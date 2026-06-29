@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: initial;
+    font-size: 17px;
+  }
+}
+
+/* Lenis smooth scrolling config */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Custom visual styles for premium light theme */
+:root {
+  --font-sans: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  --font-title: 'Cinzel', serif;
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+.font-display {
+  font-family: var(--font-display) !important;
+  font-weight: 800 !important;
+}
+.font-mono {
+  font-family: var(--font-mono) !important;
+}
+.font-title {
+  font-family: var(--font-title) !important;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff; /* Clean white background */
+  color: #1f2937; /* Dark charcoal text */
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Dynamic Dark Mode overrides when is-home-page class is applied to root */
+.is-home-page {
+  background-color: #020617 !important; /* bg-slate-950 */
+}
+
+/* Dynamic links and dropdown styling in Header */
+.is-home-page .nav-link-dynamic {
+  color: #94a3b8 !important; /* text-slate-400 */
+}
+.is-home-page .nav-link-dynamic:hover {
+  color: #ffffff !important; /* text-white */
+}
+.is-home-page .nav-dropdown-menu {
+  background-color: #0f172a !important; /* bg-slate-900 */
+  border-color: #1e293b !important; /* border-slate-800 */
+}
+.is-home-page .nav-dropdown-link {
+  color: #94a3b8 !important;
+}
+.is-home-page .nav-dropdown-link:hover {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+.is-home-page .dark-home-text {
+  color: #ffffff !important;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
