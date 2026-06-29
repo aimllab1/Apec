@@ -533,80 +533,47 @@ function AppContent({ isLoading, setIsLoading }) {
               )}
             </div>
 
-            {/* Footer */}
-            <footer className="py-20 px-6 bg-gray-50 border-t border-gray-100 relative">
-              <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 text-left">
+            {/* Clean, Sleek, Compact Footer */}
+            <footer className="py-8 px-6 bg-gray-50 border-t border-gray-100 relative select-none">
+              <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
                 
-                {/* Branding Column */}
-                <div className="lg:col-span-5">
-                  <Link to="/" className="flex items-center gap-3 mb-6">
-                    <img 
-                      src="./apec-logo.png" 
-                      alt="APEC Logo" 
-                      className="w-10 h-10 object-contain mix-blend-multiply" 
-                    />
-                    <div>
-                      <h3 className="font-title text-sm font-bold tracking-tight text-gray-900 leading-none">Adhiparasakthi</h3>
-                      <h3 className="font-title text-sm font-bold tracking-tight text-gray-900 leading-none mt-0.5">Engineering College</h3>
-                      <span className="font-mono text-[9px] uppercase font-black text-indigo-600 tracking-wider block mt-1">An Autonomous Institution</span>
-                    </div>
-                  </Link>
-                  <p className="text-xs text-gray-500 mb-8 max-w-sm leading-relaxed">
-                    Adhiparasakthi Engineering College (APEC) was established in 1984, imparting contemporary technologies in Melmaruvathur, Tamil Nadu.
-                  </p>
-
-                  <div className="space-y-4 text-xs text-gray-500">
-                    <div className="flex gap-3 items-center">
-                      <Phone className="w-4 h-4 text-gray-400" />
-                      <span>
-                        <a href="tel:+919894657971" className="hover:text-indigo-600 hover:underline transition-colors">+91 9894657971</a>
-                        {" / "}
-                        <a href="tel:+914427529585" className="hover:text-indigo-600 hover:underline transition-colors">044-27529585</a>
-                      </span>
-                    </div>
-                    <div className="flex gap-3 items-center">
-                      <Mail className="w-4 h-4 text-gray-400" />
-                      <span>principal@apec.edu.in</span>
-                    </div>
-                    <div className="flex gap-3 items-start">
-                      <MapPin className="w-4 h-4 text-gray-400 mt-0.5" />
-                      <span>Melmaruvathur – 603319, Chengalpattu District, TN.</span>
-                    </div>
+                {/* Brand Logo & Name */}
+                <div className="flex items-center gap-3">
+                  <img 
+                    src="./apec-logo.png" 
+                    alt="APEC Logo" 
+                    className="w-9 h-9 object-contain mix-blend-multiply" 
+                  />
+                  <div className="text-left">
+                    <h3 className="font-title text-xs font-black tracking-tight text-gray-900 leading-none">
+                      Adhiparasakthi Engineering College
+                    </h3>
+                    <span className="font-mono text-[8px] uppercase font-black text-indigo-650 tracking-wider block mt-1">
+                      An Autonomous Institution
+                    </span>
                   </div>
                 </div>
 
-                {/* Navigation Links Column */}
-                <div className="lg:col-span-3">
-                  <h5 className="text-xs uppercase font-extrabold tracking-widest text-gray-900 mb-6">Portal Links</h5>
-                  <ul className="space-y-3.5 text-xs font-semibold text-gray-500">
-                    <li><Link to="/" className="hover:text-gray-900 transition-colors">Home Page</Link></li>
-                    <li><Link to="/about" className="hover:text-gray-900 transition-colors">Institutional Profile</Link></li>
-                    <li><Link to="/facilities" className="hover:text-gray-900 transition-colors">Infrastructures</Link></li>
-                    <li><Link to="/placements" className="hover:text-gray-900 transition-colors">Placements & MOUs</Link></li>
-                    <li><Link to="/departments" className="hover:text-gray-900 transition-colors">Departments</Link></li>
-                  </ul>
-                </div>
-
-                {/* Action Brochure Column */}
-                <div className="lg:col-span-4">
-                  <h5 className="text-xs uppercase font-extrabold tracking-widest text-gray-900 mb-6">College Brochure</h5>
-                  <p className="text-xs text-gray-500 mb-6 leading-relaxed">
-                    Download the official APEC prospectus brochure for admission procedures.
-                  </p>
-                  <button className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-gray-900 font-bold text-xs uppercase tracking-wider px-5 py-3.5 rounded-xl border border-gray-200 transition-all">
-                    Download Prospectus <Download className="w-4 h-4 text-gray-400" />
-                  </button>
-                </div>
+                {/* Inline Nav Links */}
+                <nav className="flex flex-wrap justify-center gap-6 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
+                  <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>
+                  <Link to="/about" className="hover:text-gray-900 transition-colors">About</Link>
+                  <Link to="/departments" className="hover:text-gray-900 transition-colors">Departments</Link>
+                  <Link to="/placements" className="hover:text-gray-900 transition-colors">Placements</Link>
+                  <Link to="/facilities" className="hover:text-gray-900 transition-colors">Facilities</Link>
+                  <Link to="/contact" className="hover:text-gray-900 transition-colors">Contact</Link>
+                </nav>
 
               </div>
 
-              {/* Bottom Copyright */}
-              <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-100 flex flex-wrap items-center justify-between text-[11px] text-gray-400 font-semibold">
-                <span>© 2026 APEC. All Rights Reserved. (Autonomous College)</span>
-                <div className="flex gap-6 mt-4 sm:mt-0">
-                  <a href="#" className="hover:text-gray-900 transition-colors">Privacy</a>
-                  <a href="#" className="hover:text-gray-900 transition-colors">Terms</a>
-                  <a href="#" className="hover:text-gray-900 transition-colors">Sitemap</a>
+              {/* Bottom Copyright & Contacts row */}
+              <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-gray-200/50 flex flex-col md:flex-row items-center justify-between gap-4 text-[9px] text-gray-450 font-bold uppercase tracking-wider">
+                <span>
+                  © 2026 Adhiparasakthi Engineering College. All Rights Reserved.
+                </span>
+                <div className="flex flex-wrap gap-4 items-center justify-center">
+                  <span>Helpline: <a href="tel:+917418064336" className="text-gray-500 hover:text-indigo-600 transition-colors">7418064336</a></span>
+                  <span>Email: <span className="text-gray-500">principal@apec.edu.in</span></span>
                 </div>
               </div>
             </footer>
