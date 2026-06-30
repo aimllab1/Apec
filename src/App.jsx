@@ -5,7 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, Phone, Mail, MapPin, 
-  Download, ChevronDown, Send
+  Download, ChevronDown, Send, RotateCw
 } from 'lucide-react';
 import Preloader from './components/Preloader';
 
@@ -19,6 +19,7 @@ import Contact from './pages/Contact';
 import DepartmentDetail from './pages/DepartmentDetail';
 import FacilityDetail from './pages/FacilityDetail';
 import AdminPortal from './pages/AdminPortal';
+import PanoramaModal from './components/PanoramaModal';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -87,6 +88,7 @@ function AppContent({ isLoading, setIsLoading }) {
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [isPanoOpen, setIsPanoOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([
     { sender: 'ai', text: 'Welcome to APEC College Assistant! How can I assist you today? Feel free to ask about admissions, TNEA code, courses, library, or placements.' }
@@ -198,6 +200,18 @@ function AppContent({ isLoading, setIsLoading }) {
                 <div className="flex items-center gap-6">
                   {/* Desktop Right Action Panel */}
                   <div className="hidden lg:flex items-center gap-5">
+                    <button 
+                      onClick={() => setIsPanoOpen(true)}
+                      className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-indigo-600 hover:text-indigo-800 transition-all bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/50 px-3.5 py-2 rounded-xl cursor-pointer relative overflow-hidden group/btn"
+                    >
+                      <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-600"></span>
+                      </span>
+                      <RotateCw className="w-3.5 h-3.5 text-indigo-550 animate-[spin_10s_linear_infinite]" />
+                      <span>360° VR Tour</span>
+                    </button>
                     <a 
                       href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur" 
                       target="_blank" 
@@ -405,6 +419,19 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Link to="/departments" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Departments</Link>
                   <Link to="/facilities" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Campus Facilities</Link>
                   <Link to="/placements" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Placements & MOUs</Link>
+                  <button 
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setIsPanoOpen(true);
+                    }}
+                    className="text-left text-sm font-semibold text-indigo-600 flex items-center gap-1.5 cursor-pointer"
+                  >
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-600"></span>
+                    </span>
+                    360° VR Tour
+                  </button>
                   <a 
                     href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur"
                     target="_blank"
@@ -579,6 +606,17 @@ function AppContent({ isLoading, setIsLoading }) {
             </footer>
 
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 360° Panorama modal */}
+      <AnimatePresence>
+        {isPanoOpen && (
+          <PanoramaModal 
+            isOpen={isPanoOpen} 
+            onClose={() => setIsPanoOpen(false)} 
+            imageUrl="/Aiml_Lab_1.jpg" 
+          />
         )}
       </AnimatePresence>
     </div>
