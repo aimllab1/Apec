@@ -221,7 +221,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     >
                       ERP Portal
                     </a>
-                    {localStorage.getItem('is_logged_in') === 'true' ? (
+                    {localStorage.getItem('is_logged_in') === 'true' && (
                       <div className="flex items-center gap-3">
                         <span className="text-xs font-extrabold text-indigo-650 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -238,13 +238,6 @@ function AppContent({ isLoading, setIsLoading }) {
                           Logout
                         </button>
                       </div>
-                    ) : (
-                      <Link 
-                        to="/login" 
-                        className="text-xs font-extrabold uppercase tracking-wider text-gray-500 hover:text-indigo-600 transition-colors nav-link-dynamic"
-                      >
-                        Login
-                      </Link>
                     )}
                     <Link 
                       to="/contact"
@@ -467,7 +460,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   >
                     ERP Portal
                   </a>
-                  {localStorage.getItem('is_logged_in') === 'true' ? (
+                  {localStorage.getItem('is_logged_in') === 'true' && (
                     <div className="flex items-center justify-between py-1 border-b border-gray-50">
                       <span className="text-sm font-bold text-indigo-650 flex items-center gap-1.5 select-none">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -485,14 +478,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         Logout
                       </button>
                     </div>
-                  ) : (
-                    <Link 
-                      to="/login" 
-                      onClick={() => setMobileMenuOpen(false)} 
-                      className="text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors"
-                    >
-                      Login
-                    </Link>
                   )}
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Contact</Link>
                   
