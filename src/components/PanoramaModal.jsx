@@ -39,6 +39,7 @@ export default function PanoramaModal({ isOpen, onClose, imageUrl }) {
             doubleClickZoom: true,
             showZoomCtrl: true,
             showFullscreenCtrl: false,
+            autoRotate: -2,
           });
           setLoading(false);
         } catch (err) {
