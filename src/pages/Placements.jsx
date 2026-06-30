@@ -1,6 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Award, Briefcase, Handshake, Users, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+function CountUp({ end, suffix = "", duration = 1.5 }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp = null;
+    const endVal = parseFloat(end);
+    if (isNaN(endVal)) {
+      setCount(end);
+      return;
+    }
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      const currentCount = Math.floor(progress * endVal);
+      setCount(currentCount);
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(endVal);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [end, duration]);
+
+  return <span>{count}{suffix}</span>;
+}
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -23,10 +53,10 @@ const staggerContainer = {
 
 export default function Placements() {
   const stats = [
-    { value: "92%", label: "Placement Percentage" },
-    { value: "350+", label: "Offers Generated Yearly" },
-    { value: "50+", label: "Recruiting Partners" },
-    { value: "12 LPA", label: "Highest CTC Offered" }
+    { value: 92, suffix: "%", label: "Placement Percentage" },
+    { value: 350, suffix: "+", label: "Offers Generated Yearly" },
+    { value: 50, suffix: "+", label: "Recruiting Partners" },
+    { value: 12, suffix: " LPA", label: "Highest CTC Offered" }
   ];
 
   const partners = [
@@ -81,7 +111,9 @@ export default function Placements() {
               whileHover={{ y: -4, scale: 1.02 }}
               className="p-6 bg-gray-50 border border-gray-200 rounded-3xl text-center hover:border-indigo-500 hover:bg-white hover:shadow-lg transition-all duration-300"
             >
-              <span className="font-mono block text-3xl font-black text-gray-900 mb-1">{stat.value}</span>
+              <span className="font-mono block text-3xl font-black text-gray-900 mb-1">
+                <CountUp end={stat.value} suffix={stat.suffix} />
+              </span>
               <span className="font-display text-[10px] uppercase font-bold text-gray-400 tracking-wider">{stat.label}</span>
             </motion.div>
           ))}

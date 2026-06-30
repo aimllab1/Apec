@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Departments() {
   const [activeTab, setActiveTab] = useState('ug');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const programs = {
     ug: [
@@ -35,19 +36,48 @@ export default function Departments() {
     ]
   };
 
+  const filteredPrograms = programs[activeTab].filter(prog => 
+    prog.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    prog.focus.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="bg-white py-20 px-6">
       <div className="max-w-5xl mx-auto text-left">
         
         {/* Header */}
-        <div className="mb-16">
-          <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
+        <div className="mb-12">
+          <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
             Academic Programs
           </span>
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">Our Departments</h1>
           <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">
             Adhiparasakthi Engineering College offers a wide range of undergraduate (B.E./B.Tech.), postgraduate (M.E./M.B.A./M.C.A.), and doctoral programs with comprehensive laboratory cells.
           </p>
+        </div>
+
+        {/* Real-time Dynamic Search Filter */}
+        <div className="relative max-w-md mb-8">
+          <input 
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search courses or keywords (e.g. AI, VLSI, CAD)..."
+            className="w-full text-xs px-4 py-3 pl-10 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:border-indigo-600 focus:bg-white focus:shadow-md transition-all font-semibold text-gray-800"
+          />
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          {searchTerm && (
+            <button 
+              onClick={() => setSearchTerm('')}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-450 hover:text-gray-900 text-xs font-black cursor-pointer"
+            >
+              Clear
+            </button>
+          )}
         </div>
 
         {/* Tabs */}
@@ -59,7 +89,10 @@ export default function Departments() {
           ].map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setSearchTerm('');
+              }}
               className={`font-display text-xs font-extrabold uppercase tracking-wider pb-2.5 border-b-2 transition-all cursor-pointer ${
                 activeTab === tab.id 
                   ? 'border-indigo-600 text-indigo-600 font-black' 
@@ -88,34 +121,40 @@ export default function Departments() {
               }}
               className="grid grid-cols-1 md:grid-cols-2 gap-8 md:col-span-2"
             >
-              {programs[activeTab].map((prog, idx) => (
-                <motion.div 
-                  key={idx}
-                  variants={{
-                    hidden: { opacity: 0, y: 15 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-                  }}
-                  whileHover={{ y: -4, scale: 1.015 }}
-                  className="p-8 bg-gray-50/50 border border-gray-200 rounded-3xl flex flex-col justify-between hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 text-left"
-                >
-                  <div>
-                    <div className="flex justify-between items-start gap-4 mb-4">
-                      <h3 className="text-base font-black text-gray-900 leading-snug">{prog.name}</h3>
-                      <span className="font-mono text-[9px] uppercase font-black tracking-widest bg-white border border-gray-200 px-2.5 py-1 rounded-xl text-indigo-600 shrink-0 shadow-sm flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-indigo-500" /> {prog.duration}
-                      </span>
+              {filteredPrograms.length === 0 ? (
+                <div className="col-span-2 p-16 bg-gray-50/40 rounded-3xl border border-dashed border-gray-200 text-center flex flex-col items-center justify-center">
+                  <span className="text-gray-400 text-xs font-semibold">No departments found matching your search.</span>
+                </div>
+              ) : (
+                filteredPrograms.map((prog, idx) => (
+                  <motion.div 
+                    key={idx}
+                    variants={{
+                      hidden: { opacity: 0, y: 15 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                    }}
+                    whileHover={{ y: -4, scale: 1.015 }}
+                    className="p-8 bg-gray-50/50 border border-gray-200 rounded-3xl flex flex-col justify-between hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 text-left"
+                  >
+                    <div>
+                      <div className="flex justify-between items-start gap-4 mb-4">
+                        <h3 className="text-base font-black text-gray-900 leading-snug">{prog.name}</h3>
+                        <span className="font-mono text-[9px] uppercase font-black tracking-widest bg-white border border-gray-200 px-2.5 py-1 rounded-xl text-indigo-650 shrink-0 shadow-sm flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-indigo-500" /> {prog.duration}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mb-6 leading-relaxed font-semibold">
+                        <span className="font-display text-gray-400 font-extrabold uppercase text-[9px] tracking-wider block mb-1">Focus Core</span>
+                        {prog.focus}
+                      </p>
                     </div>
-                    <p className="text-xs text-gray-500 mb-6 leading-relaxed font-semibold">
-                      <span className="font-display text-gray-400 font-extrabold uppercase text-[9px] tracking-wider block mb-1">Focus Core</span>
-                      {prog.focus}
-                    </p>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200/60 flex items-center justify-between text-[10px] text-gray-400 font-extrabold uppercase tracking-widest">
-                    <span className="font-display flex items-center gap-1.5"><Users className="w-4 h-4 text-gray-400" /> Intake Capacity</span>
-                    <span className="font-mono text-indigo-600 font-black">{prog.intake} seats</span>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="pt-4 border-t border-gray-200/60 flex items-center justify-between text-[10px] text-gray-400 font-extrabold uppercase tracking-widest">
+                      <span className="font-display flex items-center gap-1.5"><Users className="w-4 h-4 text-gray-400" /> Intake Capacity</span>
+                      <span className="font-mono text-indigo-650 font-black">{prog.intake} seats</span>
+                    </div>
+                  </motion.div>
+                ))
+              )}
             </motion.div>
           </AnimatePresence>
         </div>

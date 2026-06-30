@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Laptop, Home, Award, Wifi, Shield, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { BookOpen, Laptop, Home, Award, Wifi, Shield, ArrowRight, RotateCw } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import PanoramaModal from '../components/PanoramaModal';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -23,6 +24,8 @@ const staggerContainer = {
 };
 
 export default function Facilities() {
+  const [isPanoOpen, setIsPanoOpen] = useState(false);
+
   const facilityList = [
     {
       id: "library",
@@ -142,6 +145,25 @@ export default function Facilities() {
                   </ul>
                 </div>
 
+                {item.id === 'labs' && (
+                  <button 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setIsPanoOpen(true);
+                    }}
+                    className="mb-6 inline-flex items-center justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200/60 font-black text-[10px] uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all cursor-pointer relative overflow-hidden group/btn w-max"
+                  >
+                    <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-450 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
+                    </span>
+                    <RotateCw className="w-3.5 h-3.5 text-indigo-500 animate-[spin_10s_linear_infinite]" />
+                    <span>360° VR Tour: AIML Lab 1</span>
+                  </button>
+                )}
+
                 {/* Click Callout */}
                 <div className="inline-flex items-center gap-1 text-xs font-bold text-indigo-600 mt-4 group-hover:translate-x-1.5 transition-transform">
                   Explore Resource Details <ArrowRight className="w-3.5 h-3.5" />
@@ -152,6 +174,17 @@ export default function Facilities() {
         </motion.div>
 
       </div>
+
+      {/* 360° Panorama modal */}
+      <AnimatePresence>
+        {isPanoOpen && (
+          <PanoramaModal 
+            isOpen={isPanoOpen} 
+            onClose={() => setIsPanoOpen(false)} 
+            imageUrl="/Aiml_Lab_1.jpg" 
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
