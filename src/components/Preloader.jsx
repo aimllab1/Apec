@@ -110,7 +110,7 @@ export default function Preloader({ onComplete }) {
 
         {/* College Name */}
         <h1 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight mb-1">
-          ADHIPPARASAKTHI
+          ADHIPARASAKTHI
           <span className="block mt-0.5 text-gray-500 font-medium">
             ENGINEERING COLLEGE
           </span>

@@ -20,6 +20,7 @@ import DepartmentDetail from './pages/DepartmentDetail';
 import FacilityDetail from './pages/FacilityDetail';
 import AdminPortal from './pages/AdminPortal';
 import PanoramaModal from './components/PanoramaModal';
+import Login from './pages/Login';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -220,6 +221,31 @@ function AppContent({ isLoading, setIsLoading }) {
                     >
                       ERP Portal
                     </a>
+                    {localStorage.getItem('is_logged_in') === 'true' ? (
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs font-extrabold text-indigo-650 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          gxwr1
+                        </span>
+                        <button 
+                          onClick={() => {
+                            localStorage.removeItem('apec_user');
+                            localStorage.removeItem('is_logged_in');
+                            window.location.reload();
+                          }}
+                          className="text-xs font-extrabold uppercase tracking-wider text-rose-500 hover:text-rose-700 transition-colors cursor-pointer"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    ) : (
+                      <Link 
+                        to="/login" 
+                        className="text-xs font-extrabold uppercase tracking-wider text-gray-500 hover:text-indigo-600 transition-colors nav-link-dynamic"
+                      >
+                        Login
+                      </Link>
+                    )}
                     <Link 
                       to="/contact"
                       className="text-xs font-black uppercase tracking-widest bg-gray-950 hover:bg-gray-800 text-white px-5 py-3 rounded-xl transition-all shadow-md active:scale-95"
@@ -441,6 +467,33 @@ function AppContent({ isLoading, setIsLoading }) {
                   >
                     ERP Portal
                   </a>
+                  {localStorage.getItem('is_logged_in') === 'true' ? (
+                    <div className="flex items-center justify-between py-1 border-b border-gray-50">
+                      <span className="text-sm font-bold text-indigo-650 flex items-center gap-1.5 select-none">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        gxwr1
+                      </span>
+                      <button 
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          localStorage.removeItem('apec_user');
+                          localStorage.removeItem('is_logged_in');
+                          window.location.reload();
+                        }}
+                        className="text-xs font-black uppercase tracking-wider text-rose-500 hover:text-rose-750 transition-colors cursor-pointer"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  ) : (
+                    <Link 
+                      to="/login" 
+                      onClick={() => setMobileMenuOpen(false)} 
+                      className="text-sm font-semibold text-gray-500 hover:text-indigo-600 transition-colors"
+                    >
+                      Login
+                    </Link>
+                  )}
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Contact</Link>
                   
                   <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
@@ -474,6 +527,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/departments/:id" element={<PageTransition><DepartmentDetail /></PageTransition>} />
                   <Route path="/facilities/:id" element={<PageTransition><FacilityDetail /></PageTransition>} />
                   <Route path="/admin-portal" element={<PageTransition><AdminPortal /></PageTransition>} />
+                  <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
                 </Routes>
               </AnimatePresence>
             </main>
