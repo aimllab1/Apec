@@ -654,7 +654,7 @@ function AppContent({ isLoading, setIsLoading }) {
           <PanoramaModal 
             isOpen={isPanoOpen} 
             onClose={() => setIsPanoOpen(false)} 
-            imageUrl="/Aiml_Lab_1.jpg" 
+            initialScene="mainGate" 
           />
         )}
       </AnimatePresence>

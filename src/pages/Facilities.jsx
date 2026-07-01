@@ -181,7 +181,7 @@ export default function Facilities() {
           <PanoramaModal 
             isOpen={isPanoOpen} 
             onClose={() => setIsPanoOpen(false)} 
-            imageUrl="/Aiml_Lab_1.jpg" 
+            initialScene="aimlLab" 
           />
         )}
       </AnimatePresence>

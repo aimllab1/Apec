@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, RotateCw, RefreshCw } from 'lucide-react';
+import { X, RotateCw, RefreshCw, Compass } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function PanoramaModal({ isOpen, onClose, imageUrl }) {
+export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGate' }) {
   const containerRef = useRef(null);
   const viewerInstanceRef = useRef(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeScene, setActiveScene] = useState(initialScene);
 
   useEffect(() => {
     if (!isOpen) return;
 
     setLoading(true);
     setError(null);
+    setActiveScene(initialScene);
 
     // Function to initialize Pannellum
     const initPannellum = () => {
@@ -27,28 +29,76 @@ export default function PanoramaModal({ isOpen, onClose, imageUrl }) {
 
       if (window.pannellum) {
         try {
-          viewerInstanceRef.current = window.pannellum.viewer(containerRef.current, {
-            type: 'equirectangular',
-            panorama: imageUrl,
-            autoLoad: true,
-            compass: true,
-            yaw: 0,
-            pitch: 0,
-            hfov: 110,
-            mouseZoom: true,
-            doubleClickZoom: true,
-            showZoomCtrl: true,
-            showFullscreenCtrl: false,
-            autoRotate: -2,
+          const viewer = window.pannellum.viewer(containerRef.current, {
+            default: {
+              firstScene: initialScene,
+              sceneFadeDuration: 1000,
+              autoLoad: true,
+              compass: true,
+              mouseZoom: true,
+              doubleClickZoom: true,
+              showZoomCtrl: true,
+              showFullscreenCtrl: false,
+            },
+            scenes: {
+              mainGate: {
+                title: "APEC Entrance Gate",
+                type: "equirectangular",
+                panorama: "/Main_Gate.jpg",
+                yaw: 0,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: -2,
+                hotSpots: [
+                  {
+                    pitch: -3,
+                    yaw: 15,
+                    type: "scene",
+                    text: "Walk to AIML Lab",
+                    sceneId: "aimlLab",
+                    targetYaw: 0,
+                    targetPitch: 0
+                  }
+                ]
+              },
+              aimlLab: {
+                title: "AIML Research Lab",
+                type: "equirectangular",
+                panorama: "/Aiml_Lab_1.jpg",
+                yaw: 0,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: -2,
+                hotSpots: [
+                  {
+                    pitch: -15,
+                    yaw: 165,
+                    type: "scene",
+                    text: "Return to Entrance Gate",
+                    sceneId: "mainGate",
+                    targetYaw: 0,
+                    targetPitch: 0
+                  }
+                ]
+              }
+            }
           });
+
+          viewerInstanceRef.current = viewer;
+
+          // Track scene changes to update header title dynamically
+          viewer.on('scenechange', (sceneId) => {
+            setActiveScene(sceneId);
+          });
+
           setLoading(false);
         } catch (err) {
           console.error("Pannellum initialization error:", err);
-          setError("Failed to initialize 360° viewer. Please try again.");
+          setError("Failed to initialize 360° Tour. Please try again.");
           setLoading(false);
         }
       } else {
-        setError("Pannellum object not found in window.");
+        setError("Pannellum script was not loaded properly.");
         setLoading(false);
       }
     };
@@ -103,7 +153,7 @@ export default function PanoramaModal({ isOpen, onClose, imageUrl }) {
         viewerInstanceRef.current = null;
       }
     };
-  }, [isOpen, imageUrl]);
+  }, [isOpen, initialScene]);
 
   if (!isOpen) return null;
 
@@ -120,14 +170,15 @@ export default function PanoramaModal({ isOpen, onClose, imageUrl }) {
         <div className="absolute top-4 left-4 right-4 z-[120] flex items-center justify-between p-4 bg-black/60 backdrop-blur-md rounded-2xl border border-white/10">
           <div>
             <h2 className="text-sm font-black flex items-center gap-2 uppercase tracking-wider text-indigo-400">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+              <Compass className="w-4 h-4 text-indigo-450 animate-pulse" />
+              <span>
+                {activeScene === 'mainGate' 
+                  ? 'APEC Entrance Gate 360° Virtual Tour' 
+                  : 'AIML Lab 1 Interactive 360° Virtual Tour'}
               </span>
-              AIML Lab 1 Interactive 360° Tour
             </h2>
-            <p className="text-[9px] text-gray-400 font-extrabold uppercase tracking-widest mt-1">
-              Drag to Look Around • Scroll to Zoom
+            <p className="text-[9px] text-gray-400 font-extrabold uppercase tracking-widest mt-1 pl-6">
+              Click arrows to walk • Drag to Look • Scroll to Zoom
             </p>
           </div>
           <button 
