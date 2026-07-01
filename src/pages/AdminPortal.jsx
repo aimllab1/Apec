@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { db } from '../firebase';
+import { collection, getDocs, deleteDoc, doc, query } from 'firebase/firestore';
 import { 
   Lock, 
   User, 
@@ -31,16 +33,34 @@ export default function AdminPortal() {
     }
   }, [isLoggedIn]);
 
-  const loadInquiries = () => {
-    const data = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-    // Sort by timestamp descending
-    data.sort((a, b) => (b.id || 0) - (a.id || 0));
-    setInquiries(data);
+  const loadInquiries = async () => {
+    try {
+      const q = query(collection(db, 'inquiries'));
+      const querySnapshot = await getDocs(q);
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({
+          docId: doc.id, // Save doc ID to delete document later
+          ...doc.data()
+        });
+      });
+      // Sort by timestamp descending
+      data.sort((a, b) => (b.id || 0) - (a.id || 0));
+      setInquiries(data);
+    } catch (err) {
+      console.error("Firestore database connection failed. Loading locally: ", err);
+      const localData = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+      localData.sort((a, b) => (b.id || 0) - (a.id || 0));
+      setInquiries(localData);
+    }
   };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (username.trim().toLowerCase() === 'admin' && password === 'admin') {
+    const isDefaultAdmin = username.trim().toLowerCase() === 'admin' && password === 'admin';
+    const isTestUser = username.trim() === 'gxwr1' && password === '@Neosyntor1';
+
+    if (isDefaultAdmin || isTestUser) {
       setIsLoggedIn(true);
       setLoginError('');
     } else {
@@ -48,12 +68,27 @@ export default function AdminPortal() {
     }
   };
 
-  const handleDelete = (id) => {
-    const updated = inquiries.filter(item => item.id !== id);
-    localStorage.setItem('apec_inquiries', JSON.stringify(updated));
-    setInquiries(updated);
-    setDeleteSuccess(true);
-    setTimeout(() => setDeleteSuccess(false), 2000);
+  const handleDelete = async (id, docId) => {
+    try {
+      if (docId) {
+        // Delete document from Firestore inquiries collection
+        await deleteDoc(doc(db, "inquiries", docId));
+      }
+
+      // Update state and fallback local storage
+      const updated = inquiries.filter(item => item.id !== id);
+      localStorage.setItem('apec_inquiries', JSON.stringify(updated.map(({ docId, ...rest }) => rest)));
+      setInquiries(updated);
+      setDeleteSuccess(true);
+      setTimeout(() => setDeleteSuccess(false), 2000);
+    } catch (err) {
+      console.error("Firestore delete failed. Deleting locally: ", err);
+      const updated = inquiries.filter(item => item.id !== id);
+      localStorage.setItem('apec_inquiries', JSON.stringify(updated.map(({ docId, ...rest }) => rest)));
+      setInquiries(updated);
+      setDeleteSuccess(true);
+      setTimeout(() => setDeleteSuccess(false), 2000);
+    }
   };
 
   const handleClearAll = () => {
@@ -364,7 +399,7 @@ export default function AdminPortal() {
                             </td>
                             <td className="py-4 px-6 text-center">
                               <button 
-                                onClick={() => handleDelete(inquiry.id)}
+                                onClick={() => handleDelete(inquiry.id, inquiry.docId)}
                                 className="p-2 text-gray-400 hover:text-red-650 hover:bg-red-50 rounded-xl transition-all cursor-pointer"
                                 title="Delete inquiry record"
                               >

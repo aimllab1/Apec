@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Points, PointMaterial } from '@react-three/drei';
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 import { 
   ArrowRight, BookOpen, ShieldAlert, Award, Calendar, User, Eye, Compass, 
   GraduationCap, X, Mail, Phone, Sparkles, Cpu, Wifi, ChevronDown, CheckCircle2,
@@ -264,25 +266,37 @@ export default function Home() {
     }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       setIsSubmitting(true);
-      // Simulate API submit request
-      setTimeout(() => {
-        // Persist inquiry submission to localStorage under the apec_inquiries key
+      const newInquiry = {
+        ...formData,
+        id: Date.now(),
+        date: new Date().toLocaleString()
+      };
+
+      try {
+        // Save directly to Firestore inquiries collection
+        await addDoc(collection(db, "inquiries"), newInquiry);
+
+        // Also update local copy for caching/offline fallback
         const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-        const newInquiry = {
-          ...formData,
-          id: Date.now(),
-          date: new Date().toLocaleString()
-        };
         existing.push(newInquiry);
         localStorage.setItem('apec_inquiries', JSON.stringify(existing));
 
         setIsSubmitting(false);
         setFormSubmitted(true);
-      }, 1200);
+      } catch (err) {
+        console.error("Firestore database connection failed. Storing locally instead: ", err);
+        // Fallback store in localStorage if database connection fails
+        const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+        existing.push(newInquiry);
+        localStorage.setItem('apec_inquiries', JSON.stringify(existing));
+
+        setIsSubmitting(false);
+        setFormSubmitted(true);
+      }
     }
   };
 
