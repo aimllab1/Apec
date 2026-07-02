@@ -3,8 +3,9 @@ title Push Project to Git Repository
 setlocal enabledelayedexpansion
 
 echo ====================================================
-echo Checking Git Repository Status...
+echo      APEC Git Deploy & Push Helper Script
 echo ====================================================
+echo.
 
 :: Check if git is installed
 where git >nul 2>nul
@@ -30,6 +31,56 @@ if !errorlevel! neq 0 (
     echo.
 )
 
+:: Ensure .gitignore exists and is configured correctly
+if not exist .gitignore (
+    echo [WARNING] .gitignore file was missing. Creating a new one...
+    (
+        echo # Logs
+        echo logs
+        echo *.log
+        echo npm-debug.log*
+        echo.
+        echo # Dependency directories
+        echo node_modules/
+        echo.
+        echo # Build outputs
+        echo dist/
+        echo dist-ssr/
+        echo.
+        echo # Environment files
+        echo .env
+        echo .env.local
+        echo.
+        echo # Editor files
+        echo .vscode/
+        echo .idea/
+        echo .DS_Store
+        echo Thumbs.db
+    ) > .gitignore
+    echo .gitignore created successfully.
+    echo.
+)
+
+:: Double check if node_modules is cached/tracked in Git
+git ls-files --error-unmatch node_modules >nul 2>nul
+if !errorlevel! eq 0 (
+    echo [WARNING] node_modules folder is currently tracked in Git.
+    echo Untracking node_modules (this keeps files locally but removes them from Git)...
+    git rm -r --cached node_modules >nul 2>nul
+    echo node_modules untracked successfully.
+    echo.
+)
+
+:: Double check if dist is cached/tracked in Git
+git ls-files --error-unmatch dist >nul 2>nul
+if !errorlevel! eq 0 (
+    echo [WARNING] dist folder is currently tracked in Git.
+    echo Untracking dist (this keeps files locally but removes them from Git)...
+    git rm -r --cached dist >nul 2>nul
+    echo dist untracked successfully.
+    echo.
+)
+
 :: Check if remote "origin" exists
 git remote get-url origin >nul 2>nul
 if !errorlevel! neq 0 (
@@ -50,12 +101,13 @@ if !errorlevel! neq 0 (
     echo.
 )
 
-:: Check current branch name or force main
+:: Force current branch name to main
 git branch -M main
 
 echo ====================================================
-echo Staging all files...
+echo Staging all files (honoring .gitignore)...
 echo ====================================================
+git add .gitignore
 git add .
 if !errorlevel! neq 0 (
     echo [ERROR] Failed to stage files.
@@ -66,23 +118,28 @@ echo Files staged successfully.
 echo.
 
 echo ====================================================
+echo Repository Status:
+echo ====================================================
+git status -s
+echo.
+
+echo ====================================================
 echo Committing changes...
 echo ====================================================
-set /p commit_msg="Enter commit message (Press Enter for default: 'Initial commit'): "
+set /p commit_msg="Enter commit message (Press Enter for default: 'Update project files'): "
 if "!commit_msg!"=="" (
-    set commit_msg=Initial commit
+    set commit_msg=Update project files
 )
 
 git commit -m "!commit_msg!"
 if !errorlevel! neq 0 (
-    echo [WARNING] Commit might have failed or there was nothing to commit.
+    echo [INFO] No new changes to commit or commit succeeded.
 )
 echo.
 
 echo ====================================================
-echo Pushing changes to remote...
+echo Pushing changes to remote main branch...
 echo ====================================================
-:: Try to push to main branch (use -u if it's the first push)
 git push -u origin main
 if !errorlevel! neq 0 (
     echo.
@@ -91,7 +148,7 @@ if !errorlevel! neq 0 (
 ) else (
     echo.
     echo ====================================================
-    echo Push operation completed successfully!
+    echo SUCCESS: Project pushed successfully without node_modules!
     echo ====================================================
 )
 
