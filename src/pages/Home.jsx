@@ -348,14 +348,10 @@ export default function Home() {
     { name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models." },
     { name: "Computer Science & Engineering", code: "CSE", details: "Focuses on algorithms, cloud architecture, system software design, and full-stack development." },
     { name: "Information Technology", code: "IT", details: "Emphasizes database administration, web systems engineering, data security, and enterprise solutions." },
-    { name: "Electronics & Communication Engineering", code: "ECE", details: "Covers high-frequency VLSI chip designs, signal processing nodes, and IoT telecommunication systems." },
-    { name: "Electrical & Electronics Engineering", code: "EEE", details: "Spearheads smart power grid setups, industrial automation control, and renewable energy grids." },
     { name: "Chemical Engineering", code: "CHEM", details: "Focuses on chemical processes, materials development, mass transfer nodes, and environmental safety." },
-    { name: "Agricultural Engineering", code: "AGRI", details: "Combines engineering technology with sustainable food processing, farm machinery, and soil hydrology." },
     { name: "Mechanical Engineering", code: "MECH", details: "Covers dynamic machine designing, thermal engines, CAD modeling, and industrial manufacturing systems." },
     { name: "Civil Engineering", code: "CIVIL", details: "Focuses on building structural designs, environmental hydrology, and general public transport infrastructure." },
-    { name: "Master of Computer Applications", code: "MCA", details: "Professional postgraduate pathway in software development, cloud databases, web engineering, and IT applications." },
-    { name: "Master of Business Administration", code: "MBA", details: "Focuses on operational management, corporate finance, marketing, and human resource systems." }
+    { name: "Master of Computer Applications", code: "MCA", details: "Professional postgraduate pathway in software development, cloud databases, web engineering, and IT applications." }
   ];
 
 
@@ -999,14 +995,10 @@ export default function Home() {
                                 <option value="CSE">Computer Science & Engineering (B.E.)</option>
                                 <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
                                 <option value="IT">Information Technology (B.Tech.)</option>
-                                <option value="ECE">Electronics & Communication Engineering (B.E.)</option>
-                                <option value="EEE">Electrical & Electronics Engineering (B.E.)</option>
                                 <option value="CHEM">Chemical Engineering (B.Tech.)</option>
-                                <option value="AGRI">Agricultural Engineering (B.Tech.)</option>
                                 <option value="MECH">Mechanical Engineering (B.E.)</option>
                                 <option value="CIVIL">Civil Engineering (B.E.)</option>
                                 <option value="MCA">Master of Computer Applications (MCA)</option>
-                                <option value="MBA">Master of Business Administration (MBA)</option>
                               </select>
                               <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 pointer-events-none">
                                 <ChevronDown className="w-4 h-4" />

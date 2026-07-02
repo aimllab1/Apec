@@ -499,14 +499,10 @@ export default function CutoffCalculator() {
                                 <option value="CSE">Computer Science & Engineering (B.E.)</option>
                                 <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
                                 <option value="IT">Information Technology (B.Tech.)</option>
-                                <option value="ECE">Electronics & Communication Engineering (B.E.)</option>
-                                <option value="EEE">Electrical & Electronics Engineering (B.E.)</option>
                                 <option value="CHEM">Chemical Engineering (B.Tech.)</option>
-                                <option value="AGRI">Agricultural Engineering (B.Tech.)</option>
                                 <option value="MECH">Mechanical Engineering (B.E.)</option>
                                 <option value="CIVIL">Civil Engineering (B.E.)</option>
                                 <option value="MCA">Master of Computer Applications (MCA)</option>
-                                <option value="MBA">Master of Business Administration (MBA)</option>
                               </select>
                               <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 pointer-events-none">
                                 <ChevronDown className="w-4 h-4" />

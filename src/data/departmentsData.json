@@ -1,0 +1,5058 @@
+{
+  "aiml": {
+    "key": "aiml",
+    "name": "Artificial Intelligence and Machine Learning",
+    "about": "The department of Artificial Intelligence and Machine Learning was established in the year of 2023 with an intake of 30 students in UG. The department is equipped with fully established laboratory such as Artificial Intelligence and Machine Laboratory.",
+    "vision": "To achieve excellence in Artificial Intelligence and Machine learning education, cutting-edge research discoveries, and innovation in AI and ML for the betterment of society.",
+    "mission": [
+      "To impart competencies and expertise’s in the field of artificial intelligence and machine learning.",
+      "To nurture a dynamic and collaborative research environment to push the boundaries of AI and ML",
+      "To foster entrepreneurship and innovation by intellectual advancements to address the real-world challenges and create economic prospects"
+    ],
+    "peos": [
+      "Conduct cutting edge research and develop solutions on problems of social relevance.",
+      "Work in a business environment, exhibiting team skills, work ethics, adaptability and lifelong learning"
+    ],
+    "psos": [
+      "Exhibit design and programming skills to build and automate business solutions using cutting edge technologies.",
+      "Strong theoretical foundation leading to excellence and excitement towards research, to provide elegant solutions to complex problems."
+    ],
+    "pos": [
+      {
+        "title": "Engineering knowledge",
+        "description": "Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems."
+      },
+      {
+        "title": "Problem analysis",
+        "description": "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of Mathematics, natural sciences, and engineering sciences."
+      },
+      {
+        "title": "Design/development of solutions",
+        "description": "Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations."
+      },
+      {
+        "title": "Conduct investigations of complex problems",
+        "description": "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions."
+      },
+      {
+        "title": "Modern tool usage",
+        "description": "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations."
+      },
+      {
+        "title": "The engineer and society",
+        "description": "Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice."
+      },
+      {
+        "title": "Environment and sustainability",
+        "description": "Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development."
+      },
+      {
+        "title": "Ethics",
+        "description": "Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice."
+      },
+      {
+        "title": "Individual and team work",
+        "description": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings."
+      },
+      {
+        "title": "Communication",
+        "description": "Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions."
+      },
+      {
+        "title": "Project management and finance",
+        "description": "Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments."
+      },
+      {
+        "title": "Life-long Learning",
+        "description": "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
+      }
+    ],
+    "faculty": [
+      {
+        "name": "Dr. N. Elamathi",
+        "qualification": "ME, Ph.D",
+        "designation": "Head of Department",
+        "department": "Computer Science and Engineering (AIML)",
+        "email": "elamathi@apec.edu.in",
+        "facultyId": "",
+        "experience": "19 Years, 10 Months",
+        "joiningDate": "September 1, 2007",
+        "teachingSince": "August 20, 2007"
+      },
+      {
+        "name": "Mr. J. Senthil Kumar",
+        "qualification": "M.Tech.",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering (AIML)",
+        "email": "omsakthisenthil@gmail.com",
+        "facultyId": "",
+        "experience": "35 Years,  Months",
+        "joiningDate": "July 23, 2025",
+        "teachingSince": "June 2, 1991"
+      },
+      {
+        "name": "Ms. R. Menaga",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering (AIML)",
+        "email": "menagashanthi1121@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 3, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. Nagaraj Jaya Sridhar J",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering (AIML)",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "SRICHARAN1406@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. Poornima Devi K",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering (AIML)",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "POORNI.SPELL@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 11, 2024",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "chemical": {
+    "key": "chemical",
+    "name": "Chemical Engineering",
+    "about": "The Department of Chemical Engineering was started in the year 1997. The Department has a sanctioned student intake of 40 for UG, affiliated to Anna University. Chemical Engineering is the branch of engineering that deals with the application of physical science (Physics and Chemistry) with mathematics, to the process of converting raw materials or chemicals into more useful or valuable forms. Majority of the passed out students are well placed in the country and many have completed higher studies in abroad and well placed there. Right from its inception, the Department has been doing its best to bring about excellence in academics. The Department has been aware of the role of chemical engineers in building of the modern India and has been taking appropriate steps to encourage research and developmental activities. The department has highly qualified core faculty of high professional profile to meet the emerging trends and challenges in the field of chemical engineering and allied areas on a global platform.",
+    "vision": "To attain national recognition in training Engineers both professionally as well as morally for meeting the challenging needs of Chemical & allied industries and societal demands of ethical Engineers.",
+    "mission": [
+      "Providing high quality Engineers in tune with changing needs of Chemical and allied industries.",
+      "Promoting industry academia relationship for mutual benefit and growth.",
+      "Cultivating a spirit of service and ethical conduct among students."
+    ],
+    "peos": [
+      "PEO1: Pursue careers as successful professionals in Chemical Engineering and       related fields.",
+      "PEO2: Lifelong learning opportunities to improve and expand technical and          professional skills.",
+      "PEO3: Design and develop eco-friendly sustainable technologies with the aid of   computational skills.",
+      "PEO4: Develop personally and professionally by accepting professional and social             responsibilities and pursing leadership roles.",
+      "PEO5: Adhere to the highest level of professional code of ethics."
+    ],
+    "psos": [
+      "PSO1  Graduates will have a strong foundation in engineering, science and current           Chemical Engineering practices and will have experience in solving structured        and unstructured problems  using conventional and innovative solutions.",
+      "PSO2  Graduates will be able to effectively describe the Chemical Engineering     problem, analyze the  data, develop potential solutions, evaluate these     solutions, and present the results using their oral, written and electronic             media skills.",
+      "PSO3  Graduates will have an understanding of ethical and professional    responsibilities of an engineer  and the impact of engineering solutions on     society and the global environment."
+    ],
+    "pos": [
+      {
+        "title": "",
+        "description": "PO1     Engineering knowledge: Apply the knowledge of mathematics,  science,  engineering fundamentals, and an engineering specialization to the solution       of  complex engineering problems"
+      },
+      {
+        "title": "",
+        "description": "PO2     Problem analysis Problem analysis: Identify, formulate, review  research             literature, and analyze complex  engineering problems reaching substantiated conclusions using first principles of  mathematics, natural sciences, and   engineering sciences."
+      },
+      {
+        "title": "",
+        "description": "PO3     Design / development of solutions: Design solutions for complex engineering       problems and design system components or  processes that            meet the specified       needs with  appropriate consideration for the public health    and safety, and the     cultural, societal, and environmental considerations."
+      },
+      {
+        "title": "",
+        "description": "PO4     Conduct investigations of complex problems: Use research-based    knowledge and research  methods including design of experiments,  analysis     and interpretation of data, and  synthesis of the information to provide valid    conclusions."
+      },
+      {
+        "title": "",
+        "description": "PO5     Modern tool usage: Modern tool usage Create, select, and apply    appropriate      techniques, resources, and  modern engineering and IT tools including    prediction and modeling to complex  engineering activities with an             understanding  of the limitations"
+      },
+      {
+        "title": "",
+        "description": "PO6     The Engineer and Society: Apply reasoning informed by the contextual   knowledge to assess societal, health, safety,  legal and cultural issues and   the       consequent responsibilities relevant to the professional engineering      practice."
+      },
+      {
+        "title": "",
+        "description": "PO7     Environment and Sustainability: Understand the impact of the professional        engineering solutions in societal and  environmental contexts, and      demonstrate the knowledge of, and need for sustainable  development"
+      },
+      {
+        "title": "",
+        "description": "PO8     Ethics: Apply ethical principles and commit to professional ethics and        responsibilities and  norms of the engineering practice"
+      },
+      {
+        "title": "",
+        "description": "PO9     Individual and team work: Function effectively as an individual, and as a            member or leader in diverse teams, and in multidisciplinary settings."
+      },
+      {
+        "title": "",
+        "description": "PO10   Communication: Communicate effectively on complex engineering activities        with the engineering community and with society at large, such as, being able      to comprehend and write effective reports and design documentation, make  effective presentations, and give and receive clear instructions."
+      },
+      {
+        "title": "",
+        "description": "PO11   Project management and finance: Demonstrate knowledge and    understanding  of the engineering and management principles and apply       these to one’s own work,  as a member and leader in a team, to manage             projects and in multidisciplinary environments"
+      },
+      {
+        "title": "",
+        "description": "PO12   Life-long learning Recognize the need for, and have the preparation and   ability to engage in  independent and life-long learning in the  broadest   context of technological change."
+      }
+    ],
+    "faculty": [
+      {
+        "name": "Dr.B.GANESH",
+        "qualification": "M.Tech., Ph.D.",
+        "designation": "Head of Department",
+        "department": "Chemical Engineering",
+        "email": "ganeshevst@gmail.com",
+        "facultyId": "",
+        "experience": "10 Years,  Months",
+        "joiningDate": "July 1, 2016",
+        "teachingSince": "June 27, 2016"
+      },
+      {
+        "name": "Dr. Magesh Rangaraju",
+        "qualification": "M.Tech., PhD",
+        "designation": "Professor",
+        "department": "Chemical Engineering",
+        "email": "mageshr@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 19, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr.S.Velmurugan",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Chemical Engineering",
+        "email": "velmuruganchemical@gmail.com",
+        "facultyId": "",
+        "experience": "26 Years, 1 Months",
+        "joiningDate": "March 1, 2023",
+        "teachingSince": "May 22, 2000"
+      },
+      {
+        "name": "Ms.M.SELVAPRATHIPA",
+        "qualification": "M.Tech., (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Chemical Engineering",
+        "email": "prathipa@apec.edu.in",
+        "facultyId": "",
+        "experience": "6 Years, 4 Months",
+        "joiningDate": "January 4, 2021",
+        "teachingSince": "February 8, 2020"
+      },
+      {
+        "name": "Mr. S. Ranjithsingh",
+        "qualification": "M. Tech.",
+        "designation": "Assistant Professor",
+        "department": "Chemical Engineering",
+        "email": "safetysingh1996@gmail.com",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "4204437",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years, 4 Months",
+        "joiningDate": "February 7, 2026",
+        "teachingSince": "February 7, 2026"
+      },
+      {
+        "name": "Ms. T. S. Swetha",
+        "qualification": "M.Tech",
+        "designation": "Assistant Professor",
+        "department": "Chemical Engineering",
+        "email": "swethats@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 18, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Ms. G. Saraswathy",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Chemical Engineering",
+        "email": "saraswathyg@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "November 1, 2023",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Heat Transfer Lab",
+      "LIST OF EQUIPMENTS",
+      "Double Pipe Heat Exchanger",
+      "Shell and Tube Heat Exchanger",
+      "Bare and Finned Tube Heat Exchanger",
+      "Forced Convection",
+      "Natural Convection",
+      "Stefan Boltzmann constant SET UP",
+      "Open Pan Evaporator",
+      "Horizontal Condenser",
+      "Vertical Condenser",
+      "Helical Coils",
+      "Agitated Vessels",
+      "Mass Transfer Lab",
+      "LIST OF EQUIPMENTS",
+      "Simple distillation",
+      "Steam distillation",
+      "Packed column distillation",
+      "Diffusivity apparatus",
+      "Liquid-liquid extraction setup",
+      "Vacuum Dryer",
+      "Tray dryer",
+      "Surface evaporation setup",
+      "Batch Reactor",
+      "Continuous Reactor",
+      "Leaching setup",
+      "Process Control Lab",
+      "LIST OF EQUIPMENTS",
+      "First order system setup",
+      "Non-Interacting level system",
+      "Interacting level system",
+      "Level system",
+      "Flow system",
+      "Pressure system",
+      "Thermal system",
+      "Control valves",
+      "Cascade Control",
+      "U- tube manometer with Controller",
+      "Mechanical Operation Lab",
+      "LIST OF EQUIPMENTS",
+      "Sieve analysis",
+      "Leaf filter",
+      "Plate and Frame Filter press",
+      "Batch Sedimentation setup",
+      "Jaw Crusher",
+      "Ball mill",
+      "Cyclone separator",
+      "Roll Crusher",
+      "Air Elutriator",
+      "Drop weight Crusher",
+      "Fluid Mechanics Lab",
+      "LIST OF EQUIPMENTS",
+      "Viscometer",
+      "Venturi meter.",
+      "Orifice meter",
+      "Rotameter",
+      "Weir and Notches",
+      "Open drum with orifice",
+      "Pipes and fittings",
+      "Helical and spiral coils",
+      "Centrifugal pump / Gear pump / Reciprocating",
+      "Packed column",
+      "Fluidized bed",
+      "Technical Analysis Lab",
+      "LIST OF EQUIPMENTS",
+      "Bunsen burners",
+      "LPG Cylinder in each row of the Laboratory",
+      "Hot Air Oven",
+      "Hot Plate",
+      "Water Bath",
+      "Magnetic Stirrers",
+      "Mechanical Stirrers",
+      "Refluxion Set up",
+      "Sharp Knives to cut sodium",
+      "Balance :Rough balance, Four digit Balance",
+      "Chemical Reaction Engineering Lab",
+      "LIST OF EQUIPMENTS",
+      "Batch Reactor",
+      "Semi batch reactor",
+      "Plug flow reactor",
+      "CSTR",
+      "Sono- chemical reactor",
+      "Photochemical reactor",
+      "Packed bed reactor",
+      "Combined CSTR and PFR",
+      "CSTR in series",
+      "Student:"
+    ],
+    "placements": [
+      {
+        "registerNumber": "420420203005",
+        "studentName": "LOGESHWAR P",
+        "companyName": "ORCHID Pharma",
+        "salaryPackage": "12000"
+      },
+      {
+        "registerNumber": "420420203007",
+        "studentName": "NANDHAKUMAR S",
+        "companyName": "ORCHID Pharma",
+        "salaryPackage": "12000"
+      },
+      {
+        "registerNumber": "420420203009",
+        "studentName": "YUVARAJ R",
+        "companyName": "ORCHID Pharma",
+        "salaryPackage": "12000"
+      },
+      {
+        "registerNumber": "420420203301",
+        "studentName": "DHWATHA J",
+        "companyName": "ORCHID Pharma",
+        "salaryPackage": "12000"
+      }
+    ],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "civil": {
+    "key": "civil",
+    "name": "civil",
+    "about": "",
+    "vision": "To produce high class Civil Engineers who will work for the environmentally suitable for pollution free air, potable drinking water and comfortable accommodation so as to develop our motherland towards a modest standard of living at par with the developed nations.",
+    "mission": [
+      "Inculcating quality consciousness among graduates by imparting world expertise.",
+      "Creating a sense of ethics and service for the benefit of society.",
+      "Making high class quality engineers to achieve International standards, to significantly contribute for the development of country."
+    ],
+    "peos": [
+      "Gain knowledge and skills in Civil engineering which will enable them to have a career and professional accomplishment in the public or private sector organizations",
+      "Become consultants on complex real life Civil Engineering problems related to Infrastructure development especially housing, construction, water supply, sewerage, transport, spatial planning.",
+      "Become entrepreneurs and develop processes and technologies to meet desired infrastructure needs of society and formulate solutions that are technically sound, Economically feasible, and socially acceptable.",
+      "Perform investigation for solving Civil Engineering problems by conducting research using modern equipment and software tools.",
+      "Function in multi-disciplinary teams and advocate policies, systems, processes and equipment to support civil engineering"
+    ],
+    "psos": [
+      "PSO1  Knowledge of Civil Engineering discipline Demonstrate in-depth knowledge of Civil Engineering discipline, with an ability to evaluate, analyze and synthesize existing and new knowledge.",
+      "PSO2  Critical analysis of Civil Engineering problems and innovation Critically analyze complex Civil Engineering problems, apply independent judgment for synthesizing information and make innovative advances in a theoretical, practical and policy context.",
+      "PSO3 Conceptualization and evaluation of engineering solutions to Civil Engineering Issues Conceptualize and solve Civil Engineering problems, evaluate potential solutions and arrive at technically feasible, economically viable and environmentally sound solutions with due consideration of health, safety, and socio cultural factors"
+    ],
+    "pos": [
+      {
+        "title": "Engineering knowledge",
+        "description": "Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems."
+      },
+      {
+        "title": "Problem analysis",
+        "description": "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of Mathematics, natural sciences, and engineering sciences."
+      },
+      {
+        "title": "Design/development of solutions",
+        "description": "Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations."
+      },
+      {
+        "title": "Conduct investigations of complex problems",
+        "description": "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions."
+      },
+      {
+        "title": "Modern tool usage",
+        "description": "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations."
+      },
+      {
+        "title": "The engineer and society",
+        "description": "Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice."
+      },
+      {
+        "title": "Environment and sustainability",
+        "description": "Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development."
+      },
+      {
+        "title": "Ethics",
+        "description": "Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice."
+      },
+      {
+        "title": "Individual and team work",
+        "description": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings."
+      },
+      {
+        "title": "Communication",
+        "description": "Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions."
+      },
+      {
+        "title": "Project management and finance",
+        "description": "Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments."
+      },
+      {
+        "title": "Life-long Learning",
+        "description": "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
+      },
+      {
+        "title": "",
+        "description": "Faculty:"
+      },
+      {
+        "title": "",
+        "description": "Dr.V.Ramasamy"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E., Ph.D"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Dean"
+      },
+      {
+        "title": "",
+        "description": "Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "rams_apec@yahoo.co.in"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years, 8 Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "June 10, 1994"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "October 6, 1994"
+      },
+      {
+        "title": "",
+        "description": "Dr.A.Krishnamoorthi"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E., Ph.D."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Head of Department"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "krish_moor2006@yahoo.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years, 5 Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "June 1, 1999"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "January 6, 1999"
+      },
+      {
+        "title": "",
+        "description": "Dr.K.Thiagarajan"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.Tech., Ph.D"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Associate Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "rajan.thiaga080@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years, 7 Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "November 23, 2022"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "November 23, 2022"
+      },
+      {
+        "title": "",
+        "description": "Dr.P.Somiyadevi"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E,Ph.D."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "somiya86@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "June 18, 2009"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "June 18, 2009"
+      },
+      {
+        "title": "",
+        "description": "Mr.S.Rethinakumar"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "rethinaindu@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "June 1, 2015"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "May 27, 2015"
+      },
+      {
+        "title": "",
+        "description": "Mr.S.Selvakumar"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "selvaashika3@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years, 1 Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "June 1, 2015"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "May 27, 2015"
+      },
+      {
+        "title": "",
+        "description": "Mr.G.Karthikkumar"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "karthikkumarg5@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "July 1, 2017"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "June 22, 2017"
+      },
+      {
+        "title": "",
+        "description": "Mr.S.Maluvu"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "maluvus@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "July 1, 2017"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "June 28, 2017"
+      },
+      {
+        "title": "",
+        "description": "Mr.S.Karthikeyan"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E., (Ph.D)"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "karthikeyan9111@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years, 7 Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "July 2, 2018"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "November 12, 2017"
+      },
+      {
+        "title": "",
+        "description": "Mr.S.Parthiban"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E., (Ph.D)"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "Parthiban@apec.edu.in"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "June 18, 2021"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "June 18, 2021"
+      },
+      {
+        "title": "",
+        "description": "Ms. I. Sakthidevi"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M.E."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "sakthidevisak@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "August 29, 2025"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "Ms. Sangeetha E"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "ME"
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "sangeethaelumalai07@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "February 1, 2025"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "Ms. K. Gomathi"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M. E."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "gomathi9418@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "April 1, 2026"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      },
+      {
+        "title": "",
+        "description": "Ms. M. Abinaya"
+      },
+      {
+        "title": "",
+        "description": "Qualification"
+      },
+      {
+        "title": "",
+        "description": "M. Tech."
+      },
+      {
+        "title": "",
+        "description": "Designation"
+      },
+      {
+        "title": "",
+        "description": "Assistant Professor"
+      },
+      {
+        "title": "",
+        "description": "Department"
+      },
+      {
+        "title": "",
+        "description": "Civil Engineering"
+      },
+      {
+        "title": "",
+        "description": "E-Mail"
+      },
+      {
+        "title": "",
+        "description": "abinayasundari2808@gmail.com"
+      },
+      {
+        "title": "",
+        "description": "Faculty ID"
+      },
+      {
+        "title": "",
+        "description": "Experience"
+      },
+      {
+        "title": "",
+        "description": "Years,  Months"
+      },
+      {
+        "title": "",
+        "description": "Dt. of Joining"
+      },
+      {
+        "title": "",
+        "description": "September 1, 2025"
+      },
+      {
+        "title": "",
+        "description": "Teaching Since"
+      }
+    ],
+    "faculty": [],
+    "labs": [
+      "image",
+      "Automatic weather Station",
+      "image",
+      "Hydraulic Engineering Lab",
+      "image",
+      "Concrete and Highway Lab",
+      "image",
+      "Survey Laboratory",
+      "image",
+      "Engineering Practices Lab",
+      "image",
+      "Environmental Engineering Lab",
+      "image",
+      "Strength of materials Lab",
+      "image",
+      "CADD Lab",
+      "image",
+      "Soil Lab",
+      "image",
+      "Automatic weather Station",
+      "image",
+      "Hydraulic Engineering Lab",
+      "image",
+      "Concrete and Highway Lab",
+      "image",
+      "Survey Laboratory",
+      "image",
+      "Engineering Practices Lab",
+      "image",
+      "Environmental Engineering Lab",
+      "image",
+      "Strength of materials Lab",
+      "image",
+      "CADD Lab",
+      "image",
+      "Soil Lab",
+      "RESEARCH & DEVELOPMENT",
+      "image",
+      "Universal Testing Machine (100T)",
+      "image",
+      "Loading Frame (AICTE Sponsored)",
+      "image",
+      "Compression Testing Machine",
+      "image",
+      "C.B.R Test Apparatus",
+      "image",
+      "Hot Air Oven",
+      "image",
+      "Atomic Adsorption Spectrometer (AICTE Sponsored- 14.39 Lakhs",
+      "image",
+      "Ultrasonic Pulse Velocity",
+      "image",
+      "Rebound Hammer",
+      "image",
+      "Rapid Chloride Penetration Test",
+      "image",
+      "Hollow Block Making Machine",
+      "image",
+      "Total Station",
+      "image",
+      "Unconfined Compressive Strength Test Apparatus",
+      "Numbers of Computers 35 (Latest Configuration with Individual LAN Connections)",
+      "Licensed Software",
+      "STADD-PRO, PRIMAVERA, MS-PROJECT, QC Plan, RIVET, BIM, AUTO CADD.",
+      "Other Accessories",
+      "A-3 PLOTTER, SCANNER, SMART PRINTER",
+      "image",
+      "image",
+      "TEACHING MODELS",
+      "image",
+      "image",
+      "image",
+      "image",
+      "CONCRETE MODELS                             : 30",
+      "IRRIGATION MODELS                           : 05",
+      "TRANSPORTATION MODEL                  : 05",
+      "ENVIRONMENTAL MODEL                   : 07",
+      "LCD PROJECTOR                                   : 5",
+      "CHARTS                                                 : 15",
+      "NPTEL CD’S                                           : 20",
+      "DEPARTMENT LIBRARY",
+      "Number of Books : 1200",
+      "Journals : 05",
+      "Back Volumes : 277",
+      "IS Codes : 240",
+      "NPTEL Web Course CD’s : 16",
+      "No of project Books : 350",
+      "System P-4 with printer : 1",
+      "image",
+      "Student:"
+    ],
+    "placements": [
+      {
+        "registerNumber": "420420103005",
+        "studentName": "PRAVEEN KUMAAR . B",
+        "companyName": "SEVAL SOFTWARE SOLUTION",
+        "salaryPackage": "1.8 LAKHS PA"
+      },
+      {
+        "registerNumber": "420420103303",
+        "studentName": "LAKSHMIPATHY.K.P",
+        "companyName": "DIGITAL EPCS PRIVATE LIMITED",
+        "salaryPackage": "3.5 LAKHS PA"
+      },
+      {
+        "registerNumber": "420420103006",
+        "studentName": "SUGAVANESHWARAN.M",
+        "companyName": "SALEM SURVEY GROUP OF COMPANIES& INSTITUTIONS",
+        "salaryPackage": "3 LAKHS PA"
+      },
+      {
+        "registerNumber": "420420103007",
+        "studentName": "SURIYA.M",
+        "companyName": "SALEM SURVEY GROUP OF COMPANIES& INSTITUTIONS",
+        "salaryPackage": "3 LAKHS PA"
+      }
+    ],
+    "rankHolders": [],
+    "publications": {
+      "journals": [
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Finite Element Analysis of Concrete with Bagasse Ash and Bagasse Fibre,",
+          "link": "V. Ramasamy"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "Interciencia Journal",
+          "department": "2023",
+          "journal": "WOS",
+          "year": "https://intercienciajournal.com/show.php?v=48&i=5",
+          "link": "Influence of Zinc Sulphate in Microstructure and Strength Properties of Blended Cementitious Concrete System"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "Journal of REVISTA",
+          "department": "MATERIA",
+          "journal": "2023",
+          "year": "SCI",
+          "link": "https://www.scielo.br/j/rmat/a/kKSpVm39k6HR4Kqg577fNsS/"
+        },
+        {
+          "title": "Performance of rc Beams Supported With Hybrid FRP Laminates:A Review,",
+          "author": "P.Somiyadevi,",
+          "department": "V. Ramasamy",
+          "journal": "Civil Engineering",
+          "year": "Materials Today proceedings",
+          "link": "2023"
+        },
+        {
+          "title": "A Study On Durability Characteristics of Nano-Concrete",
+          "author": "V. Ramasamy",
+          "department": "Civil Engineering",
+          "journal": "Materials Today proceedings",
+          "year": "2023",
+          "link": "Scopus"
+        },
+        {
+          "title": "Behaviour of hybrid fibre reinforced polymer",
+          "author": "(HyFRP) laminates on high strength concrete (HSC) beams under flexural loading",
+          "department": "P. Somiyadevi",
+          "journal": "V.Ramasamy",
+          "year": "Civil Engineering",
+          "link": "Materials Express"
+        },
+        {
+          "title": "Structural performance of hybrid FRP laminates on concrete beams made with manufactured sand”",
+          "author": "Ramasamy vasudevan",
+          "department": "Civil Engineering",
+          "journal": "Materia-Rio De Janeiro",
+          "year": "2023",
+          "link": "SCI"
+        },
+        {
+          "title": "Structural Strengthening of Beam Using Fibre Reinforced Polymer Laminate",
+          "author": "S.Karthikeyan",
+          "department": "Civil Engineering",
+          "journal": "Journal of Emerging technologies and innovative research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Investigation On Crimped Steel Fiber In M30 Concrete With Treated Rubber Powder As Partial Replacement Of Fine Aggregate",
+          "author": "Dr.K.Thiagarajan",
+          "department": "Civil Engineering",
+          "journal": "Journal of emerging technologies and innovative research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Study On Partial Replacement Of Cement by Zeolite Powder in Concrete",
+          "author": "S.Karthikeyan",
+          "department": "Civil Engineering",
+          "journal": "Journal of emerging technologies and innovative research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Studies on Properties of Sisal Fiber Reinforced Self Compacting Concrete",
+          "author": "Dr.V.Ramasamy",
+          "department": "Civil Engineering",
+          "journal": "International Journal for Research in Applied Science & Engineering Technology (IJRASET)",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Waste Plastic Induced in Self Compacting Concrete to Avoid Plastic Pollution",
+          "author": "S. Selvakumar",
+          "department": "Civil Engineering",
+          "journal": "International Journal for Research in Applied Science & Engineering Technology (IJRASET)",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Study on Concrete Using Marble Powder As Partial Replacement of Cement",
+          "author": "J.Parthiban",
+          "department": "Civil Engineering",
+          "journal": "Journal of emerging technologies and innovative research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Study On Partial Replacement Of Cement By Metakaolin Powder In Concrete",
+          "author": "S. Rethinakumar",
+          "department": "Civil Engineering",
+          "journal": "Journal of emerging technologies and innovative research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Study On Partial Replacement Of Cement By Sugarcane Bagasse Ash",
+          "author": "P. Somiyadevi",
+          "department": "Civil Engineering",
+          "journal": "Journal of Emerging Technologies and Innovative Research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Investigation On Hooked Steel Fiber In M30 Concrete With Treated Rubber Powder As Partial Replacement Of Fine Aggregate",
+          "author": "Dr. K. Thiagarajn",
+          "department": "Civil Engineering",
+          "journal": "Journal of Emerging Technologies and Innovative research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Experimental Study On Partial Replacement Of Cement By Zeolite Powder In Concrete",
+          "author": "P.Somiyadevi",
+          "department": "Civil Engineering",
+          "journal": "Journal of Emerging Technologies and innovative Research",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Production of SCC Using Bagasse Ash as Fine Aggregate",
+          "author": "S.Maluvu",
+          "department": "Civil Engineering",
+          "journal": "International Journal for Research in Applied Science & Engineering Technology (IJRASET)",
+          "year": "2023",
+          "link": "UGC"
+        },
+        {
+          "title": "Assessment of durability characteristics of concrete with Nanosilica and carbon nanotubes",
+          "author": "Dr.V.Ramasamy",
+          "department": "Civil Engineering",
+          "journal": "Journal Of Environmental Production And Ecology",
+          "year": "2023",
+          "link": "SCI"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Behaviour of Bagasse ash and Bagasse fibre in Concrete",
+          "link": "V. Ramasamy"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "YMER",
+          "department": "2022",
+          "journal": "Scopus",
+          "year": "https://ymerdigital.com/uploads/YMER201288.pdf",
+          "link": "Flexural study on Bagasse ash concrete with Bagasse fibre"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "YMER",
+          "department": "2022",
+          "journal": "Scopus",
+          "year": "https://ymerdigital.com/uploads/YMER2111BA.pdf",
+          "link": "Effects of Cement Replaced with Bagasse Ash and Bagasse Fiber in Concrete"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "Special Education",
+          "department": "2022",
+          "journal": "Scopus",
+          "year": "CALENDAR YEAR 2021",
+          "link": "Title of the  paper"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Various Treatment Techniques Involved To Enhance The Recycled Coarse Aggregate In Concrete -A review",
+          "link": "J.Venkatesh, V. Ramasamy,"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "Materials Today Proceedings",
+          "department": "2021",
+          "journal": "Scopus",
+          "year": "https://www.sciencedirect.com/science/article/abs/pii/S2214785320385837",
+          "link": "Augmentation Of Dissimilar Techniques For Enhancing The Concrete Properties With Recycled Coarse Aggregate And Manufacture Sand"
+        },
+        {
+          "title": "J.Venkatesh, V. Ramasamy,",
+          "author": "Civil Engineering",
+          "department": "Journal Of  Materials Research And Technology,",
+          "journal": "2021",
+          "year": "SCI",
+          "link": "https://www.sciencedirect.com/science/article/pii/S2238785421006499"
+        },
+        {
+          "title": "Assessment of Mechanical Properties of Nano- Modified Concrete",
+          "author": "M.Thanmanaselvi, V. Ramasamy",
+          "department": "Civil Engineering",
+          "journal": "AIP Conference Proceedings",
+          "year": "2021",
+          "link": "Scopus"
+        },
+        {
+          "title": "Strength of durability properties of concrete using Recron 3S",
+          "author": "P.Somiyadevi",
+          "department": "Civil Engineering",
+          "journal": "Suraj Punj Journal for Multidisciplinary research",
+          "year": "2021",
+          "link": "UGC"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Experimental investigation of properties of natural fiber reinforced concrete with partial replacement of seashell as fine aggregate, EPRA",
+          "link": "Goushik, V. Ramasamy"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "International Journal of  Research and Development (IJRD),",
+          "department": "2020",
+          "journal": "UGC",
+          "year": "https://eprajournals.com/IJSR/article/3215/abstract",
+          "link": "Study on Strength and Durability characteristics of Hybrid Fiber Reinforced Self- Compacting Concrete"
+        },
+        {
+          "title": "Pavithra.B, V. Ramasamy",
+          "author": "Civil Engineering",
+          "department": "International Journal of Innovative Research in Technology",
+          "journal": "2020",
+          "year": "UGC",
+          "link": "https://www.ijirt.org/master/publishedpaper/IJIRT149710_PAPER.pdf"
+        },
+        {
+          "title": "Study on strength parameters of plain cement concrete added with tamarind kernel powder",
+          "author": "S. Venkatraman, V. Ramasamy,",
+          "department": "Civil Engineering",
+          "journal": "Structural Concrete",
+          "year": "2020",
+          "link": "SCI"
+        },
+        {
+          "title": "Experimental Study On Concrete Using Treated Sea Sand As Fine Aggregate",
+          "author": "P.Somiyadevi",
+          "department": "Civil Engineering",
+          "journal": "International Journal of Creative research thoughts",
+          "year": "2020",
+          "link": "UGC"
+        },
+        {
+          "title": "Strength And Durability Properties Of Concrete Using Groundnut Shell As Fine Aggregate",
+          "author": "P.Somiyadevi",
+          "department": "Civil Engineering",
+          "journal": "International Journal of Creative research thoughts",
+          "year": "2020",
+          "link": "UGC"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Hydration Effect of Gum Arabic and Guar Gum Powder on Strength parameters of Concrete",
+          "link": "Dr.V.Ramasamy"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "Caribbean Journal of Science",
+          "department": "2019",
+          "journal": "Scopus",
+          "year": "Delay in Construction Projects – A study of Scenario of Pondicherry Region",
+          "link": "Dr.V.Ramasamy"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "International Journal of Innovative Science and Research Technology",
+          "department": "2019",
+          "journal": "UGC",
+          "year": "https://ijisrt.com/wp-content/uploads/2019/06/IJISRT19MY70.pdf",
+          "link": "Detecting failures in temporary supporting structures used in construction"
+        },
+        {
+          "title": "Civil Engineering",
+          "author": "Journal of Structural Engineering",
+          "department": "2019",
+          "journal": "Scopus",
+          "year": "Title of the Book",
+          "link": "Name of the Publisher"
+        },
+        {
+          "title": "Fluid and Solid Mechanics",
+          "author": "Mechanics of Solids",
+          "department": "Strength of Materials",
+          "journal": "PEARSON",
+          "year": "ISBN 978-81-317-6854-9, New Delhi, 2012",
+          "link": "Design of RC & Brick Masonry Structures"
+        },
+        {
+          "title": "ISBN 978-93-83-103-16-4",
+          "author": "Fluid Mechanics And Machinery",
+          "department": "ISBN 978-81-8371-424-2, Chennai, 2012.",
+          "journal": "Comprehensive Strength of Materials",
+          "year": "ISBN 978-93-83103-05-8, Chennai, 2013.",
+          "link": "Strength of Materials for Anna University"
+        },
+        {
+          "title": "ISBN 978-81-317-9478-4, New Delhi 2013",
+          "author": "Basic Civil And Mechanical Engineering",
+          "department": "Vishnu Prints Media, Chennai.2013",
+          "journal": "Structural Analysis-I",
+          "year": "ISBN 978-93-83103-35-5, Chennai 2013",
+          "link": "Prestressed Concrete Structure"
+        },
+        {
+          "title": "ISBN 978–93–80659–20–6",
+          "author": "Sri Krishna Hitech Publishing Company Pvt. Ltd, Chennai , 2014",
+          "department": "Applied Hydraulic Engineering",
+          "journal": "ISBN 978-81-8371-698-7, Chennai, 2015",
+          "year": "Mechanics of Fluids",
+          "link": "ISBN 978-81-8371-716-8, Chennai, 2015"
+        },
+        {
+          "title": "Fluid mechanics And Machinery",
+          "author": "ISBN 978-81-8371-718-2, Chennai, 2015",
+          "department": "Design Of Steel Structures",
+          "journal": "BKF Puplishers &Distributors Chennai,2016",
+          "year": "ISBN 978-81-9566-105-5",
+          "link": "Structural Analysis I I"
+        },
+        {
+          "title": "BKF Puplishers &Distributors Chennai,2016",
+          "author": "ISBN 978-81-9566-105-1",
+          "department": "Engineering Mechanics",
+          "journal": "Vishnu Prints Media, Chennai.2016",
+          "year": "Engineering graphics",
+          "link": "Vishnu Prints Media, Chennai.2016"
+        },
+        {
+          "title": "ISBN 978-93-85374-45-6",
+          "author": "Engineering practice laboratory",
+          "department": "Vishnu Prints Media, Chennai.2016",
+          "journal": "ISBN 978-93-85374-45-3",
+          "year": "Civil Engineering Structure",
+          "link": "New Age International Publishers"
+        },
+        {
+          "title": "ISBN 978-81-224-5732-2",
+          "author": "Name of the Faculty",
+          "department": "Title of the Conference Proceeding Published",
+          "journal": "Title of the paper",
+          "year": "ISBN number of the proceedings",
+          "link": "Name of the Publisher"
+        },
+        {
+          "title": "Dr. K. Thiagarajn",
+          "author": "International Conference on Civil Engineering Innovative Development in Engineering Advances",
+          "department": "Experimental Investigation on Chemically Treated Hooked End Steel Fiber Embedded in Rubberized Concrete",
+          "journal": "978-981-99-6175-7",
+          "year": "Springer",
+          "link": "Dr.V.Ramasamy"
+        },
+        {
+          "title": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
+          "author": "Performance of Concrete Using M-Sand and Marble Powder",
+          "department": "978-93-94743-08-3",
+          "journal": "Sri Manakula Vinayagar Engineering College",
+          "year": "P. Somiyadevi",
+          "link": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)"
+        },
+        {
+          "title": "Experimental investigations on properties of concrete with M-sand and sea sand",
+          "author": "978-93-94743-08-3",
+          "department": "Sri Manakula Vinayagar Engineering College",
+          "journal": "Dr.A.Krishnamoorthi",
+          "year": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
+          "link": "Strength and durability properties of cement using crushed tile waste and M-sand"
+        },
+        {
+          "title": "978-93-94743-08-3",
+          "author": "Sri Manakula Vinayagar Engineering College",
+          "department": "P.Somiyadevi",
+          "journal": "Dr. V. Ramasamy",
+          "year": "5th International Conference on Recent advances in material Chemistry (ICRAMS-2021) Virtual mode",
+          "link": "February 18th -20th -2021"
+        },
+        {
+          "title": "Study on Mechanical Properties of High Strength Concrete used in Construction Industries",
+          "author": "Virtual Mode",
+          "department": "SRM institute of science and technology",
+          "journal": "Dr. V. Ramasamy",
+          "year": "5th International Conference on Recent advances in material Chemistry (ICRAMS-2021) Virtual mode",
+          "link": "February 18th -20th -2021"
+        },
+        {
+          "title": "Evaluation of Concrete Properties using Manufactured Sand  with Nanomaterial’s",
+          "author": "Virtual Mode",
+          "department": "SRM institute of science and technology",
+          "journal": "Dr. V. Ramasamy",
+          "year": "Virtual international conference on sustainable Practices and innovations in Civil Engineering (SPICE 2021)",
+          "link": "Static behaviour of bagasse ash and bagasse fiber in concrete"
+        },
+        {
+          "title": "Sri Sivasubramaniya Nadar College of Engineering",
+          "author": "Dr. V. Ramasamy",
+          "department": "International conference on built environment ,Science and Technology",
+          "journal": "Effects of cement replaced with bagasse ash and bagasse fibre in concrete",
+          "year": "978-93-84136-22-2",
+          "link": "SRM institute of Science and Technology"
+        },
+        {
+          "title": "International Conference on",
+          "author": "Materials And Processes",
+          "department": "Structural Performance of High Strength Concrete Beams with Hybrid FRP",
+          "journal": "Laminates",
+          "year": "978-93-81208-99-1",
+          "link": "Tagore Engineering College"
+        },
+        {
+          "title": "International Conference on",
+          "author": "Materials And Processes",
+          "department": "Behavioural Analysis of FRP Sections",
+          "journal": "978-93-81208-99-1",
+          "year": "Tagore Engineering College",
+          "link": "V. Ramasamy"
+        },
+        {
+          "title": "International Conference on",
+          "author": "Materials And Processes",
+          "department": "Experimental Investigation of Mechanical Properties on Concrete with",
+          "journal": "Nanomaterial’s using Manufactured Sand",
+          "year": "978-93-81208-99-1",
+          "link": "Tagore Engineering College"
+        }
+      ],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "mca": {
+    "key": "mca",
+    "name": "Computer Applications",
+    "about": "",
+    "vision": "To be the source of bringing out globally competent pioneering computing professionals, researchers, innovators and entrepreneurs and thereby succeed and contribute value to the knowledge-based economy and society.",
+    "mission": [
+      "To offer high-grade, value-based Post-graduate programme in the field of Computer Applications",
+      "To provide conductive environment so as to achieve excellence in teaching-learning, and development activities.",
+      "To facilitate students to nurture skills to practice their professions competently to meet the ever-changing needs of society."
+    ],
+    "peos": [
+      "Apply their computing skills to analyse, design and develop innovative software products to meet the industry needs and excel as software professionals.",
+      "Pursue lifelong learning and do research in the computing field based on solid technical foundations.",
+      "Communicate and function effectively in teams in multidisciplinary fields within the global, societal and environmental context.",
+      "Exhibit professional integrity, ethics and an understanding of responsibility to contribute technical solutions for the sustainable development of society."
+    ],
+    "psos": [
+      "Able to select suitable data models, appropriate architecture, and platform to implement a system with good performance.",
+      "Able to design and integrate various system based components to provide user interactive solutions for various challenges.",
+      "Able to develop applications for real time environments using existing and upcoming technologies."
+    ],
+    "pos": [
+      {
+        "title": "",
+        "description": "PO 1 - Able to apply knowledge of computing, mathematics, science and engineering fundamentals appropriate to the discipline."
+      },
+      {
+        "title": "",
+        "description": "PO 2 - Able to analyse, design and investigate the real world complex problems to formulate solutions."
+      },
+      {
+        "title": "",
+        "description": "PO 3 - Able to learn current technologies to find the solutions for the real world problems."
+      },
+      {
+        "title": "",
+        "description": "PO 4 - Able to work effectively, individually and on teams, including diverse and multidisciplinary, to accomplish a common goal."
+      },
+      {
+        "title": "",
+        "description": "PO 5 - Able to communicate effectively and develop self-confidence"
+      },
+      {
+        "title": "",
+        "description": "PO 6 - Able to recognize of the need and engage in continuing professional development"
+      },
+      {
+        "title": "",
+        "description": "PO 7 - Able to understand of professional, ethical, legal, security and social issues and responsibilities."
+      }
+    ],
+    "faculty": [
+      {
+        "name": "Dr. S. Selvaraj",
+        "qualification": "MCA. Ph.D",
+        "designation": "Professor",
+        "department": "Computer Applications",
+        "email": "mca@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "January 1, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Dr. S. Arunkumar",
+        "qualification": "MCA, M.Phil., Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Computer Applications",
+        "email": "arunkumar@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "07TGMC0797",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "28 Years, 7 Months",
+        "joiningDate": "May 1, 2007",
+        "teachingSince": "November 9, 1998"
+      },
+      {
+        "name": "Mr. E. Janakiraman",
+        "qualification": "MCA, M.Phil",
+        "designation": "Assistant Professor",
+        "department": "Computer Applications",
+        "email": "janakiraman@apec.edu.in",
+        "facultyId": "",
+        "experience": "5 Years, 10 Months",
+        "joiningDate": "August 12, 2021",
+        "teachingSince": "August 12, 2021"
+      },
+      {
+        "name": "Ms. A. Yamuna",
+        "qualification": "MCA",
+        "designation": "Assistant Professor",
+        "department": "Computer Applications",
+        "email": "yamuanan97@gmail.com",
+        "facultyId": "",
+        "experience": "4 Years, 10 Months",
+        "joiningDate": "August 17, 2022",
+        "teachingSince": "August 17, 2022"
+      },
+      {
+        "name": "Ms. C. Amuthavalli",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "M.C.A.",
+        "qualification": "",
+        "designation": "Assistant Professor",
+        "department": "Computer Applications",
+        "email": "amuthavallic@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "4204419",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "July 23, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. Sakthi S",
+        "qualification": "MCA",
+        "designation": "Assistant Professor",
+        "department": "Computer Applications",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "SSAKTHI28@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 12, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. M. Seetha",
+        "qualification": "MCA",
+        "designation": "Assistant Professor",
+        "department": "Computer Applications",
+        "email": "sita110594@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "July 27, 2023",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [
+      {
+        "academicYear": "2006",
+        "studentName": "MOHANAPRIYA",
+        "rank": "7"
+      },
+      {
+        "academicYear": "2006",
+        "studentName": "JAYASRIDEVI",
+        "rank": "25"
+      },
+      {
+        "academicYear": "2006",
+        "studentName": "SUMITHARAVINDRAN",
+        "rank": "27"
+      },
+      {
+        "academicYear": "2007",
+        "studentName": "RAJALAKSHMI",
+        "rank": "14"
+      },
+      {
+        "academicYear": "2007",
+        "studentName": "MAHALAKSHMI",
+        "rank": "41"
+      },
+      {
+        "academicYear": "2008",
+        "studentName": "PRIYA S",
+        "rank": "25"
+      },
+      {
+        "academicYear": "2009",
+        "studentName": "PREMA. M",
+        "rank": "23"
+      },
+      {
+        "academicYear": "2011",
+        "studentName": "THAMIZHSELVI P",
+        "rank": "42"
+      },
+      {
+        "academicYear": "2012",
+        "studentName": "SAKTHIESWARI.G",
+        "rank": "32"
+      },
+      {
+        "academicYear": "2012",
+        "studentName": "PADMAMALINIK",
+        "rank": "44"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "HEMAVATHY S",
+        "rank": "6"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "PAVITHRA V",
+        "rank": "14"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "SIVAGURUS",
+        "rank": "15"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "BRINDHA",
+        "rank": "16"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "JAYANTHIE",
+        "rank": "17"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "INDUMATHI E",
+        "rank": "27"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "KAYALVIZHIR",
+        "rank": "50"
+      },
+      {
+        "academicYear": "2013",
+        "studentName": "SARGUNAN.E",
+        "rank": "50"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "VIJAYAKUMAR. M",
+        "rank": "30"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "VIJAYANTHI. E",
+        "rank": "32"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "POONGOTHAI.S",
+        "rank": "33"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "REVATHI. T",
+        "rank": "35"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "MAHESWARI.S",
+        "rank": "37"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "SRIDEVIK",
+        "rank": "41"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "ASWINI.J",
+        "rank": "46"
+      },
+      {
+        "academicYear": "2015",
+        "studentName": "BHARADHI. D",
+        "rank": "11"
+      },
+      {
+        "academicYear": "2015",
+        "studentName": "GIOVARTHINI. V",
+        "rank": "14"
+      },
+      {
+        "academicYear": "2015",
+        "studentName": "PRIYA P",
+        "rank": "17"
+      },
+      {
+        "academicYear": "2015",
+        "studentName": "YAMUNA. IN",
+        "rank": "34"
+      },
+      {
+        "academicYear": "2015",
+        "studentName": "SUGANYA",
+        "rank": "17"
+      },
+      {
+        "academicYear": "2016",
+        "studentName": "SOWPIRAJ. M",
+        "rank": "43"
+      },
+      {
+        "academicYear": "2017",
+        "studentName": "KEERTHANA",
+        "rank": "31"
+      },
+      {
+        "academicYear": "2017",
+        "studentName": "ABIRAMI k",
+        "rank": "39"
+      },
+      {
+        "academicYear": "2017",
+        "studentName": "SANTHIPRIYA.G",
+        "rank": "46"
+      },
+      {
+        "academicYear": "2017",
+        "studentName": "PUNTHAVATHI K",
+        "rank": "47"
+      },
+      {
+        "academicYear": "2018",
+        "studentName": "DIVYA",
+        "rank": "7"
+      },
+      {
+        "academicYear": "2018",
+        "studentName": "SRIMATHI. E",
+        "rank": "13"
+      },
+      {
+        "academicYear": "2018",
+        "studentName": "STEFF.D",
+        "rank": "32"
+      },
+      {
+        "academicYear": "2018",
+        "studentName": "MADHUVANTHI. P",
+        "rank": "38"
+      }
+    ],
+    "publications": {
+      "journals": [
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "A Comparative Study of Performance of Facial Expression Recognition using Deep face and VGG16 Techniques",
+          "link": "Arunkumar S"
+        },
+        {
+          "title": "Journal of Innovations in Data Science and Big Data Management",
+          "author": "2024",
+          "department": "UGC",
+          "journal": "https://matjournals.net/engineering/index.php/JIDSBDM/article/view/228/274",
+          "year": "Emotion Detection from Audio: A Deep Learning Approach",
+          "link": "Arunkumar S"
+        },
+        {
+          "title": "Journal of Big Data Technology and Business Analytics",
+          "author": "2024",
+          "department": "UGC",
+          "journal": "https://matjournals.net/engineering/index.php/JBDTBA/article/view/207/251",
+          "year": "Emotion Detection from Text using Natural Language Processing and Neural Networks",
+          "link": "Arunkumar S"
+        },
+        {
+          "title": "International Journal of Intelligent Systems and Applications in Engineering",
+          "author": "2024",
+          "department": "SCOPUS",
+          "journal": "https://ijisae.org/index.php/IJISAE/article/view/4707",
+          "year": "CALENDAR YEAR 2020",
+          "link": "Title of the  paper"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Recognition of Facial Expression using DeepLearning Model",
+          "link": "Arunkumar S"
+        },
+        {
+          "title": "International Journal of Advanced Science and Technology",
+          "author": "2020",
+          "department": "SCOPUS",
+          "journal": "http://sersc.org/journals/index.php/IJAST/article/view/28081",
+          "year": "Name of the Faculty",
+          "link": "Title of the Conference Proceeding Published"
+        },
+        {
+          "title": "Next-Gen Telehealth Ecosystems Using IoT for",
+          "author": "Virtual Consultations and Support",
+          "department": "IEEE",
+          "journal": "S.Arunkumar",
+          "year": "ICCSP 24",
+          "link": "Augmented Reality Shopping and IoT-Enabled"
+        },
+        {
+          "title": "Virtual Try-On with Cloud Services for Interactive",
+          "author": "Product Displays",
+          "department": "IEEE",
+          "journal": "S. Arunkumar",
+          "year": "ICTACC 22",
+          "link": "Facial Expression Recognition for Image Annotation"
+        }
+      ],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "cse": {
+    "key": "cse",
+    "name": "Computer Science Engineering",
+    "about": "Department of Computer Science and Engineering was established in the year 1993. It started undergraduate course with 30 students as intake of and now strengthens to 90. In addition, PG programme M.E. Computer Science and Engineering was started in the year 2009 with 18 students as intake. The department has been affiliated to Anna University Technology, Chennai. The alacrity of the students to learn makes it easier for the department of computer science and engineering to produce top-notch engineers who are being recruited by companies all over the world. We provide the following programmes.",
+    "vision": "To be a globally recognized leader in computer science and engineering education, research, and innovation, driving advancements that address societal challenges and shape the future of technology.",
+    "mission": [
+      "Foster a culture of interdisciplinary collaboration, encouraging students and faculty to explore innovative solutions that integrate computer science and engineering with other domains such as medicine, business, and the humanities.",
+      "Conduct impactful research that advances the frontiers of computer science and engineering, addressing fundamental questions and tackling real-world problems with creativity and rigor.",
+      "Engage with industry, government, and other stakeholders to translate research discoveries into practical applications, driving economic growth and societal progress."
+    ],
+    "peos": [
+      "Apply their technical competence in computer science to solve real world problems, with technical and people leadership.",
+      "Conduct cutting edge research and develop solutions on problems of social relevance.",
+      "Work in a business environment, exhibiting team skills, work ethics, adaptability and lifelong learning."
+    ],
+    "psos": [
+      "Exhibit design and programming skills to build and automate business solutions using cutting edge technologies.",
+      "Strong theoretical foundation leading to excellence and excitement towards research, to provide elegant solutions to complex problems.",
+      "Ability to work effectively with various engineering fields as a team to design, build and develop system applications."
+    ],
+    "pos": [
+      {
+        "title": "Engineering knowledge",
+        "description": "Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems."
+      },
+      {
+        "title": "Problem analysis",
+        "description": "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences."
+      },
+      {
+        "title": "Design/development of solutions",
+        "description": "Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations."
+      },
+      {
+        "title": "Conduct investigations of complex problems",
+        "description": "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions."
+      },
+      {
+        "title": "Modern tool usage",
+        "description": "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations."
+      },
+      {
+        "title": "The engineer and society",
+        "description": "Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice."
+      },
+      {
+        "title": "Environment and sustainability",
+        "description": "Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development."
+      },
+      {
+        "title": "Ethics",
+        "description": "Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice."
+      },
+      {
+        "title": "Individual and team work",
+        "description": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings."
+      },
+      {
+        "title": "Communication",
+        "description": "Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions."
+      },
+      {
+        "title": "Project management and finance",
+        "description": "Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments."
+      },
+      {
+        "title": "Life-long learning",
+        "description": "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
+      }
+    ],
+    "faculty": [
+      {
+        "name": "Dr. C. Dhaya",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Head of Department",
+        "department": "Computer Science and Engineering",
+        "email": "dhaya@apec.edu.in",
+        "facultyId": "",
+        "experience": "25 Years,  Months",
+        "joiningDate": "June 12, 2001",
+        "teachingSince": "June 12, 2001"
+      },
+      {
+        "name": "Dr. S. Jayashri",
+        "qualification": "M.E., PhD",
+        "designation": "Professor",
+        "department": "Computer Science and Engineering",
+        "email": "jayashris@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "January 1, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. G. Sekar",
+        "qualification": "M.E., (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "sekar@apec.edu.in",
+        "facultyId": "",
+        "experience": "16 Years,  Months",
+        "joiningDate": "June 21, 2010",
+        "teachingSince": "June 21, 2010"
+      },
+      {
+        "name": "Mr. G. Srinivasan",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "srinivasan@apec.edu.in",
+        "facultyId": "",
+        "experience": "14 Years, 1 Months",
+        "joiningDate": "July 24, 2012",
+        "teachingSince": "May 5, 2012"
+      },
+      {
+        "name": "Mr. K. Chairmadurai",
+        "qualification": "M.E., (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "chairmadurai@apec.edu.in",
+        "facultyId": "",
+        "experience": "9 Years,  Months",
+        "joiningDate": "August 1, 2017",
+        "teachingSince": "June 28, 2017"
+      },
+      {
+        "name": "Ms. A. Jayanthi",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "jayanthiarumugam90@gmail.com",
+        "facultyId": "",
+        "experience": "5 Years, 9 Months",
+        "joiningDate": "October 1, 2025",
+        "teachingSince": "October 1, 2021"
+      },
+      {
+        "name": "Ms. P. Gajalakshmi",
+        "qualification": "M.E., (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "gajalakshmigctme@gmail.com",
+        "facultyId": "",
+        "experience": "4 Years, 10 Months",
+        "joiningDate": "",
+        "teachingSince": "August 18, 2022"
+      },
+      {
+        "name": "Ms. M. Devika",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "m.devika2007@gmail.com",
+        "facultyId": "",
+        "experience": "4 Years, 9 Months",
+        "joiningDate": "September 5, 2022",
+        "teachingSince": "September 5, 2022"
+      },
+      {
+        "name": "Mr. S. Hariganesan",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "hariganesan@apec.edu.in",
+        "facultyId": "",
+        "experience": "3 Years, 4 Months",
+        "joiningDate": "September 1, 2014",
+        "teachingSince": "February 7, 2023"
+      },
+      {
+        "name": "Ms. S. Swetha",
+        "qualification": "M. E.",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "swethasasikumar07@gmail.com",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "4204434",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "1 Years, 7 Months",
+        "joiningDate": "November 3, 2025",
+        "teachingSince": "November 3, 2025"
+      },
+      {
+        "name": "Ms. Manonmani G",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "MANOLASKHMI@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Ms. P. Banu Priya",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "banupriya@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 1, 2023",
+        "teachingSince": ""
+      },
+      {
+        "name": "Ms. K. Muthu Priya",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "muthupriyak@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 1, 2023",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. Mahalakshmi M",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "MMDPSS123@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs.Padmapriya. T.M",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "APECPRIYA@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 12, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs.Thamarai Selvi.V",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Computer Science and Engineering",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "THAMARAIVASU.SELVI06@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "May 20, 2024",
+        "teachingSince": "Study Materials:"
+      },
+      {
+        "name": "I SEMESTER",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "II SEMESTER",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "III SEMESTER",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "IV SEMESTER",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "V SEMESTER",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "VI SEMESTER",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "LAB MANUALS",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "CS3461 - OPERATING SYSTEMS LABORATORY",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "VII SEM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [],
+    "placements": [
+      {
+        "registerNumber": "420420104001",
+        "studentName": "AJITH R",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104002",
+        "studentName": "ARUNA B",
+        "companyName": "1. Seval Software Sollutions",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104004",
+        "studentName": "BHARATHI M",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104005",
+        "studentName": "BHARATHI ARASAN A",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104007",
+        "studentName": "CHARUMATHI B",
+        "companyName": "1. Seval Software Sollutions",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104008",
+        "studentName": "DEENA E",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104010",
+        "studentName": "DILLIKUMAR N",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104011",
+        "studentName": "GEETHA M",
+        "companyName": "1. Seval Software Sollutions, 2. Zen Cropcare India Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA, 2.2 LPA"
+      },
+      {
+        "registerNumber": "420420104012",
+        "studentName": "GOKULAKRISHNAN S",
+        "companyName": "1. Seval Software Sollutions",
+        "salaryPackage": "4 LPA"
+      },
+      {
+        "registerNumber": "420420104014",
+        "studentName": "GOWTHAM RAJ S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104016",
+        "studentName": "HARISH N",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104017",
+        "studentName": "HARISHKUMAR R",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104019",
+        "studentName": "ISHWARYA SAKTHI S",
+        "companyName": "1. Zen Cropcare India Pvt. Ltd. 2. EOS Global 3. Forte Management Services",
+        "salaryPackage": "2.2 LPA, 1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104020",
+        "studentName": "JAYANTHI N",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104021",
+        "studentName": "KAMALESHWARAN K",
+        "companyName": "1. Digital EPCS",
+        "salaryPackage": "4 LPA"
+      },
+      {
+        "registerNumber": "420420104022",
+        "studentName": "KANISHKAR.S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104023",
+        "studentName": "KARTHI K",
+        "companyName": "1. OM Innovations",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104024",
+        "studentName": "KARTHIGA A",
+        "companyName": "1. Seval Software Sollutions",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104025",
+        "studentName": "KARTHIKEYAN A",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104026",
+        "studentName": "KATHIJA FYROSE FATHIMA B",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104027",
+        "studentName": "KAVIYARASU V",
+        "companyName": "1. OM Innovations",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104028",
+        "studentName": "KRISHNA KUMAR R",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104029",
+        "studentName": "LOKESHKUMAR V",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104030",
+        "studentName": "MADHUMITHA G",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104031",
+        "studentName": "MADUMITHA R",
+        "companyName": "1. Seval Software Sollutions",
+        "salaryPackage": "4 LPA"
+      },
+      {
+        "registerNumber": "420420104032",
+        "studentName": "Muthuraj M",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104034",
+        "studentName": "NAVEEN B",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104035",
+        "studentName": "NEDUNCHEZHIAN M",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104036",
+        "studentName": "RAJALAKSHMI.J",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104037",
+        "studentName": "RAJARAJAN K",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104038",
+        "studentName": "SAKTHI NANDHA KUMAR",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104039",
+        "studentName": "SAKTHISWETHA J",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104040",
+        "studentName": "SAKTHI UMA S",
+        "companyName": "1. Pilntron 2. EOS Global 3. Forte Management Services",
+        "salaryPackage": "3.5 LPA,  1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104041",
+        "studentName": "SANGAVI S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104042",
+        "studentName": "SANMATHI S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104043",
+        "studentName": "SANTHAPRASANTHSHA V",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104044",
+        "studentName": "SEDHUMADHAVAN V",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104046",
+        "studentName": "SINDHU K",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104047",
+        "studentName": "SOWNDARYA K",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104048",
+        "studentName": "SRIMATHI.V",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104049",
+        "studentName": "SRINIVAS S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104050",
+        "studentName": "SURIYA R S",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104051",
+        "studentName": "SWATHI P S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104053",
+        "studentName": "SWETHA S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104054",
+        "studentName": "TEENA D",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104055",
+        "studentName": "VAHULTHASAN T",
+        "companyName": "1. Forte Management Services",
+        "salaryPackage": "1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104056",
+        "studentName": "VANITHA LAKSHMI G",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104057",
+        "studentName": "VANMATHI S",
+        "companyName": "1. Rinex-Education 2. FACE Prep",
+        "salaryPackage": "3 LPA,  5 LPA"
+      },
+      {
+        "registerNumber": "420420104058",
+        "studentName": "VIGNESHKUMAR D",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104060",
+        "studentName": "YAZHINI E",
+        "companyName": "1. FACE Prep, 2. Infiniti Software Sollutions, 3. Avasoft",
+        "salaryPackage": "3 LPA, 4 LPA, 5 LPA"
+      },
+      {
+        "registerNumber": "420420104061",
+        "studentName": "YUVASREE C",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104301",
+        "studentName": "CHANDRASEKARAN S",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104302",
+        "studentName": "DEEPALAKSHMI R",
+        "companyName": "1. Forte Management Services",
+        "salaryPackage": "1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104304",
+        "studentName": "HARI HARAN R",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104305",
+        "studentName": "HARISH E",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104306",
+        "studentName": "HEM KUMAR V",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104307",
+        "studentName": "JAYASHREE K",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104311",
+        "studentName": "VIJAYAKUMAR E",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104312",
+        "studentName": "ZAHUL HUK N",
+        "companyName": "1. EOS Global 2. Forte Management Services",
+        "salaryPackage": "1.8 LPA,  1.5 LPA"
+      },
+      {
+        "registerNumber": "420420140309",
+        "studentName": "TAMILSELVAN T",
+        "companyName": "1. OM Innovations",
+        "salaryPackage": "1.5 LPA"
+      },
+      {
+        "registerNumber": "420420104038",
+        "studentName": "SAKTHI NANDHA KUMAR",
+        "companyName": "1. EOS Global",
+        "salaryPackage": "1.8 LPA,"
+      }
+    ],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": [
+      {
+        "studentName": "Semester",
+        "yearSem": "",
+        "gpa": "KEERTHANA P",
+        "rank": ""
+      }
+    ]
+  },
+  "mech": {
+    "key": "mech",
+    "name": "Department of Mechanical Engineering",
+    "about": "",
+    "vision": "The Department of Mechanical Engineering of Adhiparasakthi Engineering College strives hard to produce globally competitive Mechanical Engineers with good attitude to serve the changing needs of the society.",
+    "mission": [
+      "Imbibing the skill of innovative teaching and learning process to assure transfer of fundamental knowledge.",
+      "Continuous improvement in developing the competency among the students to succeed in solving the contemporary engineering challenges through value based education.",
+      "Developing the leadership skills through team work."
+    ],
+    "peos": [
+      "Effectuating success in careers by exploring with the design, digital and computational analysis of engineering systems, experimentation and testing, smart manufacturing, technical services, and research.",
+      "Amalgamating effectively with stakeholders to update and improve their core competencies and abilities to ethically compete in the ever-changing multicultural global enterprise.",
+      "To encourage multi-disciplinary research and development to foster advanced technology, and to nurture innovation and entrepreneurship in order to compete successfully in the global economy.",
+      "To globally share and apply technical knowledge to create new opportunities that proactively advances our society through team efforts and to solve various challenging technical, environmental and societal problems.",
+      "To create world class mechanical engineers capable of practice engineering ethically with a solid vision to become great leaders in academia, industries and society"
+    ],
+    "psos": [
+      "Apply the knowledge gained in Mechanical Engineering for design and development and manufacture of engineering systems.",
+      "Apply the knowledge acquired to investigate research-oriented problems in mechanical engineering with due consideration for environmental and social impacts.",
+      "Use the engineering analysis and data management tools for effective management of multidisciplinary projects."
+    ],
+    "pos": [
+      {
+        "title": "",
+        "description": "Engineering knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems."
+      },
+      {
+        "title": "",
+        "description": "Problem analysis: Identify, formulate, review research literature, and analyse complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences."
+      },
+      {
+        "title": "",
+        "description": "Design/development of solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations."
+      },
+      {
+        "title": "",
+        "description": "Conduct investigations of complex problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions."
+      },
+      {
+        "title": "",
+        "description": "Modern tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modelling to complex engineering activities with an understanding of the limitations."
+      },
+      {
+        "title": "",
+        "description": "The engineer and society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice."
+      },
+      {
+        "title": "",
+        "description": "Environment and sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development."
+      },
+      {
+        "title": "",
+        "description": "Ethics: Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice."
+      },
+      {
+        "title": "ndividual and team work",
+        "description": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings."
+      },
+      {
+        "title": "",
+        "description": "Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions."
+      },
+      {
+        "title": "",
+        "description": "Project management and finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments."
+      },
+      {
+        "title": "",
+        "description": "Life-long learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change"
+      },
+      {
+        "title": "",
+        "description": "Faculty"
+      }
+    ],
+    "faculty": [
+      {
+        "name": "Dr.C.K.Dhinakarraj",
+        "qualification": "M.E,Ph.D",
+        "designation": "Head of Department",
+        "department": "Mechanical Engineering",
+        "email": "ckd@apec.edu.in",
+        "facultyId": "",
+        "experience": "30 Years, 5 Months",
+        "joiningDate": "July 25, 2007",
+        "teachingSince": "January 2, 1996"
+      },
+      {
+        "name": "Dr.R.Kamaljayaraj",
+        "qualification": "M.E,Ph.D",
+        "designation": "Associate Professor",
+        "department": "Mechanical Engineering",
+        "email": "doctormothilal@gmail.com",
+        "facultyId": "",
+        "experience": "24 Years, 1 Months",
+        "joiningDate": "March 1, 2022",
+        "teachingSince": "May 3, 2002"
+      },
+      {
+        "name": "Dr. Gajalakshmi K",
+        "qualification": "M.E,Ph.D.",
+        "designation": "Associate Professor",
+        "department": "Mechanical Engineering",
+        "email": "kg@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "Dr. Vivekanandhan M",
+        "qualification": "M.E,Ph.D.",
+        "designation": "Associate Professor",
+        "department": "Mechanical Engineering",
+        "email": "vivekanandhanm@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "May 17, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr.K.Dhandapani",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "dhandapanitvm@gmail.com",
+        "facultyId": "",
+        "experience": "19 Years, 6 Months",
+        "joiningDate": "October 3, 2011",
+        "teachingSince": "December 3, 2007"
+      },
+      {
+        "name": "Mr.Gopikannan.S",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "gopikannan@rediffmail.com",
+        "facultyId": "",
+        "experience": "14 Years,  Months",
+        "joiningDate": "February 20, 2012",
+        "teachingSince": "June 3, 2012"
+      },
+      {
+        "name": "Mr.Sathishbabu.R",
+        "qualification": "M.E., (Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "sathish2432403@gmail.com",
+        "facultyId": "",
+        "experience": "14 Years,  Months",
+        "joiningDate": "December 17, 2012",
+        "teachingSince": "June 5, 2012"
+      },
+      {
+        "name": "Mr.Yogeshwaran.K.B",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "kbyapec@gmail.com",
+        "facultyId": "",
+        "experience": "13 Years,  Months",
+        "joiningDate": "June 3, 2013",
+        "teachingSince": "June 3, 2013"
+      },
+      {
+        "name": "Mr.Parthiban.R",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "Parthiban@apec.edu.in",
+        "facultyId": "",
+        "experience": "13 Years,  Months",
+        "joiningDate": "August 10, 2015",
+        "teachingSince": "June 3, 2013"
+      },
+      {
+        "name": "Mr.Balamurugan.M",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "asmbalamurugan@gmail.com",
+        "facultyId": "",
+        "experience": "11 Years,  Months",
+        "joiningDate": "August 5, 2015",
+        "teachingSince": "June 3, 2015"
+      },
+      {
+        "name": "Mr.Balasubramaniasaravanan.T",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "saravanathangappan@gmail.com",
+        "facultyId": "",
+        "experience": "9 Years, 11 Months",
+        "joiningDate": "June 2, 2016",
+        "teachingSince": "July 10, 2017"
+      },
+      {
+        "name": "Mr. Mohan S",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "mohans4590@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 2, 2016",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. Manigandan. C",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Mechanical Engineering",
+        "email": "manindhu198@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 3, 2013",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "image",
+      "Welding Lab",
+      "image",
+      "Dynamics Lab",
+      "image",
+      "Heat Engines Lab",
+      "image",
+      "Machine Shop",
+      "image",
+      "Mechatronics Lab",
+      "image",
+      "Heat & Mass Transfer Lab",
+      "image",
+      "Metrology & Measurements Lab",
+      "image",
+      "CAD/CAM Lab",
+      "image",
+      "RESEARCH & DEVELOPMENT",
+      "image",
+      "CNC Lathe",
+      "image",
+      "CNC Milling",
+      "image",
+      "Performance Test on Engine",
+      "Numbers of Work Stations 30 (I9,) With Wifi -Facility",
+      "Licensed Software",
+      "AUTO CADD, Solid Works, ANSYS, Hyper mesh, Creo, Lab view, Hydrosim, Pneumosim. Other Accessories",
+      "A – 3 Plotter, ALL in One Printer & Scanner, Smart Printer with Wifi Facility.",
+      "TEACHING MODELS",
+      "Engineering Graphics Models                     : 10",
+      "Lathe Demo                                                 : 02",
+      "Engine Cut section Model                          : 01",
+      "Solar Flat Plate Collector                            : 01",
+      "LCD PROJECTOR                                          : 5",
+      "CHARTS                                                       : 15",
+      "NPTEL CD’S                                                 : 25",
+      "DEPARTMENT LIBRARY",
+      "Number of Books             : 1160",
+      "Journals                            : 05",
+      "Back Volumes                  : 225",
+      "NPTEL Web Course CD’s : 10",
+      "No of project Books        : 250",
+      "image",
+      "Student"
+    ],
+    "placements": [
+      {
+        "registerNumber": "420421114012",
+        "studentName": "KISHORE SHANKAR S",
+        "companyName": "SUBA SOLUTIONS",
+        "salaryPackage": "2.78 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114302",
+        "studentName": "LESHANTH P",
+        "companyName": "SUBA SOLUTIONS",
+        "salaryPackage": "2.78 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114020",
+        "studentName": "UDHAYAKUMAR A",
+        "companyName": "SUBA SOLUTIONS",
+        "salaryPackage": "2.78 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114305",
+        "studentName": "PRABAKARAN G",
+        "companyName": "SUBA SOLUTIONS",
+        "salaryPackage": "2.78 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114303",
+        "studentName": "NARESH G R",
+        "companyName": "SUBA SOLUTIONS",
+        "salaryPackage": "2.78 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114022",
+        "studentName": "VIJAY S",
+        "companyName": "SUBA SOLUTIONS",
+        "salaryPackage": "2.78 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114301",
+        "studentName": "DINESH A",
+        "companyName": "POWERSPACK",
+        "salaryPackage": "AUTOMOTIVES PVT LTD"
+      },
+      {
+        "registerNumber": "420421114018",
+        "studentName": "SAKTHIVEL R",
+        "companyName": "SPINKS SOFT PVT LTD",
+        "salaryPackage": "2.4"
+      },
+      {
+        "registerNumber": "420421114017",
+        "studentName": "RAJESH S",
+        "companyName": "SPINKS SOFT PVT LTD",
+        "salaryPackage": "2.4"
+      },
+      {
+        "registerNumber": "420421114307",
+        "studentName": "SRINATH V",
+        "companyName": "SPINKS SOFT PVT LTD",
+        "salaryPackage": "2.4"
+      },
+      {
+        "registerNumber": "420421114007",
+        "studentName": "HARI PRASATH P",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114002",
+        "studentName": "DHANUSH E",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114013",
+        "studentName": "MANOJKUMAR M",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114004",
+        "studentName": "EZHUMALAI V",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114008",
+        "studentName": "HARISH RAGAVENDHAR I",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114009",
+        "studentName": "JAGAN S",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114010",
+        "studentName": "JANAKIRAMAN G",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114019",
+        "studentName": "SANKAR S",
+        "companyName": "TVS BRAKES INDIA",
+        "salaryPackage": "2.34 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114003",
+        "studentName": "DILLIBABU K",
+        "companyName": "ZF COMMERICAL VEHICLE",
+        "salaryPackage": "CONTROL PVT LTD"
+      },
+      {
+        "registerNumber": "420421114006",
+        "studentName": "GNANAPRAKASH M",
+        "companyName": "ZF COMMERICAL VEHICLE",
+        "salaryPackage": "CONTROL PVT LTD"
+      },
+      {
+        "registerNumber": "420421114011",
+        "studentName": "JEEVANANTHAM S",
+        "companyName": "ZF COMMERICAL VEHICLE",
+        "salaryPackage": "CONTROL PVT LTD"
+      },
+      {
+        "registerNumber": "420421114015",
+        "studentName": "PRASANTH S",
+        "companyName": "ZF COMMERICAL VEHICLE",
+        "salaryPackage": "CONTROL PVT LTD"
+      },
+      {
+        "registerNumber": "420421114306",
+        "studentName": "SARAVANAN D",
+        "companyName": "ZF COMMERICAL VEHICLE",
+        "salaryPackage": "CONTROL PVT LTD"
+      },
+      {
+        "registerNumber": "420421114005",
+        "studentName": "GIREESHVARAN S",
+        "companyName": "GESCO HEALTH CARE PVT LTD",
+        "salaryPackage": "2.16 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114001",
+        "studentName": "AKASH G",
+        "companyName": "Aswini Enterprises",
+        "salaryPackage": "2.16 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114016",
+        "studentName": "PRAVEEN M",
+        "companyName": "Aswini Enterprises",
+        "salaryPackage": "2.16 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420421114014",
+        "studentName": "PRAKASH G",
+        "companyName": "SUJA",
+        "salaryPackage": "SHOEI INDUSTRIES PRIVATE LIMITED"
+      },
+      {
+        "registerNumber": "420421114021",
+        "studentName": "VALARMATHI S",
+        "companyName": "CRYOLAR ASIA PACIFIC PVT LTD",
+        "salaryPackage": "1.8 LAKHS P.A"
+      }
+    ],
+    "rankHolders": [],
+    "publications": {
+      "journals": [
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Characterization Studies on Vetiveria Zizanioides",
+          "link": "Natural Fiber and Graphene Filler Reinforced Nano"
+        },
+        {
+          "title": "Polymer Composite Material",
+          "author": "N. Senthilkumar",
+          "department": "B. Deepanraj",
+          "journal": "C. K. Dhinakarraj",
+          "year": "M. Yuvaperiyasamy",
+          "link": "Mechanical"
+        },
+        {
+          "title": "Journal of Environ. Nanotechnolnology.",
+          "author": "2024",
+          "department": "Scopus",
+          "journal": "https://doi.org/10.13074/jent.2024.06.242561",
+          "year": "CALENDAR YEAR 2023",
+          "link": "Title of the  paper"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Experimental Interrogationson",
+          "link": "Morphologies and Mechanical Delineation of Silicon Nitride Fortified Mg-Al-Zn"
+        },
+        {
+          "title": "Alloy Composites",
+          "author": "C K Dhinakarraj,                 N Senthilkumar",
+          "department": "Mechanical",
+          "journal": "Materials",
+          "year": "Today Communications",
+          "link": "2023"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Multi-Response",
+          "link": "Optimization And Investigation Of Dry Sliding Wear Behavior Of Al7075 Surface"
+        },
+        {
+          "title": "Hybrid Nanocomposite Using Response Surface Methodology",
+          "author": "S. Gobikannan,          S.Gopalakannan, P.Sivaraj",
+          "department": "Mechanical",
+          "journal": "Surface Review and",
+          "year": "Letters",
+          "link": "2022"
+        },
+        {
+          "title": "World Scientific Publishing Company",
+          "author": "https://www.worldscientific.com/doi/abs/10.1142/S0218625X22501402",
+          "department": "Optimization and",
+          "journal": "effect of B4C/Al2O3 with graphite particulates on tribological properties of",
+          "year": "Al7075 surface hybrid nanocomposite",
+          "link": "S.Gobikannan. S.Gopalakannan, P.Sivaraj"
+        },
+        {
+          "title": "Surface Topography: Metrology and",
+          "author": "Properties",
+          "department": "2022",
+          "journal": "IOP Publishing",
+          "year": "https://iopscience.iop.org/article/10.1088/2051-672X/ac8112/meta",
+          "link": "CALENDAR YEAR 2021"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Mechanical Characterization Studies of Aluminium Alloy 7075 Based Nanocomposites",
+          "link": "J. Prakash, S. Gopalakannan & V. Kalyana Chakravarthy"
+        },
+        {
+          "title": "Teaching—Learning-Based Optimization Coupled with Response Surface Methodology for Micro Electrochemical Machining of Aluminium nanocomposite",
+          "author": "J. Prakash & S. Gopalakannan",
+          "department": "Mechanical",
+          "journal": "Silicon",
+          "year": "2021",
+          "link": "Springer"
+        },
+        {
+          "title": "Prediction of Dry Sliding Wear Response of AlMg1SiCu/Silicon Carbide/Molybdenum Disulphide Hybrid Composites Using Adaptive Neuro-Fuzzy Inference System (ANFIS) and Response Surface Methodology (RSM)",
+          "author": "K. Ragupathy, C. Velmurugan, D. S. Ebenezer Jacob Dhas, N. Senthilkumar & K. Leo Dev Wins",
+          "department": "Mechanical",
+          "journal": "Arabian Journal for Science and Engineering",
+          "year": "2021",
+          "link": "Springer Berlin Heidelberg"
+        },
+        {
+          "title": "Cashew nut shell liquid as alternate fuel for CI engine—optimization approach for performance improvement",
+          "author": "B. Deepanraj, N. Senthilkumar, D. Mala & A. Sathiamourthy",
+          "department": "Mechanical",
+          "journal": "Biomass Conversion and Biorefinery",
+          "year": "Processing of Biogenic Material for Energy and Chemistry",
+          "link": "2021"
+        },
+        {
+          "title": "Synthesis and Characterization of Silicon Nitride Reinforced Al–Mg–Zn Alloy Composites",
+          "author": "G. Anbuchezhiyan, B. Mohan, N. Senthilkumar & R. Pugazhenthi",
+          "department": "Mechanical",
+          "journal": "Metals and Materials International",
+          "year": "2021",
+          "link": "Springer + The Korean Institute of Metals and Materials"
+        },
+        {
+          "title": "Implications of SiC/Al2O3 Reinforced Al-Mg-Zn Alloy Hybrid Nano Composites Using Vacuum Sintering Method",
+          "author": "K. Velavan, B. Mohan, G. Anbuchezhiyan & N. Senthilkumar",
+          "department": "Mechanical",
+          "journal": "Silicon",
+          "year": "2021",
+          "link": "Springer Netherlands"
+        },
+        {
+          "title": "Enhancement of energy storage capacity in lithium polymer batteries incorporated with zirconium oxide nano powders",
+          "author": "D. Murugandhan , R. Valli , N. Senthilkumar, S. Arunmozhi",
+          "department": "Mechanical",
+          "journal": "Materials Today Proceedings",
+          "year": "2021",
+          "link": "Elsevier"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Effect of nanoclay and nanoscale TiO2 on carbon/glass fibrereinforced polymer composites",
+          "link": "Elamvazhudi  and Gopalakannan"
+        },
+        {
+          "title": "IOP Conference Series: Materials Science and Engineering",
+          "author": "2020",
+          "department": "Purpose LED Publishing",
+          "journal": "https://iopscience.iop.org/article/10.1088/2053-1591/aba30a/meta",
+          "year": "Mechanical and wear surface characterisation of aluminium hybrid nanocomposite",
+          "link": "I Manivannan, S Ranganathan, S Gopalakannan, S Suresh, D Candane"
+        },
+        {
+          "title": "International Journal of Computational Materials Science and Surface Engineering",
+          "author": "2020",
+          "department": "Inderscience Publishers (IEL",
+          "journal": "https://www.inderscienceonline.com/doi/abs/10.1504/IJCMSSE.2019.104697",
+          "year": "Evaluation of mode III Delamination behaviour of modified Carbon/Glass Fibre Reinforced Polymer Composites with Nanoclay particles",
+          "link": "B Elamvazhudi1 and S Gopalakannan2"
+        },
+        {
+          "title": "IOP Conference Series: Materials Science and Engineering",
+          "author": "2020",
+          "department": "Purpose LED Publishing",
+          "journal": "https://iopscience.iop.org/article/10.1088/1757-899X/988/1/012017/meta",
+          "year": "Biogas from food waste through anaerobic digestion: optimization with response surface methodology",
+          "link": "B. Deepanraj, N. Senthilkumar, J. Ranjitha, S. Jayaraj & Hwai Chyuan Ong"
+        },
+        {
+          "title": "Biomass Conversion and Biorefinery",
+          "author": "Processing of Biogenic Material for Energy and Chemistry",
+          "department": "2020",
+          "journal": "Springer Berlin Heidelberg",
+          "year": "https://link.springer.com/article/10.1007/s13399-020-00646-9",
+          "link": "Mode-1 fracture toughness analysis of coffee bean powder reinforced polymer composite"
+        },
+        {
+          "title": "A. Muniappan , R. Srinivasan , M.V.V. Sai Sandeep , N. Senthilkumar  , P.V. Senthiil",
+          "author": "Mechanical",
+          "department": "Materials Today Proceedings",
+          "journal": "2020",
+          "year": "Elsevier",
+          "link": "https://www.sciencedirect.com/science/article/abs/pii/S2214785319320681"
+        },
+        {
+          "title": "Vibration and Damping Behavior of Si3N4 Reinforced Magnesium Alloy Composite for Structural Applications",
+          "author": "C.K. Dhinakarraj      N. Senthilkumar* M.A. Badri                  G. Anbuchezhiyan",
+          "department": "Mechanical",
+          "journal": "Journal of New Materials for Electrochemical Systems",
+          "year": "2020",
+          "link": "Elsevier"
+        },
+        {
+          "title": "Surface modification of AZ61 Magnesium Alloy with Nano TiO2/Al2O3 using Laser Cladding Technique",
+          "author": "S. Sundaraselvan , N. Senthilkumar , T. Tamizharasan , A. Naveen Sait",
+          "department": "Mechanical",
+          "journal": "Materials Today Proceedings",
+          "year": "2020",
+          "link": "Elsevier"
+        },
+        {
+          "title": "Investigations of Micro-Milling Parameters in Woven Banana Fibre Reinforced",
+          "author": "Polymer Composite Filled with Rice Bran Particles",
+          "department": "C.K. Dhinakarraj",
+          "journal": "J. Sivasankar            N. Senthilkumar",
+          "year": "Mechanical",
+          "link": "International Journal of"
+        },
+        {
+          "title": "Vehicle Structures & Systems",
+          "author": "2020",
+          "department": "Elsevier",
+          "journal": "https://www.proquest.com/openview/f48e066f281b94865dc4f41eb49f6edc/1?pq-origsite=gscholar&cbl=60382",
+          "year": "Optimising the wear performance of HVOF thermal spray coated Ti-6Al-4V alloy by grey relational approach",
+          "link": "S. Thirumalvalavan and N. Senthilkumar"
+        },
+        {
+          "title": "International Journal of Rapid Manufacturing",
+          "author": "2020",
+          "department": "Elsevier",
+          "journal": "https://www.inderscienceonline.com/doi/abs/10.1504/IJRAPIDM.2020.104418",
+          "year": "CALENDAR YEAR 2019",
+          "link": "Title of the  paper"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Tribological behavior of aluminum nanocomposites studied by application of response surface methodology",
+          "link": "I. Manivannan, S. Ranganathan & S. Gopalakannan"
+        },
+        {
+          "title": "Advanced Composites and Hybrid Materials",
+          "author": "2019",
+          "department": "Springer",
+          "journal": "https://link.springer.com/article/10.1007/s42114-019-00131-6",
+          "year": "Application of Desirability-Based Multiobjective Optimization Techniques to Study the Wear of Al Self-Lubricating Hybrid Nanocomposites",
+          "link": "I. Manivannan, S. Ranganathan & S. Gopalakannan"
+        },
+        {
+          "title": "Transactions of the Indian Institute of Metals",
+          "author": "2019",
+          "department": "Springer",
+          "journal": "https://link.springer.com/article/10.1007/s12666-019-01840-8#article-info",
+          "year": "Dry sliding wear behaviour of hybrid aluminum based nanocomposites",
+          "link": "I. Manivannan, S. Ranganathan & S. Gopalakannan"
+        },
+        {
+          "title": "Materials Research Express",
+          "author": "2019",
+          "department": "IOP Publishing",
+          "journal": "https://iopscience.iop.org/article/10.1088/2053-1591/ab5394/meta",
+          "year": "Taguchi’s methodology of optimizing turning parameters over chip thickness ratio in machining P/M AMMC",
+          "link": "T. Tamizharasan, N. Senthilkumar, V. Selvakumar & S. Dinesh"
+        },
+        {
+          "title": "Discover Applied Sciences",
+          "author": "2019",
+          "department": "Springer International Publishing",
+          "journal": "https://link.springer.com/article/10.1007/s42452-019-0170-8",
+          "year": "Multi-response optimization of dry sliding wear parameters of AA6026 using hybrid gray relational analysis coupled with response surface method",
+          "link": "K Gajalakshmi , N Senthilkumar, and B Prabu"
+        },
+        {
+          "title": "Measurement and Control",
+          "author": "2019",
+          "department": "https://journals.sagepub.com/doi/full/10.1177/0020294019842603",
+          "journal": "Evaluation of mechanical properties of aluminium alloy (LM25) reinforced with fused silica metal matrix composite",
+          "year": "Thirumalvalavan, S",
+          "link": "Senthilkumar, N"
+        },
+        {
+          "title": "Indian Journal of Engineering & Materials Sciences",
+          "author": "2019",
+          "department": "NISCAIR-CSIR, India",
+          "journal": "https://nopr.niscpr.res.in/bitstream/123456789/47327/1/IJEMS%2026%281%29%2059-66.pdf",
+          "year": "A study on machinability evaluation of Al-Gr-B4C MMC using response surface methodology-based desirability analysis and artificial neural network technique",
+          "link": "S. Ponnuvel and N. Senthilkumar"
+        },
+        {
+          "title": "International Journal of Rapid Manufacturing",
+          "author": "2019",
+          "department": "Inderscience Publishers (IEL)",
+          "journal": "https://www.inderscienceonline.com/doi/abs/10.1504/IJRAPIDM.2019.097030",
+          "year": "Effect of solid concentration on biogas production through anaerobic digestion of rapeseed oil cake",
+          "link": "B. Deepanraj, N. Senthilkumar, Ranjitha J"
+        },
+        {
+          "title": "Energy Sources, Part A: Recovery, Utilization, and Environmental Effects",
+          "author": "2019",
+          "department": "Taylor & Francis",
+          "journal": "https://www.tandfonline.com/doi/abs/10.1080/15567036.2019.1636902",
+          "year": "Experimental Investigation And Optimization",
+          "link": "Of Hvof Spray Parameters On Wear Resistance"
+        },
+        {
+          "title": "Behaviour Of Ti-6al-4v Alloy",
+          "author": "Subramanian Thirumalvalavan, Natarajan Senthilkumar∗",
+          "department": "Mechanical",
+          "journal": "Comptes rendus de l’Academie bulgare des Sciences",
+          "year": "2019",
+          "link": "NISCAIR-CSIR, India"
+        },
+        {
+          "title": "An Experimental Analysis And Optimization Of Heat Treatment",
+          "author": "Parameters Of Al6061 Alloy For Improved Mechanical Properties",
+          "department": "V. Monica",
+          "journal": ", G. Lakshmikanth, S. Lathicashree, N. Senthilkumar,",
+          "year": "A. Muniappan",
+          "link": "& B. Deepanraj"
+        },
+        {
+          "title": "International Journal of Mechanical and Production",
+          "author": "Engineering Research and Development (IJMPERD)",
+          "department": "2019",
+          "journal": "NISCAIR-CSIR, India",
+          "year": "Modelling and Simulation of Conventional Drilling Process using",
+          "link": "Deform 3D"
+        },
+        {
+          "title": ", N. Senthilkumar,*, T. Tamizharasan",
+          "author": "Mechanical",
+          "department": "International Journal of Mechanical Dynamics & Analysis",
+          "journal": "2019",
+          "year": "Springer",
+          "link": "Influence of Seashell Addition on Thermo-Mechanical Properties of"
+        },
+        {
+          "title": "Nylon 66 Polymer Matrix Composite",
+          "author": "P. Vasanthkumar",
+          "department": ", N. Senthilkumar,, K. Palanikumar",
+          "journal": ", N. Rathinam",
+          "year": "Mechanical",
+          "link": "Journal of New Materials for Electrochemical Systems"
+        },
+        {
+          "title": "Surface modification of AZ61 magnesium alloy with nano-Al2O3 using laser cladding technique: optimisation of wear properties through hybrid GRA-PCA",
+          "author": "S. Sundaraselvan and N. Senthilkumar",
+          "department": "Mechanical",
+          "journal": "International Journal of Rapid Manufacturing",
+          "year": "2019",
+          "link": "Inderscience Publishers (IEL)"
+        },
+        {
+          "title": "Characterization And Wear Studies On Non-Asbestos Organic",
+          "author": "Fiber Reinforced Low Metallic Friction Composites",
+          "department": "P. E. Anbunathan",
+          "journal": ", G. Perumal & N. Senthilkumar",
+          "year": "Mechanical",
+          "link": "International Journal of Mechanical and Production"
+        },
+        {
+          "title": "Engineering Research and Development (IJMPERD)",
+          "author": "2019",
+          "department": "Springer",
+          "journal": "Influence of Seashell Addition on Thermo-Mechanical Properties of Nylon 66 Polymer Matrix Composite",
+          "year": "P. Vasanthkumar",
+          "link": ", N. Senthilkumar,, K. Palanikumar"
+        },
+        {
+          "title": "Journal of New Materials for Electrochemical Systems",
+          "author": "2019",
+          "department": "Springer",
+          "journal": "https://www.iieta.org/journals/jnmes/paper/10.14447/jnmes.v22i1.a06",
+          "year": "CALENDAR YEAR 2018",
+          "link": "Title of the  paper"
+        },
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "UGC/Scopus /WoS/SCI",
+          "journal": "Link to article / paper / abstract of the article",
+          "year": "Mechanical Properties and Tribological Behavior of Al6061–SiC–Gr Self-Lubricating Hybrid Nanocomposites",
+          "link": "I. Manivannan, S. Ranganathan, S. Gopalakannan & S. Suresh"
+        },
+        {
+          "title": "Transactions of the Indian Institute of Metals",
+          "author": "2018",
+          "department": "Springer",
+          "journal": "https://link.springer.com/article/10.1007/s12666-018-1321-0",
+          "year": "Effects of the Nanoclay and Crosslinking Systems on the Mechanical Properties of Ethylene-propylene-diene Monomer/styrene Butadiene Rubber Blends Nanocomposite",
+          "link": "S. Vishvanathperumal & S. Gopalakannan"
+        },
+        {
+          "title": "The Effect of Nanoclay and Hybrid Filler on Curing Characteristics, Mechanical Properties and Swelling Resistance of Ethylene-Vinyl Acetate/Styrene Butadiene Rubber Blend Composite",
+          "author": "Vishvanathperumal, S.; Navaneethakrishnan, V.; Gopalakannan, S.",
+          "department": "Mechanical",
+          "journal": "Journal of Advanced Microscopy Research",
+          "year": "2018",
+          "link": "American Scientific Publishers"
+        },
+        {
+          "title": "Evaluation of Crosslink Density Using Material Constants of Ethylene-Propylene-Diene Monomer/Styrene-Butadiene Rubber with Different Nanoclay Loading: Finite Element Analysis-Simulation and Experimental",
+          "author": "Vishvanathperumal, S.; Navaneethakrishnan, V.; Anand, G.; Gopalakannan, S.",
+          "department": "Mechanical",
+          "journal": "Advanced Science, Engineering and Medicine",
+          "year": "2018",
+          "link": "American Scientific Publishers"
+        },
+        {
+          "title": "Dry Sliding Wear behaviour of cast Al/Al203/Gr hybrid nano-composite using response surface methodology",
+          "author": "I. Manivannan1, S. Ranganathan2, S. Gopalakannan3 and S. Suresh4",
+          "department": "Mechanical",
+          "journal": "IOP Conference Series: Materials Science and Engineering",
+          "year": "2018",
+          "link": "Purpose LED Publishing"
+        },
+        {
+          "title": "Dry slide wear behavior of boron carbide filled epoxy composites",
+          "author": "A. Madhanagopal , S Gopalakannan",
+          "department": "Mechanical",
+          "journal": "Materials Today Proceedings",
+          "year": "2018",
+          "link": "ELSEVIER"
+        },
+        {
+          "title": "Stress Intensity Factor Calculations For Semi-Elliptical Cracked Joints Using Finite Element AnalysisIn 3D",
+          "author": "B. Elamvazhudi , S. Gopalakannan",
+          "department": "Mechanical",
+          "journal": "Materials Today Proceedings",
+          "year": "2018",
+          "link": "ELSEVIER"
+        },
+        {
+          "title": "Mechanical characteristics of conch shell polymer matrix composites",
+          "author": "Elamvazhudi B., Velmurugan V. Dr. Gopalakannan S.",
+          "department": "Mechanical",
+          "journal": "Bulletin of Pure & Applied Sciences- Geology Indian Journal.com",
+          "year": "2018",
+          "link": "https://www.indianjournals.com/ijor.aspx?target=ijor:bpasge&volume=37f&issue=1&article=009"
+        },
+        {
+          "title": "Modeling & Numerical Analysis of Supersonic Combustor with Double Inclined Ramp-Cavity Fuel Injector",
+          "author": "G. Hariharan, N. Senthilkumar, S. Gopalakannan",
+          "department": "Mechanical",
+          "journal": "International Journal of Mechanical and Production Engineering Research and Development",
+          "year": "2018",
+          "link": "Advanced Engineering Research"
+        },
+        {
+          "title": "Investigation of dynamic characteristics on gfrp composites with egg shell particles",
+          "author": "Elamvazhudi B.,*, Madheswaran K., Dr. Gopalakannan S.",
+          "department": "Mechanical",
+          "journal": "Bulletin of Pure & Applied Sciences- Geology Indian Journal.com",
+          "year": "2018",
+          "link": "https://www.indianjournals.com/ijor.aspx?target=ijor:bpasge&volume=37f&issue=1&article=008"
+        },
+        {
+          "title": "Tribological And Heat Treatment Prediction Of Stir",
+          "author": "Cast Al 6061/Sic/Mos2",
+          "department": "Composites Using Grey Relational",
+          "journal": "Analysis",
+          "year": "K. Ragupathy , C. Velmurugan",
+          "link": ", N. Senthilkumar"
+        },
+        {
+          "title": "Journal of the Balkan Tribological Association",
+          "author": "2018",
+          "department": "https://d1wqtxts1xzle7.cloudfront.net/58220077/198-217-libre.pdf?1547984361=&response-content-disposition=inline%3B+filename%3D198_217_pdf.pdf&Expires=1709617281&Signature=fOhprFvwJYW2yBt6SVKUKgKpsqd09fNJzGRhAxAsJ1CS5oKoTJMv4P7n8QPP-22roE93S7gn-FsrxLA-p9fJXFoPxRjykOa8dc~If5AyCkcXrs8o27QsK0gau2yoGHVHAiU-oo4a7g-wTc9jD783IDpjVf0p9R5lD5KltohNca7HP9aE2UDdmfTQdGZLMNWDYtS9Zj8DGHTqU1htSvdg3lpcrx5aDalEnlRBOCuw8xusve3g7rr64KC4KRN9BBh5r-ktm2EMGCf2vySwpP7U67i3y~opuG~RKuJ0yAZw~g-lxOdcRcLmsxWayiSLfvgrP2yW475DiKR3fh-RpHthrw__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA",
+          "journal": "Dry Sliding Wear Behaviour Of Surface Modified Az61 Magnesium Alloy Reinforced With Nano Titanium Dioxide.",
+          "year": "Sundaraselvan, S.; Senthilkumar, N.",
+          "link": "Mechanical"
+        },
+        {
+          "title": "Journal of the Balkan Tribological Association",
+          "author": "2018",
+          "department": "Academic Journal",
+          "journal": "https://openurl.ebsco.com/EPDB%3Agcd%3A2%3A15094290/detailv2?sid=ebsco%3Aplink%3Ascholar&id=ebsco%3Agcd%3A132275272&crl=c",
+          "year": "A Critical Review of Wear and Machinability Studies of Aluminium",
+          "link": "Metal Matrix Composite"
+        },
+        {
+          "title": "K. Gajalakshmi*, N. Senthilkumar",
+          "author": "Mechanical",
+          "department": "Journal of Advanced Engineering Research",
+          "journal": "2018",
+          "year": "Indtech Publisher",
+          "link": "Enhancing Human Comfort and Improving Illuminance Level in"
+        },
+        {
+          "title": "Smart Class Room through Optimization Approach",
+          "author": "V. Thiyagarajan,*, T. Tamizharasan",
+          "department": ", N. Senthilkumar",
+          "journal": ", B. Karthikeyan",
+          "year": "Mechanical",
+          "link": "Journal of Advanced Engineering Research"
+        },
+        {
+          "title": "Indtech Publisher",
+          "author": "Optimization of Energy Conservation in Air",
+          "department": "Conditioned System Smart Class Room of a School",
+          "journal": "building: Approach to Human comfort and Energy",
+          "year": "Management",
+          "link": "V. Thiyagarajan T. Tamizharasan N. Senthilkumar B. Karthikeyan"
+        },
+        {
+          "title": "International Journal of Engineering Research and Technology.",
+          "author": "2018",
+          "department": "https://d1wqtxts1xzle7.cloudfront.net/58220064/ijertv11n1_11-libre.pdf?1547984361=&response-content-disposition=inline%3B+filename%3Dijertv11n1_11_pdf.pdf&Expires=1709702675&Signature=Zt3sK7U0hbZrb0VOUeISvIOJMQK7H655yQey-N9dS-OjRhld6roEa66MdmcqLUR-PSJdSG2IfVpI3w~89gHqq6YCt3JvbpbZsvPdn8mP-sesQREJ5d-iaxcmuagcvECIhvJra-Fhprt9N64DV4H7YU9H926E5dscgevmR7Qi6YJlKVNHkZqfPOAExM1AcynWfDNqkd0eQ5UVdMty6rnn3nfZu2gmFF9If9BPm5Eyv2dU5JYrnAFYMZ46z7Z1No42IndOVNAJiAhVtfyROol9cbw2G0MyA0G1oJEEaJ6fXWekZnwMxXO3SXkk-fYaoH3nCdtknddq1yiyWOWvQXu7Cg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA",
+          "journal": "Title of the Book",
+          "year": "Name of the Publisher",
+          "link": "Engineering Graphics"
+        },
+        {
+          "title": "Vishnu Prints Media, Chennai.2016",
+          "author": "ISBN 978-93-85374-45-6",
+          "department": "Engineering Practice Laboratory",
+          "journal": "Vishnu Prints Media, Chennai.2016",
+          "year": "ISBN 978-93-85374-45-3",
+          "link": "Manufacturing Technology – I"
+        },
+        {
+          "title": "BKF Publishers & Distributors Chennai, 2016.",
+          "author": "Manufacturing Technology – II",
+          "department": "BKF Publishers & Distributors Chennai, 2016.",
+          "journal": "Unconventional Machining Processes",
+          "year": "BKF Publishers & Distributors Chennai, 2016.",
+          "link": "Computer Aided Design"
+        },
+        {
+          "title": "Sri Krishna Hi-tech Publishing Company Pvt Ltd",
+          "author": "ISBN 978-93-85364-23-5",
+          "department": "",
+          "journal": "",
+          "year": "",
+          "link": ""
+        }
+      ],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "it": {
+    "key": "it",
+    "name": "Information Technology",
+    "about": "",
+    "vision": "To train well educated skilled and disciplined IT Professionals through planned technological education to fit in the profession and to cater to the changing needs of the society through Innovation and Service.",
+    "mission": [
+      "To impart high quality education by leveraging new technologies that help the socio-economic growth of the society",
+      "To inspire the students to develop innovative solutions that addresses the challenging demands of the modern computing world.",
+      "To inculcate strong ethical values and attitude to serve the mankind professionally and responsibly"
+    ],
+    "peos": [
+      "Demonstrate technical competence with analytical and critical thinking to understand and meet the diversified requirements of industry, academia and research.",
+      "Exhibit technical leadership, team skills and entrepreneurship skills to provide business solutions to real world problems.",
+      "Work in multi-disciplinary industries with social and environmental responsibility, work ethics and adaptability to address complex engineering and social problems.",
+      "Pursue lifelong learning, use cutting edge technologies and involve in applied research to design optimal solutions."
+    ],
+    "psos": [
+      "To ensure graduates",
+      "Have proficiency in programming skills to design, develop and apply appropriate techniques, to solve complex engineering problems.",
+      "Have knowledge to build, automate and manage business solutions using cutting edge technologies.",
+      "Have excitement towards research in applied computer technologies."
+    ],
+    "pos": [
+      {
+        "title": "",
+        "description": "Engineering knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems."
+      },
+      {
+        "title": "",
+        "description": "Problem analysis: Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences."
+      },
+      {
+        "title": "",
+        "description": "Design/development of solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations."
+      },
+      {
+        "title": "",
+        "description": "Conduct investigations of complex problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions."
+      },
+      {
+        "title": "",
+        "description": "Modern tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations."
+      },
+      {
+        "title": "",
+        "description": "The engineer and society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice."
+      },
+      {
+        "title": "",
+        "description": "Environment and sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development."
+      },
+      {
+        "title": "",
+        "description": "Ethics: Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice."
+      },
+      {
+        "title": "ndividual and team work",
+        "description": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings."
+      },
+      {
+        "title": "",
+        "description": "Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions."
+      },
+      {
+        "title": "",
+        "description": "Project management and finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments."
+      },
+      {
+        "title": "",
+        "description": "Life-long learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
+      }
+    ],
+    "faculty": [
+      {
+        "name": "Dr. A. Bhuvaneswari",
+        "qualification": "M.E., Ph.D",
+        "designation": "Head of Department",
+        "department": "Information Technology",
+        "email": "bhuvaneswari@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "00TGIT0441",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "29 Years, 11 Months",
+        "joiningDate": "June 2, 2000",
+        "teachingSince": "August 1, 1997"
+      },
+      {
+        "name": "Mrs.Vasanthi.M.D",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "VASUSOFT1310@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "January 1, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. Thulasilakshmi.S",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "NTHULASILAKSHMI112@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "December 1, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. Lalitha M",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "lalitham@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. K. Hema Kumar",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "hemakumark@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 3, 2023",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs. Maria Salomi.E.M",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "MARIASALOMIAPEC24@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "May 17, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. Sakthivel P",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "SAKTHIBTECH1998@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 19, 2024",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. Lavanya.S",
+        "qualification": "M.E.,",
+        "designation": "Assistant Professor",
+        "department": "Information Technology",
+        "email": "",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      },
+      {
+        "name": "APEC.IT.LAVANYA@GMAIL.COM",
+        "qualification": "",
+        "designation": "",
+        "department": "",
+        "email": "",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 12, 2024",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Data Structures and Algorithms Laboratory",
+      "Object Oriented Programming Laboratory",
+      "Data Science Laboratory",
+      "Operating Systems Laboratory",
+      "Database Management Systems Laboratory",
+      "Full Stack Web Development Laboratory",
+      "Mobile Applications Development Laboratory",
+      "Embedded Systems and IoT Laboratory",
+      "Computer Networks Laboratory",
+      "Artificial Intelligence and Machine Learning Laboratory",
+      "Web Essentials Laboratory",
+      "DEPARTMENT LIBRARY",
+      "Number of Books : 1200",
+      "Journals : 05",
+      "Back Volumes : 277",
+      "IS Codes : 240",
+      "of project Books : 350",
+      "Student:"
+    ],
+    "placements": [
+      {
+        "registerNumber": "420420205001",
+        "studentName": "BALAMURUGAN T",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.44 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205002",
+        "studentName": "BANU  T",
+        "companyName": "Forte Management Services &                                                          EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205003",
+        "studentName": "BARANIDHARAN R",
+        "companyName": "SEVAL SOFTWARE SOLUTIONS",
+        "salaryPackage": "2.5 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205004",
+        "studentName": "CHARULATHA  R",
+        "companyName": "ZENCORP",
+        "salaryPackage": "2.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205005",
+        "studentName": "DINESHKUMAR B",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.44 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205006",
+        "studentName": "DIVYADARSHINI S",
+        "companyName": "ZENCORP",
+        "salaryPackage": "2.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205007",
+        "studentName": "GANESAN K",
+        "companyName": "OM INNOVATION",
+        "salaryPackage": "1.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205009",
+        "studentName": "HARISH  A",
+        "companyName": "OM INNOVATION",
+        "salaryPackage": "1.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205010",
+        "studentName": "JANANI  E",
+        "companyName": "OM INNOVATION &                                         Forte Management Services &                                   EOS Globe",
+        "salaryPackage": "1.2 LAKHS P.A. &                                                                   1.44 LAKHS P.A. &                                  1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205011",
+        "studentName": "JANANI  K",
+        "companyName": "VERTICAL SOLUTIONS &                                          OM INNOVATION &                                                 Forte Management Services &                        EOS Globe",
+        "salaryPackage": "1.8 LAKHS P.A. &                                           1.2 LAKHS P.A. &                                    1.44 LAKHS P.A. &                                  1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205012",
+        "studentName": "JANARTHANAN  R",
+        "companyName": "OM INNOVATION &                                           Forte Management Services",
+        "salaryPackage": "1.2 LAKHS P.A. &                                     1.44 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205013",
+        "studentName": "JAYA LAKSHMI K",
+        "companyName": "Forte Management Services &                                                          EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205015",
+        "studentName": "MANIMEGAN T",
+        "companyName": "Forte Management Services &                                                          EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205016",
+        "studentName": "MOONISHAA  A",
+        "companyName": "RINEX TECHNOLOGIES",
+        "salaryPackage": "5.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205017",
+        "studentName": "NANDHINI B",
+        "companyName": "Forte Management Services &                                                          EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205018",
+        "studentName": "NAVEENKUMAR  I",
+        "companyName": "SEVAL SOFTWARE SOLUTIONS",
+        "salaryPackage": "2.5 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205019",
+        "studentName": "NILAMAGAN J",
+        "companyName": "Forte Management Services &                                                          EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205020",
+        "studentName": "PRIYADHARSHINI R",
+        "companyName": "VERTICAL SOLUTIONS &                                                OM INNOVATION &                                                    Forte Management Services &                        EOS Globe",
+        "salaryPackage": "1.8 LAKHS P.A. &                                        1.2 LAKHS P.A. &                                    1.44 LAKHS P.A. &                      1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205022",
+        "studentName": "SAISUSHMA S",
+        "companyName": "ZENCORP",
+        "salaryPackage": "2.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205023",
+        "studentName": "SAKTHIVELS",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.44 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205024",
+        "studentName": "SRI RAM K",
+        "companyName": "Forte Management Services &                               EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205025",
+        "studentName": "SUGUMAR  S",
+        "companyName": "Forte Management Services &                               EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205302",
+        "studentName": "HARIRAJAN S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.44 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205303",
+        "studentName": "KAMALESH R",
+        "companyName": "OM INNOVATION",
+        "salaryPackage": "1.2 LAKHS P.A."
+      },
+      {
+        "registerNumber": "420420205304",
+        "studentName": "MOHANRAJ J",
+        "companyName": "OM INNOVATION &                                                       Forte Management Services &                                    EOS Globe",
+        "salaryPackage": "1.2 LAKHS P.A. &                                          1.44 LAKHS P.A. &                                1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205305",
+        "studentName": "SIVA KUMAR M",
+        "companyName": "Forte Management Services &                                                          EOS Globe",
+        "salaryPackage": "1.44 LAKHS P.A. &                                   1.89 LAKHS P.A"
+      },
+      {
+        "registerNumber": "420420205306",
+        "studentName": "VASANTH KUMAR J S",
+        "companyName": "OM INNOVATION",
+        "salaryPackage": "1.2 LAKHS P.A."
+      }
+    ],
+    "rankHolders": [
+      {
+        "academicYear": "2003",
+        "studentName": "MS.R.SHANMUG VADIUV",
+        "rank": "5"
+      },
+      {
+        "academicYear": "2003",
+        "studentName": "MISS.M.PAVITHRA",
+        "rank": "10"
+      },
+      {
+        "academicYear": "2006",
+        "studentName": "MISS.M.JEEVITHA",
+        "rank": "2"
+      },
+      {
+        "academicYear": "2008",
+        "studentName": "MS.N.SENTILNATHN",
+        "rank": "9"
+      },
+      {
+        "academicYear": "2012",
+        "studentName": "MISS.M.VENNILA",
+        "rank": "39"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "MISS.S.JAYANTHI",
+        "rank": "30"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "MR.T.VIGNESHRAMKUMAR",
+        "rank": "32"
+      },
+      {
+        "academicYear": "2014",
+        "studentName": "MISS.NADHINI",
+        "rank": "49"
+      }
+    ],
+    "publications": {
+      "journals": [
+        {
+          "title": "Department of the teacher",
+          "author": "Name of the journal",
+          "department": "Link to article / paper / abstract of the article",
+          "journal": "Elderly Health Monitoring Framework With QuantumAssisted Machine Learning Models as Micro Services",
+          "year": "Bhuvaneswari, A., Srivel, R., Elamathi, N., Shitharth, S., & Sangeetha, K",
+          "link": "Information Technology"
+        },
+        {
+          "title": "Quantum Innovations at the Nexus of Biomedical Intelligence",
+          "author": "2024",
+          "department": "https://doi.org/10.4018/979-8- 3693-1479-1.ch002",
+          "journal": "Genetic Determinants of Parkinson's Disease: SNCA and LRRK2 in Focus",
+          "year": "A. Bhuvaneswari, N. Legapriyadharshini, T. Thirumaraikumari, S. Rukmani Devi, Saravanan Pandiaraj",
+          "link": "Information Technology"
+        },
+        {
+          "title": "Intelligent Technologies and Parkinson’s Disease: Prediction and Diagnosis(pp. 119-214). IGI Global",
+          "author": "2024",
+          "department": "https://doi.org/10.4018/979-8-3693-1115-8.ch011",
+          "journal": "Title of the Book",
+          "year": "Authors",
+          "link": "Name of the Publisher"
+        },
+        {
+          "title": "Software Testing",
+          "author": "Dr.A.Bhuvaneswari",
+          "department": "ISBN: 97-89-38-97-36-441,",
+          "journal": "Computer Programming,",
+          "year": "Dr.A.Bhuvaneswari",
+          "link": "Sri Krishna Publishers,"
+        },
+        {
+          "title": "ISBN:978-81-08908-4-7",
+          "author": "Computer Programming",
+          "department": "Dr.A.Bhuvaneswari",
+          "journal": "Global Publishing House, Chennai",
+          "year": "Computer Architecture",
+          "link": "Dr.A.Bhuvaneswari"
+        },
+        {
+          "title": "BKF Publishers, Chennai",
+          "author": "ISBN:978-81-956610-6-7",
+          "department": "Computer Architecture",
+          "journal": "Dr.A.Bhuvaneswari",
+          "year": "Name of the Faculty",
+          "link": "Title of the Conference Proceeding Published"
+        },
+        {
+          "title": "ISBN number of the proceedings",
+          "author": "Name of the Publisher",
+          "department": "Dr. A. Bhuvaneshwari",
+          "journal": "6th National Conference on Recent Trends in Information Technology",
+          "year": "29th, April 2023",
+          "link": "Industries Gas Leakage Monitoring and Alerting System Using Solar Energy"
+        },
+        {
+          "title": "978-93-5906-081-1",
+          "author": "Adhiparasakthi Engineering College.",
+          "department": "",
+          "journal": "",
+          "year": "",
+          "link": ""
+        }
+      ],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": [
+      {
+        "studentName": "NANDHINI B",
+        "yearSem": "IV/VII  SEM",
+        "gpa": "9.28",
+        "rank": "I"
+      },
+      {
+        "studentName": "MOONISHAA  A",
+        "yearSem": "IV/VII  SEM",
+        "gpa": "8.91",
+        "rank": "II"
+      },
+      {
+        "studentName": "DIVYADHARSHINI S",
+        "yearSem": "IV/VII  SEM",
+        "gpa": "8.78",
+        "rank": "III"
+      },
+      {
+        "studentName": "BALAMURUGAN T",
+        "yearSem": "IV/VII  SEM",
+        "gpa": "8.91",
+        "rank": "II"
+      },
+      {
+        "studentName": "NAVEENKUMAR I",
+        "yearSem": "IV/VII  SEM",
+        "gpa": "8.91",
+        "rank": "II"
+      },
+      {
+        "studentName": "RAJARAJESHWARI S",
+        "yearSem": "III/IV  SEM",
+        "gpa": "9.86",
+        "rank": "I"
+      },
+      {
+        "studentName": "SANTHA KUMAR V",
+        "yearSem": "III/IV  SEM",
+        "gpa": "8.77",
+        "rank": "III"
+      },
+      {
+        "studentName": "ARTHI S",
+        "yearSem": "III/IV  SEM",
+        "gpa": "8.86",
+        "rank": "II"
+      },
+      {
+        "studentName": "VENKATESH K",
+        "yearSem": "IV/ III SEM",
+        "gpa": "8.98",
+        "rank": "I"
+      },
+      {
+        "studentName": "SELVAKUMAR J",
+        "yearSem": "II/ III  SEM",
+        "gpa": "8.65",
+        "rank": "III"
+      },
+      {
+        "studentName": "JAYASRI P",
+        "yearSem": "II/ III SEM",
+        "gpa": "8.72",
+        "rank": "II"
+      }
+    ]
+  },
+  "eee": {
+    "key": "eee",
+    "name": "Electrical and Electronics Engineering",
+    "about": "The Department of Electrical and Electronics Engineering (EEE) was established to prepare students for careers in power systems, electrical machines, control engineering, and electronics design, focusing on innovation and sustainable energy technologies.",
+    "vision": "To produce competent electrical engineers with high ethical values and technical capabilities to serve the society and industry through research and development.",
+    "mission": [
+      "To provide high-quality education and training in electrical and electronics engineering.",
+      "To promote innovation, research, and collaborative projects with industry.",
+      "To instill moral and ethical values in students to handle professional challenges."
+    ],
+    "peos": [
+      "Gain technical competence with analytical thinking to meet the requirements of electrical industry.",
+      "Exhibit leadership, teamwork, and entrepreneurship to solve real-world engineering issues.",
+      "Commit to lifelong learning and adaptive capability in modern power systems."
+    ],
+    "psos": [
+      "Analyze, design, and implement electrical systems, power grids, and control systems.",
+      "Apply modern software and hardware tools for electrical automation and renewable energy integration."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Faculty members directory",
+        "qualification": "",
+        "designation": "Staff",
+        "department": "Electrical and Electronics Engineering",
+        "email": "eee@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Electrical Machines Lab",
+      "Power Electronics Lab",
+      "Control Systems Lab",
+      "Power System Simulation Lab",
+      "Measurement and Instrumentation Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "ece": {
+    "key": "ece",
+    "name": "Electronics and Communication Engineering",
+    "about": "The Department of Electronics and Communication Engineering (ECE) aims to provide cutting-edge education in communication networks, microelectronics, signal processing, embedded systems, and VLSI design.",
+    "vision": "To be a center of excellence in electronics and communication engineering education and research, creating innovators and entrepreneurs for global development.",
+    "mission": [
+      "To deliver quality education through state-of-the-art laboratory infrastructure and teaching methodologies.",
+      "To foster research and development in wireless systems, VLSI, and signal processing.",
+      "To groom students with interpersonal skills, ethics, and professional excellence."
+    ],
+    "peos": [
+      "Succeed in professional careers or higher education by applying knowledge of ECE.",
+      "Design, analyze, and develop electronics systems utilizing modern engineering tools.",
+      "Demonstrate communication, leadership, and ethical values in multi-disciplinary teams."
+    ],
+    "psos": [
+      "Design and test electronic circuits, embedded systems, and communications devices.",
+      "Develop solutions for signal processing, VLSI design, and RF applications."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Faculty members directory",
+        "qualification": "",
+        "designation": "Staff",
+        "department": "Electronics and Communication Engineering",
+        "email": "ece@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "VLSI Design Lab",
+      "Embedded Systems Lab",
+      "Analog and Digital Communication Lab",
+      "Digital Signal Processing Lab",
+      "Microprocessors and Microcontrollers Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "mba": {
+    "key": "mba",
+    "name": "Management Studies (MBA)",
+    "about": "The Department of Management Studies (MBA) provides professional business education that combines managerial theory with practical leadership skills, preparing students for dynamic corporate careers.",
+    "vision": "To be a premier business school that develops innovative and ethical business leaders with a global outlook.",
+    "mission": [
+      "To deliver rigorous and contemporary management education.",
+      "To promote entrepreneurial thinking and leadership skills.",
+      "To cultivate social responsibility and ethical decision-making in future managers."
+    ],
+    "peos": [
+      "Perform effectively in management roles in diverse business environments.",
+      "Develop entrepreneurial ventures or lead corporate strategy teams.",
+      "Adopt ethical business practices with consideration of social responsibility."
+    ],
+    "psos": [
+      "Analyze business data and apply strategic managerial principles to solve complex problems.",
+      "Evaluate financial, marketing, operational, and human resource management strategies."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Faculty members directory",
+        "qualification": "",
+        "designation": "Staff",
+        "department": "Management Studies",
+        "email": "mba@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Management Information Systems Lab",
+      "Communication & Leadership Lab",
+      "Business Data Analytics Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "sh": {
+    "key": "sh",
+    "name": "Science & Humanities",
+    "about": "The Department of Science & Humanities bridges the transition of engineering aspirants into professional disciplines by imparting strong foundations in Mathematics, Physics, Chemistry, and English Communication.",
+    "vision": "To lay a solid foundation in basic sciences and humanities, enabling engineering students to excel in their chosen technical fields with a holistic outlook.",
+    "mission": [
+      "To deliver top-quality teaching in basic sciences and communication skills.",
+      "To nurture critical thinking and scientific inquiry.",
+      "To shape well-rounded, ethical professionals."
+    ],
+    "peos": [
+      "Apply mathematical and scientific concepts to formulate and solve engineering problems.",
+      "Communicate technical concepts effectively with clarity and confidence.",
+      "Conduct basic scientific inquiry and experimental measurements."
+    ],
+    "psos": [
+      "Solve fundamental engineering problems using mathematical modeling and scientific principles.",
+      "Communicate professionally in spoken and written formats."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Faculty members directory",
+        "qualification": "",
+        "designation": "Staff",
+        "department": "Science & Humanities",
+        "email": "sh@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Engineering Physics Lab",
+      "Engineering Chemistry Lab",
+      "Language and Communication Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "csd": {
+    "key": "csd",
+    "name": "Computer Science & Design (CSD)",
+    "about": "The Department of Computer Science & Design (CSD) focuses on the intersection of computer science, computing technologies, and design-oriented applications like UI/UX, graphics, interactive systems, and game design.",
+    "vision": "To produce creative computing professionals equipped with deep technical knowledge and design excellence.",
+    "mission": [
+      "To teach modern computing and design concepts.",
+      "To encourage project-based learning in interactive media, web technologies, and user experience.",
+      "To promote multidisciplinary collaborations and entrepreneurship."
+    ],
+    "peos": [
+      "Succeed in computing and design industries as developers, UI/UX designers, or consultants.",
+      "Use modern computing design tools to build interactive technologies.",
+      "Work collaboratively with cross-functional teams to solve business challenges."
+    ],
+    "psos": [
+      "Design and develop software applications with rich user experience and graphics.",
+      "Apply computing frameworks and design principles to build dynamic digital products."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Faculty members directory",
+        "qualification": "",
+        "designation": "Staff",
+        "department": "Computer Science & Design",
+        "email": "csd@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "UI/UX Design Studio",
+      "Computer Graphics and Animation Lab",
+      "Web Design & Development Lab",
+      "Mobile Application Design Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "agri": {
+    "key": "agri",
+    "name": "Agricultural Engineering",
+    "about": "The Department of Agricultural Engineering focuses on engineering applications in agriculture, including farm machinery, soil and water conservation, food processing technology, and sustainable farming systems.",
+    "vision": "To develop agricultural engineers who can address food security and agricultural sustainability challenges through engineering innovations.",
+    "mission": [
+      "To impart skills in farm automation, irrigation, and post-harvest technology.",
+      "To conduct research for improving agricultural productivity and resource management.",
+      "To empower students to serve rural communities and agricultural industries."
+    ],
+    "peos": [
+      "Achieve professional excellence in agricultural engineering or food processing fields.",
+      "Design eco-friendly and resource-efficient systems for agriculture.",
+      "Apply leadership and communication skills in solving community challenges."
+    ],
+    "psos": [
+      "Apply engineering principles to soil, water, crop, machinery, and food systems.",
+      "Develop sustainable and automated systems for farm mechanization and post-harvest operations."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Faculty members directory",
+        "qualification": "",
+        "designation": "Staff",
+        "department": "Agricultural Engineering",
+        "email": "agri@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Farm Machinery and Power Lab",
+      "Soil and Water Conservation Engineering Lab",
+      "Irrigation and Drainage Engineering Lab",
+      "Post-Harvest and Food Processing Technology Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  }
+}

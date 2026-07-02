@@ -414,28 +414,28 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[500px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[580px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
                         <div>
-                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.E. / B.Tech.)</span>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Engineering Programs</span>
                           <div className="space-y-1">
-                            <Link to="/departments/cse" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Computer Science & Eng.</Link>
-                            <Link to="/departments/aiml" className="block text-xs font-extrabold text-gray-650 hover:text-indigo-605 py-1 nav-dropdown-link">CSE (AI & ML)</Link>
-                            <Link to="/departments/it" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Information Technology</Link>
-                            <Link to="/departments/ece" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electronics & Comm. Eng.</Link>
-                            <Link to="/departments/eee" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electrical & Electronics</Link>
-                            <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Chemical Engineering</Link>
-                            <Link to="/departments/agriculture" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Agricultural Engineering</Link>
-                            <Link to="/departments/mech" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Mechanical Engineering</Link>
                             <Link to="/departments/civil" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Civil Engineering</Link>
+                            <Link to="/departments/mech" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Mechanical Engineering</Link>
+                            <Link to="/departments/eee" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electrical & Electronics Eng.</Link>
+                            <Link to="/departments/ece" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electronics & Communication Eng.</Link>
+                            <Link to="/departments/it" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Information Technology</Link>
+                            <Link to="/departments/cse" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Computer Science & Eng.</Link>
                           </div>
                         </div>
                         <div>
-                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Postgraduate & Doctoral</span>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Specialized, PG & Sciences</span>
                           <div className="space-y-1">
+                            <Link to="/departments/aiml" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">CSE (AI & ML)</Link>
+                            <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Chemical Engineering</Link>
                             <Link to="/departments/mca" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Master of Computer Apps (MCA)</Link>
-                            <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Master of Business Admin (MBA)</Link>
-                            <Link to="/departments" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">M.E. PG Courses</Link>
-                            <Link to="/departments" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Doctoral Ph.D. Research</Link>
+                            <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Management Studies (MBA)</Link>
+                            <Link to="/departments/sh" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Science & Humanities</Link>
+                            <Link to="/departments/csd" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Computer Science & Design (CSD)</Link>
+                            <Link to="/departments/agri" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Agricultural Engineering</Link>
                           </div>
                         </div>
                       </div>
