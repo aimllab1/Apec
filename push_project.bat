@@ -9,7 +9,7 @@ echo.
 
 :: Check if git is installed
 where git >nul 2>nul
-if !errorlevel! neq 0 (
+if !errorlevel! NEQ 0 (
     echo [ERROR] Git is not installed or not in your PATH.
     echo Please install Git and try again.
     pause
@@ -18,11 +18,11 @@ if !errorlevel! neq 0 (
 
 :: Check if this is a git repository
 git rev-parse --is-inside-work-tree >nul 2>nul
-if !errorlevel! neq 0 (
+if !errorlevel! NEQ 0 (
     echo This directory is not a Git repository.
     echo Initializing Git repository...
     git init
-    if !errorlevel! neq 0 (
+    if !errorlevel! NEQ 0 (
         echo [ERROR] Failed to initialize Git repository.
         pause
         exit /b
@@ -63,7 +63,7 @@ if not exist .gitignore (
 
 :: Double check if node_modules is cached/tracked in Git
 git ls-files --error-unmatch node_modules >nul 2>nul
-if !errorlevel! eq 0 (
+if !errorlevel! EQU 0 (
     echo [WARNING] node_modules folder is currently tracked in Git.
     echo Untracking node_modules (this keeps files locally but removes them from Git)...
     git rm -r --cached node_modules >nul 2>nul
@@ -73,7 +73,7 @@ if !errorlevel! eq 0 (
 
 :: Double check if dist is cached/tracked in Git
 git ls-files --error-unmatch dist >nul 2>nul
-if !errorlevel! eq 0 (
+if !errorlevel! EQU 0 (
     echo [WARNING] dist folder is currently tracked in Git.
     echo Untracking dist (this keeps files locally but removes them from Git)...
     git rm -r --cached dist >nul 2>nul
@@ -83,7 +83,7 @@ if !errorlevel! eq 0 (
 
 :: Check if remote "origin" exists
 git remote get-url origin >nul 2>nul
-if !errorlevel! neq 0 (
+if !errorlevel! NEQ 0 (
     echo No remote "origin" is set.
     set /p repo_url="Enter remote repository URL (e.g., https://github.com/username/repo.git): "
     if "!repo_url!"=="" (
@@ -92,7 +92,7 @@ if !errorlevel! neq 0 (
         exit /b
     )
     git remote add origin !repo_url!
-    if !errorlevel! neq 0 (
+    if !errorlevel! NEQ 0 (
         echo [ERROR] Failed to add remote origin.
         pause
         exit /b
@@ -109,7 +109,7 @@ echo Staging all files (honoring .gitignore)...
 echo ====================================================
 git add .gitignore
 git add .
-if !errorlevel! neq 0 (
+if !errorlevel! NEQ 0 (
     echo [ERROR] Failed to stage files.
     pause
     exit /b
@@ -132,7 +132,7 @@ if "!commit_msg!"=="" (
 )
 
 git commit -m "!commit_msg!"
-if !errorlevel! neq 0 (
+if !errorlevel! NEQ 0 (
     echo [INFO] No new changes to commit or commit succeeded.
 )
 echo.
@@ -141,7 +141,7 @@ echo ====================================================
 echo Pushing changes to remote main branch...
 echo ====================================================
 git push -u origin main
-if !errorlevel! neq 0 (
+if !errorlevel! NEQ 0 (
     echo.
     echo [ERROR] Failed to push to remote.
     echo Please verify your repository URL, permissions, and internet connection.
