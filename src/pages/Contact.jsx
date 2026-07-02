@@ -44,7 +44,7 @@ export default function Contact() {
           className="mb-16"
         >
           <span className="text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
-            Connect with APEC
+            Connect with Adhiparasakthi Engineering College
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">Contact Information</h1>
           <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">

@@ -98,7 +98,7 @@ export default function Preloader({ onComplete }) {
         <div className="relative mb-6 w-28 h-28 flex items-center justify-center">
           <img
             src="./apec-logo.png"
-            alt="APEC Logo"
+            alt="Adhiparasakthi Engineering College Logo"
             className="w-24 h-24 object-contain z-10 mix-blend-multiply"
           />
         </div>

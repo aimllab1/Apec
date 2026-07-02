@@ -45,19 +45,19 @@ function DodecahedronMesh() {
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.4;
-      meshRef.current.rotation.z = state.clock.getElapsedTime() * 0.2;
+      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.5;
+      meshRef.current.rotation.z = state.clock.getElapsedTime() * 0.25;
     }
   });
 
   return (
     <mesh ref={meshRef}>
-      <dodecahedronGeometry args={[1.1, 0]} />
+      <dodecahedronGeometry args={[1.2, 0]} />
       <meshBasicMaterial 
-        color="#1f2937" 
+        color="#818cf8" // soft electric indigo
         wireframe 
         transparent 
-        opacity={0.2} 
+        opacity={0.22} 
       />
     </mesh>
   );
@@ -191,18 +191,7 @@ export default function Home() {
   const scrollRef = useRef(null);
   const codeWidgetRef = useRef(null);
   const [activeDepartment, setActiveDepartment] = useState(0);
-
-  // Real-time Cutoff Predictor States
-  const [mathsMark, setMathsMark] = useState(85);
-  const [physicsMark, setPhysicsMark] = useState(80);
-  const [chemistryMark, setChemistryMark] = useState(80);
-
-  const handleMarkChange = (subject, val) => {
-    const num = Math.min(100, Math.max(0, parseInt(val, 10) || 0));
-    if (subject === 'maths') setMathsMark(num);
-    if (subject === 'physics') setPhysicsMark(num);
-    if (subject === 'chemistry') setChemistryMark(num);
-  };
+  const [widgetVisible, setWidgetVisible] = useState(true);
 
   // Admissions overlay and form state
   const [showAdModal, setShowAdModal] = useState(false);
@@ -322,6 +311,32 @@ export default function Home() {
     };
   }, []);
 
+  // Cycle the visibility of the ESTD 1984 widget (5s visible, 15s hidden)
+  useEffect(() => {
+    let timerId;
+    let isActive = true;
+
+    const cycle = () => {
+      timerId = setTimeout(() => {
+        if (!isActive) return;
+        setWidgetVisible(false);
+
+        timerId = setTimeout(() => {
+          if (!isActive) return;
+          setWidgetVisible(true);
+          cycle();
+        }, 15000);
+      }, 5000);
+    };
+
+    cycle();
+
+    return () => {
+      isActive = false;
+      clearTimeout(timerId);
+    };
+  }, []);
+
   const features = [
     { title: "Central Library", desc: "Digital systems & technical volumes" },
     { title: "Placement Records", desc: "Top recruiters & career guidance" },
@@ -348,31 +363,70 @@ export default function Home() {
   return (
     <div className="relative" ref={scrollRef}>
       
-
-
       {/* TNEA CODE WIDGET (With 3D Dodecahedron) */}
       <div 
-        ref={codeWidgetRef}
-        className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center justify-center"
+        className="fixed right-6 top-1/2 z-40 hidden md:flex flex-col items-center justify-center transition-transform duration-700 ease-in-out"
+        style={{
+          transform: `translateY(-50%) translateX(${widgetVisible ? '0' : 'calc(100% + 32px)'})`
+        }}
       >
-        <div className="relative group w-32 h-32 bg-white/80 backdrop-blur-md border border-gray-200 rounded-full shadow-xl p-1 flex items-center justify-center select-none overflow-hidden">
+        <motion.div 
+          ref={codeWidgetRef}
+          whileHover={{ scale: 1.05 }}
+          className="relative group w-32 h-32 bg-white/95 backdrop-blur-md border border-gray-200/80 rounded-full shadow-[0_8px_30px_rgba(99,102,241,0.12)] p-1 flex items-center justify-center select-none overflow-hidden hover:border-indigo-400/80 transition-colors duration-300"
+        >
+          {/* Spinning dashed border outline inside */}
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+            className="absolute inset-2 rounded-full border-2 border-dashed border-indigo-400/20 pointer-events-none"
+          />
           
           {/* Miniature 3D Dodecahedron inside */}
           <div className="absolute inset-0 z-0">
             <Canvas camera={{ position: [0, 0, 3.2], fov: 60 }}>
-              <ambientLight intensity={1.5} />
+              <ambientLight intensity={2.2} />
               <DodecahedronMesh />
             </Canvas>
           </div>
 
-          {/* HTML Code Panel overlay */}
-          <div className="relative z-10 flex flex-col items-center justify-center bg-white/90 border border-gray-100 rounded-full w-24 h-24 shadow-sm">
-            <span className="font-display text-[8px] uppercase font-bold tracking-widest text-gray-400">ESTD</span>
-            <span className="font-mono text-base font-extrabold tracking-tight text-gray-900 leading-none mt-1.5">1984</span>
-            <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse mt-2" />
-          </div>
-        </div>
+          <motion.div 
+            className="relative z-10 flex flex-col items-center justify-center bg-white border border-gray-150 rounded-full w-24 h-24 shadow-inner"
+            animate={{ 
+              borderColor: [
+                "rgba(99, 102, 241, 0.15)",
+                "rgba(139, 92, 246, 0.4)",
+                "rgba(99, 102, 241, 0.15)"
+              ]
+            }}
+            transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+          >
+            <span className="font-display text-[8px] uppercase font-black tracking-widest text-slate-400 mb-1 block select-none">
+              Counselling Code
+            </span>
+            <motion.span 
+              animate={{ 
+                scale: [1, 1.06, 1],
+                filter: [
+                  "drop-shadow(0 1px 1px rgba(99, 102, 241, 0.12))",
+                  "drop-shadow(0 3px 6px rgba(168, 85, 247, 0.20))",
+                  "drop-shadow(0 1px 1px rgba(99, 102, 241, 0.12))"
+                ]
+              }}
+              whileHover={{ 
+                scale: 1.15,
+                filter: "drop-shadow(0 4px 8px rgba(99, 102, 241, 0.35))"
+              }}
+              className="font-display text-2xl font-black tracking-widest bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 bg-clip-text text-transparent cursor-pointer transition-all"
+            >
+              1401
+            </motion.span>
+          </motion.div>
+        </motion.div>
       </div>
+
+
+
 
       {/* Hero Section */}
       <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center py-16 px-6 border-b border-gray-100 overflow-hidden bg-transparent z-10">
@@ -428,7 +482,7 @@ export default function Home() {
               <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
               
               <span className="font-display text-[9px] uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-6">
-                APEC Profile
+                Adhiparasakthi Engineering College Profile
               </span>
               
               <h3 className="font-title text-lg font-bold text-gray-900 mb-6">Autonomous Credentials</h3>
@@ -536,8 +590,8 @@ export default function Home() {
       <section className="py-24 px-6 bg-transparent border-b border-gray-100/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">APEC Portal</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Why Join APEC?</h2>
+            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College Portal</span>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Why Join Adhiparasakthi Engineering College?</h2>
           </div>
 
           <motion.div 
@@ -564,165 +618,6 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      {/* Dynamic Admission Eligibility & TNEA Cutoff Predictor */}
-      <section className="py-24 px-6 bg-slate-50/50 border-b border-gray-100/50 relative z-10 select-none">
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
-              Interactive Tools
-            </span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">
-              Cutoff Calculator & Course Predictor
-            </h2>
-            <p className="text-xs text-gray-400 mt-2 max-w-md font-semibold">
-              Enter your Board Exam marks to compute your official TNEA engineering cutoff and instantly discover eligible courses at APEC.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            
-            {/* Left Column: Marks Input Panel */}
-            <div className="lg:col-span-5 bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between shadow-sm">
-              <div className="space-y-6">
-                <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400 block mb-2">Enter Subject Marks (0 - 100)</span>
-                
-                {/* Mathematics (Weight: 100%) */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-xs font-black text-gray-800 uppercase tracking-wider">Mathematics</label>
-                    <span className="text-xs font-mono font-black text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-100">{mathsMark} / 100</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={mathsMark} 
-                    onChange={(e) => handleMarkChange('maths', e.target.value)}
-                    className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-indigo-600"
-                  />
-                </div>
-
-                {/* Physics (Weight: 50%) */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-xs font-black text-gray-800 uppercase tracking-wider">Physics</label>
-                    <span className="text-xs font-mono font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md border border-blue-100">{physicsMark} / 100</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={physicsMark} 
-                    onChange={(e) => handleMarkChange('physics', e.target.value)}
-                    className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
-                  />
-                </div>
-
-                {/* Chemistry (Weight: 50%) */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-xs font-black text-gray-800 uppercase tracking-wider">Chemistry</label>
-                    <span className="text-xs font-mono font-black text-pink-600 bg-pink-50 px-2 py-0.5 rounded-md border border-pink-100">{chemistryMark} / 100</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={chemistryMark} 
-                    onChange={(e) => handleMarkChange('chemistry', e.target.value)}
-                    className="w-full h-1.5 bg-gray-100 rounded-lg appearance-none cursor-pointer accent-pink-600"
-                  />
-                </div>
-
-              </div>
-
-              {/* Calculated TNEA Cutoff Indicator */}
-              <div className="mt-8 pt-8 border-t border-gray-100 flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest block">TNEA Formula</span>
-                  <span className="text-xs text-gray-550 font-bold block mt-1">Maths + (Physics + Chemistry)/2</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-indigo-50 border border-indigo-100 flex flex-col items-center justify-center shadow-inner relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/5 to-purple-500/5" />
-                    <span className="font-mono text-base font-black text-indigo-650 leading-none">
-                      {(mathsMark + (physicsMark + chemistryMark) / 2).toFixed(1)}
-                    </span>
-                    <span className="text-[7px] uppercase font-bold text-indigo-400 tracking-wider mt-1">Cutoff</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right Column: Dynamic predicted eligible course cards */}
-            <div className="lg:col-span-7 bg-gray-50 border border-gray-200 p-8 rounded-3xl flex flex-col justify-between text-left relative overflow-hidden">
-              <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
-              
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-indigo-600 block mb-4">
-                  APEC Admission Seat Estimator
-                </span>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[340px] overflow-y-auto pr-2 custom-scrollbar">
-                  {[
-                    { name: "CSE (AI & ML)", cut: 165 },
-                    { name: "Computer Science", cut: 160 },
-                    { name: "Information Technology", cut: 155 },
-                    { name: "Electronics (ECE)", cut: 145 },
-                    { name: "Electrical (EEE)", cut: 135 },
-                    { name: "Chemical Engg", cut: 125 },
-                    { name: "Agricultural Engg", cut: 120 },
-                    { name: "Mechanical Engg", cut: 110 },
-                    { name: "Civil Engg", cut: 100 }
-                  ].map((item, idx) => {
-                    const cutoff = mathsMark + (physicsMark + chemistryMark) / 2;
-                    const diff = cutoff - item.cut;
-                    let badge = { text: "Premium Help", color: "text-indigo-655 bg-indigo-50 border-indigo-100" };
-                    if (diff >= 0) {
-                      badge = { text: "High Eligible", color: "text-emerald-600 bg-emerald-50 border-emerald-100" };
-                    } else if (diff >= -10) {
-                      badge = { text: "Likely Eligible", color: "text-amber-600 bg-amber-50 border-amber-100" };
-                    }
-                    return (
-                      <div 
-                        key={idx}
-                        className="p-3 bg-white border border-gray-150 rounded-xl flex items-center justify-between shadow-sm hover:border-gray-300 transition-all shrink-0"
-                      >
-                        <div className="min-w-0 pr-2">
-                          <h4 className="text-xs font-black text-gray-900 truncate">{item.name}</h4>
-                          <span className="text-[9px] font-bold text-gray-400 font-mono tracking-wider block mt-0.5">Historical cutoff: {item.cut}+</span>
-                        </div>
-                        <span className={`text-[8px] font-black uppercase tracking-wider px-2 py-1 rounded-md border shrink-0 ${badge.color}`}>
-                          {badge.text}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Call to action connecting to counseling help desk */}
-              <div className="w-full pt-6 border-t border-gray-200 mt-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
-                <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest leading-none text-center sm:text-left">
-                  Need direct counseling assistance?
-                </span>
-                <button 
-                  onClick={() => setShowAdModal(true)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-gray-950 hover:bg-gray-800 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all cursor-pointer shadow-md"
-                >
-                  Connect with Expert Advisor <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
       </section>
 
@@ -798,8 +693,8 @@ export default function Home() {
             className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
           >
             {[
-              { name: "Arulthiru Bangaru Adigalar", role: "Founder President", desc: "Ordained the ACMEC Trust to establish medical, educational, and cultural service foundations.", img: "./bangaru_adigalar.jpg" },
-              { name: "Sakthi Tmt. V. Lakshmi Bangaru Adigalar", role: "Chairperson", desc: "Guiding the institution towards global academic and professional leadership.", img: "./lakshmi_adigalar.jpg" },
+              { name: "Arulthiru Bangaru Sidhar (Amma)", role: "Founder", desc: "Ordained the ACMEC Trust to establish medical, educational, and cultural service foundations.", img: "./bangaru_sidhar.jpg" },
+              { name: "Sakthi Tmt. V. Lakshmi Bangaru Sidhar", role: "President", desc: "Guiding the institution towards global academic and professional leadership.", img: "./lakshmi_sidhar.jpg" },
               { name: "Sakthi Thiru. Dr. G. B. Senthil Kumar", role: "Correspondent", desc: "Directing administrative functions and infrastructure expansions for students.", img: "./senthil_kumar.jpg" }
             ].map((person, idx) => (
               <motion.div key={idx} variants={twistReveal}>
@@ -889,7 +784,7 @@ export default function Home() {
                       <motion.img 
                         key={activeModalImage}
                         src={modalImages[activeModalImage]}
-                        alt="APEC Central Library" 
+                        alt="Adhiparasakthi Engineering College Central Library" 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -908,7 +803,7 @@ export default function Home() {
                     <div className="flex flex-col items-center">
                       <img 
                         src="./apec-logo.png" 
-                        alt="APEC Logo" 
+                        alt="Adhiparasakthi Engineering College Logo" 
                         className="w-28 h-28 object-contain bg-white rounded-full p-2.5 shadow-2xl border border-white/20 mb-6" 
                       />
                       <div className="text-center">

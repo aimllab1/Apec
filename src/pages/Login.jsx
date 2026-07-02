@@ -62,10 +62,10 @@ export default function Login() {
         {/* Top Branding Logo & Info */}
         <div className="flex flex-col items-center mb-8 text-center">
           <div className="w-16 h-16 bg-white rounded-2xl p-2.5 shadow-xl border border-white/10 mb-4 flex items-center justify-center">
-            <img src="./apec-logo.png" alt="APEC Logo" className="w-full h-full object-contain" />
+            <img src="./apec-logo.png" alt="Adhiparasakthi Engineering College Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="font-title text-xl font-black uppercase tracking-wider bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
-            APEC Access Portal
+            Adhiparasakthi Engineering College Access Portal
           </h2>
           <span className="text-[9px] uppercase font-bold text-gray-500 tracking-widest mt-1">
             An Autonomous Institution

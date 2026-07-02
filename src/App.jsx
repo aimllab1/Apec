@@ -19,8 +19,11 @@ import Contact from './pages/Contact';
 import DepartmentDetail from './pages/DepartmentDetail';
 import FacilityDetail from './pages/FacilityDetail';
 import AdminPortal from './pages/AdminPortal';
+import AdminProfile from './pages/AdminProfile';
 import PanoramaModal from './components/PanoramaModal';
 import Login from './pages/Login';
+import CutoffCalculator from './pages/CutoffCalculator';
+import FeePayment from './pages/FeePayment';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -46,6 +49,26 @@ function HologramTorus() {
       <mesh ref={meshRef}>
         <torusGeometry args={[0.6, 0.18, 10, 28]} />
         <meshBasicMaterial color="#0f172a" wireframe transparent opacity={0.45} />
+      </mesh>
+    </group>
+  );
+}
+
+// White variant of HologramTorus for use inside the gradient chat bubble
+function HologramTorusWhite() {
+  const meshRef = useRef();
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.8;
+      meshRef.current.rotation.x = 0;
+      meshRef.current.rotation.z = 0;
+    }
+  });
+  return (
+    <group scale={1.25}>
+      <mesh ref={meshRef}>
+        <torusGeometry args={[0.6, 0.18, 10, 28]} />
+        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.75} />
       </mesh>
     </group>
   );
@@ -78,6 +101,22 @@ export default function App() {
   );
 }
 
+// List of friendly prompts for rotation (defined in module scope to prevent hook dependency issues)
+const chatPrompts = [
+  "Ask me anything!",
+  "Need help with admissions?",
+  "Looking for a department?",
+  "I'm here to help!",
+  "Ask me anything about AEC!",
+  "Have a question?"
+];
+
+const stripEmojis = (text) => {
+  if (typeof text !== 'string') return text;
+  // Broad Unicode ranges to capture and remove emoji icons/symbols
+  return text.replace(/[\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF]/g, '');
+};
+
 function AppContent({ isLoading, setIsLoading }) {
   const location = useLocation();
   const isHome = location.pathname === '/';
@@ -88,11 +127,16 @@ function AppContent({ isLoading, setIsLoading }) {
     return location.pathname.startsWith(path);
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileUgcOpen, setMobileUgcOpen] = useState(false);
+  const [mobileCommunitiesOpen, setMobileCommunitiesOpen] = useState(false);
+  const [mobileIqacOpen, setMobileIqacOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  const [bubbleVisible, setBubbleVisible] = useState(false);
+  const [bubbleText, setBubbleText] = useState('');
   const [isPanoOpen, setIsPanoOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([
-    { sender: 'ai', text: 'Welcome to APEC College Assistant! How can I assist you today? Feel free to ask about admissions, TNEA code, courses, library, or placements.' }
+    { sender: 'ai', text: 'Welcome to Adhiparasakthi Engineering College Assistant! How can I assist you today? Feel free to ask about admissions, TNEA code, courses, library, or placements.' }
   ]);
   const chatBottomRef = useRef(null);
   const videoRef = useRef(null);
@@ -113,6 +157,44 @@ function AppContent({ isLoading, setIsLoading }) {
     }
   }, [messages, chatOpen]);
 
+  useEffect(() => {
+    if (chatOpen) {
+      setBubbleVisible(false);
+      return;
+    }
+
+    const showNewBubble = () => {
+      const randomIndex = Math.floor(Math.random() * chatPrompts.length);
+      setBubbleText(chatPrompts[randomIndex]);
+      setBubbleVisible(true);
+    };
+
+    const runCycle = () => {
+      showNewBubble();
+      const hideTimeout = setTimeout(() => {
+        setBubbleVisible(false);
+      }, 4500);
+      return hideTimeout;
+    };
+
+    let hideTimeoutId;
+    // Repeat every 10 seconds
+    const intervalId = setInterval(() => {
+      hideTimeoutId = runCycle();
+    }, 10000);
+
+    // Initial trigger after 2 seconds
+    const firstTriggerId = setTimeout(() => {
+      hideTimeoutId = runCycle();
+    }, 2000);
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(firstTriggerId);
+      if (hideTimeoutId) clearTimeout(hideTimeoutId);
+    };
+  }, [chatOpen]);
+
   const handleChatSubmit = (e) => {
     e.preventDefault();
     if (!chatInput.trim()) return;
@@ -129,13 +211,13 @@ function AppContent({ isLoading, setIsLoading }) {
       if (query.includes('tnea') || query.includes('counseling') || query.includes('code')) {
         aiText = "The TNEA Counseling Code for Adhiparasakthi Engineering College is 1401.";
       } else if (query.includes('admission') || query.includes('apply') || query.includes('open') || query.includes('date')) {
-        aiText = "APEC admissions for the 2026 – 2027 academic cycle are open. For details, call 7418064336 or 7418065336.";
+        aiText = "Adhiparasakthi Engineering College admissions for the 2026 – 2027 academic cycle are open. For details, call 7418064336 or 7418065336.";
       } else if (query.includes('placement') || query.includes('mou') || query.includes('company') || query.includes('recruit')) {
-        aiText = "APEC has a 92% placement rate, with partners including TCS, Wipro, Cognizant, Infosys, and HCL. Highest package offered is 12 LPA.";
+        aiText = "Adhiparasakthi Engineering College has a 92% placement rate, with partners including TCS, Wipro, Cognizant, Infosys, and HCL. Highest package offered is 12 LPA.";
       } else if (query.includes('course') || query.includes('department') || query.includes('engineering') || query.includes('ug') || query.includes('pg') || query.includes('phd')) {
         aiText = "We offer UG courses (CSE, AI/ML, ECE, EEE, Chemical, Agri, Mechanical, Civil), PG courses (MCA, MBA, M.E.), and Ph.D. programs.";
       } else if (query.includes('facility') || query.includes('library') || query.includes('hostel') || query.includes('bus') || query.includes('ground') || query.includes('lab')) {
-        aiText = "APEC offers comprehensive campus facilities including separate secure hostels, a digital Central Library (50,000+ books), fully equipped labs, and transport buses.";
+        aiText = "Adhiparasakthi Engineering College offers comprehensive campus facilities including separate secure hostels, a digital Central Library (50,000+ books), fully equipped labs, and transport buses.";
       }
 
       setMessages([...newMessages, { sender: 'ai', text: aiText }]);
@@ -178,7 +260,7 @@ function AppContent({ isLoading, setIsLoading }) {
             <header className="sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300">
               
               {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-              <div className="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between">
+              <div className="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between gap-10">
                 
                 {/* Enlarged College Logo & Name */}
                 <Link to="/" className="flex items-center gap-4 shrink-0">
@@ -196,34 +278,45 @@ function AppContent({ isLoading, setIsLoading }) {
                     </span>
                   </div>
                 </Link>
-
                 {/* Right Actions & Mobile Toggle */}
                 <div className="flex items-center gap-6">
                   {/* Desktop Right Action Panel */}
-                  <div className="hidden lg:flex items-center gap-5">
+                  <div className="hidden lg:flex items-center gap-4">
                     <button 
                       onClick={() => setIsPanoOpen(true)}
-                      className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-indigo-600 hover:text-indigo-800 transition-all bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/50 px-3.5 py-2 rounded-xl cursor-pointer relative overflow-hidden group/btn"
+                      className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-indigo-600 hover:text-indigo-800 transition-all bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/50 px-2.5 py-1.5 rounded-xl cursor-pointer relative overflow-hidden group/btn"
                     >
                       <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                       <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-600"></span>
                       </span>
-                      <RotateCw className="w-3.5 h-3.5 text-indigo-550 animate-[spin_10s_linear_infinite]" />
+                      <RotateCw className="w-3 h-3 text-indigo-550 animate-[spin_10s_linear_infinite]" />
                       <span>360° VR Tour</span>
                     </button>
+                    <Link
+                      to="/cutoff-calculator"
+                      className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-pink-650 transition-all bg-pink-50 hover:bg-pink-100 border border-pink-200/50 px-2.5 py-1.5 rounded-xl cursor-pointer hover:scale-[1.02] shadow-sm"
+                    >
+                      <span>Cutoff Calculator</span>
+                    </Link>
+                    <Link 
+                      to="/fee-payment" 
+                      className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-700 transition-all bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
+                    >
+                      <span>Fee Payment</span>
+                    </Link>
                     <a 
                       href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="text-xs font-extrabold uppercase tracking-wider text-gray-500 hover:text-indigo-600 transition-colors nav-link-dynamic"
+                      className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-blue-600 hover:text-blue-700 transition-all bg-blue-50 hover:bg-blue-100/80 border border-blue-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
                     >
-                      ERP Portal
+                      <span>ERP Portal</span>
                     </a>
                     {localStorage.getItem('is_logged_in') === 'true' && (
                       <div className="flex items-center gap-3">
-                        <span className="text-xs font-extrabold text-indigo-650 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
+                        <span className="text-xs font-extrabold text-indigo-655 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                           gxwr1
                         </span>
@@ -233,7 +326,7 @@ function AppContent({ isLoading, setIsLoading }) {
                             localStorage.removeItem('is_logged_in');
                             window.location.reload();
                           }}
-                          className="text-xs font-extrabold uppercase tracking-wider text-rose-500 hover:text-rose-700 transition-colors cursor-pointer"
+                          className="text-xs font-extrabold uppercase tracking-wider text-rose-500 hover:text-rose-750 transition-colors cursor-pointer"
                         >
                           Logout
                         </button>
@@ -241,7 +334,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     )}
                     <Link 
                       to="/contact"
-                      className="text-xs font-black uppercase tracking-widest bg-gray-950 hover:bg-gray-800 text-white px-5 py-3 rounded-xl transition-all shadow-md active:scale-95"
+                      className="text-xs font-black uppercase tracking-widest bg-gradient-to-r from-red-800 via-orange-800 to-amber-900 hover:from-red-900 hover:via-orange-900 hover:to-amber-950 text-white px-3.5 py-2 rounded-xl transition-all shadow-md active:scale-95"
                     >
                       Apply Desk
                     </Link>
@@ -261,7 +354,7 @@ function AppContent({ isLoading, setIsLoading }) {
               {/* BOTTOM BAR: NAVIGATION LINKS (Full-width centered layout) */}
               <div className="border-t border-gray-100/80 bg-white/95 hidden lg:block">
                 <div className="max-w-7xl mx-auto px-6 py-1 flex justify-center">
-                  <nav className="flex items-center gap-12">
+                  <nav className="flex items-center gap-6 xl:gap-8">
                     
                     <Link 
                       to="/" 
@@ -348,22 +441,44 @@ function AppContent({ isLoading, setIsLoading }) {
                       </div>
                     </div>
 
-                    <Link 
-                      to="/about" 
-                      className={`text-xs uppercase tracking-wider transition-colors nav-link-dynamic relative pb-1 block ${
-                        isActive('/research') 
-                          ? 'text-indigo-600 font-black' 
-                          : 'text-gray-500 hover:text-indigo-600 font-extrabold'
-                      }`}
-                    >
-                      R & D
-                      {isActive('/research') && (
-                        <motion.span 
-                          layoutId="activeNavMark" 
-                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
-                        />
-                      )}
-                    </Link>
+                    {/* UGC Hover Mega-Menu */}
+                    <div className="relative group py-2">
+                      <button 
+                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                          isActive('/ugc') 
+                            ? 'text-indigo-600 font-black' 
+                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                        }`}
+                      >
+                        UGC <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        {isActive('/ugc') && (
+                          <motion.span 
+                            layoutId="activeNavMark" 
+                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                          />
+                        )}
+                      </button>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[520px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Institutional Compliance & Strategy</span>
+                          <div className="space-y-1">
+                            <a href="https://apec.edu.in/r-d-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">R & D Cell</a>
+                            <a href="https://apec.edu.in/wp-content/uploads/2024/02/IDP.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IDP (Institutional Development Plan)</a>
+                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">UGC Self Disclosure Guidelines</a>
+                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Mandatory Disclosure</a>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Audits, Approvals & Recognition</span>
+                          <div className="space-y-1">
+                            <a href="https://apec.edu.in/annual-accounts/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Annual Accounts</a>
+                            <a href="https://apec.edu.in/wp-content/uploads/2024/02/APEC-2f-12B.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">2(f) and 12(b) Recognition</a>
+                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">UGC Undertaking</a>
+                            <a href="https://apec.edu.in/wp-content/uploads/2025/07/UGC-Autonomous-Approval-Letter.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">UGC Autonomous Approval Letter</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     
                     {/* Facilities Hover Dropdown */}
                     <div className="relative group py-2">
@@ -390,22 +505,108 @@ function AppContent({ isLoading, setIsLoading }) {
                       </div>
                     </div>
 
-                    <Link 
-                      to="/placements" 
-                      className={`text-xs uppercase tracking-wider transition-colors nav-link-dynamic relative pb-1 block ${
-                        isActive('/placements') 
-                          ? 'text-indigo-600 font-black' 
-                          : 'text-gray-500 hover:text-indigo-600 font-extrabold'
-                      }`}
-                    >
-                      Placements & MOUs
-                      {isActive('/placements') && (
-                        <motion.span 
-                          layoutId="activeNavMark" 
-                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
-                        />
-                      )}
-                    </Link>
+                    {/* Training & Placement Cell Dropdown */}
+                    <div className="relative group py-2">
+                      <button 
+                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                          isActive('/placements') 
+                            ? 'text-indigo-600 font-black' 
+                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                        }`}
+                      >
+                        Training & Placement Cell <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        {isActive('/placements') && (
+                          <motion.span 
+                            layoutId="activeNavMark" 
+                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                          />
+                        )}
+                      </button>
+                      <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-64 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Placement Cell Profile</Link>
+                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Placement Records</Link>
+                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">MOUs & Industrial Tie-ups</Link>
+                        <a href="https://apec.edu.in/rti/" target="_blank" rel="noopener noreferrer" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">RTI (Right to Information)</a>
+                      </div>
+                    </div>
+
+                    {/* Communities Dropdown */}
+                    <div className="relative group py-2">
+                      <button 
+                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                          isActive('/communities') 
+                            ? 'text-indigo-600 font-black' 
+                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                        }`}
+                      >
+                        Communities <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        {isActive('/communities') && (
+                          <motion.span 
+                            layoutId="activeNavMark" 
+                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                          />
+                        )}
+                      </button>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[540px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Student Cells & Associations</span>
+                          <div className="space-y-1">
+                            <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Anti-Ragging Committee</a>
+                            <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IIIC Cell (Industry-Institute)</a>
+                            <a href="https://apec.edu.in/women-empowerment-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Women Empowerment Cell</a>
+                            <a href="https://apec.edu.in/alumni/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Alumni Cell</a>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Welfare & Career Clubs</span>
+                          <div className="space-y-1">
+                            <a href="https://apec.edu.in/sc-st-committee/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">SC/ST Committee</a>
+                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electoral Literacy Club</a>
+                            <a href="https://apec.edu.in/career-guidance-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Career Guidance Cell</a>
+                            <a href="https://apec.edu.in/entrepreneurship-development-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Entrepreneurship Cell</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* IQAC Megamenu */}
+                    <div className="relative group py-2">
+                      <button 
+                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                          isActive('/iqac') 
+                            ? 'text-indigo-600 font-black' 
+                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                        }`}
+                      >
+                        IQAC <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        {isActive('/iqac') && (
+                          <motion.span 
+                            layoutId="activeNavMark" 
+                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                          />
+                        )}
+                      </button>
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[540px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Quality Assurance & NAAC</span>
+                          <div className="space-y-1">
+                            <a href="https://apec.edu.in/naac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">NAAC</a>
+                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IQAC</a>
+                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IQAC Members</a>
+                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IQAC MoM & AT</a>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Rankings & Disclosures</span>
+                          <div className="space-y-1">
+                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Disclosures (NIRF, AICTE & MD)</a>
+                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Undertaking</a>
+                            <a href="https://apec.edu.in/nirf/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">NIRF</a>
+                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Instrumentation Cell</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <Link 
                       to="/contact" 
@@ -432,12 +633,82 @@ function AppContent({ isLoading, setIsLoading }) {
 
               {/* Mobile Dropdown */}
               {mobileMenuOpen && (
-                <div className="lg:hidden bg-white border-b border-gray-100 py-6 px-6 flex flex-col gap-4 text-left">
+                <div className="lg:hidden bg-white border-b border-gray-100 py-6 px-6 flex flex-col gap-4 text-left max-h-[75vh] overflow-y-auto">
                   <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-gray-900">Home</Link>
                   <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">About APEC</Link>
                   <Link to="/departments" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Departments</Link>
                   <Link to="/facilities" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Campus Facilities</Link>
-                  <Link to="/placements" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Placements & MOUs</Link>
+                  <Link to="/placements" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Training & Placement Cell</Link>
+                  
+                  {/* Collapsible Mobile UGC Section */}
+                  <div>
+                    <button 
+                      onClick={() => setMobileUgcOpen(!mobileUgcOpen)} 
+                      className="w-full text-left text-sm font-semibold text-gray-500 flex items-center justify-between focus:outline-none"
+                    >
+                      <span>UGC</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileUgcOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileUgcOpen && (
+                      <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
+                        <a href="https://apec.edu.in/r-d-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">R & D Cell</a>
+                        <a href="https://apec.edu.in/wp-content/uploads/2024/02/IDP.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IDP (Institutional Development Plan)</a>
+                        <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">UGC Self Disclosure Guidelines</a>
+                        <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Mandatory Disclosure</a>
+                        <a href="https://apec.edu.in/annual-accounts/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Annual Accounts</a>
+                        <a href="https://apec.edu.in/wp-content/uploads/2024/02/APEC-2f-12B.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">2(f) and 12(b) Recognition</a>
+                        <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">UGC Undertaking</a>
+                        <a href="https://apec.edu.in/wp-content/uploads/2025/07/UGC-Autonomous-Approval-Letter.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">UGC Autonomous Approval Letter</a>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Collapsible Mobile Communities Section */}
+                  <div>
+                    <button 
+                      onClick={() => setMobileCommunitiesOpen(!mobileCommunitiesOpen)} 
+                      className="w-full text-left text-sm font-semibold text-gray-500 flex items-center justify-between focus:outline-none"
+                    >
+                      <span>Communities</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileCommunitiesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileCommunitiesOpen && (
+                      <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
+                        <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Anti-Ragging Committee</a>
+                        <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IIIC Cell (Industry-Institute)</a>
+                        <a href="https://apec.edu.in/women-empowerment-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Women Empowerment Cell</a>
+                        <a href="https://apec.edu.in/alumni/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Alumni Cell</a>
+                        <a href="https://apec.edu.in/sc-st-committee/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">SC/ST Committee</a>
+                        <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Electoral Literacy Club</a>
+                        <a href="https://apec.edu.in/career-guidance-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Career Guidance Cell</a>
+                        <a href="https://apec.edu.in/entrepreneurship-development-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Entrepreneurship Cell</a>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Collapsible Mobile IQAC Section */}
+                  <div>
+                    <button 
+                      onClick={() => setMobileIqacOpen(!mobileIqacOpen)} 
+                      className="w-full text-left text-sm font-semibold text-gray-500 flex items-center justify-between focus:outline-none"
+                    >
+                      <span>IQAC</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileIqacOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileIqacOpen && (
+                      <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
+                        <a href="https://apec.edu.in/naac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">NAAC</a>
+                        <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC</a>
+                        <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC Members</a>
+                        <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC MoM & AT</a>
+                        <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Disclosures (NIRF, AICTE & MD)</a>
+                        <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Undertaking</a>
+                        <a href="https://apec.edu.in/nirf/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">NIRF</a>
+                        <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Instrumentation Cell</a>
+                      </div>
+                    )}
+                  </div>
+
                   <button 
                     onClick={() => {
                       setMobileMenuOpen(false);
@@ -451,15 +722,25 @@ function AppContent({ isLoading, setIsLoading }) {
                     </span>
                     360° VR Tour
                   </button>
+                  <Link 
+                    to="/fee-payment"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-left text-sm font-bold text-emerald-600 bg-emerald-50/50 border border-emerald-100 px-4 py-2.5 rounded-xl flex items-center justify-between hover:bg-emerald-50 transition-colors"
+                  >
+                    <span>Fee Payment</span>
+                    <span className="text-[10px] uppercase font-black tracking-wider text-emerald-500 bg-emerald-100/50 px-2 py-0.5 rounded-md">Pay Online</span>
+                  </Link>
                   <a 
                     href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="text-sm font-semibold text-gray-500"
+                    className="text-left text-sm font-bold text-blue-600 bg-blue-50/50 border border-blue-100 px-4 py-2.5 rounded-xl flex items-center justify-between hover:bg-blue-50 transition-colors"
                   >
-                    ERP Portal
+                    <span>ERP Portal</span>
+                    <span className="text-[10px] uppercase font-black tracking-wider text-blue-500 bg-blue-100/50 px-2 py-0.5 rounded-md">VMedulife</span>
                   </a>
+
                   {localStorage.getItem('is_logged_in') === 'true' && (
                     <div className="flex items-center justify-between py-1 border-b border-gray-50">
                       <span className="text-sm font-bold text-indigo-650 flex items-center gap-1.5 select-none">
@@ -482,17 +763,32 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Contact</Link>
                   
                   <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
-                    <div className="text-xs text-center font-mono py-1.5 bg-gray-50 rounded text-gray-500 border border-gray-200">
+                    <motion.div 
+                      animate={{ 
+                        scale: [1, 1.02, 1],
+                        borderColor: ["#e2e8f0", "#a5b4fc", "#e2e8f0"]
+                      }}
+                      transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                      className="text-xs text-center font-mono py-1.5 bg-indigo-50/50 rounded text-indigo-750 border border-indigo-200 shadow-sm"
+                    >
                       TNEA Counseling Code: 1401
-                    </div>
+                    </motion.div>
+                    <Link 
+                      to="/cutoff-calculator"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block text-center text-sm font-bold uppercase tracking-wider text-pink-650 bg-pink-50 border border-pink-150 py-3 rounded-xl shadow-sm hover:scale-[1.01] active:scale-95 transition-all"
+                    >
+                      Cutoff Calculator
+                    </Link>
                     <Link 
                       to="/contact"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block text-center text-sm font-bold uppercase tracking-wider bg-gray-950 py-3 rounded-xl text-white"
+                      className="block text-center text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-red-800 via-orange-800 to-amber-900 py-3 rounded-xl text-white shadow-md"
                     >
                       Apply Desk
                     </Link>
                   </div>
+
                 </div>
               )}
             </header>
@@ -507,12 +803,15 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/placements" element={<PageTransition><Placements /></PageTransition>} />
                   <Route path="/departments" element={<PageTransition><Departments /></PageTransition>} />
                   <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+                  <Route path="/fee-payment" element={<PageTransition><FeePayment /></PageTransition>} />
                   
                   {/* Separate detail files */}
                   <Route path="/departments/:id" element={<PageTransition><DepartmentDetail /></PageTransition>} />
                   <Route path="/facilities/:id" element={<PageTransition><FacilityDetail /></PageTransition>} />
                   <Route path="/admin-portal" element={<PageTransition><AdminPortal /></PageTransition>} />
+                  <Route path="/administration/:id" element={<PageTransition><AdminProfile /></PageTransition>} />
                   <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+                  <Route path="/cutoff-calculator" element={<PageTransition><CutoffCalculator /></PageTransition>} />
                 </Routes>
               </AnimatePresence>
             </main>
@@ -520,25 +819,53 @@ function AppContent({ isLoading, setIsLoading }) {
             {/* AI CHAT ASSISTANT WIDGET */}
             <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-auto">
               
-              {/* Hologram Icon Button */}
+              {/* Floating Prompt Bubble */}
+              <AnimatePresence>
+                {!chatOpen && bubbleVisible && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -15, scale: 0.9 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="mb-1.5 mr-1 relative px-4 py-2 bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-xs font-semibold rounded-[20px] shadow-lg shadow-indigo-500/30 border border-white/20 flex items-center gap-2 select-none z-10 whitespace-nowrap"
+                  >
+                    {/* Vertically centered, mini 24px 3D hologram torus avatar matching the chatbot avatar */}
+                    <div className="w-6 h-6 shrink-0 relative">
+                      <Canvas camera={{ position: [0, 0, 2], fov: 60 }}>
+                        <ambientLight intensity={2} />
+                        <HologramTorusWhite />
+                      </Canvas>
+                    </div>
+
+                    <span>{bubbleText}</span>
+                    
+                    {/* Tail — outer border color matching gradient end */}
+                    <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-purple-600" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Hologram Icon Button wrapped in floating container */}
               {!chatOpen && (
-                <button 
-                  onClick={() => setChatOpen(true)}
-                  className="group relative w-16 h-16 bg-transparent border-0 outline-none flex items-center justify-center cursor-pointer transition-transform hover:scale-110"
-                >
-                  {/* 3D hologram Canvas */}
-                  <div className="absolute inset-0 z-0 pointer-events-none">
-                    <Canvas camera={{ position: [0, 0, 2], fov: 60 }}>
-                      <ambientLight intensity={2} />
-                      <HologramTorus />
-                    </Canvas>
-                  </div>
-                  
-                  {/* Hover Tooltip */}
-                  <div className="absolute right-full mr-3 bg-gray-950 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-md">
-                    Ask me anything
-                  </div>
-                </button>
+                <div className="chatbot-avatar-container">
+                  <button 
+                    onClick={() => {
+                      setChatOpen(true);
+                      setBubbleVisible(false); // Immediately hide the popup when clicked
+                    }}
+                    className="relative w-16 h-16 bg-transparent border-0 outline-none flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95"
+                  >
+                    {/* 3D hologram Canvas with subtle glow outline (no solid white circular container) */}
+                    <div className="absolute inset-0 z-10 pointer-events-none chatbot-canvas-glow">
+                      <Canvas camera={{ position: [0, 0, 2], fov: 60 }}>
+                        <ambientLight intensity={2} />
+                        <HologramTorus />
+                      </Canvas>
+                    </div>
+                    
+
+                  </button>
+                </div>
               )}
 
               {/* Chatbox Overlay Modal */}
@@ -549,7 +876,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <div className="p-4 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      <span className="text-xs font-bold text-gray-800 tracking-tight">APEC Portal Assistant</span>
+                      <span className="text-xs font-bold text-gray-800 tracking-tight">Adhiparasakthi Engineering College Portal Assistant</span>
                     </div>
                     <button 
                       onClick={() => setChatOpen(false)}
@@ -571,7 +898,7 @@ function AppContent({ isLoading, setIsLoading }) {
                             ? 'bg-gray-950 text-white rounded-br-none' 
                             : 'bg-white border border-gray-150 text-gray-700 rounded-bl-none'
                         }`}>
-                          {msg.text}
+                          {stripEmojis(msg.text)}
                         </div>
                       </div>
                     ))}
@@ -607,7 +934,7 @@ function AppContent({ isLoading, setIsLoading }) {
                 <div className="flex items-center gap-3">
                   <img 
                     src="./apec-logo.png" 
-                    alt="APEC Logo" 
+                    alt="Adhiparasakthi Engineering College Logo" 
                     className="w-9 h-9 object-contain mix-blend-multiply" 
                   />
                   <div className="text-left">

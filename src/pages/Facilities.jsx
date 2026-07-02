@@ -73,7 +73,7 @@ export default function Facilities() {
       title: "WiFi Campus Coverage",
       details: [
         "Secure Network: Campus-wide high-speed optical fiber wifi access for students and mentors.",
-        "Resource Linkage: Connects directly to APEC database servers, e-journals, and reference catalogs."
+        "Resource Linkage: Connects directly to Adhiparasakthi Engineering College database servers, e-journals, and reference catalogs."
       ]
     },
     {
@@ -103,7 +103,7 @@ export default function Facilities() {
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">Facilities & Infrastructure</h1>
           <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">
-            APEC provides students with a well-maintained, high-standard campus environment. Explore our library resources, dynamic labs, separate hostels, and sports grounds.
+            Adhiparasakthi Engineering College provides students with a well-maintained, high-standard campus environment. Explore our library resources, dynamic labs, separate hostels, and sports grounds.
           </p>
         </motion.div>
 

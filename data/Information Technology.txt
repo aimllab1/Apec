@@ -1,0 +1,606 @@
+Information Technology:
+
+ABOUT THE DEPARTMENT;
+
+	The department of Information Technology was established in the year of 1998 with an intake of 60 students in UG. It was approved by Madras University, Chennai in the year 1998. The Department is NBA accredited in the year 2009 and 2013 and the division has an ISO 9001:2015 certification as well. The department is equipped with fully established IT Network Laboratory. The Society of IT is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department and faculties has been a member of reputed societies such Association of Computing Machinery (ACM), Indian Society for technical education (ISTE), Institution of Electronics and Telecommunication Engineers (IETE), Computer Society of India (CSI), Institute of Electrical and Electronics Engineers (IEEE) and IIRS Outreach Programme Nodal centre. The department of information technology at Anna University gives equal weight to theoretical and experimental aspects of the subject. The department has cutting edge equipment in a number of laboratories, a well-furnished e-learning-supportive laboratory, classrooms, and a department library. Our institution sponsors periodic guest lectures, practical training sessions, and seminars for students to enhance their academic program. This makes it easier for our students to keep up with industry expectations for knowledge.
+
+Vision of The Department;
+
+To train well educated skilled and disciplined IT Professionals through planned technological education to fit in the profession and to cater to the changing needs of the society through Innovation and Service.
+
+Mission of The Department 
+Ø To impart high quality education by leveraging new technologies that help the socio-economic growth of the society
+
+Ø To inspire the students to develop innovative solutions that addresses the challenging demands of the modern computing world.
+
+Ø To inculcate strong ethical values and attitude to serve the mankind professionally and responsibly
+
+PROGRAMME EDUCATIONAL OBJECTIVES (PEOs);
+
+Demonstrate technical competence with analytical and critical thinking to understand and meet the diversified requirements of industry, academia and research.
+Exhibit technical leadership, team skills and entrepreneurship skills to provide business solutions to real world problems.
+Work in multi-disciplinary industries with social and environmental responsibility, work ethics and adaptability to address complex engineering and social problems.
+Pursue lifelong learning, use cutting edge technologies and involve in applied research to design optimal solutions.
+
+PROGRAM SPECIFIC OUTCOMES (PSOs);
+To ensure graduates
+
+Have proficiency in programming skills to design, develop and apply appropriate techniques, to solve complex engineering problems.
+Have knowledge to build, automate and manage business solutions using cutting edge technologies.
+Have excitement towards research in applied computer technologies.
+
+PROGRAM  OUTCOMES (POs);
+
+	Engineering knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.
+
+	Problem analysis: Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences.
+
+	Design/development of solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations.
+
+	Conduct investigations of complex problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.
+
+	Modern tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations.
+
+	The engineer and society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.
+
+	Environment and sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.
+
+	Ethics: Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.
+Individual and team work: Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.
+
+	Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.
+
+	Project management and finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.
+
+	Life-long learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.
+
+
+Faculty;
+
+Dr. A. Bhuvaneswari
+Qualification
+M.E., Ph.D
+
+Designation
+Head of Department
+Professor
+Vice Principal
+Department
+Information Technology
+E-Mail
+bhuvaneswari@apec.edu.in
+Faculty ID
+00TGIT0441
+
+Experience
+29 Years, 11 Months
+
+Dt. of Joining
+June 2, 2000
+Teaching Since
+August 1, 1997
+
+
+Mrs.Vasanthi.M.D
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+VASUSOFT1310@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+January 1, 2024
+Teaching Since
+
+
+Mrs. Thulasilakshmi.S
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+NTHULASILAKSHMI112@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+December 1, 2024
+Teaching Since
+
+
+
+Mrs. Lalitha M
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+lalitham@apec.edu.in
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+February 1, 2025
+Teaching Since
+
+
+Mr. K. Hema Kumar
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+hemakumark@apec.edu.in
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+August 3, 2023
+Teaching Since
+
+
+Mrs. Maria Salomi.E.M
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+MARIASALOMIAPEC24@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+May 17, 2024
+Teaching Since
+
+
+Mr. Sakthivel P
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+SAKTHIBTECH1998@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+June 19, 2024
+Teaching Since
+
+
+
+
+Mr. Lavanya.S
+Qualification
+M.E.,
+
+Designation
+Assistant Professor
+Department
+Information Technology
+E-Mail
+APEC.IT.LAVANYA@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+August 12, 2024
+Teaching Since
+
+
+
+Publication:
+
+
+PUBLICATIONS  - JOURNALS 
+  CALENDAR YEAR 2024
+Title of the  paper
+Name of the author
+Department of the teacher
+Name of the journal
+Year of publication
+Link to article / paper / abstract of the article
+Elderly Health Monitoring Framework With QuantumAssisted Machine Learning Models as Micro Services
+Bhuvaneswari, A., Srivel, R., Elamathi, N., Shitharth, S., & Sangeetha, K
+Information Technology
+Quantum Innovations at the Nexus of Biomedical Intelligence
+2024
+https://doi.org/10.4018/979-8- 3693-1479-1.ch002
+Genetic Determinants of Parkinson's Disease: SNCA and LRRK2 in Focus
+A. Bhuvaneswari, N. Legapriyadharshini, T. Thirumaraikumari, S. Rukmani Devi, Saravanan Pandiaraj
+Information Technology
+Intelligent Technologies and Parkinson’s Disease: Prediction and Diagnosis(pp. 119-214). IGI Global
+2024
+https://doi.org/10.4018/979-8-3693-1115-8.ch011
+PUBLICATIONS – BOOKS
+Title of the Book
+Authors
+Name of the Publisher
+Software Testing
+Dr.A.Bhuvaneswari
+Charulatha Publications,
+ISBN: 97-89-38-97-36-441,
+Computer Programming,
+Dr.A.Bhuvaneswari
+Sri Krishna Publishers,
+ISBN:978-81-08908-4-7
+Computer Programming
+Dr.A.Bhuvaneswari
+Global Publishing House, Chennai
+Computer Architecture
+Dr.A.Bhuvaneswari
+BKF Publishers, Chennai
+ISBN:978-81-956610-6-7
+Computer Architecture
+Dr.A.Bhuvaneswari
+Charulatha Publications
+PUBLICATIONS – CONFERENCES 
+Name of the Faculty
+Title of the Conference Proceeding Published
+Title of the paper
+ISBN number of the proceedings
+Name of the Publisher
+Dr. A. Bhuvaneshwari
+6th National Conference on Recent Trends in Information Technology
+29th, April 2023
+Industries Gas Leakage Monitoring and Alerting System Using Solar Energy
+978-93-5906-081-1
+Adhiparasakthi Engineering College.
+
+
+
+Facilities:
+
+LABORATORIES
+
+The following laboratories are available in IT Network LAB
+
+Data Structures and Algorithms Laboratory
+Object Oriented Programming Laboratory
+Data Science Laboratory
+Operating Systems Laboratory
+Database Management Systems Laboratory
+Full Stack Web Development Laboratory
+Mobile Applications Development Laboratory
+Embedded Systems and IoT Laboratory
+Computer Networks Laboratory
+Artificial Intelligence and Machine Learning Laboratory
+Web Essentials Laboratory
+
+DEPARTMENT LIBRARY
+Number of Books : 1200
+Journals : 05
+Back Volumes : 277
+IS Codes : 240
+ of project Books : 350
+
+
+
+Student:
+
+INDUSTRIAL VISIT
+Year of the Student
+Place of Visit
+Date
+III Year and IV Year
+IITM Research Park
+03.11.2023
+III Year and IV Year
+Lenovo (India) Private Limited
+14.09.2022
+II Year , III year and IV Year
+U R Rao Satellite Center(ISRO), Bangalore
+11.04.2023
+II year
+IGCAR, Kalpakkam
+12.10.2022
+BSNL, Chennai
+
+“IITM Research Park”, Chennai
+
+
+"U R Rao Satellite Centre" Bangalore
+
+
+"IGCAR" Kalpakkam
+
+
+"Bharat Sanchar Nigam Limited"(BSNL) Chennai
+
+RESEARCH & DEVELOPMENT
+Machine learning, Big data analytics & Data mining, Speech technology, Image processing & video analytics, Block chain, Cloud computing, Cyber security, Internet of Things (IoT), VLSI & Embedded systems, and Semantic web services are the main research key areas are identified by our department.
+Two faculty members are pursuing a Ph.D.
+Actively doing research in a variety of subjects; has been awarded funding for projects totalling 50 lakhs from the AICTE, TNSCST, RPS, MODROBS and APEC Trust.
+Number of research articles written by faculty and students have been published in reputable journals and conferences.
+In order to improve their domain knowledge, faculty members are encouraged to take part in Faculty Development Programs (FDPs), Valued Added Programs, Workshops, Hands-on Training Programs, Seminars and Conferences (National/International) led by leading software industries in their own research area and other institutions in India and abroad.
+TRAINING PROGRAM
+Bigdata with Hadoop - Triflorum Institute of Advance Engineering
+Web Application designing - Triflorum Institute of Advance Engineering
+Learning Program concept using Python 3.4 - Ethnus Technologies Private Limited
+Learning Program concept using C - Ethnus Technologies Private Limited
+Applications of Python - Campus Connection
+Learning Program concept using C & C++ - Campus Connection
+Robotics & Internet of Things - VEI Technologies
+
+
+Achievements:
+
+Department of Information Technology
+Congratulations Toppers 2023-24 
+IV YEAR IT
+
+NAME    :
+NANDHINI B
+YEAR      :
+IV/VII  SEM
+GPA       :
+9.28
+TOPPER :
+I
+
+NAME    :
+MOONISHAA  A
+YEAR      :
+IV/VII  SEM
+GPA       :
+8.91
+TOPPER :
+II
+
+NAME    :
+DIVYADHARSHINI S
+YEAR      :
+IV/VII  SEM
+GPA       :
+8.78
+TOPPER :
+III
+
+NAME    :
+BALAMURUGAN T
+YEAR      :
+IV/VII  SEM
+GPA       :
+8.91
+TOPPER :
+II
+
+NAME    :
+NAVEENKUMAR I
+YEAR      :
+IV/VII  SEM
+GPA       :
+8.91
+TOPPER :
+II
+    III YEAR IT   
+
+NAME    :
+RAJARAJESHWARI S
+YEAR      :
+III/IV  SEM
+GPA       :
+9.86
+TOPPER :
+I
+
+NAME    :
+SANTHA KUMAR V
+YEAR      :
+III/IV  SEM
+GPA       :
+8.77
+TOPPER :
+III
+
+NAME    :
+ARTHI S
+YEAR      :
+III/IV  SEM
+GPA       :
+8.86
+TOPPER :
+II
+  II YEAR IT   
+
+NAME    :
+VENKATESH K
+YEAR      :
+IV/ III SEM
+GPA       :
+8.98
+TOPPER :
+I
+NAME    :
+SELVAKUMAR J
+YEAR      :
+II/ III  SEM
+GPA       :
+8.65
+TOPPER :
+III
+image
+NAME    :
+JAYASRI P
+YEAR      :
+II/ III SEM
+GPA       :
+8.72
+TOPPER :
+II
+UNIVERSITY RANK HOLDERS
+ACADEMIC YEAR
+NAME OF THE STUDENT
+UNIVERSITY RANK
+2003
+MS.R.SHANMUG VADIUV
+5
+2003
+MISS.M.PAVITHRA
+10
+2006
+MISS.M.JEEVITHA
+2
+2008
+MS.N.SENTILNATHN
+9
+2012
+MISS.M.VENNILA
+39
+2014
+MISS.S.JAYANTHI
+30
+2014
+MR.T.VIGNESHRAMKUMAR
+32
+2014
+MISS.NADHINI
+49
+
+
+
+
+Placement:
+
+LIST OF STUDENTS PLACED IN 2023-2024
+Register Number
+Name of the Student
+Name of the Company
+Salary
+420420205001
+BALAMURUGAN T
+Forte Management Services
+1.44 LAKHS P.A.
+420420205002
+BANU  T
+Forte Management Services &                                                          EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205003
+BARANIDHARAN R
+SEVAL SOFTWARE SOLUTIONS
+2.5 LAKHS P.A.
+420420205004
+CHARULATHA  R
+ZENCORP
+2.2 LAKHS P.A.
+420420205005
+DINESHKUMAR B
+Forte Management Services
+1.44 LAKHS P.A.
+420420205006
+DIVYADARSHINI S
+ZENCORP
+2.2 LAKHS P.A.
+420420205007
+GANESAN K
+OM INNOVATION
+1.2 LAKHS P.A.
+420420205009
+HARISH  A
+OM INNOVATION
+1.2 LAKHS P.A.
+420420205010
+JANANI  E
+OM INNOVATION &                                         Forte Management Services &                                   EOS Globe
+1.2 LAKHS P.A. &                                                                   1.44 LAKHS P.A. &                                  1.89 LAKHS P.A
+420420205011
+JANANI  K
+VERTICAL SOLUTIONS &                                          OM INNOVATION &                                                 Forte Management Services &                        EOS Globe
+1.8 LAKHS P.A. &                                           1.2 LAKHS P.A. &                                    1.44 LAKHS P.A. &                                  1.89 LAKHS P.A
+420420205012
+JANARTHANAN  R
+OM INNOVATION &                                           Forte Management Services
+1.2 LAKHS P.A. &                                     1.44 LAKHS P.A.
+420420205013
+JAYA LAKSHMI K
+Forte Management Services &                                                          EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205015
+MANIMEGAN T
+Forte Management Services &                                                          EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205016
+MOONISHAA  A
+RINEX TECHNOLOGIES
+5.2 LAKHS P.A.
+420420205017
+NANDHINI B
+Forte Management Services &                                                          EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205018
+NAVEENKUMAR  I
+SEVAL SOFTWARE SOLUTIONS
+2.5 LAKHS P.A.
+420420205019
+NILAMAGAN J
+Forte Management Services &                                                          EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205020
+PRIYADHARSHINI R
+VERTICAL SOLUTIONS &                                                OM INNOVATION &                                                    Forte Management Services &                        EOS Globe
+1.8 LAKHS P.A. &                                        1.2 LAKHS P.A. &                                    1.44 LAKHS P.A. &                      1.89 LAKHS P.A
+420420205022
+SAISUSHMA S
+ZENCORP
+2.2 LAKHS P.A.
+420420205023
+SAKTHIVELS
+Forte Management Services
+1.44 LAKHS P.A.
+420420205024
+SRI RAM K
+Forte Management Services &                               EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205025
+SUGUMAR  S
+Forte Management Services &                               EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205302
+HARIRAJAN S
+Forte Management Services
+1.44 LAKHS P.A.
+420420205303
+KAMALESH R
+OM INNOVATION
+1.2 LAKHS P.A.
+420420205304
+MOHANRAJ J
+OM INNOVATION &                                                       Forte Management Services &                                    EOS Globe
+1.2 LAKHS P.A. &                                          1.44 LAKHS P.A. &                                1.89 LAKHS P.A
+420420205305
+SIVA KUMAR M
+Forte Management Services &                                                          EOS Globe
+1.44 LAKHS P.A. &                                   1.89 LAKHS P.A
+420420205306
+VASANTH KUMAR J S
+OM INNOVATION
+1.2 LAKHS P.A.

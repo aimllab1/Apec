@@ -62,7 +62,7 @@ const facilityData = {
   },
   labs: {
     name: "Research & Department Labs",
-    intro: "APEC features fully-equipped, modern departmental laboratories that facilitate hands-on experimentation, CAD design simulations, and student research projects.",
+    intro: "Adhiparasakthi Engineering College features fully-equipped, modern departmental laboratories that facilitate hands-on experimentation, CAD design simulations, and student research projects.",
     stats: [
       { label: "Total Labs", value: "40+" },
       { label: "Computing Servers", value: "5+ Nodes" },
@@ -144,7 +144,7 @@ const facilityData = {
     eResources: [
       "High-speed WiFi network inside study blocks",
       "Common room computers for academic inquiries",
-      "Digital reference desks linked to APEC central servers"
+      "Digital reference desks linked to Adhiparasakthi Engineering College central servers"
     ],
     memberships: [
       "Hostel Advisory Committee (HAC)",
@@ -159,7 +159,7 @@ const facilityData = {
   },
   transport: {
     name: "Transport & Bus Routes",
-    intro: "APEC operates a dedicated fleet of buses connecting the Melmaruvathur campus to major boarding sectors. This facility ensures safe and punctual travel for both students and faculty members.",
+    intro: "Adhiparasakthi Engineering College operates a dedicated fleet of buses connecting the Melmaruvathur campus to major boarding sectors. This facility ensures safe and punctual travel for both students and faculty members.",
     stats: [
       { label: "Active Routes", value: "8 Routes" },
       { label: "Certified Fleet", value: "100% Fitness Checked" },
@@ -388,7 +388,7 @@ export default function FacilityDetail() {
       html: `
         <div class="flex flex-col items-center cursor-pointer animate-[pulse_2.5s_infinite]">
           <div class="w-10 h-10 rounded-full bg-white border-2 border-gray-950 shadow-2xl flex items-center justify-center p-1 hover:scale-110 transition-transform">
-            <img src="/apec-logo.png" alt="APEC Logo" class="w-full h-full object-contain mix-blend-multiply" />
+            <img src="/apec-logo.png" alt="Adhiparasakthi Engineering College Logo" class="w-full h-full object-contain mix-blend-multiply" />
           </div>
         </div>
       `,
@@ -396,7 +396,7 @@ export default function FacilityDetail() {
       iconSize: [40, 40],
       iconAnchor: [20, 20]
     });
-    L.marker([12.4418, 79.8242], { icon: collegeIcon }).addTo(map).bindPopup("<b>APEC Campus</b><br>Melmaruvathur");
+    L.marker([12.4418, 79.8242], { icon: collegeIcon }).addTo(map).bindPopup("<b>Adhiparasakthi Engineering College Campus</b><br>Melmaruvathur");
 
     const allLatLngs = [];
 
@@ -484,7 +484,7 @@ export default function FacilityDetail() {
       // Use snapped start point if available to align with routing path
       const startCoords = (snappedStops && snappedStops[0]) ? snappedStops[0] : route.stops[0].coords;
       const busMarker = L.marker(startCoords, { icon: busIcon }).addTo(map);
-      busMarker.bindPopup(`<b>${route.name}</b><br>Active trajectory to APEC`);
+      busMarker.bindPopup(`<b>${route.name}</b><br>Active trajectory to Adhiparasakthi Engineering College`);
       busMarker.on('click', () => {
         setSelectedRouteIdx(idx);
       });
@@ -495,7 +495,7 @@ export default function FacilityDetail() {
           const isStart = sIdx === 0;
           const isEnd = sIdx === route.stops.length - 1;
           const nextStop = route.stops[sIdx + 1];
-          const nextStopText = nextStop ? `${nextStop.name} (${nextStop.time})` : "Melmaruvathur (APEC)";
+          const nextStopText = nextStop ? `${nextStop.name} (${nextStop.time})` : "Melmaruvathur (Adhiparasakthi Engineering College)";
 
           // Use snapped coordinates from OSRM to ensure stop point is exactly on the polyline path
           const stopCoords = (snappedStops && snappedStops[sIdx]) ? snappedStops[sIdx] : stop.coords;
@@ -532,7 +532,7 @@ export default function FacilityDetail() {
                 </div>
               ` : ''}
               <div class="text-[9px] text-gray-400 border-t border-gray-100 pt-1 mt-1 font-medium">
-                Way to APEC Campus (Route ${route.id})
+                Way to Adhiparasakthi Engineering College Campus (Route ${route.id})
               </div>
             </div>
           `);
@@ -626,7 +626,7 @@ export default function FacilityDetail() {
             <div>
               <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <Bus className="w-5 h-5 text-gray-900" />
-                APEC Interactive Transit Console
+                Adhiparasakthi Engineering College Interactive Transit Console
               </h3>
 
               {/* Search Bar for Boarding Stops */}
@@ -803,7 +803,7 @@ export default function FacilityDetail() {
             <div className="border-t border-gray-100 pt-16">
               <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <ShieldAlert className="w-5 h-5 text-gray-900" />
-                APEC Logistics & Safety Policies
+                Adhiparasakthi Engineering College Logistics & Safety Policies
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {facility.details.map((detail, idx) => (

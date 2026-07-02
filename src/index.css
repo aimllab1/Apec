@@ -111,3 +111,28 @@ body {
     transform: translate3d(-50%, 0, 0);
   }
 }
+
+/* Premium Chatbot Animations */
+@keyframes chatbotFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.chatbot-avatar-container {
+  animation: chatbotFloat 3.5s ease-in-out infinite;
+}
+
+.chatbot-canvas-glow {
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6)) drop-shadow(0 0 2px rgba(139, 92, 246, 0.4));
+  transition: filter 0.3s ease;
+}
+
+.group:hover .chatbot-canvas-glow {
+  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.8)) drop-shadow(0 0 4px rgba(139, 92, 246, 0.6));
+}
+
+

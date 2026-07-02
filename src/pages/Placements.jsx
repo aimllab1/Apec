@@ -92,7 +92,7 @@ export default function Placements() {
           </span>
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">Placements & MOUs</h1>
           <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">
-            APEC Placement cell trains students in technical skills, aptitude benchmarks, and soft skills to secure careers in corporate organisations.
+            Adhiparasakthi Engineering College Placement cell trains students in technical skills, aptitude benchmarks, and soft skills to secure careers in corporate organisations.
           </p>
         </motion.div>
 
@@ -133,7 +133,7 @@ export default function Placements() {
               Corporate Collaborations & MOUs
             </h3>
             <p className="text-xs text-gray-500 leading-relaxed mb-6 font-semibold">
-              APEC has active Memorandum of Understanding (MOU) relationships with major enterprises to coordinate industrial visits, value-added certification courses, and direct student placements.
+              Adhiparasakthi Engineering College has active Memorandum of Understanding (MOU) relationships with major enterprises to coordinate industrial visits, value-added certification courses, and direct student placements.
             </p>
             
             <motion.div 
