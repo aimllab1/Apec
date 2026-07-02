@@ -74,7 +74,7 @@ export default function Departments() {
 
     return {
       ...dept,
-      category: isPG ? 'pg' : 'ug',
+      category: isPG ? 'pg' : (['aiml', 'it', 'chemical', 'agri'].includes(dept.key) ? 'btech' : 'be'),
       duration,
       intake,
       focus
@@ -132,7 +132,8 @@ export default function Departments() {
           <div className="flex gap-2 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800 shrink-0 w-full md:w-auto overflow-x-auto">
             {[
               { id: 'all', label: 'All Programs' },
-              { id: 'ug', label: 'Undergraduate (B.E. / B.Tech)' },
+              { id: 'be', label: 'Undergraduate (B.E.)' },
+              { id: 'btech', label: 'Undergraduate (B.Tech.)' },
               { id: 'pg', label: 'Postgraduate (MCA / MBA)' }
             ].map((tab) => (
               <button
@@ -215,9 +216,11 @@ export default function Departments() {
                         <span className={`text-[9px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full border ${
                           dept.category === 'pg' 
                             ? 'bg-purple-500/10 border-purple-500/20 text-purple-400' 
-                            : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400'
+                            : dept.category === 'btech'
+                              ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+                              : 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400'
                         }`}>
-                          {dept.category === 'pg' ? 'Postgraduate' : 'Undergraduate'}
+                          {dept.category === 'pg' ? 'Postgraduate' : dept.category === 'btech' ? 'UG (B.Tech)' : 'UG (B.E.)'}
                         </span>
                         <span className="font-mono text-[9px] uppercase font-bold tracking-widest text-gray-400 flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5 text-indigo-400" /> {dept.duration}
