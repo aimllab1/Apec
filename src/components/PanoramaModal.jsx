@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, RotateCw, RefreshCw, Compass, Play, Pause } from 'lucide-react';
+import { X, Compass, Play, Pause } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const sceneTitles = {
@@ -90,13 +90,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             },
             scenes: {
               mainGate: {
-                title: "Adhiparasakthi Engineering College Entrance Gate",
+                title: "Entrance Gate",
                 type: "equirectangular",
                 panorama: "/Main_Gate.jpg",
-                yaw: 0,
+                yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: 1.5, // Changed to positive 1.5 for right-to-left rotation
+                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
@@ -107,13 +107,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 ]
               },
               junctionOne: {
-                title: "Adhiparasakthi Engineering College Junction 1",
+                title: "Junction 1",
                 type: "equirectangular",
                 panorama: "/Junction 1.jpeg",
-                yaw: 0,
+                yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: 1.5, // Right-to-left rotation
+                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
@@ -133,10 +133,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 title: "Main Block Reception",
                 type: "equirectangular",
                 panorama: "/main block Reception_.jpg.jpeg",
-                yaw: 0,
+                yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: 1.5, // Right-to-left rotation
+                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
@@ -156,10 +156,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 title: "AIML Research Lab",
                 type: "equirectangular",
                 panorama: "/Aiml_Lab_1.jpg",
-                yaw: 0,
+                yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: 1.5, // Right-to-left rotation
+                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
@@ -188,7 +188,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             if (!isPlayingRef.current) {
               viewer.stopAutoRotate();
             } else {
-              viewer.startAutoRotate(1.5);
+              viewer.startAutoRotate(-4.0);
             }
           });
 
@@ -270,7 +270,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
         viewerInstanceRef.current.stopAutoRotate();
         setIsPlaying(false);
       } else {
-        viewerInstanceRef.current.startAutoRotate(1.5);
+        viewerInstanceRef.current.startAutoRotate(-4.0);
         setIsPlaying(true);
       }
     }
@@ -279,13 +279,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/85 backdrop-blur-md">
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative w-full max-w-5xl bg-zinc-950 border border-zinc-800 rounded-[28px] shadow-2xl z-10 mx-auto h-[75vh] md:h-[650px] flex flex-col overflow-hidden text-white"
+        className="relative w-full h-full sm:h-[75vh] md:h-[650px] sm:max-w-5xl bg-zinc-950 border-0 sm:border border-zinc-800 rounded-none sm:rounded-[28px] shadow-2xl z-10 mx-auto flex flex-col overflow-hidden text-white"
       >
         {/* Inject CSS styles directly into component */}
         <style dangerouslySetInnerHTML={{ __html: `
@@ -391,10 +391,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
         ` }} />
 
         {/* Top Control Bar */}
-        <div className="absolute top-4 left-4 right-4 z-[120] flex items-center justify-between p-4 bg-black/60 backdrop-blur-md rounded-2xl border border-white/10">
+        <div className="absolute top-4 left-4 right-4 z-[120] flex items-center justify-between p-3 sm:p-4 bg-black/60 backdrop-blur-md rounded-2xl border border-white/10">
           <div className="flex items-center gap-3">
-            <h2 className="text-sm font-black flex items-center gap-2.5 uppercase tracking-wider text-indigo-400">
-              <Compass className="w-4 h-4 text-indigo-405 animate-pulse" />
+            <h2 className="text-xs sm:text-sm font-black flex items-center gap-2 uppercase tracking-wider text-indigo-400">
+              <Compass className="w-4 h-4 text-indigo-400 animate-pulse" />
               
               {/* Play/Pause Autoplay button right next to the compass */}
               <button 
@@ -409,11 +409,12 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 )}
               </button>
               
-              <span>Adhiparasakthi Engineering College 360° Virtual Tour</span>
+              <span className="hidden sm:inline">Adhiparasakthi Engineering College 360° Virtual Tour</span>
+              <span className="inline sm:hidden">APEC 360° Tour</span>
             </h2>
           </div>
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Quick jump dropdown list of all scenes */}
             <select
               value={activeScene}
@@ -423,12 +424,12 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                   viewerInstanceRef.current.loadScene(newScene);
                 }
               }}
-              className="bg-zinc-900/90 text-zinc-200 border border-zinc-700 rounded-xl px-3 py-1.5 font-bold text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:border-indigo-500 transition-all hover:bg-zinc-800"
+              className="bg-zinc-900/90 text-zinc-200 border border-zinc-700 rounded-xl px-2.5 py-1.5 font-bold text-[9px] sm:text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:border-indigo-500 transition-all hover:bg-zinc-800 max-w-[110px] sm:max-w-none"
             >
-              <option value="mainGate">Adhiparasakthi Engineering College Entrance Gate</option>
-              <option value="junctionOne">Adhiparasakthi Engineering College Junction 1</option>
-              <option value="reception">Main Block Reception</option>
-              <option value="aimlLab">AIML Research Lab</option>
+              <option value="mainGate">Entrance Gate</option>
+              <option value="junctionOne">Junction 1</option>
+              <option value="reception">Reception</option>
+              <option value="aimlLab">AIML Lab</option>
             </select>
 
             <button 
