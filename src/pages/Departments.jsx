@@ -74,7 +74,7 @@ export default function Departments() {
 
     return {
       ...dept,
-      category: isPG ? 'pg' : (['aiml', 'it', 'chemical', 'agri'].includes(dept.key) ? 'btech' : 'be'),
+      category: isPG ? 'pg' : (['csd', 'it', 'chemical', 'agri'].includes(dept.key) ? 'btech' : 'be'),
       duration,
       intake,
       focus
