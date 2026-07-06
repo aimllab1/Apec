@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 Thumbs.db
 
+# Secrets / Environment variables
+.env
+.env.*
+!.env.example
+

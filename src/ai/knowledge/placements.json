@@ -1,0 +1,60 @@
+{
+  "statistics": {
+    "placement_percentage": "92%",
+    "offers_generated_annually": "350+",
+    "recruiting_partners": "50+ companies",
+    "highest_ctc": "12 LPA",
+    "average_ctc": "4.5 LPA"
+  },
+  "recruiters": [
+    {
+      "name": "Tata Consultancy Services (TCS)",
+      "type": "MOU Partner & Recruiter"
+    },
+    {
+      "name": "Wipro Technologies",
+      "type": "MOU Partner & Recruiter"
+    },
+    {
+      "name": "Cognizant Technology Solutions (CTS)",
+      "type": "Recruiter"
+    },
+    {
+      "name": "Infosys",
+      "type": "Recruiter"
+    },
+    {
+      "name": "HCL Technologies",
+      "type": "MOU Partner"
+    },
+    {
+      "name": "Accenture",
+      "type": "Recruiter"
+    },
+    {
+      "name": "TVS Motors",
+      "type": "Industrial MOU"
+    },
+    {
+      "name": "FANUC India",
+      "type": "Automation Lab Partner"
+    }
+  ],
+  "training_programs": [
+    {
+      "name": "Campus Recruitment Training (CRT)",
+      "target": "Third-year and Final-year students",
+      "details": "Quantitative aptitude classes, logical reasoning drills, and mock programming assessments."
+    },
+    {
+      "name": "Mock Interview Drills",
+      "target": "Final-year candidates",
+      "details": "Conducted by alumni panels and industry experts working in leading MNCs to refine communication and technical interviews."
+    },
+    {
+      "name": "MOU Tie-ups & Internships",
+      "target": "All engineering branches",
+      "details": "Provides 3-6 months direct industrial project experience at core chemical, electronics, and software development cells."
+    }
+  ]
+}
