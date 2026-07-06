@@ -1,16 +1,26 @@
 @echo off
-title Push Project to Git Repository
+title Git Push & Deploy Helper
 setlocal enabledelayedexpansion
 
-echo ====================================================
-echo      APEC Git Deploy & Push Helper Script
-echo ====================================================
+:: Set colors using ANSI escape codes if supported (Win 10+)
+set "ESC="
+for /F %%a in ('echo prompt $E^| cmd') do set "ESC=%%a"
+set "GREEN=!ESC![92m"
+set "RED=!ESC![91m"
+set "YELLOW=!ESC![93m"
+set "CYAN=!ESC![96m"
+set "MAGENTA=!ESC![35m"
+set "RESET=!ESC![0m"
+
+echo !CYAN!====================================================!RESET!
+echo !CYAN!         APEC Git Deploy & Push Helper Script       !RESET!
+echo !CYAN!====================================================!RESET!
 echo.
 
 :: Check if git is installed
 where git >nul 2>nul
 if !errorlevel! NEQ 0 (
-    echo [ERROR] Git is not installed or not in your PATH.
+    echo !RED![ERROR] Git is not installed or not in your PATH.!RESET!
     echo Please install Git and try again.
     pause
     exit /b
@@ -19,156 +29,138 @@ if !errorlevel! NEQ 0 (
 :: Check if this is a git repository
 git rev-parse --is-inside-work-tree >nul 2>nul
 if !errorlevel! NEQ 0 (
-    echo This directory is not a Git repository.
+    echo !YELLOW!This directory is not a Git repository.!RESET!
     echo Initializing Git repository...
     git init
     if !errorlevel! NEQ 0 (
-        echo [ERROR] Failed to initialize Git repository.
+        echo !RED![ERROR] Failed to initialize Git repository.!RESET!
         pause
         exit /b
     )
-    echo Git repository initialized successfully.
-    echo.
-)
-
-:: Ensure .gitignore exists and is configured correctly
-if not exist .gitignore (
-    echo [WARNING] .gitignore file was missing. Creating a new one...
-    (
-        echo # Logs
-        echo logs
-        echo *.log
-        echo npm-debug.log*
-        echo.
-        echo # Dependency directories
-        echo node_modules/
-        echo.
-        echo # Build outputs
-        echo dist/
-        echo dist-ssr/
-        echo.
-        echo # Environment files
-        echo .env
-        echo .env.local
-        echo.
-        echo # Editor files
-        echo .vscode/
-        echo .idea/
-        echo .DS_Store
-        echo Thumbs.db
-    ) > .gitignore
-    echo .gitignore created successfully.
-    echo.
-)
-
-:: Double check if node_modules is cached/tracked in Git
-git ls-files --error-unmatch node_modules >nul 2>nul
-if !errorlevel! EQU 0 (
-    echo [WARNING] node_modules folder is currently tracked in Git.
-    echo Untracking node_modules (this keeps files locally but removes them from Git)...
-    git rm -r --cached node_modules >nul 2>nul
-    echo node_modules untracked successfully.
-    echo.
-)
-
-:: Double check if dist is cached/tracked in Git
-git ls-files --error-unmatch dist >nul 2>nul
-if !errorlevel! EQU 0 (
-    echo [WARNING] dist folder is currently tracked in Git.
-    echo Untracking dist (this keeps files locally but removes them from Git)...
-    git rm -r --cached dist >nul 2>nul
-    echo dist untracked successfully.
+    echo !GREEN!Git repository initialized successfully.!RESET!
     echo.
 )
 
 :: Check if remote "origin" exists
 git remote get-url origin >nul 2>nul
 if !errorlevel! NEQ 0 (
-    echo No remote "origin" is set.
+    echo !YELLOW!No remote "origin" is set.!RESET!
     set /p repo_url="Enter remote repository URL (e.g., https://github.com/username/repo.git): "
     if "!repo_url!"=="" (
-        echo [ERROR] Repository URL cannot be empty.
+        echo !RED![ERROR] Repository URL cannot be empty.!RESET!
         pause
         exit /b
     )
     git remote add origin !repo_url!
     if !errorlevel! NEQ 0 (
-        echo [ERROR] Failed to add remote origin.
+        echo !RED![ERROR] Failed to add remote origin.!RESET!
         pause
         exit /b
     )
-    echo Remote "origin" set to !repo_url!
+    echo !GREEN!Remote "origin" set to !repo_url!!RESET!
     echo.
 )
 
-:: Force current branch name to main
-git branch -M main
-
-echo ====================================================
-echo Current Repository Status (Before Staging):
-echo ====================================================
-git status
-echo.
-
-echo ====================================================
-echo Choose Staging Option:
-echo ====================================================
-echo [1] Stage modified and tracked files only (git add -u)
-echo [2] Stage all files including untracked (git add .)
-echo.
-set /p stage_choice="Enter choice [1 or 2] (Default: 1): "
-if "!stage_choice!"=="" set stage_choice=1
-
-if "!stage_choice!"=="1" (
-    echo Staging modified/tracked files only...
-    git add -u
-) else (
-    echo Staging all files...
-    git add .gitignore
-    git add .
+:: Get current branch name
+for /f "tokens=*" %%i in ('git branch --show-current') do set "current_branch=%%i"
+if "!current_branch!"=="" (
+    :: Fallback if not on any branch yet
+    git branch -M main
+    set "current_branch=main"
 )
 
-if !errorlevel! NEQ 0 (
-    echo [ERROR] Failed to stage files.
-    pause
-    exit /b
-)
-echo Files staged successfully.
+echo !CYAN!Current Branch:!RESET! !GREEN!!current_branch!!RESET!
 echo.
 
-echo ====================================================
-echo Repository Status:
-echo ====================================================
+:: Show status first
+echo !CYAN!====================================================!RESET!
+echo !CYAN!             Current Working Tree Status            !RESET!
+echo !CYAN!====================================================!RESET!
 git status -s
 echo.
 
-echo ====================================================
-echo Committing changes...
-echo ====================================================
-set /p commit_msg="Enter commit message (Press Enter for default: 'Update project files'): "
-if "!commit_msg!"=="" (
-    set commit_msg=Update project files
+:: Choose what to stage
+echo !CYAN!====================================================!RESET!
+echo !CYAN!             Choose Staging Option                  !RESET!
+echo !CYAN!====================================================!RESET!
+echo  [1] !GREEN!Stage modified & tracked files only!RESET! (git add -u)
+echo  [2] !GREEN!Stage all files including untracked!RESET! (git add .)
+echo  [3] !RED!Cancel and Exit!RESET!
+echo.
+set /p choice="Select an option (1, 2, or 3) [Default: 1]: "
+if "!choice!"=="" set choice=1
+
+if "!choice!"=="3" (
+    echo !YELLOW!Operation cancelled.!RESET!
+    pause
+    exit /b
 )
 
-git commit -m "!commit_msg!"
+if "!choice!"=="2" (
+    echo.
+    echo Staging all files including untracked...
+    git add .
+) else (
+    echo.
+    echo Staging modified/tracked files only...
+    git add -u
+)
+
 if !errorlevel! NEQ 0 (
-    echo [INFO] No new changes to commit or commit succeeded.
+    echo !RED![ERROR] Failed to stage files.!RESET!
+    pause
+    exit /b
+)
+echo !GREEN!Files staged successfully.!RESET!
+echo.
+
+:: Show staged files status
+echo !CYAN!====================================================!RESET!
+echo !CYAN!             Files Ready to Commit                  !RESET!
+echo !CYAN!====================================================!RESET!
+git status --porcelain | findstr /R "^[MADRC]"
+if !errorlevel! NEQ 0 (
+    echo !YELLOW!No changes ready to commit.!RESET!
+    pause
+    exit /b
 )
 echo.
 
-echo ====================================================
-echo Pushing changes to remote main branch...
-echo ====================================================
-git push -u origin main
+:: Get commit message
+echo !CYAN!====================================================!RESET!
+echo !CYAN!                 Commit Changes                     !RESET!
+echo !CYAN!====================================================!RESET!
+set /p commit_msg="Enter commit message [Default: 'Update project files']: "
+if "!commit_msg!"=="" set commit_msg=Update project files
+
+echo.
+echo Committing changes...
+git commit -m "!commit_msg!"
+if !errorlevel! NEQ 0 (
+    echo !RED![ERROR] Commit failed.!RESET!
+    pause
+    exit /b
+)
+echo !GREEN!Commit successful.!RESET!
+echo.
+
+:: Push changes
+echo !CYAN!====================================================!RESET!
+echo !CYAN!             Pushing to Remote Repo                 !RESET!
+echo !CYAN!====================================================!RESET!
+echo Pushing changes to origin/!current_branch!...
+git push origin !current_branch!
+
 if !errorlevel! NEQ 0 (
     echo.
-    echo [ERROR] Failed to push to remote.
-    echo Please verify your repository URL, permissions, and internet connection.
+    echo !RED![ERROR] Push failed.!RESET!
+    echo Please verify your internet connection, remote URL, and repository permissions.
 ) else (
     echo.
-    echo ====================================================
-    echo SUCCESS: Project pushed successfully without node_modules!
-    echo ====================================================
+    echo !GREEN!====================================================!RESET!
+    echo !GREEN!    SUCCESS: All changes pushed successfully!      !RESET!
+    echo !GREEN!====================================================!RESET!
 )
 
+echo.
 pause
