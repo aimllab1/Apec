@@ -1,0 +1,831 @@
+Computer Science Engineering:
+
+ABOUT THE DEPARTMENT;
+
+	Department of Computer Science and Engineering was established in the year 1993. It started undergraduate course with 30 students as intake of and now strengthens to 90. In addition, PG programme M.E. Computer Science and Engineering was started in the year 2009 with 18 students as intake. The department has been affiliated to Anna University Technology, Chennai. The alacrity of the students to learn makes it easier for the department of computer science and engineering to produce top-notch engineers who are being recruited by companies all over the world. We provide the following programmes.
+
+Vision of The Department;
+
+	To be a globally recognized leader in computer science and engineering education, research, and innovation, driving advancements that address societal challenges and shape the future of technology.
+
+Mission of The Department;
+
+	Foster a culture of interdisciplinary collaboration, encouraging students and faculty to explore innovative solutions that integrate computer science and engineering with other domains such as medicine, business, and the humanities.
+Conduct impactful research that advances the frontiers of computer science and engineering, addressing fundamental questions and tackling real-world problems with creativity and rigor.
+Engage with industry, government, and other stakeholders to translate research discoveries into practical applications, driving economic growth and societal progress.
+
+PROGRAMME EDUCATIONAL OBJECTIVES (PEOs)
+Graduates can;
+
+	Apply their technical competence in computer science to solve real world problems, with technical and people leadership.
+Conduct cutting edge research and develop solutions on problems of social relevance.
+Work in a business environment, exhibiting team skills, work ethics, adaptability and lifelong learning.
+
+
+PROGRAM SPECIFIC OUTCOMES (PSOs)
+The Students will be able to;
+
+	Exhibit design and programming skills to build and automate business solutions using cutting edge technologies.
+Strong theoretical foundation leading to excellence and excitement towards research, to provide elegant solutions to complex problems.
+Ability to work effectively with various engineering fields as a team to design, build and develop system applications.
+
+PROGRAM  OUTCOMES (POs);
+
+	1. Engineering knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.
+
+	2. Problem analysis: Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences.
+
+	3. Design/development of solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations.
+
+	4. Conduct investigations of complex problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.
+
+	5. Modern tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations.
+
+	6. The engineer and society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.
+
+	7. Environment and sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.
+
+	8. Ethics: Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.
+	9. Individual and team work: Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.
+
+	10. Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.
+
+	11. Project management and finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.
+
+	12. Life-long learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.
+
+LIST OF FACULTY:   
+
+Dr. C. Dhaya
+Head of Department
+M.E., Ph.D.
+
+Qualification
+M.E., Ph.D.
+
+Designation
+Head of Department
+Department
+Computer Science and Engineering
+E-Mail
+dhaya@apec.edu.in
+Faculty ID
+Experience
+25 Years,  Months
+
+Dt. of Joining
+June 12, 2001
+Teaching Since
+June 12, 2001
+
+
+
+Dr. S. Jayashri
+Professor
+M.E., PhD
+Qualification
+M.E., PhD
+
+Designation
+Professor
+Department
+Computer Science and Engineering
+E-Mail
+jayashris@apec.edu.in
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+January 1, 2024
+Teaching Since
+
+
+
+Mr. G. Sekar
+Assistant Professor
+M.E., (Ph.D.)
+Qualification
+M.E., (Ph.D.)
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+sekar@apec.edu.in
+Faculty ID
+Experience
+16 Years,  Months
+
+Dt. of Joining
+June 21, 2010
+Teaching Since
+June 21, 2010
+
+
+
+
+
+Mr. G. Srinivasan
+Assistant Professor
+M.E
+Qualification
+M.E
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+srinivasan@apec.edu.in
+Faculty ID
+Experience
+14 Years, 1 Months
+
+Dt. of Joining
+July 24, 2012
+Teaching Since
+May 5, 2012
+
+
+
+
+Mr. K. Chairmadurai
+Assistant Professor
+M.E., (Ph.D.)
+Qualification
+M.E., (Ph.D.)
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+chairmadurai@apec.edu.in
+Faculty ID
+Experience
+9 Years,  Months
+
+Dt. of Joining
+August 1, 2017
+Teaching Since
+June 28, 2017
+
+
+
+
+Ms. A. Jayanthi
+Assistant Professor
+M.E
+Qualification
+M.E
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+jayanthiarumugam90@gmail.com
+Faculty ID
+Experience
+5 Years, 9 Months
+
+Dt. of Joining
+October 1, 2025
+Teaching Since
+October 1, 2021
+
+
+
+
+Ms. P. Gajalakshmi
+Assistant Professor
+M.E., (Ph.D.)
+Qualification
+M.E., (Ph.D.)
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+gajalakshmigctme@gmail.com
+Faculty ID
+Experience
+4 Years, 10 Months
+
+Dt. of Joining
+Teaching Since
+August 18, 2022
+
+
+
+
+
+Ms. M. Devika
+Assistant Professor
+M.E
+Qualification
+M.E
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+m.devika2007@gmail.com
+Faculty ID
+Experience
+4 Years, 9 Months
+
+Dt. of Joining
+September 5, 2022
+Teaching Since
+September 5, 2022
+
+
+
+
+Mr. S. Hariganesan
+Assistant Professor
+M.E
+Qualification
+M.E
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+hariganesan@apec.edu.in
+Faculty ID
+Experience
+3 Years, 4 Months
+
+Dt. of Joining
+September 1, 2014
+Teaching Since
+February 7, 2023
+
+
+
+
+
+Ms. S. Swetha 
+Assistant Professor
+M. E. 
+Qualification
+M. E. 
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+swethasasikumar07@gmail.com
+Faculty ID
+4204434
+
+Experience
+1 Years, 7 Months
+
+Dt. of Joining
+November 3, 2025
+Teaching Since
+November 3, 2025
+
+
+
+
+
+
+Ms. Manonmani G
+Assistant Professor
+ME
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+MANOLASKHMI@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+February 1, 2025
+Teaching Since
+
+
+
+
+
+Ms. P. Banu Priya
+Assistant Professor
+ME
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+banupriya@apec.edu.in
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+March 1, 2023
+Teaching Since
+
+
+
+
+
+Ms. K. Muthu Priya
+Assistant Professor
+ME
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+muthupriyak@apec.edu.in
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+March 1, 2023
+Teaching Since
+
+
+
+
+
+Mrs. Mahalakshmi M
+Assistant Professor
+ME
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+MMDPSS123@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+February 1, 2025
+Teaching Since
+
+
+
+
+
+
+Mrs.Padmapriya. T.M
+Assistant Professor
+ME
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+APECPRIYA@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+August 12, 2024
+Teaching Since
+
+
+
+
+
+Mrs.Thamarai Selvi.V
+Assistant Professor
+ME
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Computer Science and Engineering
+E-Mail
+THAMARAIVASU.SELVI06@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+May 20, 2024
+Teaching Since
+
+
+
+
+
+Study Materials:
+R-21
+I SEMESTER
+🐍
+GE3151- Problem Solving and Python Programming
+II SEMESTER
+👩‍💻
+CS3251 - Programming in C
+III SEMESTER
+👩‍🏫
+CS3351 - Digital Principles of Computer Organization
+💻
+CS3391- Object Oriented Programming
+💽
+CS3301 - Data Structure
+📈
+CS3352 - Foundation of Data science
+IV SEMESTER
+🤖
+CS3491 - Artificial Intelligence and Machine Learning
+🖥️
+CS3451 - Introduction to Operating Systems
+📚
+CS3401 - Algorithms
+CS3492 - Database Management Systems
+CS3492 - Database Management Systems
+🔣
+CS3452 -Theory of Computation
+V SEMESTER
+📊
+CCS346 Exploratory Data Analysis
+📶
+CS3591 - Computer Networks
+🎨
+CCS370 - UI and UX Design
+👩‍💻
+CB3491 - Cryptography and Cyber Security
+🧑‍💼
+CS3501 - Compiler Design
+CS3551 - Distributed Computing
+CS3551 - Distributed Computing
+VI SEMESTER
+💵
+CCS339 - Cryptocurrency and Blockchain Technology
+🎮
+CCS347 Game Development
+🌍
+OCE351- Environmental Sustainability and Impact Assesment
+🌐
+CS3691 - Embedded Systems and IOT
+📱
+CCS356 - Object Oriented Software Engineering
+📚
+CCS355 - Neural Networks Deep Learning
+LAB MANUALS
+📱
+CS3461 - OPERATING SYSTEMS LABORATORY
+🤖
+CS3491 P- Artificial intelligence and Machine Learning
+CS3591 - CN Lab
+CS3591 - CN Lab
+CS3361 - Foundation of Data science Laboratory
+CS3361 - Foundation of Data science Laboratory
+CS3481 - Database Management System Laboratory
+CS3481 - Database Management System Laboratory
+CS3351 - DPCO Laboratory
+CS3351 - DPCO Laboratory
+CS3311 - Data Structures Laboratory
+CS3311 - Data Structures Laboratory
+CS3691 - Embedded Systems and IOT
+CS3691 - Embedded Systems and IOT
+CCS346 - Exploratory Data analysis
+CCS346 - Exploratory Data analysis
+💻
+CS3381 - Object Oriented Programming Laboratory
+📸
+CCS370 - UI and UX Design
+R-17
+VII SEM
+📊
+CS8091 - Big Data Analytics
+
+
+Achievements:
+
+Congratulations Toppers 2023-24
+Name
+Semester
+GPA
+KEERTHANA P
+III
+9.18
+SAMUNDEESHWARI J
+III
+9.05
+MATHIYARASI P
+III
+8.91
+SWATHIKA A
+V
+9.46
+SOWMIYA R
+V
+9.00
+JAYANTHI M
+V
+8.90
+SINDHU K
+VII
+9.45
+TEENA D
+VII
+9.05
+YUVASHREE C
+VII
+9.05
+SAKTHIUMA S
+VII
+9.02
+
+Awards
+
+	Activate Participant Award (Dr.C.Dhaya, HOD/CSE) from Computer Society of India in the year 2022-2023
+
+	Best supporting College Award from Computer Society of India in the year 2022-2023
+
+	Activate Participant Award (Narasimhan D – IV CSE) from Computer Society of India in the year 2022-2023
+
+ 	International level student workshop 2024 Certificate of Appreciation from Brain O Vision in the year of 2023-2024
+
+	National Level Faculty Development Programe, India book of record 2023 from Brain O Vision in the year of 2023-2024
+
+
+LIST OF STUDENTS PLACED IN 2023-2024:
+
+
+Register Number
+Name
+Name of the Company
+Salary
+420420104001
+AJITH R
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104002
+ARUNA B
+1. Seval Software Sollutions
+1.8 LPA
+420420104004
+BHARATHI M
+1. EOS Global
+1.5 LPA
+420420104005
+BHARATHI ARASAN A
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104007
+CHARUMATHI B
+1. Seval Software Sollutions
+1.8 LPA
+420420104008
+DEENA E
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104010
+DILLIKUMAR N
+1. EOS Global
+1.5 LPA
+420420104011
+GEETHA M
+1. Seval Software Sollutions, 2. Zen Cropcare India Pvt. Ltd.
+1.8 LPA, 2.2 LPA
+420420104012
+GOKULAKRISHNAN S
+1. Seval Software Sollutions
+4 LPA
+420420104014
+GOWTHAM RAJ S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104016
+HARISH N
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104017
+HARISHKUMAR R
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104019
+ISHWARYA SAKTHI S
+1. Zen Cropcare India Pvt. Ltd. 2. EOS Global 3. Forte Management Services
+2.2 LPA, 1.8 LPA,  1.5 LPA
+420420104020
+JAYANTHI N
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104021
+KAMALESHWARAN K
+1. Digital EPCS
+4 LPA
+420420104022
+KANISHKAR.S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104023
+KARTHI K
+1. OM Innovations
+1.8 LPA
+420420104024
+KARTHIGA A
+1. Seval Software Sollutions
+1.8 LPA
+420420104025
+KARTHIKEYAN A
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104026
+KATHIJA FYROSE FATHIMA B
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104027
+KAVIYARASU V
+1. OM Innovations
+1.8 LPA
+420420104028
+KRISHNA KUMAR R
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104029
+LOKESHKUMAR V
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104030
+MADHUMITHA G
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104031
+MADUMITHA R
+1. Seval Software Sollutions
+4 LPA
+420420104032
+Muthuraj M
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104034
+NAVEEN B
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104035
+NEDUNCHEZHIAN M
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104036
+RAJALAKSHMI.J
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104037
+RAJARAJAN K
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104038
+SAKTHI NANDHA KUMAR
+1. EOS Global
+1.8 LPA
+420420104039
+SAKTHISWETHA J
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104040
+SAKTHI UMA S
+1. Pilntron 2. EOS Global 3. Forte Management Services
+3.5 LPA,  1.8 LPA,  1.5 LPA
+420420104041
+SANGAVI S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104042
+SANMATHI S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104043
+SANTHAPRASANTHSHA V
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104044
+SEDHUMADHAVAN V
+1. EOS Global
+1.5 LPA
+420420104046
+SINDHU K
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104047
+SOWNDARYA K
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104048
+SRIMATHI.V
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104049
+SRINIVAS S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104050
+SURIYA R S
+1. EOS Global
+1.8 LPA
+420420104051
+SWATHI P S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104053
+SWETHA S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104054
+TEENA D
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104055
+VAHULTHASAN T
+1. Forte Management Services
+1.5 LPA
+420420104056
+VANITHA LAKSHMI G
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104057
+VANMATHI S
+1. Rinex-Education 2. FACE Prep
+3 LPA,  5 LPA
+420420104058
+VIGNESHKUMAR D
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104060
+YAZHINI E
+1. FACE Prep, 2. Infiniti Software Sollutions, 3. Avasoft
+3 LPA, 4 LPA, 5 LPA
+420420104061
+YUVASREE C
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104301
+CHANDRASEKARAN S
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104302
+DEEPALAKSHMI R
+1. Forte Management Services
+1.5 LPA
+420420104304
+HARI HARAN R
+1. EOS Global
+1.8 LPA
+420420104305
+HARISH E
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104306
+HEM KUMAR V
+1. EOS Global
+1.8 LPA
+420420104307
+JAYASHREE K
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104311
+VIJAYAKUMAR E
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420104312
+ZAHUL HUK N
+1. EOS Global 2. Forte Management Services
+1.8 LPA,  1.5 LPA
+420420140309
+TAMILSELVAN T
+1. OM Innovations
+1.5 LPA
+420420104038
+SAKTHI NANDHA KUMAR
+1. EOS Global
+1.8 LPA,

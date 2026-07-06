@@ -1,0 +1,2870 @@
+Department of Electronics and Communication Engineering
+
+
+ABOUT THE DEPARTMENT
+The Department of Electronics and Communication Engineering was established in the year 1984. The department has been well equipped with commendable and state of the art facilities and is effectively guided by the set of devoted and diligent faculty members. The department has been adjudged as one of the top ranking ECE departments in Anna University Affiliated colleges.
+The department has advanced laboratories such as Research Lab, VLSI Design, Networks Lab, Microwave Lab, Communication Lab, DSP Lab, Microprocessors Lab, Digital Lab, Circuits Lab and Electronic Devices Lab to give practical training to students on emerging technical areas. The department has advanced software’s such as CADENCE, MATLAB, ORCAD, XILINX, MODELSIM, KEIL C, NS2 and so on. The department holds its stand for producing Rank Holders all through its era of development since its establishment.
+
+Courses Offered 
+📡B.E. - Electronics and Communication Engineering
+
+M.E. - VLSI Design
+
+📱PhD - Electronics and Communication Engineering
+
+Dr. M. Malathi
+
+Head of Department
+
+Vision of The Department 
+Evolve as a centre of excellence in the field of Electronics and Communication Engineering to create potential engineers with knowledge of contemporary technologies and commitment, to serve the societal problems.
+
+Mission of The Department 
+Empowering students to achieve high standards of education in order to meet the growing challenges of the industry.
+Instill a sense of cooperative work attitude and social responsibility among the students.
+Provide value based education to build up overall professional personality of the students to embrace engineering as a culture of services to humanity.
+
+PROGRAMME EDUCATIONAL OBJECTIVES (PEOs)
+To provide the students with a strong foundation in the required sciences in order to pursue studies in Electronics and Communication Engineering.
+
+To gain adequate knowledge to become good professional in electronic and communication engineering associated industries, higher education and research.
+
+To develop attitude in lifelong learning, applying and adapting new ideas and technologies as their field evolves.
+
+To prepare students to critically analyze existing literature in an area of specialization and ethically develop innovative and research oriented methodologies to solve the problems identified.
+
+To inculcate in the students a professional and ethical attitude and an ability to visualize the engineering issues in a broader social context
+
+PROGRAM SPECIFIC OUTCOMES (PSOs)
+On successful completion of the Electronics and Communication Engineering Degree programme, the Graduates shall exhibit the following:
+PSO1: Design, develop and analyze electronic systems through application of relevant electronics, mathematics and engineering principles
+PSO2: Design, develop and analyze communication systems through application of fundamentals from communication principles, signal processing, and RF System Design & Electromagnetics.
+PSO3: Adapt to emerging electronics and communication technologies and develop innovative solutions for existing and newer problems
+
+PROGRAM  OUTCOMES (POs)
+Engineering knowledge: Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems.
+
+Problem analysis: Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences.
+
+Design/development of solutions: Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations.
+
+Conduct investigations of complex problems: Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions.
+
+Modern tool usage: Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations.
+
+The engineer and society: Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice.
+
+Environment and sustainability: Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development.
+
+Ethics: Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice.
+
+Individual and team work: Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings.
+
+Communication: Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions.
+
+Project management and finance: Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments.
+
+Life-long learning: Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change.
+
+
+Faculty
+
+Dr. J. Raja
+Qualification
+M.E., Ph.D.
+
+Designation
+Principal
+Department
+Electronics & Communication Engineering
+E-Mail
+principal@apec.edu.in
+Faculty ID
+00TGEC0462
+
+Experience
+31 Years, 10 Months
+
+Dt. of Joining
+December 3, 2003
+Teaching Since
+August 22, 1995
+
+Dr. M. Malathi
+Qualification
+M.E., Ph.D.
+
+Designation
+Head of Department
+Department
+Electronics & Communication Engineering
+E-Mail
+ecemalathi@gmail.com
+Faculty ID
+01TGIT0519
+
+Experience
+31 Years, 8 Months
+
+Dt. of Joining
+January 1, 2002
+Teaching Since
+October 3, 1995
+
+
+
+Dr. P. Thirumaraiselvan
+Qualification
+M.E., Ph.D.
+
+Designation
+Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+thirumarai@apec.edu.in
+Faculty ID
+07TGEC0819
+
+Experience
+34 Years, 1 Months
+
+Dt. of Joining
+August 16, 2007
+Teaching Since
+May 1, 1992
+
+Dr. T. N. Suresh Babu
+Qualification
+M.E., Ph.D.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+sureshbabutns@gmail.com
+Faculty ID
+09TGEC0960
+
+Experience
+29 Years, 7 Months
+
+Dt. of Joining
+June 18, 2009
+Teaching Since
+November 27, 1997
+
+
+Mr. K. Mathivanan
+Qualification
+M.E.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+mathivanan@apec.edu.in
+Faculty ID
+08TGEE0934
+
+Experience
+22 Years,  Months
+
+Dt. of Joining
+December 29, 2008
+Teaching Since
+June 1, 2004
+
+
+
+
+    Dr. G. Vasanthi
+Qualification
+M.E., Ph.D.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+vasanthig@apec.edu.in
+Faculty ID
+4204422
+
+Experience
+22 Years, 11 Months
+
+Dt. of Joining
+August 8, 2025
+Teaching Since
+July 20, 2004
+
+
+Mr. P. Vedasundaravinayagam
+Qualification
+M.E.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+vedasundaravinayagam@apec.edu.in
+Faculty ID
+13TGEC1190
+
+Experience
+18 Years,  Months
+
+Dt. of Joining
+April 1, 2013
+Teaching Since
+June 2, 2008
+
+
+
+
+Mr. S. Prakash
+Qualification
+M.Tech.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+prakashmce@gmail.com
+Faculty ID
+08TGEC0881
+
+Experience
+18 Years,  Months
+
+Dt. of Joining
+June 19, 2008
+Teaching Since
+June 18, 2008
+
+
+
+
+Mr. B. Elango
+Qualification
+M.E., (Ph.D.)
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+elango@apec.edu.in
+Faculty ID
+12TGEC1156
+
+Experience
+15 Years,  Months
+
+Dt. of Joining
+June 1, 2012
+Teaching Since
+July 1, 2011
+
+
+Mrs. M. Mala
+Qualification
+M.E.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+mala.ece.95@gmail.com
+Faculty ID
+Experience
+7 Years, 11 Months
+
+Dt. of Joining
+August 17, 2022
+Teaching Since
+July 2, 2019
+
+
+Mrs.J. Suganya
+Qualification
+M.E.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+suganya.yamni@gmail.com
+Faculty ID
+Experience
+4 Years, 10 Months
+
+Dt. of Joining
+August 17, 2022
+Teaching Since
+August 17, 2022
+
+
+
+Ms. S. Chitra
+Qualification
+M.E.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+chitrachitra738@gmail.com
+Faculty ID
+4204427
+
+Experience
+ Years,  Months
+
+Dt. of Joining
+August 20, 2025
+Teaching Since
+
+
+
+
+Mrs. R. Ramyadevi
+Qualification
+M.E.
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+ramyadevir@apec.edu.in
+Faculty ID
+4204425
+
+Experience
+ Years,  Months
+
+Dt. of Joining
+September 16, 2025
+Teaching Since
+
+
+
+Mr.Arivazhagan.H
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+arulmaha77@gmail.com
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+March 10, 2025
+Teaching Since
+
+
+
+Mr. K. Selvam
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+selvam9194@gmail.com
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+March 1, 2023
+Teaching Since
+
+
+
+Mrs. A. Aishwarya
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+aishu.ece02@gmail.com
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+January 1, 2024
+Teaching Since
+
+Mrs. Supriya T
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+SUPPRIYA1981@GMAIL.COM
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+August 2, 2024
+Teaching Since
+
+
+
+
+Mrs. S. Rajalakshmi
+Qualification
+ME
+
+Designation
+Assistant Professor
+Department
+Electronics & Communication Engineering
+E-Mail
+rajalakshmisivalingam@gmail.com
+Faculty ID
+Experience
+ Years,  Months
+
+Dt. of Joining
+January 1, 2024
+Teaching Since
+
+
+
+
+Publication
+
+PUBLICATIONS  - JOURNALS
+PATENTS
+PUBLICATIONS  - JOURNALS 
+DURING THE YEAR 2024
+
+S.No
+Title of paper
+Name of the author/s
+Name of journal
+ISSN Number
+
+Link to article/paper/
+abstract of the article
+Is it listed in UGC Care list/Scopus/
+Web of Science/other, mention
+1.
+Graph Modeled Oppositional Whale Optimization for Efficient Cloud Service Provision Using Virtual Network Mapping
+N. Balamurugan, 
+J. Raja & R. Pitchai
+Wireless Personal Communications
+0929-6212
+https://link.springer.com/article/10.1007/s11277-024-11033-2
+SCIE, Scopus
+2.
+Analysis of Slot Antenna Performance for on-Body to in-Body Channel Characterization
+Suresh Babu T N, 
+P. Thirumaraiselvan, A. Priya, 
+P.  Muthukannan
+Progress In Electromagnetics Research Letters
+1937-6480
+https://www.jpier.org/issues/volume.html?paper=24011102
+ESCI, Scopus
+DURING THE YEAR 2023
+
+S.No
+Title of paper
+Name of the author/s
+Name of journal
+ISSN Number
+
+Link to article/paper/
+abstract of the article
+Is it listed in UGC Care list/Scopus/
+Web of Science/other, mention
+1
+Analysis of Super-Solar Integrated Patch Antenna for Sub-6 GHz and Beyond 6 GHz Millimeter Wave
+Suresh Babu, T.N., Sivakumar, D., and Thirumaraiselvan. P
+Applied Computational Electromagnetics Society Journal
+1943-5711
+https://journals.riverpublishers.com/index.php/ACES/article/view/18239
+SCIE,
+Web of Science, Scopus
+2
+Design of high-speed data transfer turbo code for body channel communication transceivers
+S. Vijayalakshmi and V. Nagarajan
+Wiley International journal of communication Systems
+1074-5351
+https://onlinelibrary.wiley.com/doi/10.1002/dac.5447
+SCIE, Scopus
+3
+Optimized scheme for cluster head selection and EAMPR routing protocol design in WSN
+Sathya Janaki, R. and Nagarajan, V.
+Journal of Intelligent & Fuzzy systems
+7113 – 7127
+https://content.iospress.com/journals/journal-of-intelligent-and-fuzzy-systems/Pre-press/Pre-press
+SCIE,
+Web of Science, Scopus
+4
+A secured QR pattern-based E health care CAD system for CXR image analyzes
+J Raja, 
+J Rajeswari,
+S Jayashri
+Optik
+1618-1336
+https://doi.org/10.1016/j.ijleo.2022.170344
+Scopus
+5
+Removal of SP Noise Using Decision Based Adaptive Double Median Filter for Synthetic Aperture Radar Images
+R Pitchai,
+J Raja,
+Ch Madhu Babu
+Wireless Personal Communications
+1572-834X
+https://doi.org/10.1007/s11277-023-10495-0
+SCIE, Scopus
+6
+Human Multimodal Biometric Recognition Using Rationalized Adaboost and Geometric Curvelet
+K Gunasekaran, J Raja, 
+R Pitchai, 
+M Dhurgadevi
+International Journal of Computing and Digital Systems
+2210-142X
+https://journal.uob.edu.bh/handle/123456789/5273
+Scopus
+DURING THE YEAR 2022
+
+S.No
+Title of paper
+Name of the author/s
+Name of journal
+ISSN Number
+
+Link to article/paper/
+abstract of the article
+Is it listed in UGC Care list/Scopus/
+Web of Science/other, mention
+1
+Solar Cell Integrated Wearable Patch Antenna on Artificial Magnetic Conductor for On-Body and In-Body Communications
+Suresh Babu, T.N., and Sivakumar. D
+Applied Computational Electromagnetics Society Journal
+1943-5711
+https://doi.org/10.13052/2022.ACES.J.370507
+SCIE,
+Web of Science, Scopus
+2
+Modelling of wastewater treatment microalgae growth and harvesting by flocculation inside photo bioreactor using machine learning technique
+Pavendan.K & 
+V. Nagarajan
+Journal of Intelligent and Fuzzy Systems
+1875-8967
+https://dl.acm.org/doi/abs/10.3233/JIFS-212676
+Web of Science: SCIE
+3
+Performance of implantable antenna at ISM band characteristics for biomedical base
+G. Narmadhaa, 
+M. Malathi, Srinivasan Ashok Kumar,
+T. Shanmuganantham, S. Deivasigamani
+Science Direct ICT Express
+2405-9595
+https://www.sciencedirect.com/science/article/pii/S2405959521000679
+Scopus
+4
+Deep Learning Based Dual Channel Banana Grading System Using Convolution Neural Network
+Raghavendra S, Souvik Ganguli, 
+P. Thirumaraiselvan, Mitali Madhusmita Nayak, Sushovan Chaudhury, Randell U. Espina, Isaac Ofori
+Journal of Food Quality, 
+Hindawi Publishers
+1745-4557
+https://www.hindawi.com/journals/jfq/2022/6050284/
+Scopus
+5
+Gradient contouring and texture modelling based cad system for improved TB classification
+J Rajeswari,
+J Raja,
+S Jayashri
+Automated Software Engineering
+1573-7535
+https://doi.org/10.1007/s10515-021-00304-y
+SCIE, Scopus
+6
+De-noising of salt and pepper noise using deep learning-based alpha-guided grey wolf optimization
+J Raja,
+K Moorthi, Aruna Rajendran
+Applied Soft Computing
+1872-9681
+https://doi.org/10.1016/j.asoc.2022.109649
+SCIE, Scopus
+7
+Removal of High-Density Impulse Noise Using Adaptive Pulse Coupled Neural Network (APCNN) with Improved Alpha Guided Gray Wolf Optimization (IAgGWO) Technique in Transform Domain
+J Raja,
+K Moorthi,
+R Pitchai
+Wireless Personal Communications
+1572-834X
+https://doi.org/10.1007/s11277-021-09379-y
+SCIE, Scopus
+DURING THE YEAR 2021
+
+S.No
+Title of paper
+Name of the author/s
+Name of journal
+ISSN Number
+
+Link to article/paper/
+abstract of the article
+Is it listed in UGC Care list/Scopus/
+Web of Science/other, mention
+1
+Patch antenna integrated on solar cells for green wireless communication: A feature-oriented survey and design issues
+Suresh Babu, T.N., and Sivakumar, D
+International Journal of RF and Microwave Computer-Aided Engineering
+1099-047X
+https://onlinelibrary.wiley.com/doi/abs/10.1002/mmce.22926
+SCIE,
+Web of Science, Scopus
+2
+Multi-Objective Optimization based on self-organizing PSO algorithm for massive MIMO 5G wireless network
+Nagarajan, V & Purushothaman, KesavaluElumalai
+International Journal of Communication Systems
+1074-5351
+https://doi.org/10.1002/dac.4725.
+SCIE, Scopus
+3
+An Efficient Frequency Reconfigurable Antenna with Dual Feed for Wireless Applications
+V.Nagarajan, 
+S.A. Amutha Jeevakumari & K. Indhumathi
+Journal of Solid State Technology
+0038-111x
+https://solidstatetechnology.us/index.php/JSST/article/view/9529
+Scopus
+4
+Design of Compact D-shaped Frequency Reconfigurable Slot Antenna for Ku/K Band Applications
+V. Nagarajan & 
+M. JenathSathikbasha
+Springer journal of Wireless Personal Communications
+1572-834X
+https://link.springer.com/article/10.1007/s11277-021-08548-3
+SCIE, Scopus
+5
+Fuzzy Rough Set Derived Probabilistic Variable Precision-Based Mitigation Technique for Vampire Attack in MANETs
+P. BalajiSrikaanth & V. Nagarajan
+Springer Journal of Wireless Personal Communications
+1572-834X
+https://link.springer.com/article/10.1007/s11277-021-08673-z
+SCIE, Scopus
+6
+An automated early detection of glaucoma using support vector machine based visual geometry group 19 (VGG-19) convolutional neural network
+J Raja,
+P Shanmugam,
+R Pitchai
+Wireless Personal Communications
+1572-834X
+https://doi.org/10.1007/s11277-020-08029-z
+Scopus/SCIE
+7
+A novel energy harvesting with middle-order weighted probability (EHMoWP) for performance improvement in wireless sensor network (WSN)
+N. Mookhambika, Raja Jayamani
+Journal of Ambient Intelligence and Humanized Computing
+1868-5145
+https://doi.org/10.1007/s12652-021-03179-9
+SCIE, Scopus
+8
+An automatic recognition of glaucoma in fundus images using deep learning and random forest classifier
+P Shanmugam,
+J Raja,
+R Pitchai
+Applied Soft Computing
+1872-9681
+https://doi.org/10.1016/j.asoc.2021.107512
+SCIE, Scopus
+DURING THE YEAR 2020
+
+S.No
+Title of paper
+Name of the author/s
+Name of journal
+ISSN Number
+
+Link to article/paper/
+abstract of the article
+Is it listed in UGC Care list/Scopus/
+Web of Science/other, mention
+1
+Stepped slot patch antenna with copper ground plane and solar cell ground plane for future mobile communications
+Suresh Babu, T.N., and Sivakumar, D
+Progress In Electromagnetics Research C
+1937-8718
+https://www.jpier.org/issues/volume.html?paper=19101603
+Scopus
+2
+Design of Multiband Frequency Reconfigurable Antenna with Defected Ground Structure for Wireless Applications
+V. Nagarajan and 
+M. JenathSathikbasha
+springer journal of Wireless Personal Communications
+1572-834X
+https://link.springer.com/article/10.1007/s11277-020-07256-8
+Scopus/SCIE
+3
+BCC communication through RZ Bipolar D-QPSK Encoding and Decoding with Hybrid RF base and FPGA Implementation
+V. Nagarajan, 
+S. Vijayalakshmi, 
+Mr. SakthivelSankaran, 
+M. PallikondaRajasekaran, and 
+E. Sankaran
+International Journal of Advanced Science and Technology
+2005-4238
+https://www.researchgate.net/publication/340694177_BCC_communication_through_RZ_Bipolar_D-QPSK_Encoding_and_Decoding_with_Hybrid_RF_base_and_FPGA_Implementation
+Scopus
+4
+Design Of Reliable Body Channel Communication Transceiver With Reconfigurable Frequency Synthesizer  And  Variable Cymometer
+V. Nagarajan, 
+Mr. SakthivelSankaran, S. Vijayalakshmi, 
+M. PallikondaRajasekaran
+Journal of advanced research in dynamical & control systems, vol. 12, Issue-02
+1943-023X
+https://www.researchgate.net/publication/341203739_Design_Of_Reliable_Body_Channel_Communication_Transceiver_With_Reconfigurable_Frequency_Synthesizer_And_Variable_Cymometer
+Scopus
+5
+Implementation of High-Efficiency and Ultra-Low-Power Transceiver for the Design of Body Channel Communication Applications
+V. Nagarajan, 
+VitawatSittakul, 
+S. Vijayalakshmi, 
+K. SakthidasanSankaran
+Mr. SakthivelSankaran
+Springer Journal of Circuits, Systems, and Signal Processing
+1531-5878
+https://link.springer.com/article/10.1007/s00034-020-01444-4
+Scopus/SCIE
+6
+Optimized mobility management for RPL/6LoWPAN based IoT network architecture using the firefly algorithm
+V. Nagarajan, and
+Manikannan K
+Elsevier journal of Microprocessors and Microsystems
+1872-9436
+https://doi.org/10.1016/j.micpro.2020.103193
+Scopus/SCIE
+7
+Implementation and Performance Measure of Fuzzy AHP for Resource Allocation in 5G
+V.Nagarajan, and
+R. Dhilip Kumar
+Fluctuation and Noise Letters
+1793-6780
+https://doi.org/10.1142/S0219477521500206
+SCIE/Scopus
+8
+A Statistical Model for Estimation of Soil Moisture in Paddy Field Using Microwave Satellite Data
+Packirisamy Pari, 
+P. Thirumaraiselvan,
+Murugaiyan Ramalingam, and Shanmugam Jayalakshmi
+Progress In Electromagnetics Research, EMW Publishing
+1937-8726
+https://www.jpier.org/pierm/pier.php?paper=20051401
+ESCI/Scopus
+9
+Scattering coefficients and Path gain of a multilayer tissue structure using ABCD matrix method
+S. Sakthitharan, 
+P. Thirumaraiselvan, M. Mariappan, 
+R. Sudharshan, 
+Gopal Lenin 
+ 
+Journal of Ambient Intelligence and Humanized Computing, Springer Nature
+1868-5145
+https://link.springer.com/article/10.1007/s12652-020-02244-z
+SCI/Scopus
+10
+Path Loss Characteristics of a City Street Scene With a Site Specific Propagation Prediction Tool
+S. Sakthitharan, 
+P. Thirumaraiselvan, M. Mariappan, 
+R. Sudharshan,
+R. Rameshkumar
+Journal of Advanced Research in Dynamical & Control Systems, Institute of Advanced Scientific Research, USA
+1943-023X
+https://link.springer.com/article/10.1007/s12652-020-02244-z#article-info
+SCI/Scopus
+11
+Improved OD and OC Fragmentation using Deep Learning for the Progression Recognition of Glaucoma
+P Shanmugam,
+J Raja,
+R Pitchai
+Research Square
+2693-5015
+https://onlinelibrary.wiley.com/doi/abs/10.1002/dac.4725
+Europe PMC, PubMed Central, Meta, and Researcher
+12
+Multicriteria dragonfly graph theory based resource optimized virtual network mapping technique for home medical care service provisioning in cloud
+Pitchai R,
+Balamurugan N,
+Raja J
+Peer-to-Peer Networking and Applications
+1936-6450
+https://doi.org/10.1007/s12083-020-00923-4
+Scopus/SCIE
+13
+Annealed glowworm optimization graph theory-virtual network mapping for home healthcare in cloud
+J Raja,N Balamurugan,R Pitchai
+MOBILE NETWORKS & APPLICATIONS
+1572-8153
+10.1007/s11036-019-01394-5
+Scopus/SCIE
+14
+Low Complexity Maximum Likelihood FBMC QAM for Improved Performance in Longer Delay Channels
+J. Raja,M. Subalatha,S. Jayashri
+Wireless Personal Communications
+1572-834X
+https://doi.org/10.1007/s11277-020-07427-7
+Scopus/SCIE
+15
+An efficient packet image transmission based on texture content for border side security using sensor networks
+J. Raja,R. Pitchai,G. Reshma
+Int. J. Computer Aided Engineering and Technology
+1757-2665
+https://doi.org/10.1504/IJCAET.2020.108104
+Scopus
+DURING THE YEAR 2019
+
+S.No
+Title of paper
+Name of the author/s
+Name of journal
+ISSN Number
+
+Link to article/paper/
+abstract of the article
+Is it listed in UGC Care list/Scopus/
+Web of Science/other, mention
+1
+Design of mimo antenna for wlan/wimax applications
+Sivakumar, D., 
+Sri Arunaa, J., and Suresh Babu, T.N.
+International Journal of Recent Technology and Engineering
+2277-3878
+https://www.ijrte.org/wp-content/uploads/papers/v7i6s5/F11770476S519.pdf
+Scopus
+2
+Noise Removal Through the Exploration of Subjective and Apparent Denoised Patches Using Discrete Wavelet Transform
+K. Sakthidasan, 
+N. Velmurugan
+IETE Journal of Research
+0974-780X
+https://www.tandfonline.com/doi/full/10.1080/03772063.2019.1569483
+Scopus/SCIE
+3
+Design and Implementation of Low Power High-Efficient Transceiver for Body Channel Communications
+S. Vijayalakshmi and V. Nagarajan
+Springer- Journal of Medical Systems
+1573-689X
+https://link.springer.com/article/10.1007%2Fs10916-019-1204-x
+UGC Care list/Scopus/
+SCIE
+4
+Energy efficient low density parity check scheme for body channel communication using FPGA
+S. Vijayalakshmi and V. Nagarajan
+Elsevier- Microprocessors and Microsystems
+0141-9331
+https://www.sciencedirect.com/science/article/pii/S0141933119301115
+Scopus/Web of Science/SCI
+5
+Game theory-based modulation techniques for fifth-generation cellular system
+ReenarajThankaraj and V. Nagarajan
+IET Communications
+1751-8636
+https://doi.org/10.1049/iet-com.2018.6224
+Web of Science
+6
+Design and Performance evaluation of Sugeno fuzzy interface system for multi-disciplinary WSNs applications with optimized network structure
+S.Sivasakthiselvan and V.Nagarajan
+Elsevier Journal of Computer communication
+0140-3664
+https://www.sciencedirect.com/science/article/pii/S0140366419304566
+Scopus/Web of Science/SCIE
+7
+Efficient Traffic Control and Lifetime Maximization in Mobile Ad hoc Network by Using PSO-BAT Optimization
+Sridevi, N & Nagarajan, V
+Springer journal of Wireless Networks
+1572-8196
+https://link.springer.com/article/10.1007%2Fs11276-019-02173-6
+UGC Care list/Scopus/
+SCIE
+8
+Efficient Image De-Noising Technique Based on Modified Cuckoo Search Algorithm
+Nagarajan V, Sakthidasan@Sankaran K, Vasudevan N & Kumara Guru Diderot P
+Journal of Medical Systems
+1573-689X
+https://doi.org/10.1007/s10916-019-1423-1
+UGC Care list/Scopus/
+SCIE
+9
+A Statistical Lower UWB Channel Model for in Body Communications
+P. Thirumaraiselvan,
+Sakthidasan@Sankaran K, V. Beslin Geo, V.R. Prakash,
+N. Vasudevan
+Mobile Networks and Applications, Springer Netherlands
+1572-8153
+https://link.springer.com/article/10.1007/s11036-019-01384-7
+Scopus/SCIE
+10
+Deep multimodal biometric recognition using contourlet derivative weighted rank fusion with human face, fingerprint and iris images
+K Gunasekaran, 
+J Raja,R Pitchai
+Journal for Control, Measurement, Electronics, Computing and Communications
+0005-1144
+https://doi.org/10.1080/00051144.2019.1565681
+Scopus/SCIE
+11
+Spectrum Prediction in Cognitive Radio with Hybrid Optimized Neural Network
+R. Pitchai, 
+J. Raja,P. Supraja
+Mobile Networks and Applications
+1572-8153
+https://doi.org/10.1007/s11036-017-0909-7
+UGC Care list/Scopus/
+SCIE
+12
+Propagation Losses of UWB Antenna for On-Body to In-Body Signal Propagation
+A. Priya, S. Kaja Mohideen, and P. Thirumaraiselvan
+Progress In Electromagnetics Research M
+1937-8726
+https://www.jpier.org/PIERM/pier.php?paper=18071401
+Emerging Sources Citation Index
+13
+Prognostic evaluation of multimodal biometric traits recognition based human face, finger print and iris images using ensembled SVM classifier
+J Raja, 
+K Gunasekaran, 
+R Pitchai
+Cluster Computing
+1573-7543
+https://doi.org/10.1007/s10586-018-2649-2
+UGC Care list/Scopus/
+SCIE
+PATENTS
+Calendar Year 2023
+
+Sl. No.
+Patent Application No.
+Status of Patent (Published / Granted)
+Inventor/s Name
+Title of the Patent
+Patent Filed Date (DD/MM/
+YYYY)
+Patent Published Date / Granted Date (DD/MM/
+YYYY)
+Patent Publication Number / Patent Granted Number
+1.
+201841035834
+Granted
+T. N. Suresh Babu,
+D. Sivakumar
+MULTI-BAND CENTER FED MICROSTRIP PATCH ANTENNA ON AMCSURFACE WITH COPPER GROUND AND PV CELL GROUND
+24/09/2018
+04-07-2023
+437150
+2.
+201841015731
+Granted
+T. N. Suresh Babu,
+D. Sivakumar
+STEPPED SLOT PATCH ANTENNA WITH
+COPPER AND SOLAR CELL GROUND STRUCTURE
+26/04/2018
+21/11/2023
+470850
+Calendar Year 2022
+
+Sl. No.
+Patent Application No.
+Status of Patent (Published / Granted)
+Inventor/s Name
+Title of the Patent
+Patent Filed Date (DD/MM/
+YYYY)
+Patent Published Date / Granted Date (DD/MM/
+YYYY)
+Patent Publication Number / Patent Granted Number
+1.
+202241063447
+Published
+Mrs. S. Poonkodi, 
+Mrs. A.M. Vidhyalakshmi, 
+Dr. M. Kanchana,
+Dr. J. Raja, 
+Mr. Nanda kumar R, 
+Mrs. J. Rajeswari
+IDENTIFICATION OF CORONAVIRUS INFECTION USING DNN AND IMAGE PROCESSING
+07-11-2022
+18-11-2022
+202241063447 A
+2.
+202241000502
+Published
+Mrs. Devi P, 
+Dr. R. Subramaniyan @ Raja, 
+Dr. K. Balasubramanian, 
+N. Prabu Sankar, 
+Shaikh Abdul Waheed,
+Dr. M. Malathi, 
+R. Srivel, 
+Dr. M. Saravanan, 
+Dr. Arokiaraj David, 
+Dr Y. Seetha Mahalakshmi. 
+Mr. Kamjula lakshmi kanth reddy, 
+Dr. A. Arun kumar
+ARTIFICIAL INTELLIGENCE-BASED CANCER DIAGNOSIS AND TREATMENT BY USING NANO PARTICLES
+05-01-2022
+21-01-2022
+202241000502 A
+Calendar Year 2020
+
+Sl. No.
+Patent Application No.
+Status of Patent (Published / Granted)
+Inventor/s Name
+Title of the Patent
+Patent Filed Date (DD/MM/
+YYYY)
+Patent Published Date / Granted Date (DD/MM/
+YYYY)
+Patent Publication Number / Patent Granted Number
+1.
+202041034715
+Published
+Dr. K. Sakthidasan @ Sankaran, 
+Dr. R. Vallikannu, 
+Dr. A. K. Gnanasekar,
+Dr. P. Thirumaraiselvan, 
+Dr. B. Meenakshi, 
+G. Vimalarani,  
+S. K. Indumathi
+SECURED INTELLIGENT VEHICULAR SYSTEMS USING WIRELESS SENSOR NETWORKS
+08-12-2020
+09-04-2020
+202041034715 A
+2.
+2020102231
+Granted
+K. Sakthidasan Sankaran;
+Vasudevan N;
+Sasikumar S;
+Prabha S;
+Himanshu Shekhar;
+Elangovan P;
+Thirumaraiselvan P
+MAXIMUM POWER POINT TRACKABLE AND OPTIMIZED IOT BASED PV CHARGE CONTROLLER USING MACHINE LEARNING
+12.09.2020
+29.10.2020
+AU 2020102231A4
+
+
+
+Facilities
+
+LABORATORIES
+image
+    VLSI  Lab   
+
+image
+Electronics Devices Lab
+
+image
+Microwave Lab
+
+image
+    Research Lab   
+
+image
+    Microprocessors Lab   
+
+image
+    Communication Lab   
+
+image
+    DSP Lab   
+
+image
+Networks Lab
+
+image
+    Digital Lab   
+
+COMPUTING FACILITIES
+NUMBERS OF COMPUTERS - 120 (LATEST CONFIGURATION WITH INDIVIDUAL LAN CONNECTIONS)
+
+WIFI -FACILITY
+
+Licensed Software
+
+CADENCE, MATLAB, ORCAD, XILINX, MODELSIM, KEIL C, NS2
+
+TEACHING MODELS 
+LCD PROJECTOR                                     : 9
+
+SMART CLASSROOMS                            : 6
+
+DEPARTMENT LIBRARY
+Number of Books : 2590
+Journals : 75
+Back Volumes : 3000
+NPTEL Web Course CD’s : 56
+ of Project Books : 150
+System P-4 with printer : 1
+
+
+
+Student
+
+
+ INDUSTRIAL VISIT
+Year of the Student
+Place of Visit
+Date
+II Year
+Bharat Sanchar Nigam Limited (BSNL), Meenambakkam
+11-10-2023
+III Year
+&
+IV Year
+Bharat Sanchar Nigam Limited (BSNL), Meenambakkam
+12-10-2023
+II Year
+III Year
+&
+IV Year
+Neyveli Lignite Corporation Limited, Neyveli
+12-04-2023
+IV YEAR
+RETECH Solutions Pvt Ltd, Tambaram
+13-08-2019
+image
+Bharat Sanchar Nigam Limited (BSNL), Meenambakkam
+
+image
+Neyveli Lignite Corporation Limited, Neyveli
+
+image
+Bharat Sanchar Nigam Limited (BSNL), Maraimalainagar
+
+image
+RETECH Solutions Pvt Ltd, Tambaram
+
+CO-CURRICULAR AND EXTRACURRICULAR ACTIVITIES 
+SPORTS ACTIVITIES
+NAME
+YEAR
+BATCH
+ZONAL
+PRIZE
+EVENT
+DATE
+TOOK PLACE AT
+GOKUL.M
+II
+2021-2022
+ANNA UNIVERSITY
+FIRST
+HIGH JUMP
+28.11.22-30.11.22
+ADHIPARASAKTHI ENGINEERING COLLEGE
+GOKUL.M
+II
+2021-2022
+ANNA UNIVERSITY
+FIRST
+DECATHLON
+28.11.22-30.11.22
+ADHIPARASAKTHI ENGINEERING COLLEGE
+GOKUL.M
+II
+2021-2022
+ANNA UNIVERSITY
+FIRST
+1500M ATHLETIC
+28.11.22-30.11.22
+ADHIPARASAKTHI ENGINEERING COLLEGE
+ABINAYA.J
+III
+2021-2022
+ANNA UNIVERSITY
+SECOND
+400M HURDLE
+28.11.22-30.11.22
+ADHIPARASAKTHI ENGINEERING COLLEGE
+ABUBAKKAR SIDDIQUE
+II
+2022-2023
+ANNA UNIVERSITY
+SECOND
+HALF MARATHON
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+VIGNESH.D
+II
+2022-2023
+ANNA UNIVERSITY
+THIRD
+HALF MARATHON
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+MADHUMITHA.V
+II
+2022-2023
+ANNA UNIVERSITY
+FIRST
+HIGH JUMP
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+KALAIYARASI.M
+II
+2022-2023
+ANNA UNIVERSITY
+FIRST
+500M ATHLETICS
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+NIVETHA.V
+II
+2022-2023
+ANNA UNIVERSITY
+THIRD
+800M ATHLETICS
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+SUBALAKSHMI.A
+II
+2022-2023
+ANNA UNIVERSITY
+FIRST
+4X400M RELAY
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+GOKUL.M
+III
+2021-2023
+ANNA UNIVERSITY
+THIRD
+4X400M RELAY
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+GOKUL.M
+III
+2021-2023
+ANNA UNIVERSITY
+FIRST
+1500M ATHLETIC
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+GOKUL.M
+III
+2021-2023
+ANNA UNIVERSITY
+FIRST
+DECATHLON
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+GURUPRIYA.N
+IV
+2022-2023
+ANNA UNIVERSITY
+SECOND
+400M ATHLETICS
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+GURUPRIYA.N
+IV
+2022-2023
+ANNA UNIVERSITY
+THIRD
+LONG JUMP
+08.12.23-10.12.23
+SURYA GROUP OF INSTITUTION
+COCURRICULAR ACTIVITIES
+Name of the Student
+Year
+Event
+Date
+Prize or Participation
+Took Place at
+M.ANUPRIYA , A.YOGESHWARI,
+T.DHARSHINI
+III
+TANCAM PROJECT HACKATHON
+05.04.2024
+Participation
+RAJALAKSHMI
+ENGINEERING COLLEGE
+E.VENISRI, Y.VISHNUPRIYA,
+N.KAVITHA
+III
+TANCAM PROJECT HACKATHON
+05.04.2024
+Special Prize 
+Rs. 10,000/-
+RAJALAKSHMI
+ENGINEERING COLLEGE
+R.SATHANA, P.MAHALAKSHMI, S.HIMRITHA
+III
+TANCAM PROJECT HACKATHON
+05.04.2024
+Participation
+RAJALAKSHMI
+ENGINEERING COLLEGE
+GOKUL   D
+SURYA    R
+IV
+AGNIESZKA 2k23
+04.03.2023
+Paper Presentation
+VELAMMAL INSTITUTE OF TECHNOLOGY
+GOKUL   D
+SURYA    R
+IV
+NATIONAL LEVEL TECHNICAL SYMPOSIUM DOTZv9.0
+21.09.2022
+Participation
+UNIVERSITY COLLEGE OF ENGINEERING TINDIVANAM
+GOKUL   D
+SURYA    R
+IV
+PROJECT EXPO 2022
+06.06.2022
+Participation
+ADHIPARASAKTHI ENGINEERING COLEGE
+GOKUL D
+IV
+INTERNATIONAL WORKSHOP ON ANTENNA DESIGN TECHNOLOGIES FOR INTELLIGENT TRANSPORT SYSTEM
+25.09.2023 
+to 
+27.09.2023
+Participation
+ANNA UNIVERSITY GUINDY
+LOGESH  J
+BALASHANMUGAM  S
+GOKUL   M
+III
+ARDUINO ROBOTICS WORKSHOP
+24.02.2024
+Participation
+IIT MADRAS
+GOKUL   D
+IV
+ARDUINO ROBOTICS WORKSHOP
+24.02.2024
+Participation
+IIT MADRAS
+LOGESH  J
+BALASHANMUGAM  S
+III
+IEEE SPONSORED WORKSHOP ON INTERNET OF THINGS AND BIG DATA ANALYTICS
+05.10.2023 
+To
+06.10.2023
+Participation
+SRI SAIRAM ENGINEERING INSTITUTE OF TECHNOLOGY
+K.MUKESH
+IV
+National Conference
+21-04-2023
+Paper Presentation
+KARAPAGA VINAYAGA COLLEGE OF
+ENEINEERING AND THECHNOLOGY
+M.BATHRINARAYAN
+IV
+National Conference
+21-04-2023
+Paper Presentation
+KARAPAGA VINAYAGA COLLEGE OF
+ENEINEERING AND THECHNOLOGY
+K.JAYAKRISHNAN
+IV
+National Conference
+21-04-2023
+Paper Presentation
+KARAPAGA VINAYAGA COLLEGE OF
+ENEINEERING AND THECHNOLOGY
+G.HARISH
+IV
+National Conference
+21-04-2023
+Paper Presentation
+KARAPAGA VINAYAGA COLLEGE OF
+ENEINEERING AND THECHNOLOGY
+G.K.SIRRANJEEVI
+IV
+National Conference
+21-04-2023
+Paper Presentation
+KARAPAGA VINAYAGA COLLEGE OF
+ENEINEERING AND THECHNOLOGY
+S.KALPANA
+IV
+National Conference
+05-07-2023
+Paper Presentation
+SATHYABAMA INSTITUTE OF SCIENCE
+AND TECHNOLOGY
+D.SIVADHARSHINI
+IV
+National Conference
+05-07-2023
+Paper Presentation
+SATHYABAMA INSTITUTE OF SCIENCE
+AND TECHNOLOGY
+G.VAISHNAVI
+IV
+National Conference
+05-07-2023
+Paper Presentation
+SATHYABAMA INSTITUTE OF SCIENCE
+AND TECHNOLOGY
+V.INDIRA PRIYADHARSHINI
+IV
+National Conference
+05-07-2023
+Paper Presentation
+SATHYABAMA INSTITUTE OF SCIENCE
+AND TECHNOLOGY
+K.PUGAHENTHI
+IV
+National Conference
+05-07-2023
+Paper Presentation
+SATHYABAMA INSTITUTE OF SCIENCE
+AND TECHNOLOGY
+S,VISHNU PRASATH
+IV
+National Conference
+05-07-2023
+Paper Presentation
+SATHYABAMA INSTITUTE OF SCIENCE
+AND TECHNOLOGY
+K.SIVASHANMUGAM
+IV
+National Conference
+21-4-2023
+Paper Presentation
+KARAPAGA VINAYAGA COLLEGE OF
+ENEINEERING AND THECHNOLOGY
+K.PUGAZHENTHI
+IV
+National Conference
+1-5-2023 
+to 
+2-5-2023
+Paper Presentation
+SHRI VENKATESHWARA PADAMAVATHY ENGINEERING COLLEGE
+S.HEMAPRIYA
+IV
+National Conference
+21-4-2023
+Paper Presentation
+KARPAGA VINAYAGA COLLEGE OF
+ENGINEERING AND TECHNOLOGY
+S.SUVANTHINI
+IV
+National Conference
+21-4-2023
+Paper Presentation
+KARPAGA VINAYAGA COLLEGE OF
+ENGINEERING AND TECHNOLOGY
+E.ASWINI
+IV
+National Conference
+1-5-2023 
+to
+2-5-2023
+Paper Presentation
+SHRI VENKATESHWARA PADAMAVATHY ENGINEERING COLLEGE
+D.SIVADHARSHINI
+IV
+National Conference
+1-5-2023 
+to 
+2-5-2023
+Paper Presentation
+SHRI VENKATESHWARA PADAMAVATHY ENGINEERING COLLEGE
+S.YOGESHWARI
+IV
+National Conference
+1-5-2023 
+to 
+2-5-2023
+Paper Presentation
+SHRI VENKATESHWARA PADAMAVATHY ENGINEERING COLLEGE
+S.SANTHOSH
+IV
+National Conference
+21-4-2023
+Paper Presentation
+KARPAGA VINAYAGA COLLEGE OF
+ENGINEERING AND TECHNOLOGY
+J.MADHUVANTHI
+IV
+National Conference
+21-4-2023
+Paper Presentation
+KARPAGA VINAYAGA COLLEGE OF
+ENGINEERING AND TECHNOLOGY
+S.VISHNU PRASATH
+IV
+National Conference
+1-5-2023 
+to 
+2-5-2023
+Paper Presentation
+SHRI VENKATESHWARA PADAMAVATHY ENGINEERING COLLEGE
+IN PLANT TRAINING
+Academic Year: 2023-2024
+Name of the Student
+Year
+Duration
+Company
+Abinaya J
+2024
+18/1/24- 23/1/24(5 Days)
+DLK Career Development
+Ajay L
+2024
+18/1/24- 23/1/24(5 Days)
+DLK Career Development
+Akash K
+2024
+18/1/24- 23/1/24(5 Days)
+NxtGen Instruments
+Anbarasan S
+2024
+18/1/24- 23/1/24(5 Days)
+NxtGen Instruments
+Anupriya M
+2024
+20/1/24- 25/1/24(5 Days)
+DLK Career Development
+Balashanmugam S
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Bharath Raj S K
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Chitaardhan S
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Dharshini T
+2024
+20/1/24- 25/1/24(5 Days)
+DLK Career Development
+Dhinesh Kumar V
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Dilipkumar J
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Durgeswaran K
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Ezhilarasan R
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Gokul M
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Gokulnath M(2002)
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Gokulnath M(2004)
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Guru Priya G
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Haris S
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Hemalatha B
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Himritha S
+2024
+22/1/24-26/1/24(5 Days)
+GUVI
+Jegadheswaran S R
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Kamalesh K
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Kavitha N
+2024
+22/1/24-26/1/24(5 Days)
+GUVI
+Khawsik R
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Logesh J
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Mahalakshmi P
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Mugesh Ragavan K
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Muthukumaran S
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+N C Sri Vaibava Lakshmi
+2024
+20/1/24-24/1/24(5 Days)
+GUVI
+Poovarasan G
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Roopavathy C
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Sangeetha K
+2024
+19/1/24- 24/1/24(5 Days)
+DLK Career Development
+Sanjayharish S
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Santhosh K
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Sarumathy E
+2024
+18/1/24- 24/1/24(5 Days)
+DLK Career Development
+Sathana R
+2024
+22/1/24-26/1/24(5 Days)
+GUVI
+Sathyabama R
+2024
+18/1/24- 23/1/24(5 Days)
+DLK Career Development
+Sudharsanam S
+2024
+18/1/24- 23/1/24(5 Days)
+NxtGen Instruments
+Sunilkumar M
+2024
+15/1/24-21/1/24(5 Days)
+Smartinternz
+Thamizhselvan D
+2024
+18/1/24- 23/1/24(5 Days)
+NxtGen Instruments
+Thanusre A
+2024
+22/1/24-26/1/24(5 Days)
+GUVI
+Venisri E
+2024
+20/1/24- 25/1/24(5 Days)
+DLK Career Development
+Vignesh M
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Vishnupriya Y
+2024
+20/1/24- 25/1/24(5 Days)
+DLK Career Development
+Vishwa B
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Vishwa S
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Yogeshwari A
+2024
+20/1/24- 25/1/24(5 Days)
+DLK Career Development
+Yokesh J
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Mageshwaran S
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Vasanth S
+2024
+18/1/24- 24/1/24(5 Days)
+NxtGen Instruments
+Academic Year: 2022-2023
+Name of the Student
+Year
+Duration
+Company
+Abinaya.P
+2023
+10.07.2023 TO 24.07.2023
+RETECH SOLUTIONS
+Gokul.D
+2023
+10.07.2023 TO 24.07.2024
+RETECH SOLUTIONS
+Gowsalya.S
+2023
+18.07.2023 TO 31.07.2023
+BSNL
+Madhan Kumar.P
+2023
+17.06.2023 TO 21.06.2023
+NLC INDIA LIMITED
+Nalina.T
+2023
+10.07.2023 TO 24.07.2024
+RETECH SOLUTIONS
+Saranraj.S
+2023
+10.07.2023 TO 24.07.2025
+RETECH SOLUTIONS
+Siyamala.G
+2023
+26.06.2023 TO 12.07.2023
+GLOBAL TECHNO SOLUTIONS
+Surya.R
+2023
+1.06.2023 TO 31.06.2023
+NIRALTEK SOLUTIONS PVT LTD
+Swetha.S
+2023
+10.07.2023 TO 24.07.2024
+RETECH SOLUTIONS
+Tharun.A
+2023
+17.07.2023 TO 23.07.2023
+MARCELLO TECH
+Yuvasri.V
+2023
+10.07.2023 TO 24.07.2025
+RETECH SOLUTIONS
+Asha.A
+2023
+10.07.2023 TO 24.07.2026
+RETECH SOLUTIONS
+Gurupriya.N
+2023
+10.07.2023 TO 24.07.2027
+RETECH SOLUTIONS
+Haridha.M
+2023
+10.07.2023 TO 24.07.2028
+RETECH SOLUTIONS
+Rajaseker.V
+2023
+17.07.2023 TO 23.07.2023
+MARCELLO TECH
+Srinithi.E
+2023
+10.07.2023 TO 24.07.2028
+RETECH SOLUTIONS
+Varshini.V
+2023
+10.07.2023 TO 24.07.2029
+RETECH SOLUTIONS
+Abinaya J
+2023
+25/6/23 - 10/7/23(15 Days)
+Global Techno Solutions
+Ajay L
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Akash K
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Anupriya M
+2023
+10/7/23 - 20/7/23(10 Days)
+CodeBind Technologies
+Balashanmugam S
+2023
+10/7/23 - 20/7/23(10 Days)
+CodeBind Technologies
+Bharath Raj S K
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Chitaardhan S
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Dharshini T
+2023
+4/7/23 – 8/7/23(5 Days)
+Adventure Tech Solution
+Dhinesh Kumar V
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Dilipkumar J
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Durgeswaran K
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Gokul M
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Gokulnath M(2002)
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Gokulnath M(2004)
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Guru Priya G
+2023
+10/7/23 - 20/7/23(10 Days)
+CodeBind Technologies
+Haris S
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Hemalatha B
+2023
+10/7/23 - 18/7/23(8 Days)
+CodeBind Technologies
+Himritha S
+2023
+4/7/23 – 8/7/23(5 Days)
+Adventure Tech Solution
+Jegadheswaran S R
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Kamalesh K
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Khawsik R
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+LOGESH J
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Mahalakshmi P
+2023
+10/7/23 - 20/7/23(8 Days)
+CodeBind Technologies
+Mugesh Ragavan K
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Muthukumaran S
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+N C Sri Vaibava Lakshmi
+2023
+15/7/23 - 24/7/23(10 Days)
+GUVI
+Poovarasan G
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Roopavathy C
+2023
+10/7/23 - 20/7/23(10 Days)
+CodeBind Technologies
+Sangeetha K
+2023
+5/7/23 – 21/7/23(15 Days)
+Adventure Tech Solution
+Sanjayharish S
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Santhosh K
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Sarumathy E
+2023
+4/7/23 – 8/7/23(5 Days)
+Adventure Tech Solution
+Sathana R
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Sathyabama R
+2023
+10/7/23 - 18/7/23(8 Days)
+CodeBind Technologies
+Sudharsanam S
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Sunilkumar M
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Thamizhselvan D
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Thanusre A
+2023
+5/7/23 – 21/7/23(15 Days)
+Adventure Tech Solution
+Venisri E
+2023
+10/7/23 - 14/7/23(5 Days)
+CodeBind Technologies
+Vignesh M
+2023
+3/7/23 – 21/7/23(10 Days)
+NxtGen Instruments
+Vishnupriya Y
+2023
+10/7/23 - 14/7/23(5 Days)
+CodeBind Technologies
+Vishwa B
+2023
+3/7/23 – 15/7/23(10 Days)
+TATA – TCS
+Vishwa S
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Yogeshwari A
+2023
+10/7/23 - 14/7/23(5 Days)
+CodeBind Technologies
+Yokesh J
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Mageshwaran S
+2023
+6/7/23 – 21/7/23(10 Days)
+accenture
+Vasanth S
+2023
+10/7/23 - 20/7/23(10 Days)
+Adventure Tech Solution
+Academic Year: 2021-2022
+Name of the Student
+Year
+Duration
+Company
+Aishwarya. M
+2022
+25-07-2022 to 06-08-2022
+Assyst, Chennai
+Ashwini. E
+2022
+25-07-2022 to 06-08-2022
+Assyst, Chennai
+Aswini. E
+2022
+25-07-2022 to 06-08-2022
+Assyst, Chennai
+Balabaskaran. S
+2022
+18-07-2022to 25-07-2022
+Adventure, Chennai
+Balasubramaniyan. A
+2022
+18-07-2022to 25-07-2023
+Adventure, Chennai
+Bathrinarayanan. M
+2022
+18-07-2022to 25-07-2024
+Adventure, Chennai
+Bharathkannan. R
+2022
+18-07-2022to 25-07-2025
+Adventure, Chennai
+Chandrunath. K
+2022
+18-07-2022to 25-07-2026
+Adventure, Chennai
+EzhilRajan. R
+2022
+18-07-2022to 25-07-2027
+Adventure, Chennai
+Gokul. S
+2022
+18-07-2022to 25-07-2028
+Adventure, Chennai
+Gowtham. B
+2022
+18-07-2022to 25-07-2029
+Adventure, Chennai
+Harish. G
+2022
+18-07-2022to 25-07-2030
+Adventure, Chennai
+Hemapriya. S
+2022
+25-07-2022 to 06-08-2022
+Assyst, Chennai
+Indirapriyadharshini. V
+2022
+25-07-2022 to 06-08-2023
+Assyst, Chennai
+Jayakrishnan. M
+2022
+25-07-2022 to 06-08-2022
+Adventure, Chennai
+Kalpana. S
+2022
+25-07-2022 to 06-08-2023
+Assyst, Chennai
+Madhuvanthi. J
+2022
+25-07-2022 to 06-08-2024
+Assyst, Chennai
+Mukesh. K
+2022
+25-07-2022 to 06-08-2025
+Adventure, Chennai
+Pachaiappan. V
+2022
+18-07-2022to 25-07-2029
+Adventure, Chennai
+Preethaa. V
+2022
+25-07-2022 to 06-08-2023
+Assyst, Chennai
+Pugazhenthi. K
+2022
+18-07-2022to 25-07-2030
+Adventure, Chennai
+Pushpalatha. K
+2022
+25-07-2022 to 06-08-2025
+Assyst, Chennai
+Santhosh. S
+2022
+18-07-2022to 25-07-2029
+Adventure, Chennai
+Siranjeevi. G. K
+2022
+18-07-2022to 25-07-2030
+Adventure, Chennai
+Sivadharshinj. D
+2022
+25-07-2022 to 06-08-2025
+Assyst, Chennai
+Sivashanmugam. K
+2022
+18-07-2022to 25-07-2030
+Adventure, Chennai
+Suvathini. S
+2022
+25-07-2022 to 06-08-2025
+Assyst, Chennai
+Vaishnavi. G
+2022
+25-07-2022 to 06-08-2026
+Assyst, Chennai
+Vishnu Prasath. S
+2022
+18-07-2022to 25-07-2030
+Adventure, Chennai
+Yogeshwari. S
+2022
+25-07-2022 to 06-08-2025
+Assyst, Chennai
+Dharmadevi. P
+2022
+25-07-2022 to 06-08-2026
+Assyst, Chennai
+Jayaprakash. K
+2022
+18-07-2022to 25-07-2030
+Adventure, Chennai
+Lavanya. M
+2022
+25-07-2022 to 06-08-2026
+Assyst, Chennai
+TRAINING PROGRAM
+Academic Year
+Semester
+Class
+Name of the Training
+Duration
+No. of Days
+Name of the Company
+2018-2019
+ODD
+II-ECE
+Core Java Programming
+16.07.18 to 27.07.18
+10
+Campus Connection
+2019-2020
+ODD
+II-ECE
+C and C++ Programming
+07.01.2020 to 13.01.2020
+5
+Campus Connection
+EVEN
+II-ECE
+Aptitude
+06.05.2020 to 16.05.2020
+10
+Campus Connection
+2020-2021
+ODD
+II-ECE
+Front-end and Back-end Developers
+01.06.2020 To 25.06.2020
+22
+Campus Connection
+EVEN
+II-ECE
+Interview Skills
+22.02.21 to 05.03.21
+10
+Campus Connection
+2021-2022
+EVEN
+III-ECE
+Python Programming
+28.03.2022 to 08.04.2022
+10
+Campus Connection
+2022-2023
+ODD
+III-ECE
+MatLab Programming
+08.08.22 to 22.08.22
+10
+Campus Connection
+EVEN
+III-ECE
+Java Programming
+13.02.2023 to 23.02.2023
+10
+Campus Connection
+2023-2024
+ODD
+III-ECE
+Machine Learning with Python
+31.07.2023 to 11.08.2023
+10
+Campus Connection
+EVEN
+III-ECE
+Hands-On Training for Internet of Things (IoT) and Robotics
+12.02.2024 To 24.02.2024
+10
+Campus Connection
+
+
+
+Achievements
+
+
+
+ Department of Electronics and Communication
+Congratulations Toppers 2023-24 
+II YEAR
+image
+III YEAR
+image
+IV YEAR
+image
+UNIVERSITY RANK HOLDERS
+Year
+Name of the Student
+B.E. ECE or M.E. VLSI Design or M.E. AE
+University Rank
+2023
+Siranjeevi  .G. K 
+B.E. ECE
+5
+2021
+Yuvasri. S
+B.E. ECE
+21
+2020
+Nirmala. N. C
+B.E. ECE
+8
+2018
+Deviya Bharathi. B
+B.E. ECE
+35
+2017
+Sharmila Devi. C
+B.E. ECE
+44
+2016
+Vijayalakshmi. S
+M.E. VLSI Design
+09
+Nanthini. B
+M.E. VLSI Design
+24
+Vasuki. R
+M.E. VLSI Design
+24
+Suria. S. T.
+M.E. VLSI Design
+32
+Priyadharshini. G. R.
+B.E. ECE
+47
+Kowsalya. B
+B.E. ECE
+49
+2015
+Kalaimathi. M
+M.E. VLSI Design
+21
+Sathyavathi. M
+M.E. VLSI Design
+28
+Anjana. A
+M.E. VLSI Design
+39
+Anusuya Devi
+M.E. VLSI Design
+45
+Saranya. S. A.
+M.E. VLSI Design
+46
+Sunandha Preethi. M
+M.E. VLSI Design
+50
+Kowdami. K
+B.E. ECE
+30
+Pradeep Kumar. R
+B.E. ECE
+31
+Sangeetha. S
+M. E. Applied Electronics
+10
+Aarthi. S
+M. E. Applied Electronics
+12
+Kalpana. A
+M. E. Applied Electronics
+24
+Logeswari. M
+M. E. Applied Electronics
+27
+Sudha Selvarasi. K
+M. E. Applied Electronics
+34
+Anitha. R
+M. E. Applied Electronics
+37
+VIdhya. M
+M.E. VLSI Design
+50
+Jeevitha. P
+M.E. VLSI Design
+17
+2014
+Saravana Kumar. S
+M.E. VLSI Design
+01
+Gayathri. U
+M.E. VLSI Design
+10
+Saranya. S
+M.E. VLSI Design
+18
+Vijaya Shanthi. P
+M.E. VLSI Design
+33
+Ramkumar. A
+M.E. VLSI Design
+34
+Sathiya. M
+M.E. VLSI Design
+22
+Saranya. P
+M.E. VLSI Design
+32
+Shyamala. J
+M.E. VLSI Design
+35
+Aishwarya. A
+M.E. VLSI Design
+47
+Sivaraju. U
+M.E. VLSI Design
+47
+Sandhya Sharma
+B.E. ECE
+50
+Shanmuga Priya. B
+M. E. Applied Electronics
+23
+Bhuvaneshwari. S
+M. E. Applied Electronics
+24
+Kirubakaran. S
+M. E. Applied Electronics
+24
+Srinithya. G
+M. E. Applied Electronics
+33
+Sowmiya Benifer. K
+M. E. Applied Electronics
+44
+Sakthivel. R
+M. E. Applied Electronics
+45
+Ammu. G
+M. E. Applied Electronics
+47
+Nadanarani. J
+M. E. Applied Electronics
+47
+2013
+Sophia. A
+M.E VLSI Design
+33
+Nandhini. A
+M.E VLSI Design
+26
+Sivasakthi. M
+M.E VLSI Design
+6
+Saranya. K
+M.E VLSI Design
+4
+Priya. S
+M.E VLSI Design
+2
+Sathyakamatchi. M
+M.E. Applied Electronics
+50
+Jayanthi. K
+B.E. ECE
+16
+Yoganathan. M
+M.E. Applied Electronics
+14
+Deepa. N
+M.E. Applied Electronics
+6
+Monisha. C
+B.E. ECE
+44
+Bothini. S
+B.E. ECE
+37
+2012
+Suganya. A
+M.E. Applied Electronics
+15
+Ramya. A
+M.E. Applied Electronics
+1
+Devi. N
+M.E VLSI Design
+8
+2012
+Jenath. M
+M.E VLSI Design
+5
+Lokesh. S
+B.E. ECE
+50
+2011
+Umamahswari. R
+B.E. ECE
+3
+2009
+Dheivya. I
+B.E. ECE
+48
+2006
+Sangeetha. C
+B.E. ECE
+27
+Deepa. P
+B.E. ECE
+50
+2003
+Sivagami. D
+B.E. ECE
+11
+2002
+Praveena. D
+B.E. ECE
+2
+2001
+Desinghu. P. S
+B.E. ECE
+4
+1999
+Priya. V
+B.E. ECE
+8
+1997
+Nagaradjane. S
+B.E. ECE
+10
+1995
+Srinivasan. M. S
+B.E. ECE
+10
+Sivakumar. G
+B.E. ECE
+9
+Anand. G
+B.E. ECE
+8
+Muthu. O. L
+B.E. ECE
+2
+Kannan. K. V. S
+B.E. ECE
+1
+1994
+Panidan
+B.E. ECE
+9
+Rajeshkumar. R
+B.E. ECE
+8
+1993
+Padmanaban. S
+B.E. ECE
+7
+Swaminathan. K. S
+B.E. ECE
+7
+Venkatasathish. M
+B.E. ECE
+5
+Parbhakaran. K. V
+B.E. ECE
+3
+1992
+Vijayakrishan Veerla
+B.E. ECE
+9
+Srikanth. A. V
+B.E. ECE
+3
+1991
+Sathiyamurthi. S
+B.E. ECE
+3
+Ravikumar. S
+B.E. ECE
+2
+1990
+Sudhakaran. M
+B.E. ECE
+10
+Srinivasan. S. R
+B.E. ECE
+7
+Tamilselvan. M
+B.E. ECE
+2
+
+
+Placement
+
+Department of Electronics and Communication
+LIST OF STUDENTS PLACED IN 2023-2024
+Register Number
+Name of the Student
+Name of the Company
+Salary
+420420106004
+Gowsalya S
+Neolync Telecommunication
+16,000/- Per Month
+420420106010
+Nalina T
+Neolync Telecommunication
+16,000/- Per Month
+420420106014
+Saranraj S
+Neolync Telecommunication
+16,000/- Per Month
+420420106303
+Guru Priya N
+Neolync Telecommunication
+16,000/- Per Month
+420420106302
+Asha A
+Neolync Telecommunication
+16,000/- Per Month
+OM Innovation Call Services Pvt. Ltd.
+10,000/- Per Month
+420420106009
+Mothagamaninkandan V
+OM Innovation Call Services Pvt. Ltd.
+10,000/- Per Month
+420420106019
+Yuvaraj S
+Seval Software Solutions
+4 Lakhs Per Annum
+420420106311
+Yuvaraj K S
+OM Innovation Call Services Pvt. Ltd.
+10,000/- Per Month
+Pinstar Automotive India Pvt. Ltd.
+14,000/- Per Month
+420420106005
+Gowshikkumar R
+Pinstar Automotive India Pvt. Ltd.
+14,000/- Per Month
+420420106008
+Madhan Kumar P
+Pinstar Automotive India Pvt. Ltd.
+14,000/- Per Month
+420420106301
+Ajith Kumar B
+Pinstar Automotive India Pvt. Ltd.
+14,000/- Per Month
+420420106001
+Abinaya P
+Appasamy Associates
+18,000/- Per Month
+420420106016
+Surya R
+Axis Global Automation
+14,000/- Per Month
+420420106013
+Saairaam V C
+Axis Global Automation
+14,000/- Per Month
+420420106309
+Srinithi E
+Axis Global Automation
+14,000/- Per Month
+420420106015
+Siyamala G
+Axis Global Automation
+14,000/- Per Month
+420420106018
+Tharun A
+Wonjin Autoparts India Pvt. Ltd.
+15,000/- Per Month
+420420106306
+Rajasekar V
+Wonjin Autoparts India Pvt. Ltd.
+15,000/- Per Month
+420420106020
+Yuvasri V
+Wonjin Autoparts India Pvt. Ltd.
+15,000/- Per Month
+List of Students Placed in 2024-2025
+
+S. No.
+Register Number
+Name of the Student
+Name of the Company
+Salary
+1
+420421106002
+J. Abinaya
+Rinex Technologies
+10 Lakhs per annum
+2
+420421106018
+G. Guru Priya
+Rinex Technologies
+10 Lakhs per annum
+3
+420421106026
+J. Logesh
+Rinex Technologies/TVM Infotec
+10 Lakhs per annum/2.4 Lakhs per annum
+4
+420421106027
+P. Mahalakshmi
+Rinex Technologies
+10 Lakhs per annum
+5
+420421106028
+K. Mugesh Ragavan
+Rinex Technologies/ZF Commercial Vehicles
+10 Lakhs per annum/2.27 Lakhs per annum
+6
+420421106043
+A. Thanusre
+Edveon Technologies/Literact Fintech
+4 Lakhs per annum/3.6 Lakhs per annum
+7
+420421106021
+S. Himritha
+Tech Mahindra /Axis Global
+3.5 Lakhs per annum/1.8 Lakhs per annum
+8
+420421106009
+S. Chitaardhan
+Literact Fintech/Pegatron
+3.6 Lakhs per annum
+9
+420421106016
+M. Gokulnath
+Literact Fintech/Pegatron
+3.6 Lakhs per annum
+10
+420421106020
+B. Hemalatha
+Literact Fintech/Plintron
+3.6 Lakhs per annum
+11
+420421106022
+S. R. Jegadheswaran
+Literact Fintech/Pegatron
+3.6 Lakhs per annum
+12
+420421106032
+C. Roopavathy
+Literact Fintech
+3.6 Lakhs per annum
+13
+420421106034
+S. Sanjay Harish
+Literact Fintech/Pegatron
+3.6 Lakhs per annum
+14
+420421106036
+E. Sarumathy
+Literact Fintech/Axis Global
+3.6 Lakhs per annum
+15
+420421106037
+R. Sathana
+Literact Fintech
+3.6 Lakhs per annum
+16
+420421106038
+R. Sathyabama
+Literact Fintech
+3.6 Lakhs per annum
+17
+420421106044
+E. Venisri
+Literact Fintech/Spinks Softech
+3.6 Lakhs per annum/2.4 Lakhs per annum
+18
+420421106047
+Y. Vishnu Priya
+Literact Fintech/Spinks Softech
+3.6 Lakhs per annum/2.4 Lakhs per annum
+19
+420421106302
+S. Vasanth
+Literact Fintech
+3.6 Lakhs per annum
+20
+420421106050
+A. Yogeshwari
+Spinks Softech
+2.4 Lakhs per annum
+21
+420421106029
+S. MuthuKumaran
+Spinks Softech/Gesco Healthcare Pvt. Ltd.
+2.4 Lakhs per annum/1.92 Lakhs per annum
+22
+420421106006
+M. Anupriya
+Spinks Softech/Axis Global
+2.4 Lakhs per annum/1.8 Lakhs per annum
+23
+420421106048
+B. Vishwa
+Draeger India Pvt. Ltd.
+2.74 Lakhs per annum
+24
+420421106003
+L. Ajay
+ZF Commercial Vehicles
+2.27 Lakhs per annum
+25
+420421106013
+K. Durgeswaran
+ZF Commercial Vehicles
+2.27 Lakhs per annum
+26
+420421106015
+M. Gokul
+ZF Commercial Vehicles
+2.27 Lakhs per annum
+27
+420421106042
+D. Thamizhselvan
+ZF Commercial Vehicles
+2.27 Lakhs per annum
+28
+420421106045
+M. Vignesh
+ZF Commercial Vehicles
+2.27 Lakhs per annum
+29
+420421106004
+K. Akash
+Pegatron
+2.18 Lakhs per annum
+30
+420421106010
+T. Dharshini
+Pegatron
+2.18 Lakhs per annum
+31
+420421106023
+K. Kamalesh
+Pegatron
+2.18 Lakhs per annum
+32
+420421106049
+S. Vishwa
+Pegatron
+2.18 Lakhs per annum
+33
+420421106024
+N. Kavitha
+Pegatron
+2.18 Lakhs per annum
+34
+420421106008
+S. K. Bharath Raj
+Pegatron/Gesco Healthcare Pvt. Ltd.
+2.18 Lakhs per annum/1.92 Lakhs per annum
+35
+420421106017
+M. Gokulnath
+Pegatron/Gesco Healthcare Pvt. Ltd.
+2.18 Lakhs per annum/1.92 Lakhs per annum
+36
+420421106007
+S. Balashanmungam
+Pegatron/Gesco Healthcare Pvt. Ltd./Axis Global
+2.18 Lakhs per annum/1.92 Lakhs per annum
+37
+420421106025
+R. Khawsik
+Pegatron/Gesco Healthcare Pvt. Ltd.
+2.18 Lakhs per annum/1.92 Lakhs per annum
+38
+420421106031
+G. Poovarasan
+Pegatron/Gesco Healthcare Pvt. Ltd.
+2.18 Lakhs per annum/1.92 Lakhs per annum
+39
+420421106035
+K. Santhosh
+Pegatron/Gesco Healthcare Pvt. Ltd.
+2.18 Lakhs per annum/1.92 Lakhs per annum
+40
+420421106040
+M. Sunilkumar
+Pegatron/Gesco Healthcare Pvt. Ltd.
+2.18 Lakhs per annum/1.92 Lakhs per annum
+41
+420421106005
+S. Anbarasan
+Gesco Healthcare Pvt. Ltd.
+1.92 Lakhs per annum
+42
+420421106019
+S. Haris
+Gesco Healthcare Pvt. Ltd.
+1.92 Lakhs per annum
+43
+420421106039
+S. Sudharsanam
+Gesco Healthcare Pvt. Ltd.
+1.92 Lakhs per annum
+44
+420421106051
+J. Yokesh
+Gesco Healthcare Pvt. Ltd.
+1.92 Lakhs per annum
+45
+420421106301
+S. Mageshwaran
+Gesco Healthcare Pvt. Ltd.
+1.92 Lakhs per annum
+46
+420421106011
+V. Dhinesh Kumar
+Axis Global
+1.8 Lakhs per annum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
