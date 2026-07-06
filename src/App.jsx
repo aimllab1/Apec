@@ -133,13 +133,14 @@ function AppContent({ isLoading, setIsLoading }) {
   const [mobileAdmissionOpen, setMobileAdmissionOpen] = useState(false);
   const [mobileCommitteesOpen, setMobileCommitteesOpen] = useState(false);
   const [mobileIqacOpen, setMobileIqacOpen] = useState(false);
+  const sessionId = React.useRef(`apec-${Date.now()}-${Math.random().toString(36).slice(2)}`).current;
   const [chatOpen, setChatOpen] = useState(false);
   const [bubbleVisible, setBubbleVisible] = useState(false);
   const [bubbleText, setBubbleText] = useState('');
   const [isPanoOpen, setIsPanoOpen] = useState(false);
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([
-    { sender: 'ai', text: 'Welcome to Adhiparasakthi Engineering College Assistant! How can I assist you today? Feel free to ask about admissions, TNEA code, courses, library, or placements.' }
+    { sender: 'ai', text: "Hello 👋 I'm APEC AI Assistant. Ask me anything about admissions, departments, placements, facilities, or campus details." }
   ]);
   const chatBottomRef = useRef(null);
   const videoRef = useRef(null);
@@ -198,33 +199,44 @@ function AppContent({ isLoading, setIsLoading }) {
     };
   }, [chatOpen]);
 
-  const handleChatSubmit = (e) => {
-    e.preventDefault();
-    if (!chatInput.trim()) return;
+  const handleChatSubmit = async (e, textOverride = null) => {
+    if (e) e.preventDefault();
+    const userText = textOverride || chatInput;
+    if (!userText.trim()) return;
 
-    const userText = chatInput;
-    const newMessages = [...messages, { sender: 'user', text: userText }];
-    setMessages(newMessages);
-    setChatInput('');
+    const updatedMessages = [...messages, { sender: 'user', text: userText }];
+    setMessages(updatedMessages);
+    if (!textOverride) setChatInput('');
 
-    setTimeout(() => {
-      let aiText = "Thank you for your query. For specific questions, you can contact our administration cell directly at +91 9894657971 or email principal@apec.edu.in.";
-      const query = userText.toLowerCase();
-      
-      if (query.includes('tnea') || query.includes('counseling') || query.includes('code')) {
-        aiText = "The TNEA Counseling Code for Adhiparasakthi Engineering College is 1401.";
-      } else if (query.includes('admission') || query.includes('apply') || query.includes('open') || query.includes('date')) {
-        aiText = "Adhiparasakthi Engineering College admissions for the 2026 – 2027 academic cycle are open. For details, call 7418064336 or 7418065336.";
-      } else if (query.includes('placement') || query.includes('mou') || query.includes('company') || query.includes('recruit')) {
-        aiText = "Adhiparasakthi Engineering College has a 92% placement rate, with partners including TCS, Wipro, Cognizant, Infosys, and HCL. Highest package offered is 12 LPA.";
-      } else if (query.includes('course') || query.includes('department') || query.includes('engineering') || query.includes('ug') || query.includes('pg') || query.includes('phd')) {
-        aiText = "We offer UG courses (CSE, AI/ML, ECE, EEE, Chemical, Agri, Mechanical, Civil), PG courses (MCA, MBA, M.E.), and Ph.D. programs.";
-      } else if (query.includes('facility') || query.includes('library') || query.includes('hostel') || query.includes('bus') || query.includes('ground') || query.includes('lab')) {
-        aiText = "Adhiparasakthi Engineering College offers comprehensive campus facilities including separate secure hostels, a digital Central Library (50,000+ books), fully equipped labs, and transport buses.";
+    // Set typing loader
+    const withLoading = [...updatedMessages, { sender: 'ai', text: 'Typing...', isLoading: true }];
+    setMessages(withLoading);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: userText,
+          sessionId: sessionId
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
       }
 
-      setMessages([...newMessages, { sender: 'ai', text: aiText }]);
-    }, 700);
+      const data = await response.json();
+      setMessages([...updatedMessages, { sender: 'ai', text: data.response || "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." }]);
+    } catch (err) {
+      console.error("Chat API error:", err);
+      setMessages([...updatedMessages, { 
+        sender: 'ai', 
+        text: "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." 
+      }]);
+    }
   };
 
   return (
@@ -276,7 +288,7 @@ function AppContent({ isLoading, setIsLoading }) {
             >
               
               {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-              <div className="w-full px-4 md:px-6 py-1.5 flex items-center justify-between gap-4 md:gap-10">
+              <div className="w-full px-4 md:px-6 py-0.5 flex items-center justify-between gap-4 md:gap-10">
                 
                 {/* Enlarged College Logo & Name */}
                 <Link to="/" className="flex items-center gap-4 shrink-0">
@@ -289,7 +301,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     <span className="font-title text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-none drop-shadow-sm">
                       Adhiparasakthi Engineering College
                     </span>
-                    <span className="font-mono text-[9px] md:text-[9px] uppercase font-black text-indigo-650 tracking-wider block mt-1.5">
+                    <span className="font-mono text-[11px] md:text-[11px] uppercase font-black tracking-wider block mt-1.5 text-violet-700">
                       An Autonomous Institution
                     </span>
                   </div>
@@ -425,13 +437,13 @@ function AppContent({ isLoading, setIsLoading }) {
               />
 
               {/* BOTTOM BAR: NAVIGATION LINKS (Full-width centered layout) */}
-              <div className="bg-[#FFF4E8] border-b border-[#FFD6A5] hidden lg:block">
-                <div className="w-full px-6 py-0.5 flex justify-center relative">
-                  <nav className="flex items-center gap-2 xl:gap-3.5 py-0.5">
+              <div className="bg-[#FFF4E8] hidden lg:block">
+                <div className="w-full px-6 py-0 flex justify-center relative">
+                  <nav className="flex items-center gap-2 xl:gap-3.5 py-0">
                     
                     <Link 
                       to="/" 
-                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-1 rounded-lg block ${
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
                         isActive('/') 
                           ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                           : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -447,9 +459,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </Link>
                     
                     {/* About Dropdown */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/about') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -463,7 +475,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Institution Profile</Link>
                         <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Founder & Trustees</Link>
                         <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Principal Desk</Link>
@@ -471,23 +483,23 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
 
                     {/* Admission Dropdown */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-3 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/admission') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
-                            : 'text-slate-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-bold'
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         Admission <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/admission') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[#FF8A00]" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <Link to="/admission?tab=courses" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Courses Offered</Link>
                         <Link to="/admission?tab=procedure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Admission Procedure</Link>
                         <Link to="/admission?tab=scholarships" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Scholarships</Link>
@@ -496,9 +508,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
 
                     {/* Departments Hover Mega-Menu */}
-                    <div className="group py-0.5">
+                    <div className="group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/departments') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -512,7 +524,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-4 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[1000px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 grid grid-cols-4 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[1000px] text-left gap-6 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.E.)</span>
                           <div className="space-y-1">
@@ -555,9 +567,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
 
                   {/* UGC Hover Mega-Menu */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/ugc') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -571,7 +583,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[520px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[520px] text-left gap-6 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Institutional Compliance & Strategy</span>
                           <div className="space-y-1">
@@ -594,9 +606,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
                     
                     {/* Facilities Hover Dropdown */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/facilities') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -610,7 +622,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <Link to="/facilities/library" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Central Library</Link>
                         <Link to="/facilities/labs" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Lab Infrastructures</Link>
                         <Link to="/facilities/hostels" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Hostel Blocks</Link>
@@ -619,9 +631,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
 
                     {/* Placements Dropdown */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/placements') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -635,7 +647,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-64 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-64 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Placement Cell Profile</Link>
                         <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Placement Records</Link>
                         <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">MOUs & Industrial Tie-ups</Link>
@@ -644,9 +656,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
 
                     {/* Committees Dropdown */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/committees') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -660,7 +672,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[540px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[540px] text-left gap-6 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Student Cells & Associations</span>
                           <div className="space-y-1">
@@ -683,9 +695,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
 
                     {/* IQAC Megamenu */}
-                    <div className="relative group py-0.5">
+                    <div className="relative group py-0">
                       <button 
-                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/iqac') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -699,7 +711,7 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[540px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 grid grid-cols-2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[540px] text-left gap-6 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Quality Assurance & NAAC</span>
                           <div className="space-y-1">
@@ -723,7 +735,7 @@ function AppContent({ isLoading, setIsLoading }) {
 
                     <Link 
                       to="/contact" 
-                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-1 rounded-lg block ${
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
                         isActive('/contact') 
                           ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                           : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -740,7 +752,7 @@ function AppContent({ isLoading, setIsLoading }) {
 
                     <Link 
                       to="/cutoff-calculator" 
-                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-1 rounded-lg block ${
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
                         isActive('/cutoff-calculator') 
                           ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                           : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -764,7 +776,7 @@ function AppContent({ isLoading, setIsLoading }) {
 
               {/* Mobile Dropdown */}
               {mobileMenuOpen && (
-                <div className="lg:hidden bg-[#FFF4E8] border-b border-[#FFD6A5] py-6 px-6 flex flex-col gap-4 text-left max-h-[75vh] overflow-y-auto">
+                <div data-lenis-prevent className="lg:hidden bg-[#FFF4E8] border-b border-[#FFD6A5] py-6 px-6 flex flex-col gap-4 text-left max-h-[75vh] overflow-y-auto">
                   <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-gray-900">Home</Link>
                   <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">About APEC</Link>
                   
@@ -1039,7 +1051,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   </div>
 
                   {/* Messages Container */}
-                  <div className="grow p-4 overflow-y-auto space-y-3.5 text-xs text-left bg-gray-50/50">
+                  <div data-lenis-prevent className="grow p-4 overflow-y-auto space-y-3.5 text-xs text-left bg-gray-50/50">
                     {messages.map((msg, idx) => (
                       <div 
                         key={idx} 
@@ -1050,15 +1062,37 @@ function AppContent({ isLoading, setIsLoading }) {
                             ? 'bg-gray-950 text-white rounded-br-none' 
                             : 'bg-white border border-gray-150 text-gray-700 rounded-bl-none'
                         }`}>
-                          {stripEmojis(msg.text)}
+                          {msg.isLoading ? (
+                            <span className="flex items-center gap-1.5 py-1">
+                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-bounce" />
+                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-bounce [animation-delay:0.2s]" />
+                              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-bounce [animation-delay:0.4s]" />
+                            </span>
+                          ) : (
+                            stripEmojis(msg.text)
+                          )}
                         </div>
                       </div>
                     ))}
                     <div ref={chatBottomRef} />
                   </div>
 
+                  {/* Smart Suggestions */}
+                  <div className="px-3 pt-2 pb-1 bg-white flex flex-wrap gap-1.5 border-t border-gray-100 select-none">
+                    {['Admissions', 'Courses Offered', 'Placement Details', 'Contact Office', 'Departments'].map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        type="button"
+                        onClick={() => handleChatSubmit(null, suggestion)}
+                        className="text-[10px] font-extrabold text-indigo-650 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/30 px-2.5 py-1 rounded-full cursor-pointer transition-colors"
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
+                  </div>
+
                   {/* Input Form */}
-                  <form onSubmit={handleChatSubmit} className="p-3 border-t border-gray-100 flex items-center gap-2 bg-white">
+                  <form onSubmit={(e) => handleChatSubmit(e)} className="p-3 border-t border-gray-100 flex items-center gap-2 bg-white">
                     <input 
                       type="text" 
                       value={chatInput}

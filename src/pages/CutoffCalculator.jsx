@@ -354,7 +354,7 @@ export default function CutoffCalculator() {
                   Affiliated to Anna University • Approved by AICTE
                 </span>
                 <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase mt-4">
-                  Admission Inquiry for 2026-27
+                  {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
                 </span>
               </div>
 

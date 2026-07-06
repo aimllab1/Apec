@@ -7,7 +7,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { 
   ArrowRight, BookOpen, ShieldAlert, Award, Calendar, User, Eye, Compass, 
   GraduationCap, X, Mail, Phone, Sparkles, Cpu, Wifi, ChevronDown, CheckCircle2,
-  HeartHandshake, Code, Database, Beaker, Settings, Building, Laptop, ChevronLeft, ChevronRight, Zap
+  HeartHandshake, Code, Database, Beaker, Settings, Building, Laptop, ChevronLeft, ChevronRight, Zap, Calculator
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
@@ -235,7 +235,7 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    cutoff: '',
     phone: '',
     dept: ''
   });
@@ -249,11 +249,10 @@ export default function Home() {
       errors.name = 'Name must be at least 3 characters';
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      errors.email = 'Email address is required';
-    } else if (!emailRegex.test(formData.email)) {
-      errors.email = 'Please enter a valid email address';
+    if (!formData.cutoff) {
+      errors.cutoff = 'Cutoff is required';
+    } else if (isNaN(formData.cutoff) || Number(formData.cutoff) < 0 || Number(formData.cutoff) > 200) {
+      errors.cutoff = 'Cutoff must be between 0 and 200';
     }
 
     const phoneRegex = /^[0-9]{10}$/;
@@ -378,12 +377,12 @@ export default function Home() {
   ];
 
   const depts = [
-    { key: "civil", name: "Civil Engineering", code: "CIVIL", details: "Focuses on building structural designs, environmental hydrology, and general public transport infrastructure." },
-    { key: "mech", name: "Mechanical Engineering", code: "MECH", details: "Covers dynamic machine designing, thermal engines, CAD modeling, and industrial manufacturing systems." },
-    { key: "ece", name: "Electronics & Communication Engineering", code: "ECE", details: "Covers microelectronics, digital signal processing, embedded systems, and advanced wireless communication network architectures." },
-    { key: "eee", name: "Electrical & Electronics Engineering", code: "EEE", details: "Focuses on electrical power systems, smart grid systems, control instrumentation, and electrical machinery design." },
-    { key: "cse", name: "Computer Science & Engineering", code: "CSE", details: "Focuses on algorithms, cloud architecture, system software design, and full-stack development." },
-    { key: "aiml", name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models." }
+    { key: "civil", name: "Civil Engineering", code: "CIVIL", details: "Focuses on building structural designs, environmental hydrology, and general public transport infrastructure.", img: "/dept/civil dept.jpg" },
+    { key: "mech", name: "Mechanical Engineering", code: "MECH", details: "Covers dynamic machine designing, thermal engines, CAD modeling, and industrial manufacturing systems.", img: "/dept/mech dept.jpg" },
+    { key: "ece", name: "Electronics & Communication Engineering", code: "ECE", details: "Covers microelectronics, digital signal processing, embedded systems, and advanced wireless communication network architectures.", img: "/dept/ece dept.jpg" },
+    { key: "eee", name: "Electrical & Electronics Engineering", code: "EEE", details: "Focuses on electrical power systems, smart grid systems, control instrumentation, and electrical machinery design.", img: "/dept/eee dept.jpg" },
+    { key: "cse", name: "Computer Science & Engineering", code: "CSE", details: "Focuses on algorithms, cloud architecture, system software design, and full-stack development.", img: "/dept/cse dept.png" },
+    { key: "aiml", name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models.", img: "/dept/aiml dept.jpg" }
   ];
 
 
@@ -511,7 +510,7 @@ export default function Home() {
 
           {/* Admission Floating Banner — centered below title */}
           <div className="block w-full max-w-sm mx-auto px-8 py-6 md:p-7 bg-white/55 backdrop-blur-md border border-white/45 rounded-2xl shadow-lg mt-2 mb-20 md:mb-4 text-center">
-            <h3 className="font-title text-lg font-bold text-gray-900 mb-1">2026 – 2027 Admissions Open</h3>
+            <h3 className="font-title text-lg font-bold text-gray-900 mb-1">{`${new Date().getFullYear()} - ${new Date().getFullYear() + 1} Admissions Open`}</h3>
             <p className="text-xs text-gray-500 mb-5 font-semibold">Click below to apply or connect with our help desk.</p>
             
             <div className="flex flex-col items-center gap-4">
@@ -543,16 +542,21 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-16 items-stretch">
               {/* Anna University */}
               <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 5, 
+                  ease: 'easeInOut', 
+                  delay: 0 
+                }}
                 whileHover={{ 
-                  y: -5, 
                   scale: 1.03, 
                   boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)' 
                 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer transition-all duration-300"
+                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer bg-indigo-50/40 backdrop-blur-[2px] border border-indigo-100/30 rounded-2xl shadow-lg hover:bg-indigo-100/60 hover:border-indigo-300/50 transition-all duration-300"
               >
-                <div className="w-20 h-20 rounded-full bg-indigo-50/60 border border-indigo-100/80 flex items-center justify-center mb-6 shadow-sm group-hover:border-indigo-300 group-hover:bg-indigo-50 transition-colors duration-300">
-                  <img src="./university_logo-rem.png" alt="Anna University Logo" className="w-16 h-16 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
+                <div className="w-32 h-32 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                  <img src="./university_logo-rem.png" alt="Anna University Logo" className="w-full h-full object-contain scale-125 drop-shadow-md" />
                 </div>
                 <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-650 transition-colors duration-300">
                   Anna University
@@ -564,20 +568,21 @@ export default function Home() {
 
               {/* UGC Autonomous */}
               <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 5, 
+                  ease: 'easeInOut', 
+                  delay: 0.4 
+                }}
                 whileHover={{ 
-                  y: -5, 
                   scale: 1.03, 
                   boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)' 
                 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer transition-all duration-300"
+                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer bg-amber-50/40 backdrop-blur-[2px] border border-amber-100/30 rounded-2xl shadow-lg hover:bg-amber-100/60 hover:border-amber-300/50 transition-all duration-300"
               >
-                <div className="w-20 h-20 rounded-full bg-amber-50/60 border border-amber-100/80 flex items-center justify-center mb-6 shadow-sm group-hover:border-amber-300 group-hover:bg-amber-50 transition-colors duration-300">
-                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="8" y="8" width="32" height="32" rx="4" stroke="#1B224A" strokeWidth="2"/>
-                    <path d="M16 16 H32 M16 22 H28 M16 28 H32" stroke="#3F4FBF" strokeWidth="2" strokeLinecap="round"/>
-                    <circle cx="24" cy="24" r="3" fill="#D97706"/>
-                  </svg>
+                <div className="w-32 h-32 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                  <img src="./UGC.png" alt="UGC Logo" className="w-full h-full object-contain drop-shadow-md" />
                 </div>
                 <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors duration-300">
                   UGC Autonomous
@@ -589,16 +594,21 @@ export default function Home() {
 
               {/* NAAC Accredited */}
               <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 5, 
+                  ease: 'easeInOut', 
+                  delay: 0.8 
+                }}
                 whileHover={{ 
-                  y: -5, 
                   scale: 1.03, 
                   boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)' 
                 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none w-full transition-all duration-300"
+                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none w-full bg-emerald-50/40 backdrop-blur-[2px] border border-emerald-100/30 rounded-2xl shadow-lg hover:bg-emerald-100/60 hover:border-emerald-300/50 transition-all duration-300"
               >
-                <div className="w-20 h-20 rounded-full bg-emerald-50/60 border border-emerald-100/80 flex items-center justify-center mb-6 shadow-sm group-hover:border-emerald-300 group-hover:bg-emerald-50 transition-colors duration-300">
-                  <img src="./Naac.png" alt="NAAC Accredited Logo" className="w-16 h-16 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
+                <div className="w-60 h-36 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                  <img src="./Naac.png" alt="NAAC Accredited Logo" className="w-full h-full object-contain drop-shadow-md" />
                 </div>
                 <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
                   NAAC Accredited
@@ -686,34 +696,44 @@ export default function Home() {
                       exit="exit"
                       className="w-full h-full"
                     >
-                      <div className="group relative bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between items-start text-left transition-all duration-300 hover:border-indigo-500 hover:shadow-xl overflow-hidden min-h-[350px] h-full">
-                        {/* Subtle gradient background glow on hover */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-indigo-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                        
-                        {/* Glow decoration */}
-                        <div className="absolute -top-12 -right-12 w-24 h-24 bg-indigo-50 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-100/50 transition-colors duration-300" />
-                        
-                        <div className="w-full relative z-10">
-                          {/* Top row with Icon and Badge */}
-                          <div className="flex justify-between items-center mb-6">
-                            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100/50 flex items-center justify-center text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white transition-all duration-300">
-                              <IconComponent className="w-5 h-5" />
-                            </div>
-                            <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white group-hover:border-indigo-650 transition-all duration-300">
-                              {dept.code}
-                            </span>
-                          </div>
-                          
-                          <span className="text-[9px] uppercase font-bold tracking-widest text-gray-400 block mb-2">Focused Curriculum Overview</span>
-                          <h3 className="text-xl font-black text-gray-900 mb-3 group-hover:text-indigo-650 transition-colors duration-200">{dept.name}</h3>
-                          <p className="text-xs text-gray-500 leading-relaxed font-semibold mb-6 max-w-xl">{dept.details}</p>
+                      <div className="group relative bg-white border border-gray-200 rounded-3xl flex flex-col md:flex-row transition-all duration-300 hover:border-indigo-500 hover:shadow-xl overflow-hidden min-h-[350px] h-full">
+                        {/* Left Column: Department Image */}
+                        <div className="w-full md:w-2/5 h-48 md:h-auto overflow-hidden relative border-b md:border-b-0 md:border-r border-gray-100 shrink-0">
+                          <img 
+                            src={dept.img} 
+                            alt={dept.name} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-60 pointer-events-none" />
                         </div>
 
-                        <div className="w-full pt-6 border-t border-gray-150 mt-auto flex justify-between items-center relative z-10">
-                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Autonomous Status</span>
-                          <Link to={`/departments/${dept.key}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-900 group-hover:text-indigo-650 group-hover:gap-2.5 transition-all">
-                            Explore Portal <ArrowRight className="w-3.5 h-3.5" />
-                          </Link>
+                        {/* Right Column: Details & Explore */}
+                        <div className="p-6 md:p-8 flex flex-col justify-between items-start text-left flex-grow relative">
+                          {/* Subtle gradient background glow on hover */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-indigo-50/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                          
+                          <div className="w-full relative z-10">
+                            {/* Top row with Icon and Badge */}
+                            <div className="flex justify-between items-center mb-5">
+                              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100/50 flex items-center justify-center text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white transition-all duration-300">
+                                <IconComponent className="w-4.5 h-4.5" />
+                              </div>
+                              <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white group-hover:border-indigo-650 transition-all duration-300">
+                                {dept.code}
+                              </span>
+                            </div>
+                            
+                            <span className="text-[9px] uppercase font-bold tracking-widest text-gray-400 block mb-1">Focused Curriculum Overview</span>
+                            <h3 className="text-lg md:text-xl font-black text-gray-900 mb-2.5 group-hover:text-indigo-650 transition-colors duration-200">{dept.name}</h3>
+                            <p className="text-xs text-gray-500 leading-relaxed font-semibold mb-4 max-w-xl">{dept.details}</p>
+                          </div>
+
+                          <div className="w-full pt-4 border-t border-gray-150 mt-auto flex justify-between items-center relative z-10">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Autonomous Status</span>
+                            <Link to={`/departments/${dept.key}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-900 group-hover:text-indigo-650 group-hover:gap-2.5 transition-all">
+                              Explore Portal <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -886,7 +906,7 @@ export default function Home() {
                 {/* Badge — visible on both */}
                 <div className="flex justify-center md:justify-start mb-5">
                   <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
-                    Admission Inquiry for 2026-27
+                    {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
                   </span>
                 </div>
 
@@ -924,25 +944,28 @@ export default function Home() {
 
                       {/* Email & Phone grid */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                        {/* Email */}
+                        {/* Cutoff */}
                         <div>
-                          <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Email Address</label>
+                          <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Cutoff (Out of 200)</label>
                           <div className="relative">
                             <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                              <Mail className="w-4 h-4" />
+                              <Calculator className="w-4 h-4" />
                             </span>
                             <input
-                              type="email"
-                              name="email"
-                              value={formData.email}
+                              type="number"
+                              name="cutoff"
+                              max="200"
+                              min="0"
+                              step="0.01"
+                              value={formData.cutoff}
                               onChange={handleInputChange}
-                              placeholder="name@email.com"
-                              className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
-                                formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                              placeholder="Enter cutoff"
+                              className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
+                                formErrors.cutoff ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
                               }`}
                             />
                           </div>
-                          {formErrors.email && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.email}</p>}
+                          {formErrors.cutoff && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.cutoff}</p>}
                         </div>
 
                         {/* Phone */}

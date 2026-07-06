@@ -159,7 +159,7 @@
   "chemical": {
     "key": "chemical",
     "name": "Chemical Engineering",
-    "about": "The Department of Chemical Engineering was started in the year 1997. The Department has a sanctioned student intake of 40 for UG, affiliated to Anna University. Chemical Engineering is the branch of engineering that deals with the application of physical science (Physics and Chemistry) with mathematics, to the process of converting raw materials or chemicals into more useful or valuable forms. Majority of the passed out students are well placed in the country and many have completed higher studies in abroad and well placed there. Right from its inception, the Department has been doing its best to bring about excellence in academics. The Department has been aware of the role of chemical engineers in building of the modern India and has been taking appropriate steps to encourage research and developmental activities. The department has highly qualified core faculty of high professional profile to meet the emerging trends and challenges in the field of chemical engineering and allied areas on a global platform.",
+    "about": "The Department of Chemical Engineering was started in the year 1997. The Department has a sanctioned student intake of 40 for UG, affiliated to Anna University. Chemical Engineering is the branch of engineering that deals with the application of physical science (Physics and Chemistry) with mathematics, to the process of converting raw materials or chemicals into more useful or valuable forms. Majority of the passed out students are well placed in the country and many have completed higher studies in abroad and well placed there. Right from its inception, the Department has been doing its best to bring about excellence in academics. The Department has been aware of the role of chemical engineers in building of the modern India and has been taking appropriate steps to encourage research and developmental activities. The department has highly qualified core faculty of high professional profile to meet the emerging trends and challenges in the field of chemical engineering and allied areas on a global platform. The curricula and syllabi for the undergraduate courses have been periodically updated in line with modern day developments in the chemical engineering arena and taking into account the demands of industry and R&D institutions. The department has fully equipped undergraduate laboratories in the core areas of chemical engineering to impart practical knowledge to the students. Constantly our Department is producing University rank holders every year. Till date, 30 rank holders from both Madras and Anna University have excelled from the department, out of it one Gold medal. Besides strong academic input, students are strongly supported and guided to do mini-projects and gain hands on experience with the chemical engineering equipment's. Students are highly encouraged to participate in Workshops and technical symposium organized by the affiliated institutions to cater to the needs of the industry. Industrial visits and lectures from academic and industrial experts add a new dimension to the teaching learning process. The Department of Chemical engineering has signed Memorandum of Understanding (MOU) with 30 leading industries, which paves a great support for the enhancement of the students’ academic background and career.",
     "vision": "To attain national recognition in training Engineers both professionally as well as morally for meeting the challenging needs of Chemical & allied industries and societal demands of ethical Engineers.",
     "mission": [
       "Providing high quality Engineers in tune with changing needs of Chemical and allied industries.",
@@ -167,65 +167,65 @@
       "Cultivating a spirit of service and ethical conduct among students."
     ],
     "peos": [
-      "PEO1: Pursue careers as successful professionals in Chemical Engineering and       related fields.",
-      "PEO2: Lifelong learning opportunities to improve and expand technical and          professional skills.",
-      "PEO3: Design and develop eco-friendly sustainable technologies with the aid of   computational skills.",
-      "PEO4: Develop personally and professionally by accepting professional and social             responsibilities and pursing leadership roles.",
+      "PEO1: Pursue careers as successful professionals in Chemical Engineering and related fields.",
+      "PEO2: Lifelong learning opportunities to improve and expand technical and professional skills.",
+      "PEO3: Design and develop eco-friendly sustainable technologies with the aid of computational skills.",
+      "PEO4: Develop personally and professionally by accepting professional and social responsibilities and pursing leadership roles.",
       "PEO5: Adhere to the highest level of professional code of ethics."
     ],
     "psos": [
-      "PSO1  Graduates will have a strong foundation in engineering, science and current           Chemical Engineering practices and will have experience in solving structured        and unstructured problems  using conventional and innovative solutions.",
-      "PSO2  Graduates will be able to effectively describe the Chemical Engineering     problem, analyze the  data, develop potential solutions, evaluate these     solutions, and present the results using their oral, written and electronic             media skills.",
-      "PSO3  Graduates will have an understanding of ethical and professional    responsibilities of an engineer  and the impact of engineering solutions on     society and the global environment."
+      "PSO1: Graduates will have a strong foundation in engineering, science and current Chemical Engineering practices and will have experience in solving structured and unstructured problems using conventional and innovative solutions.",
+      "PSO2: Graduates will be able to effectively describe the Chemical Engineering problem, analyze the data, develop potential solutions, evaluate these solutions, and present the results using their oral, written and electronic media skills.",
+      "PSO3: Graduates will have an understanding of ethical and professional responsibilities of an engineer and the impact of engineering solutions on society and the global environment."
     ],
     "pos": [
       {
-        "title": "",
-        "description": "PO1     Engineering knowledge: Apply the knowledge of mathematics,  science,  engineering fundamentals, and an engineering specialization to the solution       of  complex engineering problems"
+        "title": "Engineering knowledge",
+        "description": "Apply the knowledge of mathematics, science, engineering fundamentals, and an engineering specialization to the solution of complex engineering problems."
       },
       {
-        "title": "",
-        "description": "PO2     Problem analysis Problem analysis: Identify, formulate, review  research             literature, and analyze complex  engineering problems reaching substantiated conclusions using first principles of  mathematics, natural sciences, and   engineering sciences."
+        "title": "Problem analysis",
+        "description": "Identify, formulate, review research literature, and analyze complex engineering problems reaching substantiated conclusions using first principles of mathematics, natural sciences, and engineering sciences."
       },
       {
-        "title": "",
-        "description": "PO3     Design / development of solutions: Design solutions for complex engineering       problems and design system components or  processes that            meet the specified       needs with  appropriate consideration for the public health    and safety, and the     cultural, societal, and environmental considerations."
+        "title": "Design / development of solutions",
+        "description": "Design solutions for complex engineering problems and design system components or processes that meet the specified needs with appropriate consideration for the public health and safety, and the cultural, societal, and environmental considerations."
       },
       {
-        "title": "",
-        "description": "PO4     Conduct investigations of complex problems: Use research-based    knowledge and research  methods including design of experiments,  analysis     and interpretation of data, and  synthesis of the information to provide valid    conclusions."
+        "title": "Conduct investigations of complex problems",
+        "description": "Use research-based knowledge and research methods including design of experiments, analysis and interpretation of data, and synthesis of the information to provide valid conclusions."
       },
       {
-        "title": "",
-        "description": "PO5     Modern tool usage: Modern tool usage Create, select, and apply    appropriate      techniques, resources, and  modern engineering and IT tools including    prediction and modeling to complex  engineering activities with an             understanding  of the limitations"
+        "title": "Modern tool usage",
+        "description": "Create, select, and apply appropriate techniques, resources, and modern engineering and IT tools including prediction and modeling to complex engineering activities with an understanding of the limitations."
       },
       {
-        "title": "",
-        "description": "PO6     The Engineer and Society: Apply reasoning informed by the contextual   knowledge to assess societal, health, safety,  legal and cultural issues and   the       consequent responsibilities relevant to the professional engineering      practice."
+        "title": "The Engineer and Society",
+        "description": "Apply reasoning informed by the contextual knowledge to assess societal, health, safety, legal and cultural issues and the consequent responsibilities relevant to the professional engineering practice."
       },
       {
-        "title": "",
-        "description": "PO7     Environment and Sustainability: Understand the impact of the professional        engineering solutions in societal and  environmental contexts, and      demonstrate the knowledge of, and need for sustainable  development"
+        "title": "Environment and Sustainability",
+        "description": "Understand the impact of the professional engineering solutions in societal and environmental contexts, and demonstrate the knowledge of, and need for sustainable development."
       },
       {
-        "title": "",
-        "description": "PO8     Ethics: Apply ethical principles and commit to professional ethics and        responsibilities and  norms of the engineering practice"
+        "title": "Ethics",
+        "description": "Apply ethical principles and commit to professional ethics and responsibilities and norms of the engineering practice."
       },
       {
-        "title": "",
-        "description": "PO9     Individual and team work: Function effectively as an individual, and as a            member or leader in diverse teams, and in multidisciplinary settings."
+        "title": "Individual and team work",
+        "description": "Function effectively as an individual, and as a member or leader in diverse teams, and in multidisciplinary settings."
       },
       {
-        "title": "",
-        "description": "PO10   Communication: Communicate effectively on complex engineering activities        with the engineering community and with society at large, such as, being able      to comprehend and write effective reports and design documentation, make  effective presentations, and give and receive clear instructions."
+        "title": "Communication",
+        "description": "Communicate effectively on complex engineering activities with the engineering community and with society at large, such as, being able to comprehend and write effective reports and design documentation, make effective presentations, and give and receive clear instructions."
       },
       {
-        "title": "",
-        "description": "PO11   Project management and finance: Demonstrate knowledge and    understanding  of the engineering and management principles and apply       these to one’s own work,  as a member and leader in a team, to manage             projects and in multidisciplinary environments"
+        "title": "Project management and finance",
+        "description": "Demonstrate knowledge and understanding of the engineering and management principles and apply these to one’s own work, as a member and leader in a team, to manage projects and in multidisciplinary environments."
       },
       {
-        "title": "",
-        "description": "PO12   Life-long learning Recognize the need for, and have the preparation and   ability to engage in  independent and life-long learning in the  broadest   context of technological change."
+        "title": "Life-long learning",
+        "description": "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
       }
     ],
     "faculty": [
@@ -236,7 +236,7 @@
         "department": "Chemical Engineering",
         "email": "ganeshevst@gmail.com",
         "facultyId": "",
-        "experience": "10 Years,  Months",
+        "experience": "10 Years, 0 Months",
         "joiningDate": "July 1, 2016",
         "teachingSince": "June 27, 2016"
       },
@@ -247,7 +247,7 @@
         "department": "Chemical Engineering",
         "email": "mageshr@apec.edu.in",
         "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "February 19, 2025",
         "teachingSince": ""
       },
@@ -279,19 +279,8 @@
         "designation": "Assistant Professor",
         "department": "Chemical Engineering",
         "email": "safetysingh1996@gmail.com",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "4204437",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years, 4 Months",
+        "facultyId": "4204437",
+        "experience": "0 Years, 4 Months",
         "joiningDate": "February 7, 2026",
         "teachingSince": "February 7, 2026"
       },
@@ -302,7 +291,7 @@
         "department": "Chemical Engineering",
         "email": "swethats@apec.edu.in",
         "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "March 18, 2024",
         "teachingSince": ""
       },
@@ -313,127 +302,236 @@
         "department": "Chemical Engineering",
         "email": "saraswathyg@apec.edu.in",
         "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "November 1, 2023",
         "teachingSince": ""
       }
     ],
     "labs": [
       "Heat Transfer Lab",
-      "LIST OF EQUIPMENTS",
-      "Double Pipe Heat Exchanger",
-      "Shell and Tube Heat Exchanger",
-      "Bare and Finned Tube Heat Exchanger",
-      "Forced Convection",
-      "Natural Convection",
-      "Stefan Boltzmann constant SET UP",
-      "Open Pan Evaporator",
-      "Horizontal Condenser",
-      "Vertical Condenser",
-      "Helical Coils",
-      "Agitated Vessels",
       "Mass Transfer Lab",
-      "LIST OF EQUIPMENTS",
-      "Simple distillation",
-      "Steam distillation",
-      "Packed column distillation",
-      "Diffusivity apparatus",
-      "Liquid-liquid extraction setup",
-      "Vacuum Dryer",
-      "Tray dryer",
-      "Surface evaporation setup",
-      "Batch Reactor",
-      "Continuous Reactor",
-      "Leaching setup",
       "Process Control Lab",
-      "LIST OF EQUIPMENTS",
-      "First order system setup",
-      "Non-Interacting level system",
-      "Interacting level system",
-      "Level system",
-      "Flow system",
-      "Pressure system",
-      "Thermal system",
-      "Control valves",
-      "Cascade Control",
-      "U- tube manometer with Controller",
       "Mechanical Operation Lab",
-      "LIST OF EQUIPMENTS",
-      "Sieve analysis",
-      "Leaf filter",
-      "Plate and Frame Filter press",
-      "Batch Sedimentation setup",
-      "Jaw Crusher",
-      "Ball mill",
-      "Cyclone separator",
-      "Roll Crusher",
-      "Air Elutriator",
-      "Drop weight Crusher",
       "Fluid Mechanics Lab",
-      "LIST OF EQUIPMENTS",
-      "Viscometer",
-      "Venturi meter.",
-      "Orifice meter",
-      "Rotameter",
-      "Weir and Notches",
-      "Open drum with orifice",
-      "Pipes and fittings",
-      "Helical and spiral coils",
-      "Centrifugal pump / Gear pump / Reciprocating",
-      "Packed column",
-      "Fluidized bed",
       "Technical Analysis Lab",
-      "LIST OF EQUIPMENTS",
-      "Bunsen burners",
-      "LPG Cylinder in each row of the Laboratory",
-      "Hot Air Oven",
-      "Hot Plate",
-      "Water Bath",
-      "Magnetic Stirrers",
-      "Mechanical Stirrers",
-      "Refluxion Set up",
-      "Sharp Knives to cut sodium",
-      "Balance :Rough balance, Four digit Balance",
-      "Chemical Reaction Engineering Lab",
-      "LIST OF EQUIPMENTS",
-      "Batch Reactor",
-      "Semi batch reactor",
-      "Plug flow reactor",
-      "CSTR",
-      "Sono- chemical reactor",
-      "Photochemical reactor",
-      "Packed bed reactor",
-      "Combined CSTR and PFR",
-      "CSTR in series",
-      "Student:"
+      "Chemical Reaction Engineering Lab"
     ],
     "placements": [
       {
         "registerNumber": "420420203005",
         "studentName": "LOGESHWAR P",
-        "companyName": "ORCHID Pharma",
-        "salaryPackage": "12000"
+        "companyName": "Orchid Pharma",
+        "salaryPackage": "₹12,000 / Month"
       },
       {
         "registerNumber": "420420203007",
         "studentName": "NANDHAKUMAR S",
-        "companyName": "ORCHID Pharma",
-        "salaryPackage": "12000"
+        "companyName": "Orchid Pharma",
+        "salaryPackage": "₹12,000 / Month"
+      },
+      {
+        "registerNumber": "420420203007",
+        "studentName": "NANDHAKUMAR S",
+        "companyName": "Tagros Chemicals India Ltd",
+        "salaryPackage": "₹13,000 / Month"
       },
       {
         "registerNumber": "420420203009",
         "studentName": "YUVARAJ R",
-        "companyName": "ORCHID Pharma",
-        "salaryPackage": "12000"
+        "companyName": "Orchid Pharma",
+        "salaryPackage": "₹12,000 / Month"
+      },
+      {
+        "registerNumber": "420420203009",
+        "studentName": "YUVARAJ R",
+        "companyName": "Tagros Chemicals India Ltd",
+        "salaryPackage": "₹13,000 / Month"
       },
       {
         "registerNumber": "420420203301",
         "studentName": "DHWATHA J",
-        "companyName": "ORCHID Pharma",
-        "salaryPackage": "12000"
+        "companyName": "Orchid Pharma",
+        "salaryPackage": "₹12,000 / Month"
+      },
+      {
+        "registerNumber": "420420203301",
+        "studentName": "DHWATHA J",
+        "companyName": "Tagros Chemicals India Ltd",
+        "salaryPackage": "₹13,000 / Month"
       }
     ],
-    "rankHolders": [],
+    "rankHolders": [
+      {
+        "academicYear": "2000-2001",
+        "studentName": "SRIDEVI K",
+        "rank": "XVIII"
+      },
+      {
+        "academicYear": "2002-2003",
+        "studentName": "MANIVANNAN P",
+        "rank": "XIV"
+      },
+      {
+        "academicYear": "2002-2003",
+        "studentName": "SENTHIL KUMAR P",
+        "rank": "XVI"
+      },
+      {
+        "academicYear": "2003-2004",
+        "studentName": "RYEES AHMED I",
+        "rank": "VI"
+      },
+      {
+        "academicYear": "2004-2005",
+        "studentName": "RANJANI V",
+        "rank": "I (GOLD MEDAL)"
+      },
+      {
+        "academicYear": "2005-2006",
+        "studentName": "RAMACHANDRAN T",
+        "rank": "VII"
+      },
+      {
+        "academicYear": "2005-2006",
+        "studentName": "SRINIVASAVARADHAN A",
+        "rank": "XIII"
+      },
+      {
+        "academicYear": "2005-2006",
+        "studentName": "TAMILSELVI S",
+        "rank": "XX"
+      },
+      {
+        "academicYear": "2006-2007",
+        "studentName": "SAIYED ALI A",
+        "rank": "IV"
+      },
+      {
+        "academicYear": "2006-2007",
+        "studentName": "SARAVANAN K",
+        "rank": "XX"
+      },
+      {
+        "academicYear": "2007-2008",
+        "studentName": "PREETHI P",
+        "rank": "VII"
+      },
+      {
+        "academicYear": "2008-2009",
+        "studentName": "NITHYA K",
+        "rank": "X"
+      },
+      {
+        "academicYear": "2008-2009",
+        "studentName": "SHANTHI M",
+        "rank": "XIV"
+      },
+      {
+        "academicYear": "2009-2010",
+        "studentName": "SANGEETHA K",
+        "rank": "VIII"
+      },
+      {
+        "academicYear": "2010-2011",
+        "studentName": "GOPALAKRISHNAN R",
+        "rank": "V"
+      },
+      {
+        "academicYear": "2010-2011",
+        "studentName": "VEERARAGHAVAN K",
+        "rank": "XI"
+      },
+      {
+        "academicYear": "2010-2011",
+        "studentName": "JAYASUDHA R",
+        "rank": "XII"
+      },
+      {
+        "academicYear": "2011-2012",
+        "studentName": "KAMALA BHARATHI S",
+        "rank": "IX"
+      },
+      {
+        "academicYear": "2011-2012",
+        "studentName": "KAVIMUHIL M",
+        "rank": "XIV"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "SATHISH KUMAR S",
+        "rank": "XV"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "MUTHUKUMAR K",
+        "rank": "XII"
+      },
+      {
+        "academicYear": "2014-2015",
+        "studentName": "SUJITHA P",
+        "rank": "XIV"
+      },
+      {
+        "academicYear": "2014-2015",
+        "studentName": "NIVETHA E S",
+        "rank": "XIX"
+      },
+      {
+        "academicYear": "2015-2016",
+        "studentName": "NAGESWAR L",
+        "rank": "II"
+      },
+      {
+        "academicYear": "2015-2016",
+        "studentName": "GENESIS PIETY S",
+        "rank": "IX"
+      },
+      {
+        "academicYear": "2015-2016",
+        "studentName": "VIVEKANANDHAN B",
+        "rank": "XVIII"
+      },
+      {
+        "academicYear": "2015-2016",
+        "studentName": "NITHYA K",
+        "rank": "XXI"
+      },
+      {
+        "academicYear": "2016-2017",
+        "studentName": "KALAIVANI J R",
+        "rank": "V"
+      },
+      {
+        "academicYear": "2016-2017",
+        "studentName": "DIVYA P S",
+        "rank": "XIII"
+      },
+      {
+        "academicYear": "2017-2018",
+        "studentName": "SWATHI V",
+        "rank": "XXIII"
+      },
+      {
+        "academicYear": "2021-2022",
+        "studentName": "SHANMUGA PRIYA E",
+        "rank": "IV"
+      },
+      {
+        "academicYear": "2021-2022",
+        "studentName": "SURYAPRAKASH G",
+        "rank": "VII"
+      },
+      {
+        "academicYear": "2021-2022",
+        "studentName": "EZHILARASI P",
+        "rank": "IX"
+      },
+      {
+        "academicYear": "2021-2022",
+        "studentName": "THEANPAVAI M",
+        "rank": "X"
+      }
+    ],
     "publications": {
       "journals": [],
       "books": [],
@@ -1692,14 +1790,14 @@
       "Engage with industry, government, and other stakeholders to translate research discoveries into practical applications, driving economic growth and societal progress."
     ],
     "peos": [
-      "Apply their technical competence in computer science to solve real world problems, with technical and people leadership.",
-      "Conduct cutting edge research and develop solutions on problems of social relevance.",
-      "Work in a business environment, exhibiting team skills, work ethics, adaptability and lifelong learning."
+      "PEO1: Apply their technical competence in computer science to solve real world problems, with technical and people leadership.",
+      "PEO2: Conduct cutting edge research and develop solutions on problems of social relevance.",
+      "PEO3: Work in a business environment, exhibiting team skills, work ethics, adaptability and lifelong learning."
     ],
     "psos": [
-      "Exhibit design and programming skills to build and automate business solutions using cutting edge technologies.",
-      "Strong theoretical foundation leading to excellence and excitement towards research, to provide elegant solutions to complex problems.",
-      "Ability to work effectively with various engineering fields as a team to design, build and develop system applications."
+      "PSO1: Exhibit design and programming skills to build and automate business solutions using cutting edge technologies.",
+      "PSO2: Strong theoretical foundation leading to excellence and excitement towards research, to provide elegant solutions to complex problems.",
+      "PSO3: Ability to work effectively with various engineering fields as a team to design, build and develop system applications."
     ],
     "pos": [
       {
@@ -1759,7 +1857,7 @@
         "department": "Computer Science and Engineering",
         "email": "dhaya@apec.edu.in",
         "facultyId": "",
-        "experience": "25 Years,  Months",
+        "experience": "25 Years, 0 Months",
         "joiningDate": "June 12, 2001",
         "teachingSince": "June 12, 2001"
       },
@@ -1770,7 +1868,7 @@
         "department": "Computer Science and Engineering",
         "email": "jayashris@apec.edu.in",
         "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "January 1, 2024",
         "teachingSince": ""
       },
@@ -1781,7 +1879,7 @@
         "department": "Computer Science and Engineering",
         "email": "sekar@apec.edu.in",
         "facultyId": "",
-        "experience": "16 Years,  Months",
+        "experience": "16 Years, 0 Months",
         "joiningDate": "June 21, 2010",
         "teachingSince": "June 21, 2010"
       },
@@ -1803,7 +1901,7 @@
         "department": "Computer Science and Engineering",
         "email": "chairmadurai@apec.edu.in",
         "facultyId": "",
-        "experience": "9 Years,  Months",
+        "experience": "9 Years, 0 Months",
         "joiningDate": "August 1, 2017",
         "teachingSince": "June 28, 2017"
       },
@@ -1857,18 +1955,7 @@
         "designation": "Assistant Professor",
         "department": "Computer Science and Engineering",
         "email": "swethasasikumar07@gmail.com",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "4204434",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
+        "facultyId": "4204434",
         "experience": "1 Years, 7 Months",
         "joiningDate": "November 3, 2025",
         "teachingSince": "November 3, 2025"
@@ -1878,20 +1965,9 @@
         "qualification": "ME",
         "designation": "Assistant Professor",
         "department": "Computer Science and Engineering",
-        "email": "",
+        "email": "MANOLASKHMI@GMAIL.COM",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "MANOLASKHMI@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "February 1, 2025",
         "teachingSince": ""
       },
@@ -1902,7 +1978,7 @@
         "department": "Computer Science and Engineering",
         "email": "banupriya@apec.edu.in",
         "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "March 1, 2023",
         "teachingSince": ""
       },
@@ -1913,7 +1989,7 @@
         "department": "Computer Science and Engineering",
         "email": "muthupriyak@apec.edu.in",
         "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "March 1, 2023",
         "teachingSince": ""
       },
@@ -1922,20 +1998,9 @@
         "qualification": "ME",
         "designation": "Assistant Professor",
         "department": "Computer Science and Engineering",
-        "email": "",
+        "email": "MMDPSS123@GMAIL.COM",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "MMDPSS123@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "February 1, 2025",
         "teachingSince": ""
       },
@@ -1944,20 +2009,9 @@
         "qualification": "ME",
         "designation": "Assistant Professor",
         "department": "Computer Science and Engineering",
-        "email": "",
+        "email": "APECPRIYA@GMAIL.COM",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "APECPRIYA@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "August 12, 2024",
         "teachingSince": ""
       },
@@ -1966,490 +2020,659 @@
         "qualification": "ME",
         "designation": "Assistant Professor",
         "department": "Computer Science and Engineering",
-        "email": "",
+        "email": "THAMARAIVASU.SELVI06@GMAIL.COM",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "THAMARAIVASU.SELVI06@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
+        "experience": "0 Years, 0 Months",
         "joiningDate": "May 20, 2024",
-        "teachingSince": "Study Materials:"
-      },
-      {
-        "name": "I SEMESTER",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "II SEMESTER",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "III SEMESTER",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "IV SEMESTER",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "V SEMESTER",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "VI SEMESTER",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "LAB MANUALS",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "CS3461 - OPERATING SYSTEMS LABORATORY",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "VII SEM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
         "teachingSince": ""
       }
     ],
-    "labs": [],
+    "labs": [
+      "Operating Systems Laboratory",
+      "Artificial Intelligence and Machine Learning Laboratory",
+      "Computer Networks Laboratory",
+      "Data Science Laboratory",
+      "Database Management Systems Laboratory",
+      "Digital Principles & Computer Organization Laboratory",
+      "Data Structures Laboratory",
+      "Object Oriented Programming Laboratory"
+    ],
     "placements": [
       {
         "registerNumber": "420420104001",
         "studentName": "AJITH R",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104001",
+        "studentName": "AJITH R",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104002",
         "studentName": "ARUNA B",
-        "companyName": "1. Seval Software Sollutions",
+        "companyName": "Seval Software Solutions",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104004",
         "studentName": "BHARATHI M",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104005",
         "studentName": "BHARATHI ARASAN A",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104005",
+        "studentName": "BHARATHI ARASAN A",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104007",
         "studentName": "CHARUMATHI B",
-        "companyName": "1. Seval Software Sollutions",
+        "companyName": "Seval Software Solutions",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104008",
         "studentName": "DEENA E",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104008",
+        "studentName": "DEENA E",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104010",
         "studentName": "DILLIKUMAR N",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104011",
         "studentName": "GEETHA M",
-        "companyName": "1. Seval Software Sollutions, 2. Zen Cropcare India Pvt. Ltd.",
-        "salaryPackage": "1.8 LPA, 2.2 LPA"
+        "companyName": "Seval Software Solutions",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104011",
+        "studentName": "GEETHA M",
+        "companyName": "Zen Cropcare India Pvt. Ltd.",
+        "salaryPackage": "2.2 LPA"
       },
       {
         "registerNumber": "420420104012",
         "studentName": "GOKULAKRISHNAN S",
-        "companyName": "1. Seval Software Sollutions",
+        "companyName": "Seval Software Solutions",
         "salaryPackage": "4 LPA"
       },
       {
         "registerNumber": "420420104014",
         "studentName": "GOWTHAM RAJ S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104014",
+        "studentName": "GOWTHAM RAJ S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104016",
         "studentName": "HARISH N",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104016",
+        "studentName": "HARISH N",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104017",
         "studentName": "HARISHKUMAR R",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104017",
+        "studentName": "HARISHKUMAR R",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104019",
         "studentName": "ISHWARYA SAKTHI S",
-        "companyName": "1. Zen Cropcare India Pvt. Ltd. 2. EOS Global 3. Forte Management Services",
-        "salaryPackage": "2.2 LPA, 1.8 LPA,  1.5 LPA"
+        "companyName": "Zen Cropcare India Pvt. Ltd.",
+        "salaryPackage": "2.2 LPA"
+      },
+      {
+        "registerNumber": "420420104019",
+        "studentName": "ISHWARYA SAKTHI S",
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104019",
+        "studentName": "ISHWARYA SAKTHI S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104020",
         "studentName": "JAYANTHI N",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104020",
+        "studentName": "JAYANTHI N",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104021",
         "studentName": "KAMALESHWARAN K",
-        "companyName": "1. Digital EPCS",
+        "companyName": "Digital EPCS",
         "salaryPackage": "4 LPA"
       },
       {
         "registerNumber": "420420104022",
-        "studentName": "KANISHKAR.S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "studentName": "KANISHKAR S",
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104022",
+        "studentName": "KANISHKAR S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104023",
         "studentName": "KARTHI K",
-        "companyName": "1. OM Innovations",
+        "companyName": "OM Innovations",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104024",
         "studentName": "KARTHIGA A",
-        "companyName": "1. Seval Software Sollutions",
+        "companyName": "Seval Software Solutions",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104025",
         "studentName": "KARTHIKEYAN A",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104025",
+        "studentName": "KARTHIKEYAN A",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104026",
         "studentName": "KATHIJA FYROSE FATHIMA B",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104026",
+        "studentName": "KATHIJA FYROSE FATHIMA B",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104027",
         "studentName": "KAVIYARASU V",
-        "companyName": "1. OM Innovations",
+        "companyName": "OM Innovations",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104028",
         "studentName": "KRISHNA KUMAR R",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104028",
+        "studentName": "KRISHNA KUMAR R",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104029",
         "studentName": "LOKESHKUMAR V",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104029",
+        "studentName": "LOKESHKUMAR V",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104030",
         "studentName": "MADHUMITHA G",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104030",
+        "studentName": "MADHUMITHA G",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104031",
         "studentName": "MADUMITHA R",
-        "companyName": "1. Seval Software Sollutions",
+        "companyName": "Seval Software Solutions",
         "salaryPackage": "4 LPA"
       },
       {
         "registerNumber": "420420104032",
         "studentName": "Muthuraj M",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104032",
+        "studentName": "Muthuraj M",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104034",
         "studentName": "NAVEEN B",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104034",
+        "studentName": "NAVEEN B",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104035",
         "studentName": "NEDUNCHEZHIAN M",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104035",
+        "studentName": "NEDUNCHEZHIAN M",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104036",
-        "studentName": "RAJALAKSHMI.J",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "studentName": "RAJALAKSHMI J",
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104036",
+        "studentName": "RAJALAKSHMI J",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104037",
         "studentName": "RAJARAJAN K",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104037",
+        "studentName": "RAJARAJAN K",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104038",
         "studentName": "SAKTHI NANDHA KUMAR",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104039",
         "studentName": "SAKTHISWETHA J",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104039",
+        "studentName": "SAKTHISWETHA J",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104040",
         "studentName": "SAKTHI UMA S",
-        "companyName": "1. Pilntron 2. EOS Global 3. Forte Management Services",
-        "salaryPackage": "3.5 LPA,  1.8 LPA,  1.5 LPA"
+        "companyName": "Pilntron",
+        "salaryPackage": "3.5 LPA"
+      },
+      {
+        "registerNumber": "420420104040",
+        "studentName": "SAKTHI UMA S",
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104040",
+        "studentName": "SAKTHI UMA S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104041",
         "studentName": "SANGAVI S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104041",
+        "studentName": "SANGAVI S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104042",
         "studentName": "SANMATHI S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104042",
+        "studentName": "SANMATHI S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104043",
         "studentName": "SANTHAPRASANTHSHA V",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104043",
+        "studentName": "SANTHAPRASANTHSHA V",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104044",
         "studentName": "SEDHUMADHAVAN V",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104046",
         "studentName": "SINDHU K",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104046",
+        "studentName": "SINDHU K",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104047",
         "studentName": "SOWNDARYA K",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104047",
+        "studentName": "SOWNDARYA K",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104048",
-        "studentName": "SRIMATHI.V",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "studentName": "SRIMATHI V",
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104048",
+        "studentName": "SRIMATHI V",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104049",
         "studentName": "SRINIVAS S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104049",
+        "studentName": "SRINIVAS S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104050",
         "studentName": "SURIYA R S",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104051",
         "studentName": "SWATHI P S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104051",
+        "studentName": "SWATHI P S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104053",
         "studentName": "SWETHA S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104053",
+        "studentName": "SWETHA S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104054",
         "studentName": "TEENA D",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104054",
+        "studentName": "TEENA D",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104055",
         "studentName": "VAHULTHASAN T",
-        "companyName": "1. Forte Management Services",
+        "companyName": "Forte Management Services",
         "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104056",
         "studentName": "VANITHA LAKSHMI G",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104056",
+        "studentName": "VANITHA LAKSHMI G",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104057",
         "studentName": "VANMATHI S",
-        "companyName": "1. Rinex-Education 2. FACE Prep",
-        "salaryPackage": "3 LPA,  5 LPA"
+        "companyName": "FACE Prep",
+        "salaryPackage": "5 LPA"
+      },
+      {
+        "registerNumber": "420420104057",
+        "studentName": "VANMATHI S",
+        "companyName": "Rinex-Education",
+        "salaryPackage": "3 LPA"
       },
       {
         "registerNumber": "420420104058",
         "studentName": "VIGNESHKUMAR D",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104058",
+        "studentName": "VIGNESHKUMAR D",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104060",
         "studentName": "YAZHINI E",
-        "companyName": "1. FACE Prep, 2. Infiniti Software Sollutions, 3. Avasoft",
-        "salaryPackage": "3 LPA, 4 LPA, 5 LPA"
+        "companyName": "Avasoft",
+        "salaryPackage": "5 LPA"
+      },
+      {
+        "registerNumber": "420420104060",
+        "studentName": "YAZHINI E",
+        "companyName": "Infiniti Software Solutions",
+        "salaryPackage": "4 LPA"
+      },
+      {
+        "registerNumber": "420420104060",
+        "studentName": "YAZHINI E",
+        "companyName": "FACE Prep",
+        "salaryPackage": "3 LPA"
       },
       {
         "registerNumber": "420420104061",
         "studentName": "YUVASREE C",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104061",
+        "studentName": "YUVASREE C",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104301",
         "studentName": "CHANDRASEKARAN S",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104301",
+        "studentName": "CHANDRASEKARAN S",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104302",
         "studentName": "DEEPALAKSHMI R",
-        "companyName": "1. Forte Management Services",
+        "companyName": "Forte Management Services",
         "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104304",
         "studentName": "HARI HARAN R",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104305",
         "studentName": "HARISH E",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104305",
+        "studentName": "HARISH E",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104306",
         "studentName": "HEM KUMAR V",
-        "companyName": "1. EOS Global",
+        "companyName": "EOS Global",
         "salaryPackage": "1.8 LPA"
       },
       {
         "registerNumber": "420420104307",
         "studentName": "JAYASHREE K",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104307",
+        "studentName": "JAYASHREE K",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104311",
         "studentName": "VIJAYAKUMAR E",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104311",
+        "studentName": "VIJAYAKUMAR E",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104312",
         "studentName": "ZAHUL HUK N",
-        "companyName": "1. EOS Global 2. Forte Management Services",
-        "salaryPackage": "1.8 LPA,  1.5 LPA"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420104312",
+        "studentName": "ZAHUL HUK N",
+        "companyName": "Forte Management Services",
+        "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420140309",
         "studentName": "TAMILSELVAN T",
-        "companyName": "1. OM Innovations",
+        "companyName": "OM Innovations",
         "salaryPackage": "1.5 LPA"
       },
       {
         "registerNumber": "420420104038",
         "studentName": "SAKTHI NANDHA KUMAR",
-        "companyName": "1. EOS Global",
-        "salaryPackage": "1.8 LPA,"
+        "companyName": "EOS Global",
+        "salaryPackage": "1.8 LPA"
       }
     ],
     "rankHolders": [],
@@ -2460,10 +2683,64 @@
     },
     "toppers": [
       {
-        "studentName": "Semester",
-        "yearSem": "",
-        "gpa": "KEERTHANA P",
-        "rank": ""
+        "studentName": "KEERTHANA P",
+        "yearSem": "Semester III",
+        "gpa": "9.18",
+        "rank": "1"
+      },
+      {
+        "studentName": "SAMUNDEESHWARI J",
+        "yearSem": "Semester III",
+        "gpa": "9.05",
+        "rank": "2"
+      },
+      {
+        "studentName": "MATHIYARASI P",
+        "yearSem": "Semester III",
+        "gpa": "8.91",
+        "rank": "3"
+      },
+      {
+        "studentName": "SWATHIKA A",
+        "yearSem": "Semester V",
+        "gpa": "9.46",
+        "rank": "1"
+      },
+      {
+        "studentName": "SOWMIYA R",
+        "yearSem": "Semester V",
+        "gpa": "9.00",
+        "rank": "2"
+      },
+      {
+        "studentName": "JAYANTHI M",
+        "yearSem": "Semester V",
+        "gpa": "8.90",
+        "rank": "3"
+      },
+      {
+        "studentName": "SINDHU K",
+        "yearSem": "Semester VII",
+        "gpa": "9.45",
+        "rank": "1"
+      },
+      {
+        "studentName": "TEENA D",
+        "yearSem": "Semester VII",
+        "gpa": "9.05",
+        "rank": "2"
+      },
+      {
+        "studentName": "YUVASHREE C",
+        "yearSem": "Semester VII",
+        "gpa": "9.05",
+        "rank": "2"
+      },
+      {
+        "studentName": "SAKTHIUMA S",
+        "yearSem": "Semester VII",
+        "gpa": "9.02",
+        "rank": "4"
       }
     ]
   },
@@ -4029,49 +4306,693 @@
   "eee": {
     "key": "eee",
     "name": "Electrical and Electronics Engineering",
-    "about": "The Department of Electrical and Electronics Engineering (EEE) was established to prepare students for careers in power systems, electrical machines, control engineering, and electronics design, focusing on innovation and sustainable energy technologies.",
-    "vision": "To produce competent electrical engineers with high ethical values and technical capabilities to serve the society and industry through research and development.",
+    "about": "The department of Electrical and Electronics Engineering was established in the year of 1993 with an intake of 30 students and 1994 with an intake of 60 students in UG. In 2009 M.E-Power Electronics and Drives was started with an intake of 18 and Research centre was approved by Anna University, Chennai in the year 2011. The Department is NBA accredited in the year 2004, 2008 and 2012. The department is equipped with fully established laboratories such as Power electronics Laboratory, Power Systems Laboratory, Electrical Machines-I and II Laboratory, Control & Instrumentation Laboratory, Electronic Devices and Circuits Laboratory, Linear Integrated Circuits Laboratory, Microprocessor and Microcontroller Laboratory and Engineering Workshop Laboratory. The Association of Electrical Engineers is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department has been a member of reputed societies such Institute of Electrical and Electronics Engineer (IEEE), Indian Society for technical education (ISTE) etc.",
+    "vision": "To produce high class Electrical and Electronics Engineering (EEE) Department is committed to create World class engineers who are recognized in their society, research and also Renowned with human values and ethics.",
     "mission": [
-      "To provide high-quality education and training in electrical and electronics engineering.",
-      "To promote innovation, research, and collaborative projects with industry.",
-      "To instill moral and ethical values in students to handle professional challenges."
+      "To achieve excellence in teaching and research at par with international standards by providing high quality teaching and learning environment.",
+      "Creating a sense of ethics and service for the benefit of society.",
+      "Producing competent and socially conscience EEE engineers fully equipped with highest personal and professional standards to achieve overall development of the country.",
+      "Empowering students and professionals with the state-of-art knowledge and technological skills."
     ],
     "peos": [
-      "Gain technical competence with analytical thinking to meet the requirements of electrical industry.",
-      "Exhibit leadership, teamwork, and entrepreneurship to solve real-world engineering issues.",
-      "Commit to lifelong learning and adaptive capability in modern power systems."
+      "PEO1: Find employment in Core Electrical and Electronics Engineering and service sectors.",
+      "PEO2: Get elevated to technical lead position and lead the organization competitively.",
+      "PEO3: Enter into higher studies leading to post-graduate and research degrees. Become consultant and provide solutions to the practical problems of core organization.",
+      "PEO4: Become an entrepreneur and be part of electrical and electronics product and service industries."
     ],
     "psos": [
-      "Analyze, design, and implement electrical systems, power grids, and control systems.",
-      "Apply modern software and hardware tools for electrical automation and renewable energy integration."
+      "PSO1: Foundation of Electrical Engineering: Ability to understand the principles and working of electrical components, circuits, systems and control that are forming a part of power generation, transmission, distribution, utilization, conservation and energy saving. Students can assess the power management, auditing, crisis and energy saving aspects.",
+      "PSO2: Foundation of Mathematical Concepts: Ability to apply mathematical methodologies to solve problems related with electrical engineering using appropriate engineering tools and algorithms.",
+      "PSO3: Computing and Research Ability: Ability to use knowledge in various domains to identify research gaps and hence to provide solution which leads to new ideas and innovations."
     ],
-    "pos": [],
+    "pos": [
+      {
+        "title": "Engineering knowledge",
+        "description": "Apply knowledge of mathematics, basic science and engineering science."
+      },
+      {
+        "title": "Problem analysis",
+        "description": "Identify, formulate and solve engineering problems."
+      },
+      {
+        "title": "Design/development of solutions",
+        "description": "Design an electrical system or process to improve its performance, satisfying its constraints."
+      },
+      {
+        "title": "Conduct investigations of complex problems",
+        "description": "Conduct experiments in electrical and electronics systems and interpret the data."
+      },
+      {
+        "title": "Modern tool usage",
+        "description": "Apply various tools and techniques to improve the efficiency of the system."
+      },
+      {
+        "title": "The Engineer and society",
+        "description": "Conduct themselves to uphold the professional and social obligations."
+      },
+      {
+        "title": "Environment and sustainability",
+        "description": "Design the system with environment consciousness and sustainable development."
+      },
+      {
+        "title": "Ethics",
+        "description": "Interacting industry, business and society in a professional and ethical manner."
+      },
+      {
+        "title": "Individual and team work",
+        "description": "Function in a multidisciplinary team."
+      },
+      {
+        "title": "Communication",
+        "description": "Proficiency in oral and written Communication."
+      },
+      {
+        "title": "Project management and finance",
+        "description": "Implement Cost effective and improved system."
+      },
+      {
+        "title": "Life-long learning",
+        "description": "Continue professional development and learning as a life-long activity."
+      }
+    ],
     "faculty": [
       {
-        "name": "Faculty members directory",
-        "qualification": "",
-        "designation": "Staff",
+        "name": "Dr.P.Rajivgandhi",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Head of Department",
         "department": "Electrical and Electronics Engineering",
-        "email": "eee@apec.edu.in",
+        "email": "rajivgandhi@apec.edu.in",
+        "facultyId": "14TGEE1243",
+        "experience": "12 Years, 0 Months",
+        "joiningDate": "June 11, 2014",
+        "teachingSince": "June 11, 2014"
+      },
+      {
+        "name": "Dr.S.A.Elankurisil",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "elankurisil@apec.edu.in",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
+        "experience": "28 Years, 11 Months",
+        "joiningDate": "August 3, 1998",
+        "teachingSince": "July 3, 1998"
+      },
+      {
+        "name": "Dr. R. Srivel",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Associate Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "srivel@apec.edu.in",
+        "facultyId": "",
+        "experience": "5 Years, 8 Months",
+        "joiningDate": "October 1, 2021",
+        "teachingSince": "October 1, 2021"
+      },
+      {
+        "name": "Mrs.P.Tamizharasi",
+        "qualification": "M.E., (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "tamizharasi@apec.edu.in",
+        "facultyId": "",
+        "experience": "23 Years, 6 Months",
+        "joiningDate": "December 10, 2023",
+        "teachingSince": "December 11, 2003"
+      },
+      {
+        "name": "Dr.N.Manimaran",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "manimaran@apec.edu.in",
+        "facultyId": "",
+        "experience": "18 Years, 7 Months",
+        "joiningDate": "March 22, 2012",
+        "teachingSince": "November 9, 2008"
+      },
+      {
+        "name": "Mr. P. Ramesh",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "rameshrara84@gmail.com",
+        "facultyId": "5114069",
+        "experience": "10 Years, 5 Months",
+        "joiningDate": "December 22, 2025",
+        "teachingSince": "January 4, 2016"
+      },
+      {
+        "name": "Dr.S.Muthukumar",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "muthukumar@apec.edu.in",
+        "facultyId": "",
+        "experience": "5 Years, 8 Months",
+        "joiningDate": "October 1, 2021",
+        "teachingSince": "October 1, 2021"
+      },
+      {
+        "name": "Mr.D.Sarathkumar",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "sarathkumar@apec.edu.in",
+        "facultyId": "",
+        "experience": "4 Years, 10 Months",
+        "joiningDate": "August 11, 2022",
+        "teachingSince": "August 11, 2022"
+      },
+      {
+        "name": "Dr.T.Kuntavai",
+        "qualification": "ME, Ph.D",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "kuntavai2000@gmail.com",
+        "facultyId": "",
+        "experience": "0 Years, 0 Months",
+        "joiningDate": "June 28, 2022",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs.D.K.Shobana",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "shobananadhakumar85@gmail.com",
+        "facultyId": "",
+        "experience": "0 Years, 0 Months",
+        "joiningDate": "August 29, 2022",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mrs.V.Vanitha",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "surenthuya@gmail.com",
+        "facultyId": "",
+        "experience": "0 Years, 0 Months",
+        "joiningDate": "March 1, 2023",
+        "teachingSince": ""
+      },
+      {
+        "name": "Mr. B. Sakthivel",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electrical and Electronics Engineering",
+        "email": "sakthivelb@apec.edu.in",
+        "facultyId": "4204439",
+        "experience": "0 Years, 0 Months",
+        "joiningDate": "December 4, 2025",
         "teachingSince": ""
       }
     ],
     "labs": [
-      "Electrical Machines Lab",
-      "Power Electronics Lab",
-      "Control Systems Lab",
-      "Power System Simulation Lab",
-      "Measurement and Instrumentation Lab"
+      "Electrical Machines-I Laboratory",
+      "Electrical Machines-II Laboratory",
+      "Control and Instrumentation Laboratory",
+      "Power Electronics Laboratory",
+      "Power Electronics And Drives Laboratory",
+      "Engineering Workshop Laboratory",
+      "Research & Development (R&D) Laboratory",
+      "Power System Simulation Laboratory"
     ],
-    "placements": [],
-    "rankHolders": [],
+    "placements": [
+      {
+        "registerNumber": "420420105311",
+        "studentName": "Sudharsan. P",
+        "companyName": "Zencorp",
+        "salaryPackage": "2.2 LPA"
+      },
+      {
+        "registerNumber": "420420105311",
+        "studentName": "Sudharsan. P",
+        "companyName": "Axis Global",
+        "salaryPackage": "2.2 LPA"
+      },
+      {
+        "registerNumber": "420420105314",
+        "studentName": "Venkatraman H",
+        "companyName": "Zencorp",
+        "salaryPackage": "2.2 LPA"
+      },
+      {
+        "registerNumber": "420420105004",
+        "studentName": "Manikandan S",
+        "companyName": "India Japan Lighting",
+        "salaryPackage": "1.98 LPA"
+      },
+      {
+        "registerNumber": "420420105011",
+        "studentName": "Suriya M R",
+        "companyName": "India Japan Lighting",
+        "salaryPackage": "1.98 LPA"
+      },
+      {
+        "registerNumber": "420420105014",
+        "studentName": "Vignesh A",
+        "companyName": "India Japan Lighting",
+        "salaryPackage": "1.98 LPA"
+      },
+      {
+        "registerNumber": "420420105307",
+        "studentName": "Madhankumar.B",
+        "companyName": "India Japan Lighting",
+        "salaryPackage": "1.98 LPA"
+      },
+      {
+        "registerNumber": "420420105315",
+        "studentName": "Vignesh k",
+        "companyName": "India Japan Lighting",
+        "salaryPackage": "1.98 LPA"
+      },
+      {
+        "registerNumber": "420420105002",
+        "studentName": "Harine R B",
+        "companyName": "Digital EPCS",
+        "salaryPackage": "4 LPA"
+      },
+      {
+        "registerNumber": "420420105303",
+        "studentName": "Jayasurya.S",
+        "companyName": "Digital EPCS",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105310",
+        "studentName": "Sriramanarayanan. P",
+        "companyName": "Digital EPCS",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105003",
+        "studentName": "Kalidasan K",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105010",
+        "studentName": "Sudharsan R",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105013",
+        "studentName": "ValanPradish F",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105301",
+        "studentName": "Deepan S",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105302",
+        "studentName": "Dinesh V",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105304",
+        "studentName": "Jeeva. S",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105306",
+        "studentName": "Kamalesh S",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105309",
+        "studentName": "Satishkumar. T",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105316",
+        "studentName": "Vignesh. S",
+        "companyName": "Pinstar",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105001",
+        "studentName": "Gokulakrishnan R",
+        "companyName": "Axis Global",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105006",
+        "studentName": "Prabhu C",
+        "companyName": "Axis Global",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105305",
+        "studentName": "Kamalesh. B",
+        "companyName": "Axis Global",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105312",
+        "studentName": "Sudharsan T",
+        "companyName": "Axis Global",
+        "salaryPackage": "1.68 LPA"
+      },
+      {
+        "registerNumber": "420420105005",
+        "studentName": "Nareshkumar E",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105007",
+        "studentName": "Priyanka M",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105008",
+        "studentName": "Ramya K",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105009",
+        "studentName": "Sivahariharan S",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105308",
+        "studentName": "Prakash.A",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105313",
+        "studentName": "Thangeswari S",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      },
+      {
+        "registerNumber": "420420105317",
+        "studentName": "Vijayakumar G",
+        "companyName": "Wonjin Autoparts Pvt. Ltd.",
+        "salaryPackage": "1.8 LPA"
+      }
+    ],
+    "rankHolders": [
+      {
+        "academicYear": "2001-2002",
+        "studentName": "Mr. T .Rajesh",
+        "rank": "6"
+      },
+      {
+        "academicYear": "2005-2006",
+        "studentName": "Mr.V.Karthi balaji",
+        "rank": "12"
+      },
+      {
+        "academicYear": "2007-2008",
+        "studentName": "Miss.V.Vidhya",
+        "rank": "27"
+      },
+      {
+        "academicYear": "2007-2008",
+        "studentName": "Miss.D.Sangeetha",
+        "rank": "47"
+      },
+      {
+        "academicYear": "2010-2011 (P.G)",
+        "studentName": "Miss.S.Annapoorani",
+        "rank": "9"
+      },
+      {
+        "academicYear": "2011-2012",
+        "studentName": "Mr.S.Prithiveerajan",
+        "rank": "42"
+      },
+      {
+        "academicYear": "2011-2012",
+        "studentName": "Mr.S.Deepak",
+        "rank": "47"
+      },
+      {
+        "academicYear": "2011-2012 (P.G)",
+        "studentName": "Miss.P.Thangam",
+        "rank": "9"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "Miss.D.Aishwarya",
+        "rank": "44"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "Mr.S.Sathishkumar",
+        "rank": "49"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "Miss.R.Gayathri",
+        "rank": "50"
+      },
+      {
+        "academicYear": "2012-2013 (P.G)",
+        "studentName": "Miss.J.Sujitha",
+        "rank": "30"
+      },
+      {
+        "academicYear": "2012-2013 (P.G)",
+        "studentName": "Mr.Abish g kalathil",
+        "rank": "34"
+      },
+      {
+        "academicYear": "2012-2013 (P.G)",
+        "studentName": "Mr.M.Dinesh",
+        "rank": "38"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "Miss.A.R.Ayshwarya",
+        "rank": "35"
+      },
+      {
+        "academicYear": "2013-2014 (P.G)",
+        "studentName": "Mr.R.Naveenkumar",
+        "rank": "28"
+      },
+      {
+        "academicYear": "2013-2014 (P.G)",
+        "studentName": "Mr.R.Kannan",
+        "rank": "43"
+      },
+      {
+        "academicYear": "2013-2014 (P.G)",
+        "studentName": "Mr.S.Kamalsakthi",
+        "rank": "50"
+      },
+      {
+        "academicYear": "2015-2016 (P.G)",
+        "studentName": "Miss.G.Sivapunitha",
+        "rank": "27"
+      },
+      {
+        "academicYear": "2017-2018",
+        "studentName": "Miss.G.Indumathi",
+        "rank": "31"
+      }
+    ],
     "publications": {
-      "journals": [],
-      "books": [],
-      "conferences": []
+      "journals": [
+        {
+          "title": "Improved Gorilla Troops Optimizer-Based Fuzzy PD-(1+PI) Controller for Frequency Regulation of Smart Grid under Symmetry and Cyber Attacks",
+          "author": "Dr.Elankurisil S A",
+          "journal": "Symmetry",
+          "year": "2023",
+          "link": "https://doi.org/10.3390/sym15112013"
+        },
+        {
+          "title": "Grey Wolf Optimization and Fed Fast Terminal Sliding Mode Controllers Based on Interleaved Boost Converters for Symmetric PV Systems under Asymmetric Partial Shading",
+          "author": "Dr.Elankurisil S A",
+          "journal": "Symmetry",
+          "year": "2023",
+          "link": "https://doi.org/10.3390/sym15071339"
+        },
+        {
+          "title": "Highly Efficient BBFIC for Grid-Connected Photovoltaic-Battery Energy Storage System Using Hybrid Optimization Assisted Framework",
+          "author": "Dr.Manimaran N",
+          "journal": "An International Journal of Cybernetics and Systems",
+          "year": "2023",
+          "link": "https://doi.org/10.1080/01969722.2022.2157616"
+        },
+        {
+          "title": "Improved Gorilla Troops Optimizer based Fuzzy PD-(1+PI) controller for frequency regulation of smart grid under symmetry and cyber attacks",
+          "author": "Mr.P.Rajivgandhi",
+          "journal": "Symmetry",
+          "year": "2023",
+          "link": "https://doi.org/10.3390/sym15112013"
+        },
+        {
+          "title": "An Energy Efficient and Cost Reduction based Hybridization Scheme for Mobile Ad-hoc Networks (MANET) over the Internet of Things (IoT)",
+          "author": "Dr.T.Kuntavai",
+          "journal": "International Journal on Recent and Innovation Trends in Computing and Communication",
+          "year": "2023",
+          "link": "https://doi.org/10.17762/ijritcc.v11i2s.6038"
+        },
+        {
+          "title": "Development Of Adaptive Neuro Quantum-Based Hybrid Eo-Anfis Controller for A Two-Switch Buck-Boost Flyback Converter Used in Solar Pv Applications",
+          "author": "Dr.Manimaran N",
+          "journal": "Neuro Quantology",
+          "year": "2022",
+          "link": "https://doi.org/10.14704/nq.2022.20.10.NQ55373"
+        },
+        {
+          "title": "An automation query expansion strategy for information retrieval by using fuzzy based grasshopper optimization algorithm on medical datasets",
+          "author": "Dr. R.Srivel",
+          "journal": "Concurrency and Computation: Practice and Experience",
+          "year": "2022",
+          "link": "https://onlinelibrary.wiley.com/doi/epdf/10.1002/cpe.7418"
+        },
+        {
+          "title": "Dynamic convolutional neural network based e‐waste management and optimized collection planning",
+          "author": "Dr. R.Srivel",
+          "journal": "Concurrency and Computation: Practice and Experience",
+          "year": "2022",
+          "link": "https://doi.org/10.1002/cpe.6941"
+        },
+        {
+          "title": "Integrated GIS and AHP techniques for land suitability assessment of cotton crop in Perambalur District, South India",
+          "author": "Dr. R.Srivel",
+          "journal": "Int Journal of System Assurance Engineering & Management",
+          "year": "2022",
+          "link": "https://doi.org/10.1007/s13198-022-01705-2"
+        },
+        {
+          "title": "A HEALTHCARE COMPANION USING MACHINE LEARNING LOGISTICS AND NATURAL LANGUAGE PROCESSING",
+          "author": "Dr. R.Srivel",
+          "journal": "Neuro Quantology",
+          "year": "2022",
+          "link": "https://doi.org/10.14704/nq.2022.20.5.NQ22767"
+        },
+        {
+          "title": "Adaptive trust based secure and optimal route selection algorithm for mannet using hybrid fuzzy optimization",
+          "author": "Dr. R.Srivel",
+          "journal": "Peer to peer Networking and Applications",
+          "year": "2022",
+          "link": "https://link.springer.com/article/10.1007/s12083-022-01351-2#citeas"
+        },
+        {
+          "title": "Power Quality Enhancement of cascaded H bridge multi-level inverter based distributed STATCOM by standard and intelligent controllers",
+          "author": "P.Rajivgandhi",
+          "journal": "Journal of Controller and Converters",
+          "year": "2021",
+          "link": "https://www.researchgate.net/publication/355412713_Power_Quality_Enhancement_of_Cascaded_H-Bridge_Multi_Level_Inverter_based_Distributed-STATCOM_by_Standard_and_Intelligent_Controllers"
+        },
+        {
+          "title": "Artificial intelligent controller-based power quality improvement for microgrid integration of photovoltaic system using new cascade multilevel inverter",
+          "author": "Dr.Elankurisil S A",
+          "journal": "Soft Computing",
+          "year": "2020",
+          "link": "https://doi.org/10.1007/s00500-020-05120-2"
+        },
+        {
+          "title": "Fuzzy logic technique experiment on Hybrid system to enhance quality of power sustainability",
+          "author": "P.Rajivgandhi",
+          "journal": "Journal of Xidian University",
+          "year": "2020",
+          "link": "https://xadzkjdx.cn/"
+        },
+        {
+          "title": "Improved Efficiency of the Solar Energy in Photovoltaic systems with Direct control Method using SEPIC Converter",
+          "author": "P.Rajivgandhi",
+          "journal": "International Journal of Advanced Research in Science, Communication and Technology",
+          "year": "2020",
+          "link": "https://ijarsct.co.in/Paper32.pdf"
+        },
+        {
+          "title": "Adaptive wavelet ELM-fuzzy inference system-based soft computing model for power estimation in sustainable CMOS VLSI Circuits",
+          "author": "Dr.T.Kuntavi",
+          "journal": "Soft Computing",
+          "year": "2019",
+          "link": "https://doi.org/10.1007/s00500-019-04636-6"
+        }
+      ],
+      "books": [
+        {
+          "title": "Flexible AC Transmission Systems (FACTS)",
+          "author": "P.Rajivgandhi",
+          "publisher": "Book Field Publications (BKF), Chennai, 2015"
+        },
+        {
+          "title": "Bio Medical Instrumentation (BMI)",
+          "author": "P.Rajivgandhi",
+          "publisher": "Book Field Publications (BKF), Chennai, 2015"
+        },
+        {
+          "title": "Bio Medical Instrumentation (BMI)",
+          "author": "P.Rajivgandhi",
+          "publisher": "Book Field Publications (BKF), Chennai, 2016"
+        },
+        {
+          "title": "Basic Electrical and Electronics Engineering (BEEE)",
+          "author": "P.Rajivgandhi",
+          "publisher": "Book Field Publications (BKF), Chennai, 2016"
+        },
+        {
+          "title": "Circuit Theory (CT)",
+          "author": "P.Rajivgandhi",
+          "publisher": "Book Field Publications (BKF), Chennai, 2017"
+        },
+        {
+          "title": "Power System Operation and Control (PSOC)",
+          "author": "P.Rajivgandhi",
+          "publisher": "Book Field Publications (BKF), Chennai, 2017"
+        }
+      ],
+      "conferences": [
+        {
+          "paperTitle": "Performance Improvement Of Off-Grid Hybrid Renewable Energy System With Integrated Power System Of UPQC",
+          "faculty": "Mr.P.Rajivgandhi",
+          "proceeding": "International Conference on Recent trends in Artificial Intelligence on Radiation effects and protection in nuclear power system (NCRTARNS-24)",
+          "isbn": "Virtual Mode",
+          "publisher": "Karpaga vinayaga College of Engineering and Technology, Chennai"
+        },
+        {
+          "paperTitle": "Model predictive controlled PV RBC based custom power device for quality enhancement",
+          "faculty": "Mr.P.Rajivgandhi",
+          "proceeding": "National Conference on Innovative technologies in electrical, electronics & communication (ITEC-2023)",
+          "isbn": "Virtual Mode",
+          "publisher": "Karpaga vinayaga College of Engineering and Technology, Chennai"
+        },
+        {
+          "paperTitle": "Design and Stabilization of SMIB Based Power System by using Particle Swarm Optimization Algorithm",
+          "faculty": "Mr.P.Rajivgandhi",
+          "proceeding": "International Conference On Emerging Trends In Science And Circuit Engineering (ICESCE-2021)",
+          "isbn": "Virtual Mode",
+          "publisher": "Adhi College of Engineering and Technology, Kanchipuram"
+        },
+        {
+          "paperTitle": "A Fuzzy based control of VSI based mitigation of power quality issues in power distribution systems with modified UPQC topology",
+          "faculty": "Mr.P.Rajivgandhi",
+          "proceeding": "International Conference on Challenges and opportunities in renewable energy, smart systems and E Mobility (ICCORSE-2020)",
+          "isbn": "Virtual Mode",
+          "publisher": "Easwari Engineering College at Chennai"
+        },
+        {
+          "paperTitle": "Reactive Power Control of Grid connected WECS with Levy Flight Grey Wolf Optimizer Algorithm by UPFC",
+          "faculty": "Mr.P.Rajivgandhi",
+          "proceeding": "IEEE International Conference on Computation of Power, Energy Information and Communication (ICCPEIC -2019)",
+          "isbn": "Virtual Mode",
+          "publisher": "Adhiparasakthi Engineering College at Melmaruvathur"
+        }
+      ]
     },
     "toppers": []
   },

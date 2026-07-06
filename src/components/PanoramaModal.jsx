@@ -5,6 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 const sceneTitles = {
   mainGate: 'Adhiparasakthi Engineering College Entrance Gate 360° Virtual Tour',
   junctionOne: 'Adhiparasakthi Engineering College Junction 1 360° Virtual Tour',
+  junctionTwo: 'Adhiparasakthi Engineering College Junction 2 360° Virtual Tour',
+  junctionThree: 'Adhiparasakthi Engineering College Junction 3 360° Virtual Tour',
+  library: 'Central Library 360° Virtual Tour',
+  pgBlock: 'PG Block 360° Virtual Tour',
+  amma: 'Amma Statue 360° Virtual Tour',
   reception: 'Main Block Reception 360° Virtual Tour',
   aimlLab: 'AIML Research Lab 360° Virtual Tour'
 };
@@ -17,6 +22,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
   const [error, setError] = useState(null);
   const [activeScene, setActiveScene] = useState(initialScene);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   // Keep a mutable ref of the playing state to avoid stale closure in Pannellum load callbacks
   const isPlayingRef = useRef(true);
@@ -24,6 +30,29 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
+
+  // Preload all panorama images on mount/open to ensure instant transitions
+  useEffect(() => {
+    if (isOpen) {
+      setIsInitialLoad(true); // Reset initial load overlay on open
+      const panoramaImages = [
+        "/Main_Gate.jpg",
+        "/Junction 1.jpeg",
+        "/junction 2.jpeg",
+        "/Junctiion 3 .jpg.jpeg",
+        "/amma_.jpg.jpeg",
+        "/main block Reception_.jpg.jpeg",
+        "/Aiml_Lab_1.jpg",
+        "/Library__2.jpg.jpeg",
+        "/P_G_Block__1.jpg.jpeg"
+      ];
+      
+      panoramaImages.forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -96,13 +125,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
                     yaw: -90, // Placed on the West side of the Entrance Gate panorama
                     createTooltipFunc: createCustomHotspot,
-                    createTooltipArgs: { text: "Walk to Junction 1", sceneId: "junctionOne" }
+                    createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   }
                 ]
               },
@@ -113,19 +142,25 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
-                  {
-                    pitch: -5,
-                    yaw: -90, // Placed on the West side of Junction 1 panorama
-                    createTooltipFunc: createCustomHotspot,
-                    createTooltipArgs: { text: "Walk to Main Block Reception", sceneId: "reception" }
-                  },
                   {
                     pitch: -5,
                     yaw: 90, // Placed on the East side (Back to Gate)
                     createTooltipFunc: createCustomHotspot,
-                    createTooltipArgs: { text: "Return to Entrance Gate", sceneId: "mainGate" }
+                    createTooltipArgs: { text: "Entrance Gate", sceneId: "mainGate" }
+                  },
+                  {
+                    pitch: -5,
+                    yaw: -80, // Moved slightly more towards west (-80)
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Reception", sceneId: "reception" }
+                  },
+                  {
+                    pitch: -5,
+                    yaw: 180, // South side of Junction 1 leads to Junction 2
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
                   }
                 ]
               },
@@ -136,19 +171,42 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
-                    yaw: -90, // Placed on the West side of Reception (Walk to AIML Lab)
+                    yaw: 80, // Return path to Junction 1
                     createTooltipFunc: createCustomHotspot,
-                    createTooltipArgs: { text: "Walk to AIML Research Lab", sceneId: "aimlLab" }
+                    createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
                     pitch: -5,
-                    yaw: 90, // Placed on the East side (Back to Junction 1)
+                    yaw: -90, // West side of Reception leads to Amma Statue
                     createTooltipFunc: createCustomHotspot,
-                    createTooltipArgs: { text: "Return to Junction 1", sceneId: "junctionOne" }
+                    createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
+                  }
+                ]
+              },
+              amma: {
+                title: "Amma Statue",
+                type: "equirectangular",
+                panorama: "/amma_.jpg.jpeg",
+                yaw: -45,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
+                hotSpots: [
+                  {
+                    pitch: -5,
+                    yaw: 90, // East side of Amma Statue goes back to Reception
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Reception", sceneId: "reception" }
+                  },
+                  {
+                    pitch: -5,
+                    yaw: -45, // North-West side leads to AIML Lab
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "AIML Lab", sceneId: "aimlLab" }
                   }
                 ]
               },
@@ -159,13 +217,99 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 yaw: -45, // Start from North-West direction
                 pitch: 0,
                 hfov: 110,
-                autoRotate: -4.0, // Moving leftwards (counter-clockwise) at a faster speed
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
                     pitch: -5,
-                    yaw: 90, // Placed on the East side (Back to Reception)
+                    yaw: 135, // South-East side goes back to Amma Statue
                     createTooltipFunc: createCustomHotspot,
-                    createTooltipArgs: { text: "Return to Reception", sceneId: "reception" }
+                    createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
+                  }
+                ]
+              },
+              junctionTwo: {
+                title: "Junction 2",
+                type: "equirectangular",
+                panorama: "/junction 2.jpeg",
+                yaw: -45,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
+                hotSpots: [
+                  {
+                    pitch: -5,
+                    yaw: 0, // North side of Junction 2 goes back to Junction 1
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
+                  },
+                  {
+                    pitch: -5,
+                    yaw: 180, // South side of Junction 2 leads directly to PG Block
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
+                  }
+                ]
+              },
+              pgBlock: {
+                title: "PG Block",
+                type: "equirectangular",
+                panorama: "/P_G_Block__1.jpg.jpeg",
+                yaw: -45,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
+                hotSpots: [
+                  {
+                    pitch: -5,
+                    yaw: -10, // Adjusted -10 from current position (0)
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
+                  },
+                  {
+                    pitch: -5,
+                    yaw: 170, // Adjusted -10 from current position (180)
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
+                  }
+                ]
+              },
+              junctionThree: {
+                title: "Junction 3",
+                type: "equirectangular",
+                panorama: "/Junctiion 3 .jpg.jpeg",
+                yaw: -45,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
+                hotSpots: [
+                  {
+                    pitch: -5,
+                    yaw: 30, // Adjusted +30 from current position (0)
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
+                  },
+                  {
+                    pitch: -5,
+                    yaw: 220, // Adjusted +60 from current position (160)
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Library", sceneId: "library" }
+                  }
+                ]
+              },
+              library: {
+                title: "Central Library",
+                type: "equirectangular",
+                panorama: "/Library__2.jpg.jpeg",
+                yaw: -45,
+                pitch: 0,
+                hfov: 110,
+                autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
+                hotSpots: [
+                  {
+                    pitch: -5,
+                    yaw: 40, // Opposite direction of 220 is 40
+                    createTooltipFunc: createCustomHotspot,
+                    createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
                   }
                 ]
               }
@@ -184,11 +328,12 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           viewer.on('load', () => {
             setLoading(false);
             setIsTransitioning(false);
+            setIsInitialLoad(false); // First scene loaded, hide solid loader screen
             // Apply current play state to new scene
             if (!isPlayingRef.current) {
               viewer.stopAutoRotate();
             } else {
-              viewer.startAutoRotate(-4.0);
+              viewer.startAutoRotate(4.0);
             }
           });
 
@@ -270,7 +415,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
         viewerInstanceRef.current.stopAutoRotate();
         setIsPlaying(false);
       } else {
-        viewerInstanceRef.current.startAutoRotate(-4.0);
+        viewerInstanceRef.current.startAutoRotate(4.0);
         setIsPlaying(true);
       }
     }
@@ -359,34 +504,34 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             transform: translateY(-3px) !important;
           }
           
-          /* Custom tooltip styling */
+          /* Custom tooltip styling (Permanently visible transparent text labels with strong shadows) */
           .pano-tooltip-text {
             position: absolute;
-            bottom: 54px;
+            top: 56px;
             left: 50%;
-            transform: translateX(-50%) scale(0.9);
-            background: rgba(9, 9, 11, 0.85) !important;
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            transform: translateX(-50%) !important;
+            background: transparent !important;
+            border: none !important;
             color: #ffffff !important;
             font-family: 'Plus Jakarta Sans', sans-serif !important;
-            font-weight: 700 !important;
+            font-weight: 900 !important;
             text-transform: uppercase !important;
-            letter-spacing: 0.06em !important;
-            font-size: 10px !important;
-            padding: 6px 12px !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
-            backdrop-filter: blur(8px) !important;
+            letter-spacing: 0.08em !important;
+            font-size: 24px !important; /* 3x larger than 8-10px original */
+            padding: 4px 8px !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
             white-space: nowrap !important;
-            opacity: 0;
+            opacity: 1 !important; /* Always visible without hover */
             pointer-events: none;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 1), 0 0 5px rgba(0, 0, 0, 1), 2px 2px 4px rgba(0, 0, 0, 0.9) !important;
+            transition: transform 0.2s ease, color 0.2s ease !important;
           }
           
           .custom-pano-hotspot:hover .pano-tooltip-text {
-            opacity: 1 !important;
-            transform: translateX(-50%) scale(1) !important;
-            bottom: 58px;
+            transform: translateX(-50%) scale(1.05) !important;
+            color: #6366f1 !important;
+            text-shadow: 0 0 12px rgba(99, 102, 241, 0.8), 0 0 6px rgba(0, 0, 0, 1) !important;
           }
         ` }} />
 
@@ -428,7 +573,12 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             >
               <option value="mainGate">Entrance Gate</option>
               <option value="junctionOne">Junction 1</option>
+              <option value="junctionTwo">Junction 2</option>
+              <option value="pgBlock">PG Block</option>
+              <option value="junctionThree">Junction 3</option>
+              <option value="library">Central Library</option>
               <option value="reception">Reception</option>
+              <option value="amma">Amma Statue</option>
               <option value="aimlLab">AIML Lab</option>
             </select>
 
@@ -443,7 +593,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
 
         {/* Premium Blur and Motion Transition Overlay */}
         <AnimatePresence>
-          {(loading || isTransitioning) && (
+          {isInitialLoad && (
             <motion.div
               key="transition-overlay"
               initial={{ opacity: 0 }}
@@ -474,6 +624,11 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 <h3 className="text-xs font-black uppercase tracking-wider text-white">
                   {activeScene === 'mainGate' && 'Loading Entrance Gate...'}
                   {activeScene === 'junctionOne' && 'Walking to Junction 1...'}
+                  {activeScene === 'junctionTwo' && 'Walking to Junction 2...'}
+                  {activeScene === 'pgBlock' && 'Walking to PG Block...'}
+                  {activeScene === 'junctionThree' && 'Walking to Junction 3...'}
+                  {activeScene === 'library' && 'Entering Central Library...'}
+                  {activeScene === 'amma' && 'Walking to Amma Statue...'}
                   {activeScene === 'reception' && 'Entering Main Block Reception...'}
                   {activeScene === 'aimlLab' && 'Entering AIML Research Lab...'}
                 </h3>
@@ -513,12 +668,12 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           <motion.div 
             ref={containerRef} 
             animate={{
-              scale: (loading || isTransitioning) ? 1.18 : 1,
-              filter: (loading || isTransitioning) ? 'blur(16px) brightness(0.6)' : 'blur(0px) brightness(1)',
+              scale: (loading || isTransitioning) ? 1.35 : 1,
+              filter: (loading || isTransitioning) ? 'blur(30px) brightness(0.55)' : 'blur(0px) brightness(1)',
             }}
             transition={{
-              duration: 0.8,
-              ease: [0.25, 1, 0.5, 1] // Elegant camera zoom ease
+              duration: 0.85,
+              ease: [0.19, 1, 0.22, 1] // Snappy cinematic zoom and snap ease-out
             }}
             className="w-full h-full"
           />

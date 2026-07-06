@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Award, Briefcase, Handshake, Users, ArrowUpRight } from 'lucide-react';
+import { Award, Briefcase, Handshake, Users, ArrowUpRight, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 function CountUp({ end, suffix = "", duration = 1.5 }) {
@@ -187,6 +187,28 @@ export default function Placements() {
           </motion.div>
 
         </div>
+
+        {/* PDF Link CTA for Placement Cell */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="mt-12 p-6 bg-gradient-to-r from-gray-50 to-indigo-50/20 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 text-left"
+        >
+          <div>
+            <h4 className="text-sm font-bold text-gray-900 mb-1">Looking for detailed placement records and brochure?</h4>
+            <p className="text-xs text-gray-400 font-semibold">Download the official Placement Cell brochure with detailed recruiters, highlights, and MOU particulars.</p>
+          </div>
+          <a 
+            href="/data/Placement Cell/Placement Cell.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm shrink-0"
+          >
+            <Download className="w-4 h-4" /> Download Placement PDF
+          </a>
+        </motion.div>
 
       </div>
     </div>

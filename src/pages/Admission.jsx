@@ -43,6 +43,26 @@ export default function Admission() {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'courses';
   
+  const cleanName = (name) => {
+    return name
+      .replace(/^B\.E\. - /, '')
+      .replace(/^B\.Tech\. - /, '')
+      .replace(/^M\.E\. - /, '')
+      .replace(/^PhD - /, '')
+      .replace(/^PhD\s*-\s*/, '')
+      .replace(/^M\.B\.A\.\s*/, '')
+      .replace(/^M\.C\.A\.\s*/, '')
+      .replace(/\(Master of Business Administration\)/, 'Master of Business Administration')
+      .replace(/\(Master of Computer Applications\)/, 'Master of Computer Applications')
+      .replace(/Computer Science and Engineering/g, 'CSE')
+      .replace(/Computer Science & Engineering/g, 'CSE')
+      .replace(/Artificial Intelligence and Machine Learning/g, 'AI & ML')
+      .replace(/Artificial Intelligence and Data Science/g, 'AI & DS')
+      .replace(/Electronics and Communication Engineering/g, 'Electronics & Communication')
+      .replace(/Electrical and Electronics Engineering/g, 'Electrical & Electronics')
+      .replace(/Construction Engineering and Management/g, 'Construction Engineering & Mgmt');
+  };
+
   // Scholarship filter states
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -58,33 +78,34 @@ export default function Admission() {
 
   // Program details mapping (Intakes and names)
   const ugPrograms = [
-    { name: "B.E. - Civil Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60 },
-    { name: "B.E. - Mechanical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60 },
-    { name: "B.E. - Electronics and Communication Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90 },
-    { name: "B.E. - Electrical and Electronics Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60 },
-    { name: "B.E. - Computer Science and Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90 },
-    { name: "B.Tech. - Information Technology", duration: "4 Years", type: "Under Graduate Programme", intake: 60 },
-    { name: "B.Tech. - Chemical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40 },
-    { name: "B.Tech. - Agricultural Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40 },
-    { name: "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)", duration: "4 Years", type: "Under Graduate Programme", intake: 30 },
-    { name: "B.E. - Computer Science & Engineering (Computer System Design)", duration: "4 Years", type: "Under Graduate Programme", intake: 30 }
+    { name: "B.E. - Civil Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/dept/civil dept.jpg" },
+    { name: "B.E. - Mechanical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/dept/mech dept.jpg" },
+    { name: "B.E. - Electrical and Electronics Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/dept/eee dept.jpg" },
+    { name: "B.E. - Electronics and Communication Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/dept/ece dept.jpg" },
+    { name: "B.E. - Computer Science and Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/dept/cse dept.png" },
+    { name: "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/dept/aiml dept.jpg" },
+    { name: "B.Tech. - Information Technology", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/dept/it dept.jpg" },
+    { name: "B.Tech. - Chemical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/dept/chem dept.jpg" },
+    { name: "B.Tech. - Agricultural Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/dept/agri dept.jpg" },
+    { name: "B.Tech. - Artificial Intelligence and Data Science", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/dept/ai ds dept.jpg" },
+    { name: "B.E. - Computer Science & Engineering (Computer System Design)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/dept/csd  dept.jpg" }
   ];
 
   const pgPrograms = [
-    { name: "M.E. - Computer Science and Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9 },
-    { name: "M.E. - Thermal Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 18 },
-    { name: "M.E. - VLSI Design", duration: "2 Years", type: "Post Graduate Programme", intake: 9 },
-    { name: "M.E. - Power Electronics & Drives Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9 },
-    { name: "M.E. - Construction Engineering and Management", duration: "2 Years", type: "Post Graduate Programme", intake: 18 },
-    { name: "M.B.A. (Master of Business Administration)", duration: "2 Years", type: "Post Graduate Programme", intake: 60 },
-    { name: "M.C.A. (Master of Computer Applications)", duration: "2 Years", type: "Post Graduate Programme", intake: 60 }
+    { name: "M.E. - Computer Science and Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/me.cse.jpg" },
+    { name: "M.E. - Thermal Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/dept/me.thermak.jpg" },
+    { name: "M.E. - VLSI Design", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/m.e.vlsi.jpg" },
+    { name: "M.E. - Power Electronics & Drives Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/power-electronics-electrical-drives.jpg" },
+    { name: "M.E. - Construction Engineering and Management", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/dept/m.e.construction engg and mangement.jpg" },
+    { name: "M.B.A. (Master of Business Administration)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/dept/MBA.jpg" },
+    { name: "M.C.A. (Master of Computer Applications)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/dept/MCA.jpg" }
   ];
 
   const phdPrograms = [
-    { name: "PhD - Civil Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)" },
-    { name: "PhD - Mechanical Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)" },
-    { name: "PhD - Electrical and Electronics Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)" },
-    { name: "PhD - Electronics and Communication Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)" }
+    { name: "PhD - Civil Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/dept/phd.civil.jpg" },
+    { name: "PhD - Mechanical Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/dept/phd.mech.jpg" },
+    { name: "PhD - Electrical and Electronics Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/dept/phd.eee.jpg" },
+    { name: "PhD - Electronics and Communication Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/dept/phd.ece.jpg" }
   ];
 
   // Scholarship Details
@@ -254,41 +275,105 @@ export default function Admission() {
             {activeTab === 'courses' && (
               <div className="space-y-12 text-left">
                 {/* UG Programs */}
-                <div>
-                  <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                    <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
-                      <GraduationCap className="w-6 h-6" />
+                <div className="space-y-12">
+                  {/* B.E. Programmes */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
+                      <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
+                        <GraduationCap className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Undergraduate B.E. Programmes</h2>
+                        <p className="text-[11px] font-bold text-indigo-650 uppercase tracking-widest mt-0.5">4 Years Duration • Full Time</p>
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Under Graduate Programmes</h2>
-                      <p className="text-[11px] font-bold text-indigo-650 uppercase tracking-widest mt-0.5">4 Years Duration • Full Time</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {ugPrograms.filter(c => !c.name.startsWith('B.Tech')).map((course, idx) => (
+                        <motion.div 
+                          key={idx}
+                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#FF8A00]/40 transition-all flex flex-col justify-between overflow-hidden"
+                          whileHover={{ y: -2 }}
+                        >
+                          {course.img && (
+                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                              <img 
+                                src={course.img} 
+                                alt={course.name} 
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
+                          <div className="p-5 flex flex-col justify-between flex-grow">
+                            <div>
+                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-md mb-3 border border-orange-100">
+                                B.E.
+                              </span>
+                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
+                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                              </p>
+                            </div>
+                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
+                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
+                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                              </span>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {ugPrograms.map((course, idx) => (
-                      <motion.div 
-                        key={idx}
-                        className="p-5 bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#FF8A00]/40 transition-all flex flex-col justify-between"
-                        whileHover={{ y: -2 }}
-                      >
-                        <div>
-                          <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-md mb-3 border border-orange-100">
-                            {course.name.startsWith('B.Tech') ? 'B.Tech' : 'B.E.'}
-                          </span>
-                          <h3 className="font-serif text-sm font-bold text-gray-800 leading-snug mb-2">{course.name}</h3>
-                          <p className="text-xs text-gray-400 font-semibold flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                          </p>
-                        </div>
-                        <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                          <span className="text-xs font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                            <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
+                  {/* B.Tech. Programmes */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
+                      <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
+                        <GraduationCap className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Undergraduate B.Tech. Programmes</h2>
+                        <p className="text-[11px] font-bold text-indigo-650 uppercase tracking-widest mt-0.5">4 Years Duration • Full Time</p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {ugPrograms.filter(c => c.name.startsWith('B.Tech')).map((course, idx) => (
+                        <motion.div 
+                          key={idx}
+                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#FF8A00]/40 transition-all flex flex-col justify-between overflow-hidden"
+                          whileHover={{ y: -2 }}
+                        >
+                          {course.img && (
+                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                              <img 
+                                src={course.img} 
+                                alt={course.name} 
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
+                          <div className="p-5 flex flex-col justify-between flex-grow">
+                            <div>
+                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-md mb-3 border border-orange-100">
+                                B.Tech
+                              </span>
+                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
+                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                              </p>
+                            </div>
+                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
+                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
+                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                              </span>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -304,27 +389,38 @@ export default function Admission() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {pgPrograms.map((course, idx) => (
                       <motion.div 
                         key={idx}
-                        className="p-5 bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-purple-400/40 transition-all flex flex-col justify-between"
+                        className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-purple-400/40 transition-all flex flex-col justify-between overflow-hidden"
                         whileHover={{ y: -2 }}
                       >
-                        <div>
-                          <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-purple-50 text-purple-600 rounded-md mb-3 border border-purple-100">
-                            {course.name.includes('M.E.') ? 'M.E.' : course.name.includes('M.B.A') ? 'M.B.A' : 'M.C.A.'}
-                          </span>
-                          <h3 className="font-serif text-sm font-bold text-gray-800 leading-snug mb-2">{course.name}</h3>
-                          <p className="text-xs text-gray-400 font-semibold flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                          </p>
-                        </div>
-                        <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                          <span className="text-xs font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                            <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
-                          </span>
+                        {course.img && (
+                          <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                            <img 
+                              src={course.img} 
+                              alt={course.name} 
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
+                        )}
+                        <div className="p-5 flex flex-col justify-between flex-grow">
+                          <div>
+                            <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-purple-50 text-purple-600 rounded-md mb-3 border border-purple-100">
+                              {course.name.includes('M.E.') ? 'M.E.' : course.name.includes('M.B.A') ? 'M.B.A' : 'M.C.A.'}
+                            </span>
+                            <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
+                            <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                            </p>
+                          </div>
+                          <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
+                            <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
+                              <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                            </span>
+                          </div>
                         </div>
                       </motion.div>
                     ))}
@@ -343,27 +439,38 @@ export default function Admission() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {phdPrograms.map((course, idx) => (
                       <motion.div 
                         key={idx}
-                        className="p-5 bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-pink-400/40 transition-all flex flex-col justify-between"
+                        className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-pink-400/40 transition-all flex flex-col justify-between overflow-hidden"
                         whileHover={{ y: -2 }}
                       >
-                        <div>
-                          <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-pink-50 text-pink-650 rounded-md mb-3 border border-pink-100">
-                            Ph.D.
-                          </span>
-                          <h3 className="font-serif text-sm font-bold text-gray-800 leading-snug mb-2">{course.name}</h3>
-                          <p className="text-xs text-gray-400 font-semibold flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                          </p>
-                        </div>
-                        <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                          <span className="text-[10px] font-bold text-gray-450 uppercase tracking-wider">Affiliated Board</span>
-                          <span className="text-[10px] font-bold text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
-                            Anna University Approved
-                          </span>
+                        {course.img && (
+                          <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                            <img 
+                              src={course.img} 
+                              alt={course.name} 
+                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
+                        )}
+                        <div className="p-5 flex flex-col justify-between flex-grow">
+                          <div>
+                            <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-pink-50 text-pink-650 rounded-md mb-3 border border-pink-100">
+                              Ph.D.
+                            </span>
+                            <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
+                            <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
+                              <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                            </p>
+                          </div>
+                          <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                            <span className="text-[9px] font-bold text-gray-455 uppercase tracking-wider">Affiliated Board</span>
+                            <span className="text-[9px] font-bold text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
+                              Anna University Approved
+                            </span>
+                          </div>
                         </div>
                       </motion.div>
                     ))}
