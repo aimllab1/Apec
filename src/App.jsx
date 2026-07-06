@@ -131,7 +131,7 @@ function AppContent({ isLoading, setIsLoading }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileUgcOpen, setMobileUgcOpen] = useState(false);
   const [mobileAdmissionOpen, setMobileAdmissionOpen] = useState(false);
-  const [mobileCommunitiesOpen, setMobileCommunitiesOpen] = useState(false);
+  const [mobileCommitteesOpen, setMobileCommitteesOpen] = useState(false);
   const [mobileIqacOpen, setMobileIqacOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [bubbleVisible, setBubbleVisible] = useState(false);
@@ -643,17 +643,17 @@ function AppContent({ isLoading, setIsLoading }) {
                       </div>
                     </div>
 
-                    {/* Communities Dropdown */}
+                    {/* Committees Dropdown */}
                     <div className="relative group py-0.5">
                       <button 
                         className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
-                          isActive('/communities') 
+                          isActive('/committees') 
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
-                        Communities <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-                        {isActive('/communities') && (
+                        Committees <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        {isActive('/committees') && (
                           <motion.span 
                             layoutId="activeNavMark" 
                             className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
@@ -814,16 +814,16 @@ function AppContent({ isLoading, setIsLoading }) {
                     )}
                   </div>
 
-                  {/* Collapsible Mobile Communities Section */}
+                  {/* Collapsible Mobile Committees Section */}
                   <div>
                     <button 
-                      onClick={() => setMobileCommunitiesOpen(!mobileCommunitiesOpen)} 
+                      onClick={() => setMobileCommitteesOpen(!mobileCommitteesOpen)} 
                       className="w-full text-left text-sm font-semibold text-gray-500 flex items-center justify-between focus:outline-none"
                     >
-                      <span>Communities</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileCommunitiesOpen ? 'rotate-180' : ''}`} />
+                      <span>Committees</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileCommitteesOpen ? 'rotate-180' : ''}`} />
                     </button>
-                    {mobileCommunitiesOpen && (
+                    {mobileCommitteesOpen && (
                       <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
                         <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Anti-Ragging Committee</a>
                         <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IIIC Cell (Industry-Institute)</a>
