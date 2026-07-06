@@ -105,10 +105,29 @@ if !errorlevel! NEQ 0 (
 git branch -M main
 
 echo ====================================================
-echo Staging all files (honoring .gitignore)...
+echo Current Repository Status (Before Staging):
 echo ====================================================
-git add .gitignore
-git add .
+git status
+echo.
+
+echo ====================================================
+echo Choose Staging Option:
+echo ====================================================
+echo [1] Stage modified and tracked files only (git add -u)
+echo [2] Stage all files including untracked (git add .)
+echo.
+set /p stage_choice="Enter choice [1 or 2] (Default: 1): "
+if "!stage_choice!"=="" set stage_choice=1
+
+if "!stage_choice!"=="1" (
+    echo Staging modified/tracked files only...
+    git add -u
+) else (
+    echo Staging all files...
+    git add .gitignore
+    git add .
+)
+
 if !errorlevel! NEQ 0 (
     echo [ERROR] Failed to stage files.
     pause
