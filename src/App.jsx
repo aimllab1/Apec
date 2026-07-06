@@ -5,13 +5,15 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, Phone, Mail, MapPin, 
-  Download, ChevronDown, Send, RotateCw
+  Download, ChevronDown, Send, RotateCw,
+  Calculator
 } from 'lucide-react';
 import Preloader from './components/Preloader';
 
 // Import Pages
 import Home from './pages/Home';
 import About from './pages/About';
+import Admission from './pages/Admission';
 import Facilities from './pages/Facilities';
 import Placements from './pages/Placements';
 import Departments from './pages/Departments';
@@ -128,6 +130,7 @@ function AppContent({ isLoading, setIsLoading }) {
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileUgcOpen, setMobileUgcOpen] = useState(false);
+  const [mobileAdmissionOpen, setMobileAdmissionOpen] = useState(false);
   const [mobileCommunitiesOpen, setMobileCommunitiesOpen] = useState(false);
   const [mobileIqacOpen, setMobileIqacOpen] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
@@ -226,6 +229,16 @@ function AppContent({ isLoading, setIsLoading }) {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col justify-between selection:bg-indigo-600 selection:text-white relative">
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes ticker {
+          0% { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(-50%, 0, 0); }
+        }
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}} />
       
       <AnimatePresence mode="wait">
         {isLoading ? (
@@ -235,7 +248,7 @@ function AppContent({ isLoading, setIsLoading }) {
             key="content" 
             initial={{ opacity: 0 }} 
             animate={{ opacity: 1 }} 
-            className="flex flex-col grow justify-between relative"
+            className="w-full flex flex-col grow justify-between relative"
           >
             {/* Global Fixed Background Video Loop (rendered only on Home path, outside Lenis scroll context) */}
             {isHome && (
@@ -257,10 +270,13 @@ function AppContent({ isLoading, setIsLoading }) {
             
             {/* NAVIGATION BAR WITH DETAILED HOVER MEGA-MENUS */}
             {/* STACKED HEADER SYSTEM */}
-            <header className="sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300">
+            <header
+              className="sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300"
+              style={{ width: '100vw', maxWidth: '100vw' }}
+            >
               
               {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-              <div className="max-w-7xl mx-auto px-6 py-1.5 flex items-center justify-between gap-10">
+              <div className="w-full px-4 md:px-6 py-1.5 flex items-center justify-between gap-4 md:gap-10">
                 
                 {/* Enlarged College Logo & Name */}
                 <Link to="/" className="flex items-center gap-4 shrink-0">
@@ -273,7 +289,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     <span className="font-title text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-none drop-shadow-sm">
                       Adhiparasakthi Engineering College
                     </span>
-                    <span className="font-mono text-[8px] md:text-[9px] uppercase font-black text-indigo-650 tracking-wider block mt-1.5">
+                    <span className="font-mono text-[9px] md:text-[9px] uppercase font-black text-indigo-650 tracking-wider block mt-1.5">
                       An Autonomous Institution
                     </span>
                   </div>
@@ -294,12 +310,7 @@ function AppContent({ isLoading, setIsLoading }) {
                       <RotateCw className="w-3 h-3 text-indigo-550 animate-[spin_10s_linear_infinite]" />
                       <span>360° VR Tour</span>
                     </button>
-                    <Link
-                      to="/cutoff-calculator"
-                      className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-pink-650 transition-all bg-pink-50 hover:bg-pink-100 border border-pink-200/50 px-2.5 py-1.5 rounded-xl cursor-pointer hover:scale-[1.02] shadow-sm"
-                    >
-                      <span>Cutoff Calculator</span>
-                    </Link>
+
                     <Link 
                       to="/fee-payment" 
                       className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-700 transition-all bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
@@ -343,123 +354,220 @@ function AppContent({ isLoading, setIsLoading }) {
                   {/* Mobile Menu Button */}
                   <button 
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="lg:hidden p-2 text-gray-500 hover:text-gray-900 transition-colors"
+                    className="lg:hidden p-2 pr-1 text-gray-800 hover:text-gray-950 transition-colors shrink-0"
+                    aria-label="Toggle navigation menu"
                   >
-                    {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 stroke-[2.5]" />}
                   </button>
                 </div>
 
               </div>
 
+              {/* Scrolling News Ticker */}
+              <div className="w-full bg-white border-b border-[#FFD6A5]/50 py-0.5 overflow-hidden relative z-10 select-none flex items-center">
+                {/* Announcement Icon Badge */}
+                <div className="bg-[#FF8A00] text-white px-3.5 py-[1px] rounded-r-lg font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shrink-0 z-20 shadow-sm ml-0">
+                  <span role="img" aria-label="announcement">📢</span>
+                  <span>News</span>
+                </div>
+                
+                {/* Scrolling Track */}
+                <div className="relative w-full overflow-hidden flex items-center">
+                  <div 
+                    className="animate-[ticker_35s_linear_infinite] hover:[animation-play-state:paused] cursor-pointer flex items-center gap-12 text-sm md:text-base font-semibold text-[#1B224A]"
+                    style={{
+                      whiteSpace: 'nowrap',
+                      display: 'inline-flex'
+                    }}
+                  >
+                    <div className="flex items-center gap-12">
+                      <span>🎓 Admissions Open for 2026–2027</span>
+                      <span>•</span>
+                      <span>NAAC Accredited Institution</span>
+                      <span>•</span>
+                      <span>UGC Autonomous College</span>
+                      <span>•</span>
+                      <span>Affiliated to Anna University</span>
+                      <span>•</span>
+                      <span>Placement Training Ongoing</span>
+                      <span>•</span>
+                      <span>Campus Recruitment Updates</span>
+                      <span>•</span>
+                      <span>Welcome to Adhiparasakthi Engineering College</span>
+                    </div>
+                    <div className="flex items-center gap-12" aria-hidden="true">
+                      <span>🎓 Admissions Open for 2026–2027</span>
+                      <span>•</span>
+                      <span>NAAC Accredited Institution</span>
+                      <span>•</span>
+                      <span>UGC Autonomous College</span>
+                      <span>•</span>
+                      <span>Affiliated to Anna University</span>
+                      <span>•</span>
+                      <span>Placement Training Ongoing</span>
+                      <span>•</span>
+                      <span>Campus Recruitment Updates</span>
+                      <span>•</span>
+                      <span>Welcome to Adhiparasakthi Engineering College</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Glowing Divider Separator */}
+              <div 
+                className="w-full h-[3px] animate-[shimmer_5s_linear_infinite] relative z-20"
+                style={{
+                  background: 'linear-gradient(90deg, #FFB347 0%, #FFD580 50%, #FFB347 100%)',
+                  backgroundSize: '200% 100%',
+                  boxShadow: '0 0 10px rgba(255, 179, 71, 0.5), 0 0 4px rgba(255, 213, 128, 0.3)'
+                }}
+              />
+
               {/* BOTTOM BAR: NAVIGATION LINKS (Full-width centered layout) */}
-              <div className="border-t border-gray-100/80 bg-white/95 hidden lg:block">
-                <div className="max-w-7xl mx-auto px-6 py-1 flex justify-center">
-                  <nav className="flex items-center gap-6 xl:gap-8">
+              <div className="bg-[#FFF4E8] border-b border-[#FFD6A5] hidden lg:block">
+                <div className="w-full px-6 py-0.5 flex justify-center relative">
+                  <nav className="flex items-center gap-2 xl:gap-3.5 py-0.5">
                     
                     <Link 
                       to="/" 
-                      className={`text-xs uppercase tracking-wider transition-colors nav-link-dynamic relative pb-1 block ${
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-1 rounded-lg block ${
                         isActive('/') 
-                          ? 'text-indigo-600 font-black' 
-                          : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                          ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                       }`}
                     >
                       Home
                       {isActive('/') && (
                         <motion.span 
                           layoutId="activeNavMark" 
-                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                         />
                       )}
                     </Link>
                     
                     {/* About Dropdown */}
-                    <div className="relative group py-2">
+                    <div className="relative group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/about') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         About <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/about') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
                       <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
-                        <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Institution Profile</Link>
-                        <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Founder & Trustees</Link>
-                        <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Principal Desk</Link>
+                        <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Institution Profile</Link>
+                        <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Founder & Trustees</Link>
+                        <Link to="/about" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Principal Desk</Link>
+                      </div>
+                    </div>
+
+                    {/* Admission Dropdown */}
+                    <div className="relative group py-0.5">
+                      <button 
+                        className={`text-xs uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-3 py-1 rounded-lg ${
+                          isActive('/admission') 
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-slate-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-bold'
+                        }`}
+                      >
+                        Admission <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        {isActive('/admission') && (
+                          <motion.span 
+                            layoutId="activeNavMark" 
+                            className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-[#FF8A00]" 
+                          />
+                        )}
+                      </button>
+                      <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                        <Link to="/admission?tab=courses" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Courses Offered</Link>
+                        <Link to="/admission?tab=procedure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Admission Procedure</Link>
+                        <Link to="/admission?tab=scholarships" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Scholarships</Link>
+                        <Link to="/admission?tab=brochure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Information Brochure</Link>
                       </div>
                     </div>
 
                     {/* Departments Hover Mega-Menu */}
-                    <div className="relative group py-2">
+                    <div className="group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/departments') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         Departments <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/departments') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-[-150px] hidden group-hover:grid grid-cols-3 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[800px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:grid grid-cols-4 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[1000px] text-left gap-6 animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.E.)</span>
                           <div className="space-y-1">
-                            <Link to="/departments/civil" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Civil Engineering</Link>
-                            <Link to="/departments/mech" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Mechanical Engineering</Link>
-                            <Link to="/departments/eee" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electrical & Electronics Eng.</Link>
-                            <Link to="/departments/ece" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electronics & Communication Eng.</Link>
-                            <Link to="/departments/cse" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Computer Science & Eng.</Link>
-                            <Link to="/departments/aiml" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">CSE (AI & ML)</Link>
+                            <Link to="/departments/civil" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Civil Engineering</Link>
+                            <Link to="/departments/mech" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Mechanical Engineering</Link>
+                            <Link to="/departments/eee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electrical & Electronics Engg.</Link>
+                            <Link to="/departments/ece" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electronics & Communication Engg.</Link>
+                            <Link to="/departments/cse" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Computer Science & Engg.</Link>
+                            <Link to="/departments/aiml" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">CSE (AI & ML)</Link>
+                            <Link to="/departments/csd" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Computer Science & Design (CSD)</Link>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.Tech.)</span>
                           <div className="space-y-1">
-                            <Link to="/departments/csd" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Computer Science & Design (CSD)</Link>
-                            <Link to="/departments/it" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Information Technology</Link>
-                            <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Chemical Engineering</Link>
-                            <Link to="/departments/agri" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Agricultural Engineering</Link>
+                            <Link to="/departments/it" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Information Technology</Link>
+                            <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Chemical Engineering</Link>
+                            <Link to="/departments/agri" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Agricultural Engineering</Link>
+                            <Link to="/departments/aids" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Artificial Intelligence & Data Science (AI & DS)</Link>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Postgraduate & Sciences</span>
                           <div className="space-y-1">
-                            <Link to="/departments/mca" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Master of Computer Apps (MCA)</Link>
-                            <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Management Studies (MBA)</Link>
-                            <Link to="/departments/sh" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Science & Humanities</Link>
+                            <Link to="/departments/mca" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Master of Computer Apps (MCA)</Link>
+                            <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Management Studies (MBA)</Link>
+                            <Link to="/departments/sh" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Science & Humanities</Link>
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Doctor of Philosophy (Ph.D.)</span>
+                          <div className="space-y-1">
+                            <Link to="/departments/phd-civil" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Civil Engg.</Link>
+                            <Link to="/departments/phd-mech" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Mechanical Engg.</Link>
+                            <Link to="/departments/phd-ece" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Electronics & Comm. Engg.</Link>
+                            <Link to="/departments/phd-eee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Electrical & Elect. Engg.</Link>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* UGC Hover Mega-Menu */}
-                    <div className="relative group py-2">
+                  {/* UGC Hover Mega-Menu */}
+                    <div className="relative group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/ugc') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         UGC <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/ugc') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
@@ -467,88 +575,88 @@ function AppContent({ isLoading, setIsLoading }) {
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Institutional Compliance & Strategy</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/r-d-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">R & D Cell</a>
-                            <a href="https://apec.edu.in/wp-content/uploads/2024/02/IDP.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IDP (Institutional Development Plan)</a>
-                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">UGC Self Disclosure Guidelines</a>
-                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Mandatory Disclosure</a>
+                            <a href="https://apec.edu.in/r-d-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">R & D Cell</a>
+                            <a href="https://apec.edu.in/wp-content/uploads/2024/02/IDP.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IDP (Institutional Development Plan)</a>
+                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">UGC Self Disclosure Guidelines</a>
+                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Mandatory Disclosure</a>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Audits, Approvals & Recognition</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/annual-accounts/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Annual Accounts</a>
-                            <a href="https://apec.edu.in/wp-content/uploads/2024/02/APEC-2f-12B.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">2(f) and 12(b) Recognition</a>
-                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">UGC Undertaking</a>
-                            <a href="https://apec.edu.in/wp-content/uploads/2025/07/UGC-Autonomous-Approval-Letter.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">UGC Autonomous Approval Letter</a>
+                            <a href="https://apec.edu.in/annual-accounts/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Annual Accounts</a>
+                            <a href="https://apec.edu.in/wp-content/uploads/2024/02/APEC-2f-12B.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">2(f) and 12(b) Recognition</a>
+                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">UGC Undertaking</a>
+                            <a href="https://apec.edu.in/wp-content/uploads/2025/07/UGC-Autonomous-Approval-Letter.pdf" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">UGC Autonomous Approval Letter</a>
                           </div>
                         </div>
                       </div>
                     </div>
                     
                     {/* Facilities Hover Dropdown */}
-                    <div className="relative group py-2">
+                    <div className="relative group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/facilities') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         Facilities <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/facilities') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
                       <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
-                        <Link to="/facilities/library" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Central Library</Link>
-                        <Link to="/facilities/labs" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Lab Infrastructures</Link>
-                        <Link to="/facilities/hostels" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Hostel Blocks</Link>
-                        <Link to="/facilities/transport" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Transport & Bus Routes</Link>
+                        <Link to="/facilities/library" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Central Library</Link>
+                        <Link to="/facilities/labs" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Lab Infrastructures</Link>
+                        <Link to="/facilities/hostels" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Hostel Blocks</Link>
+                        <Link to="/facilities/transport" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Transport & Bus Routes</Link>
                       </div>
                     </div>
 
-                    {/* Training & Placement Cell Dropdown */}
-                    <div className="relative group py-2">
+                    {/* Placements Dropdown */}
+                    <div className="relative group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/placements') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
-                        Training & Placement Cell <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                        Placements <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/placements') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
                       <div className="absolute top-full left-0 hidden group-hover:block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-64 text-left animate-[fadeIn_0.2s_ease-out] nav-dropdown-menu">
-                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Placement Cell Profile</Link>
-                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">Placement Records</Link>
-                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">MOUs & Industrial Tie-ups</Link>
-                        <a href="https://apec.edu.in/rti/" target="_blank" rel="noopener noreferrer" className="block px-5 py-2 text-xs font-extrabold text-gray-600 hover:bg-gray-50 hover:text-indigo-600 nav-dropdown-link">RTI (Right to Information)</a>
+                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Placement Cell Profile</Link>
+                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Placement Records</Link>
+                        <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">MOUs & Industrial Tie-ups</Link>
+                        <a href="https://apec.edu.in/rti/" target="_blank" rel="noopener noreferrer" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">RTI (Right to Information)</a>
                       </div>
                     </div>
 
                     {/* Communities Dropdown */}
-                    <div className="relative group py-2">
+                    <div className="relative group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/communities') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         Communities <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/communities') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
@@ -556,38 +664,38 @@ function AppContent({ isLoading, setIsLoading }) {
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Student Cells & Associations</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Anti-Ragging Committee</a>
-                            <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IIIC Cell (Industry-Institute)</a>
-                            <a href="https://apec.edu.in/women-empowerment-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Women Empowerment Cell</a>
-                            <a href="https://apec.edu.in/alumni/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Alumni Cell</a>
+                            <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Anti-Ragging Committee</a>
+                            <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IIIC Cell (Industry-Institute)</a>
+                            <a href="https://apec.edu.in/women-empowerment-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Women Empowerment Cell</a>
+                            <a href="https://apec.edu.in/alumni/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Alumni Cell</a>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Welfare & Career Clubs</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/sc-st-committee/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">SC/ST Committee</a>
-                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Electoral Literacy Club</a>
-                            <a href="https://apec.edu.in/career-guidance-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Career Guidance Cell</a>
-                            <a href="https://apec.edu.in/entrepreneurship-development-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Entrepreneurship Cell</a>
+                            <a href="https://apec.edu.in/sc-st-committee/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">SC/ST Committee</a>
+                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electoral Literacy Club</a>
+                            <a href="https://apec.edu.in/career-guidance-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Career Guidance Cell</a>
+                            <a href="https://apec.edu.in/entrepreneurship-development-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Entrepreneurship Cell</a>
                           </div>
                         </div>
                       </div>
                     </div>
 
                     {/* IQAC Megamenu */}
-                    <div className="relative group py-2">
+                    <div className="relative group py-0.5">
                       <button 
-                        className={`text-xs uppercase tracking-wider transition-colors flex items-center gap-1 nav-link-dynamic relative pb-1 ${
+                        className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-1 rounded-lg ${
                           isActive('/iqac') 
-                            ? 'text-indigo-600 font-black' 
-                            : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                            ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                            : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         IQAC <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
                         {isActive('/iqac') && (
                           <motion.span 
                             layoutId="activeNavMark" 
-                            className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
@@ -595,19 +703,19 @@ function AppContent({ isLoading, setIsLoading }) {
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Quality Assurance & NAAC</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/naac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">NAAC</a>
-                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IQAC</a>
-                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IQAC Members</a>
-                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">IQAC MoM & AT</a>
+                            <a href="https://apec.edu.in/naac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">NAAC</a>
+                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC</a>
+                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC Members</a>
+                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC MoM & AT</a>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Rankings & Disclosures</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Disclosures (NIRF, AICTE & MD)</a>
-                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Undertaking</a>
-                            <a href="https://apec.edu.in/nirf/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">NIRF</a>
-                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-600 hover:text-indigo-600 py-1 nav-dropdown-link">Instrumentation Cell</a>
+                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Disclosures (NIRF, AICTE & MD)</a>
+                            <a href="https://apec.edu.in/ugc/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Undertaking</a>
+                            <a href="https://apec.edu.in/nirf/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">NIRF</a>
+                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Instrumentation Cell</a>
                           </div>
                         </div>
                       </div>
@@ -615,17 +723,35 @@ function AppContent({ isLoading, setIsLoading }) {
 
                     <Link 
                       to="/contact" 
-                      className={`text-xs uppercase tracking-wider transition-colors nav-link-dynamic relative pb-1 block ${
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-1 rounded-lg block ${
                         isActive('/contact') 
-                          ? 'text-indigo-600 font-black' 
-                          : 'text-gray-500 hover:text-indigo-600 font-extrabold'
+                          ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                       }`}
                     >
                       Contact
                       {isActive('/contact') && (
                         <motion.span 
                           layoutId="activeNavMark" 
-                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-indigo-600" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
+                        />
+                      )}
+                    </Link>
+
+                    <Link 
+                      to="/cutoff-calculator" 
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-1 rounded-lg block ${
+                        isActive('/cutoff-calculator') 
+                          ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
+                      }`}
+                      title="Cutoff Calculator"
+                    >
+                      <Calculator className="w-4 h-4 text-current inline-block" />
+                      {isActive('/cutoff-calculator') && (
+                        <motion.span 
+                          layoutId="activeNavMark" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                         />
                       )}
                     </Link>
@@ -638,12 +764,32 @@ function AppContent({ isLoading, setIsLoading }) {
 
               {/* Mobile Dropdown */}
               {mobileMenuOpen && (
-                <div className="lg:hidden bg-white border-b border-gray-100 py-6 px-6 flex flex-col gap-4 text-left max-h-[75vh] overflow-y-auto">
+                <div className="lg:hidden bg-[#FFF4E8] border-b border-[#FFD6A5] py-6 px-6 flex flex-col gap-4 text-left max-h-[75vh] overflow-y-auto">
                   <Link to="/" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-gray-900">Home</Link>
                   <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">About APEC</Link>
+                  
+                  {/* Collapsible Mobile Admission Section */}
+                  <div>
+                    <button 
+                      onClick={() => setMobileAdmissionOpen(!mobileAdmissionOpen)} 
+                      className="w-full text-left text-sm font-semibold text-gray-500 flex items-center justify-between focus:outline-none"
+                    >
+                      <span>Admission</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileAdmissionOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileAdmissionOpen && (
+                      <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
+                        <Link to="/admission?tab=courses" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Courses Offered</Link>
+                        <Link to="/admission?tab=procedure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Admission Procedure</Link>
+                        <Link to="/admission?tab=scholarships" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Scholarships</Link>
+                        <Link to="/admission?tab=brochure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Information Brochure</Link>
+                      </div>
+                    )}
+                  </div>
+
                   <Link to="/departments" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Departments</Link>
                   <Link to="/facilities" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Campus Facilities</Link>
-                  <Link to="/placements" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Training & Placement Cell</Link>
+                  <Link to="/placements" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Placements</Link>
                   
                   {/* Collapsible Mobile UGC Section */}
                   <div>
@@ -804,6 +950,7 @@ function AppContent({ isLoading, setIsLoading }) {
                 <Routes location={location} key={location.pathname}>
                   <Route path="/" element={<PageTransition><Home /></PageTransition>} />
                   <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+                  <Route path="/admission" element={<PageTransition><Admission /></PageTransition>} />
                   <Route path="/facilities" element={<PageTransition><Facilities /></PageTransition>} />
                   <Route path="/placements" element={<PageTransition><Placements /></PageTransition>} />
                   <Route path="/departments" element={<PageTransition><Departments /></PageTransition>} />
@@ -956,6 +1103,7 @@ function AppContent({ isLoading, setIsLoading }) {
                 <nav className="flex flex-wrap justify-center gap-6 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
                   <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>
                   <Link to="/about" className="hover:text-gray-900 transition-colors">About</Link>
+                  <Link to="/admission" className="hover:text-gray-900 transition-colors">Admission</Link>
                   <Link to="/departments" className="hover:text-gray-900 transition-colors">Departments</Link>
                   <Link to="/placements" className="hover:text-gray-900 transition-colors">Placements</Link>
                   <Link to="/facilities" className="hover:text-gray-900 transition-colors">Facilities</Link>

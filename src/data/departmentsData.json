@@ -443,8 +443,8 @@
   },
   "civil": {
     "key": "civil",
-    "name": "civil",
-    "about": "",
+    "name": "Civil Engineering",
+    "about": "The Department of Civil Engineering was established in the year of 1984 with an intake of 60 students in UG. In 2006 M.E-Construction Engineering and Management was started with an intake of 18 and the Research centre was approved by Anna University, Chennai in the year 2011. The Department is NBA accredited in the year 2004, 2009 and 2013. The department is equipped with fully established laboratories such as Soil Mechanics Laboratory, Environmental Engineering Laboratory, Survey Laboratory, CADD Lab, Fluid Mechanics and Machinery Laboratory, Concrete Laboratory Highway Laboratory and Strength of Materials Laboratory. The Association of Civil Engineers is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department has been a member of reputed societies such Indian Concrete Institute (ICI), Indian Society for technical education (ISTE) etc.",
     "vision": "To produce high class Civil Engineers who will work for the environmentally suitable for pollution free air, potable drinking water and comfortable accommodation so as to develop our motherland towards a modest standard of living at par with the developed nations.",
     "mission": [
       "Inculcating quality consciousness among graduates by imparting world expertise.",
@@ -459,9 +459,9 @@
       "Function in multi-disciplinary teams and advocate policies, systems, processes and equipment to support civil engineering"
     ],
     "psos": [
-      "PSO1  Knowledge of Civil Engineering discipline Demonstrate in-depth knowledge of Civil Engineering discipline, with an ability to evaluate, analyze and synthesize existing and new knowledge.",
-      "PSO2  Critical analysis of Civil Engineering problems and innovation Critically analyze complex Civil Engineering problems, apply independent judgment for synthesizing information and make innovative advances in a theoretical, practical and policy context.",
-      "PSO3 Conceptualization and evaluation of engineering solutions to Civil Engineering Issues Conceptualize and solve Civil Engineering problems, evaluate potential solutions and arrive at technically feasible, economically viable and environmentally sound solutions with due consideration of health, safety, and socio cultural factors"
+      "Knowledge of Civil Engineering discipline Demonstrate in-depth knowledge of Civil Engineering discipline, with an ability to evaluate, analyze and synthesize existing and new knowledge.",
+      "Critical analysis of Civil Engineering problems and innovation Critically analyze complex Civil Engineering problems, apply independent judgment for synthesizing information and make innovative advances in a theoretical, practical and policy context.",
+      "Conceptualization and evaluation of engineering solutions to Civil Engineering Issues Conceptualize and solve Civil Engineering problems, evaluate potential solutions and arrive at technically feasible, economically viable and environmentally sound solutions with due consideration of health, safety, and socio cultural factors"
     ],
     "pos": [
       {
@@ -511,988 +511,174 @@
       {
         "title": "Life-long Learning",
         "description": "Recognize the need for, and have the preparation and ability to engage in independent and life-long learning in the broadest context of technological change."
-      },
-      {
-        "title": "",
-        "description": "Faculty:"
-      },
-      {
-        "title": "",
-        "description": "Dr.V.Ramasamy"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E., Ph.D"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Dean"
-      },
-      {
-        "title": "",
-        "description": "Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "rams_apec@yahoo.co.in"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years, 8 Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "June 10, 1994"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "October 6, 1994"
-      },
-      {
-        "title": "",
-        "description": "Dr.A.Krishnamoorthi"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E., Ph.D."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Head of Department"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "krish_moor2006@yahoo.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years, 5 Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "June 1, 1999"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "January 6, 1999"
-      },
-      {
-        "title": "",
-        "description": "Dr.K.Thiagarajan"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.Tech., Ph.D"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Associate Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "rajan.thiaga080@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years, 7 Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "November 23, 2022"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "November 23, 2022"
-      },
-      {
-        "title": "",
-        "description": "Dr.P.Somiyadevi"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E,Ph.D."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "somiya86@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "June 18, 2009"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "June 18, 2009"
-      },
-      {
-        "title": "",
-        "description": "Mr.S.Rethinakumar"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "rethinaindu@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "June 1, 2015"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "May 27, 2015"
-      },
-      {
-        "title": "",
-        "description": "Mr.S.Selvakumar"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "selvaashika3@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years, 1 Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "June 1, 2015"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "May 27, 2015"
-      },
-      {
-        "title": "",
-        "description": "Mr.G.Karthikkumar"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "karthikkumarg5@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "July 1, 2017"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "June 22, 2017"
-      },
-      {
-        "title": "",
-        "description": "Mr.S.Maluvu"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "maluvus@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "July 1, 2017"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "June 28, 2017"
-      },
-      {
-        "title": "",
-        "description": "Mr.S.Karthikeyan"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E., (Ph.D)"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "karthikeyan9111@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years, 7 Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "July 2, 2018"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "November 12, 2017"
-      },
-      {
-        "title": "",
-        "description": "Mr.S.Parthiban"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E., (Ph.D)"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "Parthiban@apec.edu.in"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "June 18, 2021"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "June 18, 2021"
-      },
-      {
-        "title": "",
-        "description": "Ms. I. Sakthidevi"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M.E."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "sakthidevisak@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "August 29, 2025"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "Ms. Sangeetha E"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "ME"
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "sangeethaelumalai07@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "February 1, 2025"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "Ms. K. Gomathi"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M. E."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "gomathi9418@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "April 1, 2026"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
-      },
-      {
-        "title": "",
-        "description": "Ms. M. Abinaya"
-      },
-      {
-        "title": "",
-        "description": "Qualification"
-      },
-      {
-        "title": "",
-        "description": "M. Tech."
-      },
-      {
-        "title": "",
-        "description": "Designation"
-      },
-      {
-        "title": "",
-        "description": "Assistant Professor"
-      },
-      {
-        "title": "",
-        "description": "Department"
-      },
-      {
-        "title": "",
-        "description": "Civil Engineering"
-      },
-      {
-        "title": "",
-        "description": "E-Mail"
-      },
-      {
-        "title": "",
-        "description": "abinayasundari2808@gmail.com"
-      },
-      {
-        "title": "",
-        "description": "Faculty ID"
-      },
-      {
-        "title": "",
-        "description": "Experience"
-      },
-      {
-        "title": "",
-        "description": "Years,  Months"
-      },
-      {
-        "title": "",
-        "description": "Dt. of Joining"
-      },
-      {
-        "title": "",
-        "description": "September 1, 2025"
-      },
-      {
-        "title": "",
-        "description": "Teaching Since"
       }
     ],
-    "faculty": [],
+    "faculty": [
+      {
+        "name": "Dr.V.Ramasamy",
+        "qualification": "M.E., Ph.D",
+        "designation": "Dean, Professor",
+        "department": "Civil Engineering",
+        "email": "rams_apec@yahoo.co.in",
+        "facultyId": "",
+        "experience": "32 Years, 8 Months",
+        "joiningDate": "June 10, 1994",
+        "teachingSince": "October 6, 1994"
+      },
+      {
+        "name": "Dr.A.Krishnamoorthi",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Head of Department",
+        "department": "Civil Engineering",
+        "email": "krish_moor2006@yahoo.com",
+        "facultyId": "",
+        "experience": "27 Years, 5 Months",
+        "joiningDate": "June 1, 1999",
+        "teachingSince": "January 6, 1999"
+      },
+      {
+        "name": "Dr.K.Thiagarajan",
+        "qualification": "M.Tech., Ph.D",
+        "designation": "Associate Professor",
+        "department": "Civil Engineering",
+        "email": "rajan.thiaga080@gmail.com",
+        "facultyId": "",
+        "experience": "4 Years, 7 Months",
+        "joiningDate": "November 23, 2022",
+        "teachingSince": "November 23, 2022"
+      },
+      {
+        "name": "Dr.P.Somiyadevi",
+        "qualification": "M.E,Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "somiya86@gmail.com",
+        "facultyId": "",
+        "experience": "17 Years,  Months",
+        "joiningDate": "June 18, 2009",
+        "teachingSince": "June 18, 2009"
+      },
+      {
+        "name": "Mr.S.Rethinakumar",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "rethinaindu@gmail.com",
+        "facultyId": "",
+        "experience": "11 Years,  Months",
+        "joiningDate": "June 1, 2015",
+        "teachingSince": "May 27, 2015"
+      },
+      {
+        "name": "Mr.S.Selvakumar",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "selvaashika3@gmail.com",
+        "facultyId": "",
+        "experience": "11 Years, 1 Months",
+        "joiningDate": "June 1, 2015",
+        "teachingSince": "May 27, 2015"
+      },
+      {
+        "name": "Mr.G.Karthikkumar",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "karthikkumarg5@gmail.com",
+        "facultyId": "",
+        "experience": "9 Years,  Months",
+        "joiningDate": "July 1, 2017",
+        "teachingSince": "June 22, 2017"
+      },
+      {
+        "name": "Mr.S.Maluvu",
+        "qualification": "M.E",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "maluvus@gmail.com",
+        "facultyId": "",
+        "experience": "9 Years,  Months",
+        "joiningDate": "July 1, 2017",
+        "teachingSince": "June 28, 2017"
+      },
+      {
+        "name": "Mr.S.Karthikeyan",
+        "qualification": "M.E., (Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "karthikeyan9111@gmail.com",
+        "facultyId": "",
+        "experience": "9 Years, 7 Months",
+        "joiningDate": "July 2, 2018",
+        "teachingSince": "November 12, 2017"
+      },
+      {
+        "name": "Mr.S.Parthiban",
+        "qualification": "M.E., (Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "Parthiban@apec.edu.in",
+        "facultyId": "",
+        "experience": "5 Years,  Months",
+        "joiningDate": "June 18, 2021",
+        "teachingSince": "June 18, 2021"
+      },
+      {
+        "name": "Ms. I. Sakthidevi",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "sakthidevisak@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 29, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Ms. Sangeetha E",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "sangeethaelumalai07@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": ""
+      },
+      {
+        "name": "Ms. K. Gomathi",
+        "qualification": "M. E.",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "gomathi9418@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "April 1, 2026",
+        "teachingSince": ""
+      },
+      {
+        "name": "Ms. M. Abinaya",
+        "qualification": "M. Tech.",
+        "designation": "Assistant Professor",
+        "department": "Civil Engineering",
+        "email": "abinayasundari2808@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "September 1, 2025",
+        "teachingSince": ""
+      }
+    ],
     "labs": [
-      "image",
-      "Automatic weather Station",
-      "image",
+      "Automatic Weather Station",
       "Hydraulic Engineering Lab",
-      "image",
       "Concrete and Highway Lab",
-      "image",
       "Survey Laboratory",
-      "image",
       "Engineering Practices Lab",
-      "image",
       "Environmental Engineering Lab",
-      "image",
-      "Strength of materials Lab",
-      "image",
+      "Strength of Materials Lab",
       "CADD Lab",
-      "image",
-      "Soil Lab",
-      "image",
-      "Automatic weather Station",
-      "image",
-      "Hydraulic Engineering Lab",
-      "image",
-      "Concrete and Highway Lab",
-      "image",
-      "Survey Laboratory",
-      "image",
-      "Engineering Practices Lab",
-      "image",
-      "Environmental Engineering Lab",
-      "image",
-      "Strength of materials Lab",
-      "image",
-      "CADD Lab",
-      "image",
-      "Soil Lab",
-      "RESEARCH & DEVELOPMENT",
-      "image",
-      "Universal Testing Machine (100T)",
-      "image",
-      "Loading Frame (AICTE Sponsored)",
-      "image",
-      "Compression Testing Machine",
-      "image",
-      "C.B.R Test Apparatus",
-      "image",
-      "Hot Air Oven",
-      "image",
-      "Atomic Adsorption Spectrometer (AICTE Sponsored- 14.39 Lakhs",
-      "image",
-      "Ultrasonic Pulse Velocity",
-      "image",
-      "Rebound Hammer",
-      "image",
-      "Rapid Chloride Penetration Test",
-      "image",
-      "Hollow Block Making Machine",
-      "image",
-      "Total Station",
-      "image",
-      "Unconfined Compressive Strength Test Apparatus",
-      "Numbers of Computers 35 (Latest Configuration with Individual LAN Connections)",
-      "Licensed Software",
-      "STADD-PRO, PRIMAVERA, MS-PROJECT, QC Plan, RIVET, BIM, AUTO CADD.",
-      "Other Accessories",
-      "A-3 PLOTTER, SCANNER, SMART PRINTER",
-      "image",
-      "image",
-      "TEACHING MODELS",
-      "image",
-      "image",
-      "image",
-      "image",
-      "CONCRETE MODELS                             : 30",
-      "IRRIGATION MODELS                           : 05",
-      "TRANSPORTATION MODEL                  : 05",
-      "ENVIRONMENTAL MODEL                   : 07",
-      "LCD PROJECTOR                                   : 5",
-      "CHARTS                                                 : 15",
-      "NPTEL CD’S                                           : 20",
-      "DEPARTMENT LIBRARY",
-      "Number of Books : 1200",
-      "Journals : 05",
-      "Back Volumes : 277",
-      "IS Codes : 240",
-      "NPTEL Web Course CD’s : 16",
-      "No of project Books : 350",
-      "System P-4 with printer : 1",
-      "image",
-      "Student:"
+      "Soil Lab"
     ],
     "placements": [
       {
@@ -1520,460 +706,533 @@
         "salaryPackage": "3 LAKHS PA"
       }
     ],
-    "rankHolders": [],
+    "rankHolders": [
+      {
+        "academicYear": "2010-2011 (P.G)",
+        "studentName": "S.M. Kayalvizhi",
+        "rank": "I"
+      },
+      {
+        "academicYear": "2010-2011",
+        "studentName": "M. Solai Raj",
+        "rank": "VIII"
+      },
+      {
+        "academicYear": "2010-2011",
+        "studentName": "J. Divyabarathi",
+        "rank": "XII"
+      },
+      {
+        "academicYear": "2010-2011",
+        "studentName": "M. Aarthi",
+        "rank": "XXXV"
+      },
+      {
+        "academicYear": "2011-2012",
+        "studentName": "S. Udhaya",
+        "rank": "XXXV"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "H. Mahalakshmi",
+        "rank": "XVII"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "Priyadharshini",
+        "rank": "XXXII"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "S. Gayathri",
+        "rank": "XXXIII"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "N.S. Kiran",
+        "rank": "XXXVI"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "C.P. Rangasamy",
+        "rank": "XXXVII"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "R. Jasmine Sudha",
+        "rank": "XXXIX"
+      },
+      {
+        "academicYear": "2012-2013",
+        "studentName": "K. Arun Mozhi",
+        "rank": "XLII"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "B. Sakthi Sangeetha Devi",
+        "rank": "XIV"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "D. Sri Vidhya",
+        "rank": "XXVIII"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "M. Nivethya",
+        "rank": "XXXII"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "V. Abinaya",
+        "rank": "XXXV"
+      },
+      {
+        "academicYear": "2013-2014",
+        "studentName": "P. Sushma",
+        "rank": "XL"
+      },
+      {
+        "academicYear": "2014-2015",
+        "studentName": "R. Narendhiran",
+        "rank": "XXXVIII"
+      },
+      {
+        "academicYear": "2015-2016 (P.G)",
+        "studentName": "R. Akila",
+        "rank": "XIII"
+      },
+      {
+        "academicYear": "2017-2018",
+        "studentName": "J. Shanmugpriya",
+        "rank": "IX"
+      },
+      {
+        "academicYear": "2017-2018",
+        "studentName": "G. Swathi Santhosh Priya",
+        "rank": "XII"
+      },
+      {
+        "academicYear": "2017-2018",
+        "studentName": "S. Priyanka",
+        "rank": "XXIV"
+      },
+      {
+        "academicYear": "2017-2018",
+        "studentName": "S. S. Rajeswari",
+        "rank": "XXXXX"
+      }
+    ],
     "publications": {
       "journals": [
         {
-          "title": "Department of the teacher",
-          "author": "Name of the journal",
-          "department": "UGC/Scopus /WoS/SCI",
-          "journal": "Link to article / paper / abstract of the article",
-          "year": "Finite Element Analysis of Concrete with Bagasse Ash and Bagasse Fibre,",
-          "link": "V. Ramasamy"
+          "title": "Finite Element Analysis of Concrete with Bagasse Ash and Bagasse Fibre",
+          "author": "V. Ramasamy",
+          "journal": "Interciencia Journal",
+          "year": "2023",
+          "link": "https://intercienciajournal.com/show.php?v=48&i=5"
         },
         {
-          "title": "Civil Engineering",
-          "author": "Interciencia Journal",
-          "department": "2023",
-          "journal": "WOS",
-          "year": "https://intercienciajournal.com/show.php?v=48&i=5",
-          "link": "Influence of Zinc Sulphate in Microstructure and Strength Properties of Blended Cementitious Concrete System"
-        },
-        {
-          "title": "Civil Engineering",
-          "author": "Journal of REVISTA",
-          "department": "MATERIA",
-          "journal": "2023",
-          "year": "SCI",
+          "title": "Influence of Zinc Sulphate in Microstructure and Strength Properties of Blended Cementitious Concrete System",
+          "author": "Ramasamy.V",
+          "journal": "Journal of REVISTA MATERIA",
+          "year": "2023",
           "link": "https://www.scielo.br/j/rmat/a/kKSpVm39k6HR4Kqg577fNsS/"
         },
         {
-          "title": "Performance of rc Beams Supported With Hybrid FRP Laminates:A Review,",
-          "author": "P.Somiyadevi,",
-          "department": "V. Ramasamy",
-          "journal": "Civil Engineering",
-          "year": "Materials Today proceedings",
-          "link": "2023"
+          "title": "Performance of rc Beams Supported With Hybrid FRP Laminates:A Review",
+          "author": "P.Somiyadevi,, V. Ramasamy",
+          "journal": "Materials Today proceedings",
+          "year": "2023",
+          "link": "https://www.sciencedirect.com/science/article/abs/pii/S2214785321048100"
         },
         {
           "title": "A Study On Durability Characteristics of Nano-Concrete",
           "author": "V. Ramasamy",
-          "department": "Civil Engineering",
           "journal": "Materials Today proceedings",
           "year": "2023",
-          "link": "Scopus"
+          "link": "https://www.sciencedirect.com/science/article/abs/pii/S221478532104743X"
         },
         {
-          "title": "Behaviour of hybrid fibre reinforced polymer",
-          "author": "(HyFRP) laminates on high strength concrete (HSC) beams under flexural loading",
-          "department": "P. Somiyadevi",
-          "journal": "V.Ramasamy",
-          "year": "Civil Engineering",
-          "link": "Materials Express"
+          "title": "Behaviour of hybrid fibre reinforced polymer (HyFRP) laminates on high strength concrete (HSC) beams under flexural loading",
+          "author": "P. Somiyadevi, V.Ramasamy",
+          "journal": "Materials Express",
+          "year": "2023",
+          "link": "http://www.ijesit.com/Volume%204/Issue%202/IJESIT201502_44.pdf"
         },
         {
           "title": "Structural performance of hybrid FRP laminates on concrete beams made with manufactured sand”",
           "author": "Ramasamy vasudevan",
-          "department": "Civil Engineering",
           "journal": "Materia-Rio De Janeiro",
           "year": "2023",
-          "link": "SCI"
+          "link": "https://www.scielo.br/j/rmat/a/BZNLHngFM4bv4FqFmkNW4kP/?format=pdf&lang=en"
         },
         {
           "title": "Structural Strengthening of Beam Using Fibre Reinforced Polymer Laminate",
           "author": "S.Karthikeyan",
-          "department": "Civil Engineering",
           "journal": "Journal of Emerging technologies and innovative research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2309570.pdf"
         },
         {
           "title": "Experimental Investigation On Crimped Steel Fiber In M30 Concrete With Treated Rubber Powder As Partial Replacement Of Fine Aggregate",
           "author": "Dr.K.Thiagarajan",
-          "department": "Civil Engineering",
           "journal": "Journal of emerging technologies and innovative research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2309649.pdf"
         },
         {
           "title": "Experimental Study On Partial Replacement Of Cement by Zeolite Powder in Concrete",
           "author": "S.Karthikeyan",
-          "department": "Civil Engineering",
           "journal": "Journal of emerging technologies and innovative research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2310016.pdf"
         },
         {
           "title": "Studies on Properties of Sisal Fiber Reinforced Self Compacting Concrete",
           "author": "Dr.V.Ramasamy",
-          "department": "Civil Engineering",
           "journal": "International Journal for Research in Applied Science & Engineering Technology (IJRASET)",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.ijraset.com/best-journal/studies-on-properties-of-sisal-fiber-reinforced-self-compacting-concrete"
         },
         {
           "title": "Waste Plastic Induced in Self Compacting Concrete to Avoid Plastic Pollution",
           "author": "S. Selvakumar",
-          "department": "Civil Engineering",
           "journal": "International Journal for Research in Applied Science & Engineering Technology (IJRASET)",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.ijraset.com/best-journal/waste-plastic-induced-in-self-compacting-concrete-to-avoid-plastic-pollution-"
         },
         {
           "title": "Experimental Study on Concrete Using Marble Powder As Partial Replacement of Cement",
           "author": "J.Parthiban",
-          "department": "Civil Engineering",
           "journal": "Journal of emerging technologies and innovative research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2310041.pdf"
         },
         {
           "title": "Experimental Study On Partial Replacement Of Cement By Metakaolin Powder In Concrete",
           "author": "S. Rethinakumar",
-          "department": "Civil Engineering",
           "journal": "Journal of emerging technologies and innovative research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2310047.pdf"
         },
         {
           "title": "Experimental Study On Partial Replacement Of Cement By Sugarcane Bagasse Ash",
           "author": "P. Somiyadevi",
-          "department": "Civil Engineering",
           "journal": "Journal of Emerging Technologies and Innovative Research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2310046.pdf"
         },
         {
-          "title": "Experimental Investigation On Hooked Steel Fiber In M30 Concrete With Treated Rubber Powder As Partial Replacement Of Fine Aggregate",
-          "author": "Dr. K. Thiagarajn",
-          "department": "Civil Engineering",
+          "title": "Experimental Investigation On Hooked Steel Fiber In M30 Concrete With Treated Rubber Powder As Partial Replacement Of Fine Aggregate Dr. K. Thiagarajn",
+          "author": "",
           "journal": "Journal of Emerging Technologies and Innovative research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2310004.pdf"
         },
         {
           "title": "Experimental Study On Partial Replacement Of Cement By Zeolite Powder In Concrete",
           "author": "P.Somiyadevi",
-          "department": "Civil Engineering",
           "journal": "Journal of Emerging Technologies and innovative Research",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.jetir.org/papers/JETIR2310016.pdf"
         },
         {
           "title": "Production of SCC Using Bagasse Ash as Fine Aggregate",
           "author": "S.Maluvu",
-          "department": "Civil Engineering",
           "journal": "International Journal for Research in Applied Science & Engineering Technology (IJRASET)",
           "year": "2023",
-          "link": "UGC"
+          "link": "https://www.ijraset.com/best-journal/production-of-scc-using-bagasse-ash-as-fine-aggregate"
         },
         {
           "title": "Assessment of durability characteristics of concrete with Nanosilica and carbon nanotubes",
           "author": "Dr.V.Ramasamy",
-          "department": "Civil Engineering",
           "journal": "Journal Of Environmental Production And Ecology",
           "year": "2023",
-          "link": "SCI"
+          "link": "https://scibulcom.net/en/article/1ZFzSg6etQSYJQmQy6ya"
         },
         {
-          "title": "Department of the teacher",
-          "author": "Name of the journal",
-          "department": "UGC/Scopus /WoS/SCI",
-          "journal": "Link to article / paper / abstract of the article",
-          "year": "Behaviour of Bagasse ash and Bagasse fibre in Concrete",
-          "link": "V. Ramasamy"
+          "title": "Behaviour of Bagasse ash and Bagasse fibre in Concrete",
+          "author": "V. Ramasamy",
+          "journal": "YMER",
+          "year": "2022",
+          "link": "https://ymerdigital.com/uploads/YMER201288.pdf"
         },
         {
-          "title": "Civil Engineering",
-          "author": "YMER",
-          "department": "2022",
-          "journal": "Scopus",
-          "year": "https://ymerdigital.com/uploads/YMER201288.pdf",
-          "link": "Flexural study on Bagasse ash concrete with Bagasse fibre"
+          "title": "Flexural study on Bagasse ash concrete with Bagasse fibre",
+          "author": "V. Ramasamy",
+          "journal": "YMER",
+          "year": "2022",
+          "link": "https://ymerdigital.com/uploads/YMER2111BA.pdf"
         },
         {
-          "title": "Civil Engineering",
-          "author": "YMER",
-          "department": "2022",
-          "journal": "Scopus",
-          "year": "https://ymerdigital.com/uploads/YMER2111BA.pdf",
-          "link": "Effects of Cement Replaced with Bagasse Ash and Bagasse Fiber in Concrete"
+          "title": "Effects of Cement Replaced with Bagasse Ash and Bagasse Fiber in Concrete",
+          "author": "V. Ramasamy",
+          "journal": "Special Education",
+          "year": "2022",
+          "link": "https://www.researchgate.net/publication/365417618_Effects_of_Cement_Replaced_With_Bagasse_Ash_and_Bagasse_Fiberin_Concrete"
         },
         {
-          "title": "Civil Engineering",
-          "author": "Special Education",
-          "department": "2022",
-          "journal": "Scopus",
-          "year": "CALENDAR YEAR 2021",
-          "link": "Title of the  paper"
+          "title": "Various Treatment Techniques Involved To Enhance The Recycled Coarse Aggregate In Concrete -A review",
+          "author": "J.Venkatesh, V. Ramasamy",
+          "journal": "Materials Today Proceedings",
+          "year": "2021",
+          "link": "https://www.sciencedirect.com/science/article/abs/pii/S2214785320385837"
         },
         {
-          "title": "Department of the teacher",
-          "author": "Name of the journal",
-          "department": "UGC/Scopus /WoS/SCI",
-          "journal": "Link to article / paper / abstract of the article",
-          "year": "Various Treatment Techniques Involved To Enhance The Recycled Coarse Aggregate In Concrete -A review",
-          "link": "J.Venkatesh, V. Ramasamy,"
-        },
-        {
-          "title": "Civil Engineering",
-          "author": "Materials Today Proceedings",
-          "department": "2021",
-          "journal": "Scopus",
-          "year": "https://www.sciencedirect.com/science/article/abs/pii/S2214785320385837",
-          "link": "Augmentation Of Dissimilar Techniques For Enhancing The Concrete Properties With Recycled Coarse Aggregate And Manufacture Sand"
-        },
-        {
-          "title": "J.Venkatesh, V. Ramasamy,",
-          "author": "Civil Engineering",
-          "department": "Journal Of  Materials Research And Technology,",
-          "journal": "2021",
-          "year": "SCI",
+          "title": "Augmentation Of Dissimilar Techniques For Enhancing The Concrete Properties With Recycled Coarse Aggregate And Manufacture Sand",
+          "author": "J.Venkatesh, V. Ramasamy",
+          "journal": "Journal Of  Materials Research And Technology,",
+          "year": "2021",
           "link": "https://www.sciencedirect.com/science/article/pii/S2238785421006499"
         },
         {
           "title": "Assessment of Mechanical Properties of Nano- Modified Concrete",
           "author": "M.Thanmanaselvi, V. Ramasamy",
-          "department": "Civil Engineering",
           "journal": "AIP Conference Proceedings",
           "year": "2021",
-          "link": "Scopus"
+          "link": "https://pubs.aip.org/aip/acp/article-abstract/2417/1/020015/611289/Assessment-of-mechanical-properties-of-nano?redirectedFrom=fulltext"
         },
         {
           "title": "Strength of durability properties of concrete using Recron 3S",
           "author": "P.Somiyadevi",
-          "department": "Civil Engineering",
           "journal": "Suraj Punj Journal for Multidisciplinary research",
           "year": "2021",
-          "link": "UGC"
+          "link": "https://www.spjmr.com/gallery/spjmr%201581.pdf"
         },
         {
-          "title": "Department of the teacher",
-          "author": "Name of the journal",
-          "department": "UGC/Scopus /WoS/SCI",
-          "journal": "Link to article / paper / abstract of the article",
-          "year": "Experimental investigation of properties of natural fiber reinforced concrete with partial replacement of seashell as fine aggregate, EPRA",
-          "link": "Goushik, V. Ramasamy"
+          "title": "Experimental investigation of properties of natural fiber reinforced concrete with partial replacement of seashell as fine aggregate, EPRA",
+          "author": "Goushik, V. Ramasamy",
+          "journal": "International Journal of  Research and Development (IJRD),",
+          "year": "2020",
+          "link": "https://eprajournals.com/IJSR/article/3215/abstract"
         },
         {
-          "title": "Civil Engineering",
-          "author": "International Journal of  Research and Development (IJRD),",
-          "department": "2020",
-          "journal": "UGC",
-          "year": "https://eprajournals.com/IJSR/article/3215/abstract",
-          "link": "Study on Strength and Durability characteristics of Hybrid Fiber Reinforced Self- Compacting Concrete"
-        },
-        {
-          "title": "Pavithra.B, V. Ramasamy",
-          "author": "Civil Engineering",
-          "department": "International Journal of Innovative Research in Technology",
-          "journal": "2020",
-          "year": "UGC",
+          "title": "Study on Strength and Durability characteristics of Hybrid Fiber Reinforced Self- Compacting Concrete",
+          "author": "Pavithra.B, V. Ramasamy",
+          "journal": "International Journal of Innovative Research in Technology",
+          "year": "2020",
           "link": "https://www.ijirt.org/master/publishedpaper/IJIRT149710_PAPER.pdf"
         },
         {
           "title": "Study on strength parameters of plain cement concrete added with tamarind kernel powder",
-          "author": "S. Venkatraman, V. Ramasamy,",
-          "department": "Civil Engineering",
+          "author": "S. Venkatraman, V. Ramasamy",
           "journal": "Structural Concrete",
           "year": "2020",
-          "link": "SCI"
+          "link": "https://onlinelibrary.wiley.com/doi/abs/10.1002/suco.201900578"
         },
         {
           "title": "Experimental Study On Concrete Using Treated Sea Sand As Fine Aggregate",
           "author": "P.Somiyadevi",
-          "department": "Civil Engineering",
           "journal": "International Journal of Creative research thoughts",
           "year": "2020",
-          "link": "UGC"
+          "link": "https://ijcrt.org/papers/IJCRT2009310.pdf"
         },
         {
           "title": "Strength And Durability Properties Of Concrete Using Groundnut Shell As Fine Aggregate",
           "author": "P.Somiyadevi",
-          "department": "Civil Engineering",
           "journal": "International Journal of Creative research thoughts",
           "year": "2020",
-          "link": "UGC"
+          "link": "https://ijcrt.org/papers/IJCRT2005455.pdf"
         },
         {
-          "title": "Department of the teacher",
-          "author": "Name of the journal",
-          "department": "UGC/Scopus /WoS/SCI",
-          "journal": "Link to article / paper / abstract of the article",
-          "year": "Hydration Effect of Gum Arabic and Guar Gum Powder on Strength parameters of Concrete",
-          "link": "Dr.V.Ramasamy"
+          "title": "Hydration Effect of Gum Arabic and Guar Gum Powder on Strength parameters of Concrete",
+          "author": "Dr.V.Ramasamy",
+          "journal": "Caribbean Journal of Science",
+          "year": "2019",
+          "link": "https://www.researchgate.net/publication/338116636_Hydration_Effect_of_Gum_Arabic_and_Guar_Gum_Powder_on_Strength_Parameters_of_Concrete"
         },
         {
-          "title": "Civil Engineering",
-          "author": "Caribbean Journal of Science",
-          "department": "2019",
-          "journal": "Scopus",
-          "year": "Delay in Construction Projects – A study of Scenario of Pondicherry Region",
-          "link": "Dr.V.Ramasamy"
+          "title": "Delay in Construction Projects – A study of Scenario of Pondicherry Region",
+          "author": "Dr.V.Ramasamy",
+          "journal": "International Journal of Innovative Science and Research Technology",
+          "year": "2019",
+          "link": "https://ijisrt.com/wp-content/uploads/2019/06/IJISRT19MY70.pdf"
         },
         {
-          "title": "Civil Engineering",
-          "author": "International Journal of Innovative Science and Research Technology",
-          "department": "2019",
-          "journal": "UGC",
-          "year": "https://ijisrt.com/wp-content/uploads/2019/06/IJISRT19MY70.pdf",
-          "link": "Detecting failures in temporary supporting structures used in construction"
-        },
-        {
-          "title": "Civil Engineering",
-          "author": "Journal of Structural Engineering",
-          "department": "2019",
-          "journal": "Scopus",
-          "year": "Title of the Book",
-          "link": "Name of the Publisher"
-        },
-        {
-          "title": "Fluid and Solid Mechanics",
-          "author": "Mechanics of Solids",
-          "department": "Strength of Materials",
-          "journal": "PEARSON",
-          "year": "ISBN 978-81-317-6854-9, New Delhi, 2012",
-          "link": "Design of RC & Brick Masonry Structures"
-        },
-        {
-          "title": "ISBN 978-93-83-103-16-4",
-          "author": "Fluid Mechanics And Machinery",
-          "department": "ISBN 978-81-8371-424-2, Chennai, 2012.",
-          "journal": "Comprehensive Strength of Materials",
-          "year": "ISBN 978-93-83103-05-8, Chennai, 2013.",
-          "link": "Strength of Materials for Anna University"
-        },
-        {
-          "title": "ISBN 978-81-317-9478-4, New Delhi 2013",
-          "author": "Basic Civil And Mechanical Engineering",
-          "department": "Vishnu Prints Media, Chennai.2013",
-          "journal": "Structural Analysis-I",
-          "year": "ISBN 978-93-83103-35-5, Chennai 2013",
-          "link": "Prestressed Concrete Structure"
-        },
-        {
-          "title": "ISBN 978–93–80659–20–6",
-          "author": "Sri Krishna Hitech Publishing Company Pvt. Ltd, Chennai , 2014",
-          "department": "Applied Hydraulic Engineering",
-          "journal": "ISBN 978-81-8371-698-7, Chennai, 2015",
-          "year": "Mechanics of Fluids",
-          "link": "ISBN 978-81-8371-716-8, Chennai, 2015"
-        },
-        {
-          "title": "Fluid mechanics And Machinery",
-          "author": "ISBN 978-81-8371-718-2, Chennai, 2015",
-          "department": "Design Of Steel Structures",
-          "journal": "BKF Puplishers &Distributors Chennai,2016",
-          "year": "ISBN 978-81-9566-105-5",
-          "link": "Structural Analysis I I"
-        },
-        {
-          "title": "BKF Puplishers &Distributors Chennai,2016",
-          "author": "ISBN 978-81-9566-105-1",
-          "department": "Engineering Mechanics",
-          "journal": "Vishnu Prints Media, Chennai.2016",
-          "year": "Engineering graphics",
-          "link": "Vishnu Prints Media, Chennai.2016"
-        },
-        {
-          "title": "ISBN 978-93-85374-45-6",
-          "author": "Engineering practice laboratory",
-          "department": "Vishnu Prints Media, Chennai.2016",
-          "journal": "ISBN 978-93-85374-45-3",
-          "year": "Civil Engineering Structure",
-          "link": "New Age International Publishers"
-        },
-        {
-          "title": "ISBN 978-81-224-5732-2",
-          "author": "Name of the Faculty",
-          "department": "Title of the Conference Proceeding Published",
-          "journal": "Title of the paper",
-          "year": "ISBN number of the proceedings",
-          "link": "Name of the Publisher"
-        },
-        {
-          "title": "Dr. K. Thiagarajn",
-          "author": "International Conference on Civil Engineering Innovative Development in Engineering Advances",
-          "department": "Experimental Investigation on Chemically Treated Hooked End Steel Fiber Embedded in Rubberized Concrete",
-          "journal": "978-981-99-6175-7",
-          "year": "Springer",
-          "link": "Dr.V.Ramasamy"
-        },
-        {
-          "title": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
-          "author": "Performance of Concrete Using M-Sand and Marble Powder",
-          "department": "978-93-94743-08-3",
-          "journal": "Sri Manakula Vinayagar Engineering College",
-          "year": "P. Somiyadevi",
-          "link": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)"
-        },
-        {
-          "title": "Experimental investigations on properties of concrete with M-sand and sea sand",
-          "author": "978-93-94743-08-3",
-          "department": "Sri Manakula Vinayagar Engineering College",
-          "journal": "Dr.A.Krishnamoorthi",
-          "year": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
-          "link": "Strength and durability properties of cement using crushed tile waste and M-sand"
-        },
-        {
-          "title": "978-93-94743-08-3",
-          "author": "Sri Manakula Vinayagar Engineering College",
-          "department": "P.Somiyadevi",
-          "journal": "Dr. V. Ramasamy",
-          "year": "5th International Conference on Recent advances in material Chemistry (ICRAMS-2021) Virtual mode",
-          "link": "February 18th -20th -2021"
-        },
-        {
-          "title": "Study on Mechanical Properties of High Strength Concrete used in Construction Industries",
-          "author": "Virtual Mode",
-          "department": "SRM institute of science and technology",
-          "journal": "Dr. V. Ramasamy",
-          "year": "5th International Conference on Recent advances in material Chemistry (ICRAMS-2021) Virtual mode",
-          "link": "February 18th -20th -2021"
-        },
-        {
-          "title": "Evaluation of Concrete Properties using Manufactured Sand  with Nanomaterial’s",
-          "author": "Virtual Mode",
-          "department": "SRM institute of science and technology",
-          "journal": "Dr. V. Ramasamy",
-          "year": "Virtual international conference on sustainable Practices and innovations in Civil Engineering (SPICE 2021)",
-          "link": "Static behaviour of bagasse ash and bagasse fiber in concrete"
-        },
-        {
-          "title": "Sri Sivasubramaniya Nadar College of Engineering",
-          "author": "Dr. V. Ramasamy",
-          "department": "International conference on built environment ,Science and Technology",
-          "journal": "Effects of cement replaced with bagasse ash and bagasse fibre in concrete",
-          "year": "978-93-84136-22-2",
-          "link": "SRM institute of Science and Technology"
-        },
-        {
-          "title": "International Conference on",
-          "author": "Materials And Processes",
-          "department": "Structural Performance of High Strength Concrete Beams with Hybrid FRP",
-          "journal": "Laminates",
-          "year": "978-93-81208-99-1",
-          "link": "Tagore Engineering College"
-        },
-        {
-          "title": "International Conference on",
-          "author": "Materials And Processes",
-          "department": "Behavioural Analysis of FRP Sections",
-          "journal": "978-93-81208-99-1",
-          "year": "Tagore Engineering College",
-          "link": "V. Ramasamy"
-        },
-        {
-          "title": "International Conference on",
-          "author": "Materials And Processes",
-          "department": "Experimental Investigation of Mechanical Properties on Concrete with",
-          "journal": "Nanomaterial’s using Manufactured Sand",
-          "year": "978-93-81208-99-1",
-          "link": "Tagore Engineering College"
+          "title": "Detecting failures in temporary supporting structures used in construction",
+          "author": "V. Ramasamy",
+          "journal": "Journal of Structural Engineering",
+          "year": "2019",
+          "link": "https://www.researchgate.net/publication/330885127_Detecting_failures_in_temporary_supporting_structures_used_in_construction"
         }
       ],
-      "books": [],
-      "conferences": []
+      "books": [
+        {
+          "title": "Fluid and Solid Mechanics",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Sri Krishna Publication, Chennai, 2005"
+        },
+        {
+          "title": "Mechanics of Solids",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Sri Krishna Hitech Publication ISBN No 978-93-80659-20-6, Chennai, 2009"
+        },
+        {
+          "title": "Strength of Materials",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "PEARSON, ISBN 978-81-317-6854-9, New Delhi, 2012"
+        },
+        {
+          "title": "Design of RC & Brick Masonry Structures",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Lakshmi Publications, ISBN 978-93-83-103-16-4, Chennai, 2012"
+        },
+        {
+          "title": "Fluid Mechanics And Machinery",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Scitech Publications (India) Pvt Ltd, ISBN 978-81-8371-424-2, Chennai, 2012."
+        },
+        {
+          "title": "Comprehensive Strength of Materials",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Lakshmi Publications, ISBN 978-93-83103-05-8, Chennai, 2013."
+        },
+        {
+          "title": "Strength of Materials for Anna University",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "PEARSON, ISBN 978-81-317-9478-4, New Delhi 2013"
+        },
+        {
+          "title": "Basic Civil And Mechanical Engineering",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Vishnu Prints Media, Chennai, 2013"
+        },
+        {
+          "title": "Structural Analysis-I",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Lakshmi Publications, ISBN 978-93-83103-35-5, Chennai 2013"
+        },
+        {
+          "title": "Prestressed Concrete Structure",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Sri Krishna Hitech Publishing Company Pvt. Ltd, ISBN 978–93–80659–20–6, Chennai, 2014"
+        },
+        {
+          "title": "Applied Hydraulic Engineering",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Scitech Publications (India) Pvt Ltd, ISBN 978-81-8371-698-7, Chennai, 2015"
+        },
+        {
+          "title": "Mechanics of Fluids",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Scitech Publications (India) Pvt Ltd, ISBN 978-81-8371-716-8, Chennai, 2015"
+        },
+        {
+          "title": "A Textbook on Fluid mechanics And Machinery",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Scitech Publications (India) Pvt Ltd, ISBN 978-81-8371-718-2, Chennai, 2015"
+        },
+        {
+          "title": "Design Of Steel Structures",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "BKF Publishers & Distributors, ISBN 978-81-9566-105-5, Chennai, 2016"
+        },
+        {
+          "title": "Structural Analysis II",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "BKF Publishers & Distributors, ISBN 978-81-9566-105-1, Chennai, 2016"
+        },
+        {
+          "title": "Engineering Mechanics",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Vishnu Prints Media, Chennai, 2016"
+        },
+        {
+          "title": "Engineering graphics",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Vishnu Prints Media, ISBN 978-93-85374-45-6, Chennai, 2016"
+        },
+        {
+          "title": "Engineering practice laboratory",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "Vishnu Prints Media, ISBN 978-93-85374-45-3, Chennai, 2016"
+        },
+        {
+          "title": "Civil Engineering Structure",
+          "author": "Dr. V. Ramasamy",
+          "publisher": "New Age International Publishers, ISBN 978-81-224-5732-2, New Delhi"
+        }
+      ],
+      "conferences": [
+        {
+          "paperTitle": "Experimental Investigation on Chemically Treated Hooked End Steel Fiber Embedded in Rubberized Concrete",
+          "faculty": "Dr. K. Thiagarajn",
+          "proceeding": "International Conference on Civil Engineering Innovative Development in Engineering Advances",
+          "isbn": "978-981-99-6175-7",
+          "publisher": "Springer"
+        },
+        {
+          "paperTitle": "Performance of Concrete Using M-Sand and Marble Powder",
+          "faculty": "Dr.V.Ramasamy",
+          "proceeding": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
+          "isbn": "978-93-94743-08-3",
+          "publisher": "Sri Manakula Vinayagar Engineering College"
+        },
+        {
+          "paperTitle": "Experimental investigations on properties of concrete with M-sand and sea sand",
+          "faculty": "P. Somiyadevi",
+          "proceeding": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
+          "isbn": "978-93-94743-08-3",
+          "publisher": "Sri Manakula Vinayagar Engineering College"
+        },
+        {
+          "paperTitle": "Strength and durability properties of cement using crushed tile waste and M-sand",
+          "faculty": "Dr.A.Krishnamoorthi",
+          "proceeding": "International Conference on Emerging Innovative Technologies in Engineering (ICEITE 2022)",
+          "isbn": "978-93-94743-08-3",
+          "publisher": "Sri Manakula Vinayagar Engineering College"
+        },
+        {
+          "paperTitle": "Study on Mechanical Properties of High Strength Concrete used in Construction Industries",
+          "faculty": "P.Somiyadevi, Dr. V. Ramasamy",
+          "proceeding": "5th International Conference on Recent advances in material Chemistry (ICRAMS-2021)",
+          "isbn": "—",
+          "publisher": "SRM Institute of Science and Technology"
+        },
+        {
+          "paperTitle": "Evaluation of Concrete Properties using Manufactured Sand with Nanomaterial’s",
+          "faculty": "Dr. V. Ramasamy",
+          "proceeding": "5th International Conference on Recent advances in material Chemistry (ICRAMS-2021)",
+          "isbn": "—",
+          "publisher": "SRM Institute of Science and Technology"
+        },
+        {
+          "paperTitle": "Static behaviour of bagasse ash and bagasse fiber in concrete",
+          "faculty": "Dr. V. Ramasamy",
+          "proceeding": "Virtual International Conference on Sustainable Practices and Innovations in Civil Engineering (SPICE 2021)",
+          "isbn": "—",
+          "publisher": "Sri Sivasubramaniya Nadar College of Engineering"
+        },
+        {
+          "paperTitle": "Effects of cement replaced with bagasse ash and bagasse fibre in concrete",
+          "faculty": "Dr. V. Ramasamy",
+          "proceeding": "International Conference on Built Environment, Science and Technology",
+          "isbn": "978-93-84136-22-2",
+          "publisher": "SRM Institute of Science and Technology"
+        },
+        {
+          "paperTitle": "Structural Performance of High Strength Concrete Beams with Hybrid FRP Laminates",
+          "faculty": "P. Somiyadevi, V. Ramasamy",
+          "proceeding": "International Conference on Materials And Processes",
+          "isbn": "978-93-81208-99-1",
+          "publisher": "Tagore Engineering College"
+        },
+        {
+          "paperTitle": "Behavioural Analysis of FRP Sections",
+          "faculty": "Dr.V.Ramasamy",
+          "proceeding": "International Conference on Materials And Processes",
+          "isbn": "978-93-81208-99-1",
+          "publisher": "Tagore Engineering College"
+        },
+        {
+          "paperTitle": "Experimental Investigation of Mechanical Properties on Concrete with Nanomaterial’s using Manufactured Sand",
+          "faculty": "V. Ramasamy",
+          "proceeding": "International Conference on Materials And Processes",
+          "isbn": "978-93-81208-99-1",
+          "publisher": "Tagore Engineering College"
+        }
+      ]
     },
     "toppers": []
   },
@@ -5045,6 +4304,242 @@
       "Soil and Water Conservation Engineering Lab",
       "Irrigation and Drainage Engineering Lab",
       "Post-Harvest and Food Processing Technology Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "phd-civil": {
+    "key": "phd-civil",
+    "name": "PhD - Civil Engg.",
+    "about": "The Ph.D. program in Civil Engineering offers opportunities for advanced research and academic inquiry in structural engineering, environmental engineering, geotechnical engineering, and construction management.",
+    "vision": "To achieve international recognition in structural and environmental research, contributing to sustainable infrastructural development.",
+    "mission": [
+      "To perform high-impact research addressing structural durability and environmental issues.",
+      "To foster collaborations with national and international research organizations.",
+      "To publish innovative findings in top-tier science and engineering journals."
+    ],
+    "peos": [
+      "Formulate and solve complex engineering problems through research methodologies.",
+      "Contribute new knowledge to the civil engineering academic community.",
+      "Maintain high ethics and professional standards in research and development."
+    ],
+    "psos": [
+      "Perform independent research in structural engineering, concrete technology, or environmental hydrology.",
+      "Publish scholarly articles in recognized peer-reviewed international journals."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Research Coordinators",
+        "qualification": "Ph.D.",
+        "designation": "Professor & Research Guide",
+        "department": "PhD - Civil Engineering",
+        "email": "phd.civil@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Advanced Structural Research Lab",
+      "Geotechnical Research Center",
+      "Environmental Engineering Research Wing"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "phd-mech": {
+    "key": "phd-mech",
+    "name": "PhD - Mechanical Engg.",
+    "about": "The Ph.D. program in Mechanical Engineering provides research pathways in materials science, thermal engineering, fluid machinery, robotics, CAD/CAM, and advanced manufacturing systems.",
+    "vision": "To drive innovations in mechanical sciences, robotics, and thermal engineering through rigorous scientific research and industrial partnership.",
+    "mission": [
+      "To conduct cutting-edge research in manufacturing systems and materials engineering.",
+      "To mentor doctoral scholars to be research leaders in industry and academia.",
+      "To secure patents and commercialize innovative mechanical designs."
+    ],
+    "peos": [
+      "Conduct independent research using advanced engineering simulation and modeling tools.",
+      "Communicate research breakthroughs effectively in academic and industrial settings.",
+      "Provide solutions for mechanical engineering challenges with global impact."
+    ],
+    "psos": [
+      "Develop innovative systems in thermal sciences, energy conservation, or manufacturing automation.",
+      "Publish articles in leading SCI and Scopus-indexed mechanical engineering journals."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Research Coordinators",
+        "qualification": "Ph.D.",
+        "designation": "Professor & Research Guide",
+        "department": "PhD - Mechanical Engineering",
+        "email": "phd.mech@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Advanced Manufacturing Research Lab",
+      "Thermal Analysis Research Wing",
+      "Materials and Composites Testing Center"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "phd-ece": {
+    "key": "phd-ece",
+    "name": "PhD - Electronics and Communication Engg.",
+    "about": "The Ph.D. program in Electronics and Communication Engineering (ECE) aims to conduct cutting-edge research in wireless networks, microelectronics, VLSI systems, embedded design, and digital signal processing.",
+    "vision": "To lead research in telecommunications and microelectronic systems, fostering innovation and technological development for the future.",
+    "mission": [
+      "To carry out advanced research in communication systems, IoT architectures, and chip designs.",
+      "To produce highly skilled research professionals ready for technology hubs and universities.",
+      "To establish collaborative research laboratories with leading electronics enterprises."
+    ],
+    "peos": [
+      "Create new algorithms, models, and architectures in communication networks.",
+      "Author scientific papers and publish them in international academic journals.",
+      "Demonstrate leadership in technological research and development projects."
+    ],
+    "psos": [
+      "Design advanced VLSI systems, wireless networks, or embedded communication protocols.",
+      "Publish research in IEEE transactions, journals, and prestigious international symposia."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Research Coordinators",
+        "qualification": "Ph.D.",
+        "designation": "Professor & Research Guide",
+        "department": "PhD - Electronics and Communication Engineering",
+        "email": "phd.ece@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Advanced Communications Research Lab",
+      "VLSI & Embedded Systems Design Suite",
+      "Digital Signal Processing Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "phd-eee": {
+    "key": "phd-eee",
+    "name": "PhD - Electrical and Electronics Engg.",
+    "about": "The Ph.D. program in Electrical and Electronics Engineering (EEE) focuses on power electronics, electrical machinery designs, smart grid architectures, renewable energy integration, and control instrumentation systems.",
+    "vision": "To be a premier center for electrical engineering research, addressing power management and clean energy challenges globally.",
+    "mission": [
+      "To conduct research in power systems, electric vehicles, and clean energy storage.",
+      "To guide research scholars in solving industrial power and grid integration problems.",
+      "To bridge academic research and practical power grid applications."
+    ],
+    "peos": [
+      "Develop innovative control models and topologies for smart power transmission.",
+      "Publish high-quality research papers and file technical patents.",
+      "Engage in ethical research practices that benefit society and environment."
+    ],
+    "psos": [
+      "Model, simulate, and design advanced power converters, smart grids, or industrial drives.",
+      "Contribute scholarly findings to indexed journals and conferences in electrical engineering."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Research Coordinators",
+        "qualification": "Ph.D.",
+        "designation": "Professor & Research Guide",
+        "department": "PhD - Electrical and Electronics Engineering",
+        "email": "phd.eee@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Advanced Power Systems Research Lab",
+      "Smart Grids & Renewable Energy Simulation Center",
+      "Power Electronics Design Lab"
+    ],
+    "placements": [],
+    "rankHolders": [],
+    "publications": {
+      "journals": [],
+      "books": [],
+      "conferences": []
+    },
+    "toppers": []
+  },
+  "aids": {
+    "key": "aids",
+    "name": "Artificial Intelligence and Data Science",
+    "about": "The Department of Artificial Intelligence and Data Science (AI & DS) aims to provide a strong foundation in data engineering, machine learning pipelines, predictive modeling, statistical learning, and database architectures.",
+    "vision": "To produce globally competent professionals in AI and Data Science who contribute to societal growth through innovative research and ethical application of intelligence systems.",
+    "mission": [
+      "To deliver deep education in mathematical foundations, machine learning algorithms, and modern data infrastructures.",
+      "To cultivate collaboration with top data companies for industrial training and project opportunities.",
+      "To foster academic research and intellectual curiosity in analytics and cognitive engineering."
+    ],
+    "peos": [
+      "Apply analytical models and programming paradigms to build secure data-driven software solutions.",
+      "Demonstrate career progression in global tech enterprises or pursue entrepreneurial research ventures.",
+      "Practice engineering with moral responsibility, high team spirit, and continuous skill refinement."
+    ],
+    "psos": [
+      "Design and optimize neural networks, big data analytical dashboards, and intelligent predictive algorithms.",
+      "Integrate cloud computing platforms and secure architectures to deploy automated machine learning models."
+    ],
+    "pos": [],
+    "faculty": [
+      {
+        "name": "Department HOD & Faculty",
+        "qualification": "Ph.D.",
+        "designation": "Professor & Head",
+        "department": "Artificial Intelligence and Data Science",
+        "email": "hod.aids@apec.edu.in",
+        "facultyId": "",
+        "experience": "",
+        "joiningDate": "",
+        "teachingSince": ""
+      }
+    ],
+    "labs": [
+      "Artificial Intelligence and Cognition Lab",
+      "Data Analytics and Visualizations Lab",
+      "Big Data Frameworks Lab",
+      "Database Systems and SQL Lab"
     ],
     "placements": [],
     "rankHolders": [],

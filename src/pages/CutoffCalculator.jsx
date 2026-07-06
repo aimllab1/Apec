@@ -451,16 +451,19 @@ export default function CutoffCalculator() {
                             }`}
                           >
                             <option value="">Select a Department</option>
+                            {/* B.E. Departments */}
                             <option value="CSE">Computer Science & Engineering (B.E.)</option>
                             <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
-                            <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
-                            <option value="IT">Information Technology (B.Tech.)</option>
                             <option value="EEE">Electrical & Electronics Eng. (B.E.)</option>
                             <option value="ECE">Electronics & Communication Eng. (B.E.)</option>
                             <option value="MECH">Mechanical Engineering (B.E.)</option>
                             <option value="CIVIL">Civil Engineering (B.E.)</option>
+                            {/* B.Tech Departments */}
+                            <option value="IT">Information Technology (B.Tech.)</option>
                             <option value="CHEM">Chemical Engineering (B.Tech.)</option>
+                            <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
                             <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
+                            {/* PG Departments */}
                             <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
                             <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
                           </select>

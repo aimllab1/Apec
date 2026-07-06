@@ -7,7 +7,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { 
   ArrowRight, BookOpen, ShieldAlert, Award, Calendar, User, Eye, Compass, 
   GraduationCap, X, Mail, Phone, Sparkles, Cpu, Wifi, ChevronDown, CheckCircle2,
-  HeartHandshake
+  HeartHandshake, Code, Database, Beaker, Settings, Building, Laptop, ChevronLeft, ChevronRight, Zap
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
@@ -141,6 +141,29 @@ const staggerContainer = {
   }
 };
 
+const slideVariants = {
+  enter: (direction) => ({
+    x: direction > 0 ? 200 : -200,
+    opacity: 0
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      x: { type: "spring", stiffness: 350, damping: 30 },
+      opacity: { duration: 0.25 }
+    }
+  },
+  exit: (direction) => ({
+    x: direction < 0 ? 200 : -200,
+    opacity: 0,
+    transition: {
+      x: { type: "spring", stiffness: 350, damping: 30 },
+      opacity: { duration: 0.25 }
+    }
+  })
+};
+
 // 3D Flip Card Component for Founders & Management
 function LeadershipCard({ name, role, desc, img }) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -190,8 +213,9 @@ function LeadershipCard({ name, role, desc, img }) {
 export default function Home() {
   const scrollRef = useRef(null);
   const codeWidgetRef = useRef(null);
-  const [activeDepartment, setActiveDepartment] = useState(0);
   const [widgetVisible, setWidgetVisible] = useState(true);
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [direction, setDirection] = useState(1);
 
   // Admissions overlay and form state
   const [showAdModal, setShowAdModal] = useState(false);
@@ -311,6 +335,15 @@ export default function Home() {
     };
   }, []);
 
+  // Department Showcase Carousel auto-play
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentIdx((prev) => (prev + 1) % depts.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [currentIdx]);
+
   // Cycle the visibility of the ESTD 1984 widget (5s visible, 15s hidden)
   useEffect(() => {
     let timerId;
@@ -345,13 +378,12 @@ export default function Home() {
   ];
 
   const depts = [
-    { name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models." },
-    { name: "Computer Science & Engineering", code: "CSE", details: "Focuses on algorithms, cloud architecture, system software design, and full-stack development." },
-    { name: "Information Technology", code: "IT", details: "Emphasizes database administration, web systems engineering, data security, and enterprise solutions." },
-    { name: "Chemical Engineering", code: "CHEM", details: "Focuses on chemical processes, materials development, mass transfer nodes, and environmental safety." },
-    { name: "Mechanical Engineering", code: "MECH", details: "Covers dynamic machine designing, thermal engines, CAD modeling, and industrial manufacturing systems." },
-    { name: "Civil Engineering", code: "CIVIL", details: "Focuses on building structural designs, environmental hydrology, and general public transport infrastructure." },
-    { name: "Master of Computer Applications", code: "MCA", details: "Professional postgraduate pathway in software development, cloud databases, web engineering, and IT applications." }
+    { key: "civil", name: "Civil Engineering", code: "CIVIL", details: "Focuses on building structural designs, environmental hydrology, and general public transport infrastructure." },
+    { key: "mech", name: "Mechanical Engineering", code: "MECH", details: "Covers dynamic machine designing, thermal engines, CAD modeling, and industrial manufacturing systems." },
+    { key: "ece", name: "Electronics & Communication Engineering", code: "ECE", details: "Covers microelectronics, digital signal processing, embedded systems, and advanced wireless communication network architectures." },
+    { key: "eee", name: "Electrical & Electronics Engineering", code: "EEE", details: "Focuses on electrical power systems, smart grid systems, control instrumentation, and electrical machinery design." },
+    { key: "cse", name: "Computer Science & Engineering", code: "CSE", details: "Focuses on algorithms, cloud architecture, system software design, and full-stack development." },
+    { key: "aiml", name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models." }
   ];
 
 
@@ -425,159 +457,159 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center py-16 px-6 border-b border-gray-100 overflow-hidden bg-transparent z-10">
+      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-start pt-14 pb-16 px-6 border-b border-gray-100 bg-transparent z-10">
         
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div className="w-full max-w-[1800px] mx-auto px-6 flex flex-col items-center relative z-10">
           
-          {/* Left Hero Text inside Bounding Box */}
-          <div className="lg:col-span-7 text-left">
-            <div className="bg-white/45 backdrop-blur-md border border-white/40 rounded-3xl p-6 md:p-8 shadow-xl max-w-2xl mb-8 relative overflow-hidden">
-              <span className="font-serif italic inline-flex items-center gap-2 px-4 py-1 mb-4 text-xs font-semibold tracking-wide text-indigo-700 bg-indigo-50 border border-indigo-100 rounded-full shadow-sm">
-                42 Years of Academic Excellence
-              </span>
-              <h1 className="font-title text-3xl md:text-4xl lg:text-5xl font-black bg-gradient-to-r from-gray-950 via-indigo-900 to-indigo-950 bg-clip-text text-transparent tracking-tight leading-tight mb-4 drop-shadow-sm">
+          {/* Hero Text — pinned to top */}
+          <div className="w-full text-center mb-8">
+            <motion.div
+              className="inline-flex items-center justify-center gap-2 px-5 py-1.5 mb-6 text-xs md:text-sm font-semibold tracking-wide text-indigo-700 bg-white border border-indigo-200 rounded-full cursor-default select-none"
+              animate={{
+                y: [0, -5, 0, 5, 0],
+                boxShadow: [
+                  '0 4px 18px rgba(99,102,241,0.18), 0 1px 4px rgba(139,92,246,0.10)',
+                  '0 8px 28px rgba(99,102,241,0.32), 0 2px 8px rgba(139,92,246,0.22)',
+                  '0 4px 18px rgba(99,102,241,0.18), 0 1px 4px rgba(139,92,246,0.10)',
+                ]
+              }}
+              transition={{
+                y: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
+                boxShadow: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }
+              }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: '0 10px 32px rgba(99,102,241,0.38), 0 3px 10px rgba(139,92,246,0.28)',
+                transition: { duration: 0.28, ease: 'easeOut' }
+              }}
+            >
+              <span className="font-serif italic"><span className="not-italic font-black text-sm md:text-base text-indigo-800">42</span> Years of Academic Excellence</span>
+            </motion.div>
+
+            {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
+            <div className="w-full flex justify-center mb-5">
+              <h1
+                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap"
+                style={{
+                  fontSize: 'clamp(1.75rem, 4.2vw, 5rem)',
+                  color: '#1B224A',
+                  opacity: 1,
+                  textShadow: '0 2px 6px rgba(255,255,255,0.15)'
+                }}
+              >
                 Adhiparasakthi Engineering College
               </h1>
-              <p className="text-xs md:text-sm text-gray-500 leading-relaxed font-semibold">
-                An autonomous institution affiliated to Anna University, committed to training engineers with a sense of service and spirituality.
-              </p>
             </div>
 
-            {/* Admission Floating Banner */}
-            <div className="w-full max-w-lg p-6 bg-white/55 backdrop-blur-md border border-white/45 rounded-2xl shadow-lg">
-              <h3 className="font-title text-lg font-bold text-gray-900 mb-1">2026 – 2027 Admissions Open</h3>
-              <p className="text-xs text-gray-500 mb-4 font-semibold">Click below to apply or connect with our help desk.</p>
-              
-              <div className="flex flex-wrap gap-4 items-center justify-between">
-                <Link 
-                  to="/contact" 
-                  className="inline-flex items-center gap-2 bg-gray-950 hover:bg-gray-800 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all"
-                >
-                  Click to Apply
-                </Link>
-                <div className="text-right">
-                  <span className="font-display block text-[9px] text-gray-400 uppercase tracking-widest font-bold">Helpline</span>
-                  <span className="font-mono text-xs md:text-sm font-bold text-gray-700 block mt-0.5">
-                    <a href="tel:+917418064336" className="hover:text-indigo-600 hover:underline transition-colors">7418064336</a>
-                    {" / "}
-                    <a href="tel:+917418065336" className="hover:text-indigo-600 hover:underline transition-colors">7418065336</a>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Hero: Institutional Credentials Dashboard */}
-          <div className="lg:col-span-5 w-full flex items-center justify-center relative">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="w-full p-8 bg-white/95 backdrop-blur-md border border-indigo-500/20 rounded-[32px] shadow-[0_0_20px_rgba(99,102,241,0.12)] text-left relative overflow-hidden hover:shadow-[0_0_25px_rgba(99,102,241,0.22)] transition-shadow duration-300"
+            <p
+              className="text-base md:text-lg text-black leading-relaxed font-bold max-w-[280px] sm:max-w-sm md:max-w-2xl mx-auto px-2"
+              style={{ textWrap: 'balance' }}
             >
-              <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
-              
-              <span className="font-display text-[9px] uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-6">
-                Adhiparasakthi Engineering College Profile
-              </span>
-              
-              <h3 className="font-title text-lg font-bold text-gray-900 mb-6">Autonomous Credentials</h3>
-              
-              <div className="space-y-4">
-                {/* Affiliation */}
-                <div className="p-4 bg-gray-50/80 border border-gray-150 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <span className="font-display block text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Affiliation</span>
-                    <span className="text-xs font-bold text-gray-800">Anna University</span>
-                  </div>
-                  <span className="text-[10px] uppercase font-extrabold tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-2.5 py-1 rounded-lg">Affiliated</span>
-                </div>
+              An autonomous institution affiliated to Anna University, committed to training engineers with a sense of service and spirituality.
+            </p>
+          </div>
 
-                {/* UGC Autonomous */}
-                <div className="p-4 bg-gray-50/80 border border-gray-150 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <span className="font-display block text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Academic Status</span>
-                    <span className="text-xs font-bold text-gray-800">UGC Autonomous</span>
-                  </div>
-                  <span className="text-[10px] uppercase font-extrabold tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-2.5 py-1 rounded-lg">Approved</span>
-                </div>
-
-                {/* Accreditations */}
-                <div className="p-4 bg-gray-50/80 border border-gray-150 rounded-2xl flex items-center justify-between">
-                  <div>
-                    <span className="font-display block text-[8px] font-bold text-gray-400 uppercase tracking-widest leading-none mb-1">Accreditation</span>
-                    <span className="text-xs font-bold text-gray-800">NAAC Certified</span>
-                  </div>
-                  <span className="text-[10px] uppercase font-extrabold tracking-wider text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-lg">Certified</span>
-                </div>
+          {/* Admission Floating Banner — centered below title */}
+          <div className="block w-full max-w-sm mx-auto px-8 py-6 md:p-7 bg-white/55 backdrop-blur-md border border-white/45 rounded-2xl shadow-lg mt-2 mb-20 md:mb-4 text-center">
+            <h3 className="font-title text-lg font-bold text-gray-900 mb-1">2026 – 2027 Admissions Open</h3>
+            <p className="text-xs text-gray-500 mb-5 font-semibold">Click below to apply or connect with our help desk.</p>
+            
+            <div className="flex flex-col items-center gap-4">
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center justify-center gap-2 bg-gray-950 hover:bg-gray-800 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition-all w-full max-w-[200px]"
+              >
+                Click to Apply
+              </Link>
+              <div className="text-center">
+                <span className="font-display block text-[9px] text-gray-400 uppercase tracking-widest font-bold">Helpline</span>
+                <span className="font-mono text-xs md:text-sm font-bold text-gray-700 block mt-0.5">
+                  <a href="tel:+917418064336" className="hover:text-indigo-600 hover:underline transition-colors">7418064336</a>
+                  {" / "}
+                  <a href="tel:+917418065336" className="hover:text-indigo-600 hover:underline transition-colors">7418065336</a>
+                </span>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-        </div>
-      </section>
+          {/* Institutional Credentials Card — Single Horizontal Row with Logos */}
+          <div className="w-full max-w-5xl bg-transparent mt-8 p-6 md:p-8 select-none relative z-10">
+            <div className="flex flex-col items-center justify-center text-center mb-8">
+              <span className="font-display text-xs uppercase tracking-widest font-black text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1 rounded-full">
+                Institutional Credentials
+              </span>
+            </div>
 
-      {/* Official Accreditation Badges Showcase Grid */}
-      <section className="bg-transparent border-b border-gray-100 py-10 px-6 relative z-10 select-none">
-        <div className="max-w-7xl mx-auto">
-          
-          <div className="flex flex-col items-center justify-center text-center mb-8">
-            <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
-              Institutional Credentials
-            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-16 items-stretch">
+              {/* Anna University */}
+              <motion.div
+                whileHover={{ 
+                  y: -5, 
+                  scale: 1.03, 
+                  boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)' 
+                }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer transition-all duration-300"
+              >
+                <div className="w-20 h-20 rounded-full bg-indigo-50/60 border border-indigo-100/80 flex items-center justify-center mb-6 shadow-sm group-hover:border-indigo-300 group-hover:bg-indigo-50 transition-colors duration-300">
+                  <img src="./university_logo-rem.png" alt="Anna University Logo" className="w-16 h-16 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
+                </div>
+                <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-650 transition-colors duration-300">
+                  Anna University
+                </h4>
+                <p className="text-sm text-slate-900 font-extrabold">
+                  Affiliated to Anna University
+                </p>
+              </motion.div>
+
+              {/* UGC Autonomous */}
+              <motion.div
+                whileHover={{ 
+                  y: -5, 
+                  scale: 1.03, 
+                  boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)' 
+                }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer transition-all duration-300"
+              >
+                <div className="w-20 h-20 rounded-full bg-amber-50/60 border border-amber-100/80 flex items-center justify-center mb-6 shadow-sm group-hover:border-amber-300 group-hover:bg-amber-50 transition-colors duration-300">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8" y="8" width="32" height="32" rx="4" stroke="#1B224A" strokeWidth="2"/>
+                    <path d="M16 16 H32 M16 22 H28 M16 28 H32" stroke="#3F4FBF" strokeWidth="2" strokeLinecap="round"/>
+                    <circle cx="24" cy="24" r="3" fill="#D97706"/>
+                  </svg>
+                </div>
+                <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors duration-300">
+                  UGC Autonomous
+                </h4>
+                <p className="text-sm text-slate-900 font-extrabold">
+                  Autonomous Status (10 Years)
+                </p>
+              </motion.div>
+
+              {/* NAAC Accredited */}
+              <motion.div
+                whileHover={{ 
+                  y: -5, 
+                  scale: 1.03, 
+                  boxShadow: '0 10px 25px rgba(59, 130, 246, 0.12)' 
+                }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none w-full transition-all duration-300"
+              >
+                <div className="w-20 h-20 rounded-full bg-emerald-50/60 border border-emerald-100/80 flex items-center justify-center mb-6 shadow-sm group-hover:border-emerald-300 group-hover:bg-emerald-50 transition-colors duration-300">
+                  <img src="./Naac.png" alt="NAAC Accredited Logo" className="w-16 h-16 object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300" />
+                </div>
+                <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
+                  NAAC Accredited
+                </h4>
+                <p className="text-sm text-slate-900 font-extrabold">
+                  Accredited with NAAC 'A' Grade
+                </p>
+              </motion.div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-            {[
-              { 
-                title: "UGC AUTONOMOUS", 
-                subtitle: "Academic Autonomy",
-                icon: Award, 
-                color: "text-amber-500", 
-                glow: "shadow-[0_0_15px_rgba(245,158,11,0.1)] border-amber-500/20 bg-amber-500/5 hover:border-amber-500 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]" 
-              },
-              { 
-                title: "NAAC CERTIFIED", 
-                subtitle: "Quality Assurance Audited",
-                icon: CheckCircle2, 
-                color: "text-emerald-500", 
-                glow: "shadow-[0_0_15px_rgba(16,185,129,0.1)] border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]" 
-              },
-              { 
-                title: "AICTE APPROVED", 
-                subtitle: "Technical Council Approved",
-                icon: Cpu, 
-                color: "text-blue-500", 
-                glow: "shadow-[0_0_15px_rgba(59,130,246,0.1)] border-blue-500/20 bg-blue-500/5 hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]" 
-              },
-              { 
-                title: "ANNA UNIVERSITY AFFILIATED", 
-                subtitle: "Affiliated University College",
-                icon: GraduationCap, 
-                color: "text-purple-500", 
-                glow: "shadow-[0_0_15px_rgba(168,85,247,0.1)] border-purple-500/20 bg-purple-500/5 hover:border-purple-500 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]" 
-              }
-            ].map((badge, idx) => {
-              const IconComp = badge.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  whileHover={{ y: -5, scale: 1.03 }}
-                  className={`p-5 rounded-2xl border bg-white flex flex-col items-center justify-center text-center transition-all duration-300 shadow-sm cursor-default ${badge.glow}`}
-                >
-                  <div className={`w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center mb-3 shadow-inner ${badge.color}`}>
-                    <IconComp className="w-5 h-5 filter drop-shadow-sm" />
-                  </div>
-                  <h4 className="text-[11px] font-black tracking-wider text-gray-900 uppercase">
-                    {badge.title}
-                  </h4>
-                  <span className="text-[9px] font-bold text-gray-400 mt-1 uppercase tracking-widest block font-mono">
-                    {badge.subtitle}
-                  </span>
-                </motion.div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
@@ -617,57 +649,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Bento Department Visualizer */}
+      {/* Bento Department Visualizer replaced with centered sliding showcase */}
       <section className="py-24 px-6 bg-transparent border-b border-gray-100/55 relative z-10">
         <div className="max-w-7xl mx-auto">
           
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Curriculum Explorer</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Department Showcases</h2>
-            <p className="text-xs text-gray-400 mt-2 max-w-sm font-semibold">Click the department tiles below to explore their focused structural programs.</p>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Department Showcase</h2>
+            <p className="text-xs text-gray-400 mt-2 max-w-sm font-semibold font-sans">Explore our individual department portals and their focused structural curricula.</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            {/* List Selection: Scrollable area for all 11 departments */}
-            <div className="lg:col-span-5 flex flex-col gap-2.5 max-h-[520px] overflow-y-auto pr-2 custom-scrollbar">
-              {depts.map((dept, idx) => (
+          <div className="relative max-w-5xl mx-auto px-4 md:px-12 flex flex-col items-center">
+            {/* Carousel card container */}
+            <div className="w-full min-h-[380px] relative overflow-hidden flex items-center justify-center py-4">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                {(() => {
+                  const dept = depts[currentIdx];
+                  let IconComponent = BookOpen;
+                  if (dept.code === 'AIML') IconComponent = Cpu;
+                  else if (dept.code === 'CSE') IconComponent = Code;
+                  else if (dept.code === 'IT') IconComponent = Database;
+                  else if (dept.code === 'CHEM') IconComponent = Beaker;
+                  else if (dept.code === 'MECH') IconComponent = Settings;
+                  else if (dept.code === 'CIVIL') IconComponent = Building;
+                  else if (dept.code === 'MCA') IconComponent = Laptop;
+                  else if (dept.code === 'ECE') IconComponent = Wifi;
+                  else if (dept.code === 'EEE') IconComponent = Zap;
+
+                  return (
+                    <motion.div
+                      key={currentIdx}
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      className="w-full h-full"
+                    >
+                      <div className="group relative bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between items-start text-left transition-all duration-300 hover:border-indigo-500 hover:shadow-xl overflow-hidden min-h-[350px] h-full">
+                        {/* Subtle gradient background glow on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/0 to-indigo-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        
+                        {/* Glow decoration */}
+                        <div className="absolute -top-12 -right-12 w-24 h-24 bg-indigo-50 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-100/50 transition-colors duration-300" />
+                        
+                        <div className="w-full relative z-10">
+                          {/* Top row with Icon and Badge */}
+                          <div className="flex justify-between items-center mb-6">
+                            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100/50 flex items-center justify-center text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white transition-all duration-300">
+                              <IconComponent className="w-5 h-5" />
+                            </div>
+                            <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white group-hover:border-indigo-650 transition-all duration-300">
+                              {dept.code}
+                            </span>
+                          </div>
+                          
+                          <span className="text-[9px] uppercase font-bold tracking-widest text-gray-400 block mb-2">Focused Curriculum Overview</span>
+                          <h3 className="text-xl font-black text-gray-900 mb-3 group-hover:text-indigo-650 transition-colors duration-200">{dept.name}</h3>
+                          <p className="text-xs text-gray-500 leading-relaxed font-semibold mb-6 max-w-xl">{dept.details}</p>
+                        </div>
+
+                        <div className="w-full pt-6 border-t border-gray-150 mt-auto flex justify-between items-center relative z-10">
+                          <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Autonomous Status</span>
+                          <Link to={`/departments/${dept.key}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-900 group-hover:text-indigo-650 group-hover:gap-2.5 transition-all">
+                            Explore Portal <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })()}
+              </AnimatePresence>
+            </div>
+
+            {/* Left and Right navigation buttons */}
+            <button
+              onClick={() => {
+                setDirection(-1);
+                setCurrentIdx((prev) => (prev - 1 + depts.length) % depts.length);
+              }}
+              className="absolute left-[-16px] md:left-[-32px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-650 hover:text-indigo-650 hover:border-indigo-300 hover:shadow-lg transition-all cursor-pointer z-20"
+              aria-label="Previous department"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={() => {
+                setDirection(1);
+                setCurrentIdx((prev) => (prev + 1) % depts.length);
+              }}
+              className="absolute right-[-16px] md:right-[-32px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-650 hover:text-indigo-650 hover:border-indigo-300 hover:shadow-lg transition-all cursor-pointer z-20"
+              aria-label="Next department"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Dot Indicator Navigation */}
+            <div className="flex gap-2 mt-6 justify-center">
+              {depts.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setActiveDepartment(idx)}
-                  className={`p-4 rounded-2xl border text-left transition-all shrink-0 ${
-                    activeDepartment === idx 
-                      ? 'bg-gray-950 border-gray-950 text-white shadow-xl' 
-                      : 'bg-white border-gray-200 text-gray-900 hover:border-gray-400'
+                  onClick={() => {
+                    setDirection(idx > currentIdx ? 1 : -1);
+                    setCurrentIdx(idx);
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    currentIdx === idx ? 'w-6 bg-indigo-650' : 'w-2 bg-gray-200 hover:bg-gray-300'
                   }`}
-                >
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm font-bold">{dept.name}</span>
-                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${
-                      activeDepartment === idx ? 'bg-gray-800 text-gray-300' : 'bg-gray-50 text-gray-500 border border-gray-200'
-                    }`}>
-                      {dept.code}
-                    </span>
-                  </div>
-                </button>
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
               ))}
             </div>
 
-            {/* Display Interactive Details Panel */}
-            <div className="lg:col-span-7 bg-gray-50 border border-gray-200 p-8 rounded-3xl flex flex-col justify-between items-start text-left relative overflow-hidden">
-              <div className="absolute -top-12 -right-12 w-32 h-32 bg-gray-200/50 rounded-full blur-3xl pointer-events-none" />
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400 block mb-4">Focused Curriculum Overview</span>
-                <h3 className="text-2xl font-black text-gray-900 mb-4">{depts[activeDepartment].name}</h3>
-                <p className="text-xs text-gray-500 leading-relaxed max-w-md">{depts[activeDepartment].details}</p>
-              </div>
-
-              <div className="w-full pt-8 border-t border-gray-200/60 mt-8 flex justify-between items-center">
-                <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Autonomous Status</span>
-                <Link to="/departments" className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-900 hover:gap-2.5 transition-all">
-                  All departments <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -726,45 +820,75 @@ export default function Home() {
               }
             `}} />
 
-            {/* Always Static/Floating Close Button */}
-            <div className="absolute top-4 right-4 md:top-6 md:right-6 z-[110]">
-              <button
-                onClick={() => setShowAdModal(false)}
-                className="p-2.5 bg-black/45 hover:bg-rose-600 text-white backdrop-blur-md rounded-full shadow-lg border border-white/10 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
-                aria-label="Close Ad"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Single Container: Responsive Input Form Only */}
+            {/* Responsive Card: split-screen on desktop, stacked on mobile */}
             <motion.div
               initial={{ scale: 0.95, y: 25, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 25, opacity: 0 }}
               transition={{ type: 'spring', damping: 28, stiffness: 200 }}
-              className="relative w-full max-w-lg bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto p-6 md:p-8 flex flex-col"
+              className="relative w-full max-w-lg md:max-w-3xl bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto flex flex-col md:flex-row"
             >
-              {/* Institution Header inside the form */}
-              <div className="flex flex-col items-center text-center mb-6">
-                <img 
-                  src="./apec-logo.png" 
-                  alt="Adhiparasakthi Engineering College Logo" 
-                  className="w-16 h-16 object-contain bg-white rounded-full p-1.5 shadow-md border border-gray-100 mb-3" 
-                />
-                <h3 className="font-title text-lg md:text-xl font-black text-gray-900 leading-tight">
+              {/* ── Close Button (inside card, top-right) ── */}
+              <button
+                onClick={() => setShowAdModal(false)}
+                className="absolute top-5 right-5 md:top-6 md:right-6 z-20 p-2 bg-gray-100 hover:bg-rose-100 text-gray-500 hover:text-rose-600 rounded-full shadow-sm border border-gray-200 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
+                aria-label="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {/* ── LEFT PANEL: Logo (desktop only) ── */}
+              <div className="hidden md:flex flex-col items-center justify-center w-[38%] shrink-0 bg-gradient-to-b from-indigo-50 via-white to-indigo-50 rounded-l-[28px] border-r border-gray-100 px-6 py-10">
+                <div className="w-24 h-24 rounded-full bg-white shadow-lg border-2 border-indigo-100 flex items-center justify-center mb-5">
+                  <img
+                    src="./apec-logo.png"
+                    alt="Adhiparasakthi Engineering College Logo"
+                    className="w-20 h-20 object-contain rounded-full"
+                  />
+                </div>
+                <h3 className="font-title text-lg font-black text-gray-900 leading-tight text-center px-2">
                   Adhiparasakthi Engineering College
                 </h3>
-                <span className="font-mono text-[9px] uppercase font-black text-indigo-650 tracking-widest block mt-1">
+                <span className="block mt-2 text-center text-indigo-700 font-semibold" style={{fontFamily: "'Cinzel', serif", letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: '12px'}}>
                   An Autonomous Institution
                 </span>
-                <span className="text-[9px] text-gray-400 font-bold mt-0.5">
-                  Affiliated to Anna University • Approved by AICTE
+                <span className="block mt-1 text-center font-title font-bold whitespace-nowrap" style={{fontSize: '12px', letterSpacing: '0.04em', lineHeight: '1.5', color: '#3b3f8c'}}>
+                  Affiliated to Anna University
                 </span>
-                <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase mt-4">
-                  Admission Inquiry for 2026-27
+                <span className="block text-center font-title font-bold whitespace-nowrap" style={{fontSize: '12px', letterSpacing: '0.04em', lineHeight: '1.5', color: '#3b3f8c'}}>
+                  Approved by AICTE
                 </span>
               </div>
+
+              {/* ── RIGHT PANEL: Form content ── */}
+              <div className="flex flex-col w-full md:w-[62%] p-6 md:p-8">
+                {/* Mobile-only: institution header (centered, stacked) */}
+                <div className="flex flex-col items-center text-center mb-6 md:hidden">
+                  <img
+                    src="./apec-logo.png"
+                    alt="Adhiparasakthi Engineering College Logo"
+                    className="w-16 h-16 object-contain bg-white rounded-full p-1.5 shadow-md border border-gray-100 mb-3"
+                  />
+                  <h3 className="font-title text-xl font-black text-gray-900 leading-tight">
+                    Adhiparasakthi Engineering College
+                  </h3>
+                  <span className="text-indigo-700 font-semibold block mt-1" style={{fontFamily: "'Cinzel', serif", letterSpacing: '0.12em', textTransform: 'uppercase', fontSize: '13px'}}>
+                    An Autonomous Institution
+                  </span>
+                  <span className="font-title font-bold mt-0.5 block text-center" style={{fontSize: '14px', letterSpacing: '0.05em', lineHeight: '1.5', color: '#3b3f8c'}}>
+                    Affiliated to Anna University
+                  </span>
+                  <span className="font-title font-bold block text-center" style={{fontSize: '14px', letterSpacing: '0.05em', lineHeight: '1.5', color: '#3b3f8c'}}>
+                    Approved by AICTE
+                  </span>
+                </div>
+
+                {/* Badge — visible on both */}
+                <div className="flex justify-center md:justify-start mb-5">
+                  <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
+                    Admission Inquiry for 2026-27
+                  </span>
+                </div>
 
               <AnimatePresence mode="wait">
                 {!formSubmitted ? (
@@ -859,16 +983,19 @@ export default function Home() {
                             }`}
                           >
                             <option value="">Select a Department</option>
+                            {/* B.E. Departments */}
                             <option value="CSE">Computer Science & Engineering (B.E.)</option>
                             <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
-                            <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
-                            <option value="IT">Information Technology (B.Tech.)</option>
                             <option value="EEE">Electrical & Electronics Eng. (B.E.)</option>
                             <option value="ECE">Electronics & Communication Eng. (B.E.)</option>
                             <option value="MECH">Mechanical Engineering (B.E.)</option>
                             <option value="CIVIL">Civil Engineering (B.E.)</option>
+                            {/* B.Tech Departments */}
+                            <option value="IT">Information Technology (B.Tech.)</option>
                             <option value="CHEM">Chemical Engineering (B.Tech.)</option>
+                            <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
                             <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
+                            {/* PG Departments */}
                             <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
                             <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
                           </select>
@@ -964,6 +1091,7 @@ export default function Home() {
                   </motion.div>
                 )}
               </AnimatePresence>
+              </div>{/* end right panel */}
             </motion.div>
           </div>
         )}

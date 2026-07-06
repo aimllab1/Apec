@@ -8,17 +8,29 @@ export default function Departments() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
+  const sortOrder = [
+    'civil', 'mech', 'eee', 'ece', 'cse', 'aiml', 'csd',
+    'it', 'chemical', 'agri', 'aids',
+    'mca', 'mba', 'sh',
+    'phd-civil', 'phd-mech', 'phd-ece', 'phd-eee'
+  ];
+
   // Process departments from JSON
   const depts = Object.values(departmentsData).map(dept => {
     // Determine category based on key or description
     const isPG = dept.key === 'mca' || dept.key === 'mba';
+    const isPhD = dept.key.startsWith('phd-');
     
     // Custom info from txt metadata
     let duration = "4 Years";
     let intake = "60 Seats";
     let focus = "";
 
-    if (dept.key === 'aiml') {
+    if (dept.key.startsWith('phd-')) {
+      duration = "3 - 5 Years";
+      intake = "Based on Vacancy";
+      focus = "Research Methodologies, Specialized Domain Research, Publications & Thesis Defense";
+    } else if (dept.key === 'aiml') {
       duration = "4 Years";
       intake = "30 Seats";
       focus = "Neural Networks, Deep Learning, Python Data Science, Machine Learning";
@@ -70,16 +82,25 @@ export default function Departments() {
       duration = "4 Years";
       intake = "60 Seats";
       focus = "Farm Mechanization, Irrigation Engineering, Post-Harvest Tech, Food Process Eng.";
+    } else if (dept.key === 'aids') {
+      duration = "4 Years";
+      intake = "60 Seats";
+      focus = "Data Mining, Big Data Analytics, Python for Data Science, Machine Learning Models";
     }
+
+    let category = 'be';
+    if (isPhD) category = 'phd';
+    else if (isPG) category = 'pg';
+    else if (['it', 'chemical', 'agri', 'aids'].includes(dept.key)) category = 'btech';
 
     return {
       ...dept,
-      category: isPG ? 'pg' : (['csd', 'it', 'chemical', 'agri'].includes(dept.key) ? 'btech' : 'be'),
+      category,
       duration,
       intake,
       focus
     };
-  });
+  }).sort((a, b) => sortOrder.indexOf(a.key) - sortOrder.indexOf(b.key));
 
   const filteredDepts = depts.filter(dept => {
     const matchesSearch = dept.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -134,7 +155,8 @@ export default function Departments() {
               { id: 'all', label: 'All Programs' },
               { id: 'be', label: 'Undergraduate (B.E.)' },
               { id: 'btech', label: 'Undergraduate (B.Tech.)' },
-              { id: 'pg', label: 'Postgraduate (MCA / MBA)' }
+              { id: 'pg', label: 'Postgraduate (MCA / MBA)' },
+              { id: 'phd', label: 'Doctor of Philosophy (Ph.D.)' }
             ].map((tab) => (
               <button
                 key={tab.id}

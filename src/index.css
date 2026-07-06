@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+@theme {
+  --color-gray-150: #eceef2;
+  --color-gray-250: #dadde3;
+  --color-gray-550: #5c6370;
+  --color-indigo-550: #5a58e7;
+  --color-indigo-650: #473ebd;
+  --color-indigo-750: #3d34b3;
+  --color-pink-150: #fadbea;
+  --color-pink-650: #cc1f6a;
+  --color-rose-750: #af123b;
+}
+
 @layer base {
   html {
     scroll-behavior: initial;
