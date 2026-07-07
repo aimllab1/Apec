@@ -74,9 +74,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       
       wrapper.innerHTML = `
         <div class="pano-arrow-wrapper">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="pano-arrow-svg">
-            <line x1="12" y1="19" x2="12" y2="5"></line>
-            <polyline points="5 12 12 5 19 12"></polyline>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="pano-arrow-svg">
+            <path class="arrow-part part-3" d="M12,2 L4,10 L20,10 Z"></path>
+            <path class="arrow-part part-2" d="M12,8 L4,16 L20,16 Z"></path>
+            <path class="arrow-part part-1" d="M12,14 L4,22 L20,22 Z"></path>
           </svg>
         </div>
         <span class="pano-tooltip-text">${args.text}</span>
@@ -128,7 +129,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30, // Placed in the middle-bottom
                     yaw: -90, // Placed on the West side of the Entrance Gate panorama
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
@@ -145,19 +146,19 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 90, // Placed on the East side (Back to Gate)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Entrance Gate", sceneId: "mainGate" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: -80, // Moved slightly more towards west (-80)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 180, // South side of Junction 1 leads to Junction 2
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
@@ -174,13 +175,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 80, // Return path to Junction 1
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: -90, // West side of Reception leads to Amma Statue
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
@@ -197,13 +198,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 90, // East side of Amma Statue goes back to Reception
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -5, // EXPLICITLY KEPT AT -5 (do not change arrow from Amma to AIML Lab)
                     yaw: -45, // North-West side leads to AIML Lab
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "AIML Lab", sceneId: "aimlLab" }
@@ -220,8 +221,8 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
-                    yaw: 135, // South-East side goes back to Amma Statue
+                    pitch: -30,
+                    yaw: 220, // Adjusted to 220 as requested
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
                   }
@@ -237,13 +238,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 0, // North side of Junction 2 goes back to Junction 1
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 180, // South side of Junction 2 leads directly to PG Block
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
@@ -260,13 +261,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: -10, // Adjusted -10 from current position (0)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 170, // Adjusted -10 from current position (180)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
@@ -283,13 +284,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 30, // Adjusted +30 from current position (0)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
                   },
                   {
-                    pitch: -5,
+                    pitch: -30,
                     yaw: 220, // Adjusted +60 from current position (160)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Library", sceneId: "library" }
@@ -306,8 +307,8 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -5,
-                    yaw: 40, // Opposite direction of 220 is 40
+                    pitch: -30,
+                    yaw: 30, // Adjusted from Library to Junction 3 to be yaw: 30
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
                   }
@@ -452,56 +453,60 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           .pano-arrow-wrapper {
             width: 44px;
             height: 44px;
-            background: rgba(9, 9, 11, 0.8) !important;
-            border: 3px solid #6366f1 !important;
-            border-radius: 50% !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             color: #ffffff !important;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.7) !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             position: relative;
-          }
-          
-          .pano-arrow-wrapper::before {
-            content: '' !important;
-            position: absolute !important;
-            inset: -6px !important;
-            border: 2px solid rgba(99, 102, 241, 0.4) !important;
-            border-radius: 50% !important;
-            animation: pano-pulse 2s infinite !important;
-            opacity: 1 !important;
-            pointer-events: none;
-          }
-          
-          @keyframes pano-pulse {
-            0% {
-              transform: scale(0.95);
-              opacity: 1;
-            }
-            100% {
-              transform: scale(1.4);
-              opacity: 0;
-            }
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)) !important;
           }
           
           .pano-arrow-svg {
-            stroke: #ffffff !important;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) !important;
+            color: #ffffff !important;
             transition: transform 0.25s ease !important;
           }
           
-          /* Hover state animations: Nudge straight up */
-          .custom-pano-hotspot:hover .pano-arrow-wrapper {
-            background: #6366f1 !important;
-            border-color: #ffffff !important;
-            transform: scale(1.15) !important;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 1) !important;
+          .arrow-part {
+            transition: opacity 0.25s ease, transform 0.25s ease, fill 0.25s ease !important;
+            opacity: 0.35;
+            fill: #ffffff !important;
           }
           
+          .arrow-part.part-1 {
+            opacity: 1; /* Only show bottom triangle in normal state */
+          }
+          
+          /* Hover state animations: sequential fade and shift up (double/triple arrow animation) */
           .custom-pano-hotspot:hover .pano-arrow-svg {
-            transform: translateY(-3px) !important;
+            transform: translateY(-4px) !important;
+          }
+          
+          .custom-pano-hotspot:hover .part-1 {
+            animation: arrow-wave-seq 0.9s infinite 0s;
+          }
+          
+          .custom-pano-hotspot:hover .part-2 {
+            animation: arrow-wave-seq 0.9s infinite 0.15s;
+          }
+          
+          .custom-pano-hotspot:hover .part-3 {
+            animation: arrow-wave-seq 0.9s infinite 0.3s;
+          }
+          
+          @keyframes arrow-wave-seq {
+            0% {
+              opacity: 0.3;
+              fill: #ffffff !important;
+            }
+            50% {
+              opacity: 1;
+              fill: #6366f1 !important; /* Glow indigo in the middle of the wave */
+            }
+            100% {
+              opacity: 0.3;
+              fill: #ffffff !important;
+            }
           }
           
           /* Custom tooltip styling (Permanently visible transparent text labels with strong shadows) */
@@ -517,7 +522,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             font-weight: 900 !important;
             text-transform: uppercase !important;
             letter-spacing: 0.08em !important;
-            font-size: 24px !important; /* 3x larger than 8-10px original */
+            font-size: 28px !important; /* Big and bold font size */
             padding: 4px 8px !important;
             box-shadow: none !important;
             backdrop-filter: none !important;
