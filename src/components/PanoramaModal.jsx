@@ -64,6 +64,9 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
 
     // Function to create custom hotspots (Google Maps style pointing straight forward/up)
     const createCustomHotspot = (hotSpotDiv, args) => {
+      // Remove default Pannellum sprite/control classes to prevent default icons from rendering
+      hotSpotDiv.classList.remove('pnlm-sprite', 'pnlm-info', 'pnlm-scene');
+      
       hotSpotDiv.innerHTML = '';
       hotSpotDiv.classList.add('custom-pano-hotspot');
       
@@ -74,7 +77,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       
       wrapper.innerHTML = `
         <div class="pano-arrow-wrapper">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" class="pano-arrow-svg">
+          <svg width="128" height="128" viewBox="0 0 32 32" fill="currentColor" class="pano-arrow-svg">
             <path class="arrow-part part-3" d="M16,2 L4,10 L16,7 L28,10 Z"></path>
             <path class="arrow-part part-2" d="M16,12 L4,20 L16,17 L28,20 Z"></path>
             <path class="arrow-part part-1" d="M16,22 L4,30 L16,27 L28,30 Z"></path>
@@ -85,13 +88,18 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       
       hotSpotDiv.appendChild(wrapper);
       
-      // Add custom click handler for navigation
-      hotSpotDiv.addEventListener('click', (e) => {
+      // Intercept and stop default click/zoom events from Pannellum using capture phase
+      const clickHandler = (e) => {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
         if (viewerInstanceRef.current) {
           viewerInstanceRef.current.loadScene(args.sceneId);
         }
-      });
+      };
+      
+      // Add listener to the capture phase to run before Pannellum's internal handler
+      hotSpotDiv.addEventListener('click', clickHandler, true);
     };
 
     // Function to initialize Pannellum
@@ -112,10 +120,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
               firstScene: initialScene,
               sceneFadeDuration: 800,
               autoLoad: true,
-              compass: true,
+              compass: false,
               mouseZoom: true,
               doubleClickZoom: true,
-              showZoomCtrl: true,
+              showZoomCtrl: false,
               showFullscreenCtrl: false,
             },
             scenes: {
@@ -153,7 +161,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                   },
                   {
                     pitch: -18,
-                    yaw: -80, // Moved slightly more towards west (-80)
+                    yaw: -75, // Moved slightly more towards west (-80 + 5 = -75)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
                   },
@@ -176,13 +184,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 80, // Return path to Junction 1
+                    yaw: 100, // Return path to Junction 1 (80 + 20 = 100)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
                     pitch: -18,
-                    yaw: -90, // West side of Reception leads to Amma Statue
+                    yaw: -85, // West side of Reception leads to Amma Statue (-80 - 5 = -85)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
                   }
@@ -199,13 +207,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 90, // East side of Amma Statue goes back to Reception
+                    yaw: 100, // East side of Amma Statue goes back to Reception (75 + 25 = 100)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
                   },
                   {
-                    pitch: -5, // EXPLICITLY KEPT AT -5 (do not change arrow from Amma to AIML Lab)
-                    yaw: -45, // North-West side leads to AIML Lab
+                    pitch: -12, // Moved slightly down from -5 as requested
+                    yaw: -40, // North-West side leads to AIML Lab
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "AIML Lab", sceneId: "aimlLab" }
                   }
@@ -222,7 +230,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 220, // Adjusted to 220 as requested
+                    yaw: 0, // Relocated to the North of the image as requested
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
                   }
@@ -239,13 +247,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 0, // North side of Junction 2 goes back to Junction 1
+                    yaw: 10, // North side of Junction 2 goes back to Junction 1 (0 + 10 = 10)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
                     pitch: -18,
-                    yaw: 180, // South side of Junction 2 leads directly to PG Block
+                    yaw: 185, // South side of Junction 2 leads directly to PG Block (180 + 5 = 185)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
                   }
@@ -262,13 +270,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: -10, // Adjusted -10 from current position (0)
+                    yaw: 0, // Adjusted from current position (-10 + 10 = 0)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
                   },
                   {
                     pitch: -18,
-                    yaw: 170, // Adjusted -10 from current position (180)
+                    yaw: 175, // Adjusted from current position (170 + 5 = 175)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
                   }
@@ -285,13 +293,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 30, // Adjusted +30 from current position (0)
+                    yaw: 35, // Adjusted from current position (30 + 5 = 35)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
                   },
                   {
                     pitch: -18,
-                    yaw: 220, // Adjusted +60 from current position (160)
+                    yaw: 210, // Adjusted from current position (220 - 10 = 210)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Library", sceneId: "library" }
                   }
@@ -308,7 +316,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 30, // Adjusted from Library to Junction 3 to be yaw: 30
+                    yaw: 70, // Adjusted from Library to Junction 3 to be yaw: 70 (60 + 10 = 70)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
                   }
@@ -435,41 +443,59 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       >
         {/* Inject CSS styles directly into component */}
         <style dangerouslySetInnerHTML={{ __html: `
-          /* Hide default Pannellum loading elements completely */
-          .pnlm-load-box {
+          /* Hide default Pannellum loading elements and default controls completely */
+          .pnlm-load-box,
+          .pnlm-zoom-controls,
+          .pnlm-compass,
+          .pnlm-fullscreen-toggle-button,
+          .pnlm-about-msg,
+          .pnlm-control-bar {
             display: none !important;
           }
           
-          /* Custom Hotspot Styling (Google Maps Arrow style) */
+          /* Custom Hotspot Styling (Google Maps Arrow style) - default styles removed and size increased */
           .custom-pano-hotspot {
-            width: 44px !important;
-            height: 44px !important;
-            margin-left: -22px !important;
-            margin-top: -22px !important;
+            background-image: none !important;
+            background: none !important;
+            width: 160px !important;
+            height: 160px !important;
+            margin-left: -80px !important;
+            margin-top: -80px !important;
             cursor: pointer !important;
             z-index: 10 !important;
+            overflow: visible !important; /* Prevent clipping of sliding chevrons */
+          }
+
+          .custom-pano-hotspot::before,
+          .custom-pano-hotspot::after {
+            display: none !important;
+            content: none !important;
           }
           
           .pano-arrow-wrapper {
-            width: 44px;
-            height: 44px;
+            width: 160px;
+            height: 160px;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             color: #ffffff !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
             position: relative;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)) !important;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7)) !important;
+            transform: perspective(300px) rotateX(60deg); /* Lies flat on the road plane */
+            transform-style: preserve-3d;
+            overflow: visible !important; /* Prevent clipping */
           }
           
           .pano-arrow-svg {
             color: #ffffff !important;
             transition: transform 0.25s ease !important;
+            overflow: visible !important; /* Prevent clipping */
           }
           
           .arrow-part {
             transition: opacity 0.25s ease, transform 0.25s ease, fill 0.25s ease !important;
-            opacity: 0.15;
+            opacity: 0.2;
             fill: #ffffff !important;
             transform-origin: center;
           }
@@ -478,76 +504,76 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             opacity: 1; /* Only show bottom triangle in normal state */
           }
           
-          /* Hover state animations: sequential fade and shift up with distinct spacing gaps */
-          .custom-pano-hotspot:hover .pano-arrow-svg {
-            transform: translateY(-4px) !important;
+          /* Hover state animations: smooth scale and road tilt adjustment */
+          .custom-pano-hotspot:hover .pano-arrow-wrapper {
+            transform: perspective(300px) rotateX(55deg) translateY(-12px) scale(1.08) !important;
           }
           
           .custom-pano-hotspot:hover .part-1 {
-            animation: arrow-wave-seq-1 1.2s infinite;
+            animation: arrow-wave-seq-1 2.2s infinite ease-in-out;
           }
           
           .custom-pano-hotspot:hover .part-2 {
-            animation: arrow-wave-seq-2 1.2s infinite;
+            animation: arrow-wave-seq-2 2.2s infinite ease-in-out;
           }
           
           .custom-pano-hotspot:hover .part-3 {
-            animation: arrow-wave-seq-3 1.2s infinite;
+            animation: arrow-wave-seq-3 2.2s infinite ease-in-out;
           }
           
           @keyframes arrow-wave-seq-1 {
             0%, 100% {
-              opacity: 0.3;
+              opacity: 0.35;
               fill: #ffffff !important;
               transform: translateY(0);
             }
-            33% {
+            25% {
               opacity: 1;
-              fill: #6366f1 !important;
-              transform: translateY(-2px);
+              fill: #00e5ff !important; /* Changed hover color to electric cyan */
+              transform: translateY(-6px);
             }
-            66% {
-              opacity: 0.3;
+            50%, 75% {
+              opacity: 0.35;
               fill: #ffffff !important;
               transform: translateY(0);
             }
           }
 
           @keyframes arrow-wave-seq-2 {
-            0%, 100% {
-              opacity: 0.15;
+            0%, 25%, 100% {
+              opacity: 0.2;
               fill: #ffffff !important;
               transform: translateY(0);
             }
-            33% {
-              opacity: 0.15;
-              fill: #ffffff !important;
-              transform: translateY(0);
-            }
-            66% {
+            50% {
               opacity: 1;
-              fill: #6366f1 !important;
-              transform: translateY(-4px); /* Moves up more, increasing the gap! */
+              fill: #00e5ff !important; /* Changed hover color to electric cyan */
+              transform: translateY(-12px);
+            }
+            75% {
+              opacity: 0.2;
+              fill: #ffffff !important;
+              transform: translateY(0);
             }
           }
 
           @keyframes arrow-wave-seq-3 {
-            0%, 66% {
-              opacity: 0.15;
+            0%, 50%, 100% {
+              opacity: 0.2;
               fill: #ffffff !important;
               transform: translateY(0);
             }
-            100% {
+            75% {
               opacity: 1;
-              fill: #6366f1 !important;
-              transform: translateY(-6px); /* Moves up even more, increasing the gap! */
+              fill: #00e5ff !important; /* Changed hover color to electric cyan */
+              transform: translateY(-18px);
             }
           }
           
           /* Custom tooltip styling (Permanently visible transparent text labels with strong shadows) */
           .pano-tooltip-text {
             position: absolute;
-            top: 56px;
+            top: 170px; /* Positioned below the 160px arrow wrapper */
             left: 50%;
             transform: translateX(-50%) !important;
             background: transparent !important;
@@ -557,8 +583,8 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             font-weight: 900 !important;
             text-transform: uppercase !important;
             letter-spacing: 0.08em !important;
-            font-size: 28px !important; /* Big and bold font size */
-            padding: 4px 8px !important;
+            font-size: 42px !important; /* Font size increased 3x */
+            padding: 2px 4px !important;
             box-shadow: none !important;
             backdrop-filter: none !important;
             white-space: nowrap !important;
@@ -570,61 +596,81 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           
           .custom-pano-hotspot:hover .pano-tooltip-text {
             transform: translateX(-50%) scale(1.05) !important;
-            color: #6366f1 !important;
-            text-shadow: 0 0 12px rgba(99, 102, 241, 0.8), 0 0 6px rgba(0, 0, 0, 1) !important;
+            color: #00e5ff !important; /* Changed hover color to electric cyan */
+            text-shadow: 0 0 12px rgba(0, 229, 255, 0.8), 0 0 6px rgba(0, 0, 0, 1) !important;
           }
         ` }} />
 
         {/* Top Control Bar */}
-        <div className="absolute top-4 left-4 right-4 z-[120] flex items-center justify-between p-3 sm:p-4 bg-black/60 backdrop-blur-md rounded-2xl border border-white/10">
-          <div className="flex items-center gap-3">
-            <h2 className="text-xs sm:text-sm font-black flex items-center gap-2 uppercase tracking-wider text-indigo-400">
-              <Compass className="w-4 h-4 text-indigo-400 animate-pulse" />
-              
-              {/* Play/Pause Autoplay button right next to the compass */}
-              <button 
-                onClick={toggleAutoplay}
-                className="p-1.5 bg-indigo-500/20 hover:bg-indigo-500/40 text-indigo-300 hover:text-white rounded-lg transition-all flex items-center justify-center cursor-pointer shadow-inner border border-indigo-500/30 active:scale-95"
-                title={isPlaying ? "Pause Autoplay" : "Resume Autoplay"}
-              >
-                {isPlaying ? (
-                  <Pause className="w-3.5 h-3.5" fill="currentColor" />
-                ) : (
-                  <Play className="w-3.5 h-3.5" fill="currentColor" />
-                )}
-              </button>
-              
-              <span className="hidden sm:inline">Adhiparasakthi Engineering College 360° Virtual Tour</span>
-              <span className="inline sm:hidden">APEC 360° Tour</span>
-            </h2>
+        <div className="absolute top-4 left-4 right-4 z-[120] flex items-center justify-between p-3.5 sm:p-5 bg-zinc-950/75 backdrop-blur-xl rounded-[24px] border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all">
+          <div className="flex items-center gap-4">
+            {/* Pulsing compass logo and title info */}
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-xl shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                <Compass className="w-5 h-5 text-indigo-400 animate-[spin_8s_linear_infinite]" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] sm:text-xs font-black tracking-widest text-indigo-400 uppercase">360° Virtual Experience</span>
+                <h2 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+                  <span className="hidden sm:inline">Adhiparasakthi Engineering College</span>
+                  <span className="inline sm:hidden">APEC 360° Tour</span>
+                </h2>
+              </div>
+            </div>
+
+            {/* Play/Pause Autoplay button */}
+            <button 
+              onClick={toggleAutoplay}
+              className={`p-2 rounded-xl transition-all flex items-center justify-center cursor-pointer border active:scale-95 shadow-lg ${
+                isPlaying 
+                  ? "bg-emerald-500/20 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30" 
+                  : "bg-zinc-800/80 border-zinc-700 text-zinc-400 hover:bg-zinc-700/80 hover:text-white"
+              }`}
+              title={isPlaying ? "Pause Autoplay" : "Resume Autoplay"}
+            >
+              {isPlaying ? (
+                <Pause className="w-4 h-4" fill="currentColor" />
+              ) : (
+                <Play className="w-4 h-4" fill="currentColor" />
+              )}
+            </button>
           </div>
           
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-4">
             {/* Quick jump dropdown list of all scenes */}
-            <select
-              value={activeScene}
-              onChange={(e) => {
-                const newScene = e.target.value;
-                if (viewerInstanceRef.current && newScene !== activeScene) {
-                  viewerInstanceRef.current.loadScene(newScene);
-                }
-              }}
-              className="bg-zinc-900/90 text-zinc-200 border border-zinc-700 rounded-xl px-2.5 py-1.5 font-bold text-[9px] sm:text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:border-indigo-500 transition-all hover:bg-zinc-800 max-w-[110px] sm:max-w-none"
-            >
-              <option value="mainGate">Entrance Gate</option>
-              <option value="junctionOne">Junction 1</option>
-              <option value="junctionTwo">Junction 2</option>
-              <option value="pgBlock">PG Block</option>
-              <option value="junctionThree">Junction 3</option>
-              <option value="library">Central Library</option>
-              <option value="reception">Reception</option>
-              <option value="amma">Amma Statue</option>
-              <option value="aimlLab">AIML Lab</option>
-            </select>
+            <div className="relative">
+              <select
+                value={activeScene}
+                onChange={(e) => {
+                  const newScene = e.target.value;
+                  if (viewerInstanceRef.current && newScene !== activeScene) {
+                    viewerInstanceRef.current.loadScene(newScene);
+                  }
+                }}
+                className="bg-zinc-900/90 text-zinc-100 border border-zinc-700 hover:border-indigo-500 rounded-xl pl-3.5 pr-8 py-2 font-bold text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all hover:bg-zinc-800 max-w-[110px] sm:max-w-none appearance-none shadow-md"
+              >
+                <option value="mainGate">Entrance Gate</option>
+                <option value="junctionOne">Junction 1</option>
+                <option value="junctionTwo">Junction 2</option>
+                <option value="pgBlock">PG Block</option>
+                <option value="junctionThree">Junction 3</option>
+                <option value="library">Central Library</option>
+                <option value="reception">Reception</option>
+                <option value="amma">Amma Statue</option>
+                <option value="aimlLab">AIML Lab</option>
+              </select>
+              {/* Custom selector indicator arrow */}
+              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                </svg>
+              </div>
+            </div>
 
+            {/* Glowing Close Button */}
             <button 
               onClick={onClose}
-              className="p-2 bg-white/10 hover:bg-rose-600 text-white rounded-full transition-all cursor-pointer shadow hover:scale-105"
+              className="p-2.5 bg-zinc-900/80 hover:bg-rose-600/90 text-zinc-400 hover:text-white rounded-xl border border-zinc-800 hover:border-rose-500 transition-all cursor-pointer shadow-lg active:scale-95 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)]"
             >
               <X className="w-4 h-4" />
             </button>

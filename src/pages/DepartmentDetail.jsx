@@ -8,9 +8,32 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
 
+const departmentImages = {
+  aiml: '/dept/aiml dept.jpg',
+  cse: '/dept/cse dept.png',
+  it: '/dept/it dept.jpg',
+  ece: '/dept/ece dept.jpg',
+  eee: '/dept/eee dept.jpg',
+  mech: '/dept/mech dept.jpg',
+  civil: '/dept/civil dept.jpg',
+  chemical: '/dept/chem dept.jpg',
+  agri: '/dept/agri dept.jpg',
+  aids: '/dept/ai ds dept.jpg',
+  csd: '/dept/csd  dept.jpg',
+  mca: '/dept/MCA.jpg',
+  mba: '/dept/MBA.jpg',
+  sh: '/dept/cse dept.png',
+  'phd-civil': '/dept/phd.civil.jpg',
+  'phd-mech': '/dept/phd.mech.jpg',
+  'phd-eee': '/dept/phd.eee.jpg',
+  'phd-ece': '/dept/phd.ece.jpg',
+  default: '/dept/cse dept.png'
+};
+
 export default function DepartmentDetail() {
   const { id } = useParams();
   const dept = departmentsData[id] || departmentsData.cse;
+  const deptImage = departmentImages[id] || departmentImages[dept.key] || departmentImages.default;
 
   // Local state for tabs
   const [activeSubTab, setActiveSubTab] = useState('overview');
@@ -84,37 +107,58 @@ export default function DepartmentDetail() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white border border-gray-200 shadow-sm p-8 md:p-12 rounded-3xl mb-12 flex flex-col xl:flex-row justify-between items-start xl:items-center gap-8"
+          className="bg-white border border-gray-200 shadow-sm p-6 sm:p-8 md:p-10 rounded-[32px] mb-12 grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch hover:shadow-md transition-shadow duration-300"
         >
-          <div className="max-w-3xl text-left">
-            <span className="text-xs font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-full inline-block mb-4 uppercase">
-              Department Portal
-            </span>
-            <h1 className="text-4xl md:text-6xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
-              {dept.name}
-            </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold leading-relaxed">
-              Adhiparasakthi Engineering College • Melmaruvathur
-            </p>
+          {/* Left Column: Department Image (40% width on Desktop, slightly reduced to 33% on Tablet, stacked on Mobile) */}
+          <div className="w-full h-64 md:h-auto md:col-span-4 lg:col-span-5 rounded-2xl overflow-hidden shadow-sm relative group min-h-[220px]">
+            <img 
+              src={deptImage} 
+              alt={`${dept.name} Department`}
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+            {/* Soft decorative shadow gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
           </div>
 
-          {/* Quick stats grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full xl:w-auto shrink-0">
-            <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px]">
-              <span className="block text-2xl font-black text-indigo-650">{(dept.faculty || []).length}</span>
-              <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Faculty</span>
+          {/* Right Column: Content (60% width on Desktop, 66% on Tablet, stacked on Mobile) */}
+          <div className="flex flex-col justify-between items-start text-left md:col-span-8 lg:col-span-7 space-y-6">
+            <div className="space-y-4">
+              {/* Badge */}
+              <div>
+                <span className="text-xs font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-full inline-block uppercase">
+                  Department Portal
+                </span>
+              </div>
+              
+              {/* Title */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black font-title tracking-tight text-gray-900 leading-tight">
+                {dept.name.replace(/^Department of\s+/i, '')}
+              </h1>
+              
+              {/* College & Location */}
+              <p className="text-sm md:text-base text-gray-500 font-bold leading-relaxed">
+                Adhiparasakthi Engineering College • Melmaruvathur
+              </p>
             </div>
-            <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px]">
-              <span className="block text-2xl font-black text-emerald-650">{(dept.labs || []).length}</span>
-              <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Laboratories</span>
-            </div>
-            <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px]">
-              <span className="block text-2xl font-black text-amber-600">{(dept.placements || []).length}</span>
-              <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Placements</span>
-            </div>
-            <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px]">
-              <span className="block text-2xl font-black text-purple-600">{(dept.publications?.journals || []).length}</span>
-              <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Publications</span>
+
+            {/* Quick stats grid (2x2 grid on Mobile, single horizontal row on Tablet & Desktop) */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full pt-2">
+              <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px] hover:border-indigo-200 hover:shadow-sm transition-all duration-300">
+                <span className="block text-2xl font-black text-indigo-650">{(dept.faculty || []).length}</span>
+                <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Faculty</span>
+              </div>
+              <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px] hover:border-emerald-200 hover:shadow-sm transition-all duration-300">
+                <span className="block text-2xl font-black text-emerald-650">{(dept.labs || []).length}</span>
+                <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Laboratories</span>
+              </div>
+              <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px] hover:border-amber-200 hover:shadow-sm transition-all duration-300">
+                <span className="block text-2xl font-black text-amber-600">{(dept.placements || []).length}</span>
+                <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Placements</span>
+              </div>
+              <div className="bg-gray-50 border border-gray-150 p-4 rounded-2xl text-center min-w-[110px] hover:border-purple-200 hover:shadow-sm transition-all duration-300">
+                <span className="block text-2xl font-black text-purple-600">{(dept.publications?.journals || []).length}</span>
+                <span className="text-[10px] uppercase font-extrabold text-gray-500 tracking-wider">Publications</span>
+              </div>
             </div>
           </div>
         </motion.div>

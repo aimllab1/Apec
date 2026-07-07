@@ -4,6 +4,28 @@ import { Clock, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
 
+const departmentImages = {
+  aiml: '/dept/aiml dept.jpg',
+  cse: '/dept/cse dept.png',
+  it: '/dept/it dept.jpg',
+  ece: '/dept/ece dept.jpg',
+  eee: '/dept/eee dept.jpg',
+  mech: '/dept/mech dept.jpg',
+  civil: '/dept/civil dept.jpg',
+  chemical: '/dept/chem dept.jpg',
+  agri: '/dept/agri dept.jpg',
+  aids: '/dept/ai ds dept.jpg',
+  csd: '/dept/csd  dept.jpg',
+  mca: '/dept/MCA.jpg',
+  mba: '/dept/MBA.jpg',
+  sh: '/dept/cse dept.png',
+  'phd-civil': '/dept/phd.civil.jpg',
+  'phd-mech': '/dept/phd.mech.jpg',
+  'phd-eee': '/dept/phd.eee.jpg',
+  'phd-ece': '/dept/phd.ece.jpg',
+  default: '/dept/cse dept.png'
+};
+
 export default function Departments() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -122,20 +144,14 @@ export default function Departments() {
         
         {/* Header */}
         <div className="mb-16 text-center md:text-left">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="font-mono text-sm uppercase font-black tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-5 py-2.5 rounded-full inline-block mb-5"
-          >
-            Academic Departments
-          </motion.span>
+
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-black font-title tracking-tight mb-6 text-gray-900"
           >
-            Redesigned Portals
+            Academic Departments
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
@@ -233,6 +249,17 @@ export default function Departments() {
                     className="group bg-white border border-gray-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between hover:border-indigo-300 hover:shadow-[0_15px_40px_rgba(99,102,241,0.05)] transition-all duration-300 text-left"
                   >
                     <div>
+                      {/* Department Image */}
+                      <div className="w-full h-48 rounded-2xl overflow-hidden mb-6 relative shadow-sm group">
+                        <img 
+                          src={departmentImages[dept.key] || departmentImages.default} 
+                          alt={`${dept.name} Department`}
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                        />
+                        {/* Subtle decorative overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none" />
+                      </div>
+
                       {/* Badge / Duration */}
                       <div className="flex justify-between items-center gap-3 mb-6">
                         <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full border ${
@@ -251,13 +278,10 @@ export default function Departments() {
 
                       {/* Title */}
                       <h3 className="text-xl md:text-2xl font-black text-gray-900 leading-tight mb-4 group-hover:text-indigo-650 transition-colors">
-                        {dept.name}
+                        {dept.name.replace(/^Department of\s+/i, '')}
                       </h3>
 
-                      {/* Description */}
-                      <p className="text-sm text-gray-600 mb-6 leading-relaxed line-clamp-3">
-                        {dept.about}
-                      </p>
+
 
                       {/* Focus Tags */}
                       <div className="mb-6">

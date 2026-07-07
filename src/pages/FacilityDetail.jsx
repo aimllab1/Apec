@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Clock, Users, ShieldAlert, Bus, Phone, Mail, Map as MapIcon } from 'lucide-react';
+import { ArrowLeft, BookOpen, Clock, Users, ShieldAlert, Bus, Phone, Mail, Map as MapIcon, RotateCw } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { motion, AnimatePresence } from 'framer-motion';
+import PanoramaModal from '../components/PanoramaModal';
 
 const facilityData = {
   library: {
@@ -358,6 +359,7 @@ export default function FacilityDetail() {
   const [selectedRouteIdx, setSelectedRouteIdx] = useState(null);
   const [hoveredStopCoords, setHoveredStopCoords] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isPanoOpen, setIsPanoOpen] = useState(false);
   
   const leafletMapInstanceRef = useRef(null);
   const hoverMarkerRef = useRef(null);
@@ -608,14 +610,28 @@ export default function FacilityDetail() {
         
         {/* Back Link */}
         <Link to="/facilities" className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 mb-8 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Facilities
+          <ArrowLeft className="w-4 h-4" /> Back to Facility Overview
         </Link>
 
         {/* Header */}
         <div className="mb-12">
           <span className="text-xs uppercase font-extrabold tracking-widest text-gray-400 mb-2 block">Campus Infrastructure</span>
           <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">{facility.name}</h1>
-          <p className="text-sm text-gray-500 leading-relaxed max-w-2xl">{facility.intro}</p>
+          <p className="text-sm text-gray-500 leading-relaxed max-w-2xl mb-6">{facility.intro}</p>
+          {id === 'labs' && (
+            <button 
+              onClick={() => setIsPanoOpen(true)}
+              className="inline-flex items-center justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200/60 font-black text-[10px] uppercase tracking-wider px-4 py-2.5 rounded-xl transition-all cursor-pointer relative overflow-hidden group/btn w-max"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-450 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-600"></span>
+              </span>
+              <RotateCw className="w-3.5 h-3.5 text-indigo-500 animate-[spin_10s_linear_infinite]" />
+              <span>360° VR Tour: AIML Lab 1</span>
+            </button>
+          )}
         </div>
 
         {/* Dynamic Transport Routing & Timings Grid */}
@@ -968,6 +984,17 @@ export default function FacilityDetail() {
         )}
 
       </div>
+
+      {/* 360° Panorama modal */}
+      <AnimatePresence>
+        {isPanoOpen && (
+          <PanoramaModal 
+            isOpen={isPanoOpen} 
+            onClose={() => setIsPanoOpen(false)} 
+            initialScene="aimlLab" 
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
