@@ -74,10 +74,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       
       wrapper.innerHTML = `
         <div class="pano-arrow-wrapper">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="pano-arrow-svg">
-            <path class="arrow-part part-3" d="M12,2 L4,10 L20,10 Z"></path>
-            <path class="arrow-part part-2" d="M12,8 L4,16 L20,16 Z"></path>
-            <path class="arrow-part part-1" d="M12,14 L4,22 L20,22 Z"></path>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" class="pano-arrow-svg">
+            <path class="arrow-part part-3" d="M16,2 L4,10 L16,7 L28,10 Z"></path>
+            <path class="arrow-part part-2" d="M16,12 L4,20 L16,17 L28,20 Z"></path>
+            <path class="arrow-part part-1" d="M16,22 L4,30 L16,27 L28,30 Z"></path>
           </svg>
         </div>
         <span class="pano-tooltip-text">${args.text}</span>
@@ -129,7 +129,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30, // Placed in the middle-bottom
+                    pitch: -18, // Placed in the middle-bottom (adjusted from -30)
                     yaw: -90, // Placed on the West side of the Entrance Gate panorama
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
@@ -146,19 +146,19 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 90, // Placed on the East side (Back to Gate)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Entrance Gate", sceneId: "mainGate" }
                   },
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: -80, // Moved slightly more towards west (-80)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
                   },
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 180, // South side of Junction 1 leads to Junction 2
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
@@ -175,13 +175,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 80, // Return path to Junction 1
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: -90, // West side of Reception leads to Amma Statue
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
@@ -198,7 +198,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 90, // East side of Amma Statue goes back to Reception
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
@@ -221,7 +221,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 220, // Adjusted to 220 as requested
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
@@ -238,13 +238,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 0, // North side of Junction 2 goes back to Junction 1
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 180, // South side of Junction 2 leads directly to PG Block
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
@@ -261,13 +261,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: -10, // Adjusted -10 from current position (0)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
                   },
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 170, // Adjusted -10 from current position (180)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
@@ -284,13 +284,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 30, // Adjusted +30 from current position (0)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
                   },
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 220, // Adjusted +60 from current position (160)
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Library", sceneId: "library" }
@@ -307,7 +307,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 autoRotate: 4.0, // Moving rightwards (clockwise) at a faster speed
                 hotSpots: [
                   {
-                    pitch: -30,
+                    pitch: -18,
                     yaw: 30, // Adjusted from Library to Junction 3 to be yaw: 30
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
@@ -469,43 +469,78 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           
           .arrow-part {
             transition: opacity 0.25s ease, transform 0.25s ease, fill 0.25s ease !important;
-            opacity: 0.35;
+            opacity: 0.15;
             fill: #ffffff !important;
+            transform-origin: center;
           }
           
           .arrow-part.part-1 {
             opacity: 1; /* Only show bottom triangle in normal state */
           }
           
-          /* Hover state animations: sequential fade and shift up (double/triple arrow animation) */
+          /* Hover state animations: sequential fade and shift up with distinct spacing gaps */
           .custom-pano-hotspot:hover .pano-arrow-svg {
             transform: translateY(-4px) !important;
           }
           
           .custom-pano-hotspot:hover .part-1 {
-            animation: arrow-wave-seq 0.9s infinite 0s;
+            animation: arrow-wave-seq-1 1.2s infinite;
           }
           
           .custom-pano-hotspot:hover .part-2 {
-            animation: arrow-wave-seq 0.9s infinite 0.15s;
+            animation: arrow-wave-seq-2 1.2s infinite;
           }
           
           .custom-pano-hotspot:hover .part-3 {
-            animation: arrow-wave-seq 0.9s infinite 0.3s;
+            animation: arrow-wave-seq-3 1.2s infinite;
           }
           
-          @keyframes arrow-wave-seq {
-            0% {
+          @keyframes arrow-wave-seq-1 {
+            0%, 100% {
               opacity: 0.3;
               fill: #ffffff !important;
+              transform: translateY(0);
             }
-            50% {
+            33% {
               opacity: 1;
-              fill: #6366f1 !important; /* Glow indigo in the middle of the wave */
+              fill: #6366f1 !important;
+              transform: translateY(-2px);
+            }
+            66% {
+              opacity: 0.3;
+              fill: #ffffff !important;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes arrow-wave-seq-2 {
+            0%, 100% {
+              opacity: 0.15;
+              fill: #ffffff !important;
+              transform: translateY(0);
+            }
+            33% {
+              opacity: 0.15;
+              fill: #ffffff !important;
+              transform: translateY(0);
+            }
+            66% {
+              opacity: 1;
+              fill: #6366f1 !important;
+              transform: translateY(-4px); /* Moves up more, increasing the gap! */
+            }
+          }
+
+          @keyframes arrow-wave-seq-3 {
+            0%, 66% {
+              opacity: 0.15;
+              fill: #ffffff !important;
+              transform: translateY(0);
             }
             100% {
-              opacity: 0.3;
-              fill: #ffffff !important;
+              opacity: 1;
+              fill: #6366f1 !important;
+              transform: translateY(-6px); /* Moves up even more, increasing the gap! */
             }
           }
           
