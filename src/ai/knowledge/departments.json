@@ -396,5 +396,70 @@
     ],
     "courses_offered": [],
     "seat_intake": "N/A"
+  },
+  {
+    "key": "me-cse",
+    "name": "M.E. Computer Science and Engineering",
+    "about": "The M.E. program in Computer Science and Engineering offers advanced coursework and research opportunities in algorithms, computer networks, data science, software engineering, and artificial intelligence.",
+    "vision": "To be a center of excellence in advanced computer science education and research, producing professionals who lead innovative solutions.",
+    "mission": [
+      "To impart advanced technical knowledge and research skills in computer science.",
+      "To foster innovation, collaboration, and ethical engineering practices."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-vlsi",
+    "name": "M.E. VLSI Design",
+    "about": "The M.E. program in VLSI Design focuses on advanced microelectronics, analog and digital IC design, testing and verification, embedded systems, and computer-aided design (CAD) of VLSI systems.",
+    "vision": "To produce industry-ready VLSI professionals and researchers capable of leading innovations in semiconductor and microelectronic systems.",
+    "mission": [
+      "To offer high-quality research-oriented education in semiconductor technology.",
+      "To collaborate with industry partners to solve microelectronics challenges."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-ped",
+    "name": "M.E. Power Electronics & Drives",
+    "about": "The M.E. program in Power Electronics & Drives prepares engineering students for advanced study and careers in electric drives, smart grids, renewable energy systems, and power converter technologies.",
+    "vision": "To advance knowledge and innovation in power electronic systems and green energy technologies.",
+    "mission": [
+      "To provide comprehensive education in advanced power devices and control technologies.",
+      "To drive sustainable energy research through academic and industrial partnerships."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-thermal",
+    "name": "M.E. Thermal Engineering",
+    "about": "The M.E. program in Thermal Engineering provides in-depth study of heat transfer, fluid dynamics, thermodynamics, combustion, and renewable energy technologies.",
+    "vision": "To be a leader in thermal science education and research, addressing energy efficiency and sustainable development challenges.",
+    "mission": [
+      "To cultivate advanced analytical and research capabilities in thermal sciences.",
+      "To develop energy-efficient technologies and sustainable thermal designs."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-cem",
+    "name": "M.E. Construction Engineering and Management",
+    "about": "The M.E. program in Construction Engineering and Management integrates engineering principles with business management to oversee complex infrastructure, construction contracts, scheduling, and project execution.",
+    "vision": "To develop global leaders in construction engineering who manage projects efficiently, sustainably, and ethically.",
+    "mission": [
+      "To deliver advanced education in project management, materials, and contracts.",
+      "To foster research in sustainable materials and construction technologies."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
   }
 ]

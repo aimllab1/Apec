@@ -22,6 +22,11 @@ const departmentImages = {
   csd: '/dept/csd  dept.jpg',
   mca: '/dept/MCA.jpg',
   mba: '/dept/MBA.jpg',
+  'me-cse': '/dept/me.cse.jpg',
+  'me-thermal': '/dept/me.thermak.jpg',
+  'me-vlsi': '/dept/m.e.vlsi.jpg',
+  'me-ped': '/dept/power-electronics-electrical-drives.jpg',
+  'me-cem': '/dept/m.e.construction engg and mangement.jpg',
   sh: '/dept/cse dept.png',
   'phd-civil': '/dept/phd.civil.jpg',
   'phd-mech': '/dept/phd.mech.jpg',
@@ -32,7 +37,13 @@ const departmentImages = {
 
 export default function DepartmentDetail() {
   const { id } = useParams();
-  const dept = departmentsData[id] || departmentsData.cse;
+  
+  // Dynamically load from localStorage config to support the content editor
+  const dept = (() => {
+    const saved = localStorage.getItem('apec_departments_data');
+    const data = saved ? JSON.parse(saved) : departmentsData;
+    return data[id] || data.cse;
+  })();
   const deptImage = departmentImages[id] || departmentImages[dept.key] || departmentImages.default;
 
   // Local state for tabs
@@ -164,7 +175,7 @@ export default function DepartmentDetail() {
         </motion.div>
 
         {/* Tab Selection */}
-        <div className="flex gap-2 bg-white p-2 rounded-2xl border border-gray-200 mb-12 overflow-x-auto w-full shadow-sm">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-row gap-2 bg-white p-1.5 lg:p-2 rounded-2xl border border-gray-200 mb-12 w-full shadow-sm">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             return (
@@ -175,14 +186,14 @@ export default function DepartmentDetail() {
                   setFacultySearch('');
                   setPubSearch('');
                 }}
-                className={`flex items-center gap-2 text-sm font-bold px-6 py-3.5 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                className={`flex flex-col lg:flex-row items-center justify-center lg:justify-start gap-1.5 lg:gap-2 text-xs lg:text-sm font-bold p-3 lg:px-6 lg:py-3.5 rounded-xl transition-all cursor-pointer text-center lg:text-left lg:whitespace-nowrap grow ${
                   activeSubTab === tab.id 
                     ? 'bg-indigo-650 text-white shadow-md' 
                     : 'text-gray-500 hover:text-indigo-650 hover:bg-gray-50'
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
-                {tab.label}
+                <span>{tab.label}</span>
               </button>
             );
           })}
@@ -270,47 +281,84 @@ export default function DepartmentDetail() {
                       No faculty members found matching your search.
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-left">
                       {filteredFaculty.map((f, idx) => (
                         <div 
                           key={idx}
-                          className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between hover:border-indigo-300 hover:shadow-md transition-all duration-300"
+                          className="bg-white border border-gray-200 rounded-3xl p-3 md:p-4 flex flex-row items-center gap-4 md:gap-5 hover:border-indigo-300 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
                         >
-                          <div>
-                            {/* Header */}
-                            <div className="flex items-start justify-between gap-3 mb-4">
-                              <div>
-                                <h4 className="text-base md:text-lg font-black text-gray-900">{f.name}</h4>
-                                <span className="text-xs text-indigo-650 font-extrabold uppercase tracking-wider block mt-1">{f.designation}</span>
-                              </div>
-                              <span className="text-[10px] font-bold bg-gray-100 px-2.5 py-1 rounded text-gray-600 uppercase font-mono">{f.qualification}</span>
-                            </div>
+                          {/* Background soft blurs for premium aesthetic */}
+                          <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50/40 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-100/50 transition-colors" />
 
-                            {/* Details */}
-                            <div className="space-y-2 mt-4 pt-4 border-t border-gray-150">
-                              {f.experience && (
-                                <div className="text-xs text-gray-600 flex items-center gap-1.5 font-semibold">
-                                  <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                                  <span>Experience: <strong className="text-gray-800">{f.experience}</strong></span>
-                                </div>
-                              )}
-                              {f.joiningDate && (
-                                <div className="text-xs text-gray-600 flex items-center gap-1.5 font-semibold">
-                                  <Briefcase className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                                  <span>Joined APEC: <strong className="text-gray-800">{f.joiningDate}</strong></span>
-                                </div>
-                              )}
+                          {/* Left side: Image / Fallback Avatar */}
+                          <div className="relative shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50 flex items-center justify-center">
+                            {f.image ? (
+                              <img 
+                                src={f.image} 
+                                alt={f.name} 
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                onError={(e) => {
+                                  e.target.style.display = 'none';
+                                  e.target.nextSibling.style.display = 'flex';
+                                }}
+                              />
+                            ) : null}
+                            {/* Fallback avatar */}
+                            <div 
+                              className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold"
+                              style={{ display: f.image ? 'none' : 'flex' }}
+                            >
+                              <GraduationCap className="w-10 h-10 text-indigo-650" />
                             </div>
                           </div>
 
-                          {f.email && (
-                            <a 
-                              href={`mailto:${f.email}`}
-                              className="mt-6 w-full flex items-center justify-center gap-1.5 bg-gray-900 hover:bg-gray-800 text-white font-bold text-xs py-3 rounded-xl transition-all uppercase tracking-wider"
-                            >
-                              <Mail className="w-3.5 h-3.5" /> Contact Email
-                            </a>
-                          )}
+                          {/* Right side: Information */}
+                          <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5 self-stretch">
+                            <div>
+                              <div className="flex flex-wrap items-center gap-2 mb-1">
+                                <h4 className="text-base md:text-lg lg:text-xl font-black text-gray-900 leading-snug">{f.name}</h4>
+                                {f.qualification && (
+                                  <span className="text-[9px] font-black bg-indigo-50 border border-indigo-150 px-2 py-0.5 rounded text-indigo-650 uppercase font-mono tracking-wider shrink-0">
+                                    {f.qualification}
+                                  </span>
+                                )}
+                              </div>
+                              
+                              <span className="text-xs md:text-sm text-indigo-650 font-extrabold uppercase tracking-wider block mb-1">
+                                {f.designation}
+                              </span>
+                              
+                              {f.department && (
+                                <span className="text-xs md:text-sm text-gray-500 font-bold block mb-3 leading-relaxed">
+                                  {f.department}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Contact/Options & Additional Metadata */}
+                            <div className="flex items-center justify-between gap-4 mt-auto pt-2 border-t border-gray-100 w-full">
+                              <div className="flex items-center gap-4">
+                                {f.experience && (
+                                  <div className="text-[10px] md:text-xs text-gray-500 font-extrabold flex items-center gap-1.5">
+                                    <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                                    <span>Exp: {f.experience.split(',')[0]}</span>
+                                  </div>
+                                )}
+                              </div>
+
+                              <div className="flex items-center gap-2">
+                                {f.email && (
+                                  <a 
+                                    href={`mailto:${f.email}`}
+                                    className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-900 hover:bg-indigo-650 text-white flex items-center justify-center shadow hover:shadow-indigo-500/30 transition-all transform hover:scale-110 active:scale-95 cursor-pointer"
+                                    title={`Email: ${f.email}`}
+                                  >
+                                    <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </div>

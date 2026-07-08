@@ -77,7 +77,8 @@
         "facultyId": "",
         "experience": "19 Years, 10 Months",
         "joiningDate": "September 1, 2007",
-        "teachingSince": "August 20, 2007"
+        "teachingSince": "August 20, 2007",
+        "image": "/Faculty Image/aiml/elamathi.jpg"
       },
       {
         "name": "Mr. J. Senthil Kumar",
@@ -88,7 +89,8 @@
         "facultyId": "",
         "experience": "35 Years,  Months",
         "joiningDate": "July 23, 2025",
-        "teachingSince": "June 2, 1991"
+        "teachingSince": "June 2, 1991",
+        "image": "/Faculty Image/aiml/senthil kumar.jpg"
       },
       {
         "name": "Ms. R. Menaga",
@@ -99,7 +101,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "March 3, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/aiml/meenga.jpg"
       },
       {
         "name": "Mr. Nagaraj Jaya Sridhar J",
@@ -110,18 +113,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "SRICHARAN1406@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "February 1, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/aiml/nagaraj.jpg"
       },
       {
         "name": "Mrs. Poornima Devi K",
@@ -132,18 +125,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "POORNI.SPELL@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "June 11, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/aiml/poornima devi.jpg"
       }
     ],
     "labs": [],
@@ -238,7 +221,8 @@
         "facultyId": "",
         "experience": "10 Years, 0 Months",
         "joiningDate": "July 1, 2016",
-        "teachingSince": "June 27, 2016"
+        "teachingSince": "June 27, 2016",
+        "image": "/Faculty Image/chemical/ganesh.jpg"
       },
       {
         "name": "Dr. Magesh Rangaraju",
@@ -249,7 +233,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "February 19, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/chemical/magesh rangaraju.jpg"
       },
       {
         "name": "Mr.S.Velmurugan",
@@ -260,7 +245,8 @@
         "facultyId": "",
         "experience": "26 Years, 1 Months",
         "joiningDate": "March 1, 2023",
-        "teachingSince": "May 22, 2000"
+        "teachingSince": "May 22, 2000",
+        "image": "/Faculty Image/chemical/velmurgan.jpg"
       },
       {
         "name": "Ms.M.SELVAPRATHIPA",
@@ -271,7 +257,8 @@
         "facultyId": "",
         "experience": "6 Years, 4 Months",
         "joiningDate": "January 4, 2021",
-        "teachingSince": "February 8, 2020"
+        "teachingSince": "February 8, 2020",
+        "image": ""
       },
       {
         "name": "Mr. S. Ranjithsingh",
@@ -282,7 +269,8 @@
         "facultyId": "4204437",
         "experience": "0 Years, 4 Months",
         "joiningDate": "February 7, 2026",
-        "teachingSince": "February 7, 2026"
+        "teachingSince": "February 7, 2026",
+        "image": "/Faculty Image/chemical/ranjithsingh.jpg"
       },
       {
         "name": "Ms. T. S. Swetha",
@@ -293,7 +281,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "March 18, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/chemical/t.s.swetha.jpg"
       },
       {
         "name": "Ms. G. Saraswathy",
@@ -304,7 +293,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "November 1, 2023",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/chemical/saraswathy.jpg"
       }
     ],
     "labs": [
@@ -621,7 +611,8 @@
         "facultyId": "",
         "experience": "32 Years, 8 Months",
         "joiningDate": "June 10, 1994",
-        "teachingSince": "October 6, 1994"
+        "teachingSince": "October 6, 1994",
+        "image": "/Faculty Image/Civil/Ramasamy.jpg"
       },
       {
         "name": "Dr.A.Krishnamoorthi",
@@ -632,7 +623,8 @@
         "facultyId": "",
         "experience": "27 Years, 5 Months",
         "joiningDate": "June 1, 1999",
-        "teachingSince": "January 6, 1999"
+        "teachingSince": "January 6, 1999",
+        "image": "/Faculty Image/Civil/krishnamoorthy.jpg"
       },
       {
         "name": "Dr.K.Thiagarajan",
@@ -643,7 +635,8 @@
         "facultyId": "",
         "experience": "4 Years, 7 Months",
         "joiningDate": "November 23, 2022",
-        "teachingSince": "November 23, 2022"
+        "teachingSince": "November 23, 2022",
+        "image": "/Faculty Image/Civil/thiagarajan.jpg"
       },
       {
         "name": "Dr.P.Somiyadevi",
@@ -654,7 +647,8 @@
         "facultyId": "",
         "experience": "17 Years,  Months",
         "joiningDate": "June 18, 2009",
-        "teachingSince": "June 18, 2009"
+        "teachingSince": "June 18, 2009",
+        "image": "/Faculty Image/Civil/sowmayadevi.jpg"
       },
       {
         "name": "Mr.S.Rethinakumar",
@@ -665,7 +659,8 @@
         "facultyId": "",
         "experience": "11 Years,  Months",
         "joiningDate": "June 1, 2015",
-        "teachingSince": "May 27, 2015"
+        "teachingSince": "May 27, 2015",
+        "image": "/Faculty Image/Civil/rethinakumar.jpg"
       },
       {
         "name": "Mr.S.Selvakumar",
@@ -676,7 +671,8 @@
         "facultyId": "",
         "experience": "11 Years, 1 Months",
         "joiningDate": "June 1, 2015",
-        "teachingSince": "May 27, 2015"
+        "teachingSince": "May 27, 2015",
+        "image": "/Faculty Image/Civil/selvakumar.jpg"
       },
       {
         "name": "Mr.G.Karthikkumar",
@@ -687,7 +683,8 @@
         "facultyId": "",
         "experience": "9 Years,  Months",
         "joiningDate": "July 1, 2017",
-        "teachingSince": "June 22, 2017"
+        "teachingSince": "June 22, 2017",
+        "image": "/Faculty Image/Civil/karthikkumar.jpg"
       },
       {
         "name": "Mr.S.Maluvu",
@@ -698,7 +695,8 @@
         "facultyId": "",
         "experience": "9 Years,  Months",
         "joiningDate": "July 1, 2017",
-        "teachingSince": "June 28, 2017"
+        "teachingSince": "June 28, 2017",
+        "image": "/Faculty Image/Civil/maluvu.jpg"
       },
       {
         "name": "Mr.S.Karthikeyan",
@@ -709,7 +707,8 @@
         "facultyId": "",
         "experience": "9 Years, 7 Months",
         "joiningDate": "July 2, 2018",
-        "teachingSince": "November 12, 2017"
+        "teachingSince": "November 12, 2017",
+        "image": "/Faculty Image/Civil/karthikayan.jpg"
       },
       {
         "name": "Mr.S.Parthiban",
@@ -720,7 +719,8 @@
         "facultyId": "",
         "experience": "5 Years,  Months",
         "joiningDate": "June 18, 2021",
-        "teachingSince": "June 18, 2021"
+        "teachingSince": "June 18, 2021",
+        "image": "/Faculty Image/Civil/parthiban.jpg"
       },
       {
         "name": "Ms. I. Sakthidevi",
@@ -731,7 +731,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "August 29, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/Civil/sakthidevi.jpg"
       },
       {
         "name": "Ms. Sangeetha E",
@@ -742,7 +743,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "February 1, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/Civil/sangetha.jpg"
       },
       {
         "name": "Ms. K. Gomathi",
@@ -753,7 +755,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "April 1, 2026",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/Civil/gomathi.jpg"
       },
       {
         "name": "Ms. M. Abinaya",
@@ -764,7 +767,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "September 1, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/Civil/abinaya.jpg"
       }
     ],
     "labs": [
@@ -1395,7 +1399,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "January 1, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/MCA/selva raj.jpg"
       },
       {
         "name": "Dr. S. Arunkumar",
@@ -1406,18 +1411,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "07TGMC0797",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "28 Years, 7 Months",
-        "joiningDate": "May 1, 2007",
-        "teachingSince": "November 9, 1998"
+        "teachingSince": "",
+        "image": "/Faculty Image/MCA/arun kumar.jpg"
       },
       {
         "name": "Mr. E. Janakiraman",
@@ -1428,7 +1423,8 @@
         "facultyId": "",
         "experience": "5 Years, 10 Months",
         "joiningDate": "August 12, 2021",
-        "teachingSince": "August 12, 2021"
+        "teachingSince": "August 12, 2021",
+        "image": "/Faculty Image/MCA/janaki raman.jpg"
       },
       {
         "name": "Ms. A. Yamuna",
@@ -1439,7 +1435,8 @@
         "facultyId": "",
         "experience": "4 Years, 10 Months",
         "joiningDate": "August 17, 2022",
-        "teachingSince": "August 17, 2022"
+        "teachingSince": "August 17, 2022",
+        "image": "/Faculty Image/MCA/yamuna.jpg"
       },
       {
         "name": "Ms. C. Amuthavalli",
@@ -1450,7 +1447,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/MCA/amuthavalli.jpg"
       },
       {
         "name": "M.C.A.",
@@ -1461,18 +1459,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "4204419",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "July 23, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/MCA/amuthavalli.jpg"
       },
       {
         "name": "Mrs. Sakthi S",
@@ -1483,18 +1471,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "SSAKTHI28@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "August 12, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/MCA/sakthi.jpg"
       },
       {
         "name": "Mrs. M. Seetha",
@@ -1505,7 +1483,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "July 27, 2023",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/MCA/seetha.jpg"
       }
     ],
     "labs": [],
@@ -1859,7 +1838,8 @@
         "facultyId": "",
         "experience": "25 Years, 0 Months",
         "joiningDate": "June 12, 2001",
-        "teachingSince": "June 12, 2001"
+        "teachingSince": "June 12, 2001",
+        "image": "/Faculty Image/cse/dhaya.jpg"
       },
       {
         "name": "Dr. S. Jayashri",
@@ -1870,7 +1850,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "January 1, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/jayashri.jpg"
       },
       {
         "name": "Mr. G. Sekar",
@@ -1881,7 +1862,8 @@
         "facultyId": "",
         "experience": "16 Years, 0 Months",
         "joiningDate": "June 21, 2010",
-        "teachingSince": "June 21, 2010"
+        "teachingSince": "June 21, 2010",
+        "image": "/Faculty Image/cse/sekar.jpg"
       },
       {
         "name": "Mr. G. Srinivasan",
@@ -1892,7 +1874,8 @@
         "facultyId": "",
         "experience": "14 Years, 1 Months",
         "joiningDate": "July 24, 2012",
-        "teachingSince": "May 5, 2012"
+        "teachingSince": "May 5, 2012",
+        "image": "/Faculty Image/cse/srinivasan.jpg"
       },
       {
         "name": "Mr. K. Chairmadurai",
@@ -1903,7 +1886,8 @@
         "facultyId": "",
         "experience": "9 Years, 0 Months",
         "joiningDate": "August 1, 2017",
-        "teachingSince": "June 28, 2017"
+        "teachingSince": "June 28, 2017",
+        "image": "/Faculty Image/cse/chairmadurai.jpg"
       },
       {
         "name": "Ms. A. Jayanthi",
@@ -1914,7 +1898,8 @@
         "facultyId": "",
         "experience": "5 Years, 9 Months",
         "joiningDate": "October 1, 2025",
-        "teachingSince": "October 1, 2021"
+        "teachingSince": "October 1, 2021",
+        "image": "/Faculty Image/cse/jayanthi.jpg"
       },
       {
         "name": "Ms. P. Gajalakshmi",
@@ -1925,7 +1910,8 @@
         "facultyId": "",
         "experience": "4 Years, 10 Months",
         "joiningDate": "",
-        "teachingSince": "August 18, 2022"
+        "teachingSince": "August 18, 2022",
+        "image": "/Faculty Image/cse/gajalakshmi.jpg"
       },
       {
         "name": "Ms. M. Devika",
@@ -1936,7 +1922,8 @@
         "facultyId": "",
         "experience": "4 Years, 9 Months",
         "joiningDate": "September 5, 2022",
-        "teachingSince": "September 5, 2022"
+        "teachingSince": "September 5, 2022",
+        "image": "/Faculty Image/cse/devika.jpg"
       },
       {
         "name": "Mr. S. Hariganesan",
@@ -1947,7 +1934,8 @@
         "facultyId": "",
         "experience": "3 Years, 4 Months",
         "joiningDate": "September 1, 2014",
-        "teachingSince": "February 7, 2023"
+        "teachingSince": "February 7, 2023",
+        "image": "/Faculty Image/cse/hariganesan.jpg"
       },
       {
         "name": "Ms. S. Swetha",
@@ -1958,7 +1946,8 @@
         "facultyId": "4204434",
         "experience": "1 Years, 7 Months",
         "joiningDate": "November 3, 2025",
-        "teachingSince": "November 3, 2025"
+        "teachingSince": "November 3, 2025",
+        "image": "/Faculty Image/cse/sweatha.jpg"
       },
       {
         "name": "Ms. Manonmani G",
@@ -1969,7 +1958,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "February 1, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/manonmani.jpg"
       },
       {
         "name": "Ms. P. Banu Priya",
@@ -1980,7 +1970,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "March 1, 2023",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/banu priya.jpg"
       },
       {
         "name": "Ms. K. Muthu Priya",
@@ -1991,7 +1982,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "March 1, 2023",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/muthu priya.jpg"
       },
       {
         "name": "Mrs. Mahalakshmi M",
@@ -2002,7 +1994,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "February 1, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/mahalakshmi.jpg"
       },
       {
         "name": "Mrs.Padmapriya. T.M",
@@ -2013,7 +2006,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "August 12, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/padmapriya.jpg"
       },
       {
         "name": "Mrs.Thamarai Selvi.V",
@@ -2024,7 +2018,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "May 20, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/cse/thamarai selvi.jpg"
       }
     ],
     "labs": [
@@ -2830,7 +2825,8 @@
         "facultyId": "",
         "experience": "30 Years, 5 Months",
         "joiningDate": "July 25, 2007",
-        "teachingSince": "January 2, 1996"
+        "teachingSince": "January 2, 1996",
+        "image": "/Faculty Image/mech/dhinakaraj.jpg"
       },
       {
         "name": "Dr.R.Kamaljayaraj",
@@ -2841,7 +2837,8 @@
         "facultyId": "",
         "experience": "24 Years, 1 Months",
         "joiningDate": "March 1, 2022",
-        "teachingSince": "May 3, 2002"
+        "teachingSince": "May 3, 2002",
+        "image": "/Faculty Image/mech/kamaliyaraj.jpg"
       },
       {
         "name": "Dr. Gajalakshmi K",
@@ -2852,7 +2849,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/mech/gajalakshmi.jpg"
       },
       {
         "name": "Dr. Vivekanandhan M",
@@ -2863,7 +2861,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "May 17, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": ""
       },
       {
         "name": "Mr.K.Dhandapani",
@@ -2874,7 +2873,8 @@
         "facultyId": "",
         "experience": "19 Years, 6 Months",
         "joiningDate": "October 3, 2011",
-        "teachingSince": "December 3, 2007"
+        "teachingSince": "December 3, 2007",
+        "image": "/Faculty Image/mech/dhandapani.jpg"
       },
       {
         "name": "Mr.Gopikannan.S",
@@ -2885,7 +2885,8 @@
         "facultyId": "",
         "experience": "14 Years,  Months",
         "joiningDate": "February 20, 2012",
-        "teachingSince": "June 3, 2012"
+        "teachingSince": "June 3, 2012",
+        "image": "/Faculty Image/mech/gopikanan.jpg"
       },
       {
         "name": "Mr.Sathishbabu.R",
@@ -2896,7 +2897,8 @@
         "facultyId": "",
         "experience": "14 Years,  Months",
         "joiningDate": "December 17, 2012",
-        "teachingSince": "June 5, 2012"
+        "teachingSince": "June 5, 2012",
+        "image": "/Faculty Image/mech/sathishbabu.jpg"
       },
       {
         "name": "Mr.Yogeshwaran.K.B",
@@ -2907,7 +2909,8 @@
         "facultyId": "",
         "experience": "13 Years,  Months",
         "joiningDate": "June 3, 2013",
-        "teachingSince": "June 3, 2013"
+        "teachingSince": "June 3, 2013",
+        "image": "/Faculty Image/mech/yogeshwaren.jpg"
       },
       {
         "name": "Mr.Parthiban.R",
@@ -2918,7 +2921,8 @@
         "facultyId": "",
         "experience": "13 Years,  Months",
         "joiningDate": "August 10, 2015",
-        "teachingSince": "June 3, 2013"
+        "teachingSince": "June 3, 2013",
+        "image": "/Faculty Image/mech/parthiban.jpg"
       },
       {
         "name": "Mr.Balamurugan.M",
@@ -2929,7 +2933,8 @@
         "facultyId": "",
         "experience": "11 Years,  Months",
         "joiningDate": "August 5, 2015",
-        "teachingSince": "June 3, 2015"
+        "teachingSince": "June 3, 2015",
+        "image": "/Faculty Image/mech/balamurugan.jpg"
       },
       {
         "name": "Mr.Balasubramaniasaravanan.T",
@@ -2940,7 +2945,8 @@
         "facultyId": "",
         "experience": "9 Years, 11 Months",
         "joiningDate": "June 2, 2016",
-        "teachingSince": "July 10, 2017"
+        "teachingSince": "July 10, 2017",
+        "image": "/Faculty Image/mech/saravanan.jpg"
       },
       {
         "name": "Mr. Mohan S",
@@ -2951,7 +2957,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "June 2, 2016",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/mech/mohan.jpg"
       },
       {
         "name": "Mr. Manigandan. C",
@@ -2962,7 +2969,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "June 3, 2013",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/mech/manikandan.jpg"
       }
     ],
     "labs": [
@@ -3792,18 +3800,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "00TGIT0441",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "29 Years, 11 Months",
-        "joiningDate": "June 2, 2000",
-        "teachingSince": "August 1, 1997"
+        "teachingSince": "",
+        "image": "/Faculty Image/it/bhuvaneshwari.jpg"
       },
       {
         "name": "Mrs.Vasanthi.M.D",
@@ -3814,18 +3812,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "VASUSOFT1310@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "January 1, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/vasanthi.jpg"
       },
       {
         "name": "Mrs. Thulasilakshmi.S",
@@ -3836,18 +3824,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "NTHULASILAKSHMI112@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "December 1, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/thulasilakshmi.jpg"
       },
       {
         "name": "Mrs. Lalitha M",
@@ -3858,7 +3836,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "February 1, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/lalitha.jpg"
       },
       {
         "name": "Mr. K. Hema Kumar",
@@ -3869,7 +3848,8 @@
         "facultyId": "",
         "experience": "Years,  Months",
         "joiningDate": "August 3, 2023",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/hema kumar.jpg"
       },
       {
         "name": "Mrs. Maria Salomi.E.M",
@@ -3880,18 +3860,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "MARIASALOMIAPEC24@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "May 17, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/maria salomi.jpg"
       },
       {
         "name": "Mr. Sakthivel P",
@@ -3902,18 +3872,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "SAKTHIBTECH1998@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "June 19, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/sakthivel.jpg"
       },
       {
         "name": "Mr. Lavanya.S",
@@ -3924,18 +3884,8 @@
         "facultyId": "",
         "experience": "",
         "joiningDate": "",
-        "teachingSince": ""
-      },
-      {
-        "name": "APEC.IT.LAVANYA@GMAIL.COM",
-        "qualification": "",
-        "designation": "",
-        "department": "",
-        "email": "",
-        "facultyId": "",
-        "experience": "Years,  Months",
-        "joiningDate": "August 12, 2024",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/it/lavanya.jpg"
       }
     ],
     "labs": [
@@ -4385,7 +4335,8 @@
         "facultyId": "14TGEE1243",
         "experience": "12 Years, 0 Months",
         "joiningDate": "June 11, 2014",
-        "teachingSince": "June 11, 2014"
+        "teachingSince": "June 11, 2014",
+        "image": "/Faculty Image/eee/rajivgandhi.jpg"
       },
       {
         "name": "Dr.S.A.Elankurisil",
@@ -4396,7 +4347,8 @@
         "facultyId": "",
         "experience": "28 Years, 11 Months",
         "joiningDate": "August 3, 1998",
-        "teachingSince": "July 3, 1998"
+        "teachingSince": "July 3, 1998",
+        "image": "/Faculty Image/eee/elankurisil.jpg"
       },
       {
         "name": "Dr. R. Srivel",
@@ -4407,7 +4359,8 @@
         "facultyId": "",
         "experience": "5 Years, 8 Months",
         "joiningDate": "October 1, 2021",
-        "teachingSince": "October 1, 2021"
+        "teachingSince": "October 1, 2021",
+        "image": "/Faculty Image/eee/srivel.jpg"
       },
       {
         "name": "Mrs.P.Tamizharasi",
@@ -4418,7 +4371,8 @@
         "facultyId": "",
         "experience": "23 Years, 6 Months",
         "joiningDate": "December 10, 2023",
-        "teachingSince": "December 11, 2003"
+        "teachingSince": "December 11, 2003",
+        "image": "/Faculty Image/eee/tamizharasi.jpg"
       },
       {
         "name": "Dr.N.Manimaran",
@@ -4429,7 +4383,8 @@
         "facultyId": "",
         "experience": "18 Years, 7 Months",
         "joiningDate": "March 22, 2012",
-        "teachingSince": "November 9, 2008"
+        "teachingSince": "November 9, 2008",
+        "image": "/Faculty Image/eee/manimaran.jpg"
       },
       {
         "name": "Mr. P. Ramesh",
@@ -4440,7 +4395,8 @@
         "facultyId": "5114069",
         "experience": "10 Years, 5 Months",
         "joiningDate": "December 22, 2025",
-        "teachingSince": "January 4, 2016"
+        "teachingSince": "January 4, 2016",
+        "image": "/Faculty Image/eee/ramesh.jpg"
       },
       {
         "name": "Dr.S.Muthukumar",
@@ -4451,7 +4407,8 @@
         "facultyId": "",
         "experience": "5 Years, 8 Months",
         "joiningDate": "October 1, 2021",
-        "teachingSince": "October 1, 2021"
+        "teachingSince": "October 1, 2021",
+        "image": "/Faculty Image/eee/muthukumar.jpg"
       },
       {
         "name": "Mr.D.Sarathkumar",
@@ -4462,7 +4419,8 @@
         "facultyId": "",
         "experience": "4 Years, 10 Months",
         "joiningDate": "August 11, 2022",
-        "teachingSince": "August 11, 2022"
+        "teachingSince": "August 11, 2022",
+        "image": "/Faculty Image/eee/sarathkumar.jpg"
       },
       {
         "name": "Dr.T.Kuntavai",
@@ -4473,7 +4431,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "June 28, 2022",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/eee/kuntavai.jpg"
       },
       {
         "name": "Mrs.D.K.Shobana",
@@ -4484,7 +4443,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "August 29, 2022",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/eee/shobana.jpg"
       },
       {
         "name": "Mrs.V.Vanitha",
@@ -4495,7 +4455,8 @@
         "facultyId": "",
         "experience": "0 Years, 0 Months",
         "joiningDate": "March 1, 2023",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/eee/vanitha.jpg"
       },
       {
         "name": "Mr. B. Sakthivel",
@@ -4506,7 +4467,8 @@
         "facultyId": "4204439",
         "experience": "0 Years, 0 Months",
         "joiningDate": "December 4, 2025",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/eee/sakthivel.jpg"
       }
     ],
     "labs": [
@@ -5018,15 +4980,220 @@
     "pos": [],
     "faculty": [
       {
-        "name": "Faculty members directory",
-        "qualification": "",
-        "designation": "Staff",
-        "department": "Electronics and Communication Engineering",
-        "email": "ece@apec.edu.in",
+        "name": "Dr. J. Raja",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Principal",
+        "department": "Electronics & Communication Engineering",
+        "email": "principal@apec.edu.in",
+        "facultyId": "00TGEC0462",
+        "experience": "31 Years, 10 Months",
+        "joiningDate": "December 3, 2003",
+        "teachingSince": "August 22, 1995",
+        "image": "/Faculty Image/ece/raja.jpg"
+      },
+      {
+        "name": "Dr. M. Malathi",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Head of Department",
+        "department": "Electronics & Communication Engineering",
+        "email": "ecemalathi@gmail.com",
+        "facultyId": "01TGIT0519",
+        "experience": "31 Years, 8 Months",
+        "joiningDate": "January 1, 2002",
+        "teachingSince": "October 3, 1995",
+        "image": "/Faculty Image/ece/malathi.jpg"
+      },
+      {
+        "name": "Dr. P. Thirumaraiselvan",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "thirumarai@apec.edu.in",
+        "facultyId": "07TGEC0819",
+        "experience": "34 Years, 1 Months",
+        "joiningDate": "August 16, 2007",
+        "teachingSince": "May 1, 1992",
+        "image": "/Faculty Image/ece/thirumaraiselvan.jpg"
+      },
+      {
+        "name": "Dr. T. N. Suresh Babu",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "sureshbabutns@gmail.com",
+        "facultyId": "09TGEC0960",
+        "experience": "29 Years, 7 Months",
+        "joiningDate": "June 18, 2009",
+        "teachingSince": "November 27, 1997",
+        "image": "/Faculty Image/ece/w=1920,quality=90,fit=scale-down (2).jpg"
+      },
+      {
+        "name": "Mr. K. Mathivanan",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "mathivanan@apec.edu.in",
+        "facultyId": "08TGEE0934",
+        "experience": "22 Years,  Months",
+        "joiningDate": "December 29, 2008",
+        "teachingSince": "June 1, 2004",
+        "image": "/Faculty Image/ece/mathivanan.jpg"
+      },
+      {
+        "name": "Dr. G. Vasanthi",
+        "qualification": "M.E., Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "vasanthig@apec.edu.in",
+        "facultyId": "4204422",
+        "experience": "22 Years, 11 Months",
+        "joiningDate": "August 8, 2025",
+        "teachingSince": "July 20, 2004",
+        "image": "/Faculty Image/ece/vasanthi.jpg"
+      },
+      {
+        "name": "Mr. P. Vedasundaravinayagam",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "vedasundaravinayagam@apec.edu.in",
+        "facultyId": "13TGEC1190",
+        "experience": "18 Years,  Months",
+        "joiningDate": "April 1, 2013",
+        "teachingSince": "June 2, 2008",
+        "image": "/Faculty Image/ece/vedasundarvinayagam.jpg"
+      },
+      {
+        "name": "Mr. S. Prakash",
+        "qualification": "M.Tech.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "prakashmce@gmail.com",
+        "facultyId": "08TGEC0881",
+        "experience": "18 Years,  Months",
+        "joiningDate": "June 19, 2008",
+        "teachingSince": "June 18, 2008",
+        "image": "/Faculty Image/ece/prakash.jpg"
+      },
+      {
+        "name": "Mr. B. Elango",
+        "qualification": "M.E., (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "elango@apec.edu.in",
+        "facultyId": "12TGEC1156",
+        "experience": "15 Years,  Months",
+        "joiningDate": "June 1, 2012",
+        "teachingSince": "July 1, 2011",
+        "image": "/Faculty Image/ece/elango.jpg"
+      },
+      {
+        "name": "Mrs. M. Mala",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "mala.ece.95@gmail.com",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
+        "experience": "7 Years, 11 Months",
+        "joiningDate": "August 17, 2022",
+        "teachingSince": "July 2, 2019",
+        "image": "/Faculty Image/ece/mala.jpg"
+      },
+      {
+        "name": "Mrs.J. Suganya",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "suganya.yamni@gmail.com",
+        "facultyId": "",
+        "experience": "4 Years, 10 Months",
+        "joiningDate": "August 17, 2022",
+        "teachingSince": "August 17, 2022",
+        "image": "/Faculty Image/ece/suganya.jpg"
+      },
+      {
+        "name": "Ms. S. Chitra",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "chitrachitra738@gmail.com",
+        "facultyId": "4204427",
+        "experience": "Years,  Months",
+        "joiningDate": "August 20, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/chithra.jpg"
+      },
+      {
+        "name": "Mrs. R. Ramyadevi",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "ramyadevir@apec.edu.in",
+        "facultyId": "4204425",
+        "experience": "Years,  Months",
+        "joiningDate": "September 16, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/ramyadevi.jpg"
+      },
+      {
+        "name": "Mr.Arivazhagan.H",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "arulmaha77@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 10, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/arivazhagan.jpg"
+      },
+      {
+        "name": "Mr. K. Selvam",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "selvam9194@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 1, 2023",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/selvam.jpg"
+      },
+      {
+        "name": "Mrs. A. Aishwarya",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "aishu.ece02@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "January 1, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/aishwarya.jpg"
+      },
+      {
+        "name": "Mrs. Supriya T",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "SUPPRIYA1981@GMAIL.COM",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 2, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/supriya.jpg"
+      },
+      {
+        "name": "Mrs. S. Rajalakshmi",
+        "qualification": "ME",
+        "designation": "Assistant Professor",
+        "department": "Electronics & Communication Engineering",
+        "email": "rajalakshmisivalingam@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "January 1, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/ece/rajalakshmi.jpg"
       }
     ],
     "labs": [
@@ -5067,15 +5234,76 @@
     "pos": [],
     "faculty": [
       {
-        "name": "Faculty members directory",
-        "qualification": "",
-        "designation": "Staff",
+        "name": "Dr. M. Saviour",
+        "qualification": "Ph.D",
+        "designation": "Head of Department",
         "department": "Management Studies",
-        "email": "mba@apec.edu.in",
+        "email": "saviour@apec.edu.in",
+        "facultyId": "09TGMB0940",
+        "experience": "28 Years,  Months",
+        "joiningDate": "February 2, 2009",
+        "teachingSince": "June 20, 1998",
+        "image": "/Faculty Image/MBA/saviour.jpg"
+      },
+      {
+        "name": "Mr.V.Thamaraiselvan",
+        "qualification": "B.E,MBA,(Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Management Studies",
+        "email": "thamaraiselvan@apec.edu.in",
+        "facultyId": "12TGMB1168",
+        "experience": "14 Years,  Months",
+        "joiningDate": "July 1, 2012",
+        "teachingSince": "June 29, 2012",
+        "image": "/Faculty Image/MBA/thamarai selvan.jpg"
+      },
+      {
+        "name": "Mrs. P. Kavitha",
+        "qualification": "B.Com., MBA",
+        "designation": "Assistant Professor",
+        "department": "Management Studies",
+        "email": "kavithakamal673@gamil.com",
+        "facultyId": "25TGMB10484",
+        "experience": "11 Years, 11 Months",
+        "joiningDate": "August 1, 2025",
+        "teachingSince": "July 1, 2015",
+        "image": "/Faculty Image/MBA/kavitha.jpg"
+      },
+      {
+        "name": "Mrs. V. Manju Priya",
+        "qualification": "BCom., MBA, (Ph.D.)",
+        "designation": "Assistant Professor",
+        "department": "Management Studies",
+        "email": "manjuvenkatesan05@gmail.com",
+        "facultyId": "25TGMB10485",
+        "experience": "6 Years,  Months",
+        "joiningDate": "August 1, 2025",
+        "teachingSince": "June 6, 2020",
+        "image": "/Faculty Image/MBA/manju piya.jpg"
+      },
+      {
+        "name": "Mrs. K. Karthiga",
+        "qualification": "MBA",
+        "designation": "Assistant Professor",
+        "department": "Management Studies",
+        "email": "",
         "facultyId": "",
-        "experience": "",
-        "joiningDate": "",
-        "teachingSince": ""
+        "experience": "4 Years, 4 Months",
+        "joiningDate": "June 13, 2023",
+        "teachingSince": "February 2, 2022",
+        "image": "/Faculty Image/MBA/karthiga.jpg"
+      },
+      {
+        "name": "Mrs. Gokulapriya M",
+        "qualification": "MBA",
+        "designation": "Assistant Professor",
+        "department": "Management Studies",
+        "email": "GOKULAPRIYA462000@GMAIL.COM",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 8, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/MBA/gokulapriya.jpg"
       }
     ],
     "labs": [
@@ -5114,15 +5342,316 @@
     "pos": [],
     "faculty": [
       {
-        "name": "Faculty members directory",
-        "qualification": "",
-        "designation": "Staff",
-        "department": "Science & Humanities",
-        "email": "sh@apec.edu.in",
+        "name": "Dr. V. Vijayasundaram",
+        "qualification": "M. Sc., Ph.D. D",
+        "designation": "Professor",
+        "department": "Science and Humanities",
+        "email": "vijayasundaram@apec.edu.in",
         "facultyId": "",
-        "experience": "",
+        "experience": "Years,  Months",
+        "joiningDate": "July 2, 2009",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/vijay sundram.jpg"
+      },
+      {
+        "name": "Dr. Sakthi Raadha. S",
+        "qualification": "M.Sc., M.Phil., Ph.D",
+        "designation": "Professor",
+        "department": "Science and Humanities",
+        "email": "sakthiraadhas@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 2, 2005",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/sakthi radha.jpg"
+      },
+      {
+        "name": "Ms. Manjula A",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "Manjumsc2013@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "December 1, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/manjula.jpg"
+      },
+      {
+        "name": "Mr. Sivaramakirshnan. V",
+        "qualification": "M.Sc., B.Ed., M.Phil.,  - SET",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "Tkmsiva.78@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "January 4, 2011",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/sivaramakrishnan.jpg"
+      },
+      {
+        "name": "Dr. Johnson. J",
+        "qualification": "M.Sc., B.Ed., M.Phil., Ph.D",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "johnmad18@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "October 25, 2023",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/johnson.jpg"
+      },
+      {
+        "name": "Dr. Johnson. J",
+        "qualification": "M.Sc., B.Ed., M.Phil., Ph.D",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "johnmad18@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "October 25, 2023",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/johnson.jpg"
+      },
+      {
+        "name": "Dr. E. Kalaivani",
+        "qualification": "M.A.,M.Phil.,Ph.D.NET.,SET.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "Ssvani1978@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
         "joiningDate": "",
-        "teachingSince": ""
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/kalaivani.jpg"
+      },
+      {
+        "name": "Dr. Sathya.S",
+        "qualification": "M.A(TAMIL)., M.A(Ling)., B.Ed.,Dip.in Saiva Siddhantha.,PG Dip.in Tamil Research Methodology., M.Phil.,NET., (Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "Sathyasenthil77@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "July 3, 2023",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/sathya.jpg"
+      },
+      {
+        "name": "Mrs. Shobana R",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "shobana@apec.edu.in",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "December 1, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/shobana r.jpg"
+      },
+      {
+        "name": "Mr. Manikandan J",
+        "qualification": "M.Sc.,M.Phil.,NET.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "manisrmk42@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "December 1, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/manikandan s.jpg"
+      },
+      {
+        "name": "Mrs. Maheswari.D",
+        "qualification": "M.A., M.A., B.Ed., M.Phil.",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "mahesaptc@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 12, 2019",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/maheswari.jpg"
+      },
+      {
+        "name": "Dr.Manikandan .S",
+        "qualification": "M. Sc., Ph.D. D",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "manikandanchocolatemunch@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 17, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/manikandan s.jpg"
+      },
+      {
+        "name": "Mrs. Thirumagal P",
+        "qualification": "M. Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "thirumagal94k@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/thirumagal.jpg"
+      },
+      {
+        "name": "Mrs. Vijayalakshmi P",
+        "qualification": "M. Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "vijichem610@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/vijaylakshmi.jpg"
+      },
+      {
+        "name": "Dr. Ommurugan S",
+        "qualification": "M. Sc., Ph.D.",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "ommurugan15@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "November 8, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/om murgan.jpg"
+      },
+      {
+        "name": "Dr. Bharathi M",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "bharathimanickam1994@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/m bharathi.jpg"
+      },
+      {
+        "name": "Dr. Jothirani. R",
+        "qualification": "M.Sc., B.Ed., M.Phil., Ph.D",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "jothirani.rk@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "August 24, 2009",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/jothirani.jpg"
+      },
+      {
+        "name": "Mrs. Nivione Claire R",
+        "qualification": "M.Sc., M.Phil., SET.",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "nivione7@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/nivione claire.jpg"
+      },
+      {
+        "name": "Mr. Madasamy S",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "madasamy1510@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "February 1, 2025",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/madasamy.jpg"
+      },
+      {
+        "name": "Mr. Ganeshkumar. M",
+        "qualification": "M.Sc., B.Ed., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "sakthigk86@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "December 1, 2011",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/ganeshkumar.jpg"
+      },
+      {
+        "name": "Mr. Arivuchezhian N",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "arivu741976@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "December 1, 2024",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/arivuchezhian.jpg"
+      },
+      {
+        "name": "Mr. Ramesh. L",
+        "qualification": "M.Sc.,,M.Ed., M.Phil",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "rameshsbl1986@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "November 22, 2022",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/ramesh.jpg"
+      },
+      {
+        "name": "Mrs. Karthigaimala.S",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "skarthigaimalamaths@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "October 7, 2022",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/karthigaimala.jpg"
+      },
+      {
+        "name": "Mrs. Anjanadevi. B",
+        "qualification": "M.Sc., M.Phil.,",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "Anjana2677@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "March 1, 2023",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/anjanadevi.jpg"
+      },
+      {
+        "name": "Mrs. Suganya. N",
+        "qualification": "M.Sc., M.Phil.,B.Ed., (Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "suganyashasti@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 4, 2014",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/suganya.jpg"
+      },
+      {
+        "name": "Mr. Balakrishnan. P",
+        "qualification": "M.Sc., M.Phil.,B.Ed., SET.,(Ph.D)",
+        "designation": "Assistant Professor",
+        "department": "Science and Humanities",
+        "email": "balakrishnamaths@gmail.com",
+        "facultyId": "",
+        "experience": "Years,  Months",
+        "joiningDate": "June 22, 2011",
+        "teachingSince": "",
+        "image": "/Faculty Image/s & h/balakrishnan.jpg"
       }
     ],
     "labs": [
@@ -5469,6 +5998,146 @@
       "books": [],
       "conferences": []
     },
+    "toppers": []
+  },
+  "me-cse": {
+    "key": "me-cse",
+    "name": "M.E. Computer Science and Engineering",
+    "about": "The M.E. program in Computer Science and Engineering offers advanced coursework and research opportunities in algorithms, computer networks, data science, software engineering, and artificial intelligence.",
+    "vision": "To be a center of excellence in advanced computer science education and research, producing professionals who lead innovative solutions.",
+    "mission": [
+      "To impart advanced technical knowledge and research skills in computer science.",
+      "To foster innovation, collaboration, and ethical engineering practices."
+    ],
+    "peos": [
+      "Apply advanced concepts in computing to design and develop complex software systems.",
+      "Engage in research and lifelong learning to solve real-world problems."
+    ],
+    "psos": [
+      "Design and analyze complex algorithms and systems software.",
+      "Integrate intelligent tools and technologies in research and practice."
+    ],
+    "pos": [
+      "Ability to apply advanced mathematical and computer science concepts.",
+      "Design and conduct experiments, as well as analyze and interpret data.",
+      "Communicate research results effectively."
+    ],
+    "faculty": [],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [],
+    "toppers": []
+  },
+  "me-vlsi": {
+    "key": "me-vlsi",
+    "name": "M.E. VLSI Design",
+    "about": "The M.E. program in VLSI Design focuses on advanced microelectronics, analog and digital IC design, testing and verification, embedded systems, and computer-aided design (CAD) of VLSI systems.",
+    "vision": "To produce industry-ready VLSI professionals and researchers capable of leading innovations in semiconductor and microelectronic systems.",
+    "mission": [
+      "To offer high-quality research-oriented education in semiconductor technology.",
+      "To collaborate with industry partners to solve microelectronics challenges."
+    ],
+    "peos": [
+      "Analyze and design state-of-the-art analog and digital integrated circuits.",
+      "Pursue careers in leading semiconductor companies or research organizations."
+    ],
+    "psos": [
+      "Implement electronic design automation (EDA) tools for VLSI design flow.",
+      "Design low-power, high-performance microelectronic systems."
+    ],
+    "pos": [
+      "Ability to analyze VLSI circuit design challenges.",
+      "Design system-on-chip architectures using modern EDA tools.",
+      "Develop innovative chip solutions."
+    ],
+    "faculty": [],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [],
+    "toppers": []
+  },
+  "me-ped": {
+    "key": "me-ped",
+    "name": "M.E. Power Electronics & Drives",
+    "about": "The M.E. program in Power Electronics & Drives prepares engineering students for advanced study and careers in electric drives, smart grids, renewable energy systems, and power converter technologies.",
+    "vision": "To advance knowledge and innovation in power electronic systems and green energy technologies.",
+    "mission": [
+      "To provide comprehensive education in advanced power devices and control technologies.",
+      "To drive sustainable energy research through academic and industrial partnerships."
+    ],
+    "peos": [
+      "Design, analyze, and implement advanced power conversion topologies.",
+      "Contribute to clean energy initiatives and electric vehicle technologies."
+    ],
+    "psos": [
+      "Model, simulate, and design motor drives and power systems.",
+      "Apply digital controllers in power electronic applications."
+    ],
+    "pos": [
+      "Solve advanced power engineering challenges.",
+      "Integrate renewable energy sources into local grids.",
+      "Communicate research and engineering outcomes clearly."
+    ],
+    "faculty": [],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [],
+    "toppers": []
+  },
+  "me-thermal": {
+    "key": "me-thermal",
+    "name": "M.E. Thermal Engineering",
+    "about": "The M.E. program in Thermal Engineering provides in-depth study of heat transfer, fluid dynamics, thermodynamics, combustion, and renewable energy technologies.",
+    "vision": "To be a leader in thermal science education and research, addressing energy efficiency and sustainable development challenges.",
+    "mission": [
+      "To cultivate advanced analytical and research capabilities in thermal sciences.",
+      "To develop energy-efficient technologies and sustainable thermal designs."
+    ],
+    "peos": [
+      "Design and optimize thermal-fluid systems and energy conversion plants.",
+      "Address environmental concerns in engineering designs and operations."
+    ],
+    "psos": [
+      "Perform computational fluid dynamics (CFD) and thermal analysis.",
+      "Implement advanced energy conservation technologies."
+    ],
+    "pos": [
+      "Apply thermofluid principles to practical plant engineering.",
+      "Utilize advanced simulation and analysis tools.",
+      "Publish scientific reports and research outcomes."
+    ],
+    "faculty": [],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [],
+    "toppers": []
+  },
+  "me-cem": {
+    "key": "me-cem",
+    "name": "M.E. Construction Engineering and Management",
+    "about": "The M.E. program in Construction Engineering and Management integrates engineering principles with business management to oversee complex infrastructure, construction contracts, scheduling, and project execution.",
+    "vision": "To develop global leaders in construction engineering who manage projects efficiently, sustainably, and ethically.",
+    "mission": [
+      "To deliver advanced education in project management, materials, and contracts.",
+      "To foster research in sustainable materials and construction technologies."
+    ],
+    "peos": [
+      "Manage large-scale construction projects within time, budget, and quality parameters.",
+      "Apply modern project management tools and sustainable construction practices."
+    ],
+    "psos": [
+      "Formulate construction schedules, cost estimates, and risk management plans.",
+      "Address legal, safety, and environmental regulations in construction."
+    ],
+    "pos": [
+      "Manage structural and infrastructural development workflows.",
+      "Apply modern scheduling algorithms and management tools.",
+      "Prepare complex cost estimates and feasibility studies."
+    ],
+    "faculty": [],
+    "labs": [],
+    "placements": [],
+    "rankHolders": [],
     "toppers": []
   }
 }

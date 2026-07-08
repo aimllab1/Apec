@@ -31,6 +31,25 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
 
+  const [isPortrait, setIsPortrait] = useState(false);
+
+  useEffect(() => {
+    const checkOrientation = () => {
+      const isWindowPortrait = window.innerHeight > window.innerWidth;
+      const isMobileDevice = window.innerWidth < 1024 || /Mobi|Android|iPhone/i.test(navigator.userAgent);
+      setIsPortrait(isWindowPortrait && isMobileDevice);
+    };
+
+    checkOrientation();
+    window.addEventListener('resize', checkOrientation);
+    window.addEventListener('orientationchange', checkOrientation);
+
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, []);
+
   // Preload all panorama images on mount/open to ensure instant transitions
   useEffect(() => {
     if (isOpen) {
@@ -62,7 +81,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
     setError(null);
     setActiveScene(initialScene);
 
-    // Function to create custom hotspots (Google Maps style pointing straight forward/up)
+    // Function to create custom hotspots (Google Maps style pentagon pointing forward)
     const createCustomHotspot = (hotSpotDiv, args) => {
       // Remove default Pannellum sprite/control classes to prevent default icons from rendering
       hotSpotDiv.classList.remove('pnlm-sprite', 'pnlm-info', 'pnlm-scene');
@@ -77,10 +96,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       
       wrapper.innerHTML = `
         <div class="pano-arrow-wrapper">
-          <svg width="128" height="128" viewBox="0 0 32 32" fill="currentColor" class="pano-arrow-svg">
-            <path class="arrow-part part-3" d="M16,2 L4,10 L16,7 L28,10 Z"></path>
-            <path class="arrow-part part-2" d="M16,12 L4,20 L16,17 L28,20 Z"></path>
-            <path class="arrow-part part-1" d="M16,22 L4,30 L16,27 L28,30 Z"></path>
+          <svg width="48" height="48" viewBox="0 0 32 32" fill="currentColor" class="pano-arrow-svg">
+            <polyline points="8,26 16,19 24,26" fill="none" stroke="#FF4D4D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="arrow-hex-inner part-1" />
+            <polyline points="8,17 16,10 24,17" fill="none" stroke="#FF4D4D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="arrow-hex-inner part-2" />
+            <polyline points="8,8 16,1 24,8" fill="none" stroke="#FF4D4D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="arrow-hex-inner part-3" />
           </svg>
         </div>
         <span class="pano-tooltip-text">${args.text}</span>
@@ -155,7 +174,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 90, // Placed on the East side (Back to Gate)
+                    yaw: 95, // Placed on the East side (Back to Gate) - Math: 90 + 5 = 95
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Entrance Gate", sceneId: "mainGate" }
                   },
@@ -190,7 +209,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                   },
                   {
                     pitch: -18,
-                    yaw: -85, // West side of Reception leads to Amma Statue (-80 - 5 = -85)
+                    yaw: -90, // West side of Reception leads to Amma Statue - Math: -85 - 5 = -90
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Amma Statue", sceneId: "amma" }
                   }
@@ -207,7 +226,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 100, // East side of Amma Statue goes back to Reception (75 + 25 = 100)
+                    yaw: 95, // East side goes back to Reception - Math: 100 - 5 = 95
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Reception", sceneId: "reception" }
                   },
@@ -247,13 +266,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 10, // North side of Junction 2 goes back to Junction 1 (0 + 10 = 10)
+                    yaw: 0, // North side goes back to Junction 1 - Math: 10 - 10 = 0
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 1", sceneId: "junctionOne" }
                   },
                   {
                     pitch: -18,
-                    yaw: 185, // South side of Junction 2 leads directly to PG Block (180 + 5 = 185)
+                    yaw: 175, // South side leads to PG Block - Math: 185 - 10 = 175
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
                   }
@@ -270,13 +289,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 0, // Adjusted from current position (-10 + 10 = 0)
+                    yaw: -10, // Leads back to Junction 2 - Math: 0 - 10 = -10
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 2", sceneId: "junctionTwo" }
                   },
                   {
                     pitch: -18,
-                    yaw: 175, // Adjusted from current position (170 + 5 = 175)
+                    yaw: 165, // Leads to Junction 3 - Math: 175 - 10 = 165
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "Junction 3", sceneId: "junctionThree" }
                   }
@@ -293,7 +312,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 hotSpots: [
                   {
                     pitch: -18,
-                    yaw: 35, // Adjusted from current position (30 + 5 = 35)
+                    yaw: 25, // Leads back to PG Block - Math: 35 - 10 = 25
                     createTooltipFunc: createCustomHotspot,
                     createTooltipArgs: { text: "PG Block", sceneId: "pgBlock" }
                   },
@@ -433,13 +452,13 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/85 backdrop-blur-md">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 bg-black">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative w-full h-full sm:h-[75vh] md:h-[650px] sm:max-w-5xl bg-zinc-950 border-0 sm:border border-zinc-800 rounded-none sm:rounded-[28px] shadow-2xl z-10 mx-auto flex flex-col overflow-hidden text-white"
+        className="relative w-full h-full bg-zinc-950 flex flex-col overflow-hidden text-white"
       >
         {/* Inject CSS styles directly into component */}
         <style dangerouslySetInnerHTML={{ __html: `
@@ -453,17 +472,17 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             display: none !important;
           }
           
-          /* Custom Hotspot Styling (Google Maps Arrow style) - default styles removed and size increased */
+          /* Custom Hotspot Styling (Google Maps Arrow style) - default styles removed and size adjusted */
           .custom-pano-hotspot {
             background-image: none !important;
             background: none !important;
-            width: 160px !important;
-            height: 160px !important;
-            margin-left: -80px !important;
-            margin-top: -80px !important;
+            width: 80px !important;
+            height: 80px !important;
+            margin-left: -40px !important;
+            margin-top: -40px !important;
             cursor: pointer !important;
             z-index: 10 !important;
-            overflow: visible !important; /* Prevent clipping of sliding chevrons */
+            overflow: visible !important; /* Prevent clipping */
           }
 
           .custom-pano-hotspot::before,
@@ -473,107 +492,92 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           }
           
           .pano-arrow-wrapper {
-            width: 160px;
-            height: 160px;
+            width: 80px;
+            height: 80px;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             color: #ffffff !important;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
             position: relative;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7)) !important;
-            transform: perspective(300px) rotateX(60deg); /* Lies flat on the road plane */
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6)) !important;
+            transform: perspective(200px) rotateX(60deg); /* Lies flat on the road plane */
             transform-style: preserve-3d;
             overflow: visible !important; /* Prevent clipping */
           }
           
           .pano-arrow-svg {
-            color: #ffffff !important;
             transition: transform 0.25s ease !important;
             overflow: visible !important; /* Prevent clipping */
           }
           
-          .arrow-part {
-            transition: opacity 0.25s ease, transform 0.25s ease, fill 0.25s ease !important;
-            opacity: 0.2;
-            fill: #ffffff !important;
+          .arrow-hexagon-base {
+            transition: all 0.3s ease !important;
+          }
+          
+          .arrow-hex-inner {
+            transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease !important;
+            opacity: 0;
             transform-origin: center;
           }
           
-          .arrow-part.part-1 {
-            opacity: 1; /* Only show bottom triangle in normal state */
+          /* Normal state: double arrow */
+          .arrow-hex-inner.part-1 {
+            opacity: 0.9;
           }
           
-          /* Hover state animations: smooth scale and road tilt adjustment */
+          .arrow-hex-inner.part-2 {
+            opacity: 0.9;
+          }
+          
+          .arrow-hex-inner.part-3 {
+            opacity: 0; /* Hidden in double arrow normal state */
+          }
+          
+          /* Hover state animations */
           .custom-pano-hotspot:hover .pano-arrow-wrapper {
-            transform: perspective(300px) rotateX(55deg) translateY(-12px) scale(1.08) !important;
+            transform: perspective(200px) rotateX(55deg) translateY(-10px) scale(1.1) !important;
+            filter: drop-shadow(0 0 12px rgba(239, 68, 68, 0.95)) !important;
+          }
+          
+          .custom-pano-hotspot:hover .arrow-hex-inner {
+            stroke: #ffffff !important; /* Transition arrows to glowing white on hover */
           }
           
           .custom-pano-hotspot:hover .part-1 {
-            animation: arrow-wave-seq-1 2.2s infinite ease-in-out;
+            animation: chevronWave1 1.8s infinite ease-in-out;
           }
           
           .custom-pano-hotspot:hover .part-2 {
-            animation: arrow-wave-seq-2 2.2s infinite ease-in-out;
+            animation: chevronWave2 1.8s infinite ease-in-out;
           }
           
           .custom-pano-hotspot:hover .part-3 {
-            animation: arrow-wave-seq-3 2.2s infinite ease-in-out;
+            animation: chevronWave3 1.8s infinite ease-in-out;
           }
           
-          @keyframes arrow-wave-seq-1 {
-            0%, 100% {
-              opacity: 0.35;
-              fill: #ffffff !important;
-              transform: translateY(0);
-            }
-            25% {
-              opacity: 1;
-              fill: #00e5ff !important; /* Changed hover color to electric cyan */
-              transform: translateY(-6px);
-            }
-            50%, 75% {
-              opacity: 0.35;
-              fill: #ffffff !important;
-              transform: translateY(0);
-            }
+          @keyframes chevronWave1 {
+            0%, 100% { opacity: 0.3; transform: translateY(0); }
+            20% { opacity: 1; transform: translateY(-2px); }
+            40%, 80% { opacity: 0.3; transform: translateY(0); }
           }
-
-          @keyframes arrow-wave-seq-2 {
-            0%, 25%, 100% {
-              opacity: 0.2;
-              fill: #ffffff !important;
-              transform: translateY(0);
-            }
-            50% {
-              opacity: 1;
-              fill: #00e5ff !important; /* Changed hover color to electric cyan */
-              transform: translateY(-12px);
-            }
-            75% {
-              opacity: 0.2;
-              fill: #ffffff !important;
-              transform: translateY(0);
-            }
+          
+          @keyframes chevronWave2 {
+            0%, 20%, 100% { opacity: 0.3; transform: translateY(0); }
+            40% { opacity: 1; transform: translateY(-2px); }
+            60%, 80% { opacity: 0.3; transform: translateY(0); }
           }
-
-          @keyframes arrow-wave-seq-3 {
-            0%, 50%, 100% {
-              opacity: 0.2;
-              fill: #ffffff !important;
-              transform: translateY(0);
-            }
-            75% {
-              opacity: 1;
-              fill: #00e5ff !important; /* Changed hover color to electric cyan */
-              transform: translateY(-18px);
-            }
+          
+          @keyframes chevronWave3 {
+            0%, 40%, 100% { opacity: 0.3; transform: translateY(0); }
+            60% { opacity: 1; transform: translateY(-2px); }
+            80% { opacity: 0.3; transform: translateY(0); }
           }
           
           /* Custom tooltip styling (Permanently visible transparent text labels with strong shadows) */
           .pano-tooltip-text {
             position: absolute;
-            top: 170px; /* Positioned below the 160px arrow wrapper */
+            top: 90px; /* Positioned below the 80px arrow wrapper */
             left: 50%;
             transform: translateX(-50%) !important;
             background: transparent !important;
@@ -583,7 +587,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             font-weight: 900 !important;
             text-transform: uppercase !important;
             letter-spacing: 0.08em !important;
-            font-size: 42px !important; /* Font size increased 3x */
+            font-size: 20px !important;
             padding: 2px 4px !important;
             box-shadow: none !important;
             backdrop-filter: none !important;
@@ -596,8 +600,8 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
           
           .custom-pano-hotspot:hover .pano-tooltip-text {
             transform: translateX(-50%) scale(1.05) !important;
-            color: #00e5ff !important; /* Changed hover color to electric cyan */
-            text-shadow: 0 0 12px rgba(0, 229, 255, 0.8), 0 0 6px rgba(0, 0, 0, 1) !important;
+            color: #FF4D4D !important; /* Changed hover color to light red */
+            text-shadow: 0 0 12px rgba(239, 68, 68, 0.8), 0 0 6px rgba(0, 0, 0, 1) !important;
           }
         ` }} />
 
@@ -732,6 +736,40 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                   />
                 </div>
               </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Landscape Orientation Warning Overlay */}
+        <AnimatePresence>
+          {isPortrait && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-zinc-950/95 z-[200] flex flex-col items-center justify-center p-6 text-center text-white"
+            >
+              <motion.div
+                animate={{ rotate: [0, 90, 0] }}
+                transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
+                className="w-20 h-20 border-2 border-indigo-400 rounded-2xl flex items-center justify-center mb-6"
+              >
+                <svg className="w-12 h-12 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </motion.div>
+              <h3 className="text-lg md:text-xl font-black uppercase tracking-wider text-white mb-2">
+                Rotate Your Device
+              </h3>
+              <p className="text-xs md:text-sm text-zinc-400 font-bold max-w-xs mx-auto leading-relaxed mb-6">
+                Please rotate your screen to landscape mode for the best 360° virtual campus tour.
+              </p>
+              <button 
+                onClick={() => setIsPortrait(false)}
+                className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md"
+              >
+                Continue Anyway
+              </button>
             </motion.div>
           )}
         </AnimatePresence>

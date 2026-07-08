@@ -6,8 +6,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, Phone, Mail, MapPin, 
-  Download, ChevronDown, Send, RotateCw,
-  Calculator
+  Download, ChevronDown, Send, RotateCw
 } from 'lucide-react';
 import Preloader from './components/Preloader';
 
@@ -34,6 +33,7 @@ import MandatoryDisclosure from './pages/MandatoryDisclosure';
 import AnnualAccounts from './pages/AnnualAccounts';
 import UgcUndertaking from './pages/UgcUndertaking';
 import UgcApprovalLetter from './pages/UgcApprovalLetter';
+import EditorPanel from './pages/EditorPanel';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -117,7 +117,7 @@ const chatPrompts = [
   "Need help with admissions?",
   "Looking for a department?",
   "I'm here to help!",
-  "Ask me anything about AEC!",
+  "Ask me anything about APEC!",
   "Have a question?"
 ];
 
@@ -193,6 +193,34 @@ function AppContent({ isLoading, setIsLoading }) {
   const [bubbleVisible, setBubbleVisible] = useState(false);
   const [bubbleText, setBubbleText] = useState('');
   const [isPanoOpen, setIsPanoOpen] = useState(false);
+  const [branding, setBranding] = useState({
+    collegeName: 'Adhiparasakthi Engineering College',
+    tagline: 'An Autonomous Institution',
+    helpline1: '7418064336',
+    helpline2: '7418065336',
+  });
+
+  const [tickerNews, setTickerNews] = useState([
+    "🎓 Admissions Open for 2026–2027",
+    "NAAC Accredited Institution",
+    "UGC Autonomous College",
+    "Affiliated to Anna University",
+    "Placement Training Ongoing",
+    "Campus Recruitment Updates",
+    "Welcome to Adhiparasakthi Engineering College"
+  ]);
+
+  useEffect(() => {
+    const savedBranding = localStorage.getItem('apec_branding');
+    if (savedBranding) {
+      setBranding(JSON.parse(savedBranding));
+    }
+    const savedTicker = localStorage.getItem('apec_ticker_news');
+    if (savedTicker) {
+      setTickerNews(JSON.parse(savedTicker));
+    }
+  }, []);
+
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([
     { sender: 'ai', text: "Hello 👋 I'm APEC AI Assistant. Ask me anything about admissions, departments, placements, facilities, or campus details." }
@@ -201,6 +229,26 @@ function AppContent({ isLoading, setIsLoading }) {
   const videoRef = useRef(null);
   const messagesContainerRef = useRef(null);
   const [isOnline, setIsOnline] = useState(true);
+  const chatbotRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (event.target.closest('.chatbot-avatar-container')) {
+        return;
+      }
+      if (chatOpen && chatbotRef.current && !chatbotRef.current.contains(event.target)) {
+        setChatOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [chatOpen]);
 
   const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
   const [viewportOffsetTop, setViewportOffsetTop] = useState(0);
@@ -424,6 +472,22 @@ function AppContent({ isLoading, setIsLoading }) {
           0% { background-position: -200% 0; }
           100% { background-position: 200% 0; }
         }
+        @keyframes degreeBounce {
+          0% {
+            transform: translateY(0) scale(1);
+            background-color: #f59e0b;
+            box-shadow: 0 0 4px #f59e0b;
+          }
+          50% {
+            background-color: #ef4444;
+            box-shadow: 0 0 6px #ef4444;
+          }
+          100% {
+            transform: translateY(-4px) scale(1.1);
+            background-color: #3b82f6;
+            box-shadow: 0 0 8px #3b82f6;
+          }
+        }
       `}} />
       
       <AnimatePresence mode="wait">
@@ -473,10 +537,10 @@ function AppContent({ isLoading, setIsLoading }) {
                   />
                   <div className="text-left flex flex-col justify-center">
                     <span className="font-title text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-none drop-shadow-sm">
-                      Adhiparasakthi Engineering College
+                      {branding.collegeName}
                     </span>
-                    <span className="font-mono text-[11px] md:text-[11px] uppercase font-black tracking-wider block mt-1.5 text-violet-700">
-                      An Autonomous Institution
+                    <span className="font-mono text-[11px] md:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-violet-750">
+                      {branding.tagline}
                     </span>
                   </div>
                 </Link>
@@ -486,15 +550,27 @@ function AppContent({ isLoading, setIsLoading }) {
                   <div className="hidden lg:flex items-center gap-4">
                     <button 
                       onClick={() => setIsPanoOpen(true)}
-                      className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-indigo-600 hover:text-indigo-800 transition-all bg-indigo-50 hover:bg-indigo-100 border border-indigo-200/50 px-2.5 py-1.5 rounded-xl cursor-pointer relative overflow-hidden group/btn"
+                      className="relative w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-650 via-purple-650 to-pink-600 hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-md hover:shadow-lg cursor-pointer group/vrbtn"
+                      title="Open 360° VR Campus Tour"
                     >
-                      <span className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-indigo-600"></span>
-                      </span>
-                      <RotateCw className="w-3 h-3 text-indigo-550 animate-[spin_10s_linear_infinite]" />
-                      <span>360° VR Tour</span>
+                      {/* Pulse background shine */}
+                      <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
+                      
+                      {/* High-tech Spatial Radar Icon */}
+                      <div className="relative w-6 h-6 flex items-center justify-center overflow-visible">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-white relative overflow-visible">
+                          {/* Rotating outer compass dashes */}
+                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 3" className="animate-[spin_8s_linear_infinite] origin-center" />
+                          {/* Pulsing horizontal orbital ring */}
+                          <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="currentColor" strokeWidth="1.5" className="animate-[pulse_1.5s_infinite_alternate] origin-center" />
+                          {/* Inner core dot */}
+                          <circle cx="12" cy="12" r="2.5" fill="#FF4D4D" className="animate-pulse" />
+                          {/* Radar sweep echo */}
+                          <circle cx="12" cy="12" r="2.5" stroke="#FF4D4D" strokeWidth="1" className="animate-[ping_1.5s_infinite] origin-center" />
+                        </svg>
+                        {/* Bouncing degree circle on the top-right corner of container */}
+                        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full border border-indigo-600 shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
+                      </div>
                     </button>
 
                     <Link 
@@ -515,7 +591,7 @@ function AppContent({ isLoading, setIsLoading }) {
                       <div className="flex items-center gap-3">
                         <span className="text-xs font-extrabold text-indigo-655 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          gxwr1
+                          {localStorage.getItem('apec_user') ? localStorage.getItem('apec_user').split('@')[0] : 'Admin'}
                         </span>
                         <button 
                           onClick={() => {
@@ -537,14 +613,32 @@ function AppContent({ isLoading, setIsLoading }) {
                     </Link>
                   </div>
 
-                  {/* Mobile Menu Button */}
-                  <button 
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="lg:hidden p-2 pr-1 text-gray-800 hover:text-gray-950 transition-colors shrink-0"
-                    aria-label="Toggle navigation menu"
-                  >
-                    {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 stroke-[2.5]" />}
-                  </button>
+                  {/* Mobile Actions: 360 VR & Menu Button */}
+                  <div className="flex items-center gap-3.5 lg:hidden shrink-0">
+                    <button 
+                      onClick={() => setIsPanoOpen(true)}
+                      className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-650 via-purple-650 to-pink-600 hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-md cursor-pointer"
+                      title="Open 360° VR Campus Tour"
+                    >
+                      <div className="relative w-5 h-5 flex items-center justify-center overflow-visible">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white relative overflow-visible">
+                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 3" className="animate-[spin_8s_linear_infinite] origin-center" />
+                          <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="currentColor" strokeWidth="1.5" className="animate-[pulse_1.5s_infinite_alternate] origin-center" />
+                          <circle cx="12" cy="12" r="2.5" fill="#FF4D4D" className="animate-pulse" />
+                          <circle cx="12" cy="12" r="2.5" stroke="#FF4D4D" strokeWidth="1" className="animate-[ping_1.5s_infinite] origin-center" />
+                        </svg>
+                        <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full border border-indigo-600 shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
+                      </div>
+                    </button>
+
+                    <button 
+                      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                      className="p-2 pr-1 text-gray-800 hover:text-gray-950 transition-colors shrink-0"
+                      aria-label="Toggle navigation menu"
+                    >
+                      {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 stroke-[2.5]" />}
+                    </button>
+                  </div>
                 </div>
 
               </div>
@@ -678,6 +772,7 @@ function AppContent({ isLoading, setIsLoading }) {
                         <Link to="/admission?tab=procedure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Admission Procedure</Link>
                         <Link to="/admission?tab=scholarships" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Scholarships</Link>
                         <Link to="/admission?tab=brochure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Information Brochure</Link>
+                        <Link to="/cutoff-calculator" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Cutoff Calculator</Link>
                       </div>
                     </div>
 
@@ -725,7 +820,14 @@ function AppContent({ isLoading, setIsLoading }) {
                           <div className="space-y-1">
                             <Link to="/departments/mca" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Master of Computer Apps (MCA)</Link>
                             <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Management Studies (MBA)</Link>
-                            <Link to="/departments/sh" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Science & Humanities</Link>
+                            <div className="pt-2">
+                              <span className="text-[9px] uppercase font-black text-gray-400 tracking-wider block px-2 mb-1.5">M.E. Programmes</span>
+                              <Link to="/departments/me-cse" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Computer Science & Engg.</Link>
+                              <Link to="/departments/me-thermal" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Thermal Engineering</Link>
+                              <Link to="/departments/me-vlsi" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - VLSI Design</Link>
+                              <Link to="/departments/me-ped" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Power Electronics & Drives</Link>
+                              <Link to="/departments/me-cem" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Construction Engg. & Mgmt.</Link>
+                            </div>
                           </div>
                         </div>
                         <div>
@@ -912,7 +1014,7 @@ function AppContent({ isLoading, setIsLoading }) {
 
                     <Link 
                       to="/contact" 
-                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
+                      className={`text-xs uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
                         isActive('/contact') 
                           ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                           : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
@@ -927,23 +1029,24 @@ function AppContent({ isLoading, setIsLoading }) {
                       )}
                     </Link>
 
-                    <Link 
-                      to="/cutoff-calculator" 
-                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
-                        isActive('/cutoff-calculator') 
-                          ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
-                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
-                      }`}
-                      title="Cutoff Calculator"
-                    >
-                      <Calculator className="w-4 h-4 text-current inline-block" />
-                      {isActive('/cutoff-calculator') && (
-                        <motion.span 
-                          layoutId="activeNavMark" 
-                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
-                        />
-                      )}
-                    </Link>
+                    {localStorage.getItem('is_logged_in') === 'true' && (
+                      <Link 
+                        to="/editor-panel" 
+                        className={`text-xs uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
+                          isActive('/editor-panel') 
+                            ? 'text-indigo-650 font-black bg-indigo-50/50 border border-indigo-100' 
+                            : 'text-indigo-600 hover:text-indigo-750 hover:bg-indigo-50 font-black'
+                        }`}
+                      >
+                        Editor Panel
+                        {isActive('/editor-panel') && (
+                          <motion.span 
+                            layoutId="activeNavMark" 
+                            className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-indigo-600" 
+                          />
+                        )}
+                      </Link>
+                    )}
 
                   </nav>
                 </div>
@@ -972,6 +1075,7 @@ function AppContent({ isLoading, setIsLoading }) {
                         <Link to="/admission?tab=procedure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Admission Procedure</Link>
                         <Link to="/admission?tab=scholarships" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Scholarships</Link>
                         <Link to="/admission?tab=brochure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Information Brochure</Link>
+                        <Link to="/cutoff-calculator" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Cutoff Calculator</Link>
                       </div>
                     )}
                   </div>
@@ -1085,7 +1189,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     <div className="flex items-center justify-between py-1 border-b border-gray-50">
                       <span className="text-sm font-bold text-indigo-650 flex items-center gap-1.5 select-none">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        gxwr1
+                        {localStorage.getItem('apec_user') ? localStorage.getItem('apec_user').split('@')[0] : 'Admin'}
                       </span>
                       <button 
                         onClick={() => {
@@ -1101,6 +1205,9 @@ function AppContent({ isLoading, setIsLoading }) {
                     </div>
                   )}
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-500">Contact</Link>
+                  {localStorage.getItem('is_logged_in') === 'true' && (
+                    <Link to="/editor-panel" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-indigo-600">Editor Panel</Link>
+                  )}
                   
                   <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
                     <motion.div 
@@ -1157,7 +1264,8 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/facilities/:id" element={<PageTransition><FacilityDetail /></PageTransition>} />
                   <Route path="/admin-portal" element={<PageTransition><AdminPortal /></PageTransition>} />
                   <Route path="/administration/:id" element={<PageTransition><AdminProfile /></PageTransition>} />
-                  <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+                   <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+                  <Route path="/editor-panel" element={<PageTransition><EditorPanel /></PageTransition>} />
                   <Route path="/cutoff-calculator" element={<PageTransition><CutoffCalculator /></PageTransition>} />
                 </Routes>
               </AnimatePresence>
@@ -1218,6 +1326,7 @@ function AppContent({ isLoading, setIsLoading }) {
                 windowWidth <= 768 ? (
                   createPortal(
                     <div 
+                      ref={chatbotRef}
                       style={{ height: `${viewportHeight}px`, top: `${viewportOffsetTop}px` }}
                       className="mobile-chat pointer-events-auto flex flex-col z-[99999999]"
                     >
@@ -1372,6 +1481,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     <AnimatePresence>
                       {chatOpen && (
                         <motion.div
+                          ref={chatbotRef}
                           initial={{ opacity: 0, scale: 0.9, y: 15 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.9, y: 15 }}

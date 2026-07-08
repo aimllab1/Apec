@@ -52,12 +52,12 @@ function DodecahedronMesh() {
 
   return (
     <mesh ref={meshRef}>
-      <dodecahedronGeometry args={[1.2, 0]} />
+      <dodecahedronGeometry args={[1.4, 0]} />
       <meshBasicMaterial 
-        color="#818cf8" // soft electric indigo
+        color="#ffffff" 
         wireframe 
         transparent 
-        opacity={0.22} 
+        opacity={0.85} 
       />
     </mesh>
   );
@@ -211,6 +211,16 @@ function LeadershipCard({ name, role, desc, img }) {
 }
 
 export default function Home() {
+  const branding = (() => {
+    const saved = localStorage.getItem('apec_branding');
+    return saved ? JSON.parse(saved) : {
+      collegeName: 'Adhiparasakthi Engineering College',
+      tagline: 'An Autonomous Institution',
+      helpline1: '7418064336',
+      helpline2: '7418065336',
+    };
+  })();
+
   const scrollRef = useRef(null);
   const codeWidgetRef = useRef(null);
   const [widgetVisible, setWidgetVisible] = useState(true);
@@ -313,13 +323,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Floating animation for the TNEA Widget
+    // Smooth slow drifting animation for the TNEA Widget (horizontal drift, no vertical bounce)
     if (codeWidgetRef.current) {
       gsap.to(codeWidgetRef.current, {
-        y: '+=12',
+        x: '-=8',
         yoyo: true,
         repeat: -1,
-        duration: 1.8,
+        duration: 2.5,
         ease: 'sine.inOut'
       });
     }
@@ -343,7 +353,7 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [currentIdx]);
 
-  // Cycle the visibility of the ESTD 1984 widget (5s visible, 15s hidden)
+  // Cycle the visibility of the TNEA Counseling Widget (10s visible, 10s hidden)
   useEffect(() => {
     let timerId;
     let isActive = true;
@@ -357,8 +367,8 @@ export default function Home() {
           if (!isActive) return;
           setWidgetVisible(true);
           cycle();
-        }, 15000);
-      }, 5000);
+        }, 10000);
+      }, 10000);
     };
 
     cycle();
@@ -370,10 +380,10 @@ export default function Home() {
   }, []);
 
   const features = [
-    { title: "Central Library", desc: "Digital systems & technical volumes" },
-    { title: "Placement Records", desc: "Top recruiters & career guidance" },
-    { title: "Equipped Labs", desc: "High-spec research & Wifi campus" },
-    { title: "Indoor Stadium & Gym", desc: "Excellent athletic infrastructure" }
+    { title: "Central Library", desc: "Digital systems & technical volumes", img: "/library_main.jpg" },
+    { title: "Placement Records", desc: "Top recruiters & career guidance", img: "/campus_main.jpg" },
+    { title: "Equipped Labs", desc: "High-spec research & Wifi campus", img: "/Aiml_Lab_1.jpg" },
+    { title: "Indoor Stadium & Gym", desc: "Excellent athletic infrastructure", img: "/Main_Gate.jpg" }
   ];
 
   const depts = [
@@ -392,63 +402,46 @@ export default function Home() {
       
       {/* TNEA CODE WIDGET (With 3D Dodecahedron) */}
       <div 
-        className="fixed right-6 top-1/2 z-40 hidden md:flex flex-col items-center justify-center transition-transform duration-700 ease-in-out"
+        className="fixed left-4 top-[75%] z-40 hidden md:flex flex-col items-center justify-center transition-transform duration-700 ease-in-out"
         style={{
-          transform: `translateY(-50%) translateX(${widgetVisible ? '0' : 'calc(100% + 32px)'})`
+          transform: `translateY(-50%) translateX(${widgetVisible ? '0' : 'calc(-100% - 32px)'})`
         }}
       >
         <motion.div 
           ref={codeWidgetRef}
-          whileHover={{ scale: 1.05 }}
-          className="relative group w-32 h-32 bg-white/95 backdrop-blur-md border border-gray-200/80 rounded-full shadow-[0_8px_30px_rgba(99,102,241,0.12)] p-1 flex items-center justify-center select-none overflow-hidden hover:border-indigo-400/80 transition-colors duration-300"
+          whileHover={{ scale: 1.04, y: -2 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="counselling-card relative group bg-gradient-to-l from-rose-600 via-red-500 to-amber-400 text-white border border-white/20 rounded-3xl shadow-[0_15px_35px_rgba(220,38,38,0.3)] select-none cursor-pointer"
         >
-          {/* Spinning dashed border outline inside */}
+          {/* Spinning dashed border outline inside - colored white/20 for defined style */}
           <motion.div 
             animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-            className="absolute inset-2 rounded-full border-2 border-dashed border-indigo-400/20 pointer-events-none"
+            transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
+            className="absolute inset-1.5 rounded-[22px] border border-dashed border-white/10 pointer-events-none"
           />
           
-          {/* Miniature 3D Dodecahedron inside */}
-          <div className="absolute inset-0 z-0">
-            <Canvas camera={{ position: [0, 0, 3.2], fov: 60 }}>
-              <ambientLight intensity={2.2} />
-              <DodecahedronMesh />
-            </Canvas>
+          {/* Miniature 3D Dodecahedron on the left */}
+          <div className="counselling-icon-section relative z-0 shrink-0">
+            <div className="counselling-icon relative">
+              <Canvas camera={{ position: [0, 0, 3.2], fov: 60 }} style={{ width: '100%', height: '100%' }}>
+                <ambientLight intensity={2.2} />
+                <DodecahedronMesh />
+              </Canvas>
+            </div>
           </div>
 
-          <motion.div 
-            className="relative z-10 flex flex-col items-center justify-center bg-white border border-gray-150 rounded-full w-24 h-24 shadow-inner"
-            animate={{ 
-              borderColor: [
-                "rgba(99, 102, 241, 0.15)",
-                "rgba(139, 92, 246, 0.4)",
-                "rgba(99, 102, 241, 0.15)"
-              ]
-            }}
-            transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-          >
-            <span className="font-display text-[8px] uppercase font-black tracking-widest text-slate-400 mb-1 block select-none">
+          {/* Defined Structure separator line */}
+          <div className="self-stretch w-[1px] bg-white/20 mx-1 shrink-0 z-10" />
+
+          {/* Text Info on the right */}
+          <div className="counselling-content select-none relative z-10">
+            <span className="counselling-title font-display uppercase text-amber-100 block select-none">
               Counselling Code
             </span>
-            <motion.span 
-              animate={{ 
-                scale: [1, 1.06, 1],
-                filter: [
-                  "drop-shadow(0 1px 1px rgba(99, 102, 241, 0.12))",
-                  "drop-shadow(0 3px 6px rgba(168, 85, 247, 0.20))",
-                  "drop-shadow(0 1px 1px rgba(99, 102, 241, 0.12))"
-                ]
-              }}
-              whileHover={{ 
-                scale: 1.15,
-                filter: "drop-shadow(0 4px 8px rgba(99, 102, 241, 0.35))"
-              }}
-              className="font-display text-2xl font-black tracking-widest bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 bg-clip-text text-transparent cursor-pointer transition-all"
-            >
+            <span className="counselling-number font-display text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.15)] select-none">
               1401
-            </motion.span>
-          </motion.div>
+            </span>
+          </div>
         </motion.div>
       </div>
 
@@ -523,9 +516,9 @@ export default function Home() {
               <div className="text-center">
                 <span className="font-display block text-[9px] text-gray-400 uppercase tracking-widest font-bold">Helpline</span>
                 <span className="font-mono text-xs md:text-sm font-bold text-gray-700 block mt-0.5">
-                  <a href="tel:+917418064336" className="hover:text-indigo-600 hover:underline transition-colors">7418064336</a>
+                  <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-600 hover:underline transition-colors">{branding.helpline1}</a>
                   {" / "}
-                  <a href="tel:+917418065336" className="hover:text-indigo-600 hover:underline transition-colors">7418065336</a>
+                  <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-650 hover:underline transition-colors">{branding.helpline2}</a>
                 </span>
               </div>
             </div>
@@ -555,7 +548,7 @@ export default function Home() {
                 }}
                 className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer bg-indigo-50/40 backdrop-blur-[2px] border border-indigo-100/30 rounded-2xl shadow-lg hover:bg-indigo-100/60 hover:border-indigo-300/50 transition-all duration-300"
               >
-                <div className="w-32 h-32 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                <div className="w-72 h-40 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
                   <img src="./university_logo-rem.png" alt="Anna University Logo" className="w-full h-full object-contain scale-125 drop-shadow-md" />
                 </div>
                 <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-650 transition-colors duration-300">
@@ -581,8 +574,8 @@ export default function Home() {
                 }}
                 className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer bg-amber-50/40 backdrop-blur-[2px] border border-amber-100/30 rounded-2xl shadow-lg hover:bg-amber-100/60 hover:border-amber-300/50 transition-all duration-300"
               >
-                <div className="w-32 h-32 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
-                  <img src="./UGC.png" alt="UGC Logo" className="w-full h-full object-contain drop-shadow-md" />
+                <div className="w-72 h-40 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                  <img src="./UGC.png" alt="UGC Logo" className="w-full h-full object-contain scale-[0.95] drop-shadow-md" />
                 </div>
                 <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors duration-300">
                   UGC Autonomous
@@ -607,8 +600,8 @@ export default function Home() {
                 }}
                 className="flex flex-col items-center justify-center p-6 text-center group cursor-pointer sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none w-full bg-emerald-50/40 backdrop-blur-[2px] border border-emerald-100/30 rounded-2xl shadow-lg hover:bg-emerald-100/60 hover:border-emerald-300/50 transition-all duration-300"
               >
-                <div className="w-60 h-36 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
-                  <img src="./Naac.png" alt="NAAC Accredited Logo" className="w-full h-full object-contain drop-shadow-md" />
+                <div className="w-72 h-40 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                  <img src="./Naac.png" alt="NAAC Accredited Logo" className="w-full h-full object-contain scale-125 drop-shadow-md" />
                 </div>
                 <h4 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors duration-300">
                   NAAC Accredited
@@ -637,21 +630,31 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="features-grid grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {features.map((feat, idx) => (
               <motion.div 
                 key={idx} 
                 variants={twistReveal}
-                whileHover={{ y: -6, scale: 1.02, rotateY: -3 }}
-                className="feature-card p-6 bg-white border border-gray-200 rounded-xl hover:border-indigo-500 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="benefit-card select-none cursor-pointer"
+                style={{ backgroundImage: `url(${feat.img})` }}
               >
-                <div>
-                  <div className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-900 border border-gray-200 mb-6 font-bold text-xs font-mono">
-                    {idx + 1}
-                  </div>
-                  <h4 className="text-base font-bold text-gray-900 mb-2">{feat.title}</h4>
-                  <p className="text-xs text-gray-500 leading-relaxed font-semibold">{feat.desc}</p>
+                {/* Background image overlay */}
+                <div className="benefit-card-overlay" />
+
+                {/* Circular Glass Badge */}
+                <div className="benefit-badge">
+                  {idx + 1}
+                </div>
+
+                {/* Bottom glass text overlay */}
+                <div className="card-content text-left">
+                  <h4 className="text-base md:text-lg font-black text-slate-900 mb-1">
+                    {feat.title}
+                  </h4>
+                  <p className="text-xs md:text-sm text-slate-850 font-bold leading-relaxed">
+                    {feat.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -696,9 +699,9 @@ export default function Home() {
                       exit="exit"
                       className="w-full h-full"
                     >
-                      <div className="group relative bg-white border border-gray-200 rounded-3xl flex flex-col md:flex-row transition-all duration-300 hover:border-indigo-500 hover:shadow-xl overflow-hidden min-h-[350px] h-full">
+                      <div className="group relative bg-white/35 backdrop-blur-sm border border-white/30 rounded-3xl flex flex-col md:flex-row transition-all duration-300 hover:border-indigo-500 hover:shadow-xl overflow-hidden min-h-[350px] h-full">
                         {/* Left Column: Department Image */}
-                        <div className="w-full md:w-2/5 h-48 md:h-auto overflow-hidden relative border-b md:border-b-0 md:border-r border-gray-100 shrink-0">
+                        <div className="w-full md:w-2/5 h-48 md:h-auto overflow-hidden relative border-b md:border-b-0 md:border-r border-white/25 shrink-0">
                           <img 
                             src={dept.img} 
                             alt={dept.name} 
@@ -715,10 +718,10 @@ export default function Home() {
                           <div className="w-full relative z-10">
                             {/* Top row with Icon and Badge */}
                             <div className="flex justify-between items-center mb-5">
-                              <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100/50 flex items-center justify-center text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white transition-all duration-300">
+                              <div className="w-10 h-10 rounded-xl bg-white/50 border border-white/20 flex items-center justify-center text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white transition-all duration-300">
                                 <IconComponent className="w-4.5 h-4.5" />
                               </div>
-                              <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white group-hover:border-indigo-650 transition-all duration-300">
+                              <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-white/50 border border-white/20 text-indigo-650 group-hover:bg-indigo-650 group-hover:text-white group-hover:border-indigo-650 transition-all duration-300">
                                 {dept.code}
                               </span>
                             </div>
@@ -728,7 +731,7 @@ export default function Home() {
                             <p className="text-xs text-gray-500 leading-relaxed font-semibold mb-4 max-w-xl">{dept.details}</p>
                           </div>
 
-                          <div className="w-full pt-4 border-t border-gray-150 mt-auto flex justify-between items-center relative z-10">
+                          <div className="w-full pt-4 border-t border-white/30 mt-auto flex justify-between items-center relative z-10">
                             <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Autonomous Status</span>
                             <Link to={`/departments/${dept.key}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-900 group-hover:text-indigo-650 group-hover:gap-2.5 transition-all">
                               Explore Portal <ArrowRight className="w-3.5 h-3.5" />
@@ -1083,7 +1086,7 @@ export default function Home() {
                         <div className="flex justify-between items-center">
                           <span className="text-gray-455 font-semibold text-[9px]">Admissions Cell</span>
                           <span className="font-bold text-gray-800 font-mono">
-                            <a href="tel:+917418064336" className="hover:text-indigo-600 hover:underline">7418064336</a> / <a href="tel:+917418065336" className="hover:text-indigo-600 hover:underline">7418065336</a>
+                            <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-600 hover:underline">{branding.helpline1}</a> / <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-600 hover:underline">{branding.helpline2}</a>
                           </span>
                         </div>
                         <div className="flex justify-between items-center">

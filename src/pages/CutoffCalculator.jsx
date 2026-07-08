@@ -22,6 +22,11 @@ export default function CutoffCalculator() {
   const [physicsMark, setPhysicsMark] = useState(80);
   const [chemistryMark, setChemistryMark] = useState(80);
 
+  const m = parseFloat(mathsMark) || 0;
+  const p = parseFloat(physicsMark) || 0;
+  const c = parseFloat(chemistryMark) || 0;
+  const cutoff = m + (p + c) / 2;
+
   // Admissions modal overlay and form state
   const [showAdModal, setShowAdModal] = useState(false);
   const [activeModalImage, setActiveModalImage] = useState(0);
@@ -47,6 +52,12 @@ export default function CutoffCalculator() {
   const [formErrors, setFormErrors] = useState({});
 
   const handleMarkChange = (subject, val) => {
+    if (val === '') {
+      if (subject === 'maths') setMathsMark('');
+      if (subject === 'physics') setPhysicsMark('');
+      if (subject === 'chemistry') setChemistryMark('');
+      return;
+    }
     const num = Math.min(100, Math.max(0, parseInt(val, 10) || 0));
     if (subject === 'maths') setMathsMark(num);
     if (subject === 'physics') setPhysicsMark(num);
@@ -97,6 +108,10 @@ export default function CutoffCalculator() {
       setIsSubmitting(true);
       const newInquiry = {
         ...formData,
+        maths: mathsMark,
+        physics: physicsMark,
+        chemistry: chemistryMark,
+        cutoff: cutoff.toFixed(1),
         id: Date.now(),
         date: new Date().toLocaleString()
       };
@@ -128,17 +143,14 @@ export default function CutoffCalculator() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-left mb-16"
+          className="text-left mb-10"
         >
           <span className="font-display text-[10px] uppercase font-extrabold tracking-widest text-rose-600 bg-rose-50 border border-rose-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
             Adhiparasakthi Engineering College Admission Support
           </span>
-          <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
+          <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-0">
             Cutoff Calculator & Course Predictor
           </h1>
-          <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-3xl font-semibold">
-            Use our interactive admission assistance tool to compute your TNEA engineering cutoff based on your Mathematics, Physics, and Chemistry scores. Check which courses you are eligible for at Adhiparasakthi Engineering College and connect with our advisors.
-          </p>
         </motion.div>
 
         {/* Predictor Interactive Panel */}
@@ -155,16 +167,26 @@ export default function CutoffCalculator() {
           {/* Left Column: Marks Input Panel */}
           <motion.div 
             variants={fadeInUp}
-            className="lg:col-span-5 bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between shadow-sm"
+            className="lg:col-span-6 bg-white border border-gray-200 p-8 rounded-3xl flex flex-col justify-between shadow-sm"
           >
             <div className="space-y-6">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400 block mb-2">Enter Subject Marks (0 - 100)</span>
+              <span className="text-[10px] uppercase font-black tracking-widest text-rose-600 block mb-4">Enter Subject Marks (0 - 100)</span>
               
               {/* Mathematics (Weight: 100%) */}
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-xs font-black text-gray-800 uppercase tracking-wider">Mathematics</label>
-                  <span className="text-xs font-mono font-black text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-100">{mathsMark} / 100</span>
+                  <div className="flex items-center gap-1.5">
+                    <input 
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={mathsMark}
+                      onChange={(e) => handleMarkChange('maths', e.target.value)}
+                      className="w-12 text-center text-xs font-mono font-black text-rose-650 bg-rose-50 px-1 py-0.5 rounded-md border border-rose-200 outline-none focus:border-rose-450 focus:ring-1 focus:ring-rose-450/20"
+                    />
+                    <span className="text-xs font-bold text-gray-400 font-mono">/ 100</span>
+                  </div>
                 </div>
                 <input 
                   type="range" 
@@ -180,7 +202,17 @@ export default function CutoffCalculator() {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-xs font-black text-gray-800 uppercase tracking-wider">Physics</label>
-                  <span className="text-xs font-mono font-black text-orange-650 bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100">{physicsMark} / 100</span>
+                  <div className="flex items-center gap-1.5">
+                    <input 
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={physicsMark}
+                      onChange={(e) => handleMarkChange('physics', e.target.value)}
+                      className="w-12 text-center text-xs font-mono font-black text-orange-655 bg-orange-50 px-1 py-0.5 rounded-md border border-orange-200 outline-none focus:border-orange-450 focus:ring-1 focus:ring-orange-450/20"
+                    />
+                    <span className="text-xs font-bold text-gray-400 font-mono">/ 100</span>
+                  </div>
                 </div>
                 <input 
                   type="range" 
@@ -196,7 +228,17 @@ export default function CutoffCalculator() {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-xs font-black text-gray-800 uppercase tracking-wider">Chemistry</label>
-                  <span className="text-xs font-mono font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-100">{chemistryMark} / 100</span>
+                  <div className="flex items-center gap-1.5">
+                    <input 
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={chemistryMark}
+                      onChange={(e) => handleMarkChange('chemistry', e.target.value)}
+                      className="w-12 text-center text-xs font-mono font-black text-amber-600 bg-amber-50 px-1 py-0.5 rounded-md border border-amber-200 outline-none focus:border-amber-450 focus:ring-1 focus:ring-amber-450/20"
+                    />
+                    <span className="text-xs font-bold text-gray-400 font-mono">/ 100</span>
+                  </div>
                 </div>
                 <input 
                   type="range" 
@@ -220,7 +262,7 @@ export default function CutoffCalculator() {
                 <div className="w-16 h-16 rounded-full bg-rose-50 border border-rose-100 flex flex-col items-center justify-center shadow-inner relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/10 to-orange-500/10" />
                   <span className="font-mono text-base font-black text-rose-650 leading-none">
-                    {(mathsMark + (physicsMark + chemistryMark) / 2).toFixed(1)}
+                    {cutoff.toFixed(1)}
                   </span>
                   <span className="text-[7px] uppercase font-bold text-orange-500 tracking-wider mt-1">Cutoff</span>
                 </div>
@@ -232,16 +274,16 @@ export default function CutoffCalculator() {
           {/* Right Column: Dynamic predicted eligible course cards */}
           <motion.div 
             variants={fadeInUp}
-            className="lg:col-span-7 bg-gray-50 border border-gray-200 p-8 rounded-3xl flex flex-col justify-between text-left relative overflow-hidden"
+            className="lg:col-span-6 bg-gray-50 border border-gray-200 p-8 rounded-3xl flex flex-col justify-between text-left relative overflow-hidden"
           >
             <div className="absolute -top-12 -right-12 w-32 h-32 bg-rose-500/5 rounded-full blur-3xl pointer-events-none" />
             
             <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-rose-600 block mb-4">
+              <span className="text-[10px] uppercase font-black tracking-widest text-rose-600 block mb-4">
                 Adhiparasakthi Engineering College Admission Seat Estimator
               </span>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[340px] overflow-y-auto pr-2 custom-scrollbar">
+              <div data-lenis-prevent className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[340px] overflow-y-auto pr-2 custom-scrollbar">
                 {[
                   { name: "CSE (AI & ML)", cut: 165 },
                   { name: "Computer Science", cut: 160 },
@@ -253,18 +295,20 @@ export default function CutoffCalculator() {
                   { name: "Mechanical Engg", cut: 110 },
                   { name: "Civil Engg", cut: 100 }
                 ].map((item, idx) => {
-                  const cutoff = mathsMark + (physicsMark + chemistryMark) / 2;
                   const diff = cutoff - item.cut;
-                  let badge = { text: "Premium Help", color: "text-indigo-655 bg-indigo-50 border-indigo-100" };
+                  let badge = { text: "Premium Help", color: "text-indigo-650 bg-indigo-50 border-indigo-100" };
+                  let cardStyle = "border-gray-150 bg-white opacity-70 scale-98";
                   if (diff >= 0) {
-                    badge = { text: "High Eligible", color: "text-emerald-600 bg-emerald-50 border-emerald-100" };
+                    badge = { text: "High Eligible", color: "text-emerald-600 bg-emerald-50 border-emerald-100 animate-pulse" };
+                    cardStyle = "border-emerald-200 bg-emerald-50/10 shadow-emerald-50/30 shadow-md scale-100";
                   } else if (diff >= -10) {
                     badge = { text: "Likely Eligible", color: "text-amber-600 bg-amber-50 border-amber-100" };
+                    cardStyle = "border-amber-200 bg-amber-50/10 scale-100";
                   }
                   return (
                     <div 
                       key={idx}
-                      className="p-3 bg-white border border-gray-150 rounded-xl flex items-center justify-between shadow-sm hover:border-gray-300 transition-all shrink-0"
+                      className={`p-3 border rounded-xl flex items-center justify-between shadow-sm transition-all duration-300 shrink-0 ${cardStyle}`}
                     >
                       <div className="min-w-0 pr-2">
                         <h4 className="text-xs font-black text-gray-900 truncate">{item.name}</h4>
@@ -288,7 +332,7 @@ export default function CutoffCalculator() {
                 onClick={() => setShowAdModal(true)}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-gray-950 hover:bg-gray-800 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all cursor-pointer shadow-md"
               >
-                Connect with Expert Advisor <ArrowRight className="w-3.5 h-3.5" />
+                Connect with Expert Advisor ({cutoff.toFixed(1)}) <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
 
@@ -356,6 +400,17 @@ export default function CutoffCalculator() {
                 <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase mt-4">
                   {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
                 </span>
+
+                {/* Calculated Cutoff badge inside the form */}
+                <div className="mt-4 px-4 py-2 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-between w-full max-w-sm shadow-sm select-none">
+                  <div className="text-left">
+                    <span className="text-[8px] uppercase font-black text-rose-600 tracking-wider block">Your TNEA Cutoff</span>
+                    <span className="text-[9px] text-gray-500 font-bold mt-0.5 block">Maths: {mathsMark} • Phy: {physicsMark} • Chem: {chemistryMark}</span>
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-rose-600 flex flex-col items-center justify-center shadow-sm shrink-0">
+                    <span className="font-mono text-xs font-black text-white leading-none">{cutoff.toFixed(1)}</span>
+                  </div>
+                </div>
               </div>
 
               <AnimatePresence mode="wait">
@@ -463,9 +518,6 @@ export default function CutoffCalculator() {
                             <option value="CHEM">Chemical Engineering (B.Tech.)</option>
                             <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
                             <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
-                            {/* PG Departments */}
-                            <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
-                            <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
                           </select>
                           <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 pointer-events-none">
                             <ChevronDown className="w-4 h-4" />

@@ -37,8 +37,13 @@ export default function Departments() {
     'phd-civil', 'phd-mech', 'phd-ece', 'phd-eee'
   ];
 
-  // Process departments from JSON
-  const depts = Object.values(departmentsData).map(dept => {
+  // Process departments from JSON or local storage config
+  const currentDeptsData = (() => {
+    const saved = localStorage.getItem('apec_departments_data');
+    return saved ? JSON.parse(saved) : departmentsData;
+  })();
+
+  const depts = Object.values(currentDeptsData).map(dept => {
     // Determine category based on key or description
     const isPG = dept.key === 'mca' || dept.key === 'mba';
     const isPhD = dept.key.startsWith('phd-');
@@ -166,7 +171,7 @@ export default function Departments() {
         {/* Search & Tabs Controls */}
         <div className="flex flex-col xl:flex-row gap-6 justify-between items-center mb-12 bg-white border border-gray-200 p-6 rounded-3xl shadow-sm">
           {/* Tabs */}
-          <div className="flex gap-2 bg-gray-50 p-1.5 rounded-2xl border border-gray-150 shrink-0 w-full xl:w-auto overflow-x-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 xl:flex xl:flex-row gap-2 bg-gray-50 p-1.5 rounded-2xl border border-gray-150 shrink-0 w-full xl:w-auto">
             {[
               { id: 'all', label: 'All Programs' },
               { id: 'be', label: 'Undergraduate (B.E.)' },
@@ -180,7 +185,7 @@ export default function Departments() {
                   setActiveTab(tab.id);
                   setSearchTerm('');
                 }}
-                className={`text-sm font-bold px-6 py-3 rounded-xl transition-all cursor-pointer whitespace-nowrap ${
+                className={`text-center py-3 px-3 text-xs md:text-sm font-bold rounded-xl transition-all cursor-pointer xl:whitespace-nowrap grow ${
                   activeTab === tab.id 
                     ? 'bg-indigo-650 text-white shadow-md' 
                     : 'text-gray-600 hover:text-indigo-650 hover:bg-gray-100'

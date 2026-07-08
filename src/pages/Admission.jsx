@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   GraduationCap, 
@@ -92,13 +92,13 @@ export default function Admission() {
   ];
 
   const pgPrograms = [
-    { name: "M.E. - Computer Science and Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/me.cse.jpg" },
-    { name: "M.E. - Thermal Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/dept/me.thermak.jpg" },
-    { name: "M.E. - VLSI Design", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/m.e.vlsi.jpg" },
-    { name: "M.E. - Power Electronics & Drives Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/power-electronics-electrical-drives.jpg" },
-    { name: "M.E. - Construction Engineering and Management", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/dept/m.e.construction engg and mangement.jpg" },
-    { name: "M.B.A. (Master of Business Administration)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/dept/MBA.jpg" },
-    { name: "M.C.A. (Master of Computer Applications)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/dept/MCA.jpg" }
+    { name: "M.E. - Computer Science and Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/me.cse.jpg", key: "me-cse" },
+    { name: "M.E. - Thermal Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/dept/me.thermak.jpg", key: "me-thermal" },
+    { name: "M.E. - VLSI Design", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/m.e.vlsi.jpg", key: "me-vlsi" },
+    { name: "M.E. - Power Electronics & Drives Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/dept/power-electronics-electrical-drives.jpg", key: "me-ped" },
+    { name: "M.E. - Construction Engineering and Management", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/dept/m.e.construction engg and mangement.jpg", key: "me-cem" },
+    { name: "M.B.A. (Master of Business Administration)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/dept/MBA.jpg", key: "mba" },
+    { name: "M.C.A. (Master of Computer Applications)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/dept/MCA.jpg", key: "mca" }
   ];
 
   const phdPrograms = [
@@ -377,52 +377,104 @@ export default function Admission() {
                   </div>
                 </div>
 
-                {/* PG Programs */}
+                {/* PG M.E. Programs */}
                 <div>
                   <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                    <div className="p-2 rounded-xl bg-purple-50 text-purple-600">
+                    <div className="p-2 rounded-xl bg-purple-50 text-purple-650">
                       <GraduationCap className="w-6 h-6" />
                     </div>
                     <div>
-                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Post Graduate Programmes</h2>
+                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Postgraduate M.E. Programmes</h2>
                       <p className="text-[11px] font-bold text-purple-600 uppercase tracking-widest mt-0.5">2 Years Duration • Full Time</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {pgPrograms.map((course, idx) => (
-                      <motion.div 
-                        key={idx}
-                        className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-purple-400/40 transition-all flex flex-col justify-between overflow-hidden"
-                        whileHover={{ y: -2 }}
-                      >
-                        {course.img && (
-                          <div className="w-full h-48 overflow-hidden border-b border-gray-100">
-                            <img 
-                              src={course.img} 
-                              alt={course.name} 
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                            />
+                    {pgPrograms.filter(c => c.name.startsWith('M.E.')).map((course, idx) => (
+                      <Link to={`/departments/${course.key}`} key={idx} className="block group">
+                        <motion.div 
+                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-purple-400/40 transition-all flex flex-col justify-between overflow-hidden h-full"
+                          whileHover={{ y: -2 }}
+                        >
+                          {course.img && (
+                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                              <img 
+                                src={course.img} 
+                                alt={course.name} 
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
+                          <div className="p-5 flex flex-col justify-between flex-grow">
+                            <div>
+                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-purple-50 text-purple-600 rounded-md mb-3 border border-purple-100">
+                                M.E.
+                              </span>
+                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
+                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                              </p>
+                            </div>
+                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
+                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
+                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                              </span>
+                            </div>
                           </div>
-                        )}
-                        <div className="p-5 flex flex-col justify-between flex-grow">
-                          <div>
-                            <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-purple-50 text-purple-600 rounded-md mb-3 border border-purple-100">
-                              {course.name.includes('M.E.') ? 'M.E.' : course.name.includes('M.B.A') ? 'M.B.A' : 'M.C.A.'}
-                            </span>
-                            <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
-                            <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
-                              <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                            </p>
+                        </motion.div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* PG Professional Programs */}
+                <div>
+                  <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
+                    <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
+                      <GraduationCap className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Postgraduate Professional Programmes (MBA / MCA)</h2>
+                      <p className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest mt-0.5">2 Years Duration • Full Time</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {pgPrograms.filter(c => !c.name.startsWith('M.E.')).map((course, idx) => (
+                      <Link to={`/departments/${course.key}`} key={idx} className="block group">
+                        <motion.div 
+                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-indigo-400/40 transition-all flex flex-col justify-between overflow-hidden h-full"
+                          whileHover={{ y: -2 }}
+                        >
+                          {course.img && (
+                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                              <img 
+                                src={course.img} 
+                                alt={course.name} 
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              />
+                            </div>
+                          )}
+                          <div className="p-5 flex flex-col justify-between flex-grow">
+                            <div>
+                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-650 rounded-md mb-3 border border-indigo-100">
+                                {course.name.includes('M.B.A') ? 'M.B.A' : 'M.C.A.'}
+                              </span>
+                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
+                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                              </p>
+                            </div>
+                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
+                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
+                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
+                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                              </span>
+                            </div>
                           </div>
-                          <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                            <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                            <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                              <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
+                        </motion.div>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -663,16 +715,20 @@ export default function Admission() {
                       </div>
                       <div className="divide-y divide-gray-150 text-xs font-semibold text-gray-500">
                         {[
-                          { dept: "Construction Eng & Mgmt", intake: 18 },
-                          { dept: "Thermal Engineering", intake: 18 },
-                          { dept: "VLSI Design", intake: 9 },
-                          { dept: "Power Electronics & Drives", intake: 9 },
-                          { dept: "Computer Science & Engg", intake: 9 }
+                          { dept: "Construction Eng & Mgmt", intake: 18, key: "me-cem" },
+                          { dept: "Thermal Engineering", intake: 18, key: "me-thermal" },
+                          { dept: "VLSI Design", intake: 9, key: "me-vlsi" },
+                          { dept: "Power Electronics & Drives", intake: 9, key: "me-ped" },
+                          { dept: "Computer Science & Engg", intake: 9, key: "me-cse" }
                         ].map((item, idx) => (
-                          <div key={idx} className="flex justify-between px-4 py-2.5 hover:bg-gray-50/50">
-                            <span className="font-bold text-gray-800 leading-tight">{item.dept}</span>
+                          <Link 
+                            to={`/departments/${item.key}`}
+                            key={idx} 
+                            className="flex justify-between px-4 py-2.5 hover:bg-gray-50/50 transition-colors hover:text-[#FF8A00] group"
+                          >
+                            <span className="font-bold text-gray-800 leading-tight group-hover:text-[#FF8A00]">{item.dept}</span>
                             <span className="font-mono text-gray-650 bg-gray-100 px-2 py-0.5 rounded font-bold shrink-0">{item.intake} Seats</span>
-                          </div>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -687,13 +743,17 @@ export default function Admission() {
                         </div>
                         <div className="divide-y divide-gray-150 text-xs font-semibold text-gray-500">
                           {[
-                            { dept: "Master of Business Admin (MBA)", intake: 60 },
-                            { dept: "Master of Computer Apps (MCA)", intake: 60 }
+                            { dept: "Master of Business Admin (MBA)", intake: 60, key: "mba" },
+                            { dept: "Master of Computer Apps (MCA)", intake: 60, key: "mca" }
                           ].map((item, idx) => (
-                            <div key={idx} className="flex justify-between px-4 py-3 hover:bg-gray-50/50">
-                              <span className="font-bold text-gray-800">{item.dept}</span>
+                            <Link 
+                              to={`/departments/${item.key}`}
+                              key={idx} 
+                              className="flex justify-between px-4 py-3 hover:bg-gray-50/50 transition-colors hover:text-[#FF8A00] group"
+                            >
+                              <span className="font-bold text-gray-800 group-hover:text-[#FF8A00]">{item.dept}</span>
                               <span className="font-mono text-gray-650 bg-gray-100 px-2 py-0.5 rounded font-bold shrink-0">{item.intake} Seats</span>
-                            </div>
+                            </Link>
                           ))}
                         </div>
                       </div>
