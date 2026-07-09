@@ -34,6 +34,7 @@ import AnnualAccounts from './pages/AnnualAccounts';
 import UgcUndertaking from './pages/UgcUndertaking';
 import UgcApprovalLetter from './pages/UgcApprovalLetter';
 import EditorPanel from './pages/EditorPanel';
+import Rti from './pages/Rti';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -930,7 +931,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Placement Cell Profile</Link>
                         <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Placement Records</Link>
                         <Link to="/placements" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">MOUs & Industrial Tie-ups</Link>
-                        <a href="https://apec.edu.in/rti/" target="_blank" rel="noopener noreferrer" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">RTI (Right to Information)</a>
                       </div>
                     </div>
 
@@ -972,6 +972,24 @@ function AppContent({ isLoading, setIsLoading }) {
                         </div>
                       </div>
                     </div>
+
+                    {/* RTI Link */}
+                    <Link 
+                      to="/rti" 
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block font-black ${
+                        isActive('/rti') 
+                          ? 'text-[#FF8A00] bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC]'
+                      }`}
+                    >
+                      RTI
+                      {isActive('/rti') && (
+                        <motion.span 
+                          layoutId="activeNavMark" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
+                        />
+                      )}
+                    </Link>
 
                     {/* IQAC Megamenu */}
                     <div className="relative group py-0">
@@ -1130,6 +1148,15 @@ function AppContent({ isLoading, setIsLoading }) {
                     )}
                   </div>
 
+                  {/* RTI Mobile Link */}
+                  <Link 
+                    to="/rti" 
+                    onClick={() => setMobileMenuOpen(false)} 
+                    className="text-left text-sm font-semibold text-gray-500"
+                  >
+                    RTI
+                  </Link>
+
                   {/* Collapsible Mobile IQAC Section */}
                   <div>
                     <button 
@@ -1264,6 +1291,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/facilities/:id" element={<PageTransition><FacilityDetail /></PageTransition>} />
                   <Route path="/admin-portal" element={<PageTransition><AdminPortal /></PageTransition>} />
                   <Route path="/administration/:id" element={<PageTransition><AdminProfile /></PageTransition>} />
+                  <Route path="/rti" element={<PageTransition><Rti /></PageTransition>} />
                    <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
                   <Route path="/editor-panel" element={<PageTransition><EditorPanel /></PageTransition>} />
                   <Route path="/cutoff-calculator" element={<PageTransition><CutoffCalculator /></PageTransition>} />
