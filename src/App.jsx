@@ -37,6 +37,14 @@ import UgcUndertaking from './pages/UgcUndertaking';
 import UgcApprovalLetter from './pages/UgcApprovalLetter';
 import EditorPanel from './pages/EditorPanel';
 import Rti from './pages/Rti';
+import Iqac from './pages/Iqac';
+import IqacMembers from './pages/IqacMembers';
+import IqacMeetings from './pages/IqacMeetings';
+import Disclosures from './pages/Disclosures';
+import Nirf from './pages/Nirf';
+import InstrumentationCell from './pages/InstrumentationCell';
+import Committees from './pages/Committees';
+import { getLocalResponse } from './ai/engine/localAIClient.js';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -233,6 +241,15 @@ function AppContent({ isLoading, setIsLoading }) {
   const messagesContainerRef = useRef(null);
   const [isOnline, setIsOnline] = useState(true);
   const chatbotRef = useRef(null);
+  const [chatSession, setChatSession] = useState({
+    turns: [],
+    lastDepartment: null,
+    lastTopic: null,
+    lastDocId: null,
+    turnCount: 0,
+    createdAt: Date.now(),
+    lastActivity: Date.now()
+  });
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -416,8 +433,6 @@ function AppContent({ isLoading, setIsLoading }) {
     }
   };
 
-const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
-
   const handleChatSubmit = async (e, textOverride = null) => {
     if (e) e.preventDefault();
     if (windowWidth <= 768) {
@@ -437,94 +452,29 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
     const withLoading = [...updatedMessages, { sender: 'ai', text: 'Typing...', isLoading: true }];
     setMessages(withLoading);
 
-    try {
-      let retrievedContext = "";
-
-      // 1. Generate text embedding for user's input
-      const embedResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: "models/text-embedding-004",
-          content: { parts: [{ text: userText }] }
-        })
-      });
-
-      if (embedResponse.ok) {
-        const embedData = await embedResponse.json();
-        const queryVector = embedData.embedding?.values;
-
-        if (queryVector) {
-          // 2. Fetch all trained vectors from Firestore knowledge_base
-          const snapshot = await getDocs(collection(db, 'knowledge_base'));
-          const candidates = [];
-          snapshot.forEach(doc => {
-            const data = doc.data();
-            if (data.embedding && data.text) {
-              // Calculate Cosine Similarity
-              let dotProduct = 0;
-              let normA = 0;
-              let normB = 0;
-              const vA = queryVector;
-              const vB = data.embedding;
-              for (let i = 0; i < vA.length; i++) {
-                dotProduct += vA[i] * vB[i];
-                normA += vA[i] * vA[i];
-                normB += vB[i] * vB[i];
-              }
-              const similarity = (normA === 0 || normB === 0) ? 0 : dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
-              candidates.push({ text: data.text, similarity });
-            }
-          });
-
-          // Sort and select top matching context chunks above threshold (0.65)
-          candidates.sort((a, b) => b.similarity - a.similarity);
-          const relevantChunks = candidates.filter(c => c.similarity > 0.65).slice(0, 4);
-
-          if (relevantChunks.length > 0) {
-            retrievedContext = relevantChunks.map(c => c.text).join("\n\n");
-            console.log("Retrieved RAG Context:", retrievedContext);
-          }
+    // Simulate natural AI thinking delay
+    setTimeout(() => {
+      try {
+        // Deep copy the session state to prevent direct mutation errors in React Strict Mode
+        const sessionCopy = JSON.parse(JSON.stringify(chatSession));
+        const { response, updatedSession } = getLocalResponse(userText, sessionCopy);
+        
+        if (updatedSession) {
+          setChatSession(updatedSession);
         }
+        
+        setIsOnline(true);
+        // Replace typing loader with the actual local AI response
+        setMessages([...updatedMessages, { sender: 'ai', text: response }]);
+      } catch (err) {
+        console.error("Local AI Assistant error:", err);
+        setIsOnline(false);
+        setMessages([...updatedMessages, { 
+          sender: 'ai', 
+          text: "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." 
+        }]);
       }
-
-      // 3. Query Gemini Flash with Context constraint
-      const systemInstruction = "You are the APEC AI Assistant. Answer the user's question using ONLY the provided context snippets. Be extremely concise, direct, and specific. Do NOT return paragraphs of general text; only output the exact specific data or answer expected by the user. If you cannot find the exact answer in the context, respond with: 'I couldn't find this information in the current college database. Please contact the college help desk for confirmation.'";
-      
-      const promptText = retrievedContext 
-        ? `Context:\n${retrievedContext}\n\nQuestion: ${userText}`
-        : userText;
-
-      const geminiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: promptText }] }],
-          systemInstruction: { parts: [{ text: systemInstruction }] },
-          generationConfig: {
-            temperature: 0.15,
-            maxOutputTokens: 200
-          }
-        })
-      });
-
-      if (!geminiResponse.ok) {
-        throw new Error('Gemini API query failed');
-      }
-
-      const geminiData = await geminiResponse.json();
-      const answer = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
-      setIsOnline(true);
-      setMessages([...updatedMessages, { sender: 'ai', text: answer.trim() || "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." }]);
-    } catch (err) {
-      console.error("RAG assistant pipeline error:", err);
-      setIsOnline(false);
-      setMessages([...updatedMessages, { 
-        sender: 'ai', 
-        text: "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." 
-      }]);
-    }
+    }, 450);
   };
 
   return (
@@ -616,26 +566,24 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                   <div className="hidden lg:flex items-center gap-4">
                     <button 
                       onClick={() => setIsPanoOpen(true)}
-                      className="relative w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-650 via-purple-650 to-pink-600 hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-md hover:shadow-lg cursor-pointer group/vrbtn"
+                      className="relative w-10 h-10 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer group/vrbtn"
                       title="Open 360° VR Campus Tour"
                     >
                       {/* Pulse background shine */}
-                      <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
+                      <span className="absolute inset-0 rounded-full bg-black/5 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
                       
-                      {/* High-tech Spatial Radar Icon */}
-                      <div className="relative w-6 h-6 flex items-center justify-center overflow-visible">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-white relative overflow-visible">
-                          {/* Rotating outer compass dashes */}
-                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 3" className="animate-[spin_8s_linear_infinite] origin-center" />
-                          {/* Pulsing horizontal orbital ring */}
-                          <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="currentColor" strokeWidth="1.5" className="animate-[pulse_1.5s_infinite_alternate] origin-center" />
-                          {/* Inner core dot */}
-                          <circle cx="12" cy="12" r="2.5" fill="#FF4D4D" className="animate-pulse" />
-                          {/* Radar sweep echo */}
-                          <circle cx="12" cy="12" r="2.5" stroke="#FF4D4D" strokeWidth="1" className="animate-[ping_1.5s_infinite] origin-center" />
+                      {/* Minimalist Panoramic 360 Circular Arrow Logo (Expanded, Padding Removed) */}
+                      <div className="relative w-8 h-8 flex items-center justify-center overflow-visible text-black">
+                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
+                          {/* Panoramic Circular Arrow loop */}
+                          <path d="M21.5 12a9.5 9.5 0 1 1-2.8-6.7L21.5 8" className="animate-[spin_16s_linear_infinite] origin-center" />
+                          {/* Arrow head */}
+                          <path d="M21.5 3v5h-5" />
+                          {/* Central panoramic text "360°" */}
+                          <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="900" stroke="none" fill="currentColor" style={{ fontFamily: 'system-ui, sans-serif' }}>360°</text>
                         </svg>
                         {/* Bouncing degree circle on the top-right corner of container */}
-                        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full border border-indigo-600 shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
+                        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
                       </div>
                     </button>
 
@@ -683,17 +631,16 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                   <div className="flex items-center gap-3.5 lg:hidden shrink-0">
                     <button 
                       onClick={() => setIsPanoOpen(true)}
-                      className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-650 via-purple-650 to-pink-600 hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-md cursor-pointer"
+                      className="relative w-9 h-9 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer"
                       title="Open 360° VR Campus Tour"
                     >
-                      <div className="relative w-5 h-5 flex items-center justify-center overflow-visible">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-white relative overflow-visible">
-                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 3" className="animate-[spin_8s_linear_infinite] origin-center" />
-                          <ellipse cx="12" cy="12" rx="9" ry="3.5" stroke="currentColor" strokeWidth="1.5" className="animate-[pulse_1.5s_infinite_alternate] origin-center" />
-                          <circle cx="12" cy="12" r="2.5" fill="#FF4D4D" className="animate-pulse" />
-                          <circle cx="12" cy="12" r="2.5" stroke="#FF4D4D" strokeWidth="1" className="animate-[ping_1.5s_infinite] origin-center" />
+                      <div className="relative w-7 h-7 flex items-center justify-center overflow-visible text-black">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
+                          <path d="M21.5 12a9.5 9.5 0 1 1-2.8-6.7L21.5 8" className="animate-[spin_16s_linear_infinite] origin-center" />
+                          <path d="M21.5 3v5h-5" />
+                          <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="900" stroke="none" fill="currentColor" style={{ fontFamily: 'system-ui, sans-serif' }}>360°</text>
                         </svg>
-                        <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full border border-indigo-600 shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
+                        <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full border border-white shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
                       </div>
                     </button>
 
@@ -1020,19 +967,19 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Student Cells & Associations</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Anti-Ragging Committee</a>
-                            <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IIIC Cell (Industry-Institute)</a>
-                            <a href="https://apec.edu.in/women-empowerment-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Women Empowerment Cell</a>
-                            <a href="https://apec.edu.in/alumni/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Alumni Cell</a>
+                            <Link to="/committees/anti-ragging" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Anti-Ragging Committee</Link>
+                            <Link to="/committees/iiic" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IIIC Cell (Industry-Institute)</Link>
+                            <Link to="/committees/women-empowerment" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Women Empowerment Cell</Link>
+                            <Link to="/committees/alumni-cell" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Alumni Cell</Link>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Welfare & Career Clubs</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/sc-st-committee/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">SC/ST Committee</a>
-                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electoral Literacy Club</a>
-                            <a href="https://apec.edu.in/career-guidance-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Career Guidance Cell</a>
-                            <a href="https://apec.edu.in/entrepreneurship-development-cell/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Entrepreneurship Cell</a>
+                            <Link to="/committees/sc-st-committee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">SC/ST Committee</Link>
+                            <Link to="/committees/electoral-literacy" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electoral Literacy Club</Link>
+                            <Link to="/committees/career-guidance" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Career Guidance Cell</Link>
+                            <Link to="/committees/entrepreneurship" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Entrepreneurship Cell</Link>
                           </div>
                         </div>
                       </div>
@@ -1078,18 +1025,18 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Quality Assurance & NAAC</span>
                           <div className="space-y-1">
                             <a href="https://apec.edu.in/naac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">NAAC</a>
-                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC</a>
-                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC Members</a>
-                            <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC MoM & AT</a>
+                            <Link to="/iqac" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC</Link>
+                            <Link to="/iqac-members" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC Members</Link>
+                            <Link to="/iqac-mom-at" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IQAC MoM & AT</Link>
                           </div>
                         </div>
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Rankings & Disclosures</span>
                           <div className="space-y-1">
-                            <a href="https://apec.edu.in/mandatory-disclosure/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Disclosures (NIRF, AICTE & MD)</a>
+                            <Link to="/disclosures" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Disclosures (NIRF, AICTE & MD)</Link>
                             <Link to="/ugc-undertaking" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Undertaking</Link>
-                            <a href="https://apec.edu.in/nirf/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">NIRF</a>
-                            <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Instrumentation Cell</a>
+                            <Link to="/nirf" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">NIRF</Link>
+                            <Link to="/instrumentation-cell" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Instrumentation Cell</Link>
                           </div>
                         </div>
                       </div>
@@ -1115,7 +1062,7 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                     {localStorage.getItem('is_logged_in') === 'true' && (
                       <Link 
                         to="/editor-panel" 
-                        className={`text-xs uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
+                        className={`text-xs uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
                           isActive('/editor-panel') 
                             ? 'text-indigo-650 font-black bg-indigo-50/50 border border-indigo-100' 
                             : 'text-indigo-600 hover:text-indigo-750 hover:bg-indigo-50 font-black'
@@ -1201,14 +1148,14 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                     </button>
                     {mobileCommitteesOpen && (
                       <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
-                        <a href="https://apec.edu.in/anti-ragging/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Anti-Ragging Committee</a>
-                        <a href="https://apec.edu.in/industry-institute-interaction-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IIIC Cell (Industry-Institute)</a>
-                        <a href="https://apec.edu.in/women-empowerment-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Women Empowerment Cell</a>
-                        <a href="https://apec.edu.in/alumni/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Alumni Cell</a>
-                        <a href="https://apec.edu.in/sc-st-committee/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">SC/ST Committee</a>
-                        <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Electoral Literacy Club</a>
-                        <a href="https://apec.edu.in/career-guidance-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Career Guidance Cell</a>
-                        <a href="https://apec.edu.in/entrepreneurship-development-cell/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Entrepreneurship Cell</a>
+                        <Link to="/committees/anti-ragging" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">Anti-Ragging Committee</Link>
+                        <Link to="/committees/iiic" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">IIIC Cell (Industry-Institute)</Link>
+                        <Link to="/committees/women-empowerment" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">Women Empowerment Cell</Link>
+                        <Link to="/committees/alumni-cell" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">Alumni Cell</Link>
+                        <Link to="/committees/sc-st-committee" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">SC/ST Committee</Link>
+                        <Link to="/committees/electoral-literacy" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">Electoral Literacy Club</Link>
+                        <Link to="/committees/career-guidance" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">Career Guidance Cell</Link>
+                        <Link to="/committees/entrepreneurship" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500 text-left">Entrepreneurship Cell</Link>
                       </div>
                     )}
                   </div>
@@ -1234,13 +1181,13 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                     {mobileIqacOpen && (
                       <div className="pl-4 mt-2 space-y-2 flex flex-col border-l border-gray-100">
                         <a href="https://apec.edu.in/naac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">NAAC</a>
-                        <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC</a>
-                        <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC Members</a>
-                        <a href="https://apec.edu.in/iqac/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC MoM & AT</a>
-                        <Link to="/mandatory-disclosure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Disclosures (NIRF, AICTE & MD)</Link>
+                        <Link to="/iqac" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC</Link>
+                        <Link to="/iqac-members" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC Members</Link>
+                        <Link to="/iqac-mom-at" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IQAC MoM & AT</Link>
+                        <Link to="/disclosures" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Disclosures (NIRF, AICTE & MD)</Link>
                         <Link to="/ugc-undertaking" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Undertaking</Link>
-                        <a href="https://apec.edu.in/nirf/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">NIRF</a>
-                        <a href="https://apec.edu.in/" target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Instrumentation Cell</a>
+                        <Link to="/nirf" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">NIRF</Link>
+                        <Link to="/instrumentation-cell" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Instrumentation Cell</Link>
                       </div>
                     )}
                   </div>
@@ -1357,6 +1304,14 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                   <Route path="/admin-portal" element={<PageTransition><AdminPortal /></PageTransition>} />
                   <Route path="/administration/:id" element={<PageTransition><AdminProfile /></PageTransition>} />
                   <Route path="/rti" element={<PageTransition><Rti /></PageTransition>} />
+                  <Route path="/iqac" element={<PageTransition><Iqac /></PageTransition>} />
+                  <Route path="/iqac-members" element={<PageTransition><IqacMembers /></PageTransition>} />
+                  <Route path="/iqac-mom-at" element={<PageTransition><IqacMeetings /></PageTransition>} />
+                  <Route path="/disclosures" element={<PageTransition><Disclosures /></PageTransition>} />
+                  <Route path="/nirf" element={<PageTransition><Nirf /></PageTransition>} />
+                  <Route path="/instrumentation-cell" element={<PageTransition><InstrumentationCell /></PageTransition>} />
+                  <Route path="/committees" element={<PageTransition><Committees /></PageTransition>} />
+                  <Route path="/committees/:id" element={<PageTransition><Committees /></PageTransition>} />
                    <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
                   <Route path="/editor-panel" element={<PageTransition><EditorPanel /></PageTransition>} />
                   <Route path="/cutoff-calculator" element={<PageTransition><CutoffCalculator /></PageTransition>} />
@@ -1435,17 +1390,6 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                                 className="w-full h-full object-contain"
                               />
                             </div>
-                            {/* Animated online/offline dot */}
-                            <span className="absolute bottom-0 right-0 flex h-3 w-3">
-                              {isOnline ? (
-                                <>
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-450 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white dark:border-slate-900"></span>
-                                </>
-                              ) : (
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500 border-2 border-white dark:border-slate-900"></span>
-                              )}
-                            </span>
                           </div>
 
                           <div className="text-left leading-tight">
@@ -1588,7 +1532,7 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                             <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-slate-500/5 rounded-full blur-xl pointer-events-none" />
                             
                             <div className="flex items-center gap-2.5 z-10">
-                              <div className="relative flex items-center justify-center shrink-0">
+                              <div className="flex items-center justify-center shrink-0">
                                 <div className="w-12 h-12 rounded-full bg-white p-1.5 border-2 border-[#E8C983] flex items-center justify-center shadow-md">
                                   <img 
                                     src="./apec-logo.png" 
@@ -1596,16 +1540,6 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
                                     className="w-full h-full object-contain"
                                   />
                                 </div>
-                                <span className="absolute bottom-0 right-0 flex h-3 w-3">
-                                  {isOnline ? (
-                                    <>
-                                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-450 opacity-75"></span>
-                                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-white dark:border-slate-900"></span>
-                                    </>
-                                  ) : (
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-rose-500 border-2 border-white dark:border-slate-900"></span>
-                                  )}
-                                </span>
                               </div>
 
                               <div className="text-left leading-tight">
@@ -1732,48 +1666,112 @@ const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
             </div>
 
             {/* Clean, Sleek, Compact Footer */}
-            <footer className="py-8 px-6 bg-gray-50 border-t border-gray-100 relative select-none">
-              <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <footer className="footer bg-gray-50 border-t border-gray-100 relative select-none">
+              <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
                 
-                {/* Brand Logo & Name */}
-                <div className="flex items-center gap-3">
+                {/* Left Section (College Branding) */}
+                <div className="footer-brand select-none">
                   <img 
                     src="./apec-logo.png" 
                     alt="Adhiparasakthi Engineering College Logo" 
-                    className="w-9 h-9 object-contain mix-blend-multiply" 
+                    className="footer-logo mix-blend-multiply shrink-0" 
                   />
-                  <div className="text-left">
-                    <h3 className="font-title text-xs font-black tracking-tight text-gray-900 leading-none">
-                      Adhiparasakthi Engineering College
+                  <div className="footer-brand-text">
+                    <h3 className="font-title text-xs md:text-sm font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-none drop-shadow-sm uppercase">
+                      {branding.collegeName}
                     </h3>
-                    <span className="font-mono text-[8px] uppercase font-black text-indigo-650 tracking-wider block mt-1">
-                      An Autonomous Institution
+                    <span className="font-mono text-[9px] uppercase font-black text-indigo-650 tracking-wider block mt-1">
+                      {branding.tagline}
                     </span>
                   </div>
                 </div>
 
-                {/* Inline Nav Links */}
-                <nav className="flex flex-wrap justify-center gap-6 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
-                  <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>
-                  <Link to="/about" className="hover:text-gray-900 transition-colors">About</Link>
-                  <Link to="/admission" className="hover:text-gray-900 transition-colors">Admission</Link>
-                  <Link to="/departments" className="hover:text-gray-900 transition-colors">Departments</Link>
-                  <Link to="/placements" className="hover:text-gray-900 transition-colors">Placements</Link>
-                  <Link to="/facilities" className="hover:text-gray-900 transition-colors">Facilities</Link>
-                  <Link to="/contact" className="hover:text-gray-900 transition-colors">Contact</Link>
-                </nav>
-
-              </div>
-
-              {/* Bottom Copyright & Contacts row */}
-              <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-gray-200/50 flex flex-col md:flex-row items-center justify-between gap-4 text-[9px] text-gray-450 font-bold uppercase tracking-wider">
-                <span>
-                  © 2026 Adhiparasakthi Engineering College. All Rights Reserved.
-                </span>
-                <div className="flex flex-wrap gap-4 items-center justify-center">
-                  <span>Helpline: <a href="tel:+917418064336" className="text-gray-500 hover:text-indigo-600 transition-colors">7418064336</a></span>
-                  <span>Email: <span className="text-gray-500">principal@apec.edu.in</span></span>
+                {/* Center Section: Copyright & Socials */}
+                <div className="flex flex-col items-center gap-4 text-center w-full md:w-auto">
+                  <div className="footer-copyright font-sans text-xs md:text-sm tracking-wider uppercase leading-relaxed font-semibold">
+                    <p>© 2026 ADHIPARASAKTHI ENGINEERING COLLEGE</p>
+                    <p>ALL RIGHTS RESERVED.</p>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <a 
+                      href="https://instagram.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="social-icon instagram flex items-center justify-center"
+                      aria-label="Instagram"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    </a>
+                    <a 
+                      href="https://facebook.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="social-icon facebook flex items-center justify-center"
+                      aria-label="Facebook"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                    </a>
+                    <a 
+                      href="https://linkedin.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="social-icon linkedin flex items-center justify-center"
+                      aria-label="LinkedIn"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                      </svg>
+                    </a>
+                    <a 
+                      href="https://youtube.com" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="social-icon youtube flex items-center justify-center"
+                      aria-label="YouTube"
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                      </svg>
+                    </a>
+                  </div>
                 </div>
+
+                {/* Right Section Contact */}
+                <div className="footer-contact w-full md:w-auto">
+                  <div className="footer-contact-item flex items-center gap-2 text-sm font-bold text-[#07113A]">
+                    <span className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
+                      <Phone className="w-3.5 h-3.5 text-indigo-650" /> Helpline:
+                    </span>
+                    <a 
+                      href={`tel:+91${branding.helpline1}`} 
+                      className="hover:text-indigo-650 transition-colors"
+                    >
+                      {branding.helpline1}
+                    </a>
+                  </div>
+                  
+                  <div className="footer-contact-item flex items-center gap-2 text-sm font-bold text-[#07113A]">
+                    <span className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
+                      <Mail className="w-3.5 h-3.5 text-indigo-650" /> Email:
+                    </span>
+                    <a 
+                      href="mailto:principal@apec.edu.in" 
+                      className="email-text hover:text-indigo-650 transition-colors"
+                    >
+                      principal@apec.edu.in
+                    </a>
+                  </div>
+                </div>
+
               </div>
             </footer>
 

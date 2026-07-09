@@ -241,6 +241,21 @@ export default function Home() {
     }
   }, [showAdModal]);
 
+  // Library slideshow state
+  const [libraryImageIdx, setLibraryImageIdx] = useState(0);
+  const libraryImages = [
+    "/images/library/cl.jpg",
+    "/images/library/2860d03c-30f4-42ff-89e0-84e69198edd4.jpg",
+    "/images/library/b8d6dbd7-848a-4f97-8df6-5187bdf2139a.jpg"
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLibraryImageIdx(prev => (prev + 1) % libraryImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -380,9 +395,9 @@ export default function Home() {
   }, []);
 
   const features = [
-    { title: "Central Library", desc: "Digital systems & technical volumes", img: "/library_main.jpg" },
-    { title: "Placement Records", desc: "Top recruiters & career guidance", img: "/campus_main.jpg" },
-    { title: "Equipped Labs", desc: "High-spec research & Wifi campus", img: "/Aiml_Lab_1.jpg" },
+    { title: "Central Library", desc: "Digital systems & technical volumes", img: "/images/library/cl.jpg" },
+    { title: "Placement Records", desc: "Top recruiters & career guidance", img: "/images/placement/placement_cell.jpg" },
+    { title: "Equipped Labs", desc: "High-spec research & Wifi campus", img: "/images/labs/lab.jpg" },
     { title: "Indoor Stadium & Gym", desc: "Excellent athletic infrastructure", img: "/Main_Gate.jpg" }
   ];
 
@@ -636,9 +651,42 @@ export default function Home() {
               <motion.div 
                 key={idx} 
                 variants={twistReveal}
-                className="benefit-card select-none cursor-pointer"
-                style={{ backgroundImage: `url(${feat.img})` }}
+                className="benefit-card select-none cursor-pointer relative overflow-hidden"
+                style={{ 
+                  backgroundColor: "#0f172a"
+                }}
               >
+                {/* Background image / slideshow */}
+                {feat.title === "Central Library" ? (
+                  <div className="absolute inset-0 w-full h-full">
+                    {libraryImages.map((img, i) => (
+                      <motion.div
+                        key={img}
+                        className="absolute inset-0"
+                        style={{ 
+                          backgroundImage: `url(${img})`,
+                          backgroundSize: "100% 100%",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center"
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: i === libraryImageIdx ? 1 : 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div 
+                    className="absolute inset-0"
+                    style={{ 
+                      backgroundImage: `url(${feat.img})`,
+                      backgroundSize: feat.title === "Placement Records" || feat.title === "Equipped Labs" ? "100% 100%" : "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center"
+                    }}
+                  />
+                )}
+
                 {/* Background image overlay */}
                 <div className="benefit-card-overlay" />
 

@@ -14,6 +14,28 @@ const sceneTitles = {
   aimlLab: 'AIML Research Lab 360° Virtual Tour'
 };
 
+const mapPoints = [
+  { id: 1, name: "Main Gate Entrance", x: 78.0, y: 89.8, sceneId: "mainGate" },
+  { id: 2, name: "Junction 1", x: 65.1, y: 51.5, sceneId: "junctionOne" },
+  { id: 3, name: "Junction 2", x: 52.3, y: 63.6, sceneId: "junctionTwo" },
+  { id: 4, name: "PG Block", x: 34.6, y: 71.3, sceneId: "pgBlock" },
+  { id: 5, name: "Junction 3", x: 23.6, y: 72.4, sceneId: "junctionThree" },
+  { id: 6, name: "Central Library", x: 12.4, y: 65.6, sceneId: "library" },
+  { id: 7, name: "Main Block / Reception", x: 60.2, y: 29.6, sceneId: "reception" }
+];
+
+const thumbnailScenes = [
+  { id: 'mainGate', label: 'Main Gate', img: '/Main_Gate.jpg' },
+  { id: 'junctionOne', label: 'Junction 1', img: '/Junction 1.jpeg' },
+  { id: 'junctionTwo', label: 'Junction 2', img: '/junction 2.jpeg' },
+  { id: 'reception', label: 'Reception', img: '/main block Reception_.jpg.jpeg' },
+  { id: 'amma', label: 'Amma Statue', img: '/amma_.jpg.jpeg' },
+  { id: 'aimlLab', label: 'AIML Lab', img: '/Aiml_Lab_1.jpg' },
+  { id: 'pgBlock', label: 'PG Block', img: '/P_G_Block__1.jpg.jpeg' },
+  { id: 'junctionThree', label: 'Junction 3', img: '/Junctiion 3 .jpg.jpeg' },
+  { id: 'library', label: 'Library', img: '/Library__2.jpg.jpeg' }
+];
+
 export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGate' }) {
   const containerRef = useRef(null);
   const viewerInstanceRef = useRef(null);
@@ -23,6 +45,41 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
   const [activeScene, setActiveScene] = useState(initialScene);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [mobileSelectorOpen, setMobileSelectorOpen] = useState(false);
+  const [showMiniMap, setShowMiniMap] = useState(window.innerWidth >= 1024);
+  const [isGyroActive, setIsGyroActive] = useState(false);
+
+  const toggleGyroscope = () => {
+    if (!viewerInstanceRef.current) return;
+    try {
+      if (isGyroActive) {
+        viewerInstanceRef.current.stopDeviceOrientation();
+        setIsGyroActive(false);
+      } else {
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission()
+            .then(permissionState => {
+              if (permissionState === 'granted') {
+                viewerInstanceRef.current.startDeviceOrientation();
+                setIsGyroActive(true);
+              } else {
+                alert("Permission to access gyroscope was denied.");
+              }
+            })
+            .catch(err => {
+              console.error("Device orientation permission error:", err);
+              viewerInstanceRef.current.startDeviceOrientation();
+              setIsGyroActive(true);
+            });
+        } else {
+          viewerInstanceRef.current.startDeviceOrientation();
+          setIsGyroActive(true);
+        }
+      }
+    } catch (e) {
+      console.error("Gyroscope orientation error:", e);
+    }
+  };
 
   // Keep a mutable ref of the playing state to avoid stale closure in Pannellum load callbacks
   const isPlayingRef = useRef(true);
@@ -606,16 +663,16 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
         ` }} />
 
         {/* Top Control Bar */}
-        <div className="absolute top-4 left-4 right-4 z-[120] flex items-center justify-between p-3.5 sm:p-5 bg-zinc-950/75 backdrop-blur-xl rounded-[24px] border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.8),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all">
+        <div className="absolute top-4 left-4 right-4 z-[120] hidden lg:flex items-center justify-between p-3.5 sm:p-5 bg-white/95 border border-zinc-200 shadow-xl rounded-[24px] transition-all">
           <div className="flex items-center gap-4">
             {/* Pulsing compass logo and title info */}
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-xl shadow-[0_0_15px_rgba(99,102,241,0.2)]">
-                <Compass className="w-5 h-5 text-indigo-400 animate-[spin_8s_linear_infinite]" />
+              <div className="p-2.5 bg-gradient-to-br from-cyan-50 to-teal-50 border border-cyan-100 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+                <Compass className="w-5 h-5 text-cyan-600 animate-[spin_8s_linear_infinite]" />
               </div>
               <div className="flex flex-col">
-                <span className="text-[10px] sm:text-xs font-black tracking-widest text-indigo-400 uppercase">360° Virtual Experience</span>
-                <h2 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+                <span className="text-[10px] sm:text-xs font-black tracking-widest text-cyan-600 uppercase">360° Virtual Experience</span>
+                <h2 className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-zinc-800">
                   <span className="hidden sm:inline">Adhiparasakthi Engineering College</span>
                   <span className="inline sm:hidden">APEC 360° Tour</span>
                 </h2>
@@ -625,10 +682,10 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             {/* Play/Pause Autoplay button */}
             <button 
               onClick={toggleAutoplay}
-              className={`p-2 rounded-xl transition-all flex items-center justify-center cursor-pointer border active:scale-95 shadow-lg ${
+              className={`p-2 rounded-xl transition-all flex items-center justify-center cursor-pointer border active:scale-95 shadow-sm ${
                 isPlaying 
-                  ? "bg-emerald-500/20 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/30" 
-                  : "bg-zinc-800/80 border-zinc-700 text-zinc-400 hover:bg-zinc-700/80 hover:text-white"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-600 hover:bg-emerald-100" 
+                  : "bg-zinc-50 border-zinc-200 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800"
               }`}
               title={isPlaying ? "Pause Autoplay" : "Resume Autoplay"}
             >
@@ -651,7 +708,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                     viewerInstanceRef.current.loadScene(newScene);
                   }
                 }}
-                className="bg-zinc-900/90 text-zinc-100 border border-zinc-700 hover:border-indigo-500 rounded-xl pl-3.5 pr-8 py-2 font-bold text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all hover:bg-zinc-800 max-w-[110px] sm:max-w-none appearance-none shadow-md"
+                className="bg-white text-zinc-800 border border-zinc-300 hover:border-cyan-500 rounded-xl pl-3.5 pr-8 py-2 font-bold text-[10px] sm:text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-500/30 transition-all hover:bg-zinc-50 max-w-[110px] sm:max-w-none appearance-none shadow-sm"
               >
                 <option value="mainGate">Entrance Gate</option>
                 <option value="junctionOne">Junction 1</option>
@@ -664,7 +721,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                 <option value="aimlLab">AIML Lab</option>
               </select>
               {/* Custom selector indicator arrow */}
-              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400">
+              <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500">
                 <svg className="w-3 h-3 fill-current" viewBox="0 0 20 20">
                   <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
                 </svg>
@@ -674,11 +731,240 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
             {/* Glowing Close Button */}
             <button 
               onClick={onClose}
-              className="p-2.5 bg-zinc-900/80 hover:bg-rose-600/90 text-zinc-400 hover:text-white rounded-xl border border-zinc-800 hover:border-rose-500 transition-all cursor-pointer shadow-lg active:scale-95 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+              className="p-2.5 bg-zinc-50 hover:bg-rose-50 text-zinc-500 hover:text-rose-600 rounded-xl border border-zinc-200 hover:border-rose-350 transition-all cursor-pointer shadow-sm active:scale-95 hover:shadow-[0_0_15px_rgba(239,68,68,0.15)]"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
+        </div>
+
+        {/* Mobile Floating Overlay */}
+        <div className="absolute top-4 left-4 right-4 z-[120] flex lg:hidden items-center justify-between pointer-events-none">
+          {/* Hamburger Menu Button (3 spans transitioning to X) */}
+          <button 
+            onClick={() => setMobileSelectorOpen(!mobileSelectorOpen)}
+            className="w-10 h-10 rounded-full bg-black/90 backdrop-blur-md border border-white/10 text-white flex flex-col items-center justify-center gap-1.5 cursor-pointer pointer-events-auto shadow-lg active:scale-95 z-[130]"
+            title="Choose Location"
+          >
+            <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 ${mobileSelectorOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
+            <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 ${mobileSelectorOpen ? 'opacity-0' : ''}`} />
+            <span className={`w-4.5 h-0.5 bg-white rounded-full transition-all duration-300 ${mobileSelectorOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+          </button>
+
+          <div className="flex items-center gap-2 pointer-events-auto">
+            {/* Gyroscope Toggle Button */}
+            <button 
+              onClick={toggleGyroscope}
+              className={`w-10 h-10 rounded-full bg-black/90 backdrop-blur-md border flex items-center justify-center cursor-pointer shadow-lg active:scale-95 transition-all ${
+                isGyroActive 
+                  ? 'border-cyan-500 text-cyan-400 bg-cyan-950/50' 
+                  : 'border-white/10 text-zinc-400 hover:text-white'
+              }`}
+              title="Toggle Gyroscope"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={`w-4.5 h-4.5 ${isGyroActive ? 'animate-pulse' : ''}`}>
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                <path d="M12 18h.01" />
+                {isGyroActive && <path d="M17 12a5 5 0 0 0-10 0" />}
+              </svg>
+            </button>
+
+            {/* Close Button */}
+            <button 
+              onClick={onClose}
+              className="w-10 h-10 rounded-full bg-black/90 backdrop-blur-md border border-white/10 text-zinc-400 hover:text-white flex items-center justify-center cursor-pointer shadow-lg active:scale-95"
+              title="Exit Tour"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Scene Selector Dropdown Drawer */}
+        <AnimatePresence>
+          {mobileSelectorOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-16 left-4 right-4 z-[130] bg-white/98 border border-zinc-200 rounded-3xl p-5 shadow-2xl backdrop-blur-xl flex flex-col gap-4 text-left lg:hidden max-h-[70vh] overflow-y-auto"
+            >
+              <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
+                <span className="text-[10px] font-black tracking-widest text-cyan-600 uppercase">Select Location</span>
+                <span className="text-[9px] font-extrabold text-zinc-400 uppercase tracking-widest">360° virtual tour</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2.5">
+                {thumbnailScenes.map((item) => {
+                  const isActive = activeScene === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        if (viewerInstanceRef.current && item.id !== activeScene) {
+                          viewerInstanceRef.current.loadScene(item.id);
+                        }
+                        setMobileSelectorOpen(false);
+                      }}
+                      className={`relative h-[65px] rounded-xl overflow-hidden border transition-all cursor-pointer text-left group ${
+                        isActive 
+                          ? 'border-cyan-500 ring-2 ring-cyan-500/30 scale-[1.02]' 
+                          : 'border-zinc-200/80 hover:border-zinc-300'
+                      }`}
+                    >
+                      <img 
+                        src={item.img} 
+                        alt={item.label} 
+                        className="w-full h-full object-cover"
+                        style={{ objectPosition: '25% center' }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/35 to-black/5" />
+                      <span className="absolute bottom-2 left-2.5 right-2.5 text-[9px] font-black uppercase tracking-wider text-white truncate text-center">
+                        {item.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* APEC Desktop Left Sidebar Panel (Map on top, vertical scenes list below) */}
+        <div className="absolute left-6 top-24 bottom-6 w-[290px] z-[120] hidden lg:flex flex-col gap-4 pointer-events-none select-none">
+          <AnimatePresence>
+            {showMiniMap ? (
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="flex flex-col gap-4 h-full pointer-events-auto"
+              >
+                {/* 1. Map Card (Top) */}
+                <div className="bg-white/95 border border-zinc-200 rounded-2xl p-3 shadow-xl flex flex-col gap-2 shrink-0">
+                  <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
+                    <div className="flex items-center gap-1.5">
+                      <Compass className="w-3.5 h-3.5 text-cyan-600 animate-pulse" />
+                      <span className="text-[10px] font-black tracking-widest text-cyan-600 uppercase font-title">APEC Campus Map</span>
+                    </div>
+                    <button 
+                      onClick={() => setShowMiniMap(false)}
+                      className="p-1 hover:bg-zinc-100 rounded-lg text-zinc-400 hover:text-zinc-700 transition-colors cursor-pointer"
+                      title="Collapse Sidebar"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+
+                  {/* Interactive Map Display */}
+                  <div className="relative w-full h-[185px] rounded-lg overflow-hidden border border-zinc-200 bg-zinc-50">
+                    <img 
+                      src="/data/pano/map.png" 
+                      alt="Campus Navigation Map" 
+                      className="w-full h-full object-cover pointer-events-none select-none opacity-85" 
+                    />
+
+                    {/* Coordinate pins */}
+                    {mapPoints.map((pt) => {
+                      const isActive = activeScene === pt.sceneId;
+                      return (
+                        <div
+                          key={pt.id}
+                          style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
+                          className="absolute -translate-x-1/2 -translate-y-1/2 group z-[126]"
+                        >
+                          <button
+                            onClick={() => {
+                              if (viewerInstanceRef.current && pt.sceneId !== activeScene) {
+                                viewerInstanceRef.current.loadScene(pt.sceneId);
+                              }
+                            }}
+                            className={`relative w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                              isActive 
+                                ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.9)] scale-110' 
+                                : 'bg-cyan-500/80 hover:bg-cyan-400 hover:scale-110'
+                            }`}
+                          >
+                            <div className={`w-1 h-1 rounded-full ${isActive ? 'bg-white' : 'bg-white/70'}`} />
+                            {isActive && (
+                              <>
+                                <span className="absolute inset-0 rounded-full border border-red-500 animate-[ping_1.6s_infinite] opacity-75" />
+                                <span className="absolute -inset-1 rounded-full border border-red-500/50 animate-[ping_2s_infinite] opacity-40" />
+                              </>
+                            )}
+                          </button>
+
+                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-white/95 border border-zinc-200 rounded-lg text-[9px] font-black uppercase tracking-wider text-zinc-800 whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-md z-[127]">
+                            {pt.name}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* 2. Vertical Explore Scenes List (Fills remaining height) */}
+                <div className="flex-1 bg-white/95 border border-zinc-200 rounded-2xl p-4 shadow-xl flex flex-col gap-3 min-h-0">
+                  <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
+                    <span className="text-[10px] font-black tracking-widest text-cyan-600 uppercase font-title font-bold">Explore Campus</span>
+                    <span className="text-[9px] font-extrabold text-zinc-400 uppercase tracking-widest">{thumbnailScenes.length} Scenes</span>
+                  </div>
+
+                  <div 
+                    className="flex-1 overflow-y-auto flex flex-col gap-2.5 pr-1"
+                    style={{ scrollbarWidth: 'thin', msOverflowStyle: 'none' }}
+                  >
+                    {thumbnailScenes.map((item) => {
+                      const isActive = activeScene === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => {
+                            if (viewerInstanceRef.current && item.id !== activeScene) {
+                              viewerInstanceRef.current.loadScene(item.id);
+                            }
+                          }}
+                          className={`relative h-[80px] rounded-xl overflow-hidden border transition-all cursor-pointer text-left w-full group shrink-0 ${
+                            isActive 
+                              ? 'border-cyan-500 ring-2 ring-cyan-500/25 scale-[1.02] shadow-sm shadow-cyan-500/10' 
+                              : 'border-zinc-200/85 hover:border-zinc-350 hover:scale-[1.01]'
+                          }`}
+                        >
+                          <img 
+                            src={item.img} 
+                            alt={item.label} 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            style={{ objectPosition: '25% center' }}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/5" />
+                          <div className="absolute bottom-2.5 left-3.5 right-3.5 flex flex-col">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-white truncate">
+                              {item.label}
+                            </span>
+                            <span className="text-[8px] font-extrabold text-zinc-300 uppercase tracking-widest mt-0.5">
+                              360° Panorama View
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              /* Minimized Floating button in bottom-left for desktop */
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                onClick={() => setShowMiniMap(true)}
+                className="w-10 h-10 rounded-full bg-white/95 border border-zinc-200 text-zinc-500 flex items-center justify-center cursor-pointer pointer-events-auto shadow-md active:scale-95 hover:bg-zinc-50 absolute bottom-0 left-0"
+                title="Expand Navigation Sidebar"
+              >
+                <Compass className="w-5 h-5 text-cyan-600" />
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Premium Blur and Motion Transition Overlay */}
