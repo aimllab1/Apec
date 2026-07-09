@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, User, Eye, EyeOff, ShieldAlert, KeyRound, CheckCircle2 } from 'lucide-react';
+import { db } from '../firebase';
+import { collection, doc, getDocs, setDoc, query, where, limit } from 'firebase/firestore';
+import { encryptText, decryptText } from '../utils/crypto';
 
 export default function Login() {
   const navigate = useNavigate();
   
-  // Inputs
+  // Inputs (prefilled for development convenience as requested)
   const [usernameInput, setUsernameInput] = useState('admin@apec.edu.in');
   const [passwordInput, setPasswordInput] = useState('web-development-01');
   
@@ -16,7 +19,53 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1); // 1 = Login Form, 2 = Success Animation
 
-  const handleLoginSubmit = (e) => {
+  // Auto-populate secure AES-encrypted accounts on first mount if database is empty
+  useEffect(() => {
+    const initUsers = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'users'));
+        if (querySnapshot.empty) {
+          console.log("Populating database with secure AES-encrypted accounts...");
+          
+          const defaultAccounts = [
+            { username: 'admin@apec.edu.in', role: 'admin' },
+            { username: 'admission@apec.edu.in', role: 'admission' },
+            { username: 'aiml@apec.edu.in', role: 'dept_aiml' },
+            { username: 'cse@apec.edu.in', role: 'dept_cse' },
+            { username: 'civil@apec.edu.in', role: 'dept_civil' },
+            { username: 'mech@apec.edu.in', role: 'dept_mech' },
+            { username: 'eee@apec.edu.in', role: 'dept_eee' },
+            { username: 'ece@apec.edu.in', role: 'dept_ece' },
+            { username: 'it@apec.edu.in', role: 'dept_it' },
+            { username: 'chemical@apec.edu.in', role: 'dept_chemical' },
+            { username: 'agri@apec.edu.in', role: 'dept_agri' },
+            { username: 'aids@apec.edu.in', role: 'dept_aids' },
+            { username: 'csd@apec.edu.in', role: 'dept_csd' },
+            { username: 'mca@apec.edu.in', role: 'dept_mca' },
+            { username: 'mba@apec.edu.in', role: 'dept_mba' },
+            { username: 'sh@apec.edu.in', role: 'dept_sh' }
+          ];
+
+          for (const acc of defaultAccounts) {
+            // Encrypt the password using PBKDF2 derived 256-bit AES-GCM
+            const encryptedPassword = await encryptText('web-development-01');
+            const docId = acc.username.replace(/[^a-zA-Z0-9]/g, '_'); // Safe identifier
+            await setDoc(doc(db, 'users', docId), {
+              username: acc.username,
+              password: encryptedPassword,
+              role: acc.role
+            });
+          }
+          console.log("Database user accounts populated successfully!");
+        }
+      } catch (err) {
+        console.error("Firestore user accounts initialization skipped/failed:", err);
+      }
+    };
+    initUsers();
+  }, []);
+
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setError('');
     
@@ -26,38 +75,73 @@ export default function Login() {
     }
 
     setIsLoading(true);
-
-    // Validate credentials: admin@apec.edu.in or admission@apec.edu.in
     const username = usernameInput.trim().toLowerCase();
     const password = passwordInput;
 
-    const isValidUser = 
-      (username === "admin@apec.edu.in" && password === "web-development-01") ||
-      (username === "admission@apec.edu.in" && password === "web-development-01");
+    try {
+      // Query Firestore for matching user
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where('username', '==', username), limit(1));
+      const querySnapshot = await getDocs(q);
 
-    if (!isValidUser) {
-      setTimeout(() => {
+      if (querySnapshot.empty) {
         setError('Invalid username or password.');
         setIsLoading(false);
-      }, 600);
-      return;
-    }
+        return;
+      }
 
-    // Dynamic role detection
-    const detectedRole = username.includes('admission') ? 'admission' : 'admin';
+      const userDoc = querySnapshot.docs[0].data();
+      
+      // Decrypt stored AES-GCM password string for secure verification
+      const decryptedPassword = await decryptText(userDoc.password);
 
-    // Successful login: Bypass verification code step entirely
-    setTimeout(() => {
-      setStep(2); // Success step
-      localStorage.setItem('apec_user', usernameInput.trim());
+      if (decryptedPassword !== password) {
+        setError('Invalid username or password.');
+        setIsLoading(false);
+        return;
+      }
+
+      // Success
+      setStep(2);
+      localStorage.setItem('apec_user', userDoc.username);
       localStorage.setItem('is_logged_in', 'true');
-      localStorage.setItem('user_role', detectedRole);
+      localStorage.setItem('user_role', userDoc.role);
       
       setTimeout(() => {
         navigate('/');
         window.location.reload();
       }, 1200);
-    }, 800);
+
+    } catch (err) {
+      console.error("Database auth failed. Falling back to offline verify:", err);
+      
+      // Offline fallback for seamless testing/development
+      const isOfflineValid = 
+        (username === 'admin@apec.edu.in' && password === 'web-development-01') ||
+        (username === 'admission@apec.edu.in' && password === 'web-development-01') ||
+        (username === 'cse@apec.edu.in' && password === 'web-development-01') ||
+        (username === 'aiml@apec.edu.in' && password === 'web-development-01');
+
+      if (isOfflineValid) {
+        let detectedRole = 'admin';
+        if (username.includes('admission')) detectedRole = 'admission';
+        else if (username.includes('cse')) detectedRole = 'dept_cse';
+        else if (username.includes('aiml')) detectedRole = 'dept_aiml';
+        
+        setStep(2);
+        localStorage.setItem('apec_user', username);
+        localStorage.setItem('is_logged_in', 'true');
+        localStorage.setItem('user_role', detectedRole);
+        
+        setTimeout(() => {
+          navigate('/');
+          window.location.reload();
+        }, 1200);
+      } else {
+        setError('Database connection error and offline credentials failed.');
+        setIsLoading(false);
+      }
+    }
   };
 
   return (

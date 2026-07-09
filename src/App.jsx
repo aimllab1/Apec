@@ -9,6 +9,8 @@ import {
   Download, ChevronDown, Send, RotateCw
 } from 'lucide-react';
 import Preloader from './components/Preloader';
+import { db } from './firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 // Import Pages
 import Home from './pages/Home';
@@ -414,6 +416,8 @@ function AppContent({ isLoading, setIsLoading }) {
     }
   };
 
+const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
+
   const handleChatSubmit = async (e, textOverride = null) => {
     if (e) e.preventDefault();
     if (windowWidth <= 768) {
@@ -434,26 +438,87 @@ function AppContent({ isLoading, setIsLoading }) {
     setMessages(withLoading);
 
     try {
-      const response = await fetch('/api/chat', {
+      let retrievedContext = "";
+
+      // 1. Generate text embedding for user's input
+      const embedResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GEMINI_API_KEY}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          message: userText,
-          sessionId: sessionId
+          model: "models/text-embedding-004",
+          content: { parts: [{ text: userText }] }
         })
       });
 
-      if (!response.ok) {
-        throw new Error('API request failed');
+      if (embedResponse.ok) {
+        const embedData = await embedResponse.json();
+        const queryVector = embedData.embedding?.values;
+
+        if (queryVector) {
+          // 2. Fetch all trained vectors from Firestore knowledge_base
+          const snapshot = await getDocs(collection(db, 'knowledge_base'));
+          const candidates = [];
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            if (data.embedding && data.text) {
+              // Calculate Cosine Similarity
+              let dotProduct = 0;
+              let normA = 0;
+              let normB = 0;
+              const vA = queryVector;
+              const vB = data.embedding;
+              for (let i = 0; i < vA.length; i++) {
+                dotProduct += vA[i] * vB[i];
+                normA += vA[i] * vA[i];
+                normB += vB[i] * vB[i];
+              }
+              const similarity = (normA === 0 || normB === 0) ? 0 : dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
+              candidates.push({ text: data.text, similarity });
+            }
+          });
+
+          // Sort and select top matching context chunks above threshold (0.65)
+          candidates.sort((a, b) => b.similarity - a.similarity);
+          const relevantChunks = candidates.filter(c => c.similarity > 0.65).slice(0, 4);
+
+          if (relevantChunks.length > 0) {
+            retrievedContext = relevantChunks.map(c => c.text).join("\n\n");
+            console.log("Retrieved RAG Context:", retrievedContext);
+          }
+        }
       }
 
-      const data = await response.json();
+      // 3. Query Gemini Flash with Context constraint
+      const systemInstruction = "You are the APEC AI Assistant. Answer the user's question using ONLY the provided context snippets. Be extremely concise, direct, and specific. Do NOT return paragraphs of general text; only output the exact specific data or answer expected by the user. If you cannot find the exact answer in the context, respond with: 'I couldn't find this information in the current college database. Please contact the college help desk for confirmation.'";
+      
+      const promptText = retrievedContext 
+        ? `Context:\n${retrievedContext}\n\nQuestion: ${userText}`
+        : userText;
+
+      const geminiResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: "user", parts: [{ text: promptText }] }],
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          generationConfig: {
+            temperature: 0.15,
+            maxOutputTokens: 200
+          }
+        })
+      });
+
+      if (!geminiResponse.ok) {
+        throw new Error('Gemini API query failed');
+      }
+
+      const geminiData = await geminiResponse.json();
+      const answer = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || "";
+
       setIsOnline(true);
-      setMessages([...updatedMessages, { sender: 'ai', text: data.response || "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." }]);
+      setMessages([...updatedMessages, { sender: 'ai', text: answer.trim() || "I couldn't find this information in the current college database. Please contact the college help desk for confirmation." }]);
     } catch (err) {
-      console.error("Chat API error:", err);
+      console.error("RAG assistant pipeline error:", err);
       setIsOnline(false);
       setMessages([...updatedMessages, { 
         sender: 'ai', 
