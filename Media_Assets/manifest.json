@@ -1,0 +1,23 @@
+{
+  "short_name": "APEC",
+  "name": "Adhiparasakthi Engineering College",
+  "icons": [
+    {
+      "src": "/apec-logo.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apec-logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#07113A",
+  "theme_color": "#07113A",
+  "display": "standalone",
+  "orientation": "portrait"
+}

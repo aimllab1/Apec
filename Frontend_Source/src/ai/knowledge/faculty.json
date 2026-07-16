@@ -1,0 +1,1262 @@
+[
+  {
+    "name": "Dr. N. Elamathi",
+    "designation": "Head of Department",
+    "qualification": "ME, Ph.D",
+    "email": "elamathi@apec.edu.in",
+    "experience": "19 Years, 10 Months",
+    "department": "Artificial Intelligence and Machine Learning",
+    "department_key": "aiml"
+  },
+  {
+    "name": "Mr. J. Senthil Kumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.Tech.",
+    "email": "omsakthisenthil@gmail.com",
+    "experience": "35 Years,  Months",
+    "department": "Artificial Intelligence and Machine Learning",
+    "department_key": "aiml"
+  },
+  {
+    "name": "Ms. R. Menaga",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "menagashanthi1121@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Artificial Intelligence and Machine Learning",
+    "department_key": "aiml"
+  },
+  {
+    "name": "Mr. Nagaraj Jaya Sridhar J",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Artificial Intelligence and Machine Learning",
+    "department_key": "aiml"
+  },
+  {
+    "name": "Mrs. Poornima Devi K",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Artificial Intelligence and Machine Learning",
+    "department_key": "aiml"
+  },
+  {
+    "name": "Dr.B.GANESH",
+    "designation": "Head of Department",
+    "qualification": "M.Tech., Ph.D.",
+    "email": "ganeshevst@gmail.com",
+    "experience": "10 Years, 0 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Dr. Magesh Rangaraju",
+    "designation": "Professor",
+    "qualification": "M.Tech., PhD",
+    "email": "mageshr@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Mr.S.Velmurugan",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "velmuruganchemical@gmail.com",
+    "experience": "26 Years, 1 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Ms.M.SELVAPRATHIPA",
+    "designation": "Assistant Professor",
+    "qualification": "M.Tech., (Ph.D.)",
+    "email": "prathipa@apec.edu.in",
+    "experience": "6 Years, 4 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Mr. S. Ranjithsingh",
+    "designation": "Assistant Professor",
+    "qualification": "M. Tech.",
+    "email": "safetysingh1996@gmail.com",
+    "experience": "0 Years, 4 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Ms. T. S. Swetha",
+    "designation": "Assistant Professor",
+    "qualification": "M.Tech",
+    "email": "swethats@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Ms. G. Saraswathy",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "saraswathyg@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Chemical Engineering",
+    "department_key": "chemical"
+  },
+  {
+    "name": "Dr.V.Ramasamy",
+    "designation": "Dean, Professor",
+    "qualification": "M.E., Ph.D",
+    "email": "rams_apec@yahoo.co.in",
+    "experience": "32 Years, 8 Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Dr.A.Krishnamoorthi",
+    "designation": "Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "krish_moor2006@yahoo.com",
+    "experience": "27 Years, 5 Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Dr.P.Somiyadevi",
+    "designation": "Head of Department",
+    "qualification": "M.E,Ph.D.",
+    "email": "somiya86@gmail.com",
+    "experience": "17 Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Dr.K.Thiagarajan",
+    "designation": "Associate Professor",
+    "qualification": "M.Tech., Ph.D",
+    "email": "rajan.thiaga080@gmail.com",
+    "experience": "4 Years, 7 Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Mr.S.Rethinakumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "rethinaindu@gmail.com",
+    "experience": "11 Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Mr.S.Selvakumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "selvaashika3@gmail.com",
+    "experience": "11 Years, 1 Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Mr.G.Karthikkumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "karthikkumarg5@gmail.com",
+    "experience": "9 Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Mr.S.Maluvu",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "maluvus@gmail.com",
+    "experience": "9 Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Mr.S.Karthikeyan",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D)",
+    "email": "karthikeyan9111@gmail.com",
+    "experience": "9 Years, 7 Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Mr.S.Parthiban",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D)",
+    "email": "Parthiban@apec.edu.in",
+    "experience": "5 Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Ms. I. Sakthidevi",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "sakthidevisak@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Ms. Sangeetha E",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "sangeethaelumalai07@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Ms. K. Gomathi",
+    "designation": "Assistant Professor",
+    "qualification": "M. E.",
+    "email": "gomathi9418@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Ms. M. Abinaya",
+    "designation": "Assistant Professor",
+    "qualification": "M. Tech.",
+    "email": "abinayasundari2808@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Civil Engineering",
+    "department_key": "civil"
+  },
+  {
+    "name": "Dr. S. Selvaraj",
+    "designation": "Professor",
+    "qualification": "MCA. Ph.D",
+    "email": "mca@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Dr. S. Arunkumar",
+    "designation": "Assistant Professor",
+    "qualification": "MCA, M.Phil., Ph.D.",
+    "email": "arunkumar@apec.edu.in",
+    "experience": "N/A",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Mr. E. Janakiraman",
+    "designation": "Assistant Professor",
+    "qualification": "MCA, M.Phil",
+    "email": "janakiraman@apec.edu.in",
+    "experience": "5 Years, 10 Months",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Ms. A. Yamuna",
+    "designation": "Assistant Professor",
+    "qualification": "MCA",
+    "email": "yamuanan97@gmail.com",
+    "experience": "4 Years, 10 Months",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Ms. C. Amuthavalli",
+    "designation": "",
+    "qualification": "N/A",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "M.C.A.",
+    "designation": "Assistant Professor",
+    "qualification": "N/A",
+    "email": "amuthavallic@apec.edu.in",
+    "experience": "N/A",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Mrs. Sakthi S",
+    "designation": "Assistant Professor",
+    "qualification": "MCA",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Mrs. M. Seetha",
+    "designation": "Assistant Professor",
+    "qualification": "MCA",
+    "email": "sita110594@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Computer Applications",
+    "department_key": "mca"
+  },
+  {
+    "name": "Dr. C. Dhaya",
+    "designation": "Head of Department",
+    "qualification": "M.E., Ph.D.",
+    "email": "dhaya@apec.edu.in",
+    "experience": "25 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Dr. S. Jayashri",
+    "designation": "Professor",
+    "qualification": "M.E., PhD",
+    "email": "jayashris@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mr. G. Sekar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D.)",
+    "email": "sekar@apec.edu.in",
+    "experience": "16 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mr. G. Srinivasan",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "srinivasan@apec.edu.in",
+    "experience": "14 Years, 1 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mr. K. Chairmadurai",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D.)",
+    "email": "chairmadurai@apec.edu.in",
+    "experience": "9 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. A. Jayanthi",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "jayanthiarumugam90@gmail.com",
+    "experience": "5 Years, 9 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. P. Gajalakshmi",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D.)",
+    "email": "gajalakshmigctme@gmail.com",
+    "experience": "4 Years, 10 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. M. Devika",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "m.devika2007@gmail.com",
+    "experience": "4 Years, 9 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mr. S. Hariganesan",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "hariganesan@apec.edu.in",
+    "experience": "3 Years, 4 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. S. Swetha",
+    "designation": "Assistant Professor",
+    "qualification": "M. E.",
+    "email": "swethasasikumar07@gmail.com",
+    "experience": "1 Years, 7 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. Manonmani G",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "MANOLASKHMI@GMAIL.COM",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. P. Banu Priya",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "banupriya@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Ms. K. Muthu Priya",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "muthupriyak@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mrs. Mahalakshmi M",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "MMDPSS123@GMAIL.COM",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mrs.Padmapriya. T.M",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "APECPRIYA@GMAIL.COM",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Mrs.Thamarai Selvi.V",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "THAMARAIVASU.SELVI06@GMAIL.COM",
+    "experience": "0 Years, 0 Months",
+    "department": "Computer Science Engineering",
+    "department_key": "cse"
+  },
+  {
+    "name": "Dr.C.K.Dhinakarraj",
+    "designation": "Head of Department",
+    "qualification": "M.E,Ph.D",
+    "email": "ckd@apec.edu.in",
+    "experience": "30 Years, 5 Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Dr.R.Kamaljayaraj",
+    "designation": "Associate Professor",
+    "qualification": "M.E,Ph.D",
+    "email": "doctormothilal@gmail.com",
+    "experience": "24 Years, 1 Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Dr. Gajalakshmi K",
+    "designation": "Associate Professor",
+    "qualification": "M.E,Ph.D.",
+    "email": "kg@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Dr. Vivekanandhan M",
+    "designation": "Associate Professor",
+    "qualification": "M.E,Ph.D.",
+    "email": "vivekanandhanm@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.K.Dhandapani",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "dhandapanitvm@gmail.com",
+    "experience": "19 Years, 6 Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.Gopikannan.S",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "gopikannan@rediffmail.com",
+    "experience": "14 Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.Sathishbabu.R",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D)",
+    "email": "sathish2432403@gmail.com",
+    "experience": "14 Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.Yogeshwaran.K.B",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "kbyapec@gmail.com",
+    "experience": "13 Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.Parthiban.R",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "Parthiban@apec.edu.in",
+    "experience": "13 Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.Balamurugan.M",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "asmbalamurugan@gmail.com",
+    "experience": "11 Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr.Balasubramaniasaravanan.T",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "saravanathangappan@gmail.com",
+    "experience": "9 Years, 11 Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr. Mohan S",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "mohans4590@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Mr. Manigandan. C",
+    "designation": "Assistant Professor",
+    "qualification": "M.E",
+    "email": "manindhu198@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Department of Mechanical Engineering",
+    "department_key": "mech"
+  },
+  {
+    "name": "Dr. A. Bhuvaneswari",
+    "designation": "Head of Department",
+    "qualification": "M.E., Ph.D",
+    "email": "bhuvaneswari@apec.edu.in",
+    "experience": "N/A",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mrs.Vasanthi.M.D",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mrs. Thulasilakshmi.S",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mrs. Lalitha M",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "lalitham@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mr. K. Hema Kumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "hemakumark@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mrs. Maria Salomi.E.M",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mr. Sakthivel P",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Mr. Lavanya.S",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.,",
+    "email": "N/A",
+    "experience": "N/A",
+    "department": "Information Technology",
+    "department_key": "it"
+  },
+  {
+    "name": "Dr.P.Rajivgandhi",
+    "designation": "Head of Department",
+    "qualification": "M.E., Ph.D.",
+    "email": "rajivgandhi@apec.edu.in",
+    "experience": "12 Years, 0 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Dr.S.A.Elankurisil",
+    "designation": "Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "elankurisil@apec.edu.in",
+    "experience": "28 Years, 11 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Dr. R. Srivel",
+    "designation": "Associate Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "srivel@apec.edu.in",
+    "experience": "5 Years, 8 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Mrs.P.Tamizharasi",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D.)",
+    "email": "tamizharasi@apec.edu.in",
+    "experience": "23 Years, 6 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Dr.N.Manimaran",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "manimaran@apec.edu.in",
+    "experience": "18 Years, 7 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Mr. P. Ramesh",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "rameshrara84@gmail.com",
+    "experience": "10 Years, 5 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Dr.S.Muthukumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "muthukumar@apec.edu.in",
+    "experience": "5 Years, 8 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Mr.D.Sarathkumar",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "sarathkumar@apec.edu.in",
+    "experience": "4 Years, 10 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Dr.T.Kuntavai",
+    "designation": "Assistant Professor",
+    "qualification": "ME, Ph.D",
+    "email": "kuntavai2000@gmail.com",
+    "experience": "0 Years, 0 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Mrs.D.K.Shobana",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "shobananadhakumar85@gmail.com",
+    "experience": "0 Years, 0 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Mrs.V.Vanitha",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "surenthuya@gmail.com",
+    "experience": "0 Years, 0 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Mr. B. Sakthivel",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "sakthivelb@apec.edu.in",
+    "experience": "0 Years, 0 Months",
+    "department": "Electrical and Electronics Engineering",
+    "department_key": "eee"
+  },
+  {
+    "name": "Dr. J. Raja",
+    "designation": "Principal",
+    "qualification": "M.E., Ph.D.",
+    "email": "principal@apec.edu.in",
+    "experience": "31 Years, 10 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Dr. M. Malathi",
+    "designation": "Head of Department",
+    "qualification": "M.E., Ph.D.",
+    "email": "ecemalathi@gmail.com",
+    "experience": "31 Years, 8 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Dr. P. Thirumaraiselvan",
+    "designation": "Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "thirumarai@apec.edu.in",
+    "experience": "34 Years, 1 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Dr. T. N. Suresh Babu",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "sureshbabutns@gmail.com",
+    "experience": "29 Years, 7 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mr. K. Mathivanan",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "mathivanan@apec.edu.in",
+    "experience": "22 Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Dr. G. Vasanthi",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., Ph.D.",
+    "email": "vasanthig@apec.edu.in",
+    "experience": "22 Years, 11 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mr. P. Vedasundaravinayagam",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "vedasundaravinayagam@apec.edu.in",
+    "experience": "18 Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mr. S. Prakash",
+    "designation": "Assistant Professor",
+    "qualification": "M.Tech.",
+    "email": "prakashmce@gmail.com",
+    "experience": "18 Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mr. B. Elango",
+    "designation": "Assistant Professor",
+    "qualification": "M.E., (Ph.D.)",
+    "email": "elango@apec.edu.in",
+    "experience": "15 Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mrs. M. Mala",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "mala.ece.95@gmail.com",
+    "experience": "7 Years, 11 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mrs.J. Suganya",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "suganya.yamni@gmail.com",
+    "experience": "4 Years, 10 Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Ms. S. Chitra",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "chitrachitra738@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mrs. R. Ramyadevi",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "ramyadevir@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mr.Arivazhagan.H",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "arulmaha77@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mr. K. Selvam",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "selvam9194@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mrs. A. Aishwarya",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "aishu.ece02@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mrs. Supriya T",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "SUPPRIYA1981@GMAIL.COM",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Mrs. S. Rajalakshmi",
+    "designation": "Assistant Professor",
+    "qualification": "ME",
+    "email": "rajalakshmisivalingam@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Electronics and Communication Engineering",
+    "department_key": "ece"
+  },
+  {
+    "name": "Dr. M. Saviour",
+    "designation": "Head of Department",
+    "qualification": "Ph.D",
+    "email": "saviour@apec.edu.in",
+    "experience": "28 Years,  Months",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba"
+  },
+  {
+    "name": "Mr.V.Thamaraiselvan",
+    "designation": "Assistant Professor",
+    "qualification": "B.E,MBA,(Ph.D)",
+    "email": "thamaraiselvan@apec.edu.in",
+    "experience": "14 Years,  Months",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba"
+  },
+  {
+    "name": "Mrs. P. Kavitha",
+    "designation": "Assistant Professor",
+    "qualification": "B.Com., MBA",
+    "email": "kavithakamal673@gamil.com",
+    "experience": "11 Years, 11 Months",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba"
+  },
+  {
+    "name": "Mrs. V. Manju Priya",
+    "designation": "Assistant Professor",
+    "qualification": "BCom., MBA, (Ph.D.)",
+    "email": "manjuvenkatesan05@gmail.com",
+    "experience": "6 Years,  Months",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba"
+  },
+  {
+    "name": "Mrs. K. Karthiga",
+    "designation": "Assistant Professor",
+    "qualification": "MBA",
+    "email": "N/A",
+    "experience": "4 Years, 4 Months",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba"
+  },
+  {
+    "name": "Mrs. Gokulapriya M",
+    "designation": "Assistant Professor",
+    "qualification": "MBA",
+    "email": "GOKULAPRIYA462000@GMAIL.COM",
+    "experience": "Years,  Months",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba"
+  },
+  {
+    "name": "Dr. V. Vijayasundaram",
+    "designation": "Professor",
+    "qualification": "M. Sc., Ph.D. D",
+    "email": "vijayasundaram@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Sakthi Raadha. S",
+    "designation": "Professor",
+    "qualification": "M.Sc., M.Phil., Ph.D",
+    "email": "sakthiraadhas@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Ms. Manjula A",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "Manjumsc2013@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Sivaramakirshnan. V",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., B.Ed., M.Phil.,  - SET",
+    "email": "Tkmsiva.78@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Johnson. J",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., B.Ed., M.Phil., Ph.D",
+    "email": "johnmad18@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Johnson. J",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., B.Ed., M.Phil., Ph.D",
+    "email": "johnmad18@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. E. Kalaivani",
+    "designation": "Assistant Professor",
+    "qualification": "M.A.,M.Phil.,Ph.D.NET.,SET.,",
+    "email": "Ssvani1978@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Sathya.S",
+    "designation": "Assistant Professor",
+    "qualification": "M.A(TAMIL)., M.A(Ling)., B.Ed.,Dip.in Saiva Siddhantha.,PG Dip.in Tamil Research Methodology., M.Phil.,NET., (Ph.D)",
+    "email": "Sathyasenthil77@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Shobana R",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "shobana@apec.edu.in",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Manikandan J",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc.,M.Phil.,NET.,",
+    "email": "manisrmk42@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Maheswari.D",
+    "designation": "Assistant Professor",
+    "qualification": "M.A., M.A., B.Ed., M.Phil.",
+    "email": "mahesaptc@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr.Manikandan .S",
+    "designation": "Assistant Professor",
+    "qualification": "M. Sc., Ph.D. D",
+    "email": "manikandanchocolatemunch@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Thirumagal P",
+    "designation": "Assistant Professor",
+    "qualification": "M. Sc., M.Phil.,",
+    "email": "thirumagal94k@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Vijayalakshmi P",
+    "designation": "Assistant Professor",
+    "qualification": "M. Sc., M.Phil.,",
+    "email": "vijichem610@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Ommurugan S",
+    "designation": "Assistant Professor",
+    "qualification": "M. Sc., Ph.D.",
+    "email": "ommurugan15@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Bharathi M",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "bharathimanickam1994@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Dr. Jothirani. R",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., B.Ed., M.Phil., Ph.D",
+    "email": "jothirani.rk@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Nivione Claire R",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil., SET.",
+    "email": "nivione7@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Madasamy S",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "madasamy1510@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Ganeshkumar. M",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., B.Ed., M.Phil.,",
+    "email": "sakthigk86@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Arivuchezhian N",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "arivu741976@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Ramesh. L",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc.,,M.Ed., M.Phil",
+    "email": "rameshsbl1986@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Karthigaimala.S",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "skarthigaimalamaths@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Anjanadevi. B",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,",
+    "email": "Anjana2677@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mrs. Suganya. N",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,B.Ed., (Ph.D)",
+    "email": "suganyashasti@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Mr. Balakrishnan. P",
+    "designation": "Assistant Professor",
+    "qualification": "M.Sc., M.Phil.,B.Ed., SET.,(Ph.D)",
+    "email": "balakrishnamaths@gmail.com",
+    "experience": "Years,  Months",
+    "department": "Science & Humanities",
+    "department_key": "sh"
+  },
+  {
+    "name": "Faculty members directory",
+    "designation": "Staff",
+    "qualification": "N/A",
+    "email": "csd@apec.edu.in",
+    "experience": "N/A",
+    "department": "Computer Science & Design (CSD)",
+    "department_key": "csd"
+  },
+  {
+    "name": "Faculty members directory",
+    "designation": "Staff",
+    "qualification": "N/A",
+    "email": "agri@apec.edu.in",
+    "experience": "N/A",
+    "department": "Agricultural Engineering",
+    "department_key": "agri"
+  },
+  {
+    "name": "Research Coordinators",
+    "designation": "Professor & Research Guide",
+    "qualification": "Ph.D.",
+    "email": "phd.civil@apec.edu.in",
+    "experience": "N/A",
+    "department": "PhD - Civil Engg.",
+    "department_key": "phd-civil"
+  },
+  {
+    "name": "Research Coordinators",
+    "designation": "Professor & Research Guide",
+    "qualification": "Ph.D.",
+    "email": "phd.mech@apec.edu.in",
+    "experience": "N/A",
+    "department": "PhD - Mechanical Engg.",
+    "department_key": "phd-mech"
+  },
+  {
+    "name": "Research Coordinators",
+    "designation": "Professor & Research Guide",
+    "qualification": "Ph.D.",
+    "email": "phd.ece@apec.edu.in",
+    "experience": "N/A",
+    "department": "PhD - Electronics and Communication Engg.",
+    "department_key": "phd-ece"
+  },
+  {
+    "name": "Research Coordinators",
+    "designation": "Professor & Research Guide",
+    "qualification": "Ph.D.",
+    "email": "phd.eee@apec.edu.in",
+    "experience": "N/A",
+    "department": "PhD - Electrical and Electronics Engg.",
+    "department_key": "phd-eee"
+  },
+  {
+    "name": "Department HOD & Faculty",
+    "designation": "Professor & Head",
+    "qualification": "Ph.D.",
+    "email": "hod.aids@apec.edu.in",
+    "experience": "N/A",
+    "department": "Artificial Intelligence and Data Science",
+    "department_key": "aids"
+  }
+]

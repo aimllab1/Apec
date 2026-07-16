@@ -1,0 +1,756 @@
+{
+  "name": "Adhiparasakthi Engineering College",
+  "short_name": "APEC",
+  "established": "1984",
+  "founder": "His Holiness Arulthiru Bangaru Adigalar",
+  "location": "Melmaruvathur, Kanchipuram District, Tamil Nadu - 603319, India",
+  "accreditation": "NAAC Accredited with 'A' Grade, UGC Autonomous Institution, Affiliated to Anna University",
+  "tnea_counseling_code": "1401",
+  "helplines": [
+    "+91 7418064336",
+    "+91 7418065336"
+  ],
+  "emails": {
+    "principal": "principal@apec.edu.in",
+    "general": "info@apec.edu.in",
+    "admin": "admin@apec.ac.in"
+  },
+  "cutoff_calculator": {
+    "total_score": 200,
+    "formula": "Mathematics (out of 100) + Physics / 2 (out of 50) + Chemistry / 2 (out of 50)",
+    "rule": "Math marks are taken fully, while Physics and Chemistry marks are halved, then all three are added together to get your engineering cutoff score out of 200."
+  },
+  "fee_payment": {
+    "bank_name": "Central Bank of India",
+    "branch": "Melmaruvathur",
+    "ifsc_code": "CBIN0283083",
+    "account_name": "Adhiparasakthi Engineering College",
+    "modes": [
+      "Net Banking",
+      "UPI QR Code Scanning (GPay, PhonePe, Paytm, etc.)",
+      "Direct Cash/Challan Deposit"
+    ],
+    "instructions": "To pay fees online, enter your Student Name, Department, and Fee Amount. The portal generates a dynamic UPI QR Code. Ensure you include your Register Number or Admission Number in the remarks for transaction confirmation."
+  },
+  "facilities": {
+    "library": {
+      "name": "APEC Central Library",
+      "area": "4,000 sq.m. across 2 stories",
+      "volumes": "Over 56,000 engineering and technical volumes",
+      "book_bank": "Dedicated collection of 3,700+ textbooks for SC/ST students",
+      "digital_library": "30+ computer terminals with access to IEEE, ScienceDirect, and Springer",
+      "memberships": [
+        "CSI",
+        "IETE",
+        "ISTE",
+        "IEEE Student Branch"
+      ]
+    },
+    "hostels": {
+      "name": "APEC Residential Hostels",
+      "capacity": "800+ beds in separate blocks for boys and girls",
+      "amenities": [
+        "RO water plant",
+        "24/7 diesel generator backup",
+        "Air-conditioned dining halls",
+        "Multi-gym",
+        "Common TV lounges",
+        "Indoor reading rooms",
+        "Biometric attendance scanning"
+      ],
+      "mess": "Nutritious and hygiene-certified vegetarian mess serving balanced meals"
+    },
+    "laboratories": {
+      "name": "Engineering Laboratories",
+      "features": [
+        "Fully equipped computer science labs with high-speed internet",
+        "Advanced AI/ML server centers",
+        "Mechanical engineering CNC machinery workshops",
+        "Chemical process engineering process control labs",
+        "Electrical machines & power systems panels"
+      ]
+    },
+    "bus_routes": [
+      {
+        "id": "02",
+        "name": "Esur (Route 02)",
+        "busNo": "TN19 K9234",
+        "driver": "Pannerselvam C",
+        "phone": "9894745125",
+        "stops": [
+          {
+            "name": "Esur (ஈசூர்)",
+            "time": "07:25 AM",
+            "threeMonth": "3750",
+            "sixMonth": "7500"
+          },
+          {
+            "name": "Arasur (அரசூர்)",
+            "time": "07:30 AM",
+            "threeMonth": "3600",
+            "sixMonth": "7200"
+          },
+          {
+            "name": "Polambakkam (தபாலம்பா ் ம்)",
+            "time": "08:25 AM",
+            "threeMonth": "2100",
+            "sixMonth": "4200"
+          },
+          {
+            "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+            "time": "08:30 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "03",
+        "name": "Chengalpattu (Route 03)",
+        "busNo": "TN19 K9333",
+        "driver": "Guru A",
+        "phone": "7092053189",
+        "stops": [
+          {
+            "name": "Chengalpattu (தசங் ல்பட்டு)",
+            "time": "07:40 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Mamandur (மாமை் டூர்)",
+            "time": "07:50 AM",
+            "threeMonth": "4250",
+            "sixMonth": "8500"
+          },
+          {
+            "name": "Padalam (படாளம்)",
+            "time": "07:55 AM",
+            "threeMonth": "4000",
+            "sixMonth": "8000"
+          },
+          {
+            "name": "Melavalam Pettai (வமலேளம் வபட்ணட)",
+            "time": "08:00 AM",
+            "threeMonth": "3200",
+            "sixMonth": "6400"
+          },
+          {
+            "name": "Karunguzhi (ருங்குழி)",
+            "time": "08:05 AM",
+            "threeMonth": "3000",
+            "sixMonth": "6000"
+          },
+          {
+            "name": "Madhuranthagam (மதுராந்ெ ம்)",
+            "time": "08:10 AM",
+            "threeMonth": "2550",
+            "sixMonth": "5100"
+          },
+          {
+            "name": "Pakkam (பா ் ம்)",
+            "time": "08:15 AM",
+            "threeMonth": "2000",
+            "sixMonth": "4000"
+          },
+          {
+            "name": "Sirunavalur (சிறுநாேலூர்)",
+            "time": "08:20 AM",
+            "threeMonth": "1800",
+            "sixMonth": "3600"
+          },
+          {
+            "name": "Oonamalai (ஊனமணல)",
+            "time": "08:25 AM",
+            "threeMonth": "1500",
+            "sixMonth": "3000"
+          },
+          {
+            "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+            "time": "08:30 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "04",
+        "name": "Thellar (Route 04)",
+        "busNo": "TN19 E3690",
+        "driver": "Ramesh K",
+        "phone": "9442492892",
+        "stops": [
+          {
+            "name": "Thellar (தெள்ளார்)",
+            "time": "07:10 AM",
+            "threeMonth": "5500",
+            "sixMonth": "11000"
+          },
+          {
+            "name": "Kodityalam (கோடியாலம்)",
+            "time": "07:15 AM",
+            "threeMonth": "5500",
+            "sixMonth": "11000"
+          },
+          {
+            "name": "Theyyar (தெய்யார்)",
+            "time": "07:20 AM",
+            "threeMonth": "5500",
+            "sixMonth": "11000"
+          },
+          {
+            "name": "Nallur (நல்லூர்)",
+            "time": "07:30 AM",
+            "threeMonth": "5000",
+            "sixMonth": "10000"
+          },
+          {
+            "name": "Eramalur (ஏமலூர்)",
+            "time": "07:35 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Padur (பாதூர்)",
+            "time": "07:40 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Veppankarunai (வேப்பங்குருணை)",
+            "time": "07:50 AM",
+            "threeMonth": "4250",
+            "sixMonth": "8500"
+          },
+          {
+            "name": "Ettipattu (எட்டிப்பட்டு)",
+            "time": "07:55 AM",
+            "threeMonth": "4250",
+            "sixMonth": "8500"
+          },
+          {
+            "name": "Orathi (ஒரெ்தி)",
+            "time": "08:00 AM",
+            "threeMonth": "4000",
+            "sixMonth": "8000"
+          },
+          {
+            "name": "Porankal (தபாறங் கல்)",
+            "time": "08:05 AM",
+            "threeMonth": "3750",
+            "sixMonth": "7500"
+          },
+          {
+            "name": "Attivakkam (அெ்திோ ் ம்)",
+            "time": "08:10 AM",
+            "threeMonth": "3750",
+            "sixMonth": "7500"
+          },
+          {
+            "name": "Minnalchitthamur (மின்னல்சிெ்ெமூர்)",
+            "time": "08:15 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Thozhpedu (தொழுவபடு)",
+            "time": "08:20 AM",
+            "threeMonth": "2550",
+            "sixMonth": "5100"
+          },
+          {
+            "name": "Arapedu (அறவபடு)",
+            "time": "08:25 AM",
+            "threeMonth": "2550",
+            "sixMonth": "5100"
+          },
+          {
+            "name": "Acharappakkam (அச்சரப்பா ் ம்)",
+            "time": "08:30 AM",
+            "threeMonth": "1800",
+            "sixMonth": "3600"
+          },
+          {
+            "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+            "time": "08:35 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "05",
+        "name": "Tindivanam (Route 05)",
+        "busNo": "TN19 Z 3609",
+        "driver": "Lakshmanan C",
+        "phone": "9626460927",
+        "stops": [
+          {
+            "name": "Tindivanam Mailam Road (மர ் ாைம் சாணல)",
+            "time": "07:15 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Jayapuram (தஜயபுரம்)",
+            "time": "07:20 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Women’s Police Station (ம ளிர் காவல்)",
+            "time": "07:30 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Taluk Office (ொலுக்கா)",
+            "time": "07:35 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Gingee Bus Stop (தசஞ்சி)",
+            "time": "07:30 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Santhaimedu (சந்ணெவமடு)",
+            "time": "07:35 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Pattanam (பட்டைம்)",
+            "time": "07:40 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "College Road (ல்லூரி சாணல)",
+            "time": "07:50 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Saram (சாரம்)",
+            "time": "08:00 AM",
+            "threeMonth": "4200",
+            "sixMonth": "8400"
+          },
+          {
+            "name": "Olakkur (ஒல ்கூர்)",
+            "time": "08:05 AM",
+            "threeMonth": "4200",
+            "sixMonth": "8400"
+          },
+          {
+            "name": "Padhiri (பாதிரி)",
+            "time": "08:10 AM",
+            "threeMonth": "4000",
+            "sixMonth": "8000"
+          },
+          {
+            "name": "Ongur (ஓங்கூர்)",
+            "time": "08:12 AM",
+            "threeMonth": "3750",
+            "sixMonth": "7500"
+          },
+          {
+            "name": "Toll Gate (வடால் வ ட்டு)",
+            "time": "08:15 AM",
+            "threeMonth": "3300",
+            "sixMonth": "6600"
+          },
+          {
+            "name": "Thozhpeadu (தொழுவபடு)",
+            "time": "08:20 AM",
+            "threeMonth": "2550",
+            "sixMonth": "5100"
+          },
+          {
+            "name": "Arappeadu (அரப்வபடு)",
+            "time": "08:25 AM",
+            "threeMonth": "2550",
+            "sixMonth": "5100"
+          },
+          {
+            "name": "Acharapakkam (அச்சரப்பா ் ம்)",
+            "time": "08:30 AM",
+            "threeMonth": "1800",
+            "sixMonth": "3600"
+          },
+          {
+            "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+            "time": "08:35 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "06",
+        "name": "Uthiramerur (Route 06)",
+        "busNo": "TN19 T7722 SML",
+        "driver": "Kumar V",
+        "phone": "9790034195",
+        "stops": [
+          {
+            "name": "Uthramerrur (உெ்திரவமரூர்)",
+            "time": "07:40 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Kavanoor (ாேனூர்)",
+            "time": "07:45 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Kammalampoondi (ம்மாளம்பூை் டி)",
+            "time": "07:50 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Pazhathottam (பழெ்வொட்டம்)",
+            "time": "07:50 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Theettalam kootroad (தீட்டாளம் கூட்வராடு)",
+            "time": "07:55 AM",
+            "threeMonth": "4000",
+            "sixMonth": "8000"
+          },
+          {
+            "name": "Elendathur (எலந்ெெ்தூர்)",
+            "time": "08:00 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Kiliyanoor (கிளியனூர்)",
+            "time": "08:05 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Pasunkarunai (பசுங் ருணை)",
+            "time": "08:10 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Madhur (மாதுர்)",
+            "time": "08:15 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Kizhammur (கிழாமூர்)",
+            "time": "08:20 AM",
+            "threeMonth": "3000",
+            "sixMonth": "6000"
+          },
+          {
+            "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+            "time": "08:30 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "09",
+        "name": "Vandavasi (Route 09)",
+        "busNo": "TN19 Z9459",
+        "driver": "Mujip Basha A",
+        "phone": "8489797864",
+        "stops": [
+          {
+            "name": "Vandavasi old Bus stand (வந்ைவோசி)",
+            "time": "07:50 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Vandavasi gov Hospital",
+            "time": "07:55 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Birthur (பிர்தூர்)",
+            "time": "08:00 AM",
+            "threeMonth": "4350",
+            "sixMonth": "8700"
+          },
+          {
+            "name": "Kadaisikulam (ேரடசிகυளம்)",
+            "time": "08:05 AM",
+            "threeMonth": "4250",
+            "sixMonth": "8500"
+          },
+          {
+            "name": "Maruthadu (மருைோடு)",
+            "time": "08:10 AM",
+            "threeMonth": "4000",
+            "sixMonth": "8000"
+          },
+          {
+            "name": "Kilkodungalore (கீழ்கேோடுங்ேோலூர்)",
+            "time": "08:15 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Salavedu (சோலரவடு)",
+            "time": "08:20 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Keezhseesamangalam (கீழ்சீசமங்ேலம்)",
+            "time": "08:25 AM",
+            "threeMonth": "3250",
+            "sixMonth": "6500"
+          },
+          {
+            "name": "Ramapuram (ரோமோபுரம்)",
+            "time": "08:30 AM",
+            "threeMonth": "2250",
+            "sixMonth": "4500"
+          },
+          {
+            "name": "Melmaruvathur (ரமல்மருவை்தூர்)",
+            "time": "08:35 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "name": "Cheyyar (Route 10)",
+        "busNo": "TN19 BS 0405",
+        "driver": "Ramesh M",
+        "phone": "63741785797",
+        "stops": [
+          {
+            "name": "Arni Koot Road (ஆரணி கூட்டு ரரோடு)",
+            "time": "07:15 AM",
+            "threeMonth": "6500",
+            "sixMonth": "13000"
+          },
+          {
+            "name": "Toll Gate (ரடோல் ரேட்)",
+            "time": "07:18 AM",
+            "threeMonth": "6500",
+            "sixMonth": "13000"
+          },
+          {
+            "name": "Anakkavur (அனே்ேோவூர்)",
+            "time": "07:20 AM",
+            "threeMonth": "6250",
+            "sixMonth": "12500"
+          },
+          {
+            "name": "Sugar Mill (சர்ே்ேரர ஆரல)",
+            "time": "07:25 AM",
+            "threeMonth": "6250",
+            "sixMonth": "12500"
+          },
+          {
+            "name": "Vinayagapuram (விநோயேபுரம்)",
+            "time": "07:25 AM",
+            "threeMonth": "6250",
+            "sixMonth": "12500"
+          },
+          {
+            "name": "Kolamandhai (கேோளமந்ரை)",
+            "time": "07:30 AM",
+            "threeMonth": "6200",
+            "sixMonth": "12400"
+          },
+          {
+            "name": "Purisai (புரிரச)",
+            "time": "07:35 AM",
+            "threeMonth": "6100",
+            "sixMonth": "12200"
+          },
+          {
+            "name": "Echur (எச்சூர்)",
+            "time": "07:40 AM",
+            "threeMonth": "6000",
+            "sixMonth": "12000"
+          },
+          {
+            "name": "Ammayapattu (அம்ரமயப்பட்டு)",
+            "time": "07:45 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Vandavasi (வந்ைவோசி)",
+            "time": "07:50 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Kadaisikulam (ேரடசிகுளம்)",
+            "time": "07:55 AM",
+            "threeMonth": "4250",
+            "sixMonth": "8500"
+          },
+          {
+            "name": "Maruthadu (மருைோடு)",
+            "time": "08:00 AM",
+            "threeMonth": "4000",
+            "sixMonth": "8000"
+          },
+          {
+            "name": "Kilkodungalore (கீழ்கேோடுங்ேோலூர்)",
+            "time": "08:05 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Salavedu (சோலரவடு)",
+            "time": "08:10 AM",
+            "threeMonth": "3500",
+            "sixMonth": "7000"
+          },
+          {
+            "name": "Keezhseesamangalam (கீழ்சீசமங்ேலம்)",
+            "time": "08:15 AM",
+            "threeMonth": "3250",
+            "sixMonth": "6500"
+          },
+          {
+            "name": "Ramapuram (ரோமோபுரம்)",
+            "time": "08:20 AM",
+            "threeMonth": "2250",
+            "sixMonth": "4500"
+          },
+          {
+            "name": "Melmaruvathur (ரமல்மருவை்தூர்)",
+            "time": "08:30 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      },
+      {
+        "id": "11",
+        "name": "Marakkanam (Route 11)",
+        "busNo": "TN19 BS 0909",
+        "driver": "Kanniyappan E",
+        "phone": "9894868521",
+        "stops": [
+          {
+            "name": "Murukkeri (முரு ்வ ரி)",
+            "time": "07:00 AM",
+            "threeMonth": "9000",
+            "sixMonth": "18000"
+          },
+          {
+            "name": "Kanthadu (ந்ொடு)",
+            "time": "07:10 AM",
+            "threeMonth": "8750",
+            "sixMonth": "17500"
+          },
+          {
+            "name": "Marakkanam (மர ் ாைம்)",
+            "time": "07:15 AM",
+            "threeMonth": "8500",
+            "sixMonth": "17000"
+          },
+          {
+            "name": "Vennangupattu (தேை் ைங்குபட்டு)",
+            "time": "07:30 AM",
+            "threeMonth": "4800",
+            "sixMonth": "9600"
+          },
+          {
+            "name": "Kadapakkam (டப்பா ் ம்)",
+            "time": "07:40 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Panaiyur (பணனயூர்)",
+            "time": "07:45 AM",
+            "threeMonth": "4500",
+            "sixMonth": "9000"
+          },
+          {
+            "name": "Ellaiyaamman Kovil (எல்ணலயம்மன்)",
+            "time": "07:50 AM",
+            "threeMonth": "4330",
+            "sixMonth": "8660"
+          },
+          {
+            "name": "Cheyyur (தசய்யூர்)",
+            "time": "08:00 AM",
+            "threeMonth": "4050",
+            "sixMonth": "8100"
+          },
+          {
+            "name": "Oonambakkam (ஊனம்பா ் ம்)",
+            "time": "08:10 AM",
+            "threeMonth": "3300",
+            "sixMonth": "6600"
+          },
+          {
+            "name": "Kattudevathur (ாட்டுவெேெ்தூர்)",
+            "time": "08:15 AM",
+            "threeMonth": "3000",
+            "sixMonth": "6000"
+          },
+          {
+            "name": "Chithamur (சிெ்ெaமூர்)",
+            "time": "08:20 AM",
+            "threeMonth": "2100",
+            "sixMonth": "4200"
+          },
+          {
+            "name": "Polambakkam (தபாலம்பா ் ம்)",
+            "time": "08:25 AM",
+            "threeMonth": "2100",
+            "sixMonth": "4200"
+          },
+          {
+            "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+            "time": "08:30 AM",
+            "threeMonth": "-",
+            "sixMonth": "-"
+          }
+        ]
+      }
+    ]
+  },
+  "administration": [
+    {
+      "name": "Dr. J. Raja, Ph.D.",
+      "role": "Principal",
+      "qualifications": "Ph.D. (Engineering)",
+      "department": "Office of the Principal",
+      "bio": "Dr. J. Raja is a distinguished academic leader and the Principal of Adhiparasakthi Engineering College, Melmaruvathur.",
+      "contact": "principal@apec.ac.in",
+      "office": "Principal's Office, Main Block"
+    },
+    {
+      "name": "Dr. A. Bhuvaneshwari, M.E., Ph.D.",
+      "role": "Vice Principal",
+      "qualifications": "M.E., Ph.D.",
+      "department": "Office of the Vice Principal",
+      "bio": "Dr. A. Bhuvaneshwari serves as the Vice Principal of Adhiparasakthi Engineering College.",
+      "contact": "viceprincipal@apec.ac.in",
+      "office": "Vice Principal's Office, Main Block"
+    }
+  ]
+}

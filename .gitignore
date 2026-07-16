@@ -29,3 +29,10 @@ Thumbs.db
 .env.*
 !.env.example
 
+# Local scratch directories
+scratch/
+.gemini/
+
+# Large media assets
+Media_Assets/Videos/
+
