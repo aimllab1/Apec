@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Save, AlertCircle, RefreshCw, Users, FileText, Settings, Plus, Trash2, 
+  Save, AlertCircle, RefreshCw, Users, FileText, Settings, Plus, Minus, Trash2, 
   Edit3, Check, CheckCircle2, ChevronRight, UserCheck, ShieldAlert, KeyRound, Globe,
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone
 } from 'lucide-react';
@@ -117,6 +117,59 @@ export default function EditorPanel() {
     loadTour();
   }, []);
 
+  const [mapZoom, setMapZoom] = useState(1);
+  const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
+  const [isPanningMap, setIsPanningMap] = useState(false);
+  const [panStartPoint, setPanStartPoint] = useState({ x: 0, y: 0 });
+
+  const handleZoomIn = () => setMapZoom(prev => Math.min(4, prev + 0.25));
+  const handleZoomOut = () => {
+    setMapZoom(prev => {
+      const next = Math.max(1, prev - 0.25);
+      if (next === 1) setMapOffset({ x: 0, y: 0 });
+      return next;
+    });
+  };
+  const handleResetZoom = () => {
+    setMapZoom(1);
+    setMapOffset({ x: 0, y: 0 });
+  };
+
+  const handleMapWheel = (e) => {
+    if (e.deltaY < 0) {
+      setMapZoom(prev => Math.min(4, prev + 0.15));
+    } else {
+      setMapZoom(prev => {
+        const next = Math.max(1, prev - 0.15);
+        if (next === 1) setMapOffset({ x: 0, y: 0 });
+        return next;
+      });
+    }
+  };
+
+  const handleMapBgMouseDown = (e) => {
+    if (selectedPointId !== null) return;
+    if (mapZoom <= 1) return;
+    setIsPanningMap(true);
+    setPanStartPoint({ x: e.clientX - mapOffset.x, y: e.clientY - mapOffset.y });
+  };
+
+  const handleMapBgMouseMove = (e) => {
+    if (!isPanningMap) return;
+    const newX = e.clientX - panStartPoint.x;
+    const newY = e.clientY - panStartPoint.y;
+    const limitX = (mapZoom - 1) * 300;
+    const limitY = (mapZoom - 1) * 200;
+    setMapOffset({
+      x: Math.max(-limitX, Math.min(limitX, newX)),
+      y: Math.max(-limitY, Math.min(limitY, newY))
+    });
+  };
+
+  const handleMapBgMouseUp = () => {
+    setIsPanningMap(false);
+  };
+
   const handleMapMouseDown = (ptId) => {
     setSelectedPointId(ptId);
   };
@@ -124,8 +177,16 @@ export default function EditorPanel() {
   const handleMapMouseMove = (e) => {
     if (selectedPointId === null) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    const containerX = e.clientX - rect.left;
+    const containerY = e.clientY - rect.top;
+    
+    // Reverse scale and offset translation to get original coordinate percentages
+    const imgX = ((containerX - rect.width / 2) / mapZoom) + rect.width / 2 - mapOffset.x;
+    const imgY = ((containerY - rect.height / 2) / mapZoom) + rect.height / 2 - mapOffset.y;
+    
+    const x = ((imgX / rect.width) * 100);
+    const y = ((imgY / rect.height) * 100);
     
     const clampedX = Math.max(0, Math.min(100, parseFloat(x.toFixed(1))));
     const clampedY = Math.max(0, Math.min(100, parseFloat(y.toFixed(1))));
@@ -137,8 +198,15 @@ export default function EditorPanel() {
     if (selectedPointId === null) return;
     const touch = e.touches[0];
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((touch.clientX - rect.left) / rect.width) * 100;
-    const y = ((touch.clientY - rect.top) / rect.height) * 100;
+    
+    const containerX = touch.clientX - rect.left;
+    const containerY = touch.clientY - rect.top;
+    
+    const imgX = ((containerX - rect.width / 2) / mapZoom) + rect.width / 2 - mapOffset.x;
+    const imgY = ((containerY - rect.height / 2) / mapZoom) + rect.height / 2 - mapOffset.y;
+    
+    const x = ((imgX / rect.width) * 100);
+    const y = ((imgY / rect.height) * 100);
     
     const clampedX = Math.max(0, Math.min(100, parseFloat(x.toFixed(1))));
     const clampedY = Math.max(0, Math.min(100, parseFloat(y.toFixed(1))));
@@ -1506,45 +1574,100 @@ export default function EditorPanel() {
                     </h4>
                     
                     <div 
-                      className="relative w-full aspect-[16/10] bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-inner cursor-crosshair select-none"
-                      onMouseMove={handleMapMouseMove}
-                      onMouseUp={handleMapMouseUp}
-                      onMouseLeave={handleMapMouseUp}
+                      className="relative w-full aspect-[1694/929] bg-slate-100 border border-slate-200 rounded-3xl overflow-hidden shadow-inner cursor-crosshair select-none"
+                      onWheel={handleMapWheel}
+                      onMouseDown={handleMapBgMouseDown}
+                      onMouseMove={(e) => {
+                        handleMapBgMouseMove(e);
+                        handleMapMouseMove(e);
+                      }}
+                      onMouseUp={() => {
+                        handleMapBgMouseUp();
+                        handleMapMouseUp();
+                      }}
+                      onMouseLeave={() => {
+                        handleMapBgMouseUp();
+                        handleMapMouseUp();
+                      }}
                       onTouchMove={handleMapTouchMove}
-                      onTouchEnd={handleMapMouseUp}
+                      onTouchEnd={() => {
+                        handleMapBgMouseUp();
+                        handleMapMouseUp();
+                      }}
                     >
-                      <img 
-                        src="/Images/Panorama/map.png" 
-                        alt="Campus Map Editor" 
-                        className="w-full h-full object-cover pointer-events-none"
-                      />
+                      {/* Zoomable / Pannable Inner Area */}
+                      <div
+                        style={{
+                          transform: `scale(${mapZoom}) translate(${mapOffset.x}px, ${mapOffset.y}px)`,
+                          transformOrigin: 'center center',
+                          transition: isPanningMap ? 'none' : 'transform 0.12s ease-out'
+                        }}
+                        className="w-full h-full relative"
+                      >
+                        <img 
+                          src="/Images/Panorama/map.png" 
+                          alt="Campus Map Editor" 
+                          className="w-full h-full object-cover pointer-events-none"
+                        />
 
-                      {/* Map Coordinate Pins */}
-                      {tourPoints.map((pt) => {
-                        const isDragging = selectedPointId === pt.id;
-                        return (
-                          <div
-                            key={pt.id}
-                            style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
-                            className="absolute -translate-x-1/2 -translate-y-1/2 group z-30"
-                          >
-                            <button
-                              onMouseDown={() => handleMapMouseDown(pt.id)}
-                              onTouchStart={() => handleMapMouseDown(pt.id)}
-                              className={`w-5 h-5 rounded-full flex items-center justify-center cursor-move shadow-md transition-transform ${
-                                isDragging 
-                                  ? 'bg-red-650 scale-125 ring-4 ring-red-300' 
-                                  : 'bg-indigo-650 hover:bg-indigo-700 hover:scale-110'
-                              }`}
+                        {/* Map Coordinate Pins */}
+                        {tourPoints.map((pt) => {
+                          const isDragging = selectedPointId === pt.id;
+                          return (
+                            <div
+                              key={pt.id}
+                              style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
+                              className="absolute -translate-x-1/2 -translate-y-1/2 group z-30"
                             >
-                              <div className="w-1.5 h-1.5 rounded-full bg-white" />
-                            </button>
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded-lg text-[8px] font-black uppercase tracking-wider text-white whitespace-nowrap shadow-md pointer-events-none group-hover:opacity-100 transition-opacity">
-                              {pt.name} ({pt.x}%, {pt.y}%)
+                              <button
+                                onMouseDown={(e) => {
+                                  e.stopPropagation(); // prevent panning start
+                                  handleMapMouseDown(pt.id);
+                                }}
+                                onTouchStart={(e) => {
+                                  e.stopPropagation();
+                                  handleMapMouseDown(pt.id);
+                                }}
+                                className={`w-5 h-5 rounded-full flex items-center justify-center cursor-move shadow-md transition-transform ${
+                                  isDragging 
+                                    ? 'bg-red-650 scale-125 ring-4 ring-red-300' 
+                                    : 'bg-indigo-650 hover:bg-indigo-700 hover:scale-110'
+                                }`}
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                              </button>
+                              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 px-2 py-0.5 bg-slate-900 border border-slate-800 rounded-lg text-[8px] font-black uppercase tracking-wider text-white whitespace-nowrap shadow-md pointer-events-none group-hover:opacity-100 transition-opacity">
+                                {pt.name} ({pt.x}%, {pt.y}%)
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
+
+                      {/* Map Controls */}
+                      <div className="absolute bottom-4 right-4 flex flex-col gap-1.5 z-40 bg-white/95 backdrop-blur-sm border border-slate-200 p-1.5 rounded-xl shadow-md">
+                        <button
+                          onClick={handleZoomIn}
+                          className="p-1 hover:bg-slate-100 rounded-lg text-slate-700 transition-colors cursor-pointer"
+                          title="Zoom In"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={handleZoomOut}
+                          className="p-1 hover:bg-slate-100 rounded-lg text-slate-700 transition-colors cursor-pointer"
+                          title="Zoom Out"
+                        >
+                          <Minus className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={handleResetZoom}
+                          className="p-1 hover:bg-slate-100 rounded-lg text-slate-700 transition-colors cursor-pointer"
+                          title="Reset View"
+                        >
+                          <RotateCcw className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
 
                     {/* Coordinates Table */}

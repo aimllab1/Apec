@@ -103,6 +103,60 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
   const [mobileSelectorOpen, setMobileSelectorOpen] = useState(false);
   const [showMiniMap, setShowMiniMap] = useState(window.innerWidth >= 1024);
   const [isGyroActive, setIsGyroActive] = useState(false);
+  
+  // Interactive Map Zoom & Pan State
+  const [mapZoom, setMapZoom] = useState(1);
+  const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
+  const [isPanningMap, setIsPanningMap] = useState(false);
+  const [panStartPoint, setPanStartPoint] = useState({ x: 0, y: 0 });
+
+  const handleMapZoomIn = () => setMapZoom(prev => Math.min(4, prev + 0.25));
+  const handleMapZoomOut = () => {
+    setMapZoom(prev => {
+      const next = Math.max(1, prev - 0.25);
+      if (next === 1) setMapOffset({ x: 0, y: 0 });
+      return next;
+    });
+  };
+  const handleMapResetZoom = () => {
+    setMapZoom(1);
+    setMapOffset({ x: 0, y: 0 });
+  };
+
+  const handleMapWheel = (e) => {
+    if (e.deltaY < 0) {
+      setMapZoom(prev => Math.min(4, prev + 0.15));
+    } else {
+      setMapZoom(prev => {
+        const next = Math.max(1, prev - 0.15);
+        if (next === 1) setMapOffset({ x: 0, y: 0 });
+        return next;
+      });
+    }
+  };
+
+  const handleMapBgMouseDown = (e) => {
+    if (mapZoom <= 1) return;
+    setIsPanningMap(true);
+    setPanStartPoint({ x: e.clientX - mapOffset.x, y: e.clientY - mapOffset.y });
+  };
+
+  const handleMapBgMouseMove = (e) => {
+    if (!isPanningMap) return;
+    const newX = e.clientX - panStartPoint.x;
+    const newY = e.clientY - panStartPoint.y;
+    // Pan offset limits based on zoom scale
+    const limitX = (mapZoom - 1) * 150;
+    const limitY = (mapZoom - 1) * 100;
+    setMapOffset({
+      x: Math.max(-limitX, Math.min(limitX, newX)),
+      y: Math.max(-limitY, Math.min(limitY, newY))
+    });
+  };
+
+  const handleMapBgMouseUp = () => {
+    setIsPanningMap(false);
+  };
   const [currentYaw, setCurrentYaw] = useState(0);
   const [showWestFacing, setShowWestFacing] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
@@ -971,61 +1025,108 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                   </div>
 
                   {/* Interactive Map Display */}
-                  <div className="relative w-full h-[185px] rounded-lg overflow-hidden border border-zinc-200 bg-zinc-50">
-                    <img 
-                      src="/Images/Panorama/map.png" 
-                      alt="Campus Navigation Map" 
-                      className="w-full h-full object-cover pointer-events-none select-none opacity-85" 
-                    />
+                  <div 
+                    className="relative w-full aspect-[1694/929] rounded-lg overflow-hidden border border-zinc-200 bg-zinc-50 cursor-grab active:cursor-grabbing select-none"
+                    onWheel={handleMapWheel}
+                    onMouseDown={handleMapBgMouseDown}
+                    onMouseMove={handleMapBgMouseMove}
+                    onMouseUp={handleMapBgMouseUp}
+                    onMouseLeave={handleMapBgMouseUp}
+                  >
+                    {/* Zoomable / Pannable Inner Area */}
+                    <div
+                      style={{
+                        transform: `scale(${mapZoom}) translate(${mapOffset.x}px, ${mapOffset.y}px)`,
+                        transformOrigin: 'center center',
+                        transition: isPanningMap ? 'none' : 'transform 0.12s ease-out'
+                      }}
+                      className="w-full h-full relative"
+                    >
+                      <img 
+                        src="/Images/Panorama/map.png" 
+                        alt="Campus Navigation Map" 
+                        className="w-full h-full object-cover pointer-events-none select-none opacity-85" 
+                      />
 
-                    {/* Coordinate pins */}
-                    {mapPoints.map((pt) => {
-                      const isActive = activeScene === pt.sceneId;
-                      return (
-                        <div
-                          key={pt.id}
-                          style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
-                          className="absolute -translate-x-1/2 -translate-y-1/2 group z-[126]"
-                        >
-                          {/* Live Camera Vision Cone (Rotates dynamically as viewer pans) */}
-                          {isActive && (
-                            <div 
-                              style={{ transform: `translate(-50%, -50%) rotate(${currentYaw}deg)` }}
-                              className="absolute pointer-events-none w-20 h-20 origin-center transition-transform duration-75 left-1/2 top-1/2 z-[120]"
-                            >
-                              <svg className="w-full h-full text-red-500/25 fill-current opacity-80" viewBox="0 0 100 100">
-                                <path d="M50 50 L15 0 A 45 45 0 0 1 85 0 Z" />
-                              </svg>
-                            </div>
-                          )}
-
-                          <button
-                            onClick={() => {
-                              if (viewerInstanceRef.current && pt.sceneId !== activeScene) {
-                                viewerInstanceRef.current.loadScene(pt.sceneId);
-                              }
-                            }}
-                            className={`relative w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer ${
-                              isActive 
-                                ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.9)] scale-110' 
-                                : 'bg-cyan-500/80 hover:bg-cyan-400 hover:scale-110'
-                            }`}
+                      {/* Coordinate pins */}
+                      {mapPoints.map((pt) => {
+                        const isActive = activeScene === pt.sceneId;
+                        return (
+                          <div
+                            key={pt.id}
+                            style={{ left: `${pt.x}%`, top: `${pt.y}%` }}
+                            className="absolute -translate-x-1/2 -translate-y-1/2 group z-[126]"
                           >
-                            <div className={`w-1 h-1 rounded-full ${isActive ? 'bg-white' : 'bg-white/70'}`} />
+                            {/* Live Camera Vision Cone (Rotates dynamically as viewer pans) */}
                             {isActive && (
-                              <>
-                                <span className="absolute inset-0 rounded-full border border-red-500 animate-[ping_1.6s_infinite] opacity-75" />
-                                <span className="absolute -inset-1 rounded-full border border-red-500/50 animate-[ping_2s_infinite] opacity-40" />
-                              </>
+                              <div 
+                                style={{ transform: `translate(-50%, -50%) rotate(${currentYaw}deg)` }}
+                                className="absolute pointer-events-none w-20 h-20 origin-center transition-transform duration-75 left-1/2 top-1/2 z-[120]"
+                              >
+                                <svg className="w-full h-full text-red-500/25 fill-current opacity-80" viewBox="0 0 100 100">
+                                  <path d="M50 50 L15 0 A 45 45 0 0 1 85 0 Z" />
+                                </svg>
+                              </div>
                             )}
-                          </button>
 
-                          <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-white/95 border border-zinc-200 rounded-lg text-[9px] font-black uppercase tracking-wider text-zinc-800 whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-md z-[127]">
-                            {pt.name}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (viewerInstanceRef.current && pt.sceneId !== activeScene) {
+                                  viewerInstanceRef.current.loadScene(pt.sceneId);
+                                }
+                              }}
+                              onMouseDown={(e) => e.stopPropagation()} // prevent panning trigger
+                              className={`relative w-3.5 h-3.5 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                                isActive 
+                                  ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.9)] scale-110' 
+                                  : 'bg-cyan-500/80 hover:bg-cyan-400 hover:scale-110'
+                              }`}
+                            >
+                              <div className={`w-1 h-1 rounded-full ${isActive ? 'bg-white' : 'bg-white/70'}`} />
+                              {isActive && (
+                                <>
+                                  <span className="absolute inset-0 rounded-full border border-red-500 animate-[ping_1.6s_infinite] opacity-75" />
+                                  <span className="absolute -inset-1 rounded-full border border-red-500/50 animate-[ping_2s_infinite] opacity-40" />
+                                </>
+                              )}
+                            </button>
+
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-white/95 border border-zinc-200 rounded-lg text-[9px] font-black uppercase tracking-wider text-zinc-800 whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity shadow-md z-[127]">
+                              {pt.name}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+
+                    {/* Floating Zoom / Pan Controls */}
+                    <div className="absolute bottom-2 right-2 flex gap-1 z-[130] bg-white/90 backdrop-blur-sm border border-zinc-200 p-1 rounded-lg shadow-sm font-bold text-xs uppercase tracking-wider">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleMapZoomIn(); }}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        className="p-1 hover:bg-zinc-100 rounded text-zinc-700 transition-colors cursor-pointer"
+                        title="Zoom In"
+                      >
+                        <ZoomIn className="w-3 h-3" />
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleMapZoomOut(); }}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        className="p-1 hover:bg-zinc-100 rounded text-zinc-700 transition-colors cursor-pointer"
+                        title="Zoom Out"
+                      >
+                        <ZoomOut className="w-3 h-3" />
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleMapResetZoom(); }}
+                        onMouseDown={(e) => e.stopPropagation()}
+                        className="p-1 hover:bg-zinc-100 rounded text-zinc-700 transition-colors cursor-pointer"
+                        title="Reset View"
+                      >
+                        <RotateCcw className="w-3 h-3" />
+                      </button>
+                    </div>
                   </div>
                 </div>
 
