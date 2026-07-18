@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { X, Compass, Play, Pause, Camera, Volume2, VolumeX, ZoomIn, ZoomOut, RotateCcw, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getLoadedTourData } from '../data/tourData';
+import { getLoadedTourData, getLoadedTourDataAsync } from '../data/tourData';
 
 const westFacingImages = {
   mainGate: {
@@ -71,7 +71,18 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
 
   useEffect(() => {
     if (isOpen) {
-      setTourData(getLoadedTourData());
+      // Load current local cache immediately for instantaneous render
+      const cachedData = getLoadedTourData();
+      setTourData(cachedData);
+
+      // Fetch fresh configuration from Firestore in the background and update
+      getLoadedTourDataAsync()
+        .then(freshData => {
+          setTourData(freshData);
+        })
+        .catch(err => {
+          console.error("Firestore tour data fetch failed:", err);
+        });
     }
   }, [isOpen, initialScene]);
 
