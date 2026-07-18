@@ -7,7 +7,7 @@ import {
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone
 } from 'lucide-react';
 import { db } from '../firebase';
-import { collection, doc, getDocs, setDoc, addDoc, deleteDoc, query, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, setDoc, addDoc, deleteDoc, query, where } from 'firebase/firestore';
 import departmentsData from '../data/departmentsData.json';
 import { getLoadedTourDataAsync, saveTourDataAsync } from '../data/tourData';
 
@@ -161,53 +161,69 @@ export default function EditorPanel() {
       setActiveTab('branding');
     }
 
-    // Load branding
-    const savedBranding = localStorage.getItem('apec_branding');
-    if (savedBranding) {
-      setBranding(JSON.parse(savedBranding));
-    }
-
-    // Load ticker
-    const savedTicker = localStorage.getItem('apec_ticker_news');
-    if (savedTicker) {
-      setTickerNews(JSON.parse(savedTicker));
-    } else {
-      setTickerNews([
-        "🎓 Admissions Open for 2026–2027",
-        "NAAC Accredited Institution",
-        "UGC Autonomous College",
-        "Affiliated to Anna University",
-        "Placement Training Ongoing",
-        "Campus Recruitment Updates",
-        "Welcome to Adhiparasakthi Engineering College"
-      ]);
-    }
-
-    // Load advertisements popup settings
-    const savedAdEnabled = localStorage.getItem('apec_ad_popup_enabled');
-    if (savedAdEnabled !== null) {
-      setAdEnabled(savedAdEnabled === 'true');
-    }
-    const savedAds = localStorage.getItem('apec_advertisements');
-    if (savedAds) {
-      setAds(JSON.parse(savedAds));
-    } else {
-      const defaultAds = [
-        {
-          id: 'ad-default-1',
-          title: 'APEC 2026 Admissions Open',
-          details: 'Register now to secure your seat. Click below to inquire.',
-          imgUrl: '/Images/College/library.webp',
-          link: '/admission',
-          startDate: '',
-          endDate: '',
-          functionDate: '',
-          isActive: true
+    // Centralized settings loader
+    const fetchSettings = async () => {
+      // 1. Load branding
+      try {
+        const snap = await getDoc(doc(db, 'system_settings', 'branding'));
+        if (snap.exists()) {
+          setBranding(snap.data());
+          localStorage.setItem('apec_branding', JSON.stringify(snap.data()));
+        } else {
+          const saved = localStorage.getItem('apec_branding');
+          if (saved) setBranding(JSON.parse(saved));
         }
-      ];
-      setAds(defaultAds);
-      localStorage.setItem('apec_advertisements', JSON.stringify(defaultAds));
-    }
+      } catch (err) {
+        console.warn("Firestore branding fetch failed, reading fallback:", err);
+        const saved = localStorage.getItem('apec_branding');
+        if (saved) setBranding(JSON.parse(saved));
+      }
+
+      // 2. Load ticker
+      try {
+        const snap = await getDoc(doc(db, 'system_settings', 'ticker_news'));
+        if (snap.exists()) {
+          setTickerNews(snap.data().items);
+          localStorage.setItem('apec_ticker_news', JSON.stringify(snap.data().items));
+        } else {
+          const saved = localStorage.getItem('apec_ticker_news');
+          if (saved) setTickerNews(JSON.parse(saved));
+        }
+      } catch (err) {
+        console.warn("Firestore ticker fetch failed, reading fallback:", err);
+        const saved = localStorage.getItem('apec_ticker_news');
+        if (saved) setTickerNews(JSON.parse(saved));
+      }
+
+      // 3. Load advertisements popup settings
+      try {
+        const snapEnabled = await getDoc(doc(db, 'system_settings', 'ad_popup_enabled'));
+        if (snapEnabled.exists()) {
+          setAdEnabled(snapEnabled.data().enabled);
+          localStorage.setItem('apec_ad_popup_enabled', String(snapEnabled.data().enabled));
+        } else {
+          const saved = localStorage.getItem('apec_ad_popup_enabled');
+          if (saved !== null) setAdEnabled(saved === 'true');
+        }
+
+        const snapAds = await getDoc(doc(db, 'system_settings', 'advertisements'));
+        if (snapAds.exists()) {
+          setAds(snapAds.data().items);
+          localStorage.setItem('apec_advertisements', JSON.stringify(snapAds.data().items));
+        } else {
+          const saved = localStorage.getItem('apec_advertisements');
+          if (saved) setAds(JSON.parse(saved));
+        }
+      } catch (err) {
+        console.warn("Firestore advertisements fetch failed, reading fallback:", err);
+        const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
+        if (savedEnabled !== null) setAdEnabled(savedEnabled === 'true');
+        const savedAds = localStorage.getItem('apec_advertisements');
+        if (savedAds) setAds(JSON.parse(savedAds));
+      }
+    };
+
+    fetchSettings();
 
     // Load departments & faculty
     const savedDepts = localStorage.getItem('apec_departments_data');
@@ -281,9 +297,27 @@ export default function EditorPanel() {
   };
 
   // Save General Branding
-  const saveBranding = () => {
-    localStorage.setItem('apec_branding', JSON.stringify(branding));
-    triggerSuccess('College branding settings published successfully!');
+  const saveBranding = async () => {
+    try {
+      await setDoc(doc(db, 'system_settings', 'branding'), branding);
+      localStorage.setItem('apec_branding', JSON.stringify(branding));
+      triggerSuccess('College branding settings published globally!');
+    } catch (err) {
+      console.error("Firestore branding save failed:", err);
+      localStorage.setItem('apec_branding', JSON.stringify(branding));
+      triggerSuccess('Saved locally (Offline)');
+    }
+  };
+
+  // Helper to save ticker to db
+  const saveTickerToDB = async (updatedItems) => {
+    try {
+      await setDoc(doc(db, 'system_settings', 'ticker_news'), { items: updatedItems });
+      localStorage.setItem('apec_ticker_news', JSON.stringify(updatedItems));
+    } catch (err) {
+      console.error("Firestore ticker save failed:", err);
+      localStorage.setItem('apec_ticker_news', JSON.stringify(updatedItems));
+    }
   };
 
   // Add Ticker Item
@@ -294,7 +328,7 @@ export default function EditorPanel() {
       : { text: newTickerText.trim() };
     const updated = [...tickerNews, item];
     setTickerNews(updated);
-    localStorage.setItem('apec_ticker_news', JSON.stringify(updated));
+    saveTickerToDB(updated);
     setNewTickerText('');
     setNewTickerLink('');
     triggerSuccess('News announcement added!');
@@ -304,15 +338,33 @@ export default function EditorPanel() {
   const deleteTickerItem = (idx) => {
     const updated = tickerNews.filter((_, i) => i !== idx);
     setTickerNews(updated);
-    localStorage.setItem('apec_ticker_news', JSON.stringify(updated));
+    saveTickerToDB(updated);
     triggerSuccess('News announcement deleted!');
   };
 
+  // Helper to save ads to db
+  const saveAdsToDB = async (updatedAds) => {
+    try {
+      await setDoc(doc(db, 'system_settings', 'advertisements'), { items: updatedAds });
+      localStorage.setItem('apec_advertisements', JSON.stringify(updatedAds));
+    } catch (err) {
+      console.error("Firestore advertisements save failed:", err);
+      localStorage.setItem('apec_advertisements', JSON.stringify(updatedAds));
+    }
+  };
+
   // Advertisement manager actions
-  const handleToggleAdEnabled = (val) => {
+  const handleToggleAdEnabled = async (val) => {
     setAdEnabled(val);
-    localStorage.setItem('apec_ad_popup_enabled', String(val));
-    triggerSuccess(`Advertisement popup globally turned ${val ? 'ON' : 'OFF'}`);
+    try {
+      await setDoc(doc(db, 'system_settings', 'ad_popup_enabled'), { enabled: val });
+      localStorage.setItem('apec_ad_popup_enabled', String(val));
+      triggerSuccess(`Advertisement popup globally turned ${val ? 'ON' : 'OFF'}`);
+    } catch (err) {
+      console.error("Firestore ad_popup_enabled save failed:", err);
+      localStorage.setItem('apec_ad_popup_enabled', String(val));
+      triggerSuccess(`Toggled locally (Offline)`);
+    }
   };
 
   const handleAddAd = () => {
@@ -327,7 +379,7 @@ export default function EditorPanel() {
     };
     const updated = [...ads, createdAd];
     setAds(updated);
-    localStorage.setItem('apec_advertisements', JSON.stringify(updated));
+    saveAdsToDB(updated);
     setNewAd({
       title: '',
       details: '',
@@ -344,14 +396,14 @@ export default function EditorPanel() {
   const handleDeleteAd = (id) => {
     const updated = ads.filter(a => a.id !== id);
     setAds(updated);
-    localStorage.setItem('apec_advertisements', JSON.stringify(updated));
+    saveAdsToDB(updated);
     triggerSuccess("Advertisement deleted.");
   };
 
   const handleToggleAdStatus = (id) => {
     const updated = ads.map(a => a.id === id ? { ...a, isActive: !a.isActive } : a);
     setAds(updated);
-    localStorage.setItem('apec_advertisements', JSON.stringify(updated));
+    saveAdsToDB(updated);
     triggerSuccess("Advertisement status toggled!");
   };
 

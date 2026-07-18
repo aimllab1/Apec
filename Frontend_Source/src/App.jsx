@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import Preloader from './components/Preloader';
 import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
 
 // Import Pages
 import Home from './pages/Home';
@@ -244,14 +244,33 @@ function AppContent({ isLoading, setIsLoading }) {
     // Pre-warm the 360 Tour cache in the background on initial landing
     getLoadedTourDataAsync().catch(err => console.log("Tour preheat failed:", err));
 
-    const reloadData = () => {
-      const savedBranding = localStorage.getItem('apec_branding');
-      if (savedBranding) {
-        setBranding(JSON.parse(savedBranding));
+    const reloadData = async () => {
+      try {
+        const snapBranding = await getDoc(doc(db, 'system_settings', 'branding'));
+        if (snapBranding.exists()) {
+          setBranding(snapBranding.data());
+          localStorage.setItem('apec_branding', JSON.stringify(snapBranding.data()));
+        } else {
+          const saved = localStorage.getItem('apec_branding');
+          if (saved) setBranding(JSON.parse(saved));
+        }
+      } catch (err) {
+        const saved = localStorage.getItem('apec_branding');
+        if (saved) setBranding(JSON.parse(saved));
       }
-      const savedTicker = localStorage.getItem('apec_ticker_news');
-      if (savedTicker) {
-        setTickerNews(JSON.parse(savedTicker));
+
+      try {
+        const snapTicker = await getDoc(doc(db, 'system_settings', 'ticker_news'));
+        if (snapTicker.exists()) {
+          setTickerNews(snapTicker.data().items);
+          localStorage.setItem('apec_ticker_news', JSON.stringify(snapTicker.data().items));
+        } else {
+          const saved = localStorage.getItem('apec_ticker_news');
+          if (saved) setTickerNews(JSON.parse(saved));
+        }
+      } catch (err) {
+        const saved = localStorage.getItem('apec_ticker_news');
+        if (saved) setTickerNews(JSON.parse(saved));
       }
     };
 

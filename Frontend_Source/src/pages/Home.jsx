@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Points, PointMaterial } from '@react-three/drei';
 import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
 import { 
   ArrowRight, BookOpen, ShieldAlert, Award, Calendar, User, Eye, Compass, 
   GraduationCap, X, Mail, Phone, Sparkles, Cpu, Wifi, ChevronDown, CheckCircle2,
@@ -238,16 +238,40 @@ export default function Home() {
 
   // Load ads on mount or storage updates
   useEffect(() => {
-    const reloadAds = () => {
-      const adEnabledStr = localStorage.getItem('apec_ad_popup_enabled');
-      const adEnabled = adEnabledStr !== 'false'; // default true
-      
-      if (adEnabled) {
-        const savedAdsStr = localStorage.getItem('apec_advertisements');
-        let loadedAds = [];
-        if (savedAdsStr) {
-          loadedAds = JSON.parse(savedAdsStr);
+    const reloadAds = async () => {
+      let adEnabled = true;
+      let loadedAds = [];
+
+      try {
+        const snapEnabled = await getDoc(doc(db, 'system_settings', 'ad_popup_enabled'));
+        if (snapEnabled.exists()) {
+          adEnabled = snapEnabled.data().enabled;
+          localStorage.setItem('apec_ad_popup_enabled', String(adEnabled));
         } else {
+          const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
+          if (savedEnabled !== null) adEnabled = savedEnabled === 'true';
+        }
+      } catch (err) {
+        const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
+        if (savedEnabled !== null) adEnabled = savedEnabled === 'true';
+      }
+
+      if (adEnabled) {
+        try {
+          const snapAds = await getDoc(doc(db, 'system_settings', 'advertisements'));
+          if (snapAds.exists()) {
+            loadedAds = snapAds.data().items;
+            localStorage.setItem('apec_advertisements', JSON.stringify(loadedAds));
+          } else {
+            const savedAds = localStorage.getItem('apec_advertisements');
+            if (savedAds) loadedAds = JSON.parse(savedAds);
+          }
+        } catch (err) {
+          const savedAds = localStorage.getItem('apec_advertisements');
+          if (savedAds) loadedAds = JSON.parse(savedAds);
+        }
+
+        if (loadedAds.length === 0) {
           loadedAds = [
             {
               id: 'ad-default-1',
@@ -262,7 +286,7 @@ export default function Home() {
             }
           ];
         }
-        
+
         const nowStr = new Date().toISOString().split('T')[0];
         const filtered = loadedAds.filter(ad => {
           if (!ad.isActive) return false;
@@ -270,7 +294,7 @@ export default function Home() {
           if (ad.endDate && ad.endDate < nowStr) return false;
           return true;
         });
-        
+
         setActiveAds(filtered);
       } else {
         setActiveAds([]);
