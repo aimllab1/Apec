@@ -193,6 +193,17 @@ export const defaultScenes = {
   }
 };
 
+const safeJsonParse = (str, fallback) => {
+  if (!str || str === 'undefined' || str === 'null') return fallback;
+  try {
+    const parsed = JSON.parse(str);
+    return parsed ? parsed : fallback;
+  } catch (e) {
+    console.error("JSON parse failed in tourData:", e);
+    return fallback;
+  }
+};
+
 // Fetch tour configuration from Firestore (falls back to localStorage, then default configurations)
 export const getLoadedTourDataAsync = async () => {
   try {
@@ -217,8 +228,8 @@ export const getLoadedTourDataAsync = async () => {
   const scenes = localStorage.getItem('apec_360_scenes');
   
   return {
-    mapPoints: points ? JSON.parse(points) : defaultMapPoints,
-    scenes: scenes ? JSON.parse(scenes) : defaultScenes
+    mapPoints: safeJsonParse(points, defaultMapPoints),
+    scenes: safeJsonParse(scenes, defaultScenes)
   };
 };
 
@@ -252,7 +263,7 @@ export const getLoadedTourData = () => {
   const scenes = localStorage.getItem('apec_360_scenes');
   
   return {
-    mapPoints: points ? JSON.parse(points) : defaultMapPoints,
-    scenes: scenes ? JSON.parse(scenes) : defaultScenes
+    mapPoints: safeJsonParse(points, defaultMapPoints),
+    scenes: safeJsonParse(scenes, defaultScenes)
   };
 };
