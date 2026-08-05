@@ -580,28 +580,35 @@ function AppContent({ isLoading, setIsLoading }) {
                   playsInline={true}
                   className="w-full h-full object-cover opacity-90" 
                 />
-                {/* Clean bright overlays for text separation and flow blending */}
-                <div className="absolute inset-0 bg-white/10 backdrop-blur-[0.1px]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-transparent to-white/10" />
+                {/* Subtle 20% dark overlay for background video (15-25% opacity) */}
+                <div className="absolute inset-0 bg-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/30" />
               </div>
             )}
             
             {/* NAVIGATION BAR WITH DETAILED HOVER MEGA-MENUS */}
             {/* STACKED HEADER SYSTEM */}
             <header
-              className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300"
+              className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300 relative"
             >
+              {/* UNIFIED TOP CORNER SQUARE LOGO BADGE (Spans Header Top Bar + News Ticker) */}
+              <Link 
+                to="/" 
+                className="absolute left-0 top-0 bottom-0 w-[72px] sm:w-[96px] lg:w-[110px] bg-white border-r border-b border-gray-200/90 shadow-md flex items-center justify-center p-2 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0"
+                title="Adhiparasakthi Engineering College"
+              >
+                <img 
+                  src="/Images/Logos/apec-logo.png" 
+                  alt="APEC Logo" 
+                  className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300 drop-shadow-md" 
+                />
+              </Link>
               
               {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-              <div className="w-full px-4 md:px-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
+              <div className="w-full pl-[80px] sm:pl-[108px] lg:pl-[122px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
                 
-                {/* Enlarged College Logo & Name */}
-                <Link to="/" className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-                  <img 
-                    src="/Images/Logos/apec-logo.png" 
-                    alt="APEC Logo" 
-                    className={`w-10 h-10 sm:w-12 sm:h-12 object-contain transition-all ${isHome ? 'bg-white rounded-full p-0.5 shadow-sm border border-gray-100' : 'mix-blend-multiply'}`} 
-                  />
+                {/* College Name & Tagline */}
+                <Link to="/" className="flex items-center shrink-0">
                   <div className="text-left flex flex-col justify-center max-w-[170px] xs:max-w-[210px] sm:max-w-md lg:max-w-none">
                     <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-tight drop-shadow-sm">
                       {branding.collegeName}
@@ -708,7 +715,7 @@ function AppContent({ isLoading, setIsLoading }) {
               </div>
 
               {/* Scrolling News Ticker */}
-              <div className="w-full bg-white border-b border-[#FFD6A5]/50 h-[32px] sm:h-[36px] overflow-hidden relative z-10 select-none flex items-center shrink-0">
+              <div className="w-full pl-[80px] sm:pl-[108px] lg:pl-[122px] bg-white border-b border-[#FFD6A5]/50 h-[32px] sm:h-[36px] overflow-hidden relative z-10 select-none flex items-center shrink-0">
                 {/* Announcement Icon Badge */}
                 <div className="bg-[#FF8A00] text-white px-3 py-[1px] h-full rounded-r-lg font-black text-[10px] sm:text-xs uppercase tracking-wider flex items-center gap-1.5 shrink-0 z-20 shadow-sm ml-0">
                   <span role="img" aria-label="announcement">📢</span>

@@ -591,16 +591,16 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-start pt-14 pb-16 px-6 border-b border-gray-100 bg-transparent z-10">
+      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-start pt-6 pb-8 px-6 border-b border-gray-100 bg-transparent z-10">
         
         <div className="w-full max-w-[1800px] mx-auto px-6 flex flex-col items-center relative z-10">
           
           {/* Hero Text — pinned to top */}
-          <div className="w-full text-center mb-8">
+          <div className="w-full text-center mb-2">
             <motion.div
-              className="inline-flex items-center justify-center gap-2 px-5 py-1.5 mb-6 text-xs md:text-sm font-semibold tracking-wide text-indigo-700 bg-white border border-indigo-200 rounded-full cursor-default select-none"
+              className="inline-flex items-center justify-center gap-2 px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-indigo-700 bg-white border border-indigo-200 rounded-full cursor-default select-none"
               animate={{
-                y: [0, -5, 0, 5, 0],
+                y: [0, -4, 0, 4, 0],
                 boxShadow: [
                   '0 4px 18px rgba(99,102,241,0.18), 0 1px 4px rgba(139,92,246,0.10)',
                   '0 8px 28px rgba(99,102,241,0.32), 0 2px 8px rgba(139,92,246,0.22)',
@@ -621,53 +621,61 @@ export default function Home() {
             </motion.div>
 
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
-            <div className="w-full flex justify-center mb-5">
+            <div className="w-full flex justify-center mb-3">
               <h1
-                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap"
+                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap text-[#1B224A]"
                 style={{
                   fontSize: 'clamp(1.75rem, 4.2vw, 5rem)',
-                  color: '#1B224A',
-                  opacity: 1,
-                  textShadow: '0 2px 6px rgba(255,255,255,0.15)'
+                  textShadow: '0 2px 8px rgba(255,255,255,0.8), 0 4px 16px rgba(255,255,255,0.6)'
                 }}
               >
                 Adhiparasakthi Engineering College
               </h1>
             </div>
 
-            <p
-              className="text-base md:text-lg text-black leading-relaxed font-bold max-w-[280px] sm:max-w-sm md:max-w-2xl mx-auto px-2"
-              style={{ textWrap: 'balance' }}
-            >
-              An autonomous institution affiliated to Anna University, committed to training engineers with a sense of service and spirituality.
-            </p>
-          </div>
-
-          {/* Admission Floating Banner — centered below title */}
-          <div className="block w-full max-w-sm mx-auto px-8 py-6 md:p-7 bg-white/55 backdrop-blur-md border border-white/45 rounded-2xl shadow-lg mt-2 mb-20 md:mb-4 text-center">
-            <h3 className="font-title text-lg font-bold text-gray-900 mb-1">{`${new Date().getFullYear()} - ${new Date().getFullYear() + 1} Admissions Open`}</h3>
-            <p className="text-xs text-gray-500 mb-5 font-semibold">Click below to apply or connect with our help desk.</p>
-            
-            <div className="flex flex-col items-center gap-4">
-              <Link 
-                to="/contact" 
-                className="inline-flex items-center justify-center gap-2 bg-gray-950 hover:bg-gray-800 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition-all w-full max-w-[200px]"
+            {/* Subtitle — Forced Single Straight Line matching title style */}
+            <div className="w-full flex justify-center mb-2 px-2">
+              <h2
+                className="font-title font-bold tracking-[0.06em] text-slate-900 uppercase text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
+                style={{
+                  fontSize: 'clamp(0.75rem, 1.8vw, 1.35rem)',
+                  textShadow: '0 1px 4px rgba(255,255,255,0.9)'
+                }}
               >
-                Click to Apply
-              </Link>
-              <div className="text-center">
-                <span className="font-display block text-[9px] text-gray-400 uppercase tracking-widest font-bold">Helpline</span>
-                <span className="font-mono text-xs md:text-sm font-bold text-gray-700 block mt-0.5">
-                  <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-600 hover:underline transition-colors">{branding.helpline1}</a>
-                  {" / "}
-                  <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-650 hover:underline transition-colors">{branding.helpline2}</a>
-                </span>
-              </div>
+                An Autonomous Institution Affiliated to Anna University
+              </h2>
             </div>
+
+            {/* Mission tagline */}
+            <p className="text-xs sm:text-sm md:text-base text-gray-800 font-bold max-w-2xl mx-auto px-2 mb-3 text-center leading-relaxed drop-shadow-sm">
+              Committed to training engineers with a sense of service and spirituality.
+            </p>
+
+            {/* Core Pillars: STUDY SPIRITUALITY SERVICE */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="flex flex-wrap items-center justify-center gap-2 sm:gap-3.5 my-1.5"
+            >
+              {['STUDY', 'SPIRITUALITY', 'SERVICE'].map((word) => (
+                <motion.div
+                  key={word}
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-lg bg-white/90 border border-indigo-200/80 backdrop-blur-md shadow-md hover:shadow-indigo-500/20 hover:border-indigo-400 hover:bg-white transition-all duration-300 cursor-pointer select-none"
+                >
+                  <span className="font-title font-black text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase text-indigo-950 transition-colors">
+                    {word}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
 
           {/* Institutional Credentials Card — Single Horizontal Row with Logos */}
-          <div className="w-full max-w-5xl bg-transparent mt-8 p-6 md:p-8 select-none relative z-10">
+          <div className="w-full max-w-5xl bg-transparent mt-1 p-2 md:p-3 select-none relative z-10">
             <div className="flex flex-col items-center justify-center text-center mb-8">
               <span className="font-display text-xs uppercase tracking-widest font-black text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1 rounded-full">
                 Institutional Credentials
