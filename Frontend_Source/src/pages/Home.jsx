@@ -658,13 +658,13 @@ export default function Home() {
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
             <motion.div
-              className="inline-flex items-center justify-center gap-2 px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border-2 border-amber-400/90 rounded-full cursor-default select-none shadow-[0_0_18px_rgba(245,158,11,0.35)]"
+              className="inline-flex items-center justify-center gap-2 px-4 py-1 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-900 bg-white/90 border border-amber-400/70 rounded-full cursor-default select-none shadow-[0_0_12px_rgba(245,158,11,0.25)]"
               animate={{
-                y: [0, -4, 0, 4, 0],
+                y: [0, -3, 0, 3, 0],
                 boxShadow: [
-                  '0 0 14px rgba(245,158,11,0.30), 0 2px 8px rgba(217,119,6,0.20)',
-                  '0 0 24px rgba(245,158,11,0.50), 0 4px 14px rgba(217,119,6,0.35)',
-                  '0 0 14px rgba(245,158,11,0.30), 0 2px 8px rgba(217,119,6,0.20)',
+                  '0 0 10px rgba(245,158,11,0.25), 0 1px 6px rgba(217,119,6,0.15)',
+                  '0 0 18px rgba(245,158,11,0.45), 0 3px 10px rgba(217,119,6,0.25)',
+                  '0 0 10px rgba(245,158,11,0.25), 0 1px 6px rgba(217,119,6,0.15)',
                 ]
               }}
               transition={{
@@ -672,8 +672,8 @@ export default function Home() {
                 boxShadow: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }
               }}
               whileHover={{
-                scale: 1.05,
-                boxShadow: '0 0 28px rgba(245,158,11,0.60), 0 4px 16px rgba(217,119,6,0.40)',
+                scale: 1.04,
+                boxShadow: '0 0 22px rgba(245,158,11,0.55), 0 3px 12px rgba(217,119,6,0.30)',
                 transition: { duration: 0.28, ease: 'easeOut' }
               }}
             >
@@ -682,11 +682,11 @@ export default function Home() {
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
             <div className="w-full flex justify-center mb-3">
               <h1
-                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.65)]"
+                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap text-white"
                 style={{
                   fontSize: 'clamp(1.75rem, 4.2vw, 5rem)',
                   color: '#FFFFFF',
-                  textShadow: '0 0 24px rgba(255,255,255,0.6), 0 4px 18px rgba(15,23,42,0.8)'
+                  textShadow: '0 0 25px rgba(245,158,11,0.75), 0 0 50px rgba(251,191,36,0.45), 0 4px 18px rgba(15,23,42,0.9)'
                 }}
               >
                 Adhiparasakthi Engineering College
@@ -696,18 +696,18 @@ export default function Home() {
             {/* Subtitle — Forced Single Straight Line matching title style */}
             <div className="w-full flex justify-center mb-2 px-2">
               <h2
-                className="font-title font-bold tracking-[0.06em] text-slate-100 uppercase text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+                className="font-title font-bold tracking-[0.06em] text-slate-100 uppercase text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
                 style={{
                   fontSize: 'clamp(0.75rem, 1.8vw, 1.35rem)',
                   color: '#F8FAFC',
-                  textShadow: '0 0 16px rgba(255,255,255,0.5), 0 2px 8px rgba(15,23,42,0.7)'
+                  textShadow: '0 0 18px rgba(245,158,11,0.65), 0 0 35px rgba(251,191,36,0.35), 0 2px 10px rgba(15,23,42,0.8)'
                 }}
               >
                 An Autonomous Institution Affiliated to Anna University
               </h2>
             </div>
 
-            {/* Core Pillars: STUDY SPIRITUALITY SERVICE — Transparent Glass Boxes */}
+            {/* Core Pillars: STUDY SPIRITUALITY SERVICE — Transparent Glass Boxes with White & Gold Text */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -720,9 +720,9 @@ export default function Home() {
                   whileHover={{ scale: 1.06, y: -2 }}
                   whileTap={{ scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-lg bg-white/20 border border-white/40 backdrop-blur-md shadow-lg hover:shadow-indigo-500/25 hover:border-white/70 hover:bg-white/35 transition-all duration-300 cursor-pointer select-none"
+                  className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-lg bg-white/20 border border-white/40 backdrop-blur-md shadow-lg hover:shadow-amber-500/30 hover:border-amber-300/80 hover:bg-white/35 transition-all duration-300 cursor-pointer select-none"
                 >
-                  <span className="font-title font-black text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase text-slate-900 drop-shadow-sm transition-colors">
+                  <span className="font-title font-black text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase bg-gradient-to-r from-white via-amber-200 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_8px_rgba(245,158,11,0.7)] transition-all">
                     {word}
                   </span>
                 </motion.div>
