@@ -586,136 +586,137 @@ function AppContent({ isLoading, setIsLoading }) {
               </div>
             )}
             
-            {/* NAVIGATION BAR WITH DETAILED HOVER MEGA-MENUS */}
             {/* STACKED HEADER SYSTEM */}
             <header
-              className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300 relative"
+              className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300"
             >
-              {/* UNIFIED TOP CORNER SQUARE LOGO BADGE (Spans Header Top Bar + News Ticker ONLY, stops before Nav Bar) */}
-              <Link 
-                to="/" 
-                className="absolute left-0 top-0 h-[92px] sm:h-[106px] w-[64px] sm:w-[82px] lg:w-[92px] bg-white border-r border-b border-amber-200/60 shadow-md flex items-center justify-center p-1.5 z-30 rounded-br-2xl group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
-                title="Adhiparasakthi Engineering College"
-              >
-                <img 
-                  src="/Images/Logos/apec-logo.png" 
-                  alt="APEC Logo" 
-                  className="w-10 h-10 sm:w-13 sm:h-13 lg:w-16 lg:h-16 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300 drop-shadow-md" 
-                />
-              </Link>
-              
-              {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-              <div className="w-full pl-[72px] sm:pl-[92px] lg:pl-[104px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
-                
-                {/* College Name & Tagline */}
-                <Link to="/" className="flex items-center shrink-0">
-                  <div className="text-left flex flex-col justify-center max-w-[170px] xs:max-w-[210px] sm:max-w-md lg:max-w-none">
-                    <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight text-indigo-950 block leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
-                      {branding.collegeName}
-                    </span>
-                    <span className="font-mono text-[6.5px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-indigo-650">
-                      {branding.tagline}
-                    </span>
-                  </div>
+              {/* TOP HEADER + NEWS CONTAINER (Logo isolated inside this wrapper ONLY, completely above Nav Bar) */}
+              <div className="relative w-full">
+                {/* PERFECT SQUARE LOGO BADGE (Covers ONLY Top Header Bar + News Ticker — 100% Square 92x92 mobile / 106x106 desktop) */}
+                <Link 
+                  to="/" 
+                  className="absolute left-0 top-0 h-[92px] lg:h-[106px] w-[92px] lg:w-[106px] aspect-square bg-white border-r border-b border-amber-300/80 shadow-md flex items-center justify-center p-2 z-30 rounded-br-2xl group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
+                  title="Adhiparasakthi Engineering College"
+                >
+                  <img 
+                    src="/Images/Logos/apec-logo.png" 
+                    alt="APEC Logo" 
+                    className="w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300 drop-shadow-md" 
+                  />
                 </Link>
-                {/* Right Actions & Mobile Toggle */}
-                <div className="flex items-center gap-6">
-                  {/* Desktop Right Action Panel */}
-                  <div className="hidden lg:flex items-center gap-4">
-                    <button 
-                      onClick={() => setIsPanoOpen(true)}
-                      className="relative w-10 h-10 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer group/vrbtn"
-                      title="Open 360° VR Campus Tour"
-                    >
-                      {/* Pulse background shine */}
-                      <span className="absolute inset-0 rounded-full bg-black/5 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
-                      
-                      {/* Minimalist Panoramic 360 Circular Arrow Logo (Expanded, Padding Removed) */}
-                      <div className="relative w-8 h-8 flex items-center justify-center overflow-visible text-black">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
-                          {/* Panoramic Circular Arrow loop */}
-                          <path d="M23 12a11 11 0 1 1-3.2-7.8L23 8" className="animate-[spin_16s_linear_infinite] origin-center" />
-                          {/* Arrow head */}
-                          <path d="M23 3v5h-5" />
-                          {/* Central panoramic text "360°" */}
-                          <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="900" stroke="none" fill="currentColor" style={{ fontFamily: 'system-ui, sans-serif' }}>360°</text>
-                        </svg>
-                        {/* Bouncing degree circle on the top-right corner of container */}
-                        <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
-                      </div>
-                    </button>
+                
+                {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
+                <div className="w-full pl-[98px] lg:pl-[114px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
+                  
+                  {/* College Name & Tagline */}
+                  <Link to="/" className="flex items-center shrink-0">
+                    <div className="text-left flex flex-col justify-center max-w-[170px] xs:max-w-[210px] sm:max-w-md lg:max-w-none">
+                      <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight text-indigo-950 block leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+                        {branding.collegeName}
+                      </span>
+                      <span className="font-mono text-[6.5px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-indigo-650">
+                        {branding.tagline}
+                      </span>
+                    </div>
+                  </Link>
+                  {/* Right Actions & Mobile Toggle */}
+                  <div className="flex items-center gap-6">
+                    {/* Desktop Right Action Panel */}
+                    <div className="hidden lg:flex items-center gap-4">
+                      <button 
+                        onClick={() => setIsPanoOpen(true)}
+                        className="relative w-10 h-10 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer group/vrbtn"
+                        title="Open 360° VR Campus Tour"
+                      >
+                        {/* Pulse background shine */}
+                        <span className="absolute inset-0 rounded-full bg-black/5 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
+                        
+                        {/* Minimalist Panoramic 360 Circular Arrow Logo (Expanded, Padding Removed) */}
+                        <div className="relative w-8 h-8 flex items-center justify-center overflow-visible text-black">
+                          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
+                            {/* Panoramic Circular Arrow loop */}
+                            <path d="M23 12a11 11 0 1 1-3.2-7.8L23 8" className="animate-[spin_16s_linear_infinite] origin-center" />
+                            {/* Arrow head */}
+                            <path d="M23 3v5h-5" />
+                            {/* Central panoramic text "360°" */}
+                            <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="900" stroke="none" fill="currentColor" style={{ fontFamily: 'system-ui, sans-serif' }}>360°</text>
+                          </svg>
+                          {/* Bouncing degree circle on the top-right corner of container */}
+                          <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full border border-white shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
+                        </div>
+                      </button>
 
-                    <Link 
-                      to="/fee-payment" 
-                      className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-700 transition-all bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
-                    >
-                      <span>Fee Payment</span>
-                    </Link>
-                    <a 
-                      href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-blue-600 hover:text-blue-700 transition-all bg-blue-50 hover:bg-blue-100/80 border border-blue-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
-                    >
-                      <span>ERP Portal</span>
-                    </a>
-                    {localStorage.getItem('is_logged_in') === 'true' && (
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs font-extrabold text-indigo-655 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          {localStorage.getItem('apec_user') ? localStorage.getItem('apec_user').split('@')[0] : 'Admin'}
-                        </span>
-                        <button 
-                          onClick={() => {
-                            localStorage.removeItem('apec_user');
-                            localStorage.removeItem('is_logged_in');
-                            window.location.reload();
-                          }}
-                          className="text-xs font-extrabold uppercase tracking-wider text-rose-500 hover:text-rose-750 transition-colors cursor-pointer"
-                        >
-                          Logout
-                        </button>
-                      </div>
-                    )}
-                    <Link 
-                      to="/contact"
-                      className="text-xs font-black uppercase tracking-widest bg-gradient-to-r from-red-800 via-orange-800 to-amber-900 hover:from-red-900 hover:via-orange-900 hover:to-amber-950 text-white px-3.5 py-2 rounded-xl transition-all shadow-md active:scale-95"
-                    >
-                      New Admission
-                    </Link>
+                      <Link 
+                        to="/fee-payment" 
+                        className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-700 transition-all bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
+                      >
+                        <span>Fee Payment</span>
+                      </Link>
+                      <a 
+                        href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-blue-600 hover:text-blue-700 transition-all bg-blue-50 hover:bg-blue-100/80 border border-blue-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
+                      >
+                        <span>ERP Portal</span>
+                      </a>
+                      {localStorage.getItem('is_logged_in') === 'true' && (
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs font-extrabold text-indigo-655 bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-100 flex items-center gap-1.5 select-none animate-fade-in">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            {localStorage.getItem('apec_user') ? localStorage.getItem('apec_user').split('@')[0] : 'Admin'}
+                          </span>
+                          <button 
+                            onClick={() => {
+                              localStorage.removeItem('apec_user');
+                              localStorage.removeItem('is_logged_in');
+                              window.location.reload();
+                            }}
+                            className="text-xs font-extrabold uppercase tracking-wider text-rose-500 hover:text-rose-750 transition-colors cursor-pointer"
+                          >
+                            Logout
+                          </button>
+                        </div>
+                      )}
+                      <Link 
+                        to="/contact"
+                        className="text-xs font-black uppercase tracking-widest bg-gradient-to-r from-red-800 via-orange-800 to-amber-900 hover:from-red-900 hover:via-orange-900 hover:to-amber-950 text-white px-3.5 py-2 rounded-xl transition-all shadow-md active:scale-95"
+                      >
+                        New Admission
+                      </Link>
+                    </div>
+
+                    {/* Mobile Actions: 360 VR & Menu Button */}
+                    <div className="flex items-center gap-2 sm:gap-3.5 lg:hidden shrink-0">
+                      <button 
+                        onClick={() => setIsPanoOpen(true)}
+                        className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer"
+                        title="Open 360° VR Campus Tour"
+                      >
+                        <div className="relative w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center overflow-visible text-black">
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
+                            <path d="M23 12a11 11 0 1 1-3.2-7.8L23 8" className="animate-[spin_16s_linear_infinite] origin-center" />
+                            <path d="M23 3v5h-5" />
+                            <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="900" stroke="none" fill="currentColor" style={{ fontFamily: 'system-ui, sans-serif' }}>360°</text>
+                          </svg>
+                          <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full border border-white shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
+                        </div>
+                      </button>
+
+                      <button 
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        className="p-1.5 text-gray-800 hover:text-gray-950 transition-colors shrink-0 focus:outline-none"
+                        aria-label="Toggle navigation menu"
+                      >
+                        {mobileMenuOpen ? <X className="w-5.5 h-5.5 sm:w-6 sm:h-6" /> : <Menu className="w-5.5 h-5.5 sm:w-6 sm:h-6 stroke-[2.5]" />}
+                      </button>
+                    </div>
                   </div>
 
-                  {/* Mobile Actions: 360 VR & Menu Button */}
-                  <div className="flex items-center gap-2 sm:gap-3.5 lg:hidden shrink-0">
-                    <button 
-                      onClick={() => setIsPanoOpen(true)}
-                      className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer"
-                      title="Open 360° VR Campus Tour"
-                    >
-                      <div className="relative w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center overflow-visible text-black">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
-                          <path d="M23 12a11 11 0 1 1-3.2-7.8L23 8" className="animate-[spin_16s_linear_infinite] origin-center" />
-                          <path d="M23 3v5h-5" />
-                          <text x="12" y="14.8" textAnchor="middle" fontSize="7.5" fontWeight="900" stroke="none" fill="currentColor" style={{ fontFamily: 'system-ui, sans-serif' }}>360°</text>
-                        </svg>
-                        <span className="absolute -top-1 -right-1 w-1.5 h-1.5 rounded-full border border-white shadow-sm animate-[degreeBounce_1.2s_infinite_alternate]" />
-                      </div>
-                    </button>
-
-                    <button 
-                      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                      className="p-1.5 text-gray-800 hover:text-gray-950 transition-colors shrink-0 focus:outline-none"
-                      aria-label="Toggle navigation menu"
-                    >
-                      {mobileMenuOpen ? <X className="w-5.5 h-5.5 sm:w-6 sm:h-6" /> : <Menu className="w-5.5 h-5.5 sm:w-6 sm:h-6 stroke-[2.5]" />}
-                    </button>
-                  </div>
                 </div>
 
-              </div>
-
-              {/* Scrolling News Ticker */}
-              <div className="w-full pl-[72px] sm:pl-[92px] lg:pl-[104px] bg-white border-b border-[#FFD6A5]/50 h-[32px] sm:h-[36px] overflow-hidden relative z-10 select-none flex items-center shrink-0">
+                {/* Scrolling News Ticker */}
+                <div className="w-full pl-[98px] lg:pl-[114px] bg-white border-b border-[#FFD6A5]/50 h-[32px] sm:h-[36px] overflow-hidden relative z-10 select-none flex items-center shrink-0">
                 
                 {/* Scrolling Track */}
                 <div className="relative w-full overflow-hidden flex items-center">
@@ -769,14 +770,16 @@ function AppContent({ isLoading, setIsLoading }) {
                   </div>
                 </div>
               </div>
+            </div>
+            {/* END TOP HEADER + NEWS CONTAINER */}
 
-              {/* Glowing Divider Separator */}
+              {/* Glowing Divider Separator (Full Width, 50% Thickness/Length) */}
               <div 
-                className="w-full h-[3px] animate-[shimmer_5s_linear_infinite] relative z-20"
+                className="w-full h-[1.5px] animate-[shimmer_5s_linear_infinite] relative z-20"
                 style={{
                   background: 'linear-gradient(90deg, #FFB347 0%, #FFD580 50%, #FFB347 100%)',
                   backgroundSize: '200% 100%',
-                  boxShadow: '0 0 10px rgba(255, 179, 71, 0.5), 0 0 4px rgba(255, 213, 128, 0.3)'
+                  boxShadow: '0 0 8px rgba(255, 179, 71, 0.4), 0 0 3px rgba(255, 213, 128, 0.2)'
                 }}
               />
 

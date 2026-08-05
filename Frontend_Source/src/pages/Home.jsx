@@ -706,11 +706,6 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Mission tagline */}
-            <p className="text-xs sm:text-sm md:text-base text-gray-800 font-bold max-w-2xl mx-auto px-2 mb-3 text-center leading-relaxed drop-shadow-sm">
-              Committed to training engineers with a sense of service and spirituality.
-            </p>
-
             {/* Core Pillars: STUDY SPIRITUALITY SERVICE — Transparent Glass Boxes */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}

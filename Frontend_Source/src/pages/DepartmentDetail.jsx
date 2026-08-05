@@ -198,19 +198,28 @@ export default function DepartmentDetail() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* Back Link */}
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="mb-8"
-        >
-          <Link 
-            to="/departments" 
-            className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-gray-550 hover:text-indigo-650 transition-colors bg-white hover:bg-gray-50 border border-gray-200/80 px-4 py-2 rounded-full shadow-sm"
+        {/* Back Link & Title */}
+        <div className="mb-8 flex flex-col items-start gap-4">
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Departments
-          </Link>
-        </motion.div>
+            <Link 
+              to="/departments" 
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-gray-550 hover:text-indigo-650 transition-colors bg-white hover:bg-gray-50 border border-gray-200/80 px-4 py-2 rounded-full shadow-sm"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" /> Back to Departments
+            </Link>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 uppercase tracking-tight mt-2"
+            style={{ fontFamily: "'Playfair Display', 'Merriweather', 'Georgia', serif", letterSpacing: "-0.02em" }}
+          >
+            {dept.name.replace(/^Department of\s+/i, '')}
+          </motion.h1>
+        </div>
 
         {/* Hero Section */}
         <motion.div 
