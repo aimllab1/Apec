@@ -219,18 +219,103 @@ export default function DepartmentDetail() {
           >
             {dept.name.replace(/^Department of\s+/i, '')}
           </motion.h1>
+
+          {/* Tab Selection */}
+          <div className="relative mt-2 w-full flex items-center justify-start gap-3">
+            {/* Overview Button */}
+            <button
+              onClick={() => {
+                setActiveSubTab('overview');
+                setFacultySearch('');
+                setPubSearch('');
+                setIsMoreOpen(false);
+              }}
+              className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
+                activeSubTab === 'overview' 
+                  ? 'bg-indigo-650 text-white border-indigo-650' 
+                  : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+              <span>Overview</span>
+            </button>
+
+            {/* More Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
+                  (activeSubTab !== 'overview' || isMoreOpen)
+                    ? 'bg-white text-indigo-650 border-indigo-200' 
+                    : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
+                }`}
+              >
+                <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                <span>{activeSubTab !== 'overview' ? moreOptions.find(o => o.id === activeSubTab)?.label || 'More' : 'More'}</span>
+                <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Overlay to close dropdown */}
+              {isMoreOpen && (
+                <div 
+                  className="fixed inset-0 z-40" 
+                  onClick={() => setIsMoreOpen(false)}
+                />
+              )}
+
+              {/* Dropdown Menu */}
+              <AnimatePresence>
+                {isMoreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-2"
+                  >
+                    {moreOptions.map((opt) => {
+                      const Icon = opt.icon;
+                      return (
+                        <button
+                          key={opt.id}
+                          onClick={() => {
+                            setActiveSubTab(opt.id);
+                            setFacultySearch('');
+                            setPubSearch('');
+                            setIsMoreOpen(false);
+                          }}
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors ${
+                            activeSubTab === opt.id 
+                              ? 'text-indigo-650 bg-indigo-50/50' 
+                              : 'text-gray-600 hover:text-indigo-650 hover:bg-gray-50'
+                          }`}
+                        >
+                          <Icon className="w-4 h-4" />
+                          {opt.label}
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
 
         {/* Hero Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white border border-gray-200 shadow-sm p-6 sm:p-8 md:p-10 rounded-3xl mb-12 flex flex-col gap-8 hover:shadow-md transition-shadow duration-300 animate-fadeIn"
-        >
+        <AnimatePresence>
+          {activeSubTab === 'overview' && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20, height: 0, overflow: 'hidden' }}
+              transition={{ duration: 0.3 }}
+              className="bg-white border border-gray-200 shadow-sm p-6 sm:p-8 md:p-10 rounded-3xl mb-12 flex flex-col gap-8 hover:shadow-md transition-shadow duration-300 animate-fadeIn"
+            >
           {/* Top Row: Image & Info Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
             {/* Left Column: Department Image */}
-            <div className="w-full h-56 sm:h-64 md:h-72 md:col-span-5 rounded-2xl overflow-hidden shadow-sm relative group">
+            <div className="w-full h-64 sm:h-72 md:h-auto min-h-[320px] md:col-span-5 rounded-2xl overflow-hidden shadow-sm relative group">
               <img 
                 src={deptImage} 
                 alt={`${dept.name} Department`}
@@ -239,9 +324,9 @@ export default function DepartmentDetail() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
 
-            {/* Right Column: Title and Details */}
-            <div className="flex flex-col justify-center items-start text-left md:col-span-7 space-y-5">
-              <div className="space-y-4 w-full">
+            {/* Right Column: Title, Details, and KPIs */}
+            <div className="flex flex-col justify-between items-start text-left md:col-span-7 space-y-8 w-full h-full py-2">
+              <div className="space-y-5 w-full">
                 {/* Badges Row */}
                 <div className="flex flex-wrap gap-2 items-center">
                   <span className="text-[10px] font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1.5 rounded-full uppercase">
@@ -280,168 +365,66 @@ export default function DepartmentDetail() {
                   </span>
                 </p>
               </div>
+
+              {/* KPI Cards (Laboratories and Intake Capacity) */}
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0 },
+                  show: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.1 }
+                  }
+                }}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full mt-auto"
+              >
+                {/* KPI 1: Laboratories */}
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+                  }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  className="group bg-gradient-to-br from-blue-50/60 to-indigo-50/20 backdrop-blur-md border border-blue-100 hover:border-blue-300 shadow-sm hover:shadow-[0_12px_32px_rgba(59,130,246,0.08)] p-5 rounded-2xl flex items-center gap-4 transition-all duration-300"
+                >
+                  <div className="bg-blue-600 text-white p-3.5 rounded-xl shadow-md shadow-blue-500/20 group-hover:rotate-6 transition-transform duration-300">
+                    <FlaskConical className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-900 to-indigo-950 bg-clip-text text-transparent tracking-tight">{(dept.labs || []).length}</span>
+                    <span className="text-[10px] font-black uppercase text-blue-750 tracking-wider">Laboratories</span>
+                  </div>
+                </motion.div>
+
+                {/* KPI 2: Intake Capacity */}
+                <motion.div 
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
+                  }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  className="group bg-gradient-to-br from-amber-50/60 to-orange-50/20 backdrop-blur-md border border-amber-100 hover:border-amber-300 shadow-sm hover:shadow-[0_12px_32px_rgba(245,158,11,0.08)] p-5 rounded-2xl flex items-center gap-4 transition-all duration-300"
+                >
+                  <div className="bg-amber-600 text-white p-3.5 rounded-xl shadow-md shadow-amber-500/20 group-hover:rotate-6 transition-transform duration-300">
+                    <GraduationCap className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-3xl sm:text-4xl font-black bg-gradient-to-r from-amber-900 to-orange-950 bg-clip-text text-transparent tracking-tight">
+                      {displayIntakeValue}
+                    </span>
+                    <span className="text-[10px] font-black uppercase text-amber-750 tracking-wider">
+                      {displayIntakeLabel}
+                    </span>
+                  </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
-
-          {/* Bottom Row: 3 KPI Cards */}
-          <motion.div 
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.1
-                }
-              }
-            }}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full pt-6 border-t border-gray-150"
-          >
-            
-            {/* KPI 1: Laboratories */}
-            <motion.div 
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
-              }}
-              whileHover={{ y: -6, scale: 1.015 }}
-              className="group bg-gradient-to-br from-blue-50/60 to-indigo-50/20 backdrop-blur-md border border-blue-100 hover:border-blue-300 shadow-sm hover:shadow-[0_12px_32px_rgba(59,130,246,0.08)] p-5 rounded-2xl flex items-center gap-4 transition-all duration-300"
-            >
-              <div className="bg-blue-600 text-white p-3.5 rounded-xl shadow-md shadow-blue-500/20 group-hover:rotate-6 transition-transform duration-300">
-                <FlaskConical className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
-              </div>
-              <div className="text-left">
-                <span className="block text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-900 to-indigo-950 bg-clip-text text-transparent tracking-tight">{(dept.labs || []).length}</span>
-                <span className="text-[10px] font-black uppercase text-blue-750 tracking-wider">Laboratories</span>
-              </div>
             </motion.div>
+          )}
+        </AnimatePresence>
 
-            {/* KPI 2: Publications */}
-            <motion.div 
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
-              }}
-              whileHover={{ y: -6, scale: 1.015 }}
-              className="group bg-gradient-to-br from-purple-50/60 to-fuchsia-50/20 backdrop-blur-md border border-purple-100 hover:border-purple-300 shadow-sm hover:shadow-[0_12px_32px_rgba(147,51,234,0.08)] p-5 rounded-2xl flex items-center gap-4 transition-all duration-300"
-            >
-              <div className="bg-purple-650 text-white p-3.5 rounded-xl shadow-md shadow-purple-500/20 group-hover:rotate-6 transition-transform duration-300">
-                <BookOpen className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
-              </div>
-              <div className="text-left">
-                <span className="block text-3xl sm:text-4xl font-black bg-gradient-to-r from-purple-900 to-fuchsia-950 bg-clip-text text-transparent tracking-tight">
-                  {(dept.publications?.journals || []).length + (dept.publications?.books || []).length + (dept.publications?.conferences || []).length}
-                </span>
-                <span className="text-[10px] font-black uppercase text-purple-750 tracking-wider">Publications</span>
-              </div>
-            </motion.div>
-
-            {/* KPI 3: Intake Capacity */}
-            <motion.div 
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 15 } }
-              }}
-              whileHover={{ y: -6, scale: 1.015 }}
-              className="group bg-gradient-to-br from-amber-50/60 to-orange-50/20 backdrop-blur-md border border-amber-100 hover:border-amber-300 shadow-sm hover:shadow-[0_12px_32px_rgba(245,158,11,0.08)] p-5 rounded-2xl flex items-center gap-4 transition-all duration-300"
-            >
-              <div className="bg-amber-600 text-white p-3.5 rounded-xl shadow-md shadow-amber-500/20 group-hover:rotate-6 transition-transform duration-300">
-                <GraduationCap className="w-5.5 h-5.5 sm:w-6 sm:h-6" />
-              </div>
-              <div className="text-left">
-                <span className="block text-3xl sm:text-4xl font-black bg-gradient-to-r from-amber-900 to-orange-950 bg-clip-text text-transparent tracking-tight">
-                  {displayIntakeValue}
-                </span>
-                <span className="text-[10px] font-black uppercase text-amber-750 tracking-wider">
-                  {displayIntakeLabel}
-                </span>
-              </div>
-            </motion.div>
-
-          </motion.div>
-        </motion.div>
-
-        {/* Tab Selection */}
-        <div className="relative mb-8 sm:mb-12 w-full flex items-center justify-start gap-3">
-          {/* Overview Button */}
-          <button
-            onClick={() => {
-              setActiveSubTab('overview');
-              setFacultySearch('');
-              setPubSearch('');
-              setIsMoreOpen(false);
-            }}
-            className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
-              activeSubTab === 'overview' 
-                ? 'bg-indigo-650 text-white border-indigo-650' 
-                : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
-            }`}
-          >
-            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-            <span>Overview</span>
-          </button>
-
-          {/* More Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsMoreOpen(!isMoreOpen)}
-              className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
-                (activeSubTab !== 'overview' || isMoreOpen)
-                  ? 'bg-white text-indigo-650 border-indigo-200' 
-                  : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
-              }`}
-            >
-              <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-              <span>{activeSubTab !== 'overview' ? moreOptions.find(o => o.id === activeSubTab)?.label || 'More' : 'More'}</span>
-              <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Overlay to close dropdown */}
-            {isMoreOpen && (
-              <div 
-                className="fixed inset-0 z-40" 
-                onClick={() => setIsMoreOpen(false)}
-              />
-            )}
-
-            {/* Dropdown Menu */}
-            <AnimatePresence>
-              {isMoreOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-2"
-                >
-                  {moreOptions.map((opt) => {
-                    const Icon = opt.icon;
-                    return (
-                      <button
-                        key={opt.id}
-                        onClick={() => {
-                          setActiveSubTab(opt.id);
-                          setFacultySearch('');
-                          setPubSearch('');
-                          setIsMoreOpen(false);
-                        }}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors ${
-                          activeSubTab === opt.id 
-                            ? 'text-indigo-650 bg-indigo-50/50' 
-                            : 'text-gray-600 hover:text-indigo-650 hover:bg-gray-50'
-                        }`}
-                      >
-                        <Icon className="w-4 h-4" />
-                        {opt.label}
-                      </button>
-                    );
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
 
         {/* Main Content Area */}
         <div className="bg-white border border-gray-200 shadow-sm rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-10 min-h-[400px]">

@@ -679,14 +679,14 @@ export default function Home() {
             >
               <span className="font-serif italic"><span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence</span>
             </motion.div>
-
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
             <div className="w-full flex justify-center mb-3">
               <h1
-                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap text-[#1B224A]"
+                className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.65)]"
                 style={{
                   fontSize: 'clamp(1.75rem, 4.2vw, 5rem)',
-                  textShadow: '0 0 22px rgba(99,102,241,0.35), 0 2px 8px rgba(255,255,255,0.9), 0 4px 16px rgba(255,255,255,0.6)'
+                  color: '#FFFFFF',
+                  textShadow: '0 0 24px rgba(255,255,255,0.6), 0 4px 18px rgba(15,23,42,0.8)'
                 }}
               >
                 Adhiparasakthi Engineering College
@@ -696,10 +696,11 @@ export default function Home() {
             {/* Subtitle — Forced Single Straight Line matching title style */}
             <div className="w-full flex justify-center mb-2 px-2">
               <h2
-                className="font-title font-bold tracking-[0.06em] text-slate-900 uppercase text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
+                className="font-title font-bold tracking-[0.06em] text-slate-100 uppercase text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
                 style={{
                   fontSize: 'clamp(0.75rem, 1.8vw, 1.35rem)',
-                  textShadow: '0 1px 4px rgba(255,255,255,0.9)'
+                  color: '#F8FAFC',
+                  textShadow: '0 0 16px rgba(255,255,255,0.5), 0 2px 8px rgba(15,23,42,0.7)'
                 }}
               >
                 An Autonomous Institution Affiliated to Anna University
