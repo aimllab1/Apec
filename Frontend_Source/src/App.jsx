@@ -594,18 +594,18 @@ function AppContent({ isLoading, setIsLoading }) {
               {/* UNIFIED TOP CORNER SQUARE LOGO BADGE (Spans Header Top Bar + News Ticker) */}
               <Link 
                 to="/" 
-                className="absolute left-0 top-0 bottom-0 w-[72px] sm:w-[96px] lg:w-[110px] bg-white border-r border-b border-gray-200/90 shadow-md flex items-center justify-center p-2 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0"
+                className="absolute left-0 top-0 bottom-0 w-[64px] sm:w-[82px] lg:w-[92px] bg-white border-r border-b border-gray-200/90 shadow-md flex items-center justify-center p-1.5 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0"
                 title="Adhiparasakthi Engineering College"
               >
                 <img 
                   src="/Images/Logos/apec-logo.png" 
                   alt="APEC Logo" 
-                  className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300 drop-shadow-md" 
+                  className="w-10 h-10 sm:w-13 sm:h-13 lg:w-16 lg:h-16 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300 drop-shadow-md" 
                 />
               </Link>
               
               {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-              <div className="w-full pl-[80px] sm:pl-[108px] lg:pl-[122px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
+              <div className="w-full pl-[72px] sm:pl-[92px] lg:pl-[104px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
                 
                 {/* College Name & Tagline */}
                 <Link to="/" className="flex items-center shrink-0">
@@ -715,12 +715,7 @@ function AppContent({ isLoading, setIsLoading }) {
               </div>
 
               {/* Scrolling News Ticker */}
-              <div className="w-full pl-[80px] sm:pl-[108px] lg:pl-[122px] bg-white border-b border-[#FFD6A5]/50 h-[32px] sm:h-[36px] overflow-hidden relative z-10 select-none flex items-center shrink-0">
-                {/* Announcement Icon Badge */}
-                <div className="bg-[#FF8A00] text-white px-3 py-[1px] h-full rounded-r-lg font-black text-[10px] sm:text-xs uppercase tracking-wider flex items-center gap-1.5 shrink-0 z-20 shadow-sm ml-0">
-                  <span role="img" aria-label="announcement">📢</span>
-                  <span>News</span>
-                </div>
+              <div className="w-full pl-[72px] sm:pl-[92px] lg:pl-[104px] bg-white border-b border-[#FFD6A5]/50 h-[32px] sm:h-[36px] overflow-hidden relative z-10 select-none flex items-center shrink-0">
                 
                 {/* Scrolling Track */}
                 <div className="relative w-full overflow-hidden flex items-center">

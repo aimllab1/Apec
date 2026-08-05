@@ -49,6 +49,12 @@ if (Test-Path $localDist) {
 
     Copy-Item -Path "$localDist\*" -Destination $networkDist -Recurse -Force
     Write-Host "[OK] Build files successfully copied to Z:\Production_Build\dist"
+
+    $rootDist = "$networkShareDir\dist"
+    if (Test-Path $rootDist) {
+        Copy-Item -Path "$localDist\*" -Destination $rootDist -Recurse -Force
+        Write-Host "[OK] Build files successfully copied to Z:\dist"
+    }
 } else {
     Write-Error "[ERROR] Build failed: output directory 'dist' was not generated on local drive."
 }

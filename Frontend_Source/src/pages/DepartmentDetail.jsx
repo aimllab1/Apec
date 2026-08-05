@@ -248,22 +248,21 @@ export default function DepartmentDetail() {
                   )}
                 </div>
                 
-                {/* Title with Logo/Icon */}
-                <div className="flex items-center gap-3.5 pt-1">
-                  <div className="bg-indigo-50 border border-indigo-100 text-indigo-650 p-2.5 sm:p-3 rounded-2xl shrink-0 shadow-sm">
-                    <DeptIcon className="w-6 h-6 sm:w-8 sm:h-8" />
-                  </div>
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black font-title tracking-tight text-gray-900 leading-tight">
-                    {dept.name.replace(/^Department of\s+/i, '')}
-                  </h1>
-                </div>
+                {/* Department Title */}
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black font-title tracking-tight text-gray-900 leading-tight">
+                  {dept.name.replace(/^Department of\s+/i, '')}
+                </h1>
                 
                 {/* College & Location */}
-                <p className="text-xs sm:text-sm md:text-base text-gray-550 font-bold leading-relaxed flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full shrink-0" />
-                  Adhiparasakthi Engineering College
-                  <span className="text-gray-300">•</span>
-                  Melmaruvathur
+                <p className="text-xs sm:text-sm md:text-base text-gray-550 font-bold leading-relaxed flex flex-wrap items-center gap-x-4 gap-y-1">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full shrink-0" />
+                    Adhiparasakthi Engineering College
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-indigo-600 rounded-full shrink-0" />
+                    Melmaruvathur
+                  </span>
                 </p>
               </div>
             </div>
