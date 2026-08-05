@@ -235,6 +235,39 @@ export default function Home() {
   const [showAdModal, setShowAdModal] = useState(false);
   const [activeAds, setActiveAds] = useState([]);
   const [currentAdIdx, setCurrentAdIdx] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [adFacilityIdx, setAdFacilityIdx] = useState(0);
+  const adFacilityImages = [
+    { url: '/Images/College/library.webp', title: 'Central Library' },
+    { url: '/Images/Gallery/infrastructure/campus.jpg', title: 'Green Campus' },
+    { url: '/Images/Gallery/infrastructure/lab.jpg', title: 'Advanced Labs' }
+  ];
+
+  // Rotate facilities slideshow
+  useEffect(() => {
+    if (showAdModal) {
+      const timer = setInterval(() => {
+        setAdFacilityIdx(prev => (prev + 1) % adFacilityImages.length);
+      }, 4000);
+      return () => clearInterval(timer);
+    }
+  }, [showAdModal]);
+
+  // Check mobile screen sizes for responsive popup layout
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Close helper that saves closure to sessionStorage for visit-once behavior
+  const handleCloseAdModal = () => {
+    setShowAdModal(false);
+    sessionStorage.setItem('apec_ad_popup_closed', 'true');
+  };
 
   // Load ads on mount or storage updates
   useEffect(() => {
@@ -311,15 +344,40 @@ export default function Home() {
     };
   }, []);
 
-  // Trigger ad popup 1.5 seconds after landing
+  // Trigger ad popup after page is fully loaded and interactive, plus a 400ms delay
   useEffect(() => {
-    if (activeAds.length > 0) {
-      const timer = setTimeout(() => {
-        setShowAdModal(true);
-      }, 1500);
-      return () => clearTimeout(timer);
+    const isClosed = sessionStorage.getItem('apec_ad_popup_closed') === 'true';
+    const isSubmitted = sessionStorage.getItem('apec_ad_popup_submitted') === 'true';
+    
+    if (isClosed || isSubmitted) {
+      return;
     }
-  }, [activeAds]);
+
+    const startTimer = () => {
+      return setTimeout(() => {
+        setShowAdModal(true);
+      }, 400);
+    };
+
+    let timer;
+
+    if (document.readyState === 'complete') {
+      timer = startTimer();
+    } else {
+      const handleLoad = () => {
+        timer = startTimer();
+      };
+      window.addEventListener('load', handleLoad);
+      return () => {
+        window.removeEventListener('load', handleLoad);
+        clearTimeout(timer);
+      };
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   // Slideshow for multiple active ads (cycles every 5 seconds)
   useEffect(() => {
@@ -460,6 +518,7 @@ export default function Home() {
 
         setIsSubmitting(false);
         setFormSubmitted(true);
+        sessionStorage.setItem('apec_ad_popup_submitted', 'true');
       } catch (err) {
         console.error("Firestore database connection failed. Storing locally instead: ", err);
         // Fallback store in localStorage if database connection fails
@@ -469,6 +528,7 @@ export default function Home() {
 
         setIsSubmitting(false);
         setFormSubmitted(true);
+        sessionStorage.setItem('apec_ad_popup_submitted', 'true');
       }
     }
   };
@@ -598,13 +658,13 @@ export default function Home() {
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
             <motion.div
-              className="inline-flex items-center justify-center gap-2 px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-indigo-700 bg-white border border-indigo-200 rounded-full cursor-default select-none"
+              className="inline-flex items-center justify-center gap-2 px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border-2 border-amber-400/90 rounded-full cursor-default select-none shadow-[0_0_18px_rgba(245,158,11,0.35)]"
               animate={{
                 y: [0, -4, 0, 4, 0],
                 boxShadow: [
-                  '0 4px 18px rgba(99,102,241,0.18), 0 1px 4px rgba(139,92,246,0.10)',
-                  '0 8px 28px rgba(99,102,241,0.32), 0 2px 8px rgba(139,92,246,0.22)',
-                  '0 4px 18px rgba(99,102,241,0.18), 0 1px 4px rgba(139,92,246,0.10)',
+                  '0 0 14px rgba(245,158,11,0.30), 0 2px 8px rgba(217,119,6,0.20)',
+                  '0 0 24px rgba(245,158,11,0.50), 0 4px 14px rgba(217,119,6,0.35)',
+                  '0 0 14px rgba(245,158,11,0.30), 0 2px 8px rgba(217,119,6,0.20)',
                 ]
               }}
               transition={{
@@ -613,11 +673,11 @@ export default function Home() {
               }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: '0 10px 32px rgba(99,102,241,0.38), 0 3px 10px rgba(139,92,246,0.28)',
+                boxShadow: '0 0 28px rgba(245,158,11,0.60), 0 4px 16px rgba(217,119,6,0.40)',
                 transition: { duration: 0.28, ease: 'easeOut' }
               }}
             >
-              <span className="font-serif italic"><span className="not-italic font-black text-sm md:text-base text-indigo-800">42</span> Years of Academic Excellence</span>
+              <span className="font-serif italic"><span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence</span>
             </motion.div>
 
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
@@ -626,7 +686,7 @@ export default function Home() {
                 className="font-title font-black tracking-[-0.02em] leading-[1.05] text-center lg:whitespace-nowrap text-[#1B224A]"
                 style={{
                   fontSize: 'clamp(1.75rem, 4.2vw, 5rem)',
-                  textShadow: '0 2px 8px rgba(255,255,255,0.8), 0 4px 16px rgba(255,255,255,0.6)'
+                  textShadow: '0 0 22px rgba(99,102,241,0.35), 0 2px 8px rgba(255,255,255,0.9), 0 4px 16px rgba(255,255,255,0.6)'
                 }}
               >
                 Adhiparasakthi Engineering College
@@ -651,7 +711,7 @@ export default function Home() {
               Committed to training engineers with a sense of service and spirituality.
             </p>
 
-            {/* Core Pillars: STUDY SPIRITUALITY SERVICE */}
+            {/* Core Pillars: STUDY SPIRITUALITY SERVICE — Transparent Glass Boxes */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -664,9 +724,9 @@ export default function Home() {
                   whileHover={{ scale: 1.06, y: -2 }}
                   whileTap={{ scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                  className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-lg bg-white/90 border border-indigo-200/80 backdrop-blur-md shadow-md hover:shadow-indigo-500/20 hover:border-indigo-400 hover:bg-white transition-all duration-300 cursor-pointer select-none"
+                  className="px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-lg bg-white/20 border border-white/40 backdrop-blur-md shadow-lg hover:shadow-indigo-500/25 hover:border-white/70 hover:bg-white/35 transition-all duration-300 cursor-pointer select-none"
                 >
-                  <span className="font-title font-black text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase text-indigo-950 transition-colors">
+                  <span className="font-title font-black text-xs sm:text-sm md:text-base tracking-[0.2em] uppercase text-slate-900 drop-shadow-sm transition-colors">
                     {word}
                   </span>
                 </motion.div>
@@ -767,132 +827,33 @@ export default function Home() {
       </section>
 
 
-      {/* WHY JOIN APEC FEATURE GRID */}
+      {/* Leadership Section */}
       <section className="py-24 px-6 bg-transparent border-b border-gray-100/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Why Join Adhiparasakthi Engineering College?</h2>
+            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Leadership</span>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Management & Founders</h2>
           </div>
 
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-120px" }}
             variants={staggerContainer}
-            className="features-grid grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
           >
-            {features.map((feat, idx) => (
-              <motion.div 
-                key={idx} 
-                variants={twistReveal}
-                className="benefit-card select-none cursor-pointer relative overflow-hidden"
-                style={{ 
-                  backgroundColor: "#0f172a"
-                }}
-              >
-                {/* Background image / slideshow */}
-                {feat.title === "Central Library" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {libraryImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === libraryImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : feat.title === "Equipped Labs" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {labImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === labImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : feat.title === "Indoor Stadium & Gym" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {indoorImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === indoorImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : feat.title === "Placement Records" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {placementImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === placementImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div 
-                    className="absolute inset-0"
-                    style={{ 
-                      backgroundImage: `url(${feat.img})`,
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center"
-                    }}
-                  />
-                )}
-
-                {/* Background image overlay */}
-                <div className="benefit-card-overlay" />
-
-                {/* Circular Glass Badge */}
-                <div className="benefit-badge">
-                  {idx + 1}
-                </div>
-
-                {/* Bottom glass text overlay */}
-                <div className="card-content text-left">
-                  <h4 className="text-base md:text-lg font-black text-slate-900 mb-1">
-                    {feat.title}
-                  </h4>
-                  <p className="text-xs md:text-sm text-slate-850 font-bold leading-relaxed">
-                    {feat.desc}
-                  </p>
-                </div>
+            {[
+              { name: "Arulthiru Bangaru Sidhar (Amma)", role: "Founder", desc: "Ordained the ACMEC Trust to establish medical, educational, and cultural service foundations.", img: "/Images/College/bangaru_sidhar.jpg" },
+              { name: "Sakthi Tmt. V. Lakshmi Bangaru Sidhar", role: "President", desc: "Guiding the institution towards global academic and professional leadership.", img: "/Images/College/lakshmi_sidhar.jpg" },
+              { name: "Sakthi Thiru. Dr. G. B. Senthil Kumar", role: "Correspondent", desc: "Directing administrative functions and infrastructure expansions for students.", img: "/Images/College/senthil_kumar.jpg" }
+            ].map((person, idx) => (
+              <motion.div key={idx} variants={twistReveal}>
+                <LeadershipCard 
+                  name={person.name} 
+                  role={person.role} 
+                  desc={person.desc} 
+                  img={person.img} 
+                />
               </motion.div>
             ))}
           </motion.div>
@@ -1029,33 +990,132 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Leadership Section */}
+      {/* WHY JOIN APEC FEATURE GRID */}
       <section className="py-24 px-6 bg-transparent border-b border-gray-100/50 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Leadership</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Management & Founders</h2>
+            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College</span>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Why Join Adhiparasakthi Engineering College?</h2>
           </div>
 
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-120px" }}
+            viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
+            className="features-grid grid grid-cols-1 md:grid-cols-2 gap-8"
           >
-            {[
-              { name: "Arulthiru Bangaru Sidhar (Amma)", role: "Founder", desc: "Ordained the ACMEC Trust to establish medical, educational, and cultural service foundations.", img: "/Images/College/bangaru_sidhar.jpg" },
-              { name: "Sakthi Tmt. V. Lakshmi Bangaru Sidhar", role: "President", desc: "Guiding the institution towards global academic and professional leadership.", img: "/Images/College/lakshmi_sidhar.jpg" },
-              { name: "Sakthi Thiru. Dr. G. B. Senthil Kumar", role: "Correspondent", desc: "Directing administrative functions and infrastructure expansions for students.", img: "/Images/College/senthil_kumar.jpg" }
-            ].map((person, idx) => (
-              <motion.div key={idx} variants={twistReveal}>
-                <LeadershipCard 
-                  name={person.name} 
-                  role={person.role} 
-                  desc={person.desc} 
-                  img={person.img} 
-                />
+            {features.map((feat, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={twistReveal}
+                className="benefit-card select-none cursor-pointer relative overflow-hidden"
+                style={{ 
+                  backgroundColor: "#0f172a"
+                }}
+              >
+                {/* Background image / slideshow */}
+                {feat.title === "Central Library" ? (
+                  <div className="absolute inset-0 w-full h-full">
+                    {libraryImages.map((img, i) => (
+                      <motion.div
+                        key={img}
+                        className="absolute inset-0"
+                        style={{ 
+                          backgroundImage: `url(${img})`,
+                          backgroundSize: "100% 100%",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center"
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: i === libraryImageIdx ? 1 : 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    ))}
+                  </div>
+                ) : feat.title === "Equipped Labs" ? (
+                  <div className="absolute inset-0 w-full h-full">
+                    {labImages.map((img, i) => (
+                      <motion.div
+                        key={img}
+                        className="absolute inset-0"
+                        style={{ 
+                          backgroundImage: `url(${img})`,
+                          backgroundSize: "100% 100%",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center"
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: i === labImageIdx ? 1 : 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    ))}
+                  </div>
+                ) : feat.title === "Indoor Stadium & Gym" ? (
+                  <div className="absolute inset-0 w-full h-full">
+                    {indoorImages.map((img, i) => (
+                      <motion.div
+                        key={img}
+                        className="absolute inset-0"
+                        style={{ 
+                          backgroundImage: `url(${img})`,
+                          backgroundSize: "100% 100%",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center"
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: i === indoorImageIdx ? 1 : 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    ))}
+                  </div>
+                ) : feat.title === "Placement Records" ? (
+                  <div className="absolute inset-0 w-full h-full">
+                    {placementImages.map((img, i) => (
+                      <motion.div
+                        key={img}
+                        className="absolute inset-0"
+                        style={{ 
+                          backgroundImage: `url(${img})`,
+                          backgroundSize: "100% 100%",
+                          backgroundRepeat: "no-repeat",
+                          backgroundPosition: "center"
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: i === placementImageIdx ? 1 : 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div 
+                    className="absolute inset-0"
+                    style={{ 
+                      backgroundImage: `url(${feat.img})`,
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center"
+                    }}
+                  />
+                )}
+
+                {/* Background image overlay */}
+                <div className="benefit-card-overlay" />
+
+                {/* Circular Glass Badge */}
+                <div className="benefit-badge">
+                  {idx + 1}
+                </div>
+
+                {/* Bottom glass text overlay */}
+                <div className="card-content text-left">
+                  <h4 className="text-base md:text-lg font-black text-slate-900 mb-1">
+                    {feat.title}
+                  </h4>
+                  <p className="text-xs md:text-sm text-slate-850 font-bold leading-relaxed">
+                    {feat.desc}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -1063,441 +1123,314 @@ export default function Home() {
       </section>
 
       {/* Admissions Advertisement Modal Overlay */}
-      <AnimatePresence>
-        {showAdModal && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
-            {/* Backdrop click to close */}
-            <div className="absolute inset-0" onClick={() => setShowAdModal(false)} />
+      <motion.div
+        animate={showAdModal ? "visible" : "hidden"}
+        initial={{ opacity: 0, pointerEvents: "none", visibility: "hidden" }}
+        variants={{
+          hidden: { opacity: 0, pointerEvents: "none", transitionEnd: { visibility: "hidden" } },
+          visible: { opacity: 1, pointerEvents: "auto", visibility: "visible" }
+        }}
+        transition={{ ease: "easeOut", duration: 0.3 }}
+        className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-6 bg-slate-950/75 backdrop-blur-md overflow-y-auto"
+      >
+        {/* Backdrop click to close */}
+        <div className="absolute inset-0 cursor-pointer" onClick={handleCloseAdModal} />
 
-            {/* Custom Embedded CSS animations */}
-            <style dangerouslySetInnerHTML={{__html: `
-              @keyframes gradient-shift {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-              }
-              .animate-gradient-border {
-                background-size: 200% 200%;
-                animation: gradient-shift 5s ease infinite;
-              }
-            `}} />
+        {/* Custom Embedded CSS animations */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animate-gradient-border {
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+          }
+        `}} />
 
-            <motion.div
-              initial={{ scale: 0.95, y: 25, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.95, y: 25, opacity: 0 }}
-              transition={{ type: 'spring', damping: 28, stiffness: 200 }}
-              className="relative w-full max-w-lg md:max-w-3.5xl bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto flex flex-col md:flex-row"
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setShowAdModal(false)}
-                className="absolute top-5 right-5 md:top-6 md:right-6 z-25 p-2 bg-white/80 hover:bg-rose-100 text-gray-500 hover:text-rose-600 rounded-full shadow-sm border border-gray-200 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
-                aria-label="Close"
-              >
-                <X className="w-4 h-4" />
-              </button>
+        <motion.div
+          variants={{
+            hidden: isMobile 
+              ? { y: '100%', opacity: 1, scale: 1 } 
+              : { scale: 0.97, opacity: 0, y: 0 },
+            visible: { 
+              y: 0, 
+              scale: 1, 
+              opacity: 1,
+              transition: { ease: 'easeOut', duration: 0.3 }
+            }
+          }}
+          animate={showAdModal ? "visible" : "hidden"}
+          className="relative w-full md:max-w-3.5xl bg-white border border-gray-200 rounded-t-[2.5rem] md:rounded-[28px] shadow-2xl z-10 mx-auto max-h-[92vh] md:max-h-[90vh] overflow-y-auto flex flex-col md:flex-row border-t md:border"
+        >
+          {/* Close Button */}
+          <button
+            onClick={handleCloseAdModal}
+            className="absolute top-5 right-5 md:top-6 md:right-6 z-25 p-2 bg-white/80 hover:bg-rose-100 text-gray-500 hover:text-rose-600 rounded-full shadow-sm border border-gray-200 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4" />
+          </button>
 
-              {/* ── LEFT PANEL: Logo, Info & Scheduled Ad Notices (desktop only) ── */}
-              <div className="hidden md:flex flex-col items-center justify-start w-[40%] shrink-0 bg-gradient-to-b from-indigo-50 via-white to-indigo-50 rounded-l-[28px] border-r border-gray-100 p-6 max-h-[90vh] overflow-y-auto">
-                <div className="w-20 h-20 rounded-full bg-white shadow-md border border-indigo-100 flex items-center justify-center mb-4 mt-2">
-                  <img
-                    src="/Images/Logos/apec-logo.png"
-                    alt="Logo"
-                    className="w-16 h-16 object-contain rounded-full"
-                  />
-                </div>
-                <h3 className="font-title text-sm font-black text-gray-900 leading-tight text-center px-1">
+          {/* ── LEFT PANEL: College Facility Slideshow (desktop only) ── */}
+          <div className="hidden md:flex flex-col w-[45%] shrink-0 relative overflow-hidden bg-slate-900 rounded-l-[28px]">
+            {/* Background Image Slideshow */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
+              style={{ 
+                backgroundImage: `url(${adFacilityImages[adFacilityIdx].url})`
+              }}
+            />
+            
+            {/* Dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-between p-7 text-left select-none">
+              {/* College Logo */}
+              <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                <img
+                  src="/Images/Logos/apec-logo.png"
+                  alt="Logo"
+                  className="w-12 h-12 object-contain filter brightness-100 contrast-100 rounded-full"
+                />
+              </div>
+
+              <div>
+                {/* Big Font College Name */}
+                <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight drop-shadow-lg">
                   Adhiparasakthi Engineering College
                 </h3>
-                <span className="block mt-2 text-center text-indigo-700 font-bold uppercase tracking-widest text-[9px]" style={{fontFamily: "'Cinzel', serif"}}>
-                  An Autonomous Institution
-                </span>
-                <span className="block mt-1 text-center font-title font-bold text-[10px] text-[#3b3f8c]">
-                  Affiliated to Anna University
-                </span>
 
-                {/* Scheduled Advertisement inside Left Panel */}
-                {activeAds.length > 0 && (
-                  <div className="w-full mt-6 pt-5 border-t border-gray-150 text-left space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-650 flex items-center gap-1">
-                        <Megaphone className="w-3.5 h-3.5 text-indigo-600 animate-bounce" /> Live Notice / Event
-                      </span>
-                      {activeAds.length > 1 && (
-                        <div className="flex gap-1">
-                          {activeAds.map((_, i) => (
-                            <span 
-                              key={i} 
-                              className={`w-1 h-1 rounded-full transition-all ${i === currentAdIdx ? 'bg-indigo-650 w-2.5' : 'bg-slate-200'}`} 
-                            />
-                          ))}
-                        </div>
-                      )}
+                {/* Subtitle / Tagline */}
+                <span className="block text-[10px] sm:text-xs font-bold tracking-widest text-indigo-100 uppercase mt-2.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full border border-white/30 shadow-sm w-fit">
+                  Autonomous Institution
+                </span>
+                <p className="text-[10.5px] text-slate-100 font-semibold mt-1 drop-shadow">
+                  Affiliated to Anna University
+                </p>
+              </div>
+            </div>
+
+            {/* Facility Indicators Bottom Bar */}
+            <div className="absolute bottom-5 left-7 z-10 flex items-center gap-1.5 pt-2">
+              {adFacilityImages.map((fac, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setAdFacilityIdx(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === adFacilityIdx ? 'w-6 bg-indigo-400' : 'w-1.5 bg-white/60 hover:bg-white'
+                  }`}
+                  title={fac.title}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* ── RIGHT PANEL: Admissions Inquiry Form ── */}
+          <div className="flex flex-col w-full md:w-[55%] p-6 md:p-8 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-center md:justify-start mb-5">
+              <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
+                {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
+              </span>
+            </div>
+
+            <AnimatePresence mode="wait">
+              {!formSubmitted ? (
+                <motion.div
+                  key="form-container"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-full text-left"
+                >
+                  <form onSubmit={handleFormSubmit} className="space-y-3.5">
+                    {/* Name Input */}
+                    <div>
+                      <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Full Name</label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-450 pointer-events-none">
+                          <User className="w-4 h-4" />
+                        </span>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          placeholder="Your full name"
+                          className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
+                            formErrors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                          }`}
+                        />
+                      </div>
+                      {formErrors.name && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.name}</p>}
                     </div>
 
-                    {(() => {
-                      const ad = activeAds[currentAdIdx] || activeAds[0];
-                      let daysLeft = null;
-                      if (ad.functionDate) {
-                        const target = new Date(ad.functionDate);
-                        const today = new Date();
-                        target.setHours(0,0,0,0);
-                        today.setHours(0,0,0,0);
-                        const diffTime = target - today;
-                        daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                      }
-
-                      return (
-                        <div className="bg-slate-950 text-white border border-slate-800 rounded-[22px] p-4.5 shadow-2xl space-y-4 transition-all duration-300 relative overflow-hidden group hover:scale-[1.01] hover:shadow-indigo-500/10">
-                          {/* Ambient background glow effect */}
-                          <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all pointer-events-none" />
-                          <div className="absolute bottom-0 left-0 w-20 h-20 bg-purple-500/5 rounded-full blur-xl pointer-events-none" />
-
-                          {ad.imgUrl && (
-                            <div className="w-full h-24 rounded-2xl overflow-hidden bg-slate-900 border border-slate-850 relative">
-                              <img src={ad.imgUrl} alt={ad.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-                            </div>
-                          )}
-                          
-                          <div className="space-y-1.5 text-left">
-                            <h4 className="text-xs md:text-sm font-black text-slate-100 leading-snug group-hover:text-white transition-colors">{ad.title}</h4>
-                            <p className="text-[10.5px] text-slate-400 font-semibold leading-relaxed">{ad.details}</p>
-                          </div>
-
-                          {/* Date Countdown widget inside premium dark capsule */}
-                          {ad.functionDate && (
-                            <div className="pt-0.5 text-left">
-                              {daysLeft > 0 ? (
-                                <div className="bg-indigo-950/80 border border-indigo-500/30 text-indigo-300 px-3 py-1.5 rounded-xl inline-flex items-center gap-2 text-[9.5px] font-black uppercase tracking-wider shadow-inner">
-                                  <Clock className="w-3.5 h-3.5 text-indigo-400 animate-spin" style={{ animationDuration: '8s' }} />
-                                  <span>⏳ {daysLeft} Days Remaining</span>
-                                </div>
-                              ) : daysLeft === 0 ? (
-                                <div className="bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 px-3 py-1.5 rounded-xl inline-flex items-center gap-2 text-[9.5px] font-black uppercase tracking-wider animate-pulse shadow-inner">
-                                  <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                                  <span>🔥 Event Starts Today!</span>
-                                </div>
-                              ) : null}
-                            </div>
-                          )}
-
-                          {/* Premium CTA Button */}
-                          {ad.link && (
-                            <a
-                              href={ad.link.startsWith('http') ? ad.link : undefined}
-                              onClick={(e) => {
-                                if (!ad.link.startsWith('http')) {
-                                  e.preventDefault();
-                                  setShowAdModal(false);
-                                  window.location.href = ad.link;
-                                }
-                              }}
-                              target={ad.link.startsWith('http') ? "_blank" : undefined}
-                              rel="noopener noreferrer"
-                              className="w-full bg-gradient-to-r from-indigo-650 to-purple-600 hover:from-indigo-550 hover:to-purple-500 text-white font-black text-[9.5px] uppercase tracking-wider py-3 rounded-xl flex items-center justify-center gap-1.5 transition-all duration-300 cursor-pointer shadow-lg shadow-indigo-600/20 active:scale-98 select-none text-center"
-                            >
-                              Register Now <ArrowRight className="w-3.5 h-3.5" />
-                            </a>
-                          )}
-                        </div>
-                      );
-                    })()}
-                  </div>
-                )}
-              </div>
-
-              {/* ── RIGHT PANEL: Admissions Inquiry Form & Mobile notices alert ── */}
-              <div className="flex flex-col w-full md:w-[60%] p-6 md:p-8 max-h-[90vh] overflow-y-auto">
-                
-                {/* Mobile-only: institution header */}
-                <div className="flex flex-col items-center text-center mb-5 md:hidden">
-                  <img
-                    src="/Images/Logos/apec-logo.png"
-                    alt="Logo"
-                    className="w-14 h-14 object-contain bg-white rounded-full p-1.5 shadow border border-gray-100 mb-2.5"
-                  />
-                  <h3 className="font-title text-base font-black text-gray-900 leading-tight">
-                    Adhiparasakthi Engineering College
-                  </h3>
-                  <span className="text-indigo-700 font-semibold block mt-0.5 text-[10px]" style={{fontFamily: "'Cinzel', serif", letterSpacing: '0.05em'}}>
-                    An Autonomous Institution
-                  </span>
-                </div>
-
-                {/* Mobile-only scheduled ad banner */}
-                {activeAds.length > 0 && (
-                  (() => {
-                    const ad = activeAds[currentAdIdx] || activeAds[0];
-                    let daysLeft = null;
-                    if (ad.functionDate) {
-                      const target = new Date(ad.functionDate);
-                      const today = new Date();
-                      target.setHours(0,0,0,0);
-                      today.setHours(0,0,0,0);
-                      const diffTime = target - today;
-                      daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    }
-                    return (
-                      <div className="md:hidden mb-5 bg-slate-950 text-white border border-slate-800 p-4 rounded-2xl text-left space-y-2.5 relative overflow-hidden">
-                        <div className="flex items-center justify-between">
-                          <span className="font-display text-[8px] uppercase tracking-widest font-black text-indigo-400 flex items-center gap-1 select-none">
-                            <Megaphone className="w-3.5 h-3.5 text-indigo-400 animate-bounce" /> Live Notice / Event
+                    {/* Email & Phone grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {/* Cutoff */}
+                      <div>
+                        <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Cutoff (Out of 200)</label>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-450 pointer-events-none">
+                            <Calculator className="w-4 h-4" />
                           </span>
-                          {activeAds.length > 1 && (
-                            <span className="text-[9px] font-mono font-bold text-slate-400">
-                              {currentAdIdx + 1}/{activeAds.length}
-                            </span>
-                          )}
+                          <input
+                            type="number"
+                            name="cutoff"
+                            max="200"
+                            min="0"
+                            step="0.01"
+                            value={formData.cutoff}
+                            onChange={handleInputChange}
+                            placeholder="Enter cutoff"
+                            className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
+                              formErrors.cutoff ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                            }`}
+                          />
                         </div>
-                        <h5 className="text-[11.5px] font-black text-slate-100">{ad.title}</h5>
-                        <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">{ad.details}</p>
-                        
-                        <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                          {/* Countdown Timer capsule */}
-                          {ad.functionDate && (
-                            <div>
-                              {daysLeft > 0 ? (
-                                <span className="bg-indigo-950 border border-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-lg inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider">
-                                  ⏳ {daysLeft} Days Left
-                                </span>
-                              ) : daysLeft === 0 ? (
-                                <span className="bg-emerald-950 border border-emerald-500/30 text-emerald-300 px-2 py-0.5 rounded-lg inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wider animate-pulse">
-                                  🔥 Starts Today!
-                                </span>
-                              ) : null}
-                            </div>
-                          )}
-
-                          {ad.link && (
-                            <a 
-                              href={ad.link.startsWith('http') ? ad.link : undefined}
-                              onClick={(e) => {
-                                if (!ad.link.startsWith('http')) {
-                                  e.preventDefault();
-                                  setShowAdModal(false);
-                                  window.location.href = ad.link;
-                                }
-                              }}
-                              target={ad.link.startsWith('http') ? "_blank" : undefined}
-                              className="text-[9.5px] font-black uppercase text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-0.5 self-end"
-                            >
-                              Register Now <ArrowRight className="w-3 h-3" />
-                            </a>
-                          )}
-                        </div>
+                        {formErrors.cutoff && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.cutoff}</p>}
                       </div>
-                    );
-                  })()
-                )}
 
-                <div className="flex justify-center md:justify-start mb-5">
-                  <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
-                    {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
-                  </span>
-                </div>
-
-                <AnimatePresence mode="wait">
-                  {!formSubmitted ? (
-                    <motion.div
-                      key="form-container"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.25 }}
-                      className="w-full text-left"
-                    >
-                      <form onSubmit={handleFormSubmit} className="space-y-3.5">
-                        {/* Name Input */}
-                        <div>
-                          <label className="block text-[9px] uppercase font-black text-gray-450 tracking-wider mb-1">Full Name</label>
-                          <div className="relative">
-                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                              <User className="w-4 h-4" />
-                            </span>
-                            <input
-                              type="text"
-                              name="name"
-                              value={formData.name}
-                              onChange={handleInputChange}
-                              placeholder="Your full name"
-                              className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
-                                formErrors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                              }`}
-                            />
-                          </div>
-                          {formErrors.name && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.name}</p>}
+                      {/* Phone */}
+                      <div>
+                        <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Mobile Number</label>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-455 pointer-events-none">
+                            <Phone className="w-4 h-4" />
+                          </span>
+                          <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            placeholder="10-digit mobile"
+                            className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
+                              formErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                            }`}
+                          />
                         </div>
+                        {formErrors.phone && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.phone}</p>}
+                      </div>
+                    </div>
 
-                        {/* Email & Phone grid */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                          {/* Cutoff */}
-                          <div>
-                            <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Cutoff (Out of 200)</label>
-                            <div className="relative">
-                              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                                <Calculator className="w-4 h-4" />
-                              </span>
-                              <input
-                                type="number"
-                                name="cutoff"
-                                max="200"
-                                min="0"
-                                step="0.01"
-                                value={formData.cutoff}
-                                onChange={handleInputChange}
-                                placeholder="Enter cutoff"
-                                className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
-                                  formErrors.cutoff ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                                }`}
-                              />
-                            </div>
-                            {formErrors.cutoff && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.cutoff}</p>}
-                          </div>
-
-                          {/* Phone */}
-                          <div>
-                            <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Mobile Number</label>
-                            <div className="relative">
-                              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                                <Phone className="w-4 h-4" />
-                              </span>
-                              <input
-                                type="tel"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                                placeholder="10-digit mobile"
-                                className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
-                                  formErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                                }`}
-                              />
-                            </div>
-                            {formErrors.phone && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.phone}</p>}
-                          </div>
-                        </div>
-
-                        {/* Preferred Department */}
-                        <div>
-                          <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Preferred Department</label>
-                          <div className="relative">
-                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
-                              <GraduationCap className="w-4 h-4" />
-                            </span>
-                            <select
-                              name="dept"
-                              value={formData.dept}
-                              onChange={handleInputChange}
-                              className={`w-full text-xs pl-9 pr-9 py-2.5 bg-gray-50 border rounded-xl outline-none appearance-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold cursor-pointer ${
-                                formErrors.dept ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                              }`}
-                            >
-                              <option value="">Select a Department</option>
-                              <option value="CSE">Computer Science & Engineering (B.E.)</option>
-                              <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
-                              <option value="EEE">Electrical & Electronics Eng. (B.E.)</option>
-                              <option value="ECE">Electronics & Communication Eng. (B.E.)</option>
-                              <option value="MECH">Mechanical Engineering (B.E.)</option>
-                              <option value="CIVIL">Civil Engineering (B.E.)</option>
-                              <option value="IT">Information Technology (B.Tech.)</option>
-                              <option value="CHEM">Chemical Engineering (B.Tech.)</option>
-                              <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
-                              <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
-                              <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
-                              <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
-                            </select>
-                            <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 pointer-events-none">
-                              <ChevronDown className="w-4 h-4" />
-                            </span>
-                          </div>
-                          {formErrors.dept && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.dept}</p>}
-                        </div>
-
-                        {/* Submit Button */}
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer mt-2 animate-gradient-border"
+                    {/* Preferred Department */}
+                    <div>
+                      <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Preferred Department</label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-455 pointer-events-none">
+                          <GraduationCap className="w-4 h-4" />
+                        </span>
+                        <select
+                          name="dept"
+                          value={formData.dept}
+                          onChange={handleInputChange}
+                          className={`w-full text-xs pl-9 pr-9 py-2.5 bg-gray-50 border rounded-xl outline-none appearance-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold cursor-pointer ${
+                            formErrors.dept ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                          }`}
                         >
-                          {isSubmitting ? (
-                            <span className="flex items-center justify-center gap-2">
-                              <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                              Processing Submission...
-                            </span>
-                          ) : (
-                            'Submit Inquiry Now'
-                          )}
-                        </button>
-                      </form>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="success-container"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.4 }}
-                      className="text-center py-6 flex flex-col items-center justify-center grow w-full"
-                    >
-                      {/* Animated Success Badge */}
-                      <motion.div
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ type: 'spring', damping: 12, stiffness: 120, delay: 0.1 }}
-                        className="w-14 h-14 bg-green-50 border border-green-200 text-green-600 rounded-full flex items-center justify-center mb-4 shadow-sm"
-                      >
-                        <CheckCircle2 className="w-8 h-8" />
-                      </motion.div>
-                      
-                      <h4 className="font-sans text-xl md:text-2xl font-black text-gray-900 mb-1 tracking-tight">Inquiry Registered</h4>
-                      <p className="font-sans text-[10px] text-indigo-650 font-extrabold mb-4 uppercase tracking-wider">
-                        Thank You, {formData.name}
-                      </p>
-                      
-                      <div className="bg-gray-50 border border-gray-150 rounded-2xl p-4 text-left max-w-sm w-full mb-4 space-y-3 shadow-sm text-xs">
-                        <div className="flex justify-between items-center pb-2 border-b border-gray-200/60">
-                          <span className="text-gray-400 font-bold uppercase tracking-wider text-[8px]">Selected Course</span>
-                          <span className="font-bold text-indigo-600">{formData.dept}</span>
-                        </div>
-                        
-                        <div className="text-[9px] text-gray-400 font-bold uppercase tracking-widest block text-center pt-1">
-                          For Further Details Contact
-                        </div>
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-455 font-semibold text-[9px]">Admissions Cell</span>
-                            <span className="font-bold text-gray-800 font-mono">
-                              <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-655 hover:underline">{branding.helpline1}</a> / <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-655 hover:underline">{branding.helpline2}</a>
-                            </span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-gray-455 font-semibold text-[9px]">Principal Office</span>
-                            <span className="font-bold text-gray-800 font-mono">
-                              <a href="tel:+919894657971" className="hover:text-indigo-655 hover:underline">9894657971</a>
-                            </span>
-                          </div>
-                        </div>
+                          <option value="">Select a Department</option>
+                          <option value="CSE">Computer Science & Engineering (B.E.)</option>
+                          <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
+                          <option value="EEE">Electrical & Electronics Eng. (B.E.)</option>
+                          <option value="ECE">Electronics & Communication Eng. (B.E.)</option>
+                          <option value="MECH">Mechanical Engineering (B.E.)</option>
+                          <option value="CIVIL">Civil Engineering (B.E.)</option>
+                          <option value="IT">Information Technology (B.Tech.)</option>
+                          <option value="CHEM">Chemical Engineering (B.Tech.)</option>
+                          <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
+                          <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
+                          <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
+                          <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
+                        </select>
+                        <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-455 pointer-events-none">
+                          <ChevronDown className="w-4 h-4" />
+                        </span>
                       </div>
+                      {formErrors.dept && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.dept}</p>}
+                    </div>
 
-                      <p className="text-xs text-gray-555 max-w-xs leading-relaxed mb-6 font-semibold">
-                        Our admissions team will reach out shortly with direct counseling assistance.
-                      </p>
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer mt-2 animate-gradient-border"
+                    >
+                      {isSubmitting ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Processing Submission...
+                        </span>
+                      ) : (
+                        'Submit Inquiry Now'
+                      )}
+                    </button>
+                  </form>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="success-container"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-center py-6 flex flex-col items-center justify-center grow w-full"
+                >
+                  {/* Animated Success Badge */}
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', damping: 12, stiffness: 120, delay: 0.1 }}
+                    className="w-14 h-14 bg-green-50 border border-green-200 text-green-600 rounded-full flex items-center justify-center mb-4 shadow-sm"
+                  >
+                    <CheckCircle2 className="w-8 h-8" />
+                  </motion.div>
+                  
+                  <h4 className="font-sans text-xl md:text-2xl font-black text-gray-900 mb-1 tracking-tight">Inquiry Registered</h4>
+                  <p className="font-sans text-[10px] text-indigo-650 font-extrabold mb-4 uppercase tracking-wider">
+                    Thank You, {formData.name}
+                  </p>
+                  
+                  <div className="bg-gray-50 border border-gray-150 rounded-2xl p-4 text-left max-w-sm w-full mb-4 space-y-3 shadow-sm text-xs">
+                    <div className="flex justify-between items-center pb-2 border-b border-gray-200/60">
+                      <span className="text-gray-400 font-bold uppercase tracking-wider text-[8px]">Selected Course</span>
+                      <span className="font-bold text-indigo-600">{formData.dept}</span>
+                    </div>
+                    
+                    <div className="text-[9px] text-gray-400 font-bold uppercase tracking-widest block text-center pt-1">
+                      For Further Details Contact
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-455 font-semibold text-[9px]">Admissions Cell</span>
+                        <span className="font-bold text-gray-800 font-mono">
+                          <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-655 hover:underline">{branding.helpline1}</a> / <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-655 hover:underline">{branding.helpline2}</a>
+                        </span>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-gray-455 font-semibold text-[9px]">Principal Office</span>
+                        <span className="font-bold text-gray-800 font-mono">
+                          <a href="tel:+919894657971" className="hover:text-indigo-655 hover:underline">9894657971</a>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-                      <button
-                        onClick={() => setShowAdModal(false)}
-                        className="bg-gray-950 hover:bg-gray-800 text-white font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition-all duration-200 cursor-pointer shadow hover:shadow-lg active:scale-95"
-                      >
-                        Close Window
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
+                  <p className="text-xs text-gray-555 max-w-xs leading-relaxed mb-6 font-semibold">
+                    Our admissions team will reach out shortly with direct counseling assistance.
+                  </p>
+
+                  <button
+                    onClick={handleCloseAdModal}
+                    className="bg-gray-950 hover:bg-gray-800 text-white font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition-all duration-200 cursor-pointer shadow hover:shadow-lg active:scale-95"
+                  >
+                    Close Window
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-        )}
-      </AnimatePresence>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

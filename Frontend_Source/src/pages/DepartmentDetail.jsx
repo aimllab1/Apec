@@ -5,7 +5,7 @@ import {
   Search, Mail, GraduationCap, Trophy, 
   BookOpenCheck, UserCheck, Milestone, Library, FileText,
   // New icons for department hero & KPIs
-  Cpu, Laptop, BrainCircuit, Zap, Settings, Hammer, FlaskConical, Sprout, Building, ExternalLink
+  Cpu, Laptop, BrainCircuit, Zap, Settings, Hammer, FlaskConical, Sprout, Building, ExternalLink, MoreVertical, ChevronDown
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
@@ -140,6 +140,8 @@ export default function DepartmentDetail() {
 
   // Local state for tabs
   const [activeSubTab, setActiveSubTab] = useState('overview');
+  // Local state for more dropdown
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   // Local state for faculty search
   const [facultySearch, setFacultySearch] = useState('');
   // Local state for publication search
@@ -173,14 +175,18 @@ export default function DepartmentDetail() {
     j.journal.toLowerCase().includes(pubSearch.toLowerCase())
   );
 
-  // Tabs structure
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: BookOpen },
+  // More options structure
+  const moreOptions = [
     { id: 'faculty', label: 'Faculty Directory', icon: Users },
-    { id: 'labs', label: 'Laboratories', icon: Library },
-    { id: 'curriculum', label: 'PEOs & Outcomes', icon: Milestone },
-    { id: 'publications', label: 'Research & Books', icon: BookOpenCheck },
-    { id: 'achievements', label: 'Placements & Ranks', icon: Trophy }
+    { id: 'curriculum', label: 'PEO / PSO / PO', icon: Milestone },
+    { id: 'syllabus', label: 'Curriculum & Syllabus', icon: BookOpenCheck },
+    { id: 'labs', label: 'Facilities', icon: Library },
+    { id: 'calendar', label: 'Academic Calendar', icon: Clock },
+    { id: 'achievements', label: 'Placement Details', icon: Briefcase },
+    { id: 'funds', label: 'Funds Received', icon: Award },
+    { id: 'events', label: 'Events', icon: Trophy },
+    { id: 'newsletter', label: 'Newsletter', icon: FileText },
+    { id: 'feedback', label: 'Feedback', icon: Mail }
   ];
 
   return (
@@ -348,28 +354,84 @@ export default function DepartmentDetail() {
         </motion.div>
 
         {/* Tab Selection */}
-        <div className="flex flex-row flex-nowrap overflow-x-auto gap-1 bg-white p-1 rounded-xl sm:rounded-2xl border border-gray-200 mb-8 sm:mb-12 w-full shadow-sm hide-scrollbar snap-x snap-mandatory scroll-smooth">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => {
-                  setActiveSubTab(tab.id);
-                  setFacultySearch('');
-                  setPubSearch('');
-                }}
-                className={`flex flex-row items-center justify-center gap-1.5 text-[10px] sm:text-xs md:text-sm font-bold px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl transition-all cursor-pointer whitespace-nowrap grow shrink-0 snap-start ${
-                  activeSubTab === tab.id 
-                    ? 'bg-indigo-650 text-white shadow-md' 
-                    : 'text-gray-500 hover:text-indigo-650 hover:bg-gray-50'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+        <div className="relative mb-8 sm:mb-12 w-full flex items-center justify-start gap-3">
+          {/* Overview Button */}
+          <button
+            onClick={() => {
+              setActiveSubTab('overview');
+              setFacultySearch('');
+              setPubSearch('');
+              setIsMoreOpen(false);
+            }}
+            className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
+              activeSubTab === 'overview' 
+                ? 'bg-indigo-650 text-white border-indigo-650' 
+                : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
+            }`}
+          >
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+            <span>Overview</span>
+          </button>
+
+          {/* More Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
+                (activeSubTab !== 'overview' || isMoreOpen)
+                  ? 'bg-white text-indigo-650 border-indigo-200' 
+                  : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
+              }`}
+            >
+              <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+              <span>{activeSubTab !== 'overview' ? moreOptions.find(o => o.id === activeSubTab)?.label || 'More' : 'More'}</span>
+              <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Overlay to close dropdown */}
+            {isMoreOpen && (
+              <div 
+                className="fixed inset-0 z-40" 
+                onClick={() => setIsMoreOpen(false)}
+              />
+            )}
+
+            {/* Dropdown Menu */}
+            <AnimatePresence>
+              {isMoreOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full left-0 mt-2 w-64 bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-2"
+                >
+                  {moreOptions.map((opt) => {
+                    const Icon = opt.icon;
+                    return (
+                      <button
+                        key={opt.id}
+                        onClick={() => {
+                          setActiveSubTab(opt.id);
+                          setFacultySearch('');
+                          setPubSearch('');
+                          setIsMoreOpen(false);
+                        }}
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors ${
+                          activeSubTab === opt.id 
+                            ? 'text-indigo-650 bg-indigo-50/50' 
+                            : 'text-gray-600 hover:text-indigo-650 hover:bg-gray-50'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Main Content Area */}
@@ -426,34 +488,6 @@ export default function DepartmentDetail() {
                     </div>
                   </div>
 
-                  {/* Approved Intake Capacities */}
-                  <div className="bg-gray-50 border border-gray-150 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-3xl text-left">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-black text-indigo-650 mb-4 font-title flex items-center gap-2">
-                      <GraduationCap className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 text-indigo-650" /> Approved Intake Capacities
-                    </h3>
-                    <div className="overflow-hidden border border-gray-250 rounded-2xl bg-white shadow-sm">
-                      <table className="w-full text-xs md:text-sm text-left border-collapse">
-                        <thead>
-                          <tr className="bg-gray-50 border-b border-gray-250 text-gray-550 uppercase text-[10px] font-black tracking-wider">
-                            <th className="py-3 px-4">Programme</th>
-                            <th className="py-3 px-4 text-center">Duration</th>
-                            <th className="py-3 px-4 text-right">Approved Intake</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-150 font-semibold text-gray-700">
-                          {deptIntakeCourses.map((course, idx) => (
-                            <tr key={idx} className="hover:bg-gray-50/30 transition-colors">
-                              <td className="py-3.5 px-4 text-gray-900 font-bold">{course.name}</td>
-                              <td className="py-3.5 px-4 text-center text-gray-550">{course.duration}</td>
-                              <td className="py-3.5 px-4 text-right text-indigo-650 font-mono font-bold">
-                                {course.seats > 0 ? `${course.seats} Seats` : (course.label || "N/A")}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
 
                 </div>
               )}

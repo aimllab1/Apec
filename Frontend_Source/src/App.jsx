@@ -591,10 +591,10 @@ function AppContent({ isLoading, setIsLoading }) {
             <header
               className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300 relative"
             >
-              {/* UNIFIED TOP CORNER SQUARE LOGO BADGE (Spans Header Top Bar + News Ticker) */}
+              {/* UNIFIED TOP CORNER SQUARE LOGO BADGE (Spans Header Top Bar + News Ticker ONLY, stops before Nav Bar) */}
               <Link 
                 to="/" 
-                className="absolute left-0 top-0 bottom-0 w-[64px] sm:w-[82px] lg:w-[92px] bg-white border-r border-b border-gray-200/90 shadow-md flex items-center justify-center p-1.5 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0"
+                className="absolute left-0 top-0 h-[92px] sm:h-[106px] w-[64px] sm:w-[82px] lg:w-[92px] bg-white border-r border-b border-amber-200/60 shadow-md flex items-center justify-center p-1.5 z-30 rounded-br-2xl group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
                 title="Adhiparasakthi Engineering College"
               >
                 <img 
@@ -610,10 +610,10 @@ function AppContent({ isLoading, setIsLoading }) {
                 {/* College Name & Tagline */}
                 <Link to="/" className="flex items-center shrink-0">
                   <div className="text-left flex flex-col justify-center max-w-[170px] xs:max-w-[210px] sm:max-w-md lg:max-w-none">
-                    <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-tight drop-shadow-sm">
+                    <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight text-indigo-950 block leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
                       {branding.collegeName}
                     </span>
-                    <span className="font-mono text-[6.5px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-violet-750">
+                    <span className="font-mono text-[6.5px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-indigo-650">
                       {branding.tagline}
                     </span>
                   </div>
