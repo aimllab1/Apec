@@ -23,47 +23,34 @@ export default function AchievementBadge({
       role="status"
       aria-label={`${years} ${text}`}
     >
-      {/* ── LEFT CURVED WHEAT PADDY EAR (Fixed 24k Gold Theme + Dark Bronze Outlines) ── */}
-      <div className="absolute -left-5.5 sm:-left-7 top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:scale-105">
+      {/* ── LEFT CURVED GOLDEN FEATHER WING CREST ── */}
+      <div className="absolute -left-6 sm:-left-7.5 top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:scale-105">
         <svg 
-          className="w-7 h-10.5 sm:w-8.5 sm:h-12.5 drop-shadow-[0_0_10px_rgba(245,158,11,0.85)] drop-shadow-[0_0_18px_rgba(251,191,36,0.50)]" 
-          viewBox="0 0 36 50"
+          className="w-7.5 h-11 sm:w-9 sm:h-13 drop-shadow-[0_0_12px_rgba(245,158,11,0.85)] drop-shadow-[0_0_20px_rgba(251,191,36,0.50)]" 
+          viewBox="0 0 38 52"
         >
           <defs>
-            {/* Fixed Classic 24k Gold Fill Gradient */}
-            <linearGradient id="fixedGoldTheme" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FFF5C0" />
+            {/* 24k Gold Wing Fill Gradient */}
+            <linearGradient id="goldWingTheme" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFF8D6" />
               <stop offset="35%" stopColor="#FFE79A" />
               <stop offset="70%" stopColor="#FBBF24" />
               <stop offset="100%" stopColor="#F59E0B" />
             </linearGradient>
           </defs>
 
-          {/* Stem following capsule curve with Dark Bronze Stroke */}
-          <path d="M28 4C12 8 6 36 28 44" stroke="#78350F" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M28 4C12 8 6 36 28 44" stroke="url(#fixedGoldTheme)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+          {/* Sweeping Golden Wing Spine following capsule curve */}
+          <path d="M30 4C14 10 8 36 30 46" stroke="#78350F" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+          <path d="M30 4C14 10 8 36 30 46" stroke="url(#goldWingTheme)" strokeWidth="2" strokeLinecap="round" fill="none" />
           
-          {/* Light Colored Paddy Grains with Crisp Dark Colored Borders */}
-          <path d="M28 4C24 2 20 4.5 22 7.5C24.5 7.5 27 6 28 4Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M22 10.5C18 8 14.5 10.5 16 14.5C19.5 14.5 22 12.5 22 10.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M17.5 17.5C13.5 15.5 10 18 11.5 22C15 22 17.5 20 17.5 17.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M16 25C12 23 8.5 25.5 10 29.5C13.5 29.5 16 27.5 16 25Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M18.5 32.5C14.5 30.5 11 33 12.5 37C16 37 18.5 35 18.5 32.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M24 39.5C20 37.5 16.5 40 18 43.5C21.5 43.5 24 41.5 24 39.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-
-          {/* Radiating Awns with Dark Bronze Strokes */}
-          <path d="M22 7.5L16 2" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M16 14.5L10 9" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M11.5 22L5.5 16.5" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M10 29.5L4 24" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M12.5 37L6.5 31.5" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-
-          {/* Inner Highlight Leaves — Same Uniform Light Gold Fill */}
-          <path d="M28 4C30 2 32 4 30.5 7.5C28 7.5 27 5.5 28 4Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M22 10.5C25 8.5 27.5 11 26 14.5C23 14.5 21 12.5 22 10.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M17.5 17.5C20.5 15.5 23 18 21.5 22C18.5 22 16.5 20 17.5 17.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M16 25C19 23 21.5 25.5 20 29.5C17 29.5 15 27.5 16 25Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M18.5 32.5C21.5 30.5 24 33 22.5 37C19.5 37 17.5 35 18.5 32.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          {/* Overlapping Curved Golden Feathers with Crisp Dark Outlines */}
+          <path d="M30 4C24 2 18 5 22 9C26 9 29 6 30 4Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M23 9.5C17 7.5 12 11 15.5 15C19.5 15 22.5 12.5 23 9.5Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M17.5 16C12 14 7.5 17.5 11 21.5C15 21.5 18 19 17.5 16Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M14.5 23C9 21 4.5 24.5 8 28.5C12 28.5 15 26 14.5 23Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M15 30C9.5 28 5 31.5 8.5 35.5C12.5 35.5 15.5 33 15 30Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M19.5 37C14 35 9.5 38.5 13 42.5C17 42.5 20 40 19.5 37Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M26 43.5C21 42 17 45.5 20.5 48.5C24 48.5 26.5 46 26 43.5Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
         </svg>
       </div>
 
@@ -84,34 +71,22 @@ export default function AchievementBadge({
         </div>
       </div>
 
-      {/* ── RIGHT CURVED WHEAT PADDY EAR (Fixed 24k Gold Theme + Dark Bronze Outlines) ── */}
-      <div className="absolute -right-5.5 sm:-right-7 top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:scale-105">
+      {/* ── RIGHT CURVED GOLDEN FEATHER WING CREST ── */}
+      <div className="absolute -right-6 sm:-right-7.5 top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:scale-105">
         <svg 
-          className="w-7 h-10.5 sm:w-8.5 sm:h-12.5 drop-shadow-[0_0_10px_rgba(245,158,11,0.85)] drop-shadow-[0_0_18px_rgba(251,191,36,0.50)] transform scale-x-[-1]" 
-          viewBox="0 0 36 50"
+          className="w-7.5 h-11 sm:w-9 sm:h-13 drop-shadow-[0_0_12px_rgba(245,158,11,0.85)] drop-shadow-[0_0_20px_rgba(251,191,36,0.50)] transform scale-x-[-1]" 
+          viewBox="0 0 38 52"
         >
-          <path d="M28 4C12 8 6 36 28 44" stroke="#78350F" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M28 4C12 8 6 36 28 44" stroke="url(#fixedGoldTheme)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+          <path d="M30 4C14 10 8 36 30 46" stroke="#78350F" strokeWidth="3.2" strokeLinecap="round" fill="none" />
+          <path d="M30 4C14 10 8 36 30 46" stroke="url(#goldWingTheme)" strokeWidth="2" strokeLinecap="round" fill="none" />
           
-          <path d="M28 4C24 2 20 4.5 22 7.5C24.5 7.5 27 6 28 4Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M22 10.5C18 8 14.5 10.5 16 14.5C19.5 14.5 22 12.5 22 10.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M17.5 17.5C13.5 15.5 10 18 11.5 22C15 22 17.5 20 17.5 17.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M16 25C12 23 8.5 25.5 10 29.5C13.5 29.5 16 27.5 16 25Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M18.5 32.5C14.5 30.5 11 33 12.5 37C16 37 18.5 35 18.5 32.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M24 39.5C20 37.5 16.5 40 18 43.5C21.5 43.5 24 41.5 24 39.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-
-          <path d="M22 7.5L16 2" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M16 14.5L10 9" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M11.5 22L5.5 16.5" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M10 29.5L4 24" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-          <path d="M12.5 37L6.5 31.5" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
-
-          {/* Inner Highlight Leaves — Same Uniform Light Gold Fill */}
-          <path d="M28 4C30 2 32 4 30.5 7.5C28 7.5 27 5.5 28 4Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M22 10.5C25 8.5 27.5 11 26 14.5C23 14.5 21 12.5 22 10.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M17.5 17.5C20.5 15.5 23 18 21.5 22C18.5 22 16.5 20 17.5 17.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M16 25C19 23 21.5 25.5 20 29.5C17 29.5 15 27.5 16 25Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M18.5 32.5C21.5 30.5 24 33 22.5 37C19.5 37 17.5 35 18.5 32.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M30 4C24 2 18 5 22 9C26 9 29 6 30 4Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M23 9.5C17 7.5 12 11 15.5 15C19.5 15 22.5 12.5 23 9.5Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M17.5 16C12 14 7.5 17.5 11 21.5C15 21.5 18 19 17.5 16Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M14.5 23C9 21 4.5 24.5 8 28.5C12 28.5 15 26 14.5 23Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M15 30C9.5 28 5 31.5 8.5 35.5C12.5 35.5 15.5 33 15 30Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M19.5 37C14 35 9.5 38.5 13 42.5C17 42.5 20 40 19.5 37Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M26 43.5C21 42 17 45.5 20.5 48.5C24 48.5 26.5 46 26 43.5Z" fill="url(#goldWingTheme)" stroke="#78350F" strokeWidth="0.8" />
         </svg>
       </div>
     </div>
