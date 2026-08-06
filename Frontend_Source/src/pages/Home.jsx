@@ -658,95 +658,13 @@ export default function Home() {
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
             
-            {/* 42 Years Badge with Sweeping Royal Curved Golden Laurel & Wheat Wreath */}
-            <div className="relative inline-flex items-center justify-center my-2 select-none">
-              
-              {/* Left Royal Curved Laurel & Wheat Wreath */}
-              <svg 
-                className="absolute -left-9 sm:-left-11 top-1/2 -translate-y-1/2 w-10 h-14 sm:w-12 sm:h-16 pointer-events-none drop-shadow-[0_4px_14px_rgba(245,158,11,0.65)] z-20" 
-                viewBox="0 0 52 72" 
-                fill="none"
-              >
-                <defs>
-                  <linearGradient id="goldGradientLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FEF08A" />
-                    <stop offset="50%" stopColor="#F59E0B" />
-                    <stop offset="100%" stopColor="#B45309" />
-                  </linearGradient>
-                </defs>
-
-                {/* Sweeping Grand Curved Stem */}
-                <path d="M44 64C20 54 8 36 12 8" stroke="url(#goldGradientLeft)" strokeWidth="3" strokeLinecap="round" />
-                <path d="M44 64C36 62 30 65 26 68" stroke="url(#goldGradientLeft)" strokeWidth="2" strokeLinecap="round" />
-
-                {/* 7 Pairs of Cascading Royal Laurel / Paddy Grains */}
-                <path d="M12 8C7 5 3 8.5 5 13C9 13 13 10.5 12 8Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M12 8C16 6 19.5 9 18 13C14.5 13 12.5 10.5 12 8Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M11 15C5.5 12 1.5 15.5 3.5 20C8 20 12 17.5 11 15Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M11.5 15C16 13 20 16 18.5 20.5C14.5 20.5 12 17.5 11.5 15Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M11.5 23C5.5 20 1 23.5 3 28.5C8 28.5 12.5 25.5 11.5 23Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M12 23C17 21 21 24 19.5 28.8C15.5 28.8 13 25.8 12 23Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M13.5 31.5C7.5 28.5 3 32 5 37C10 37 14.5 34 13.5 31.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M14 31.5C19 29.5 23 32.5 21.5 37.3C17.5 37.3 15 34.3 14 31.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M17.5 40C11.5 37 7 40.5 9 45.5C14 45.5 18.5 42.5 17.5 40Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M18 40C23 38 27 41 25.5 45.8C21.5 45.8 19 42.8 18 40Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M23 48.5C17 45.5 12.5 49 14.5 54C19.5 54 24 51 23 48.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M23.5 48.5C28.5 46.5 32.5 49.5 31 54.3C27 54.3 24.5 51.3 23.5 48.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M31 56.5C25 53.5 20.5 57 22.5 62C27.5 62 32 59 31 56.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M31.5 56.5C36.5 54.5 40.5 57.5 39 62.3C35 62.3 32.5 59.3 31.5 56.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
-              </svg>
-
-              {/* Main Pill Badge Container */}
-              <div className="inline-flex items-center justify-center px-5 sm:px-6 py-1.5 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border border-amber-400/80 rounded-full cursor-default shadow-[0_2px_16px_rgba(245,158,11,0.30)] z-10">
-                <span className="font-serif italic text-amber-950">
-                  <span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence
-                </span>
-              </div>
-
-              {/* Right Royal Curved Laurel & Wheat Wreath */}
-              <svg 
-                className="absolute -right-9 sm:-right-11 top-1/2 -translate-y-1/2 w-10 h-14 sm:w-12 sm:h-16 pointer-events-none drop-shadow-[0_4px_14px_rgba(245,158,11,0.65)] z-20 transform scale-x-[-1]" 
-                viewBox="0 0 52 72" 
-                fill="none"
-              >
-                <defs>
-                  <linearGradient id="goldGradientRight" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#FEF08A" />
-                    <stop offset="50%" stopColor="#F59E0B" />
-                    <stop offset="100%" stopColor="#B45309" />
-                  </linearGradient>
-                </defs>
-
-                <path d="M44 64C20 54 8 36 12 8" stroke="url(#goldGradientRight)" strokeWidth="3" strokeLinecap="round" />
-                <path d="M44 64C36 62 30 65 26 68" stroke="url(#goldGradientRight)" strokeWidth="2" strokeLinecap="round" />
-
-                <path d="M12 8C7 5 3 8.5 5 13C9 13 13 10.5 12 8Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M12 8C16 6 19.5 9 18 13C14.5 13 12.5 10.5 12 8Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M11 15C5.5 12 1.5 15.5 3.5 20C8 20 12 17.5 11 15Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M11.5 15C16 13 20 16 18.5 20.5C14.5 20.5 12 17.5 11.5 15Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M11.5 23C5.5 20 1 23.5 3 28.5C8 28.5 12.5 25.5 11.5 23Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M12 23C17 21 21 24 19.5 28.8C15.5 28.8 13 25.8 12 23Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M13.5 31.5C7.5 28.5 3 32 5 37C10 37 14.5 34 13.5 31.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M14 31.5C19 29.5 23 32.5 21.5 37.3C17.5 37.3 15 34.3 14 31.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M17.5 40C11.5 37 7 40.5 9 45.5C14 45.5 18.5 42.5 17.5 40Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M18 40C23 38 27 41 25.5 45.8C21.5 45.8 19 42.8 18 40Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M23 48.5C17 45.5 12.5 49 14.5 54C19.5 54 24 51 23 48.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M23.5 48.5C28.5 46.5 32.5 49.5 31 54.3C27 54.3 24.5 51.3 23.5 48.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-
-                <path d="M31 56.5C25 53.5 20.5 57 22.5 62C27.5 62 32 59 31 56.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-                <path d="M31.5 56.5C36.5 54.5 40.5 57.5 39 62.3C35 62.3 32.5 59.3 31.5 56.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
-              </svg>
+            {/* 42 Years Badge with Official University Crest Medallion Symbols */}
+            <div className="inline-flex items-center justify-center gap-2.5 px-4 sm:px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border border-amber-400/80 rounded-full cursor-default select-none shadow-[0_2px_16px_rgba(245,158,11,0.30)] transition-all hover:scale-[1.02]">
+              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0 drop-shadow-[0_1px_3px_rgba(245,158,11,0.6)]" />
+              <span className="font-serif italic text-amber-950">
+                <span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence
+              </span>
+              <Award className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 shrink-0 drop-shadow-[0_1px_3px_rgba(245,158,11,0.6)]" />
             </div>
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
             <div className="w-full flex justify-center mb-3">
