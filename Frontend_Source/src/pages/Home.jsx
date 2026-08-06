@@ -658,45 +658,48 @@ export default function Home() {
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
             
-            {/* 42 Years Badge with Outer Curved Golden Wheat/Paddy Sheaf Framing */}
+            {/* 42 Years Badge with Sweeping Royal Curved Golden Laurel & Wheat Wreath */}
             <div className="relative inline-flex items-center justify-center my-2 select-none">
               
-              {/* Left High-Detail Golden Wheat Sheaf (Wrapping outer curvature of pill) */}
+              {/* Left Royal Curved Laurel & Wheat Wreath */}
               <svg 
-                className="absolute -left-7 sm:-left-8 top-1/2 -translate-y-1/2 w-8 h-12 sm:w-9.5 sm:h-14 pointer-events-none drop-shadow-[0_2px_10px_rgba(245,158,11,0.6)] z-20" 
-                viewBox="0 0 44 64" 
+                className="absolute -left-9 sm:-left-11 top-1/2 -translate-y-1/2 w-10 h-14 sm:w-12 sm:h-16 pointer-events-none drop-shadow-[0_4px_14px_rgba(245,158,11,0.65)] z-20" 
+                viewBox="0 0 52 72" 
                 fill="none"
               >
-                {/* Curved Central Stalk */}
-                <path d="M38 58C24 48 14 34 16 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
+                <defs>
+                  <linearGradient id="goldGradientLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FEF08A" />
+                    <stop offset="50%" stopColor="#F59E0B" />
+                    <stop offset="100%" stopColor="#B45309" />
+                  </linearGradient>
+                </defs>
 
-                {/* Golden Wheat Grains with Awns */}
-                <path d="M16 8C13 5 9 7.5 11 11.5C14 11.5 17 9.5 16 8Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M11 11.5L4 4" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                {/* Sweeping Grand Curved Stem */}
+                <path d="M44 64C20 54 8 36 12 8" stroke="url(#goldGradientLeft)" strokeWidth="3" strokeLinecap="round" />
+                <path d="M44 64C36 62 30 65 26 68" stroke="url(#goldGradientLeft)" strokeWidth="2" strokeLinecap="round" />
 
-                <path d="M18 13C13.5 10 9.5 12.5 11.5 16.8C15 16.8 18 14.8 18 13Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M11.5 16.8L3 10" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                {/* 7 Pairs of Cascading Royal Laurel / Paddy Grains */}
+                <path d="M12 8C7 5 3 8.5 5 13C9 13 13 10.5 12 8Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M12 8C16 6 19.5 9 18 13C14.5 13 12.5 10.5 12 8Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
 
-                <path d="M20.5 19C16 16 12 18.5 14 22.8C17.5 22.8 20.5 20.8 20.5 19Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M14 22.8L5 17" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M11 15C5.5 12 1.5 15.5 3.5 20C8 20 12 17.5 11 15Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M11.5 15C16 13 20 16 18.5 20.5C14.5 20.5 12 17.5 11.5 15Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
 
-                <path d="M23.5 25.5C19 22.5 15 25 17 29.3C20.5 29.3 23.5 27.3 23.5 25.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M17 29.3L8 24" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M11.5 23C5.5 20 1 23.5 3 28.5C8 28.5 12.5 25.5 11.5 23Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M12 23C17 21 21 24 19.5 28.8C15.5 28.8 13 25.8 12 23Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
 
-                <path d="M27 32.5C22.5 29.5 18.5 32 20.5 36.3C24 36.3 27 34.3 27 32.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M20.5 36.3L11.5 31" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M13.5 31.5C7.5 28.5 3 32 5 37C10 37 14.5 34 13.5 31.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M14 31.5C19 29.5 23 32.5 21.5 37.3C17.5 37.3 15 34.3 14 31.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
 
-                <path d="M31 40C26.5 37 22.5 39.5 24.5 43.8C28 43.8 31 41.8 31 40Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M24.5 43.8L15.5 38.5" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M17.5 40C11.5 37 7 40.5 9 45.5C14 45.5 18.5 42.5 17.5 40Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M18 40C23 38 27 41 25.5 45.8C21.5 45.8 19 42.8 18 40Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
 
-                <path d="M35 47.5C30.5 44.5 26.5 47 28.5 51.3C32 51.3 35 49.3 35 47.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M23 48.5C17 45.5 12.5 49 14.5 54C19.5 54 24 51 23 48.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M23.5 48.5C28.5 46.5 32.5 49.5 31 54.3C27 54.3 24.5 51.3 23.5 48.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
 
-                {/* Inner Side Grains */}
-                <path d="M16 8C19.5 6 22.5 8.5 21 11.5C18 11.5 16 9.5 16 8Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M18 13C21.5 11 24.5 13.5 23 16.5C20 16.5 18 14.5 18 13Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M20.5 19C24 17 27 19.5 25.5 22.5C22.5 22.5 20.5 20.5 20.5 19Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M23.5 25.5C27 23.5 30 26 28.5 29C25.5 29 23.5 27 23.5 25.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M27 32.5C30.5 30.5 33.5 33 32 36C29 36 27 34 27 32.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M31 56.5C25 53.5 20.5 57 22.5 62C27.5 62 32 59 31 56.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M31.5 56.5C36.5 54.5 40.5 57.5 39 62.3C35 62.3 32.5 59.3 31.5 56.5Z" fill="url(#goldGradientLeft)" stroke="#92400E" strokeWidth="0.6" />
               </svg>
 
               {/* Main Pill Badge Container */}
@@ -706,31 +709,43 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Right High-Detail Golden Wheat Sheaf (Wrapping outer curvature of pill) */}
+              {/* Right Royal Curved Laurel & Wheat Wreath */}
               <svg 
-                className="absolute -right-7 sm:-right-8 top-1/2 -translate-y-1/2 w-8 h-12 sm:w-9.5 sm:h-14 pointer-events-none drop-shadow-[0_2px_10px_rgba(245,158,11,0.6)] z-20 transform scale-x-[-1]" 
-                viewBox="0 0 44 64" 
+                className="absolute -right-9 sm:-right-11 top-1/2 -translate-y-1/2 w-10 h-14 sm:w-12 sm:h-16 pointer-events-none drop-shadow-[0_4px_14px_rgba(245,158,11,0.65)] z-20 transform scale-x-[-1]" 
+                viewBox="0 0 52 72" 
                 fill="none"
               >
-                <path d="M38 58C24 48 14 34 16 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
-                <path d="M16 8C13 5 9 7.5 11 11.5C14 11.5 17 9.5 16 8Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M11 11.5L4 4" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M18 13C13.5 10 9.5 12.5 11.5 16.8C15 16.8 18 14.8 18 13Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M11.5 16.8L3 10" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M20.5 19C16 16 12 18.5 14 22.8C17.5 22.8 20.5 20.8 20.5 19Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M14 22.8L5 17" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M23.5 25.5C19 22.5 15 25 17 29.3C20.5 29.3 23.5 27.3 23.5 25.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M17 29.3L8 24" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M27 32.5C22.5 29.5 18.5 32 20.5 36.3C24 36.3 27 34.3 27 32.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M20.5 36.3L11.5 31" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M31 40C26.5 37 22.5 39.5 24.5 43.8C28 43.8 31 41.8 31 40Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M24.5 43.8L15.5 38.5" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M35 47.5C30.5 44.5 26.5 47 28.5 51.3C32 51.3 35 49.3 35 47.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M16 8C19.5 6 22.5 8.5 21 11.5C18 11.5 16 9.5 16 8Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M18 13C21.5 11 24.5 13.5 23 16.5C20 16.5 18 14.5 18 13Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M20.5 19C24 17 27 19.5 25.5 22.5C22.5 22.5 20.5 20.5 20.5 19Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M23.5 25.5C27 23.5 30 26 28.5 29C25.5 29 23.5 27 23.5 25.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
-                <path d="M27 32.5C30.5 30.5 33.5 33 32 36C29 36 27 34 27 32.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <defs>
+                  <linearGradient id="goldGradientRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#FEF08A" />
+                    <stop offset="50%" stopColor="#F59E0B" />
+                    <stop offset="100%" stopColor="#B45309" />
+                  </linearGradient>
+                </defs>
+
+                <path d="M44 64C20 54 8 36 12 8" stroke="url(#goldGradientRight)" strokeWidth="3" strokeLinecap="round" />
+                <path d="M44 64C36 62 30 65 26 68" stroke="url(#goldGradientRight)" strokeWidth="2" strokeLinecap="round" />
+
+                <path d="M12 8C7 5 3 8.5 5 13C9 13 13 10.5 12 8Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M12 8C16 6 19.5 9 18 13C14.5 13 12.5 10.5 12 8Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+
+                <path d="M11 15C5.5 12 1.5 15.5 3.5 20C8 20 12 17.5 11 15Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M11.5 15C16 13 20 16 18.5 20.5C14.5 20.5 12 17.5 11.5 15Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+
+                <path d="M11.5 23C5.5 20 1 23.5 3 28.5C8 28.5 12.5 25.5 11.5 23Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M12 23C17 21 21 24 19.5 28.8C15.5 28.8 13 25.8 12 23Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+
+                <path d="M13.5 31.5C7.5 28.5 3 32 5 37C10 37 14.5 34 13.5 31.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M14 31.5C19 29.5 23 32.5 21.5 37.3C17.5 37.3 15 34.3 14 31.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+
+                <path d="M17.5 40C11.5 37 7 40.5 9 45.5C14 45.5 18.5 42.5 17.5 40Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M18 40C23 38 27 41 25.5 45.8C21.5 45.8 19 42.8 18 40Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+
+                <path d="M23 48.5C17 45.5 12.5 49 14.5 54C19.5 54 24 51 23 48.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M23.5 48.5C28.5 46.5 32.5 49.5 31 54.3C27 54.3 24.5 51.3 23.5 48.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+
+                <path d="M31 56.5C25 53.5 20.5 57 22.5 62C27.5 62 32 59 31 56.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
+                <path d="M31.5 56.5C36.5 54.5 40.5 57.5 39 62.3C35 62.3 32.5 59.3 31.5 56.5Z" fill="url(#goldGradientRight)" stroke="#92400E" strokeWidth="0.6" />
               </svg>
             </div>
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
