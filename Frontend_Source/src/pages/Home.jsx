@@ -658,54 +658,57 @@ export default function Home() {
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
             
-            {/* 42 Years Badge with Outer Curved Golden Paddy Wreath Framing */}
+            {/* 42 Years Badge with Outer Curved Golden Paddy Wreath Hugging the Pill Border */}
             <div className="relative inline-flex items-center justify-center my-2 select-none">
               
-              {/* Left Curved Paddy Wreath (wrapping outside left border) */}
+              {/* Left Curved Paddy Arc (hugs the exact rounded-full curve of pill box) */}
               <svg 
-                className="absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2 w-7 h-10 sm:w-8.5 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_6px_rgba(245,158,11,0.4)] z-20" 
-                viewBox="0 0 40 60" 
+                className="absolute -left-6 sm:-left-7 top-1/2 -translate-y-1/2 w-8 h-11 sm:w-9 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_8px_rgba(245,158,11,0.5)] z-20" 
+                viewBox="0 0 36 48" 
                 fill="currentColor"
               >
-                <path d="M34 54C20 45 10 32 12 8" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" fill="none" />
-                <path d="M12 8C8.5 5 5 8 7 11.5C10 11.5 13 9.5 12 8Z" />
-                <path d="M11 15C7 12.5 3.5 15.5 5 19.5C8.5 19.5 11.5 17.5 11 15Z" />
-                <path d="M13 23C8.5 20.5 4.5 24 6.5 28C10.5 28 13.5 25.5 13 23Z" />
-                <path d="M16 31C11.5 28.5 7.5 32 9.5 36C13.5 36 16.5 33.5 16 31Z" />
-                <path d="M20 39C15.5 36.5 11.5 40 13.5 44C17.5 44 20.5 41.5 20 39Z" />
-                <path d="M25 47C20.5 44.5 16.5 48 18.5 52C22.5 52 25.5 49.5 25 47Z" />
-                <path d="M12 8C15 6 17.5 8.5 16 11.5C13.5 11.5 12 9.5 12 8Z" />
-                <path d="M13.5 15C16.5 13 19 15.5 17.5 18.5C15 18.5 13.5 16.5 13.5 15Z" />
-                <path d="M15.5 23C18.5 21 21 23.5 19.5 26.5C17 26.5 15.5 24.5 15.5 23Z" />
-                <path d="M18.5 31C21.5 29 24 31.5 22.5 34.5C20 34.5 18.5 32.5 18.5 31Z" />
-                <path d="M22.5 39C25.5 37 28 39.5 26.5 42.5C24 42.5 22.5 40.5 22.5 39Z" />
+                {/* Arc Stem following pill curve */}
+                <path d="M28 4C14 10 10 38 28 44" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                
+                {/* Paddy Grains along curvature */}
+                <path d="M28 4C24 2 20 4.5 22 7.5C24.5 7.5 27 6 28 4Z" />
+                <path d="M25 9C21 7 17.5 9.5 19.5 12.5C22 12.5 24.5 11 25 9Z" />
+                <path d="M22 15C17.5 13 14 15.5 16 18.5C18.5 18.5 21 17 22 15Z" />
+                <path d="M20 22C15 20.5 11.5 23 13.5 26C16.5 26 19 24.5 20 22Z" />
+                <path d="M21 29C16.5 28 13 30.5 15 33.5C17.8 33.5 20 31.5 21 29Z" />
+                <path d="M24 36C20 35 16.5 37.5 18.5 40.5C21.2 40.5 23.5 38.5 24 36Z" />
+                <path d="M28 44C24 43.5 21 46 23 48C25.5 47 27.5 45.5 28 44Z" />
+
+                {/* Outer Crest Leaf Accents */}
+                <path d="M20 15C16.5 12 13 14.5 15 17.5C17.5 17.5 19.5 16.5 20 15Z" />
+                <path d="M18 22C14 19.5 10.5 22 12.5 25C15.5 25 17.5 23.5 18 22Z" />
+                <path d="M19 29C15 27 11.5 29.5 13.5 32.5C16.5 32.5 18.5 30.5 19 29Z" />
               </svg>
 
-              {/* Main Badge Container */}
+              {/* Main Pill Badge Container */}
               <div className="inline-flex items-center justify-center px-5 sm:px-6 py-1.5 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border border-amber-400/80 rounded-full cursor-default shadow-[0_2px_16px_rgba(245,158,11,0.30)] z-10">
                 <span className="font-serif italic text-amber-950">
                   <span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence
                 </span>
               </div>
 
-              {/* Right Curved Paddy Wreath (wrapping outside right border) */}
+              {/* Right Curved Paddy Arc (hugs the exact right rounded-full curve) */}
               <svg 
-                className="absolute -right-5 sm:-right-6 top-1/2 -translate-y-1/2 w-7 h-10 sm:w-8.5 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_6px_rgba(245,158,11,0.4)] z-20 transform scale-x-[-1]" 
-                viewBox="0 0 40 60" 
+                className="absolute -right-6 sm:-right-7 top-1/2 -translate-y-1/2 w-8 h-11 sm:w-9 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_8px_rgba(245,158,11,0.5)] z-20 transform scale-x-[-1]" 
+                viewBox="0 0 36 48" 
                 fill="currentColor"
               >
-                <path d="M34 54C20 45 10 32 12 8" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" fill="none" />
-                <path d="M12 8C8.5 5 5 8 7 11.5C10 11.5 13 9.5 12 8Z" />
-                <path d="M11 15C7 12.5 3.5 15.5 5 19.5C8.5 19.5 11.5 17.5 11 15Z" />
-                <path d="M13 23C8.5 20.5 4.5 24 6.5 28C10.5 28 13.5 25.5 13 23Z" />
-                <path d="M16 31C11.5 28.5 7.5 32 9.5 36C13.5 36 16.5 33.5 16 31Z" />
-                <path d="M20 39C15.5 36.5 11.5 40 13.5 44C17.5 44 20.5 41.5 20 39Z" />
-                <path d="M25 47C20.5 44.5 16.5 48 18.5 52C22.5 52 25.5 49.5 25 47Z" />
-                <path d="M12 8C15 6 17.5 8.5 16 11.5C13.5 11.5 12 9.5 12 8Z" />
-                <path d="M13.5 15C16.5 13 19 15.5 17.5 18.5C15 18.5 13.5 16.5 13.5 15Z" />
-                <path d="M15.5 23C18.5 21 21 23.5 19.5 26.5C17 26.5 15.5 24.5 15.5 23Z" />
-                <path d="M18.5 31C21.5 29 24 31.5 22.5 34.5C20 34.5 18.5 32.5 18.5 31Z" />
-                <path d="M22.5 39C25.5 37 28 39.5 26.5 42.5C24 42.5 22.5 40.5 22.5 39Z" />
+                <path d="M28 4C14 10 10 38 28 44" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                <path d="M28 4C24 2 20 4.5 22 7.5C24.5 7.5 27 6 28 4Z" />
+                <path d="M25 9C21 7 17.5 9.5 19.5 12.5C22 12.5 24.5 11 25 9Z" />
+                <path d="M22 15C17.5 13 14 15.5 16 18.5C18.5 18.5 21 17 22 15Z" />
+                <path d="M20 22C15 20.5 11.5 23 13.5 26C16.5 26 19 24.5 20 22Z" />
+                <path d="M21 29C16.5 28 13 30.5 15 33.5C17.8 33.5 20 31.5 21 29Z" />
+                <path d="M24 36C20 35 16.5 37.5 18.5 40.5C21.2 40.5 23.5 38.5 24 36Z" />
+                <path d="M28 44C24 43.5 21 46 23 48C25.5 47 27.5 45.5 28 44Z" />
+                <path d="M20 15C16.5 12 13 14.5 15 17.5C17.5 17.5 19.5 16.5 20 15Z" />
+                <path d="M18 22C14 19.5 10.5 22 12.5 25C15.5 25 17.5 23.5 18 22Z" />
+                <path d="M19 29C15 27 11.5 29.5 13.5 32.5C16.5 32.5 18.5 30.5 19 29Z" />
               </svg>
             </div>
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
