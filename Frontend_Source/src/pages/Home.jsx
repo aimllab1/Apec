@@ -651,41 +651,61 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-start pt-6 pb-8 px-6 border-b border-gray-100 bg-transparent z-10">
+      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-start pt-6 pb-8 px-6 bg-transparent z-10">
         
         <div className="w-full max-w-[1800px] mx-auto px-6 flex flex-col items-center relative z-10">
           
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
-            <div className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border border-amber-400/80 rounded-full cursor-default select-none shadow-[0_2px_16px_rgba(245,158,11,0.30)] transition-all">
-              {/* Left Paddy / Wheat Stalk Icon */}
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21C12 21 12 11 12 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                <path d="M12 3.5C10 2 8 3.5 8 6C10 6 12 5 12 3.5Z" />
-                <path d="M12 7C9.5 5.5 7 7 7 9.5C9.5 9.5 12 8.5 12 7Z" />
-                <path d="M12 10.5C9 9 6.5 10.5 6.5 13C9 13 12 12 12 10.5Z" />
-                <path d="M12 14C8.5 12.5 6 14 6 16.5C8.5 16.5 12 15.5 12 14Z" />
-                <path d="M12 5C14 3.5 16 5 16 7.5C14 7.5 12 6.5 12 5Z" />
-                <path d="M12 8.5C14.5 7 17 8.5 17 11C14.5 11 12 10 12 8.5Z" />
-                <path d="M12 12C15 10.5 17.5 12 17.5 14.5C15 14.5 12 13.5 12 12Z" />
-                <path d="M12 15.5C15.5 14 18 15.5 18 18C15.5 18 12 17 12 15.5Z" />
+            
+            {/* 42 Years Badge with Outer Curved Golden Paddy Wreath Framing */}
+            <div className="relative inline-flex items-center justify-center my-2 select-none">
+              
+              {/* Left Curved Paddy Wreath (wrapping outside left border) */}
+              <svg 
+                className="absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2 w-7 h-10 sm:w-8.5 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_6px_rgba(245,158,11,0.4)] z-20" 
+                viewBox="0 0 40 60" 
+                fill="currentColor"
+              >
+                <path d="M34 54C20 45 10 32 12 8" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+                <path d="M12 8C8.5 5 5 8 7 11.5C10 11.5 13 9.5 12 8Z" />
+                <path d="M11 15C7 12.5 3.5 15.5 5 19.5C8.5 19.5 11.5 17.5 11 15Z" />
+                <path d="M13 23C8.5 20.5 4.5 24 6.5 28C10.5 28 13.5 25.5 13 23Z" />
+                <path d="M16 31C11.5 28.5 7.5 32 9.5 36C13.5 36 16.5 33.5 16 31Z" />
+                <path d="M20 39C15.5 36.5 11.5 40 13.5 44C17.5 44 20.5 41.5 20 39Z" />
+                <path d="M25 47C20.5 44.5 16.5 48 18.5 52C22.5 52 25.5 49.5 25 47Z" />
+                <path d="M12 8C15 6 17.5 8.5 16 11.5C13.5 11.5 12 9.5 12 8Z" />
+                <path d="M13.5 15C16.5 13 19 15.5 17.5 18.5C15 18.5 13.5 16.5 13.5 15Z" />
+                <path d="M15.5 23C18.5 21 21 23.5 19.5 26.5C17 26.5 15.5 24.5 15.5 23Z" />
+                <path d="M18.5 31C21.5 29 24 31.5 22.5 34.5C20 34.5 18.5 32.5 18.5 31Z" />
+                <path d="M22.5 39C25.5 37 28 39.5 26.5 42.5C24 42.5 22.5 40.5 22.5 39Z" />
               </svg>
 
-              <span className="font-serif italic text-amber-950">
-                <span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence
-              </span>
+              {/* Main Badge Container */}
+              <div className="inline-flex items-center justify-center px-5 sm:px-6 py-1.5 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border border-amber-400/80 rounded-full cursor-default shadow-[0_2px_16px_rgba(245,158,11,0.30)] z-10">
+                <span className="font-serif italic text-amber-950">
+                  <span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence
+                </span>
+              </div>
 
-              {/* Right Paddy / Wheat Stalk Icon */}
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 shrink-0 transform scale-x-[-1]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 21C12 21 12 11 12 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                <path d="M12 3.5C10 2 8 3.5 8 6C10 6 12 5 12 3.5Z" />
-                <path d="M12 7C9.5 5.5 7 7 7 9.5C9.5 9.5 12 8.5 12 7Z" />
-                <path d="M12 10.5C9 9 6.5 10.5 6.5 13C9 13 12 12 12 10.5Z" />
-                <path d="M12 14C8.5 12.5 6 14 6 16.5C8.5 16.5 12 15.5 12 14Z" />
-                <path d="M12 5C14 3.5 16 5 16 7.5C14 7.5 12 6.5 12 5Z" />
-                <path d="M12 8.5C14.5 7 17 8.5 17 11C14.5 11 12 10 12 8.5Z" />
-                <path d="M12 12C15 10.5 17.5 12 17.5 14.5C15 14.5 12 13.5 12 12Z" />
-                <path d="M12 15.5C15.5 14 18 15.5 18 18C15.5 18 12 17 12 15.5Z" />
+              {/* Right Curved Paddy Wreath (wrapping outside right border) */}
+              <svg 
+                className="absolute -right-5 sm:-right-6 top-1/2 -translate-y-1/2 w-7 h-10 sm:w-8.5 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_6px_rgba(245,158,11,0.4)] z-20 transform scale-x-[-1]" 
+                viewBox="0 0 40 60" 
+                fill="currentColor"
+              >
+                <path d="M34 54C20 45 10 32 12 8" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" fill="none" />
+                <path d="M12 8C8.5 5 5 8 7 11.5C10 11.5 13 9.5 12 8Z" />
+                <path d="M11 15C7 12.5 3.5 15.5 5 19.5C8.5 19.5 11.5 17.5 11 15Z" />
+                <path d="M13 23C8.5 20.5 4.5 24 6.5 28C10.5 28 13.5 25.5 13 23Z" />
+                <path d="M16 31C11.5 28.5 7.5 32 9.5 36C13.5 36 16.5 33.5 16 31Z" />
+                <path d="M20 39C15.5 36.5 11.5 40 13.5 44C17.5 44 20.5 41.5 20 39Z" />
+                <path d="M25 47C20.5 44.5 16.5 48 18.5 52C22.5 52 25.5 49.5 25 47Z" />
+                <path d="M12 8C15 6 17.5 8.5 16 11.5C13.5 11.5 12 9.5 12 8Z" />
+                <path d="M13.5 15C16.5 13 19 15.5 17.5 18.5C15 18.5 13.5 16.5 13.5 15Z" />
+                <path d="M15.5 23C18.5 21 21 23.5 19.5 26.5C17 26.5 15.5 24.5 15.5 23Z" />
+                <path d="M18.5 31C21.5 29 24 31.5 22.5 34.5C20 34.5 18.5 32.5 18.5 31Z" />
+                <path d="M22.5 39C25.5 37 28 39.5 26.5 42.5C24 42.5 22.5 40.5 22.5 39Z" />
               </svg>
             </div>
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
@@ -835,7 +855,7 @@ export default function Home() {
 
 
       {/* Leadership Section */}
-      <section className="py-24 px-6 bg-transparent border-b border-gray-100/50 relative z-10">
+      <section className="py-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Leadership</span>
@@ -868,7 +888,7 @@ export default function Home() {
       </section>
 
       {/* Bento Department Visualizer replaced with centered sliding showcase */}
-      <section className="py-24 px-6 bg-transparent border-b border-gray-100/55 relative z-10">
+      <section className="py-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
           
           <div className="text-left mb-16">
@@ -998,7 +1018,7 @@ export default function Home() {
       </section>
 
       {/* WHY JOIN APEC FEATURE GRID */}
-      <section className="py-24 px-6 bg-transparent border-b border-gray-100/50 relative z-10">
+      <section className="py-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College</span>
