@@ -58,12 +58,12 @@ export default function AchievementBadge({
           <path d="M10 29.5L4 24" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
           <path d="M12.5 37L6.5 31.5" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
 
-          {/* Inner Highlight Leaves */}
-          <path d="M28 4C30 2 32 4 30.5 7.5C28 7.5 27 5.5 28 4Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M22 10.5C25 8.5 27.5 11 26 14.5C23 14.5 21 12.5 22 10.5Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M17.5 17.5C20.5 15.5 23 18 21.5 22C18.5 22 16.5 20 17.5 17.5Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M16 25C19 23 21.5 25.5 20 29.5C17 29.5 15 27.5 16 25Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M18.5 32.5C21.5 30.5 24 33 22.5 37C19.5 37 17.5 35 18.5 32.5Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
+          {/* Inner Highlight Leaves — Same Uniform Light Gold Fill */}
+          <path d="M28 4C30 2 32 4 30.5 7.5C28 7.5 27 5.5 28 4Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M22 10.5C25 8.5 27.5 11 26 14.5C23 14.5 21 12.5 22 10.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M17.5 17.5C20.5 15.5 23 18 21.5 22C18.5 22 16.5 20 17.5 17.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M16 25C19 23 21.5 25.5 20 29.5C17 29.5 15 27.5 16 25Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M18.5 32.5C21.5 30.5 24 33 22.5 37C19.5 37 17.5 35 18.5 32.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
         </svg>
       </div>
 
@@ -106,11 +106,12 @@ export default function AchievementBadge({
           <path d="M10 29.5L4 24" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
           <path d="M12.5 37L6.5 31.5" stroke="#78350F" strokeWidth="1.2" strokeLinecap="round" />
 
-          <path d="M28 4C30 2 32 4 30.5 7.5C28 7.5 27 5.5 28 4Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M22 10.5C25 8.5 27.5 11 26 14.5C23 14.5 21 12.5 22 10.5Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M17.5 17.5C20.5 15.5 23 18 21.5 22C18.5 22 16.5 20 17.5 17.5Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M16 25C19 23 21.5 25.5 20 29.5C17 29.5 15 27.5 16 25Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
-          <path d="M18.5 32.5C21.5 30.5 24 33 22.5 37C19.5 37 17.5 35 18.5 32.5Z" fill="#FFF8D6" stroke="#78350F" strokeWidth="0.6" />
+          {/* Inner Highlight Leaves — Same Uniform Light Gold Fill */}
+          <path d="M28 4C30 2 32 4 30.5 7.5C28 7.5 27 5.5 28 4Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M22 10.5C25 8.5 27.5 11 26 14.5C23 14.5 21 12.5 22 10.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M17.5 17.5C20.5 15.5 23 18 21.5 22C18.5 22 16.5 20 17.5 17.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M16 25C19 23 21.5 25.5 20 29.5C17 29.5 15 27.5 16 25Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M18.5 32.5C21.5 30.5 24 33 22.5 37C19.5 37 17.5 35 18.5 32.5Z" fill="url(#fixedGoldTheme)" stroke="#78350F" strokeWidth="0.8" />
         </svg>
       </div>
     </div>
