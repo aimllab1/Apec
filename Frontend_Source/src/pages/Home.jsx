@@ -658,31 +658,45 @@ export default function Home() {
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
             
-            {/* 42 Years Badge with Outer Curved Golden Paddy Wreath Hugging the Pill Border */}
+            {/* 42 Years Badge with Outer Curved Golden Wheat/Paddy Sheaf Framing */}
             <div className="relative inline-flex items-center justify-center my-2 select-none">
               
-              {/* Left Curved Paddy Arc (hugs the exact rounded-full curve of pill box) */}
+              {/* Left High-Detail Golden Wheat Sheaf (Wrapping outer curvature of pill) */}
               <svg 
-                className="absolute -left-6 sm:-left-7 top-1/2 -translate-y-1/2 w-8 h-11 sm:w-9 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_8px_rgba(245,158,11,0.5)] z-20" 
-                viewBox="0 0 36 48" 
-                fill="currentColor"
+                className="absolute -left-7 sm:-left-8 top-1/2 -translate-y-1/2 w-8 h-12 sm:w-9.5 sm:h-14 pointer-events-none drop-shadow-[0_2px_10px_rgba(245,158,11,0.6)] z-20" 
+                viewBox="0 0 44 64" 
+                fill="none"
               >
-                {/* Arc Stem following pill curve */}
-                <path d="M28 4C14 10 10 38 28 44" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-                
-                {/* Paddy Grains along curvature */}
-                <path d="M28 4C24 2 20 4.5 22 7.5C24.5 7.5 27 6 28 4Z" />
-                <path d="M25 9C21 7 17.5 9.5 19.5 12.5C22 12.5 24.5 11 25 9Z" />
-                <path d="M22 15C17.5 13 14 15.5 16 18.5C18.5 18.5 21 17 22 15Z" />
-                <path d="M20 22C15 20.5 11.5 23 13.5 26C16.5 26 19 24.5 20 22Z" />
-                <path d="M21 29C16.5 28 13 30.5 15 33.5C17.8 33.5 20 31.5 21 29Z" />
-                <path d="M24 36C20 35 16.5 37.5 18.5 40.5C21.2 40.5 23.5 38.5 24 36Z" />
-                <path d="M28 44C24 43.5 21 46 23 48C25.5 47 27.5 45.5 28 44Z" />
+                {/* Curved Central Stalk */}
+                <path d="M38 58C24 48 14 34 16 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
 
-                {/* Outer Crest Leaf Accents */}
-                <path d="M20 15C16.5 12 13 14.5 15 17.5C17.5 17.5 19.5 16.5 20 15Z" />
-                <path d="M18 22C14 19.5 10.5 22 12.5 25C15.5 25 17.5 23.5 18 22Z" />
-                <path d="M19 29C15 27 11.5 29.5 13.5 32.5C16.5 32.5 18.5 30.5 19 29Z" />
+                {/* Golden Wheat Grains with Awns */}
+                <path d="M16 8C13 5 9 7.5 11 11.5C14 11.5 17 9.5 16 8Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M11 11.5L4 4" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+
+                <path d="M18 13C13.5 10 9.5 12.5 11.5 16.8C15 16.8 18 14.8 18 13Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M11.5 16.8L3 10" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+
+                <path d="M20.5 19C16 16 12 18.5 14 22.8C17.5 22.8 20.5 20.8 20.5 19Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M14 22.8L5 17" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+
+                <path d="M23.5 25.5C19 22.5 15 25 17 29.3C20.5 29.3 23.5 27.3 23.5 25.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M17 29.3L8 24" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+
+                <path d="M27 32.5C22.5 29.5 18.5 32 20.5 36.3C24 36.3 27 34.3 27 32.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M20.5 36.3L11.5 31" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+
+                <path d="M31 40C26.5 37 22.5 39.5 24.5 43.8C28 43.8 31 41.8 31 40Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M24.5 43.8L15.5 38.5" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+
+                <path d="M35 47.5C30.5 44.5 26.5 47 28.5 51.3C32 51.3 35 49.3 35 47.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+
+                {/* Inner Side Grains */}
+                <path d="M16 8C19.5 6 22.5 8.5 21 11.5C18 11.5 16 9.5 16 8Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M18 13C21.5 11 24.5 13.5 23 16.5C20 16.5 18 14.5 18 13Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M20.5 19C24 17 27 19.5 25.5 22.5C22.5 22.5 20.5 20.5 20.5 19Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M23.5 25.5C27 23.5 30 26 28.5 29C25.5 29 23.5 27 23.5 25.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M27 32.5C30.5 30.5 33.5 33 32 36C29 36 27 34 27 32.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
               </svg>
 
               {/* Main Pill Badge Container */}
@@ -692,23 +706,31 @@ export default function Home() {
                 </span>
               </div>
 
-              {/* Right Curved Paddy Arc (hugs the exact right rounded-full curve) */}
+              {/* Right High-Detail Golden Wheat Sheaf (Wrapping outer curvature of pill) */}
               <svg 
-                className="absolute -right-6 sm:-right-7 top-1/2 -translate-y-1/2 w-8 h-11 sm:w-9 sm:h-12 text-amber-500 pointer-events-none drop-shadow-[0_2px_8px_rgba(245,158,11,0.5)] z-20 transform scale-x-[-1]" 
-                viewBox="0 0 36 48" 
-                fill="currentColor"
+                className="absolute -right-7 sm:-right-8 top-1/2 -translate-y-1/2 w-8 h-12 sm:w-9.5 sm:h-14 pointer-events-none drop-shadow-[0_2px_10px_rgba(245,158,11,0.6)] z-20 transform scale-x-[-1]" 
+                viewBox="0 0 44 64" 
+                fill="none"
               >
-                <path d="M28 4C14 10 10 38 28 44" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-                <path d="M28 4C24 2 20 4.5 22 7.5C24.5 7.5 27 6 28 4Z" />
-                <path d="M25 9C21 7 17.5 9.5 19.5 12.5C22 12.5 24.5 11 25 9Z" />
-                <path d="M22 15C17.5 13 14 15.5 16 18.5C18.5 18.5 21 17 22 15Z" />
-                <path d="M20 22C15 20.5 11.5 23 13.5 26C16.5 26 19 24.5 20 22Z" />
-                <path d="M21 29C16.5 28 13 30.5 15 33.5C17.8 33.5 20 31.5 21 29Z" />
-                <path d="M24 36C20 35 16.5 37.5 18.5 40.5C21.2 40.5 23.5 38.5 24 36Z" />
-                <path d="M28 44C24 43.5 21 46 23 48C25.5 47 27.5 45.5 28 44Z" />
-                <path d="M20 15C16.5 12 13 14.5 15 17.5C17.5 17.5 19.5 16.5 20 15Z" />
-                <path d="M18 22C14 19.5 10.5 22 12.5 25C15.5 25 17.5 23.5 18 22Z" />
-                <path d="M19 29C15 27 11.5 29.5 13.5 32.5C16.5 32.5 18.5 30.5 19 29Z" />
+                <path d="M38 58C24 48 14 34 16 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M16 8C13 5 9 7.5 11 11.5C14 11.5 17 9.5 16 8Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M11 11.5L4 4" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M18 13C13.5 10 9.5 12.5 11.5 16.8C15 16.8 18 14.8 18 13Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M11.5 16.8L3 10" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M20.5 19C16 16 12 18.5 14 22.8C17.5 22.8 20.5 20.8 20.5 19Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M14 22.8L5 17" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M23.5 25.5C19 22.5 15 25 17 29.3C20.5 29.3 23.5 27.3 23.5 25.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M17 29.3L8 24" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M27 32.5C22.5 29.5 18.5 32 20.5 36.3C24 36.3 27 34.3 27 32.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M20.5 36.3L11.5 31" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M31 40C26.5 37 22.5 39.5 24.5 43.8C28 43.8 31 41.8 31 40Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M24.5 43.8L15.5 38.5" stroke="#F59E0B" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M35 47.5C30.5 44.5 26.5 47 28.5 51.3C32 51.3 35 49.3 35 47.5Z" fill="#FBBF24" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M16 8C19.5 6 22.5 8.5 21 11.5C18 11.5 16 9.5 16 8Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M18 13C21.5 11 24.5 13.5 23 16.5C20 16.5 18 14.5 18 13Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M20.5 19C24 17 27 19.5 25.5 22.5C22.5 22.5 20.5 20.5 20.5 19Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M23.5 25.5C27 23.5 30 26 28.5 29C25.5 29 23.5 27 23.5 25.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
+                <path d="M27 32.5C30.5 30.5 33.5 33 32 36C29 36 27 34 27 32.5Z" fill="#FDE047" stroke="#D97706" strokeWidth="0.8" />
               </svg>
             </div>
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
