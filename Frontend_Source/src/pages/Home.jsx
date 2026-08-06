@@ -657,28 +657,37 @@ export default function Home() {
           
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
-            <motion.div
-              className="inline-flex items-center justify-center gap-2 px-4 py-1 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-900 bg-white/90 border border-amber-400/70 rounded-full cursor-default select-none shadow-[0_0_12px_rgba(245,158,11,0.25)]"
-              animate={{
-                y: [0, -3, 0, 3, 0],
-                boxShadow: [
-                  '0 0 10px rgba(245,158,11,0.25), 0 1px 6px rgba(217,119,6,0.15)',
-                  '0 0 18px rgba(245,158,11,0.45), 0 3px 10px rgba(217,119,6,0.25)',
-                  '0 0 10px rgba(245,158,11,0.25), 0 1px 6px rgba(217,119,6,0.15)',
-                ]
-              }}
-              transition={{
-                y: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' },
-                boxShadow: { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }
-              }}
-              whileHover={{
-                scale: 1.04,
-                boxShadow: '0 0 22px rgba(245,158,11,0.55), 0 3px 12px rgba(217,119,6,0.30)',
-                transition: { duration: 0.28, ease: 'easeOut' }
-              }}
-            >
-              <span className="font-serif italic"><span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence</span>
-            </motion.div>
+            <div className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-1.5 mb-3 text-xs md:text-sm font-semibold tracking-wide text-amber-950 bg-white/95 border border-amber-400/80 rounded-full cursor-default select-none shadow-[0_2px_16px_rgba(245,158,11,0.30)] transition-all">
+              {/* Left Paddy / Wheat Stalk Icon */}
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21C12 21 12 11 12 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <path d="M12 3.5C10 2 8 3.5 8 6C10 6 12 5 12 3.5Z" />
+                <path d="M12 7C9.5 5.5 7 7 7 9.5C9.5 9.5 12 8.5 12 7Z" />
+                <path d="M12 10.5C9 9 6.5 10.5 6.5 13C9 13 12 12 12 10.5Z" />
+                <path d="M12 14C8.5 12.5 6 14 6 16.5C8.5 16.5 12 15.5 12 14Z" />
+                <path d="M12 5C14 3.5 16 5 16 7.5C14 7.5 12 6.5 12 5Z" />
+                <path d="M12 8.5C14.5 7 17 8.5 17 11C14.5 11 12 10 12 8.5Z" />
+                <path d="M12 12C15 10.5 17.5 12 17.5 14.5C15 14.5 12 13.5 12 12Z" />
+                <path d="M12 15.5C15.5 14 18 15.5 18 18C15.5 18 12 17 12 15.5Z" />
+              </svg>
+
+              <span className="font-serif italic text-amber-950">
+                <span className="not-italic font-black text-sm md:text-base text-amber-600">42</span> Years of Academic Excellence
+              </span>
+
+              {/* Right Paddy / Wheat Stalk Icon */}
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500 shrink-0 transform scale-x-[-1]" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 21C12 21 12 11 12 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <path d="M12 3.5C10 2 8 3.5 8 6C10 6 12 5 12 3.5Z" />
+                <path d="M12 7C9.5 5.5 7 7 7 9.5C9.5 9.5 12 8.5 12 7Z" />
+                <path d="M12 10.5C9 9 6.5 10.5 6.5 13C9 13 12 12 12 10.5Z" />
+                <path d="M12 14C8.5 12.5 6 14 6 16.5C8.5 16.5 12 15.5 12 14Z" />
+                <path d="M12 5C14 3.5 16 5 16 7.5C14 7.5 12 6.5 12 5Z" />
+                <path d="M12 8.5C14.5 7 17 8.5 17 11C14.5 11 12 10 12 8.5Z" />
+                <path d="M12 12C15 10.5 17.5 12 17.5 14.5C15 14.5 12 13.5 12 12Z" />
+                <path d="M12 15.5C15.5 14 18 15.5 18 18C15.5 18 12 17 12 15.5Z" />
+              </svg>
+            </div>
             {/* Title — fluid clamp() inside 1800px container, single line lg+ */}
             <div className="w-full flex justify-center mb-3">
               <h1
@@ -736,7 +745,7 @@ export default function Home() {
           <div className="w-full max-w-4xl bg-transparent mt-1 p-2 md:p-3 select-none relative z-10">
             <div className="flex flex-col items-center justify-center text-center mb-5">
               <span className="font-display text-[11px] uppercase tracking-widest font-black text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1 rounded-full">
-                Institutional Credentials
+                Recognition & Accreditation
               </span>
             </div>
 
@@ -830,7 +839,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Leadership</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Management & Founders</h2>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-white drop-shadow-md">Management & Founders</h2>
           </div>
 
           <motion.div 
@@ -864,7 +873,7 @@ export default function Home() {
           
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Curriculum Explorer</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Department Showcase</h2>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-white drop-shadow-md">Department Showcase</h2>
             <p className="text-xs text-gray-400 mt-2 max-w-sm font-semibold font-sans">Explore our individual department portals and their focused structural curricula.</p>
           </div>
 
@@ -993,7 +1002,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-gray-900">Why Join Adhiparasakthi Engineering College?</h2>
+            <h2 className="font-title text-3xl md:text-4xl font-bold text-white drop-shadow-md">Why Join Adhiparasakthi Engineering College?</h2>
           </div>
 
           <motion.div 
