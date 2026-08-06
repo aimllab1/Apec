@@ -573,7 +573,7 @@ function AppContent({ isLoading, setIsLoading }) {
               <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
                 <video 
                   ref={videoRef}
-                  src="/Videos/Background/bg_loop.mp4" 
+                  src="/Videos/Background/bg_viedo.mp4" 
                   autoPlay={true}
                   loop={true}
                   muted={true}

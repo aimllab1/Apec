@@ -686,7 +686,7 @@ export default function Home() {
                 style={{
                   fontSize: 'clamp(1.75rem, 4.2vw, 5rem)',
                   color: '#FFFFFF',
-                  textShadow: '0 0 25px rgba(245,158,11,0.75), 0 0 50px rgba(251,191,36,0.45), 0 4px 18px rgba(15,23,42,0.9)'
+                  textShadow: '0 0 25px hsla(38, 71%, 56%, 0.70), 0 0 50px rgba(251,191,36,0.45), 0 4px 18px rgba(15,23,42,0.9)'
                 }}
               >
                 Adhiparasakthi Engineering College
