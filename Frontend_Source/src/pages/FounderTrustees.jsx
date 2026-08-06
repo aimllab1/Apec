@@ -51,7 +51,7 @@ function AdminFlipCard({ name, role, desc, img, route }) {
 
   return (
     <div
-      className="w-full h-[390px] [perspective:1000px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-3xl"
+      className="w-full h-[410px] [perspective:1000px] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-3xl"
       role="button"
       tabIndex={0}
       title="View Profile"
@@ -67,34 +67,34 @@ function AdminFlipCard({ name, role, desc, img, route }) {
       >
         {/* FRONT SIDE */}
         <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-3xl border border-gray-200/80 shadow-md overflow-hidden bg-white flex flex-col justify-between">
-          <div className="w-full h-[76%] overflow-hidden bg-gray-50 flex items-center justify-center">
+          <div className="w-full h-[74%] overflow-hidden bg-gray-50 flex items-center justify-center">
             {img ? (
               <img src={img} alt={name} className="w-full h-full object-cover object-[center_12%] grayscale-[10%] hover:grayscale-0 transition-all duration-500" />
             ) : (
               <div className="w-full h-full bg-indigo-50/50 flex items-center justify-center text-indigo-400">
-                <User className="w-16 h-16 opacity-75" />
+                <User className="w-20 h-20 opacity-75" />
               </div>
             )}
           </div>
           <div className="p-5 text-left grow flex flex-col justify-center border-t border-gray-100 bg-white">
-            <h4 className="font-serif text-sm md:text-base font-bold text-gray-900 leading-snug">{name}</h4>
-            <span className="font-display text-[9px] font-extrabold text-indigo-650 uppercase tracking-widest mt-1 block">{role}</span>
+            <h4 className="font-serif text-base md:text-lg font-bold text-gray-900 leading-snug">{name}</h4>
+            <span className="font-display text-xs font-extrabold text-indigo-650 uppercase tracking-wider mt-1 block">{role}</span>
           </div>
         </div>
 
-        {/* BACK SIDE */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl border border-slate-800 shadow-xl bg-slate-950 text-white p-7 flex flex-col justify-between text-left">
+        {/* BACK SIDE: White Glassmorphism Blur Effect */}
+        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl border border-white/70 shadow-2xl bg-white/85 backdrop-blur-xl text-slate-900 p-7 flex flex-col justify-between text-left">
           <div>
-            <div className="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-5">
-              <User className="w-4 h-4 text-indigo-400" />
+            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100/80 flex items-center justify-center mb-4 shadow-sm">
+              <User className="w-6 h-6 text-indigo-650" />
             </div>
-            <h4 className="font-serif text-sm md:text-base font-bold text-white leading-snug">{name}</h4>
-            <span className="font-display text-[9px] font-extrabold text-indigo-400 uppercase tracking-widest block mb-4">{role}</span>
-            <p className="text-[11px] text-slate-350 leading-relaxed font-semibold">{desc}</p>
+            <h4 className="font-serif text-base md:text-lg font-bold text-slate-900 leading-snug mb-1">{name}</h4>
+            <span className="font-display text-xs font-extrabold text-indigo-650 uppercase tracking-wider block mb-3.5">{role}</span>
+            <p className="text-xs md:text-sm text-slate-700 leading-relaxed font-semibold">{desc}</p>
           </div>
           {/* View Profile CTA */}
-          <div className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-indigo-400 hover:text-indigo-300 transition-colors">
-            <ArrowRight className="w-3 h-3" />
+          <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-indigo-650 hover:text-indigo-800 transition-colors">
+            <ArrowRight className="w-4 h-4 text-indigo-650" />
             View Profile
           </div>
         </div>

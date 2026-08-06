@@ -592,16 +592,16 @@ function AppContent({ isLoading, setIsLoading }) {
             >
               {/* TOP HEADER + NEWS CONTAINER (Logo isolated inside this wrapper ONLY, completely above Nav Bar) */}
               <div className="relative w-full">
-                {/* PERFECT SQUARE LOGO BADGE (Covers ONLY Top Header Bar + News Ticker — 100% Square 92x92 mobile / 106x106 desktop) */}
+                {/* LOGO BADGE (Seamless, borderless, shadowless) */}
                 <Link 
                   to="/" 
-                  className="absolute left-0 top-0 h-[92px] lg:h-[106px] w-[92px] lg:w-[106px] aspect-square bg-white border-r border-b border-amber-300/80 shadow-md flex items-center justify-center p-2 z-30 rounded-br-2xl group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
+                  className="absolute left-0 top-0 bottom-0 w-[88px] sm:w-[92px] lg:w-[98px] bg-white flex items-center justify-center p-2 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
                   title="Adhiparasakthi Engineering College"
                 >
                   <img 
                     src="/Images/Logos/apec-logo.png" 
                     alt="APEC Logo" 
-                    className="w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300 drop-shadow-md" 
+                    className="w-13 h-13 sm:w-15 sm:h-15 lg:w-16 lg:h-16 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300" 
                   />
                 </Link>
                 
