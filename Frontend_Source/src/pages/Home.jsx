@@ -723,7 +723,7 @@ export default function Home() {
               </span>
             </div>
 
-            {/* 3-Column Square Box Grid — Transparent Glassmorphism with Gold Ambient Glow */}
+            {/* 3-Column Square Box Grid — Transparent Glassmorphism with Reduced Blur & Larger Images */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-5 justify-center items-center w-full">
               {/* Anna University */}
               <motion.div
@@ -738,10 +738,10 @@ export default function Home() {
                   scale: 1.06, 
                   boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/15 backdrop-blur-md border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/25 transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[65%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-18 sm:max-h-24 md:max-h-28 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
+                <div className="w-full h-[72%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-22 sm:max-h-28 md:max-h-32 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1">
                   <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
@@ -766,10 +766,10 @@ export default function Home() {
                   scale: 1.06, 
                   boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/15 backdrop-blur-md border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/25 transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[65%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-18 sm:max-h-24 md:max-h-28 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
+                <div className="w-full h-[72%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-22 sm:max-h-28 md:max-h-32 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1">
                   <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
@@ -794,10 +794,10 @@ export default function Home() {
                   scale: 1.06, 
                   boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/15 backdrop-blur-md border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/25 transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[65%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-18 sm:max-h-24 md:max-h-28 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
+                <div className="w-full h-[72%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-22 sm:max-h-28 md:max-h-32 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1">
                   <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
