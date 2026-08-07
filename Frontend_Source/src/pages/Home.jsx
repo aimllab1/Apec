@@ -715,17 +715,17 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Institutional Credentials Card — 2-Column Responsive Layout with Significantly Enlarged Images */}
-          <div className="w-full max-w-xl mx-auto bg-transparent mt-2 p-1 select-none relative z-10">
+          {/* Institutional Credentials Card — 3-Column Layout with Enlarged Anna University & NAAC Logos */}
+          <div className="w-full max-w-3xl mx-auto bg-transparent mt-2 p-1 select-none relative z-10">
             <div className="flex flex-col items-center justify-center text-center mb-4">
               <span className="font-display text-[10px] sm:text-[11px] uppercase tracking-widest font-black text-amber-300 bg-black/60 border border-amber-400/40 px-3.5 py-1 rounded-full shadow-md backdrop-blur-md">
                 Recognition & Accreditation
               </span>
             </div>
 
-            {/* 2-Column Square Box Grid */}
-            <div className="grid grid-cols-2 gap-3 sm:gap-6 md:gap-8 justify-center items-center w-full">
-              {/* Anna University */}
+            {/* 3-Column Square Box Grid */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-5 justify-center items-center w-full">
+              {/* Anna University — Enlarged Image */}
               <motion.div
                 animate={{ y: [0, -3, 0] }}
                 transition={{ 
@@ -738,44 +738,72 @@ export default function Home() {
                   scale: 1.06, 
                   boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[78%] flex items-center justify-center p-1 transition-transform duration-300 group-hover:scale-108">
-                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-28 sm:max-h-36 md:max-h-44 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
+                <div className="w-full h-[76%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
+                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-24 sm:max-h-30 md:max-h-36 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1 pb-1">
-                  <h4 className="font-title text-xs sm:text-sm md:text-base font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     Anna University
                   </h4>
-                  <p className="text-[9px] sm:text-xs md:text-sm text-slate-100 font-bold tracking-tight leading-none mt-0.5">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     Affiliated
                   </p>
                 </div>
               </motion.div>
 
-              {/* NAAC Accredited */}
+              {/* UGC Autonomous — Standard Unchanged Size */}
               <motion.div
                 animate={{ y: [0, -3, 0] }}
                 transition={{ 
                   repeat: Infinity, 
                   duration: 5, 
                   ease: 'easeInOut', 
-                  delay: 0.5 
+                  delay: 0.4 
                 }}
                 whileHover={{ 
                   scale: 1.06, 
                   boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[78%] flex items-center justify-center p-1 transition-transform duration-300 group-hover:scale-108">
-                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-28 sm:max-h-36 md:max-h-44 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
+                <div className="w-full h-[65%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
+                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-16 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1 pb-1">
-                  <h4 className="font-title text-xs sm:text-sm md:text-base font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
+                    UGC Autonomous
+                  </h4>
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
+                    10 Years Status
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* NAAC Accredited — Enlarged Image */}
+              <motion.div
+                animate={{ y: [0, -3, 0] }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 5, 
+                  ease: 'easeInOut', 
+                  delay: 0.8 
+                }}
+                whileHover={{ 
+                  scale: 1.06, 
+                  boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
+                }}
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
+              >
+                <div className="w-full h-[76%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
+                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-24 sm:max-h-30 md:max-h-36 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
+                </div>
+                <div className="mt-0 flex flex-col items-center justify-center px-1 pb-1">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     NAAC Accredited
                   </h4>
-                  <p className="text-[9px] sm:text-xs md:text-sm text-slate-100 font-bold tracking-tight leading-none mt-0.5">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     Grade 'A'
                   </p>
                 </div>
