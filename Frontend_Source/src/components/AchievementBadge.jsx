@@ -23,15 +23,15 @@ export default function AchievementBadge({
       role="status"
       aria-label={`${years} ${text}`}
     >
-      {/* ── LEFT CLASSICAL OLIVE BRANCH SHEAF ── */}
+      {/* ── LEFT VICTORIAN PALM FROND WREATH ── */}
       <div className="absolute -left-6 sm:-left-7.5 top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-transform duration-500 group-hover:-translate-x-0.5 group-hover:scale-105">
         <svg 
           className="w-7.5 h-11 sm:w-9 sm:h-13 drop-shadow-[0_0_12px_rgba(245,158,11,0.85)] drop-shadow-[0_0_20px_rgba(251,191,36,0.50)]" 
           viewBox="0 0 38 52"
         >
           <defs>
-            {/* 24k Gold Olive Branch Gradient */}
-            <linearGradient id="goldOliveTheme" x1="0%" y1="0%" x2="100%" y2="100%">
+            {/* 24k Gold Palm Frond Gradient */}
+            <linearGradient id="goldPalmTheme" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#FFF8D6" />
               <stop offset="35%" stopColor="#FFE79A" />
               <stop offset="70%" stopColor="#FBBF24" />
@@ -39,24 +39,18 @@ export default function AchievementBadge({
             </linearGradient>
           </defs>
 
-          {/* Sweeping Olive Branch Stem following capsule curve */}
+          {/* Sweeping Palm Spine following capsule curve */}
           <path d="M28 4C12 10 8 36 28 44" stroke="#78350F" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M28 4C12 10 8 36 28 44" stroke="url(#goldOliveTheme)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+          <path d="M28 4C12 10 8 36 28 44" stroke="url(#goldPalmTheme)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
           
-          {/* Smooth Curved Olive Leaves */}
-          <path d="M28 4C22 2 16 6 20 10C24 10 27 7 28 4Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M21 10.5C15 8.5 9.5 12.5 13.5 16.5C17.5 16.5 20.5 13.5 21 10.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M16 17.5C10 15.5 4.5 19.5 8.5 23.5C12.5 23.5 15.5 20.5 16 17.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M14 24.5C8 22.5 2.5 26.5 6.5 30.5C10.5 30.5 13.5 27.5 14 24.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M15.5 31.5C9.5 29.5 4 33.5 8 37.5C12 37.5 15 34.5 15.5 31.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M20 38.5C14 36.5 8.5 40.5 12.5 44.5C16.5 44.5 19.5 41.5 20 38.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-
-          {/* Subtle 24k Gold Berry Accents */}
-          <circle cx="23" cy="8" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="17" cy="14" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="12" cy="21" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="10" cy="28" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="11" cy="35" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
+          {/* Radiating Slender Palm Pinnae Leaves with Dark Outlines */}
+          <path d="M28 4C20 1 12 5 18 9C23 9 26 6.5 28 4Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M23 8.5C15 6 7 10 13 14.5C18.5 14.5 21.5 11.5 23 8.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M18 14.5C10 12 3 16 9 20.5C14.5 20.5 17.5 17.5 18 14.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M15 21.5C7 19 1 23 6.5 27.5C12 27.5 14.5 24.5 15 21.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M14.5 28.5C6.5 26 0.5 30 6 34.5C11.5 34.5 14 31.5 14.5 28.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M16.5 35.5C8.5 33 2.5 37 8 41.5C13.5 41.5 16 38.5 16.5 35.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M21 41.5C13.5 39.5 8 43.5 13.5 47.5C18.5 47.5 20.5 44.5 21 41.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
         </svg>
       </div>
 
@@ -77,27 +71,22 @@ export default function AchievementBadge({
         </div>
       </div>
 
-      {/* ── RIGHT CLASSICAL OLIVE BRANCH SHEAF ── */}
+      {/* ── RIGHT VICTORIAN PALM FROND WREATH ── */}
       <div className="absolute -right-6 sm:-right-7.5 top-1/2 -translate-y-1/2 pointer-events-none z-20 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:scale-105">
         <svg 
           className="w-7.5 h-11 sm:w-9 sm:h-13 drop-shadow-[0_0_12px_rgba(245,158,11,0.85)] drop-shadow-[0_0_20px_rgba(251,191,36,0.50)] transform scale-x-[-1]" 
           viewBox="0 0 38 52"
         >
           <path d="M28 4C12 10 8 36 28 44" stroke="#78350F" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M28 4C12 10 8 36 28 44" stroke="url(#goldOliveTheme)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+          <path d="M28 4C12 10 8 36 28 44" stroke="url(#goldPalmTheme)" strokeWidth="1.8" strokeLinecap="round" fill="none" />
           
-          <path d="M28 4C22 2 16 6 20 10C24 10 27 7 28 4Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M21 10.5C15 8.5 9.5 12.5 13.5 16.5C17.5 16.5 20.5 13.5 21 10.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M16 17.5C10 15.5 4.5 19.5 8.5 23.5C12.5 23.5 15.5 20.5 16 17.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M14 24.5C8 22.5 2.5 26.5 6.5 30.5C10.5 30.5 13.5 27.5 14 24.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M15.5 31.5C9.5 29.5 4 33.5 8 37.5C12 37.5 15 34.5 15.5 31.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-          <path d="M20 38.5C14 36.5 8.5 40.5 12.5 44.5C16.5 44.5 19.5 41.5 20 38.5Z" fill="url(#goldOliveTheme)" stroke="#78350F" strokeWidth="0.8" />
-
-          <circle cx="23" cy="8" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="17" cy="14" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="12" cy="21" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="10" cy="28" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
-          <circle cx="11" cy="35" r="2.2" fill="#FFE79A" stroke="#78350F" strokeWidth="0.6" />
+          <path d="M28 4C20 1 12 5 18 9C23 9 26 6.5 28 4Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M23 8.5C15 6 7 10 13 14.5C18.5 14.5 21.5 11.5 23 8.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M18 14.5C10 12 3 16 9 20.5C14.5 20.5 17.5 17.5 18 14.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M15 21.5C7 19 1 23 6.5 27.5C12 27.5 14.5 24.5 15 21.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M14.5 28.5C6.5 26 0.5 30 6 34.5C11.5 34.5 14 31.5 14.5 28.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M16.5 35.5C8.5 33 2.5 37 8 41.5C13.5 41.5 16 38.5 16.5 35.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
+          <path d="M21 41.5C13.5 39.5 8 43.5 13.5 47.5C18.5 47.5 20.5 44.5 21 41.5Z" fill="url(#goldPalmTheme)" stroke="#78350F" strokeWidth="0.8" />
         </svg>
       </div>
     </div>

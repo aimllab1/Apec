@@ -260,6 +260,13 @@ export default function AdminPortal() {
                 </div>
 
                 <div className="flex flex-wrap gap-3">
+                  <a 
+                    href="/editor"
+                    className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-md transition-all cursor-pointer"
+                  >
+                    Manage HOD Portals & Editor
+                  </a>
+
                   <button 
                     onClick={handleExportCSV}
                     disabled={inquiries.length === 0}

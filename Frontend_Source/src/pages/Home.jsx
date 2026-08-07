@@ -184,29 +184,29 @@ function LeadershipCard({ name, role, desc, img }) {
         className="relative w-full h-full [transform-style:preserve-3d] transition-all duration-700"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
       >
-        {/* FRONT SIDE: Portrait image and Title letters overlay */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-3xl border border-gray-200/80 shadow-lg overflow-hidden bg-white">
+        {/* FRONT SIDE: Portrait image and Title overlay with Pure White Border + Mild Gold BoxShadow */}
+        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-3xl border-2 border-white shadow-[0_0_25px_rgba(245,158,11,0.45)] overflow-hidden bg-white">
           <img src={img} alt={name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 text-left">
-            <h4 className="font-serif text-lg md:text-xl font-bold text-white mb-1 leading-snug">{name}</h4>
-            <span className="font-display text-xs font-extrabold text-indigo-400 uppercase tracking-wider">{role}</span>
+            <h4 className="font-title text-lg md:text-xl font-bold text-white mb-1 leading-snug drop-shadow-md">{name}</h4>
+            <span className="font-display text-xs font-extrabold text-amber-300 uppercase tracking-wider">{role}</span>
           </div>
         </div>
 
-        {/* BACK SIDE: Detailed biography info card with White Glassmorphism Blur */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl border border-white/70 shadow-2xl bg-white/85 backdrop-blur-xl text-slate-900 p-7 md:p-8 flex flex-col justify-between text-left">
+        {/* BACK SIDE: Detailed biography info card with Pure White Border + Mild Gold BoxShadow */}
+        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl border-2 border-white shadow-[0_0_25px_rgba(245,158,11,0.45)] bg-white/90 backdrop-blur-xl text-slate-900 p-7 md:p-8 flex flex-col justify-between text-left">
           <div>
-            <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100/80 flex items-center justify-center mb-5 shadow-sm">
-              <User className="w-6 h-6 text-indigo-650" />
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center mb-5 shadow-sm">
+              <User className="w-6 h-6 text-amber-600" />
             </div>
-            <h4 className="font-serif text-lg md:text-xl font-bold text-slate-900 mb-1.5 leading-snug">{name}</h4>
-            <span className="font-display text-xs font-extrabold text-indigo-650 uppercase tracking-wider block mb-4">{role}</span>
+            <h4 className="font-title text-lg md:text-xl font-bold text-slate-900 mb-1.5 leading-snug">{name}</h4>
+            <span className="font-display text-xs font-extrabold text-amber-600 uppercase tracking-wider block mb-4">{role}</span>
             <p className="text-sm text-slate-700 leading-relaxed font-semibold">{desc}</p>
           </div>
           
           <div className="pt-4 border-t border-slate-200/80">
-            <Link to="/about" className="inline-flex items-center gap-2 text-xs md:text-sm font-extrabold text-indigo-650 hover:text-indigo-800 hover:gap-3 transition-all">
-              Read Biography <ArrowRight className="w-4 h-4 text-indigo-650" />
+            <Link to="/about" className="inline-flex items-center gap-2 text-xs md:text-sm font-extrabold text-amber-600 hover:text-amber-800 hover:gap-3 transition-all">
+              Read Biography <ArrowRight className="w-4 h-4 text-amber-600" />
             </Link>
           </div>
         </div>
@@ -689,12 +689,12 @@ export default function Home() {
               </h2>
             </div>
 
-            {/* Core Pillars: STUDY • SPIRITUALITY • SERVICE — Clean Pure White Text on Single Straight Line */}
+            {/* Core Pillars: STUDY • SPIRITUALITY • SERVICE — Same Cinzel Title Font as College Name */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className="flex flex-nowrap items-center justify-center gap-2 xs:gap-3 sm:gap-5 my-2.5 whitespace-nowrap max-w-full px-1 select-none"
+              className="flex flex-nowrap items-center justify-center gap-2 xs:gap-3 sm:gap-6 my-3 whitespace-nowrap max-w-full px-1 select-none"
             >
               {['STUDY', 'SPIRITUALITY', 'SERVICE'].map((word, idx) => (
                 <React.Fragment key={word}>
@@ -705,7 +705,8 @@ export default function Home() {
                     whileHover={{ scale: 1.08, y: -1 }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                    className="font-title font-black text-[10px] xs:text-xs sm:text-sm md:text-base tracking-[0.14em] xs:tracking-[0.18em] sm:tracking-[0.22em] uppercase text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] cursor-pointer hover:text-indigo-100 transition-colors"
+                    className="font-title font-black text-xs xs:text-sm sm:text-base md:text-lg tracking-[0.16em] xs:tracking-[0.20em] sm:tracking-[0.24em] uppercase text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] cursor-pointer hover:text-amber-200 transition-colors"
+                    style={{ fontFamily: "'Cinzel', 'Playfair Display', serif" }}
                   >
                     {word}
                   </motion.span>
@@ -714,18 +715,19 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Institutional Credentials Card — Single Horizontal Row with Logos */}
-          <div className="w-full max-w-4xl bg-transparent mt-1 p-2 md:p-3 select-none relative z-10">
-            <div className="flex flex-col items-center justify-center text-center mb-5">
-              <span className="font-display text-[11px] uppercase tracking-widest font-black text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1 rounded-full">
+          {/* Institutional Credentials Card — Mobile Responsive Compact Square Boxes */}
+          <div className="w-full max-w-3xl bg-transparent mt-2 p-1 select-none relative z-10">
+            <div className="flex flex-col items-center justify-center text-center mb-4">
+              <span className="font-display text-[10px] sm:text-[11px] uppercase tracking-widest font-black text-amber-300 bg-black/60 border border-amber-400/40 px-3.5 py-1 rounded-full shadow-md backdrop-blur-md">
                 Recognition & Accreditation
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch">
+            {/* 3-Column Square Box Grid — Responsive on Mobile */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-5 justify-center items-center w-full">
               {/* Anna University */}
               <motion.div
-                animate={{ y: [0, -4, 0] }}
+                animate={{ y: [0, -3, 0] }}
                 transition={{ 
                   repeat: Infinity, 
                   duration: 5, 
@@ -733,25 +735,27 @@ export default function Home() {
                   delay: 0 
                 }}
                 whileHover={{ 
-                  scale: 1.03, 
-                  boxShadow: '0 8px 20px rgba(59, 130, 246, 0.12)' 
+                  scale: 1.05, 
+                  boxShadow: '0 0 25px rgba(245, 158, 11, 0.45)' 
                 }}
-                className="flex flex-col items-center justify-center p-4 sm:p-5 text-center group cursor-pointer bg-indigo-50/40 backdrop-blur-[2px] border border-indigo-100/30 rounded-2xl shadow-md hover:bg-indigo-100/60 hover:border-indigo-300/50 transition-all duration-300"
+                className="aspect-square w-full flex flex-col items-center justify-center p-1 sm:p-1.5 text-center group cursor-pointer bg-black/50 backdrop-blur-md border-2 border-white/80 rounded-2xl shadow-[0_0_18px_rgba(245,158,11,0.30)] hover:bg-black/70 hover:border-white transition-all duration-300 overflow-hidden"
               >
-                <div className="w-40 h-24 flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-105">
-                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-full h-full object-contain drop-shadow-md" />
+                <div className="w-full h-1/2 flex items-center justify-center transition-transform duration-300 group-hover:scale-108">
+                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-14 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]" />
                 </div>
-                <h4 className="font-title text-sm sm:text-base font-bold text-gray-900 mb-1 group-hover:text-indigo-650 transition-colors duration-300">
-                  Anna University
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-900 font-extrabold tracking-tight">
-                  Affiliated to Anna University
-                </p>
+                <div className="mt-1 flex flex-col items-center justify-center">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                    Anna University
+                  </h4>
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-200 font-bold tracking-tight mt-0.5 leading-tight">
+                    Affiliated
+                  </p>
+                </div>
               </motion.div>
 
               {/* UGC Autonomous */}
               <motion.div
-                animate={{ y: [0, -4, 0] }}
+                animate={{ y: [0, -3, 0] }}
                 transition={{ 
                   repeat: Infinity, 
                   duration: 5, 
@@ -759,25 +763,27 @@ export default function Home() {
                   delay: 0.4 
                 }}
                 whileHover={{ 
-                  scale: 1.03, 
-                  boxShadow: '0 8px 20px rgba(59, 130, 246, 0.12)' 
+                  scale: 1.05, 
+                  boxShadow: '0 0 25px rgba(245, 158, 11, 0.45)' 
                 }}
-                className="flex flex-col items-center justify-center p-4 sm:p-5 text-center group cursor-pointer bg-amber-50/40 backdrop-blur-[2px] border border-amber-100/30 rounded-2xl shadow-md hover:bg-amber-100/60 hover:border-amber-300/50 transition-all duration-300"
+                className="aspect-square w-full flex flex-col items-center justify-center p-1 sm:p-1.5 text-center group cursor-pointer bg-black/50 backdrop-blur-md border-2 border-white/80 rounded-2xl shadow-[0_0_18px_rgba(245,158,11,0.30)] hover:bg-black/70 hover:border-white transition-all duration-300 overflow-hidden"
               >
-                <div className="w-40 h-24 flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-105">
-                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-full h-full object-contain drop-shadow-md" />
+                <div className="w-full h-1/2 flex items-center justify-center transition-transform duration-300 group-hover:scale-108">
+                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-14 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]" />
                 </div>
-                <h4 className="font-title text-sm sm:text-base font-bold text-gray-900 mb-1 group-hover:text-amber-600 transition-colors duration-300">
-                  UGC Autonomous
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-900 font-extrabold tracking-tight">
-                  Autonomous Status (10 Years)
-                </p>
+                <div className="mt-1 flex flex-col items-center justify-center">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                    UGC Autonomous
+                  </h4>
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-200 font-bold tracking-tight mt-0.5 leading-tight">
+                    10 Years Status
+                  </p>
+                </div>
               </motion.div>
 
               {/* NAAC Accredited */}
               <motion.div
-                animate={{ y: [0, -4, 0] }}
+                animate={{ y: [0, -3, 0] }}
                 transition={{ 
                   repeat: Infinity, 
                   duration: 5, 
@@ -785,20 +791,22 @@ export default function Home() {
                   delay: 0.8 
                 }}
                 whileHover={{ 
-                  scale: 1.03, 
-                  boxShadow: '0 8px 20px rgba(59, 130, 246, 0.12)' 
+                  scale: 1.05, 
+                  boxShadow: '0 0 25px rgba(245, 158, 11, 0.45)' 
                 }}
-                className="flex flex-col items-center justify-center p-4 sm:p-5 text-center group cursor-pointer sm:col-span-2 lg:col-span-1 sm:max-w-xs sm:mx-auto lg:max-w-none w-full bg-emerald-50/40 backdrop-blur-[2px] border border-emerald-100/30 rounded-2xl shadow-md hover:bg-emerald-100/60 hover:border-emerald-300/50 transition-all duration-300"
+                className="aspect-square w-full flex flex-col items-center justify-center p-1 sm:p-1.5 text-center group cursor-pointer bg-black/50 backdrop-blur-md border-2 border-white/80 rounded-2xl shadow-[0_0_18px_rgba(245,158,11,0.30)] hover:bg-black/70 hover:border-white transition-all duration-300 overflow-hidden"
               >
-                <div className="w-40 h-24 flex items-center justify-center mb-3 transition-transform duration-300 group-hover:scale-105">
-                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-full h-full object-contain drop-shadow-md" />
+                <div className="w-full h-1/2 flex items-center justify-center transition-transform duration-300 group-hover:scale-108">
+                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-14 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]" />
                 </div>
-                <h4 className="font-title text-sm sm:text-base font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors duration-300">
-                  NAAC Accredited
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-900 font-extrabold tracking-tight">
-                  Accredited with NAAC 'A' Grade
-                </p>
+                <div className="mt-1 flex flex-col items-center justify-center">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                    NAAC Accredited
+                  </h4>
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-200 font-bold tracking-tight mt-0.5 leading-tight">
+                    Grade 'A'
+                  </p>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -1142,19 +1150,19 @@ export default function Home() {
             }
           }}
           animate={showAdModal ? "visible" : "hidden"}
-          className="relative w-full md:max-w-3.5xl bg-white border border-gray-200 rounded-t-[2.5rem] md:rounded-[28px] shadow-2xl z-10 mx-auto max-h-[92vh] md:max-h-[90vh] overflow-y-auto flex flex-col md:flex-row border-t md:border"
+          className="relative w-full md:max-w-2xl bg-white border border-gray-200 rounded-t-[2.5rem] md:rounded-[28px] shadow-2xl z-10 mx-auto max-h-[92vh] md:max-h-[90vh] overflow-y-auto flex flex-col md:flex-row border-t md:border"
         >
           {/* Close Button */}
           <button
             onClick={handleCloseAdModal}
-            className="absolute top-5 right-5 md:top-6 md:right-6 z-25 p-2 bg-white/80 hover:bg-rose-100 text-gray-500 hover:text-rose-600 rounded-full shadow-sm border border-gray-200 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
+            className="absolute top-4 right-4 md:top-5 md:right-5 z-25 p-1.5 bg-white/80 hover:bg-rose-100 text-gray-500 hover:text-rose-600 rounded-full shadow-sm border border-gray-200 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
           </button>
 
           {/* ── LEFT PANEL: College Facility Slideshow (desktop only) ── */}
-          <div className="hidden md:flex flex-col w-[45%] shrink-0 relative overflow-hidden bg-slate-900 rounded-l-[28px]">
+          <div className="hidden md:flex flex-col w-[42%] shrink-0 relative overflow-hidden bg-slate-900 rounded-l-[28px]">
             {/* Background Image Slideshow */}
             <div 
               className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
@@ -1164,9 +1172,9 @@ export default function Home() {
             />
             
             {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-between p-7 text-left select-none">
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30 flex flex-col items-center justify-center p-6 text-center select-none">
               {/* College Logo */}
-              <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-xl mb-3.5">
                 <img
                   src="/Images/Logos/apec-logo.png"
                   alt="Logo"
@@ -1174,30 +1182,28 @@ export default function Home() {
                 />
               </div>
 
-              <div>
-                {/* Big Font College Name */}
-                <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight drop-shadow-lg">
-                  Adhiparasakthi Engineering College
-                </h3>
+              {/* College Name under Logo */}
+              <h3 className="font-serif text-lg sm:text-xl font-black text-white leading-tight tracking-tight drop-shadow-lg max-w-[220px]">
+                Adhiparasakthi Engineering College
+              </h3>
 
-                {/* Subtitle / Tagline */}
-                <span className="block text-[10px] sm:text-xs font-bold tracking-widest text-indigo-100 uppercase mt-2.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full border border-white/30 shadow-sm w-fit">
-                  Autonomous Institution
-                </span>
-                <p className="text-[10.5px] text-slate-100 font-semibold mt-1 drop-shadow">
-                  Affiliated to Anna University
-                </p>
-              </div>
+              {/* Subtitle / Tagline */}
+              <span className="inline-block text-[9px] sm:text-[10px] font-bold tracking-widest text-indigo-100 uppercase mt-2.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full border border-white/30 shadow-sm">
+                Autonomous Institution
+              </span>
+              <p className="text-[10px] text-slate-100 font-semibold mt-1.5 drop-shadow">
+                Affiliated to Anna University
+              </p>
             </div>
 
             {/* Facility Indicators Bottom Bar */}
-            <div className="absolute bottom-5 left-7 z-10 flex items-center gap-1.5 pt-2">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pt-2">
               {adFacilityImages.map((fac, idx) => (
                 <button
                   key={idx}
                   onClick={() => setAdFacilityIdx(idx)}
                   className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === adFacilityIdx ? 'w-6 bg-indigo-400' : 'w-1.5 bg-white/60 hover:bg-white'
+                    idx === adFacilityIdx ? 'w-5 bg-indigo-400' : 'w-1.5 bg-white/60 hover:bg-white'
                   }`}
                   title={fac.title}
                 />
@@ -1206,7 +1212,7 @@ export default function Home() {
           </div>
 
           {/* ── RIGHT PANEL: Admissions Inquiry Form ── */}
-          <div className="flex flex-col w-full md:w-[55%] p-6 md:p-8 max-h-[90vh] overflow-y-auto">
+          <div className="flex flex-col w-full md:w-[58%] p-5 md:p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-center md:justify-start mb-5">
               <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
                 {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}

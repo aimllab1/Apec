@@ -18,6 +18,7 @@ import About from './pages/About';
 import InstitutionalProfile from './pages/InstitutionalProfile';
 import FounderTrustees from './pages/FounderTrustees';
 import PrincipalDesk from './pages/PrincipalDesk';
+import Faculty from './pages/Faculty';
 import Admission from './pages/Admission';
 import Facilities from './pages/Facilities';
 import Placements from './pages/Placements';
@@ -809,23 +810,25 @@ function AppContent({ isLoading, setIsLoading }) {
                     <div className="relative group py-0">
                       <button 
                         className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
-                          isActive('/about') 
+                          isActive('/about') || isActive('/faculty')
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         About <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-                        {isActive('/about') && (
+                        {(isActive('/about') || isActive('/faculty')) && (
                           <motion.span 
                             layoutId="activeNavMark" 
                             className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
-                      <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
+                      
+                      <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu z-50">
                         <Link to="/about/profile" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Institution Profile</Link>
                         <Link to="/about/founders" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Founder & Trustees</Link>
                         <Link to="/about/principal" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Principal Desk & Contacts</Link>
+                        <Link to="/faculty" className="block px-5 py-2 text-xs font-extrabold text-[#FF8A00] hover:bg-[#FFE7CC] nav-dropdown-link transition-colors border-t border-gray-100 mt-1 pt-2">Faculty Directory</Link>
                       </div>
                     </div>
 
@@ -1211,6 +1214,26 @@ function AppContent({ isLoading, setIsLoading }) {
                             <Link to="/about/profile" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Institution Profile</Link>
                             <Link to="/about/founders" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Founder & Trustees</Link>
                             <Link to="/about/principal" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Principal Desk & Contacts</Link>
+                            <div className="pt-2 border-t border-gray-150">
+                              <Link to="/faculty" onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-[#FF8A00] flex items-center justify-between pr-2 mb-2">
+                                <span>Faculty Directory (All)</span>
+                                <span className="text-[9px] bg-amber-100 text-[#FF8A00] px-1.5 py-0.5 rounded font-black">B.E. / B.Tech</span>
+                              </Link>
+                              <div className="pl-2 space-y-1.5 text-[11px]">
+                                <span className="text-[10px] font-black uppercase text-indigo-600 block">B.E. Faculty</span>
+                                <Link to="/faculty?dept=Computer%20Science%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. CSE Faculty</Link>
+                                <Link to="/faculty?dept=Electronics%20and%20Communication%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. ECE Faculty</Link>
+                                <Link to="/faculty?dept=Electrical%20and%20Electronics%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. EEE Faculty</Link>
+                                <Link to="/faculty?dept=Department%20of%20Mechanical%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. Mechanical Faculty</Link>
+                                <Link to="/faculty?dept=Civil%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. Civil Faculty</Link>
+                                <Link to="/faculty?dept=Artificial%20Intelligence%20and%20Machine%20Learning" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. AIML Faculty</Link>
+
+                                <span className="text-[10px] font-black uppercase text-emerald-600 block pt-1.5">B.Tech. Faculty</span>
+                                <Link to="/faculty?dept=Information%20Technology" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.Tech IT Faculty</Link>
+                                <Link to="/faculty?dept=Chemical%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.Tech Chemical Faculty</Link>
+                                <Link to="/faculty?dept=Agricultural%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.Tech Agri Faculty</Link>
+                              </div>
+                            </div>
                           </div>
                         )}
                       </div>
@@ -1418,6 +1441,8 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/about/profile" element={<PageTransition><InstitutionalProfile /></PageTransition>} />
                   <Route path="/about/founders" element={<PageTransition><FounderTrustees /></PageTransition>} />
                   <Route path="/about/principal" element={<PageTransition><PrincipalDesk /></PageTransition>} />
+                  <Route path="/about/faculty" element={<PageTransition><Faculty /></PageTransition>} />
+                  <Route path="/faculty" element={<PageTransition><Faculty /></PageTransition>} />
                   <Route path="/admission" element={<PageTransition><Admission /></PageTransition>} />
                   <Route path="/facilities" element={<PageTransition><Facilities /></PageTransition>} />
                   <Route path="/placements" element={<PageTransition><Placements /></PageTransition>} />

@@ -554,7 +554,7 @@ export default function DepartmentDetail() {
                               </div>
                               
                               <span className="text-[11px] sm:text-xs md:text-sm text-indigo-650 font-extrabold uppercase tracking-wider block mb-1">
-                                {f.designation}
+                                {(/head\s+of\s+(the\s+)?department/gi.test(f.designation || '') || (f.designation || '').toLowerCase() === 'hod' || (f.designation || '').toLowerCase() === 'professor & head') ? 'Professor' : f.designation}
                               </span>
                               
                               {f.department && (

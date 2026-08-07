@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Save, AlertCircle, RefreshCw, Users, FileText, Settings, Plus, Minus, Trash2, 
   Edit3, Check, CheckCircle2, ChevronRight, UserCheck, ShieldAlert, KeyRound, Globe,
-  Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone
+  Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key
 } from 'lucide-react';
 import { db } from '../firebase';
 import { collection, doc, getDoc, getDocs, setDoc, addDoc, deleteDoc, query, where } from 'firebase/firestore';
 import departmentsData from '../data/departmentsData.json';
 import { getLoadedTourDataAsync, saveTourDataAsync } from '../data/tourData';
+import { encryptText, decryptText } from '../utils/crypto';
 
 // Google API Key from global memory rule
 const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
@@ -91,21 +92,17 @@ export default function EditorPanel() {
   const [isTraining, setIsTraining] = useState(false);
   const [trainedDocs, setTrainedDocs] = useState([]);
 
-  // 6. 360 Tour State (For Admin only)
-  const [tourPoints, setTourPoints] = useState([]);
-  const [tourScenes, setTourScenes] = useState({});
-  const [selectedPointId, setSelectedPointId] = useState(null);
-  
-  // New Scene form state
-  const [newSceneKey, setNewSceneKey] = useState('');
-  const [newSceneTitle, setNewSceneTitle] = useState('');
-  const [newScenePanorama, setNewScenePanorama] = useState('');
-  
-  // New Hotspot form state
-  const [targetSceneId, setTargetSceneId] = useState('');
-  const [newHotspotYaw, setNewHotspotYaw] = useState(0);
-  const [newHotspotPitch, setNewHotspotPitch] = useState(-18);
-  const [newHotspotText, setNewHotspotText] = useState('');
+  // 8. HOD Accounts & Department Portals State (Admin only)
+  const [hodAccounts, setHodAccounts] = useState([]);
+  const [hodSearch, setHodSearch] = useState('');
+  const [hodForm, setHodForm] = useState({
+    deptKey: '',
+    deptName: '',
+    email: '',
+    password: '',
+  });
+  const [showHodPassword, setShowHodPassword] = useState(false);
+  const [editingHodId, setEditingHodId] = useState(null);
 
   // Load tour data on mount
   useEffect(() => {
@@ -320,8 +317,87 @@ export default function EditorPanel() {
     // Load Trained Docs list if admin
     if (userRole === 'admin') {
       loadTrainedDocuments();
+      loadHodAccounts();
     }
   }, [userRole]);
+
+  // Load HOD accounts from Firestore (or fallback)
+  const loadHodAccounts = async () => {
+    try {
+      const snapshot = await getDocs(collection(db, 'users'));
+      const list = [];
+      for (const docSnap of snapshot.docs) {
+        const u = docSnap.data();
+        if (u.role && u.role.startsWith('dept_')) {
+          let clearPassword = u.password || '••••••••';
+          if (u.password) {
+            try {
+              const decrypted = await decryptText(u.password);
+              clearPassword = decrypted;
+            } catch (e) {}
+          }
+          list.push({
+            id: docSnap.id,
+            username: u.username,
+            role: u.role,
+            deptKey: u.role.replace('dept_', ''),
+            deptName: u.deptName || u.role.replace('dept_', '').toUpperCase(),
+            clearPassword: clearPassword
+          });
+        }
+      }
+      setHodAccounts(list);
+    } catch (e) {
+      console.warn("Firestore HOD accounts fetch failed:", e);
+    }
+  };
+
+  // Create or Update HOD Account
+  const handleSaveHodAccount = async (e) => {
+    e.preventDefault();
+    if (!hodForm.deptKey.trim() || !hodForm.email.trim() || !hodForm.password.trim()) {
+      alert("Please fill in Department, Email, and Password.");
+      return;
+    }
+
+    const cleanDeptKey = hodForm.deptKey.trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+    const cleanRole = `dept_${cleanDeptKey}`;
+    const cleanEmail = hodForm.email.trim().toLowerCase();
+    const docId = cleanEmail.replace(/[^a-zA-Z0-9]/g, '_');
+
+    try {
+      const encryptedPassword = await encryptText(hodForm.password.trim());
+      await setDoc(doc(db, 'users', docId), {
+        username: cleanEmail,
+        password: encryptedPassword,
+        role: cleanRole,
+        deptName: hodForm.deptName.trim() || cleanDeptKey.toUpperCase(),
+        createdAt: Date.now()
+      });
+
+      triggerSuccess(`HOD Portal created for ${cleanEmail} (${hodForm.deptName || cleanDeptKey.toUpperCase()})!`);
+      setHodForm({ deptKey: '', deptName: '', email: '', password: '' });
+      setEditingHodId(null);
+      loadHodAccounts();
+    } catch (err) {
+      console.error("Failed to save HOD portal account:", err);
+      alert("Failed to save HOD account to database: " + err.message);
+    }
+  };
+
+  // Delete HOD Account
+  const handleDeleteHodAccount = async (docId, email) => {
+    if (window.confirm(`Are you sure you want to revoke HOD portal access for ${email}?`)) {
+      try {
+        await deleteDoc(doc(db, 'users', docId));
+        triggerSuccess(`HOD portal access revoked for ${email}.`);
+        loadHodAccounts();
+      } catch (err) {
+        console.error("Failed to delete HOD account:", err);
+        alert("Failed to delete account from database.");
+      }
+    }
+  };
 
   // Load Inquiries from Firestore
   const loadInquiriesFromDB = async () => {
@@ -833,6 +909,22 @@ export default function EditorPanel() {
               >
                 <span className="flex items-center gap-2.5">
                   <Compass className="w-4 h-4" /> 360 VR Manager
+                </span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+
+            {userRole === 'admin' && (
+              <button
+                onClick={() => { setActiveTab('hod_portals'); setSelectedFacultyIdx(null); }}
+                className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                  activeTab === 'hod_portals' 
+                    ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                }`}
+              >
+                <span className="flex items-center gap-2.5">
+                  <KeyRound className="w-4 h-4 text-amber-400" /> HOD Accounts & Portals
                 </span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
@@ -1442,6 +1534,236 @@ export default function EditorPanel() {
                         )}
                       </tbody>
                     </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* HOD ACCOUNTS & DEPARTMENT PORTALS MANAGER (Admin only) */}
+            {activeTab === 'hod_portals' && userRole === 'admin' && (
+              <div className="space-y-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <KeyRound className="w-5 h-5 text-amber-500" />
+                      <h3 className="font-title text-xl font-black text-slate-900">HOD Department Portals Provisioning</h3>
+                    </div>
+                    <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                      Create & manage dedicated login credentials for Heads of Departments (HODs) to allow them to edit their own department details and faculty.
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={loadHodAccounts}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-sm"
+                  >
+                    <RefreshCw className="w-3.5 h-3.5" /> Refresh Accounts
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Left Column: Create / Edit HOD Portal Form */}
+                  <div className="lg:col-span-5 bg-gradient-to-br from-indigo-50/70 via-slate-50 to-white border border-indigo-150/80 p-6 rounded-3xl shadow-sm text-left relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-200/20 rounded-full blur-2xl pointer-events-none" />
+
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shadow-md shadow-indigo-500/20">
+                        <Plus className="w-4 h-4" />
+                      </div>
+                      <h4 className="text-sm font-black text-slate-900 uppercase tracking-wider">
+                        {editingHodId ? 'Edit HOD Account' : 'Provision New HOD Portal'}
+                      </h4>
+                    </div>
+
+                    <form onSubmit={handleSaveHodAccount} className="space-y-4">
+                      {/* Department Select / Custom input */}
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
+                          Department *
+                        </label>
+                        <select
+                          value={hodForm.deptKey}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const matched = depts.find(d => d.key === val);
+                            setHodForm({
+                              ...hodForm,
+                              deptKey: val,
+                              deptName: matched ? matched.name : val.toUpperCase(),
+                              email: hodForm.email || `${val}@apec.edu.in`
+                            });
+                          }}
+                          className="w-full text-xs px-4 py-3 bg-white border border-slate-250 rounded-xl outline-none focus:border-indigo-600 font-bold text-slate-800 shadow-sm"
+                          required
+                        >
+                          <option value="">-- Choose Department --</option>
+                          {depts.map((d, i) => (
+                            <option key={i} value={d.key}>{d.name} ({d.key.toUpperCase()})</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Custom Department Name label if needed */}
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
+                          Department Display Name
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Department of Computer Science"
+                          value={hodForm.deptName}
+                          onChange={(e) => setHodForm({ ...hodForm, deptName: e.target.value })}
+                          className="w-full text-xs px-4 py-3 bg-white border border-slate-250 rounded-xl outline-none focus:border-indigo-600 font-semibold text-slate-800"
+                        />
+                      </div>
+
+                      {/* HOD Department Email */}
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
+                          Department / HOD Email *
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="email"
+                            placeholder="e.g. cse@apec.edu.in"
+                            value={hodForm.email}
+                            onChange={(e) => setHodForm({ ...hodForm, email: e.target.value })}
+                            className="w-full text-xs pl-10 pr-4 py-3 bg-white border border-slate-250 rounded-xl outline-none focus:border-indigo-600 font-semibold text-slate-800"
+                            required
+                          />
+                          <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        </div>
+                      </div>
+
+                      {/* HOD Password */}
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">
+                          Password (AES Encrypted) *
+                        </label>
+                        <div className="relative">
+                          <input
+                            type={showHodPassword ? "text" : "password"}
+                            placeholder="Set secure password"
+                            value={hodForm.password}
+                            onChange={(e) => setHodForm({ ...hodForm, password: e.target.value })}
+                            className="w-full text-xs pl-10 pr-10 py-3 bg-white border border-slate-250 rounded-xl outline-none focus:border-indigo-600 font-semibold text-slate-800"
+                            required
+                          />
+                          <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                          <button
+                            type="button"
+                            onClick={() => setShowHodPassword(!showHodPassword)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-650"
+                          >
+                            {showHodPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Form action buttons */}
+                      <div className="pt-3 flex gap-2">
+                        <button
+                          type="submit"
+                          className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg hover:shadow-indigo-500/20 transition-all cursor-pointer flex items-center justify-center gap-2"
+                        >
+                          <KeyRound className="w-4 h-4" />
+                          {editingHodId ? 'Update Portal Credentials' : 'Create HOD Portal'}
+                        </button>
+                        {editingHodId && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingHodId(null);
+                              setHodForm({ deptKey: '', deptName: '', email: '', password: '' });
+                            }}
+                            className="px-4 py-3 bg-slate-200 text-slate-700 font-extrabold text-xs uppercase tracking-wider rounded-xl hover:bg-slate-300"
+                          >
+                            Cancel
+                          </button>
+                        )}
+                      </div>
+                    </form>
+                  </div>
+
+                  {/* Right Column: List of Existing HOD Portals */}
+                  <div className="lg:col-span-7 space-y-4 text-left">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                      <h4 className="text-xs font-black uppercase text-slate-500 tracking-wider">
+                        Active HOD Portals ({hodAccounts.length})
+                      </h4>
+                      <div className="relative w-full sm:w-64">
+                        <input
+                          type="text"
+                          placeholder="Search department / email..."
+                          value={hodSearch}
+                          onChange={(e) => setHodSearch(e.target.value)}
+                          className="w-full text-xs pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-semibold"
+                        />
+                        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+                      </div>
+                    </div>
+
+                    <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm divide-y divide-slate-100">
+                      {hodAccounts
+                        .filter(acc => 
+                          acc.username.toLowerCase().includes(hodSearch.toLowerCase()) ||
+                          acc.deptName.toLowerCase().includes(hodSearch.toLowerCase()) ||
+                          acc.deptKey.toLowerCase().includes(hodSearch.toLowerCase())
+                        )
+                        .map((acc) => (
+                          <div key={acc.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/60 transition-colors">
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2">
+                                <span className="px-2.5 py-0.5 bg-indigo-50 border border-indigo-100 text-indigo-700 font-black rounded-lg text-[10px] uppercase font-mono">
+                                  {acc.deptKey}
+                                </span>
+                                <span className="font-extrabold text-sm text-slate-900">{acc.deptName}</span>
+                              </div>
+                              <div className="text-xs text-slate-500 font-semibold flex items-center gap-1.5">
+                                <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                <span>{acc.username}</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                              <div className="bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl font-mono text-xs text-slate-700 font-bold flex items-center gap-1.5">
+                                <Lock className="w-3 h-3 text-slate-400" />
+                                <span>{acc.clearPassword}</span>
+                              </div>
+
+                              <button
+                                onClick={() => {
+                                  setEditingHodId(acc.id);
+                                  setHodForm({
+                                    deptKey: acc.deptKey,
+                                    deptName: acc.deptName,
+                                    email: acc.username,
+                                    password: acc.clearPassword
+                                  });
+                                }}
+                                className="p-2 text-indigo-650 hover:bg-indigo-50 rounded-xl transition-colors cursor-pointer"
+                                title="Edit Portal Credentials"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+
+                              <button
+                                onClick={() => handleDeleteHodAccount(acc.id, acc.username)}
+                                className="p-2 text-red-500 hover:bg-red-50 rounded-xl transition-colors cursor-pointer"
+                                title="Revoke HOD Access"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+
+                      {hodAccounts.length === 0 && (
+                        <div className="p-12 text-center text-slate-400 font-semibold text-xs">
+                          No HOD department portals configured yet. Use the form on the left to provision a portal.
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

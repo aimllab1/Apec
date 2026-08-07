@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, Search, GraduationCap, Mail, Briefcase, 
@@ -22,59 +23,82 @@ const staggerContainer = {
 const deptImageMap = {
   'Civil Engineering': '/Images/Dept/civil dept.jpg',
   'Mechanical Engineering': '/Images/Dept/mech dept.jpg',
+  'Department of Mechanical Engineering': '/Images/Dept/mech dept.jpg',
   'Electrical and Electronics Engineering': '/Images/Dept/eee dept.jpg',
   'Electronics and Communication Engineering': '/Images/Dept/ece dept.jpg',
   'Computer Science and Engineering': '/Images/Dept/cse dept.png',
+  'Computer Science Engineering': '/Images/Dept/cse dept.png',
   'Artificial Intelligence and Machine Learning': '/Images/Dept/aiml dept.jpg',
+  'Computer Science & Design (CSD)': '/Images/Dept/csd  dept.jpg',
   'Information Technology': '/Images/Dept/it dept.jpg',
   'Chemical Engineering': '/Images/Dept/chem dept.jpg',
   'Agricultural Engineering': '/Images/Dept/agri dept.jpg',
+  'Artificial Intelligence and Data Science': '/Images/Dept/ai ds dept.jpg',
+  'Computer Applications': '/Images/Dept/MCA.jpg',
   'Master of Computer Applications (MCA)': '/Images/Dept/MCA.jpg',
   'Management Studies (MBA)': '/Images/Dept/MBA.jpg',
-  'Science & Humanities': '/Images/Dept/cse dept.png'
+  'Science & Humanities': '/Images/Dept/cse dept.png',
+  'PhD - Civil Engg.': '/Images/Dept/phd.civil.jpg',
+  'PhD - Mechanical Engg.': '/Images/Dept/phd.mech.jpg',
+  'PhD - Electronics and Communication Engg.': '/Images/Dept/phd.ece.jpg',
+  'PhD - Electrical and Electronics Engg.': '/Images/Dept/phd.eee.jpg'
 };
 
-// Program Categorization (B.E., B.Tech., PG, Science & Humanities)
+// Program Categorization (B.E., B.Tech., PG, Ph.D.)
 const categoryGroups = [
   {
     title: "Undergraduate (B.E. Programmes)",
+    badge: "B.E.",
     depts: [
       "Civil Engineering",
-      "Mechanical Engineering",
+      "Department of Mechanical Engineering",
       "Electrical and Electronics Engineering",
       "Electronics and Communication Engineering",
-      "Computer Science and Engineering",
-      "Artificial Intelligence and Machine Learning"
+      "Computer Science Engineering",
+      "Artificial Intelligence and Machine Learning",
+      "Computer Science & Design (CSD)"
     ]
   },
   {
     title: "Undergraduate (B.Tech. Programmes)",
+    badge: "B.Tech",
     depts: [
       "Information Technology",
       "Chemical Engineering",
-      "Agricultural Engineering"
+      "Agricultural Engineering",
+      "Artificial Intelligence and Data Science"
     ]
   },
   {
-    title: "Postgraduate Programmes (M.E. / MCA / MBA)",
+    title: "Postgraduate & Basic Sciences",
+    badge: "PG & Sciences",
     depts: [
       "Master of Computer Applications (MCA)",
-      "Management Studies (MBA)"
+      "Management Studies (MBA)",
+      "Science & Humanities"
     ]
   },
   {
-    title: "Science & Humanities",
+    title: "Doctor of Philosophy (Ph.D. Research)",
+    badge: "Ph.D.",
     depts: [
-      "Science & Humanities"
+      "PhD - Civil Engg.",
+      "PhD - Mechanical Engg.",
+      "PhD - Electronics and Communication Engg.",
+      "PhD - Electrical and Electronics Engg."
     ]
   }
 ];
 
 // Helper to determine top-right badge (HOD, PRINCIPAL, DEAN)
-const getTopRightBadge = (member) => {
+const getTopRightBadge = (member, currentDept) => {
+  const deptStr = ((currentDept || '') + ' ' + (member?.department || '') + ' ' + (member?.department_key || '')).toLowerCase();
+  if (deptStr.includes('science') && deptStr.includes('humanities')) {
+    return null; // Explicitly remove HOD tag for Science & Humanities department
+  }
   const name = (member.name || '').toLowerCase().trim();
   if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 'PRINCIPAL';
-  if (member.isHod) return 'HOD';
+  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 'HOD';
   if (name.includes('ramasamy')) return 'DEAN';
   return null;
 };
@@ -83,7 +107,7 @@ const getTopRightBadge = (member) => {
 const getRankWeight = (member) => {
   const name = (member.name || '').toLowerCase().trim();
   if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 1;
-  if (member.isHod) return 2;
+  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 2;
   if (name.includes('ramasamy')) return 3;
   const d = (member.designation || '').toLowerCase();
   if (d.includes('professor') && !d.includes('assistant') && !d.includes('associate')) return 4;
@@ -96,16 +120,42 @@ const getRankWeight = (member) => {
 const formatDesignation = (designation, name) => {
   if (!designation) return 'Professor';
   let d = designation.trim();
+  if (/head\s+of\s+(the\s+)?department/gi.test(d) || d.toLowerCase() === 'hod' || d.toLowerCase() === 'professor & head') {
+    return 'Professor';
+  }
   d = d.replace(/Principal,?\s*/gi, '').replace(/Dean,?\s*/gi, '').replace(/HOD,?\s*/gi, '').replace(/Coordinator,?\s*/gi, '').trim();
   if (!d) return 'Professor';
   return d;
 };
 
 export default function Faculty() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDept, setSelectedDept] = useState(null); // null = Department list view
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('All');
   const [selectedFacultyMember, setSelectedFacultyMember] = useState(null); // Faculty detail modal state
+
+  // Handle URL query parameter `dept` or `key`
+  useEffect(() => {
+    const deptQuery = searchParams.get('dept') || searchParams.get('key');
+    if (deptQuery) {
+      // Find matching department name
+      const allDepts = categoryGroups.flatMap(g => g.depts);
+      const match = allDepts.find(d => 
+        d.toLowerCase().includes(deptQuery.toLowerCase()) || 
+        deptQuery.toLowerCase().includes(d.toLowerCase())
+      );
+      if (match) {
+        setSelectedDept(match);
+      } else {
+        // Check departmentsData keys
+        const deptObj = departmentsData[deptQuery.toLowerCase()];
+        if (deptObj && deptObj.name) {
+          setSelectedDept(deptObj.name);
+        }
+      }
+    }
+  }, [searchParams]);
 
   // Build Faculty Image Lookup Map from departmentsData
   const facultyImageMap = useMemo(() => {
@@ -131,49 +181,29 @@ export default function Faculty() {
   const departmentFacultyMembers = useMemo(() => {
     if (!selectedDept) return [];
     
+    const targetDeptLower = selectedDept.toLowerCase().trim();
+
     const filtered = facultyData.filter(member => {
-      const memberDept = (member.department || '').trim();
+      const memberDept = (member.department || '').trim().toLowerCase();
       const memberKey = (member.department_key || '').trim().toLowerCase();
 
-      // Strict Department Partitioning
-      if (selectedDept === 'Computer Science and Engineering') {
-        return memberDept === 'Computer Science and Engineering' || memberKey === 'cse';
-      }
-      if (selectedDept === 'Science & Humanities') {
-        return memberDept === 'Science & Humanities' || memberKey === 'sh';
-      }
-      if (selectedDept === 'Mechanical Engineering') {
-        return memberDept === 'Mechanical Engineering' || memberKey === 'mech';
-      }
-      if (selectedDept === 'Civil Engineering') {
-        return memberDept === 'Civil Engineering' || memberKey === 'civil';
-      }
-      if (selectedDept === 'Electrical and Electronics Engineering') {
-        return memberDept === 'Electrical and Electronics Engineering' || memberKey === 'eee';
-      }
-      if (selectedDept === 'Electronics and Communication Engineering') {
-        return memberDept === 'Electronics and Communication Engineering' || memberKey === 'ece';
-      }
-      if (selectedDept === 'Artificial Intelligence and Machine Learning') {
-        return memberDept === 'Artificial Intelligence and Machine Learning' || memberKey === 'aiml';
-      }
-      if (selectedDept === 'Information Technology') {
-        return memberDept === 'Information Technology' || memberKey === 'it';
-      }
-      if (selectedDept === 'Chemical Engineering') {
-        return memberDept === 'Chemical Engineering' || memberKey === 'chemical';
-      }
-      if (selectedDept === 'Agricultural Engineering') {
-        return memberDept === 'Agricultural Engineering' || memberKey === 'agri';
-      }
-      if (selectedDept === 'Master of Computer Applications (MCA)') {
-        return memberDept === 'Master of Computer Applications (MCA)' || memberKey === 'mca';
-      }
-      if (selectedDept === 'Management Studies (MBA)') {
-        return memberDept === 'Management Studies (MBA)' || memberKey === 'mba';
+      // Check MCA matching
+      if (targetDeptLower.includes('mca') || targetDeptLower.includes('computer applications')) {
+        return memberDept.includes('mca') || memberDept.includes('computer applications') || memberKey === 'mca';
       }
 
-      return memberDept.toLowerCase() === selectedDept.toLowerCase();
+      // Check S&H matching
+      if (targetDeptLower.includes('science') && targetDeptLower.includes('humanities')) {
+        return memberDept === 'science & humanities' || memberKey === 'sh';
+      }
+
+      // Standard matching logic
+      const isMatch = memberDept === targetDeptLower || 
+                      targetDeptLower.includes(memberDept) || 
+                      memberDept.includes(targetDeptLower) ||
+                      (memberKey && targetDeptLower.includes(memberKey));
+
+      return isMatch;
     }).filter(member => {
       const nameMatch = member.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                         member.qualification?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -182,7 +212,7 @@ export default function Faculty() {
       let roleMatch = true;
       if (roleFilter !== 'All') {
         if (roleFilter === 'Head of Department') {
-          roleMatch = member.isHod;
+          roleMatch = member.isHod || (member.designation && member.designation.toLowerCase().includes('head'));
         } else {
           roleMatch = member.designation?.toLowerCase().includes(roleFilter.toLowerCase());
         }
@@ -249,11 +279,16 @@ export default function Faculty() {
               return (
                 <div key={groupIdx} className="space-y-6">
                   {/* Category Header */}
-                  <div className="flex items-center gap-3 border-b border-gray-200 pb-3">
-                    <div className="w-3 h-3 rounded-full bg-[#FF8A00]" />
-                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-title tracking-tight">
-                      {group.title}
-                    </h2>
+                  <div className="flex items-center justify-between border-b border-gray-200 pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-3 h-3 rounded-full bg-[#FF8A00]" />
+                      <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-title tracking-tight">
+                        {group.title}
+                      </h2>
+                    </div>
+                    <span className="text-xs font-black bg-[#FFE7CC] text-[#FF8A00] px-3 py-1 rounded-full uppercase tracking-wider">
+                      {group.badge}
+                    </span>
                   </div>
 
                   {/* Grid of Department Cards */}
@@ -285,6 +320,12 @@ export default function Faculty() {
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                               
+                              <div className="absolute top-3 right-3">
+                                <span className="text-[10px] font-black bg-black/60 text-amber-300 backdrop-blur-md px-2.5 py-1 rounded-full border border-amber-400/30 font-mono">
+                                  {group.badge}
+                                </span>
+                              </div>
+
                               <div className="absolute bottom-3 left-4 right-4 text-white">
                                 <h3 className="font-extrabold text-base text-white group-hover:text-amber-300 transition-colors leading-snug font-title">
                                   {deptName}
@@ -384,7 +425,7 @@ export default function Faculty() {
             >
               {departmentFacultyMembers.map((member, idx) => {
                 const photoSrc = member.image || facultyImageMap[member.name?.toLowerCase().trim()] || null;
-                const topRightBadge = getTopRightBadge(member);
+                const topRightBadge = getTopRightBadge(member, selectedDept);
 
                 return (
                   <motion.div 
@@ -516,15 +557,15 @@ export default function Faculty() {
                   <div className="flex-1">
                     <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
                       <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-title">{selectedFacultyMember.name}</h2>
-                      {getTopRightBadge(selectedFacultyMember) && (
+                      {getTopRightBadge(selectedFacultyMember, selectedDept) && (
                         <span className={`text-[10px] font-black border px-2.5 py-0.5 rounded-full uppercase ${
-                          getTopRightBadge(selectedFacultyMember) === 'PRINCIPAL'
+                          getTopRightBadge(selectedFacultyMember, selectedDept) === 'PRINCIPAL'
                             ? 'bg-[#FF8A00] text-white border-amber-600'
-                            : getTopRightBadge(selectedFacultyMember) === 'HOD' 
+                            : getTopRightBadge(selectedFacultyMember, selectedDept) === 'HOD' 
                             ? 'text-amber-900 bg-amber-100 border-amber-300' 
                             : 'text-indigo-900 bg-indigo-100 border-indigo-300'
                         }`}>
-                          {getTopRightBadge(selectedFacultyMember)}
+                          {getTopRightBadge(selectedFacultyMember, selectedDept)}
                         </span>
                       )}
                     </div>
