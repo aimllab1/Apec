@@ -723,7 +723,7 @@ export default function Home() {
               </span>
             </div>
 
-            {/* 3-Column Square Box Grid — Responsive on Mobile */}
+            {/* 3-Column Square Box Grid — Transparent Glassmorphism with Gold Ambient Glow */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-5 justify-center items-center w-full">
               {/* Anna University */}
               <motion.div
@@ -735,19 +735,19 @@ export default function Home() {
                   delay: 0 
                 }}
                 whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: '0 0 25px rgba(245, 158, 11, 0.45)' 
+                  scale: 1.06, 
+                  boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-1 sm:p-1.5 text-center group cursor-pointer bg-black/50 backdrop-blur-md border-2 border-white/80 rounded-2xl shadow-[0_0_18px_rgba(245,158,11,0.30)] hover:bg-black/70 hover:border-white transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/15 backdrop-blur-md border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/25 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-1/2 flex items-center justify-center transition-transform duration-300 group-hover:scale-108">
-                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-14 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]" />
+                <div className="w-full h-[65%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-18 sm:max-h-24 md:max-h-28 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
-                <div className="mt-1 flex flex-col items-center justify-center">
-                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                <div className="mt-0 flex flex-col items-center justify-center px-1">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     Anna University
                   </h4>
-                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-200 font-bold tracking-tight mt-0.5 leading-tight">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     Affiliated
                   </p>
                 </div>
@@ -763,19 +763,19 @@ export default function Home() {
                   delay: 0.4 
                 }}
                 whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: '0 0 25px rgba(245, 158, 11, 0.45)' 
+                  scale: 1.06, 
+                  boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-1 sm:p-1.5 text-center group cursor-pointer bg-black/50 backdrop-blur-md border-2 border-white/80 rounded-2xl shadow-[0_0_18px_rgba(245,158,11,0.30)] hover:bg-black/70 hover:border-white transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/15 backdrop-blur-md border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/25 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-1/2 flex items-center justify-center transition-transform duration-300 group-hover:scale-108">
-                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-14 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]" />
+                <div className="w-full h-[65%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-18 sm:max-h-24 md:max-h-28 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
-                <div className="mt-1 flex flex-col items-center justify-center">
-                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                <div className="mt-0 flex flex-col items-center justify-center px-1">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     UGC Autonomous
                   </h4>
-                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-200 font-bold tracking-tight mt-0.5 leading-tight">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     10 Years Status
                   </p>
                 </div>
@@ -791,19 +791,19 @@ export default function Home() {
                   delay: 0.8 
                 }}
                 whileHover={{ 
-                  scale: 1.05, 
-                  boxShadow: '0 0 25px rgba(245, 158, 11, 0.45)' 
+                  scale: 1.06, 
+                  boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
                 }}
-                className="aspect-square w-full flex flex-col items-center justify-center p-1 sm:p-1.5 text-center group cursor-pointer bg-black/50 backdrop-blur-md border-2 border-white/80 rounded-2xl shadow-[0_0_18px_rgba(245,158,11,0.30)] hover:bg-black/70 hover:border-white transition-all duration-300 overflow-hidden"
+                className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/15 backdrop-blur-md border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/25 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-1/2 flex items-center justify-center transition-transform duration-300 group-hover:scale-108">
-                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-14 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.3)]" />
+                <div className="w-full h-[65%] flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+                  <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-18 sm:max-h-24 md:max-h-28 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
-                <div className="mt-1 flex flex-col items-center justify-center">
-                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-tight drop-shadow-md group-hover:text-amber-300 transition-colors">
+                <div className="mt-0 flex flex-col items-center justify-center px-1">
+                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     NAAC Accredited
                   </h4>
-                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-200 font-bold tracking-tight mt-0.5 leading-tight">
+                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     Grade 'A'
                   </p>
                 </div>
