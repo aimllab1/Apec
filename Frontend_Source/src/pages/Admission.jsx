@@ -23,24 +23,19 @@ import {
 } from 'lucide-react';
 import CutoffCalculator from './CutoffCalculator';
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
+const scrollRevealProps = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-30px" },
+  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
 };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
+const getCardScrollReveal = (idx = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-30px" },
+  transition: { duration: 0.7, delay: (idx % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }
+});
 
 export default function Admission() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -283,10 +278,10 @@ export default function Admission() {
                   {/* B.E. Programmes */}
                   <div>
                     <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.5 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                       className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                     >
                       <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
@@ -302,11 +297,11 @@ export default function Admission() {
                       {ugPrograms.filter(c => !c.name.startsWith('B.Tech')).map((course, idx) => (
                         <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                           <motion.div 
-                            initial={{ opacity: 0, y: 35 }}
+                            initial={{ opacity: 0, y: 45 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.15 }}
-                            transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
-                            whileHover={{ y: -6 }}
+                            viewport={{ once: true, amount: 0.12 }}
+                            transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                            whileHover={{ y: -5 }}
                             className="bg-white border border-gray-200 hover:border-orange-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                           >
                             {course.img && (
@@ -351,10 +346,10 @@ export default function Admission() {
                   {/* B.Tech. Programmes */}
                   <div>
                     <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.5 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                       className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                     >
                       <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
@@ -370,11 +365,11 @@ export default function Admission() {
                       {ugPrograms.filter(c => c.name.startsWith('B.Tech')).map((course, idx) => (
                         <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                           <motion.div 
-                            initial={{ opacity: 0, y: 35 }}
+                            initial={{ opacity: 0, y: 45 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.15 }}
-                            transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
-                            whileHover={{ y: -6 }}
+                            viewport={{ once: true, amount: 0.12 }}
+                            transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                            whileHover={{ y: -5 }}
                             className="bg-white border border-gray-200 hover:border-orange-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                           >
                             {course.img && (
@@ -420,10 +415,10 @@ export default function Admission() {
                 {/* PG M.E. Programs */}
                 <div>
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 35 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                     className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                   >
                     <div className="p-3 rounded-2xl bg-purple-50 text-purple-650 shadow-sm">
@@ -439,11 +434,11 @@ export default function Admission() {
                     {pgPrograms.filter(c => c.name.startsWith('M.E.')).map((course, idx) => (
                       <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          initial={{ opacity: 0, y: 35 }}
+                          initial={{ opacity: 0, y: 45 }}
                           whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.15 }}
-                          transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
-                          whileHover={{ y: -6 }}
+                          viewport={{ once: true, amount: 0.12 }}
+                          transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          whileHover={{ y: -5 }}
                           className="bg-white border border-gray-200 hover:border-purple-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
                           {course.img && (
@@ -488,10 +483,10 @@ export default function Admission() {
                 {/* PG Professional Programs */}
                 <div>
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 35 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                     className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                   >
                     <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
@@ -507,11 +502,11 @@ export default function Admission() {
                     {pgPrograms.filter(c => !c.name.startsWith('M.E.')).map((course, idx) => (
                       <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          initial={{ opacity: 0, y: 35 }}
+                          initial={{ opacity: 0, y: 45 }}
                           whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.15 }}
-                          transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
-                          whileHover={{ y: -6 }}
+                          viewport={{ once: true, amount: 0.12 }}
+                          transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          whileHover={{ y: -5 }}
                           className="bg-white border border-gray-200 hover:border-indigo-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
                           {course.img && (
@@ -556,10 +551,10 @@ export default function Admission() {
                 {/* Ph.D. Programs */}
                 <div>
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 35 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                     className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                   >
                     <div className="p-3 rounded-2xl bg-pink-50 text-pink-650 shadow-sm">
@@ -575,11 +570,11 @@ export default function Admission() {
                     {phdPrograms.map((course, idx) => (
                       <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          initial={{ opacity: 0, y: 35 }}
+                          initial={{ opacity: 0, y: 45 }}
                           whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.15 }}
-                          transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
-                          whileHover={{ y: -6 }}
+                          viewport={{ once: true, amount: 0.12 }}
+                          transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          whileHover={{ y: -5 }}
                           className="bg-white border border-gray-200 hover:border-pink-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
                           {course.img && (
@@ -623,10 +618,10 @@ export default function Admission() {
 
                 {/* PDF Link CTA for Courses */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 35 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                   className="p-6 bg-gradient-to-r from-gray-50 via-indigo-50/20 to-gray-50 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4"
                 >
                   <div className="text-left">
@@ -650,7 +645,13 @@ export default function Admission() {
               <div className="space-y-12 text-left">
                 
                 {/* Introduction & Quotas */}
-                <div className="p-6 md:p-8 bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 rounded-3xl text-white">
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="p-6 md:p-8 bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 rounded-3xl text-white shadow-md"
+                >
                   <h3 className="font-title text-xl md:text-2xl font-bold mb-4 text-[#FF8A00]">Admission Pathways</h3>
                   <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium mb-6">
                     Adhiparasakthi Engineering College holds autonomous status. All student admissions are structured under two main quotas: Government Quota (through single window counseling system of the State Government) and Management Quota (through the Self-Financing Professional Colleges Consortium).
@@ -669,10 +670,15 @@ export default function Admission() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* UG Program Procedures */}
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     UG Programmes Admission Procedure
                   </h3>
@@ -727,10 +733,15 @@ export default function Admission() {
                     </div>
 
                   </div>
-                </div>
+                </motion.div>
 
                 {/* PG Program Procedures */}
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     PG Programmes Admission Procedure
                   </h3>
@@ -768,10 +779,15 @@ export default function Admission() {
                       </tbody>
                     </table>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Intake Capacity Lists */}
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                >
                   <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     Approved Intake Capacities
                   </h3>
@@ -875,10 +891,16 @@ export default function Admission() {
                     </div>
 
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Important Notes & Guidelines (Warning Board) */}
-                <div className="p-6 border border-rose-200 bg-rose-50/20 rounded-3xl space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="p-6 border border-rose-200 bg-rose-50/20 rounded-3xl space-y-4 shadow-sm"
+                >
                   <div className="flex items-center gap-2 text-rose-700">
                     <AlertTriangle className="w-5 h-5 shrink-0" />
                     <h4 className="text-sm font-black uppercase tracking-wider">Critical Rules & Admission Policies</h4>
@@ -915,10 +937,16 @@ export default function Admission() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* College Admission Inquiry Desk */}
-                <div className="p-6 md:p-8 bg-gradient-to-r from-gray-50 via-indigo-50/10 to-gray-50 border border-gray-200 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="p-6 md:p-8 bg-gradient-to-r from-gray-50 via-indigo-50/10 to-gray-50 border border-gray-200 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
+                >
                   <div>
                     <h3 className="text-base font-black text-gray-900 mb-1 flex items-center gap-1.5">
                       <Phone className="w-5 h-5 text-indigo-650" /> College Inquiry Desk
@@ -936,7 +964,7 @@ export default function Admission() {
                       7418065336
                     </span>
                   </div>
-                </div>
+                </motion.div>
 
               </div>
             )}
@@ -946,7 +974,13 @@ export default function Admission() {
               <div className="space-y-8 text-left">
                 
                 {/* Intro & Search Filter */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-50 p-6 rounded-3xl border border-gray-150">
+                <motion.div 
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-50 p-6 rounded-3xl border border-gray-150 shadow-sm"
+                >
                   <div className="text-left">
                     <h3 className="text-base font-black text-gray-900 mb-0.5">Financial Support Schemes</h3>
                     <p className="text-xs text-gray-400 font-semibold">Showing {filteredScholarships.length} of {scholarships.length} scholarships available at APEC.</p>
@@ -961,10 +995,16 @@ export default function Admission() {
                       className="w-full pl-10 pr-4 py-2 border border-gray-200 bg-white rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-[#FF8A00] focus:border-[#FF8A00]"
                     />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Category Pills */}
-                <div className="flex flex-wrap gap-1.5 pb-2">
+                <motion.div 
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-wrap gap-1.5 pb-2"
+                >
                   {categories.map((cat, idx) => (
                     <button
                       key={idx}
@@ -978,20 +1018,18 @@ export default function Admission() {
                       {cat}
                     </button>
                   ))}
-                </div>
+                </motion.div>
 
                 {/* Scholarship Grid */}
                 {filteredScholarships.length > 0 ? (
-                  <motion.div 
-                    variants={staggerContainer}
-                    initial="hidden"
-                    animate="visible"
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                  >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {filteredScholarships.map((s, idx) => (
                       <motion.div
                         key={s.id}
-                        variants={fadeInUp}
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.12 }}
+                        transition={{ duration: 0.55, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
                         className="p-6 bg-white border border-gray-200 rounded-3xl hover:border-indigo-500 hover:shadow-lg transition-all flex flex-col justify-between"
                       >
                         <div>
@@ -1026,7 +1064,7 @@ export default function Admission() {
                         </div>
                       </motion.div>
                     ))}
-                  </motion.div>
+                  </div>
                 ) : (
                   <div className="py-12 border border-dashed border-gray-300 rounded-3xl text-center text-gray-400">
                     <p className="text-sm font-semibold">No scholarships matching your criteria were found.</p>
@@ -1040,7 +1078,13 @@ export default function Admission() {
                 )}
 
                 {/* PDF Link CTA for Scholarships */}
-                <div className="p-6 bg-gradient-to-r from-gray-50 to-indigo-50/20 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  className="p-6 bg-gradient-to-r from-gray-50 to-indigo-50/20 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm"
+                >
                   <div className="text-left">
                     <h4 className="text-sm font-bold text-gray-900 mb-1">Need the full scholarships circular?</h4>
                     <p className="text-xs text-gray-400 font-semibold">You can download the official college scholarships PDF document for your records.</p>
@@ -1053,7 +1097,7 @@ export default function Admission() {
                   >
                     <Download className="w-4 h-4" /> Download Scholarships PDF
                   </a>
-                </div>
+                </motion.div>
 
               </div>
             )}
@@ -1063,7 +1107,13 @@ export default function Admission() {
               <div className="space-y-8 text-left">
                 
                 {/* Hero card for brochure */}
-                <div className="p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-purple-50/30 border border-indigo-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-purple-50/30 border border-indigo-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
+                >
                   <div className="space-y-2">
                     <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-650 block">Official Publication</span>
                     <h3 className="font-title text-xl md:text-2xl font-bold text-gray-900">APEC Information Brochure</h3>
@@ -1090,10 +1140,16 @@ export default function Admission() {
                       <ExternalLink className="w-4 h-4" /> Open In New Tab
                     </a>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Embedded PDF Viewer */}
-                <div className="border border-gray-200 rounded-3xl overflow-hidden bg-gray-50 shadow-md">
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="border border-gray-200 rounded-3xl overflow-hidden bg-gray-50 shadow-md"
+                >
                   <div className="bg-white border-b border-gray-150 px-5 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <FileText className="w-4 h-4 text-indigo-650" />
@@ -1111,15 +1167,21 @@ export default function Admission() {
                       style={{ pointerEvents: 'auto' }}
                     />
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Compatibility notice */}
-                <div className="flex items-start gap-2.5 p-4 bg-gray-50 rounded-2xl border border-gray-200 text-xs text-gray-400 font-medium leading-normal">
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-start gap-2.5 p-4 bg-gray-50 rounded-2xl border border-gray-200 text-xs text-gray-400 font-medium leading-normal"
+                >
                   <Info className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
                   <p>
                     <strong>PDF Loading Issue?</strong> Some mobile web browsers may disable inline PDF previews. If the document does not display above, please use the <strong>Download PDF</strong> or <strong>Open in New Tab</strong> options to view it directly.
                   </p>
-                </div>
+                </motion.div>
 
               </div>
             )}

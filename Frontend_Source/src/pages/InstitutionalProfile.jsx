@@ -128,14 +128,14 @@ export default function InstitutionalProfile() {
               variants={fadeInUp}
               className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-full h-28 sm:h-32 mb-5 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-full h-36 sm:h-44 mb-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src="/Images/Logos/university_logo-rem.png" 
                   alt="Anna University Logo" 
-                  className="h-24 sm:h-28 w-auto object-contain filter drop-shadow-sm" 
+                  className="h-32 sm:h-40 w-auto max-w-full object-contain filter drop-shadow-md" 
                 />
               </div>
-              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
+              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3 inline-block">
                 Affiliation
               </span>
               <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-snug">
@@ -151,14 +151,14 @@ export default function InstitutionalProfile() {
               variants={fadeInUp}
               className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-full h-28 sm:h-32 mb-5 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-full h-36 sm:h-44 mb-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src="/Images/Logos/UGC.png" 
                   alt="UGC Autonomous Logo" 
-                  className="h-20 sm:h-22 w-auto object-contain filter drop-shadow-sm" 
+                  className="h-28 sm:h-34 w-auto max-w-full object-contain filter drop-shadow-md" 
                 />
               </div>
-              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
+              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3 inline-block">
                 UGC Autonomous
               </span>
               <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-snug">
@@ -174,14 +174,14 @@ export default function InstitutionalProfile() {
               variants={fadeInUp}
               className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-full h-28 sm:h-32 mb-5 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-full h-36 sm:h-44 mb-6 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src="/Images/Logos/Naac.png" 
                   alt="NAAC Accredited Logo" 
-                  className="h-24 sm:h-28 w-auto object-contain filter drop-shadow-sm" 
+                  className="h-32 sm:h-40 w-auto max-w-full object-contain filter drop-shadow-md" 
                 />
               </div>
-              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
+              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full mb-3 inline-block">
                 Quality Mark
               </span>
               <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-snug">

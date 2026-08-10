@@ -1093,16 +1093,53 @@ function AppContent({ isLoading, setIsLoading }) {
                       </div>
                     </div>
 
+                    {/* Alumni Cell Direct Nav Link */}
+                    <Link 
+                      to="/alumni" 
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block font-black ${
+                        isActive('/alumni') || isActive('/about/alumni') || isActive('/alumni-cell')
+                          ? 'text-[#FF8A00] bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC]'
+                      }`}
+                    >
+                      Alumni Cell
+                      {(isActive('/alumni') || isActive('/about/alumni') || isActive('/alumni-cell')) && (
+                        <motion.span 
+                          layoutId="activeNavMark" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
+                        />
+                      )}
+                    </Link>
+
+                    {/* Contact Link */}
                     <Link 
                       to="/contact" 
-                      className={`text-xs uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block ${
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block font-black ${
                         isActive('/contact') 
-                          ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
-                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
+                          ? 'text-[#FF8A00] bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC]'
                       }`}
                     >
                       Contact
                       {isActive('/contact') && (
+                        <motion.span 
+                          layoutId="activeNavMark" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
+                        />
+                      )}
+                    </Link>
+
+                    {/* Feedback Direct Nav Link */}
+                    <Link 
+                      to="/feedback" 
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block font-black ${
+                        isActive('/feedback') 
+                          ? 'text-[#FF8A00] bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC]'
+                      }`}
+                    >
+                      Feedback
+                      {isActive('/feedback') && (
                         <motion.span 
                           layoutId="activeNavMark" 
                           className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
@@ -1323,6 +1360,9 @@ function AppContent({ isLoading, setIsLoading }) {
                         )}
                       </div>
 
+                      {/* Alumni Cell Mobile Link */}
+                      <Link to="/alumni" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-700 block border-b border-gray-150 pb-2">Alumni Cell</Link>
+
                       <button 
                         onClick={() => {
                           setMobileMenuOpen(false);
@@ -1378,6 +1418,7 @@ function AppContent({ isLoading, setIsLoading }) {
                       )}
                       
                       <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-705 block border-b border-gray-150 pb-2">Contact</Link>
+                      <Link to="/feedback" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-705 block border-b border-gray-150 pb-2">Feedback</Link>
                       
                       {localStorage.getItem('is_logged_in') === 'true' && (
                         <Link to="/editor-panel" onClick={() => setMobileMenuOpen(false)} className="text-sm font-bold text-indigo-600 block border-b border-gray-150 pb-2">Editor Panel</Link>
@@ -1435,6 +1476,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/placements" element={<PageTransition><Placements /></PageTransition>} />
                   <Route path="/departments" element={<PageTransition><Departments /></PageTransition>} />
                   <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+                  <Route path="/feedback" element={<PageTransition><Contact /></PageTransition>} />
                   <Route path="/fee-payment" element={<PageTransition><FeePayment /></PageTransition>} />
                   <Route path="/r-d-cell" element={<PageTransition><RDCell /></PageTransition>} />
                   <Route path="/idp" element={<PageTransition><IDP /></PageTransition>} />
