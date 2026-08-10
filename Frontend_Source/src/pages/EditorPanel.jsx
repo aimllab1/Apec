@@ -121,6 +121,11 @@ export default function EditorPanel() {
   const [showHodPassword, setShowHodPassword] = useState(false);
   const [editingHodId, setEditingHodId] = useState(null);
 
+  // 6. 360 VR Tour Manager State
+  const [tourPoints, setTourPoints] = useState([]);
+  const [tourScenes, setTourScenes] = useState([]);
+  const [selectedPointId, setSelectedPointId] = useState(null);
+
   // Load tour data on mount
   useEffect(() => {
     const loadTour = async () => {

@@ -781,9 +781,8 @@ export default function Home() {
       {/* Leadership Section */}
       <section className="py-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Leadership</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-white drop-shadow-md">Management & Founders</h2>
+          <div className="text-center mb-16 flex flex-col items-center">
+            <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Management & Founders</h2>
           </div>
 
           <motion.div 
@@ -816,7 +815,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           
           <div className="text-center mb-16 flex flex-col items-center">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-400 bg-indigo-950/60 border border-indigo-500/30 px-3.5 py-1.5 rounded-full inline-block mb-4 shadow-sm">Curriculum Explorer</span>
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Department Showcase</h2>
             <p className="text-sm md:text-base text-slate-200/90 font-semibold font-sans max-w-2xl text-center">Explore our individual department portals and their focused curricula.</p>
           </div>
@@ -921,9 +919,8 @@ export default function Home() {
       {/* WHY JOIN APEC FEATURE GRID */}
       <section className="why-join-gallery py-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-white drop-shadow-md">Why Join Adhiparasakthi Engineering College?</h2>
+          <div className="text-center mb-16 flex flex-col items-center">
+            <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Why Join Adhiparasakthi Engineering College?</h2>
           </div>
 
           <motion.div 

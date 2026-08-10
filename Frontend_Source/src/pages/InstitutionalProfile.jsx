@@ -217,13 +217,15 @@ export default function InstitutionalProfile() {
             {/* IQAC Integration */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-indigo-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-indigo-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5 group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 shrink-0">
+              <Link to="/iqac" className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 shrink-0 hover:scale-105 transition-transform">
                 <Award className="w-6 h-6" />
-              </div>
+              </Link>
               <div className="grow text-left">
-                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Internal Quality Assurance Cell (IQAC)</h3>
+                <Link to="/iqac" className="block group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5 group-hover:text-indigo-600">Internal Quality Assurance Cell (IQAC)</h3>
+                </Link>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Drives quality audits, academic parameters, and NAAC accreditation documentation.
                 </p>
@@ -244,13 +246,15 @@ export default function InstitutionalProfile() {
             {/* Committees Integration */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-pink-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-pink-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5 group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-600 shrink-0">
+              <Link to="/committees" className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-600 shrink-0 hover:scale-105 transition-transform">
                 <Users className="w-6 h-6" />
-              </div>
+              </Link>
               <div className="grow text-left">
-                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Institutional Committees & Cells</h3>
+                <Link to="/committees" className="block group-hover:text-pink-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5 group-hover:text-pink-600">Institutional Committees & Cells</h3>
+                </Link>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Ensures student welfare, anti-ragging protection, industry tie-ups, and career development support.
                 </p>
@@ -271,13 +275,15 @@ export default function InstitutionalProfile() {
             {/* RTI Integration */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-emerald-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-emerald-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5 group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
+              <Link to="/rti" className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0 hover:scale-105 transition-transform">
                 <Scale className="w-6 h-6" />
-              </div>
+              </Link>
               <div className="grow text-left">
-                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Right to Information (RTI)</h3>
+                <Link to="/rti" className="block group-hover:text-emerald-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5 group-hover:text-emerald-600">Right to Information (RTI)</h3>
+                </Link>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Access statutory disclosures, guidelines, and guidebook publications under the RTI Act.
                 </p>
@@ -290,13 +296,15 @@ export default function InstitutionalProfile() {
             {/* Compliance & Disclosures */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-blue-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-blue-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5 group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 shrink-0">
+              <Link to="/disclosures" className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 shrink-0 hover:scale-105 transition-transform">
                 <FileText className="w-6 h-6" />
-              </div>
+              </Link>
               <div className="grow text-left">
-                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Compliance & Disclosures</h3>
+                <Link to="/disclosures" className="block group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5 group-hover:text-blue-600">Compliance & Disclosures</h3>
+                </Link>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Access audit profiles, annual accounts, UGC approval letters, and Institutional Development Plans (IDP).
                 </p>
