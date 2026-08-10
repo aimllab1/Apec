@@ -616,20 +616,20 @@ export default function Admission() {
                   {...scrollRevealProps}
                   className="p-6 md:p-8 bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 rounded-3xl text-white shadow-md"
                 >
-                  <h3 className="font-title text-xl md:text-2xl font-bold mb-4 text-[#FF8A00]">Admission Pathways</h3>
-                  <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium mb-6">
+                  <h3 className="font-title text-3xl md:text-4xl font-bold mb-4 text-[#FF8A00]">Admission Pathways</h3>
+                  <p className="text-base md:text-xl text-slate-300 leading-relaxed font-medium mb-6">
                     Adhiparasakthi Engineering College holds autonomous status. All student admissions are structured under two main quotas: Government Quota (through single window counseling system of the State Government) and Management Quota (through the Self-Financing Professional Colleges Consortium).
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="p-4 bg-white/5 border border-white/10 rounded-2xl">
-                      <span className="text-[#FF8A00] text-xs font-bold block uppercase tracking-widest mb-1">01. Government Quota</span>
-                      <p className="text-xs text-slate-400 leading-relaxed font-semibold">
+                      <span className="text-[#FF8A00] text-base font-bold block uppercase tracking-widest mb-1">01. Government Quota</span>
+                      <p className="text-base text-slate-400 leading-relaxed font-semibold">
                         Allotted based on Higher Secondary cutoff marks through single window counseling organized by Anna University, Chennai.
                       </p>
                     </div>
                     <div className="p-4 bg-white/5 border border-white/10 rounded-2xl">
-                      <span className="text-purple-400 text-xs font-bold block uppercase tracking-widest mb-1">02. Management Quota</span>
-                      <p className="text-xs text-slate-400 leading-relaxed font-semibold">
+                      <span className="text-purple-400 text-base font-bold block uppercase tracking-widest mb-1">02. Management Quota</span>
+                      <p className="text-base text-slate-400 leading-relaxed font-semibold">
                         Allotted based on merit through Consortium of Self-Financing Professional, Arts & Science Colleges in Tamil Nadu.
                       </p>
                     </div>
@@ -638,7 +638,7 @@ export default function Admission() {
 
                 {/* UG Program Procedures */}
                 <motion.div {...scrollRevealProps}>
-                  <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
+                  <h3 className="font-title text-2xl md:text-3xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     UG Programmes Admission Procedure
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -650,14 +650,14 @@ export default function Admission() {
                           <div className="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-[#FF8A00]">
                             <CheckCircle2 className="w-4 h-4" />
                           </div>
-                          <h4 className="text-sm font-black text-gray-900 uppercase tracking-wide">Government Quota</h4>
+                          <h4 className="text-xl font-black text-gray-900 uppercase tracking-wide">Government Quota</h4>
                         </div>
-                        <p className="text-xs text-gray-500 leading-relaxed font-semibold mb-6">
+                        <p className="text-base text-gray-500 leading-relaxed font-semibold mb-6">
                           Candidates seeking admission for UG Programmes Under Government Quota must apply to <strong>‘The Secretary, Engineering Admissions, Anna University, Chennai – 25.’</strong> Merit list will be prepared by Anna University. Students will be called for counseling based on this merit list, where college & branch allotment takes place.
                         </p>
                       </div>
                       <div className="pt-4 border-t border-gray-50 space-y-3">
-                        <div className="flex items-start gap-2.5 text-xs text-gray-400">
+                        <div className="flex items-start gap-2.5 text-base text-gray-400">
                           <Phone className="w-4 h-4 text-[#FF8A00] shrink-0 mt-0.5" />
                           <div>
                             <span className="block font-bold text-gray-700">Anna University Helpline:</span>
@@ -674,14 +674,14 @@ export default function Admission() {
                           <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600">
                             <CheckCircle2 className="w-4 h-4" />
                           </div>
-                          <h4 className="text-sm font-black text-gray-900 uppercase tracking-wide">Management Quota</h4>
+                          <h4 className="text-xl font-black text-gray-900 uppercase tracking-wide">Management Quota</h4>
                         </div>
-                        <p className="text-xs text-gray-500 leading-relaxed font-semibold mb-6">
+                        <p className="text-base text-gray-500 leading-relaxed font-semibold mb-6">
                           Candidates seeking admission for UG Programmes Under Management Quota must apply to <strong>‘The Secretary, Consortium of self-financing professional, Arts & Science College in Tamil Nadu, Chennai – 14.’</strong> Merit list will be prepared by the consortium. Students are allotted college branches from this merit list based on choices filled.
                         </p>
                       </div>
                       <div className="pt-4 border-t border-gray-50 space-y-3">
-                        <div className="flex items-start gap-2.5 text-xs text-gray-400">
+                        <div className="flex items-start gap-2.5 text-base text-gray-400">
                           <Phone className="w-4 h-4 text-indigo-650 shrink-0 mt-0.5" />
                           <div>
                             <span className="block font-bold text-gray-700">Consortium Helpline:</span>
@@ -696,11 +696,11 @@ export default function Admission() {
 
                 {/* PG Program Procedures */}
                 <motion.div {...scrollRevealProps}>
-                  <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
+                  <h3 className="font-title text-2xl md:text-3xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     PG Programmes Admission Procedure
                   </h3>
                   <div className="overflow-x-auto border border-gray-200 rounded-2xl shadow-sm">
-                    <table className="w-full text-left text-xs border-collapse">
+                    <table className="w-full text-left text-base border-collapse">
                       <thead>
                         <tr className="bg-gray-550/5 text-gray-700 uppercase tracking-wider font-extrabold border-b border-gray-200">
                           <th className="p-4 border-r border-gray-200">Quota</th>
@@ -712,7 +712,7 @@ export default function Admission() {
                         <tr className="hover:bg-gray-50/50">
                           <td className="p-4 border-r border-gray-200 font-bold text-gray-800">Government Quota</td>
                           <td className="p-4 border-r border-gray-200">
-                            <span className="px-2.5 py-1 rounded bg-[#FFE7CC] text-[#FF8A00] text-[10px] font-black tracking-wider uppercase">TANCET</span>
+                            <span className="px-2.5 py-1 rounded bg-[#FFE7CC] text-[#FF8A00] text-sm font-black tracking-wider uppercase">TANCET</span>
                           </td>
                           <td className="p-4 leading-relaxed">
                             <strong>For M.E. :</strong> The Secretary, TANCA, Anna University, Chennai.<br />
@@ -737,7 +737,7 @@ export default function Admission() {
 
                 {/* Intake Capacity Lists */}
                 <motion.div {...scrollRevealProps}>
-                  <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
+                  <h3 className="font-title text-2xl md:text-3xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     Approved Intake Capacities
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -745,11 +745,11 @@ export default function Admission() {
                     {/* UG Intake Table */}
                     <div className="border border-gray-200 rounded-2xl shadow-sm overflow-hidden bg-white">
                       <div className="bg-orange-50/80 px-4 py-3 border-b border-gray-200">
-                        <h4 className="text-xs font-black uppercase tracking-wider text-[#FF8A00] flex items-center gap-1.5">
+                        <h4 className="text-base font-black uppercase tracking-wider text-[#FF8A00] flex items-center gap-1.5">
                           <GraduationCap className="w-4 h-4" /> Undergraduate (B.E. / B.Tech)
                         </h4>
                       </div>
-                      <div className="divide-y divide-gray-150 text-xs font-semibold text-gray-500">
+                      <div className="divide-y divide-gray-150 text-base font-semibold text-gray-500">
                         {[
                           { dept: "CIVIL", intake: 60 },
                           { dept: "MECH", intake: 60 },
@@ -772,11 +772,11 @@ export default function Admission() {
                     {/* PG Engineering Intake */}
                     <div className="border border-gray-200 rounded-2xl shadow-sm overflow-hidden bg-white">
                       <div className="bg-purple-50/80 px-4 py-3 border-b border-gray-200">
-                        <h4 className="text-xs font-black uppercase tracking-wider text-purple-700 flex items-center gap-1.5">
+                        <h4 className="text-base font-black uppercase tracking-wider text-purple-700 flex items-center gap-1.5">
                           <GraduationCap className="w-4 h-4" /> Postgraduate M.E.
                         </h4>
                       </div>
-                      <div className="divide-y divide-gray-150 text-xs font-semibold text-gray-500">
+                      <div className="divide-y divide-gray-150 text-base font-semibold text-gray-500">
                         {[
                           { dept: "Construction Eng & Mgmt", intake: 18, key: "me-cem" },
                           { dept: "Thermal Engineering", intake: 18, key: "me-thermal" },
@@ -800,11 +800,11 @@ export default function Admission() {
                     <div className="space-y-4">
                       <div className="border border-gray-200 rounded-2xl shadow-sm overflow-hidden bg-white">
                         <div className="bg-indigo-50/80 px-4 py-3 border-b border-gray-200">
-                          <h4 className="text-xs font-black uppercase tracking-wider text-indigo-700 flex items-center gap-1.5">
+                          <h4 className="text-base font-black uppercase tracking-wider text-indigo-700 flex items-center gap-1.5">
                             <GraduationCap className="w-4 h-4" /> MBA & MCA Programmes
                           </h4>
                         </div>
-                        <div className="divide-y divide-gray-150 text-xs font-semibold text-gray-500">
+                        <div className="divide-y divide-gray-150 text-base font-semibold text-gray-500">
                           {[
                             { dept: "Master of Business Admin (MBA)", intake: 60, key: "mba" },
                             { dept: "Master of Computer Apps (MCA)", intake: 60, key: "mca" }
@@ -822,17 +822,17 @@ export default function Admission() {
                       </div>
 
                       <div className="border border-gray-200 rounded-2xl p-5 bg-pink-50/20 border-pink-100 text-left">
-                        <h4 className="text-xs font-bold text-pink-650 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                        <h4 className="text-base font-bold text-pink-650 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                           <BookOpenCheck className="w-4 h-4" /> Doctoral Programmes (Ph.D.)
                         </h4>
-                        <p className="text-xs text-gray-500 leading-relaxed font-semibold">
+                        <p className="text-base text-gray-500 leading-relaxed font-semibold">
                           Candidates seeking admission to Ph.D. research programmes are requested to review notifications published by Anna University directly on the official Anna University website.
                         </p>
                         <a 
                           href="https://www.annauniv.edu/" 
                           target="_blank" 
                           rel="noopener noreferrer" 
-                          className="mt-3.5 inline-flex items-center gap-1.5 text-[10px] font-black text-indigo-650 hover:text-indigo-700 uppercase tracking-widest transition-colors"
+                          className="mt-3.5 inline-flex items-center gap-1.5 text-xs font-black text-indigo-650 hover:text-indigo-700 uppercase tracking-widest transition-colors"
                         >
                           Visit Anna University Website <ExternalLink className="w-3.5 h-3.5" />
                         </a>
@@ -849,9 +849,9 @@ export default function Admission() {
                 >
                   <div className="flex items-center gap-2 text-rose-700">
                     <AlertTriangle className="w-5 h-5 shrink-0" />
-                    <h4 className="text-sm font-black uppercase tracking-wider">Critical Rules & Admission Policies</h4>
+                    <h4 className="text-xl font-black uppercase tracking-wider">Critical Rules & Admission Policies</h4>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-500 font-semibold leading-relaxed">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-base text-gray-500 font-semibold leading-relaxed">
                     <div className="space-y-3">
                       <div className="flex items-start gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-rose-600 mt-1.5 shrink-0" />
@@ -891,14 +891,14 @@ export default function Admission() {
                   className="p-6 md:p-8 bg-gradient-to-r from-gray-50 via-indigo-50/10 to-gray-50 border border-gray-200 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
                 >
                   <div>
-                    <h3 className="text-base font-black text-gray-900 mb-1 flex items-center gap-1.5">
+                    <h3 className="text-2xl font-black text-gray-900 mb-1 flex items-center gap-1.5">
                       <Phone className="w-5 h-5 text-indigo-650" /> College Inquiry Desk
                     </h3>
-                    <p className="text-xs text-gray-400 font-semibold leading-relaxed">
+                    <p className="text-base text-gray-400 font-semibold leading-relaxed">
                       For any questions or support regarding admissions under either quota, reach out to the college administrative officers.
                     </p>
                   </div>
-                  <div className="flex flex-wrap gap-4 shrink-0 font-mono text-sm font-black text-indigo-650 bg-white border border-gray-150 px-5 py-3 rounded-2xl shadow-sm">
+                  <div className="flex flex-wrap gap-4 shrink-0 font-mono text-xl font-black text-indigo-650 bg-white border border-gray-150 px-5 py-3 rounded-2xl shadow-sm">
                     <span className="flex items-center gap-1.5">
                       Phone: 7418064336
                     </span>
@@ -922,8 +922,8 @@ export default function Admission() {
                   className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-50 p-6 rounded-3xl border border-gray-150 shadow-sm"
                 >
                   <div className="text-left">
-                    <h3 className="text-base font-black text-gray-900 mb-0.5">Financial Support Schemes</h3>
-                    <p className="text-xs text-gray-400 font-semibold">Showing {filteredScholarships.length} of {scholarships.length} scholarships available at APEC.</p>
+                    <h3 className="text-2xl font-black text-gray-900 mb-0.5">Financial Support Schemes</h3>
+                    <p className="text-base text-gray-400 font-semibold">Showing {filteredScholarships.length} of {scholarships.length} scholarships available at APEC.</p>
                   </div>
                   <div className="relative w-full md:w-80">
                     <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -932,7 +932,7 @@ export default function Admission() {
                       placeholder="Search scholarships..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-gray-200 bg-white rounded-xl text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-[#FF8A00] focus:border-[#FF8A00]"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-200 bg-white rounded-xl text-base font-semibold focus:outline-none focus:ring-1 focus:ring-[#FF8A00] focus:border-[#FF8A00]"
                     />
                   </div>
                 </motion.div>
@@ -946,7 +946,7 @@ export default function Admission() {
                     <button
                       key={idx}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider transition-all border ${
+                      className={`px-3 py-1.5 rounded-lg text-xs uppercase font-bold tracking-wider transition-all border ${
                         selectedCategory === cat 
                           ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm' 
                           : 'bg-white border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-gray-900'
@@ -968,29 +968,29 @@ export default function Admission() {
                       >
                         <div>
                           <div className="flex justify-between items-start gap-4 mb-3">
-                            <span className="px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-650 rounded-md border border-indigo-100">
+                            <span className="px-2.5 py-1 text-xs font-bold uppercase tracking-wider bg-indigo-50 text-indigo-650 rounded-md border border-indigo-100">
                               {s.category}
                             </span>
-                            <span className="font-mono text-xs font-black text-[#FF8A00] bg-orange-50/50 border border-orange-100 px-3 py-1 rounded-full">
+                            <span className="font-mono text-base font-black text-[#FF8A00] bg-orange-50/50 border border-orange-100 px-3 py-1 rounded-full">
                               {s.amount}
                             </span>
                           </div>
                           
-                          <h4 className="font-serif text-base font-bold text-gray-900 leading-snug mb-2">
+                          <h4 className="font-serif text-2xl font-bold text-gray-900 leading-snug mb-2">
                             {s.id}. {s.title}
                           </h4>
                           
-                          <p className="text-xs text-gray-400 font-bold mb-3 leading-snug">
+                          <p className="text-base text-gray-400 font-bold mb-3 leading-snug">
                             Provider: <span className="text-gray-600">{s.provider}</span>
                           </p>
                           
-                          <p className="text-xs text-gray-500 leading-relaxed font-semibold">
+                          <p className="text-base text-gray-500 leading-relaxed font-semibold">
                             {s.description}
                           </p>
                         </div>
 
                         {/* Visual verification checkmark */}
-                        <div className="mt-4 pt-3.5 border-t border-gray-50 flex items-center justify-between text-[9px] font-bold uppercase tracking-wider text-gray-400">
+                        <div className="mt-4 pt-3.5 border-t border-gray-50 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-gray-400">
                           <span>Institutional Support</span>
                           <span className="flex items-center gap-1 text-emerald-600 font-black">
                             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> Active Application
@@ -1001,10 +1001,10 @@ export default function Admission() {
                   </div>
                 ) : (
                   <div className="py-12 border border-dashed border-gray-300 rounded-3xl text-center text-gray-400">
-                    <p className="text-sm font-semibold">No scholarships matching your criteria were found.</p>
+                    <p className="text-xl font-semibold">No scholarships matching your criteria were found.</p>
                     <button 
                       onClick={() => { setSearchTerm(''); setSelectedCategory('All'); }}
-                      className="mt-3 text-xs font-bold text-indigo-650 hover:underline"
+                      className="mt-3 text-base font-bold text-indigo-650 hover:underline"
                     >
                       Clear filters and try again
                     </button>
@@ -1017,14 +1017,14 @@ export default function Admission() {
                   className="p-6 bg-gradient-to-r from-gray-50 to-indigo-50/20 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm"
                 >
                   <div className="text-left">
-                    <h4 className="text-sm font-bold text-gray-900 mb-1">Need the full scholarships circular?</h4>
-                    <p className="text-xs text-gray-400 font-semibold">You can download the official college scholarships PDF document for your records.</p>
+                    <h4 className="text-xl font-bold text-gray-900 mb-1">Need the full scholarships circular?</h4>
+                    <p className="text-base text-gray-400 font-semibold">You can download the official college scholarships PDF document for your records.</p>
                   </div>
                   <a 
                     href="/Documents/PDFs/Admission/2. Scholarships.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm shrink-0"
+                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-base font-bold transition-all shadow-sm shrink-0"
                   >
                     <Download className="w-4 h-4" /> Download Scholarships PDF
                   </a>
@@ -1043,9 +1043,9 @@ export default function Admission() {
                   className="p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-purple-50/30 border border-indigo-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
                 >
                   <div className="space-y-2">
-                    <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-650 block">Official Publication</span>
-                    <h3 className="font-title text-xl md:text-2xl font-bold text-gray-900">APEC Information Brochure</h3>
-                    <p className="text-xs md:text-sm text-gray-500 leading-relaxed font-semibold max-w-xl">
+                    <span className="font-display text-xs uppercase tracking-widest font-black text-indigo-650 block">Official Publication</span>
+                    <h3 className="font-title text-3xl md:text-4xl font-bold text-gray-900">APEC Information Brochure</h3>
+                    <p className="text-base md:text-xl text-gray-500 leading-relaxed font-semibold max-w-xl">
                       Read about our campus guidelines, academic cells, state-of-the-art laboratory infrastructures, campus events, and placement highlights in the official college brochure.
                     </p>
                   </div>
@@ -1055,7 +1055,7 @@ export default function Admission() {
                     <a 
                       href="/Documents/PDFs/bro.pdf" 
                       download="APEC_Admission_Brochure.pdf" 
-                      className="flex items-center justify-center gap-2 px-5 py-3 bg-[#FF8A00] hover:bg-[#E07B00] text-white rounded-xl text-xs uppercase tracking-wider font-extrabold transition-all shadow-md shadow-orange-500/10 text-center"
+                      className="flex items-center justify-center gap-2 px-5 py-3 bg-[#FF8A00] hover:bg-[#E07B00] text-white rounded-xl text-base uppercase tracking-wider font-extrabold transition-all shadow-md shadow-orange-500/10 text-center"
                     >
                       <Download className="w-4 h-4" /> Download PDF (6.8 MB)
                     </a>
@@ -1063,7 +1063,7 @@ export default function Admission() {
                       href="/Documents/PDFs/bro.pdf" 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="flex items-center justify-center gap-2 px-5 py-3 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 rounded-xl text-xs uppercase tracking-wider font-extrabold transition-all text-center"
+                      className="flex items-center justify-center gap-2 px-5 py-3 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 rounded-xl text-base uppercase tracking-wider font-extrabold transition-all text-center"
                     >
                       <ExternalLink className="w-4 h-4" /> Open In New Tab
                     </a>
@@ -1078,9 +1078,9 @@ export default function Admission() {
                   <div className="bg-white border-b border-gray-150 px-5 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <FileText className="w-4 h-4 text-indigo-650" />
-                      <span className="text-xs font-black uppercase tracking-wider text-slate-800">Inline Brochure Document Preview</span>
+                      <span className="text-base font-black uppercase tracking-wider text-slate-800">Inline Brochure Document Preview</span>
                     </div>
-                    <span className="font-mono text-[10px] text-gray-400 font-bold">PDF Format</span>
+                    <span className="font-mono text-xs text-gray-400 font-bold">PDF Format</span>
                   </div>
                   
                   <div className="relative w-full h-[650px] bg-[#5c6370]">
@@ -1097,7 +1097,7 @@ export default function Admission() {
                 {/* Compatibility notice */}
                 <motion.div 
                   {...scrollRevealProps}
-                  className="flex items-start gap-2.5 p-4 bg-gray-50 rounded-2xl border border-gray-200 text-xs text-gray-400 font-medium leading-normal"
+                  className="flex items-start gap-2.5 p-4 bg-gray-50 rounded-2xl border border-gray-200 text-base text-gray-400 font-medium leading-normal"
                 >
                   <Info className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
                   <p>

@@ -60,17 +60,17 @@ export default function InstitutionalProfile() {
           {/* Vision */}
           <motion.div 
             variants={fadeInUp}
-            className="p-8 bg-slate-50/50 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+            className="p-8 sm:p-9 bg-slate-50/50 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
-              <div className="relative w-12 h-12 flex items-center justify-center mb-6">
+              <div className="relative w-14 h-14 flex items-center justify-center mb-6">
                 <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 opacity-20 blur-sm transition-all duration-300 group-hover:opacity-40" />
-                <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500/90 to-purple-600/90 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white shadow-lg">
-                  <Telescope className="w-5 h-5 text-white" />
+                <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500/90 to-purple-600/90 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white shadow-lg">
+                  <Telescope className="w-6 h-6 text-white" />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-slate-900 mb-3">Vision Statement</h3>
-              <p className="text-xs text-slate-550 leading-relaxed font-semibold">
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-4">Vision Statement</h3>
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed sm:leading-loose font-semibold">
                 To create high-quality engineers who possess a deep sense of service and spirituality, advancing the growth of society through the adoption of sustainable and appropriate technologies.
               </p>
             </div>
@@ -79,27 +79,27 @@ export default function InstitutionalProfile() {
           {/* Mission */}
           <motion.div 
             variants={fadeInUp}
-            className="p-8 bg-slate-50/50 border border-slate-200/80 rounded-3xl hover:border-pink-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+            className="p-8 sm:p-9 bg-slate-50/50 border border-slate-200/80 rounded-3xl hover:border-pink-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
           >
             <div>
-              <div className="relative w-12 h-12 flex items-center justify-center mb-6">
+              <div className="relative w-14 h-14 flex items-center justify-center mb-6">
                 <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 opacity-20 blur-sm transition-all duration-300 group-hover:opacity-40" />
-                <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-pink-500/90 to-rose-600/90 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white shadow-lg">
-                  <Rocket className="w-5 h-5 text-white" />
+                <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-pink-500/90 to-rose-600/90 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white shadow-lg">
+                  <Rocket className="w-6 h-6 text-white" />
                 </div>
               </div>
-              <h3 className="text-lg font-black text-slate-900 mb-3">Mission Objectives</h3>
-              <ul className="space-y-3.5 text-xs text-slate-550 font-semibold leading-relaxed text-left list-none">
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-4">Mission Objectives</h3>
+              <ul className="space-y-4 text-sm sm:text-base text-slate-600 font-semibold leading-relaxed text-left list-none">
                 <li className="flex items-start">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-pink-500 mt-1.5 mr-2.5 shrink-0" />
+                  <span className="inline-block w-2 h-2 rounded-full bg-pink-500 mt-2 mr-3 shrink-0" />
                   <span>Imparting high-quality education with emphasis on contemporary technologies to achieve growth across society.</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-pink-500 mt-1.5 mr-2.5 shrink-0" />
+                  <span className="inline-block w-2 h-2 rounded-full bg-pink-500 mt-2 mr-3 shrink-0" />
                   <span>Cultivating empathy, discipline, and core professional ethics.</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-pink-500 mt-1.5 mr-2.5 shrink-0" />
+                  <span className="inline-block w-2 h-2 rounded-full bg-pink-500 mt-2 mr-3 shrink-0" />
                   <span>Creating a holistic, value-centric, and spiritual campus environment.</span>
                 </li>
               </ul>

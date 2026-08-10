@@ -62,9 +62,9 @@ function ScrollToTop() {
 // 3D Hologram Torus spinning cleanly in one direction (Y-axis)
 function HologramTorus() {
   const meshRef = useRef();
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.8;
+      meshRef.current.rotation.y += delta * 0.8;
       meshRef.current.rotation.x = 0;
       meshRef.current.rotation.z = 0;
     }
@@ -82,9 +82,9 @@ function HologramTorus() {
 // White variant of HologramTorus for use inside the gradient chat bubble
 function HologramTorusWhite() {
   const meshRef = useRef();
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.8;
+      meshRef.current.rotation.y += delta * 0.8;
       meshRef.current.rotation.x = 0;
       meshRef.current.rotation.z = 0;
     }

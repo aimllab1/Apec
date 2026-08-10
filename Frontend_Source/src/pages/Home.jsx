@@ -20,10 +20,10 @@ gsap.registerPlugin(ScrollTrigger);
 function IcosahedronMesh() {
   const meshRef = useRef(null);
   
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.2;
-      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.1;
+      meshRef.current.rotation.y += delta * 0.2;
+      meshRef.current.rotation.x += delta * 0.1;
     }
   });
 
@@ -44,10 +44,10 @@ function IcosahedronMesh() {
 function DodecahedronMesh() {
   const meshRef = useRef(null);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.5;
-      meshRef.current.rotation.z = state.clock.getElapsedTime() * 0.25;
+      meshRef.current.rotation.y += delta * 0.5;
+      meshRef.current.rotation.z += delta * 0.25;
     }
   });
 
@@ -69,14 +69,13 @@ function Innovation3D() {
   const meshRef = useRef(null);
   const particlesRef = useRef(null);
   
-  useFrame((state) => {
-    const elapsed = state.clock.getElapsedTime();
+  useFrame((state, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = elapsed * 0.4;
-      meshRef.current.rotation.x = elapsed * 0.2;
+      meshRef.current.rotation.y += delta * 0.4;
+      meshRef.current.rotation.x += delta * 0.2;
     }
     if (particlesRef.current) {
-      particlesRef.current.rotation.y = -elapsed * 0.15;
+      particlesRef.current.rotation.y -= delta * 0.15;
     }
   });
 
@@ -558,7 +557,7 @@ export default function Home() {
     { key: "ece", name: "Electronics & Communication Engineering", code: "ECE", details: "Covers microelectronics, digital signal processing, embedded systems, and advanced wireless communication network architectures.", img: "/Images/Dept/ece dept.jpg" },
     { key: "eee", name: "Electrical & Electronics Engineering", code: "EEE", details: "Focuses on electrical power systems, smart grid systems, control instrumentation, and electrical machinery design.", img: "/Images/Dept/eee dept.jpg" },
     { key: "cse", name: "Computer Science & Engineering", code: "CSE", details: "Focuses on algorithms, cloud architecture, system software design, and full-stack development.", img: "/Images/Dept/cse dept.png" },
-    { key: "aiml", name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models.", img: "/Images/Dept/aiml dept.jpg" }
+    { key: "aiml", name: "CSE (Artificial Intelligence & Machine Learning)", code: "AIML", details: "Specialized pathway in neural networks, machine learning algorithms, deep learning, and predictive models.", img: "/Images/Department/aiml/askan tech IV.jpeg" }
   ];
 
 

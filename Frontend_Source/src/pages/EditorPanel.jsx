@@ -642,6 +642,63 @@ export default function EditorPanel() {
     }
   };
 
+  // Export Full CMS Backup (JSON)
+  const handleExportCmsBackup = () => {
+    const backupData = {
+      branding: JSON.parse(localStorage.getItem('apec_branding') || '{}'),
+      tickerNews: JSON.parse(localStorage.getItem('apec_ticker_news') || '[]'),
+      departments: JSON.parse(localStorage.getItem('apec_departments_data') || '{}'),
+      timestamp: new Date().toISOString()
+    };
+    const jsonStr = JSON.stringify(backupData, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `APEC_CMS_Backup_${Date.now()}.json`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    triggerSuccess('CMS Data backup exported as JSON!');
+  };
+
+  // Import Full CMS Backup (JSON)
+  const handleImportCmsBackup = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = JSON.parse(event.target.result);
+        if (data.branding) localStorage.setItem('apec_branding', JSON.stringify(data.branding));
+        if (data.tickerNews) localStorage.setItem('apec_ticker_news', JSON.stringify(data.tickerNews));
+        if (data.departments) localStorage.setItem('apec_departments_data', JSON.stringify(data.departments));
+        window.dispatchEvent(new Event('apec_storage_update'));
+        triggerSuccess('CMS Data imported and synchronized successfully!');
+        setTimeout(() => window.location.reload(), 1200);
+      } catch (err) {
+        alert('Failed to parse backup JSON file. Ensure it is a valid CMS backup.');
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  // Download updated departmentsData.json for repository overwrite
+  const handleDownloadDepartmentsJson = () => {
+    const obj = {};
+    depts.forEach(d => {
+      obj[d.key] = d;
+    });
+    const jsonStr = JSON.stringify(obj, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `departmentsData.json`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    triggerSuccess('departmentsData.json downloaded!');
+  };
+
   // Reset CMS Data to Default
   const resetToFactoryDefault = () => {
     if (window.confirm('⚠️ WARNING: This will discard ALL customized edits and revert the portal back to factory JSON files. Continue?')) {
@@ -666,7 +723,7 @@ export default function EditorPanel() {
       <div className="max-w-[1400px] mx-auto animate-fade-in">
         
         {/* Banner / Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
           <div>
             <h1 className="font-title text-3xl font-black text-slate-900 leading-tight">
               APEC Web Portal Console
@@ -675,14 +732,44 @@ export default function EditorPanel() {
               Welcome, <span className="text-indigo-600 font-extrabold">{userEmail.split('@')[0]}</span> (Role: <span className="uppercase font-bold text-slate-700">{userRole}</span>)
             </p>
           </div>
-          {userRole === 'admin' && (
+
+          <div className="flex flex-wrap items-center gap-2">
+            {/* Export Config */}
             <button 
-              onClick={resetToFactoryDefault}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+              onClick={handleExportCmsBackup}
+              title="Export all CMS settings & faculty photos as a JSON file"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
             >
-              <RefreshCw className="w-3.5 h-3.5" /> Revert All Defaults
+              <Download className="w-3.5 h-3.5 text-indigo-600" /> Export Backup
             </button>
-          )}
+
+            {/* Import Config */}
+            <label 
+              title="Import JSON backup to sync changes across devices & Network IPs"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+            >
+              <Upload className="w-3.5 h-3.5 text-emerald-600" /> Import Sync
+              <input type="file" accept="application/json" onChange={handleImportCmsBackup} className="hidden" />
+            </label>
+
+            {/* Download departmentsData.json */}
+            <button 
+              onClick={handleDownloadDepartmentsJson}
+              title="Download departmentsData.json to permanently commit to code repository"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-indigo-200 text-indigo-700 bg-indigo-50 hover:bg-indigo-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+            >
+              <Database className="w-3.5 h-3.5 text-indigo-600" /> Code Sync JSON
+            </button>
+
+            {userRole === 'admin' && (
+              <button 
+                onClick={resetToFactoryDefault}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+              >
+                <RefreshCw className="w-3.5 h-3.5" /> Revert Defaults
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Global Success Notification banner */}
