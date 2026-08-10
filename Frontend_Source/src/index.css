@@ -613,70 +613,169 @@ body {
 }
 
 /* Premium Benefit Card Gallery Styles */
-.benefit-card {
-  height: 350px;
-  border-radius: 28px;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
+.why-join-gallery .features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .why-join-gallery .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+.why-join-gallery .benefit-card {
   position: relative;
-  box-shadow: 0 25px 50px rgba(0,0,0,.25);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  height: 300px; /* Mobile height */
+  border-radius: 20px; /* Rounded corners around the entire card */
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: #07113a;
 }
 
-.benefit-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow: 0 35px 70px rgba(0,0,0,.35);
+@media (min-width: 768px) and (max-width: 1023px) {
+  .why-join-gallery .benefit-card {
+    height: 260px; /* Tablet: reduced card height */
+  }
 }
 
-.benefit-card-overlay {
+@media (min-width: 1024px) {
+  .why-join-gallery .benefit-card {
+    height: 380px; /* Desktop height */
+    border-radius: 24px;
+  }
+}
+
+.why-join-gallery .benefit-card:hover {
+  transform: translateY(-6px); /* Card moves upward by a few pixels */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Image wrapper containing slideshows or static images */
+.why-join-gallery .benefit-image-wrapper {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.2) 100%);
-  transition: opacity 0.3s ease;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
 }
 
-.benefit-card:hover .benefit-card-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.25) 100%);
+.why-join-gallery .benefit-card:hover .benefit-image-wrapper {
+  transform: scale(1.04); /* Image scales slightly */
 }
 
-.card-content {
+/* Force cover sizing and centering on all slideshow/background images */
+.why-join-gallery .benefit-image-wrapper div,
+.why-join-gallery .benefit-image-wrapper motion.div {
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Gradient overlay */
+.why-join-gallery .benefit-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.45) 45%, rgba(2, 6, 23, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bottom text content */
+.why-join-gallery .card-content {
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  padding: 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  transition: background 0.3s ease;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-top: none;
+  padding: 20px 24px;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
 }
 
-.benefit-card:hover .card-content {
-  background: rgba(255, 255, 255, 0.32);
+@media (min-width: 1024px) {
+  .why-join-gallery .card-content {
+    padding: 24px 28px;
+  }
 }
 
-.benefit-badge {
+.why-join-gallery .card-content h4 {
+  font-family: var(--font-title), serif;
+  font-size: 18px; /* Mobile font size */
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .why-join-gallery .card-content h4 {
+    font-size: 20px; /* Tablet font size */
+  }
+}
+
+@media (min-width: 1024px) {
+  .why-join-gallery .card-content h4 {
+    font-size: 24px; /* Desktop font size */
+  }
+}
+
+.why-join-gallery .card-content p {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px; /* Mobile font size */
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 768px) {
+  .why-join-gallery .card-content p {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .why-join-gallery .card-content p {
+    font-size: 16px;
+  }
+}
+
+/* Circular elegant badge */
+.why-join-gallery .benefit-badge {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 45px;
-  height: 45px;
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  font-family: monospace;
-  font-weight: 800;
-  font-size: 16px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.25), inset 0 0 8px rgba(255, 255, 255, 0.2);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+  font-size: 14px;
   z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 /* Redesigned Premium Footer Styles */

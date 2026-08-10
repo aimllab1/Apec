@@ -15,11 +15,11 @@ New-Item -ItemType Directory -Force -Path $localBuildDir
 
 # 2. Copy source files
 Write-Host "Copying source files to local drive..."
-Copy-Item -Path "$networkShareDir\package.json" -Destination $localBuildDir
-Copy-Item -Path "$networkShareDir\package-lock.json" -Destination $localBuildDir
-Copy-Item -Path "$networkShareDir\index.html" -Destination $localBuildDir
-Copy-Item -Path "$networkShareDir\Project_Settings" -Destination $localBuildDir -Recurse
-Copy-Item -Path "$networkShareDir\Frontend_Source" -Destination $localBuildDir -Recurse
+Copy-Item -Path "$networkShareDir\package.json" -Destination $localBuildDir -Force
+Copy-Item -Path "$networkShareDir\package-lock.json" -Destination $localBuildDir -Force
+Copy-Item -Path "$networkShareDir\index.html" -Destination $localBuildDir -Force
+Copy-Item -Path "$networkShareDir\Project_Settings" -Destination $localBuildDir -Recurse -Force
+Copy-Item -Path "$networkShareDir\Frontend_Source" -Destination $localBuildDir -Recurse -Force
 
 # Save current location and switch to local build dir
 Push-Location $localBuildDir

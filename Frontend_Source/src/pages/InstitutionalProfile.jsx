@@ -28,7 +28,7 @@ const staggerContainer = {
 
 export default function InstitutionalProfile() {
   return (
-    <div className="bg-white py-20 px-6 overflow-hidden">
+    <div className="bg-white py-12 md:py-20 px-4 sm:px-6 md:px-8 w-full">
       <div className="max-w-5xl mx-auto text-left">
         
         {/* Intro Hero Section */}
@@ -36,7 +36,7 @@ export default function InstitutionalProfile() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="about-intro mb-16"
+          className="about-intro mb-12 sm:mb-16 w-full"
         >
           <span className="font-display text-[10px] uppercase font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
             42-Year Academic Legacy
@@ -44,7 +44,7 @@ export default function InstitutionalProfile() {
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
             Institutional Profile
           </h1>
-          <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-3xl font-semibold">
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed sm:leading-loose w-full text-justify font-semibold">
             Adhiparasakthi Engineering College (APEC), Melmaruvathur, established in 1984, is a premier autonomous institution. Founded on the values of academic quality, research excellence, and spiritual grounding, APEC is committed to nurturing socially responsible engineers. Affiliated with Anna University and approved by AICTE, the institution has consistently maintained a reputation for progressive educational curricula.
           </p>
         </motion.div>

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, ArrowRight } from 'lucide-react';
+import { 
+  Clock, ArrowRight, GraduationCap, BookOpen, Award, Users, Search, 
+  Sparkles, Filter, CheckCircle2, ChevronRight, Layers, Cpu, Database, 
+  Zap, Flame, HardHat, ShieldCheck
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
 
@@ -18,6 +22,11 @@ const departmentImages = {
   csd: '/Images/Dept/csd  dept.jpg',
   mca: '/Images/Dept/MCA.jpg',
   mba: '/Images/Dept/MBA.jpg',
+  'me-cse': '/Images/Dept/me.cse.jpg',
+  'me-thermal': '/Images/Dept/me.thermak.jpg',
+  'me-vlsi': '/Images/Dept/m.e.vlsi.jpg',
+  'me-ped': '/Images/Dept/power-electronics-electrical-drives.jpg',
+  'me-cem': '/Images/Dept/m.e.construction engg and mangement.jpg',
   sh: '/Images/Dept/cse dept.png',
   'phd-civil': '/Images/Dept/phd.civil.jpg',
   'phd-mech': '/Images/Dept/phd.mech.jpg',
@@ -26,14 +35,26 @@ const departmentImages = {
   default: '/Images/Dept/cse dept.png'
 };
 
+const categoryBadgeStyles = {
+  ug_be: { label: 'UG Programme (B.E.)', bg: 'bg-indigo-500/10 border-indigo-500/30 text-indigo-700' },
+  ug_btech: { label: 'UG Programme (B.Tech.)', bg: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700' },
+  pg_me: { label: 'PG Programme (M.E.)', bg: 'bg-amber-500/10 border-amber-500/30 text-amber-700' },
+  pg_other: { label: 'PG Programme (MCA / MBA)', bg: 'bg-purple-500/10 border-purple-500/30 text-purple-700' },
+  phd: { label: 'Ph.D. Research Center', bg: 'bg-rose-500/10 border-rose-500/30 text-rose-700' }
+};
+
 export default function Departments() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   const sortOrder = [
-    'civil', 'mech', 'eee', 'ece', 'cse', 'aiml', 'csd',
-    'it', 'chemical', 'agri', 'aids',
-    'mca', 'mba', 'sh',
+    // Undergraduate Programs
+    'civil', 'mech', 'eee', 'ece', 'cse', 'aiml', 'csd', 'it', 'chemical', 'agri', 'aids', 'sh',
+    // Postgraduate M.E. Programs
+    'me-cse', 'me-vlsi', 'me-ped', 'me-thermal', 'me-cem',
+    // Postgraduate MCA & MBA
+    'mca', 'mba',
+    // Ph.D. Research Centers
     'phd-civil', 'phd-mech', 'phd-ece', 'phd-eee'
   ];
 
@@ -44,63 +65,90 @@ export default function Departments() {
   })();
 
   const depts = Object.values(currentDeptsData).map(dept => {
-    // Determine category based on key or description
-    const isPG = dept.key === 'mca' || dept.key === 'mba';
+    const isME = dept.key.startsWith('me-');
+    const isPGOther = dept.key === 'mca' || dept.key === 'mba';
     const isPhD = dept.key.startsWith('phd-');
-    
-    // Custom info from txt metadata
+    const isBTech = ['it', 'chemical', 'agri', 'aids'].includes(dept.key);
+
+    let category = 'ug_be';
+    if (isPhD) category = 'phd';
+    else if (isME) category = 'pg_me';
+    else if (isPGOther) category = 'pg_other';
+    else if (isBTech) category = 'ug_btech';
+
+    // Program metadata definitions
     let duration = "4 Years";
     let intake = "60 Seats";
     let focus = "";
 
-    if (dept.key.startsWith('phd-')) {
+    if (dept.key === 'me-cse') {
+      duration = "2 Years";
+      intake = "9 Seats";
+      focus = "Advanced Algorithms, Cloud Architecture, Deep Learning, Software Security";
+    } else if (dept.key === 'me-vlsi') {
+      duration = "2 Years";
+      intake = "9 Seats";
+      focus = "Analog & Digital IC Design, System-on-Chip (SoC), Low Power VLSI, EDA Tools";
+    } else if (dept.key === 'me-ped') {
+      duration = "2 Years";
+      intake = "9 Seats";
+      focus = "Smart Grids, Renewable Energy Topologies, Electric Vehicle Drives, Power Converters";
+    } else if (dept.key === 'me-thermal') {
+      duration = "2 Years";
+      intake = "9 Seats";
+      focus = "Computational Fluid Dynamics (CFD), Advanced Heat Exchangers, Sustainable Energy Systems";
+    } else if (dept.key === 'me-cem') {
+      duration = "2 Years";
+      intake = "9 Seats";
+      focus = "Construction Project Scheduling, Building Information Modeling (BIM), Contract Management";
+    } else if (isPhD) {
       duration = "3 - 5 Years";
       intake = "Based on Vacancy";
-      focus = "Research Methodologies, Specialized Domain Research, Publications & Thesis Defense";
+      focus = "Advanced Research Methodologies, High-Impact Publications, Thesis & Patent Filings";
     } else if (dept.key === 'aiml') {
       duration = "4 Years";
       intake = "30 Seats";
-      focus = "Neural Networks, Deep Learning, Python Data Science, Machine Learning";
+      focus = "Neural Networks, Deep Learning, Python Data Science, Artificial Intelligence";
     } else if (dept.key === 'cse') {
       duration = "4 Years";
       intake = "90 Seats";
-      focus = "AI, Cloud Computing, Web Technologies, Database Systems, Software Engineering";
+      focus = "AI, Cloud Computing, Full-Stack Web Development, Software Engineering";
     } else if (dept.key === 'it') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "Network Lab, Cloud Architectures, Web Essentials, Cybersecurity Systems";
+      focus = "Network Architectures, Cloud Infrastructure, Web Essentials, Cybersecurity";
     } else if (dept.key === 'chemical') {
       duration = "4 Years";
       intake = "40 Seats";
-      focus = "Process Control, Fluid Dynamics, Mass Transfer, Chemical Reaction Engineering";
+      focus = "Process Control, Fluid Dynamics, Chemical Reaction Engineering, Mass Transfer";
     } else if (dept.key === 'mech') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "CAD/CAM, Thermal Engineering, Fluid Machinery, IoT Mechatronics";
+      focus = "CAD/CAM Robotics, Thermal Engineering, Fluid Machinery, IoT Mechatronics";
     } else if (dept.key === 'civil') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "Soil Mechanics, Strength of Materials, Structural Surveying, Concrete Technology";
+      focus = "Structural Analysis, Geotechnical Engg, Concrete Tech, Surveying & GIS";
     } else if (dept.key === 'mca') {
       duration = "2 Years";
       intake = "60 Seats";
-      focus = "Full Stack Web Development, Cloud Databases, Advanced Java, Software Testing";
+      focus = "Enterprise Software Development, Cloud Databases, Mobile App Dev, Systems Testing";
     } else if (dept.key === 'eee') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "Power Systems, Control Systems, Electrical Machines, Smart Grids, Renewable Energy";
+      focus = "Power Systems, Electrical Machines, Control Systems, Smart Grid Automation";
     } else if (dept.key === 'ece') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "VLSI, Embedded Systems, Communication Systems, Signal Processing, IoT";
+      focus = "VLSI Circuits, Embedded IoT Systems, Signal Processing, Digital Communications";
     } else if (dept.key === 'mba') {
       duration = "2 Years";
       intake = "60 Seats";
-      focus = "Strategic Management, Marketing, Finance, HR Management, Entrepreneurship";
+      focus = "Strategic Management, Corporate Finance, Marketing Analytics, HR Leadership";
     } else if (dept.key === 'sh') {
       duration = "1 Year";
       intake = "N/A";
-      focus = "Engineering Mathematics, Applied Physics, Applied Chemistry, Communication Skills";
+      focus = "Engineering Mathematics, Applied Physics, Applied Chemistry, Technical English";
     } else if (dept.key === 'csd') {
       duration = "4 Years";
       intake = "60 Seats";
@@ -108,76 +156,124 @@ export default function Departments() {
     } else if (dept.key === 'agri') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "Farm Mechanization, Irrigation Engineering, Post-Harvest Tech, Food Process Eng.";
+      focus = "Farm Machinery, Precision Irrigation, Post-Harvest Tech, Food Engineering";
     } else if (dept.key === 'aids') {
       duration = "4 Years";
       intake = "60 Seats";
-      focus = "Data Mining, Big Data Analytics, Python for Data Science, Machine Learning Models";
+      focus = "Big Data Analytics, Statistical Machine Learning, Data Mining, Predictive Modeling";
     }
-
-    let category = 'be';
-    if (isPhD) category = 'phd';
-    else if (isPG) category = 'pg';
-    else if (['it', 'chemical', 'agri', 'aids'].includes(dept.key)) category = 'btech';
 
     return {
       ...dept,
       category,
       duration,
       intake,
-      focus
+      focus: focus || "Core Engineering Fundamentals & Advanced Practical Labs"
     };
-  }).sort((a, b) => sortOrder.indexOf(a.key) - sortOrder.indexOf(b.key));
-
-  const filteredDepts = depts.filter(dept => {
-    const matchesSearch = dept.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          dept.about.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          dept.focus.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    if (activeTab === 'all') return matchesSearch;
-    return dept.category === activeTab && matchesSearch;
+  }).sort((a, b) => {
+    const indexA = sortOrder.indexOf(a.key);
+    const indexB = sortOrder.indexOf(b.key);
+    return (indexA !== -1 ? indexA : 99) - (indexB !== -1 ? indexB : 99);
   });
 
-  return (
-    <div className="min-h-screen bg-slate-50 py-24 px-6 md:px-12 relative overflow-hidden text-gray-900">
-      {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-100/50 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[400px] h-[400px] bg-violet-100/50 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+  // Filter departments based on search and selected tab
+  const filteredDepts = depts.filter(dept => {
+    const matchesSearch = dept.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (dept.about && dept.about.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                          (dept.focus && dept.focus.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                          dept.key.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    if (activeTab === 'all') return matchesSearch;
+    if (activeTab === 'ug') return (dept.category === 'ug_be' || dept.category === 'ug_btech') && matchesSearch;
+    if (activeTab === 'pg_me') return dept.category === 'pg_me' && matchesSearch;
+    if (activeTab === 'pg_other') return dept.category === 'pg_other' && matchesSearch;
+    if (activeTab === 'phd') return dept.category === 'phd' && matchesSearch;
+    
+    return matchesSearch;
+  });
 
-      <div className="max-w-6xl mx-auto relative z-10">
+  // Counts for summary metrics
+  const totalCount = depts.length;
+  const ugCount = depts.filter(d => d.category === 'ug_be' || d.category === 'ug_btech').length;
+  const meCount = depts.filter(d => d.category === 'pg_me').length;
+  const pgOtherCount = depts.filter(d => d.category === 'pg_other').length;
+  const phdCount = depts.filter(d => d.category === 'phd').length;
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden text-gray-900">
+      {/* Dynamic Background Mesh */}
+      <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-gradient-to-br from-indigo-200/40 via-purple-200/30 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-amber-200/40 via-rose-200/30 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Header */}
-        <div className="mb-16 text-center md:text-left">
+        {/* Header Hero Section */}
+        <div className="mb-14 text-center max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-wider mb-6 shadow-sm"
+          >
+            <Sparkles className="w-4 h-4 text-indigo-600" />
+            <span>Academic Excellence & Research Centers</span>
+          </motion.div>
 
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-black font-title tracking-tight mb-6 text-gray-900"
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 text-slate-900 font-title"
           >
-            Academic Departments
+            Explore Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-amber-600">Academic Departments</span>
           </motion.h1>
+
           <motion.p 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-base md:text-lg text-gray-600 max-w-3xl leading-relaxed font-medium"
+            className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium mb-10"
           >
-            Explore our state-of-the-art departments, fully loaded with official curriculum, faculty profiles, publication track records, and student accomplishments.
+            Adiparasakthi Engineering College offers a wide range of Undergraduate, Master of Engineering (M.E.), Professional Postgraduate (MCA / MBA), and Ph.D. Research programs approved by AICTE, UGC Autonomous, and affiliated with Anna University.
           </motion.p>
+
+          {/* Quick Metrics Bar */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-3 rounded-2xl border border-slate-200 shadow-md max-w-3xl mx-auto"
+          >
+            <div className="p-3 text-center rounded-xl bg-slate-50 border border-slate-100">
+              <span className="block text-2xl font-black text-indigo-600">{ugCount}</span>
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">UG Degrees</span>
+            </div>
+            <div className="p-3 text-center rounded-xl bg-amber-50/60 border border-amber-100">
+              <span className="block text-2xl font-black text-amber-600">{meCount}</span>
+              <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">M.E. Programs</span>
+            </div>
+            <div className="p-3 text-center rounded-xl bg-purple-50/60 border border-purple-100">
+              <span className="block text-2xl font-black text-purple-600">{pgOtherCount}</span>
+              <span className="text-[11px] font-bold text-purple-700 uppercase tracking-wider">MCA & MBA</span>
+            </div>
+            <div className="p-3 text-center rounded-xl bg-rose-50/60 border border-rose-100">
+              <span className="block text-2xl font-black text-rose-600">{phdCount}</span>
+              <span className="text-[11px] font-bold text-rose-700 uppercase tracking-wider">Ph.D. Centers</span>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Search & Tabs Controls */}
-        <div className="flex flex-col xl:flex-row gap-6 justify-between items-center mb-12 bg-white border border-gray-200 p-6 rounded-3xl shadow-sm">
-          {/* Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 xl:flex xl:flex-row gap-2 bg-gray-50 p-1.5 rounded-2xl border border-gray-150 shrink-0 w-full xl:w-auto">
+        {/* Filter Tabs & Search Controls */}
+        <div className="flex flex-col lg:flex-row gap-4 justify-between items-center mb-10 bg-white/90 backdrop-blur-md border border-slate-200 p-4 sm:p-5 rounded-3xl shadow-sm">
+          
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap gap-2 w-full lg:w-auto">
             {[
-              { id: 'all', label: 'All Programs' },
-              { id: 'be', label: 'Undergraduate (B.E.)' },
-              { id: 'btech', label: 'Undergraduate (B.Tech.)' },
-              { id: 'pg', label: 'Postgraduate (MCA / MBA)' },
-              { id: 'phd', label: 'Doctor of Philosophy (Ph.D.)' }
+              { id: 'all', label: `All Programs (${totalCount})` },
+              { id: 'ug', label: `Undergraduate (${ugCount})` },
+              { id: 'pg_me', label: `M.E. Programs (${meCount})` },
+              { id: 'pg_other', label: `MCA / MBA (${pgOtherCount})` },
+              { id: 'phd', label: `Ph.D. Centers (${phdCount})` }
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -185,10 +281,10 @@ export default function Departments() {
                   setActiveTab(tab.id);
                   setSearchTerm('');
                 }}
-                className={`text-center py-3 px-3 text-xs md:text-sm font-bold rounded-xl transition-all cursor-pointer xl:whitespace-nowrap grow ${
+                className={`py-2.5 px-4 text-xs sm:text-sm font-extrabold rounded-xl transition-all cursor-pointer grow lg:grow-0 text-center ${
                   activeTab === tab.id 
-                    ? 'bg-indigo-650 text-white shadow-md' 
-                    : 'text-gray-600 hover:text-indigo-650 hover:bg-gray-100'
+                    ? 'bg-slate-900 text-white shadow-md' 
+                    : 'bg-slate-100/80 text-slate-600 hover:text-slate-900 hover:bg-slate-200/80'
                 }`}
               >
                 {tab.label}
@@ -196,141 +292,146 @@ export default function Departments() {
             ))}
           </div>
 
-          {/* Search bar */}
-          <div className="relative w-full xl:max-w-md">
+          {/* Search Box */}
+          <div className="relative w-full lg:w-80 shrink-0">
             <input 
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search departments, labs, focus areas..."
-              className="w-full text-sm px-5 py-3.5 pl-11 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:border-indigo-650 focus:bg-white focus:shadow-[0_0_20px_rgba(99,102,241,0.08)] transition-all font-medium text-gray-800 placeholder-gray-400"
+              placeholder="Search departments or focus areas..."
+              className="w-full text-sm py-2.5 pl-10 pr-10 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-100 transition-all font-medium text-slate-800 placeholder-slate-400"
             />
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             {searchTerm && (
               <button 
                 onClick={() => setSearchTerm('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-850 text-xs font-black cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black text-slate-400 hover:text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full w-5 h-5 flex items-center justify-center cursor-pointer transition-colors"
               >
-                Clear
+                ✕
               </button>
             )}
           </div>
         </div>
 
-        {/* Content list */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="wait">
-            <motion.div 
-              key={activeTab + searchTerm}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { 
-                  opacity: 1, 
-                  transition: { staggerChildren: 0.05 } 
-                }
-              }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:col-span-2 lg:col-span-3"
-            >
-              {filteredDepts.length === 0 ? (
-                <div className="col-span-full p-20 bg-gray-100/50 rounded-3xl border border-dashed border-gray-300 text-center flex flex-col items-center justify-center">
-                  <span className="text-gray-550 text-sm font-semibold">No departments found matching your search criteria.</span>
-                </div>
-              ) : (
-                filteredDepts.map((dept) => (
+        {/* Department Cards Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeTab + searchTerm}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          >
+            {filteredDepts.length === 0 ? (
+              <div className="col-span-full p-16 bg-white rounded-3xl border border-dashed border-slate-300 text-center flex flex-col items-center justify-center">
+                <Search className="w-12 h-12 text-slate-300 mb-4" />
+                <h3 className="text-lg font-bold text-slate-700 mb-1">No Departments Found</h3>
+                <p className="text-sm text-slate-500 max-w-md">No programs match your current search query. Try clearing the filter or searching for another keyword.</p>
+                <button
+                  onClick={() => { setActiveTab('all'); setSearchTerm(''); }}
+                  className="mt-5 px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition-colors shadow-sm"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              filteredDepts.map((dept) => {
+                const badgeInfo = categoryBadgeStyles[dept.category] || categoryBadgeStyles.ug_be;
+                const facultyCount = Array.isArray(dept.faculty) ? dept.faculty.length : 0;
+                const labCount = Array.isArray(dept.labs) ? dept.labs.length : 0;
+                const placementCount = Array.isArray(dept.placements) ? dept.placements.length : 0;
+
+                return (
                   <motion.div 
                     key={dept.key}
-                    variants={{
-                      hidden: { opacity: 0, y: 15 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }
-                    }}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    className="group bg-white border border-gray-200 rounded-3xl p-6 md:p-8 flex flex-col justify-between hover:border-indigo-300 hover:shadow-[0_15px_40px_rgba(99,102,241,0.05)] transition-all duration-300 text-left"
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    className="group bg-white border border-slate-200/90 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-indigo-400 hover:shadow-[0_20px_45px_rgba(99,102,241,0.08)] transition-all duration-300 text-left"
                   >
                     <div>
-                      {/* Department Image */}
-                      <div className="w-full h-48 rounded-2xl overflow-hidden mb-6 relative shadow-sm group">
+                      {/* Department Image Header */}
+                      <div className="w-full h-52 overflow-hidden relative bg-slate-100">
                         <img 
                           src={departmentImages[dept.key] || departmentImages.default} 
                           alt={`${dept.name} Department`}
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          onError={(e) => { e.target.src = departmentImages.default; }}
                         />
-                        {/* Subtle decorative overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
+                        
+                        {/* Category Badge over Image */}
+                        <div className="absolute top-4 left-4">
+                          <span className={`text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full border backdrop-blur-md ${badgeInfo.bg}`}>
+                            {badgeInfo.label}
+                          </span>
+                        </div>
+
+                        {/* Duration Badge */}
+                        <div className="absolute bottom-3 right-4 flex items-center gap-1 text-[11px] font-extrabold text-white bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
+                          <Clock className="w-3.5 h-3.5 text-amber-400" />
+                          <span>{dept.duration}</span>
+                        </div>
                       </div>
 
-                      {/* Badge / Duration */}
-                      <div className="flex justify-between items-center gap-3 mb-6">
-                        <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full border ${
-                          dept.category === 'pg' 
-                            ? 'bg-purple-550/10 border-purple-550/20 text-purple-650' 
-                            : dept.category === 'btech'
-                              ? 'bg-emerald-550/10 border-emerald-550/20 text-emerald-650'
-                              : 'bg-indigo-550/10 border-indigo-550/20 text-indigo-650'
-                        }`}>
-                          {dept.category === 'pg' ? 'Postgraduate' : dept.category === 'btech' ? 'UG (B.Tech)' : 'UG (B.E.)'}
-                        </span>
-                        <span className="font-mono text-[10px] uppercase font-bold tracking-widest text-gray-500 flex items-center gap-1.5">
-                          <Clock className="w-4 h-4 text-indigo-650" /> {dept.duration}
-                        </span>
-                      </div>
+                      {/* Content Area */}
+                      <div className="p-6">
+                        {/* Department Name */}
+                        <h3 className="text-xl font-black text-slate-900 leading-snug mb-3 group-hover:text-indigo-600 transition-colors font-title">
+                          {dept.name}
+                        </h3>
 
-                      {/* Title */}
-                      <h3 className="text-xl md:text-2xl font-black text-gray-900 leading-tight mb-4 group-hover:text-indigo-650 transition-colors">
-                        {dept.name.replace(/^Department of\s+/i, '')}
-                      </h3>
+                        {/* Intake Info */}
+                        <div className="flex items-center gap-2 mb-4 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-100 p-2.5 rounded-xl">
+                          <GraduationCap className="w-4 h-4 text-indigo-600 shrink-0" />
+                          <span>Approved Intake: <strong className="text-slate-900">{dept.intake}</strong></span>
+                        </div>
 
-
-
-                      {/* Focus Tags */}
-                      <div className="mb-6">
-                        <span className="text-[10px] font-black uppercase text-gray-400 tracking-wider block mb-2.5">Core Focus</span>
-                        <div className="flex flex-wrap gap-2">
-                          {dept.focus.split(', ').slice(0, 3).map((f, idx) => (
-                            <span key={idx} className="text-[10px] font-bold bg-gray-50 border border-gray-200 px-3 py-1 rounded-xl text-gray-700">
-                              {f}
-                            </span>
-                          ))}
+                        {/* Core Focus Pills */}
+                        <div className="mb-6">
+                          <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider block mb-2">Key Focus Areas</span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {dept.focus.split(', ').slice(0, 3).map((f, idx) => (
+                              <span key={idx} className="text-[11px] font-bold bg-indigo-50/70 border border-indigo-100 text-indigo-800 px-2.5 py-1 rounded-lg">
+                                {f}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Stats & Link */}
-                    <div className="pt-6 border-t border-gray-150">
-                      <div className="grid grid-cols-3 gap-2.5 text-center mb-6">
-                        <div className="bg-gray-50 p-3 rounded-2xl border border-gray-150">
-                          <span className="block text-sm font-black text-indigo-600">{dept.faculty.length}</span>
-                          <span className="text-[9px] uppercase font-bold text-gray-500 tracking-wider">Faculty</span>
+                    {/* Stats & Footer Link */}
+                    <div className="px-6 pb-6 pt-2">
+                      <div className="grid grid-cols-3 gap-2 text-center mb-5 border-t border-slate-100 pt-4">
+                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                          <span className="block text-sm font-black text-indigo-600">{facultyCount || 'Expert'}</span>
+                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Faculty</span>
                         </div>
-                        <div className="bg-gray-50 p-3 rounded-2xl border border-gray-150">
-                          <span className="block text-sm font-black text-emerald-650">{dept.labs.length}</span>
-                          <span className="text-[9px] uppercase font-bold text-gray-500 tracking-wider">Labs</span>
+                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                          <span className="block text-sm font-black text-emerald-600">{labCount || 'Advanced'}</span>
+                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Labs</span>
                         </div>
-                        <div className="bg-gray-50 p-3 rounded-2xl border border-gray-150">
-                          <span className="block text-sm font-black text-amber-600">{dept.placements.length}</span>
-                          <span className="text-[9px] uppercase font-bold text-gray-500 tracking-wider">Placed</span>
+                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                          <span className="block text-sm font-black text-amber-600">{placementCount || 'High'}</span>
+                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Placements</span>
                         </div>
                       </div>
 
                       <Link 
                         to={`/departments/${dept.key}`}
-                        className="w-full flex items-center justify-center gap-2 bg-indigo-650 hover:bg-indigo-600 active:scale-95 text-white font-bold text-sm py-4 rounded-2xl transition-all shadow-md hover:shadow-indigo-500/10"
+                        className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all shadow-md hover:shadow-indigo-500/20 active:scale-95 cursor-pointer"
                       >
-                        Explore Portal <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <span>Explore Department Portal</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </motion.div>
-                ))
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                );
+              })
+            )}
+          </motion.div>
+        </AnimatePresence>
 
       </div>
     </div>

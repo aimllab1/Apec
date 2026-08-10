@@ -942,7 +942,7 @@ export default function Home() {
       </section>
 
       {/* WHY JOIN APEC FEATURE GRID */}
-      <section className="py-24 px-6 bg-transparent relative z-10">
+      <section className="why-join-gallery py-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-left mb-16">
             <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Adhiparasakthi Engineering College</span>
@@ -954,101 +954,100 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="features-grid grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="features-grid"
           >
             {features.map((feat, idx) => (
               <motion.div 
                 key={idx} 
                 variants={twistReveal}
                 className="benefit-card select-none cursor-pointer relative overflow-hidden"
-                style={{ 
-                  backgroundColor: "#0f172a"
-                }}
               >
-                {/* Background image / slideshow */}
-                {feat.title === "Central Library" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {libraryImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === libraryImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : feat.title === "Equipped Labs" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {labImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === labImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : feat.title === "Indoor Stadium & Gym" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {indoorImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === indoorImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : feat.title === "Placement Records" ? (
-                  <div className="absolute inset-0 w-full h-full">
-                    {placementImages.map((img, i) => (
-                      <motion.div
-                        key={img}
-                        className="absolute inset-0"
-                        style={{ 
-                          backgroundImage: `url(${img})`,
-                          backgroundSize: "100% 100%",
-                          backgroundRepeat: "no-repeat",
-                          backgroundPosition: "center"
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: i === placementImageIdx ? 1 : 0 }}
-                        transition={{ duration: 0.8 }}
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div 
-                    className="absolute inset-0"
-                    style={{ 
-                      backgroundImage: `url(${feat.img})`,
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center"
-                    }}
-                  />
-                )}
+                {/* Background image / slideshow wrapper */}
+                <div className="benefit-image-wrapper absolute inset-0 w-full h-full">
+                  {feat.title === "Central Library" ? (
+                    <div className="absolute inset-0 w-full h-full">
+                      {libraryImages.map((img, i) => (
+                        <motion.div
+                          key={img}
+                          className="absolute inset-0"
+                          style={{ 
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: "100% 100%",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center"
+                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: i === libraryImageIdx ? 1 : 0 }}
+                          transition={{ duration: 0.8 }}
+                        />
+                      ))}
+                    </div>
+                  ) : feat.title === "Equipped Labs" ? (
+                    <div className="absolute inset-0 w-full h-full">
+                      {labImages.map((img, i) => (
+                        <motion.div
+                          key={img}
+                          className="absolute inset-0"
+                          style={{ 
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: "100% 100%",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center"
+                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: i === labImageIdx ? 1 : 0 }}
+                          transition={{ duration: 0.8 }}
+                        />
+                      ))}
+                    </div>
+                  ) : feat.title === "Indoor Stadium & Gym" ? (
+                    <div className="absolute inset-0 w-full h-full">
+                      {indoorImages.map((img, i) => (
+                        <motion.div
+                          key={img}
+                          className="absolute inset-0"
+                          style={{ 
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: "100% 100%",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center"
+                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: i === indoorImageIdx ? 1 : 0 }}
+                          transition={{ duration: 0.8 }}
+                        />
+                      ))}
+                    </div>
+                  ) : feat.title === "Placement Records" ? (
+                    <div className="absolute inset-0 w-full h-full">
+                      {placementImages.map((img, i) => (
+                        <motion.div
+                          key={img}
+                          className="absolute inset-0"
+                          style={{ 
+                            backgroundImage: `url(${img})`,
+                            backgroundSize: "100% 100%",
+                            backgroundRepeat: "no-repeat",
+                            backgroundPosition: "center"
+                          }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: i === placementImageIdx ? 1 : 0 }}
+                          transition={{ duration: 0.8 }}
+                        />
+                      ))}
+                    </div>
+                  ) : (
+                    <div 
+                      className="absolute inset-0"
+                      style={{ 
+                        backgroundImage: `url(${feat.img})`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        backgroundPosition: "center"
+                      }}
+                    />
+                  )}
+                </div>
 
                 {/* Background image overlay */}
                 <div className="benefit-card-overlay" />
@@ -1058,12 +1057,12 @@ export default function Home() {
                   {idx + 1}
                 </div>
 
-                {/* Bottom glass text overlay */}
+                {/* Bottom gradient text overlay */}
                 <div className="card-content text-left">
-                  <h4 className="text-base md:text-lg font-black text-slate-900 mb-1">
+                  <h4 className="font-bold">
                     {feat.title}
                   </h4>
-                  <p className="text-xs md:text-sm text-slate-850 font-bold leading-relaxed">
+                  <p className="font-semibold leading-relaxed">
                     {feat.desc}
                   </p>
                 </div>
