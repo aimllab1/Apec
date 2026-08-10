@@ -851,36 +851,37 @@ export default function Home() {
                       className="w-full h-full flex items-center justify-center"
                     >
                       <div className="dept-showcase-card">
-                        {/* Left Column: Department Image */}
-                        <div className="dept-image-wrapper">
+                        {/* Edge-to-edge Background Image */}
+                        <div className="dept-bg-image-wrapper">
                           <img 
                             src={dept.img} 
                             alt={dept.name} 
-                            className="dept-image"
+                            className="dept-bg-image"
                           />
                         </div>
 
-                        {/* Right Column: Details & Explore */}
-                        <div className="dept-content-area">
-                          <div className="w-full relative z-10 flex flex-col">
-                            {/* Top row with Icon and Badge */}
-                            <div className="dept-top-bar">
+                        {/* Top-Left Info Container (Name, Icon, Badge) */}
+                        <div className="dept-top-left-panel">
+                          <div className="dept-header-info">
+                            <div className="dept-icon-badge-row">
                               <div className="dept-icon-container">
-                                <IconComponent className="w-5 h-5 text-indigo-400" />
+                                <IconComponent className="w-5 h-5 text-indigo-300" />
                               </div>
                               <span className="dept-code-badge">
                                 {dept.code}
                               </span>
                             </div>
-                            
                             <span className="dept-subtitle">Focused Curriculum Overview</span>
                             <h3 className="dept-title">{dept.name}</h3>
-                            <p className="dept-description">{dept.details}</p>
                           </div>
+                        </div>
 
-                          <div className="dept-bottom-bar">
-                            <span className="dept-status">Autonomous Status</span>
-                            <Link to={`/departments/${dept.key}`} className="dept-link">
+                        {/* Bottom-Right Info Container (Description, Explore Link) */}
+                        <div className="dept-bottom-right-panel">
+                          <p className="dept-description">{dept.details}</p>
+                          <div className="dept-actions">
+                            <span className="dept-status-badge">Autonomous Status</span>
+                            <Link to={`/departments/${dept.key}`} className="dept-link-btn">
                               Explore Portal <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
                           </div>

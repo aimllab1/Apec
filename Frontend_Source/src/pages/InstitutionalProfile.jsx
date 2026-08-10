@@ -128,11 +128,11 @@ export default function InstitutionalProfile() {
               variants={fadeInUp}
               className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 mb-5 p-3 rounded-2xl bg-white border border-slate-150 shadow-sm group-hover:shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 mb-5 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src="/Images/Logos/university_logo-rem.png" 
                   alt="Anna University Logo" 
-                  className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
+                  className="w-full h-full object-contain filter drop-shadow-sm" 
                 />
               </div>
               <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
@@ -151,11 +151,11 @@ export default function InstitutionalProfile() {
               variants={fadeInUp}
               className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 mb-5 p-3 rounded-2xl bg-white border border-slate-150 shadow-sm group-hover:shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 mb-5 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src="/Images/Logos/UGC.png" 
                   alt="UGC Autonomous Logo" 
-                  className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
+                  className="w-full h-full object-contain filter drop-shadow-sm" 
                 />
               </div>
               <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
@@ -174,11 +174,11 @@ export default function InstitutionalProfile() {
               variants={fadeInUp}
               className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
             >
-              <div className="w-24 h-24 sm:w-28 sm:h-28 mb-5 p-3 rounded-2xl bg-white border border-slate-150 shadow-sm group-hover:shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 mb-5 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                 <img 
                   src="/Images/Logos/Naac.png" 
                   alt="NAAC Accredited Logo" 
-                  className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
+                  className="w-full h-full object-contain filter drop-shadow-sm" 
                 />
               </div>
               <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">

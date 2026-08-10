@@ -384,8 +384,7 @@ export default function Departments() {
                     transition={{ duration: 0.2 }}
                     className="group bg-white border border-slate-200/90 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-amber-400 hover:shadow-[0_20px_45px_rgba(217,119,6,0.1)] transition-all duration-300 text-left"
                   >
-                    <div>
-                      {/* Department Image Header */}
+                    {/* Department Image Header */}
                       <div className="w-full h-48 overflow-hidden relative bg-slate-100">
                         <img 
                           src={departmentImages[dept.key] || departmentImages.default} 
@@ -410,20 +409,20 @@ export default function Departments() {
                       </div>
 
                       {/* Content Area */}
-                      <div className="p-6">
+                      <div className="p-6 flex flex-col grow">
                         {/* Department Name */}
                         <h3 className="text-xl font-black text-slate-900 leading-snug mb-3 group-hover:text-amber-600 transition-colors font-title">
                           {dept.name}
                         </h3>
 
                         {/* Intake Info */}
-                        <div className="flex items-center gap-2 mb-4 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-150 p-2.5 rounded-xl">
+                        <div className="flex items-center gap-2 mb-4 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-150 p-2.5 rounded-xl shrink-0">
                           <GraduationCap className="w-4 h-4 text-indigo-600 shrink-0" />
                           <span>Approved Intake: <strong className="text-slate-900">{dept.intake}</strong></span>
                         </div>
 
                         {/* Core Focus Pills */}
-                        <div className="mb-4">
+                        <div className="mb-4 grow">
                           <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider block mb-2">Key Focus Areas</span>
                           <div className="flex flex-wrap gap-1.5">
                             {dept.focus.split(', ').slice(0, 3).map((f, idx) => (
@@ -433,35 +432,33 @@ export default function Departments() {
                             ))}
                           </div>
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Stats & Footer Link */}
-                    <div className="px-6 pb-6 pt-1">
-                      <div className="grid grid-cols-3 gap-2 text-center mb-5 border-t border-slate-100 pt-4">
-                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
-                          <span className="block text-xs font-black text-indigo-600">{facultyCount || 'Expert'}</span>
-                          <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Faculty</span>
+                        {/* Stats Bar */}
+                        <div className="grid grid-cols-3 gap-2 text-center my-4 border-t border-slate-100 pt-3">
+                          <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
+                            <span className="block text-xs font-black text-indigo-600">{facultyCount || 'Expert'}</span>
+                            <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Faculty</span>
+                          </div>
+                          <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
+                            <span className="block text-xs font-black text-emerald-600">{labCount || 'Advanced'}</span>
+                            <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Labs</span>
+                          </div>
+                          <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
+                            <span className="block text-xs font-black text-amber-600">{placementCount || 'High'}</span>
+                            <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Placed</span>
+                          </div>
                         </div>
-                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
-                          <span className="block text-xs font-black text-emerald-600">{labCount || 'Advanced'}</span>
-                          <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Labs</span>
-                        </div>
-                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
-                          <span className="block text-xs font-black text-amber-600">{placementCount || 'High'}</span>
-                          <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Placed</span>
-                        </div>
-                      </div>
 
-                      <Link 
-                        to={`/departments/${dept.key}`}
-                        className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer"
-                      >
-                        <span>Explore Department Portal</span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
-                  </motion.div>
+                        {/* CTA Link */}
+                        <Link 
+                          to={`/departments/${dept.key}`}
+                          className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer mt-auto"
+                        >
+                          <span>Explore Department Portal</span>
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
+                    </motion.div>
                 );
               })
             )}
