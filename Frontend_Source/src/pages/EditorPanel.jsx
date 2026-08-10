@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Save, AlertCircle, RefreshCw, Users, FileText, Settings, Plus, Minus, Trash2, 
   Edit3, Check, CheckCircle2, ChevronRight, UserCheck, ShieldAlert, KeyRound, Globe,
-  Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key
+  Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key,
+  BookOpen, Milestone, Library, Briefcase, GraduationCap
 } from 'lucide-react';
 
 import departmentsData from '../data/departmentsData.json';
