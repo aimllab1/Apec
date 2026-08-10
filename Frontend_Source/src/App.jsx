@@ -43,6 +43,7 @@ import Iqac from './pages/Iqac';
 import IqacMembers from './pages/IqacMembers';
 import IqacMeetings from './pages/IqacMeetings';
 import Disclosures from './pages/Disclosures';
+import AlumniCell from './pages/AlumniCell';
 import Nirf from './pages/Nirf';
 import InstrumentationCell from './pages/InstrumentationCell';
 import Committees from './pages/Committees';
@@ -808,6 +809,7 @@ function AppContent({ isLoading, setIsLoading }) {
                         <Link to="/about/profile" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Institution Profile</Link>
                         <Link to="/about/founders" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Founder & Trustees</Link>
                         <Link to="/about/principal" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Principal Desk & Contacts</Link>
+                        <Link to="/alumni" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Alumni Cell</Link>
                         <Link to="/faculty" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Faculty Directory</Link>
                       </div>
                     </div>
@@ -1194,6 +1196,7 @@ function AppContent({ isLoading, setIsLoading }) {
                             <Link to="/about/profile" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Institution Profile</Link>
                             <Link to="/about/founders" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Founder & Trustees</Link>
                             <Link to="/about/principal" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Principal Desk & Contacts</Link>
+                            <Link to="/alumni" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Alumni Cell</Link>
                             <div className="pt-2 border-t border-gray-150">
                               <Link to="/faculty" onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-[#FF8A00] flex items-center justify-between pr-2 mb-2">
                                 <span>Faculty Directory (All)</span>
@@ -1421,6 +1424,10 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/about/profile" element={<PageTransition><InstitutionalProfile /></PageTransition>} />
                   <Route path="/about/founders" element={<PageTransition><FounderTrustees /></PageTransition>} />
                   <Route path="/about/principal" element={<PageTransition><PrincipalDesk /></PageTransition>} />
+                  <Route path="/about/alumni" element={<PageTransition><AlumniCell /></PageTransition>} />
+                  <Route path="/alumni" element={<PageTransition><AlumniCell /></PageTransition>} />
+                  <Route path="/alumni-cell" element={<PageTransition><AlumniCell /></PageTransition>} />
+                  <Route path="/committees/alumni-cell" element={<PageTransition><AlumniCell /></PageTransition>} />
                   <Route path="/about/faculty" element={<PageTransition><Faculty /></PageTransition>} />
                   <Route path="/faculty" element={<PageTransition><Faculty /></PageTransition>} />
                   <Route path="/admission" element={<PageTransition><Admission /></PageTransition>} />
