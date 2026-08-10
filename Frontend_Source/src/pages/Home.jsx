@@ -614,7 +614,7 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative min-h-[calc(100vh-80px)] flex flex-col justify-start pt-6 pb-8 px-6 bg-transparent z-10">
+      <section className="relative flex flex-col justify-start pt-6 pb-12 px-6 bg-transparent z-10">
         
         <div className="w-full max-w-[1800px] mx-auto px-6 flex flex-col items-center relative z-10">
           
@@ -778,7 +778,7 @@ export default function Home() {
 
 
       {/* Leadership Section */}
-      <section className="py-24 px-6 bg-transparent relative z-10">
+      <section className="pt-12 md:pt-16 pb-24 px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Management & Founders</h2>
@@ -818,98 +818,99 @@ export default function Home() {
             <p className="text-sm md:text-base text-slate-200/90 font-semibold font-sans max-w-2xl text-center">Explore our individual department portals and their focused curricula.</p>
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-4 md:px-12 flex flex-col items-center">
-            {/* Carousel card container */}
-            <div className="w-full min-h-[420px] md:min-h-[380px] relative overflow-hidden flex items-center justify-center py-4">
-              <AnimatePresence initial={false} custom={direction} mode="wait">
-                {(() => {
-                  const dept = depts[currentIdx];
-                  const deptIcons = {
-                    AIML: Cpu,
-                    CSE: Code,
-                    IT: Database,
-                    CHEM: Beaker,
-                    MECH: Settings,
-                    CIVIL: Building,
-                    MCA: Laptop,
-                    ECE: Wifi,
-                    EEE: Zap
-                  };
-                  const IconComponent = deptIcons[dept.code] || BookOpen;
+          <div className="relative max-w-5xl mx-auto w-full px-4 md:px-6">
+            <div className="dept-showcase-gold-container w-full flex flex-col items-center">
+              {/* Carousel card container */}
+              <div className="w-full min-h-[420px] md:min-h-[380px] relative overflow-hidden flex items-center justify-center py-4">
+                <AnimatePresence initial={false} custom={direction} mode="wait">
+                  {(() => {
+                    const dept = depts[currentIdx];
+                    const deptIcons = {
+                      AIML: Cpu,
+                      CSE: Code,
+                      IT: Database,
+                      CHEM: Beaker,
+                      MECH: Settings,
+                      CIVIL: Building,
+                      MCA: Laptop,
+                      ECE: Wifi,
+                      EEE: Zap
+                    };
+                    const IconComponent = deptIcons[dept.code] || BookOpen;
 
-                  return (
-                    <motion.div
-                      key={currentIdx}
-                      custom={direction}
-                      variants={slideVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      className="w-full h-full flex items-center justify-center"
-                    >
-                      <div className="dept-showcase-card">
-                        {/* Edge-to-edge Background Image */}
-                        <div className="dept-bg-image-wrapper">
-                          <img 
-                            src={dept.img} 
-                            alt={dept.name} 
-                            className="dept-bg-image"
-                          />
-                        </div>
+                    return (
+                      <motion.div
+                        key={currentIdx}
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        className="w-full h-full flex items-center justify-center"
+                      >
+                        <div className="dept-showcase-card">
+                          {/* Edge-to-edge Background Image */}
+                          <div className="dept-bg-image-wrapper">
+                            <img 
+                              src={dept.img} 
+                              alt={dept.name} 
+                              className="dept-bg-image"
+                            />
+                          </div>
 
-                        {/* Single uniform dark/black transparent overlay */}
-                        <div className="dept-card-overlay" />
+                          {/* Single uniform dark/black transparent overlay */}
+                          <div className="dept-card-overlay" />
 
-                        {/* Top-Left Info Container (Name, Icon, Badge) */}
-                        <div className="dept-top-left-panel">
-                          <div className="dept-header-info">
-                            <div className="dept-icon-badge-row">
-                              <div className="dept-icon-container">
-                                <IconComponent className="w-5 h-5 text-indigo-300" />
+                          {/* Top-Left Info Container (Name, Icon, Badge) */}
+                          <div className="dept-top-left-panel">
+                            <div className="dept-header-info">
+                              <div className="dept-icon-badge-row">
+                                <div className="dept-icon-container">
+                                  <IconComponent className="w-5 h-5 text-indigo-300" />
+                                </div>
+                                <span className="dept-code-badge">
+                                  {dept.code}
+                                </span>
                               </div>
-                              <span className="dept-code-badge">
-                                {dept.code}
-                              </span>
+                              <span className="dept-subtitle">Focused Curriculum Overview</span>
+                              <h3 className="dept-title">{dept.name}</h3>
                             </div>
-                            <span className="dept-subtitle">Focused Curriculum Overview</span>
-                            <h3 className="dept-title">{dept.name}</h3>
+                          </div>
+
+                          {/* Bottom-Right Info Container (Description, Explore Link) */}
+                          <div className="dept-bottom-right-panel">
+                            <p className="dept-description">{dept.details}</p>
+                            <div className="dept-actions">
+                              <span className="dept-status-badge">Autonomous Status</span>
+                              <Link to={`/departments/${dept.key}`} className="dept-link-btn">
+                                Explore Portal <ArrowRight className="w-3.5 h-3.5" />
+                              </Link>
+                            </div>
                           </div>
                         </div>
+                      </motion.div>
+                    );
+                  })()}
+                </AnimatePresence>
+              </div>
 
-                        {/* Bottom-Right Info Container (Description, Explore Link) */}
-                        <div className="dept-bottom-right-panel">
-                          <p className="dept-description">{dept.details}</p>
-                          <div className="dept-actions">
-                            <span className="dept-status-badge">Autonomous Status</span>
-                            <Link to={`/departments/${dept.key}`} className="dept-link-btn">
-                              Explore Portal <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })()}
-              </AnimatePresence>
+              {/* Dot Indicator Navigation */}
+              <div className="flex gap-2 mt-4 justify-center pb-2">
+                {depts.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => {
+                      setDirection(idx > currentIdx ? 1 : -1);
+                      setCurrentIdx(idx);
+                    }}
+                    className={`indicator-dot cursor-pointer ${
+                      currentIdx === idx ? 'active' : 'inactive'
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
             </div>
-
-            {/* Dot Indicator Navigation */}
-            <div className="flex gap-2 mt-6 justify-center">
-              {depts.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setDirection(idx > currentIdx ? 1 : -1);
-                    setCurrentIdx(idx);
-                  }}
-                  className={`indicator-dot cursor-pointer ${
-                    currentIdx === idx ? 'active' : 'inactive'
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
           </div>
 
         </div>
