@@ -1420,17 +1420,6 @@ export default function EditorPanel() {
                                 )}
                               </div>
                             </div>
-
-                            <div className="space-y-1 pt-1">
-                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Image Asset URL / Relative Path</label>
-                              <input 
-                                type="text"
-                                value={editFaculty.image}
-                                onChange={(e) => setEditFaculty({...editFaculty, image: e.target.value})}
-                                placeholder="/Images/Faculty/cse/member.jpg or data:image/..."
-                                className="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg outline-none focus:border-indigo-600 font-mono text-slate-700"
-                              />
-                            </div>
                           </div>
 
                           <div className="space-y-3">
