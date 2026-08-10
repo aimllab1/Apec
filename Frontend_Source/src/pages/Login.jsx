@@ -25,6 +25,8 @@ export default function Login() {
   const [userRoleTemp, setUserRoleTemp] = useState('');
   const [otpInput, setOtpInput] = useState('');
   const [isOtpLoading, setIsOtpLoading] = useState(false);
+  const [otpNotice, setOtpNotice] = useState('');
+
   // Complete account registry covering Admin, Admission, and all 14 HOD departments
   const ACCOUNT_REGISTRY = {
     'admin@apec.edu.in': { role: 'admin', pass: 'web-development-01' },
@@ -39,6 +41,7 @@ export default function Login() {
     'chemical@apec.edu.in': { role: 'dept_chemical', pass: 'web-development-01' },
     'agri@apec.edu.in': { role: 'dept_agri', pass: 'web-development-01' },
     'aids@apec.edu.in': { role: 'dept_aids', pass: 'web-development-01' },
+    'csd@apec.edu.in': { role: 'dept_csd', pass: 'web-development-01' },
     'mca@apec.edu.in': { role: 'dept_mca', pass: 'web-development-01' },
     'mba@apec.edu.in': { role: 'dept_mba', pass: 'web-development-01' },
     'sh@apec.edu.in': { role: 'dept_sh', pass: 'web-development-01' }
