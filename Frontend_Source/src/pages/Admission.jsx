@@ -18,7 +18,8 @@ import {
   FileCheck,
   Search,
   BookOpenCheck,
-  Calculator
+  Calculator,
+  ArrowRight
 } from 'lucide-react';
 import CutoffCalculator from './CutoffCalculator';
 
@@ -80,17 +81,17 @@ export default function Admission() {
 
   // Program details mapping (Intakes and names)
   const ugPrograms = [
-    { name: "B.E. - Civil Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/civil dept.jpg" },
-    { name: "B.E. - Mechanical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/mech dept.jpg" },
-    { name: "B.E. - Electrical and Electronics Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/eee dept.jpg" },
-    { name: "B.E. - Electronics and Communication Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/Images/Dept/ece dept.jpg" },
-    { name: "B.E. - Computer Science and Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/Images/Dept/cse dept.png" },
-    { name: "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/Images/Dept/aiml dept.jpg" },
-    { name: "B.Tech. - Information Technology", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/it dept.jpg" },
-    { name: "B.Tech. - Chemical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/Images/Dept/chem dept.jpg" },
-    { name: "B.Tech. - Agricultural Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/Images/Dept/agri dept.jpg" },
-    { name: "B.Tech. - Artificial Intelligence and Data Science", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/ai ds dept.jpg" },
-    { name: "B.E. - Computer Science & Engineering (Computer System Design)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/Images/Dept/csd  dept.jpg" }
+    { name: "B.E. - Civil Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/civil dept.jpg", key: "civil" },
+    { name: "B.E. - Mechanical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/mech dept.jpg", key: "mech" },
+    { name: "B.E. - Electrical and Electronics Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/eee dept.jpg", key: "eee" },
+    { name: "B.E. - Electronics and Communication Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/Images/Dept/ece dept.jpg", key: "ece" },
+    { name: "B.E. - Computer Science and Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/Images/Dept/cse dept.png", key: "cse" },
+    { name: "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/Images/Dept/aiml dept.jpg", key: "aiml" },
+    { name: "B.Tech. - Information Technology", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/it dept.jpg", key: "it" },
+    { name: "B.Tech. - Chemical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/Images/Dept/chem dept.jpg", key: "chemical" },
+    { name: "B.Tech. - Agricultural Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/Images/Dept/agri dept.jpg", key: "agri" },
+    { name: "B.Tech. - Artificial Intelligence and Data Science", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/ai ds dept.jpg", key: "aids" },
+    { name: "B.E. - Computer Science & Engineering (Computer System Design)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/Images/Dept/csd  dept.jpg", key: "csd" }
   ];
 
   const pgPrograms = [
@@ -104,10 +105,10 @@ export default function Admission() {
   ];
 
   const phdPrograms = [
-    { name: "PhD - Civil Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.civil.jpg" },
-    { name: "PhD - Mechanical Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.mech.jpg" },
-    { name: "PhD - Electrical and Electronics Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.eee.jpg" },
-    { name: "PhD - Electronics and Communication Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.ece.jpg" }
+    { name: "PhD - Civil Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.civil.jpg", key: "phd-civil" },
+    { name: "PhD - Mechanical Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.mech.jpg", key: "phd-mech" },
+    { name: "PhD - Electrical and Electronics Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.eee.jpg", key: "phd-eee" },
+    { name: "PhD - Electronics and Communication Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.ece.jpg", key: "phd-ece" }
   ];
 
   // Scholarship Details
@@ -276,105 +277,141 @@ export default function Admission() {
 
             {/* TAB 1: COURSES OFFERED */}
             {activeTab === 'courses' && (
-              <div className="space-y-12 text-left">
+              <div className="space-y-14 text-left">
                 {/* UG Programs */}
-                <div className="space-y-12">
+                <div className="space-y-14">
                   {/* B.E. Programmes */}
                   <div>
-                    <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                      <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
-                        <GraduationCap className="w-6 h-6" />
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
+                    >
+                      <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
+                        <GraduationCap className="w-7 h-7 text-indigo-600" />
                       </div>
                       <div>
-                        <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Undergraduate B.E. Programmes</h2>
-                        <p className="text-[11px] font-bold text-indigo-650 uppercase tracking-widest mt-0.5">4 Years Duration • Full Time</p>
+                        <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900">Undergraduate B.E. Programmes</h2>
+                        <p className="text-xs md:text-sm font-bold text-indigo-600 uppercase tracking-widest mt-1">4 Years Duration • Full Time</p>
                       </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                       {ugPrograms.filter(c => !c.name.startsWith('B.Tech')).map((course, idx) => (
-                        <motion.div 
-                          key={idx}
-                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#FF8A00]/40 transition-all flex flex-col justify-between overflow-hidden"
-                          whileHover={{ y: -2 }}
-                        >
-                          {course.img && (
-                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
-                              <img 
-                                src={course.img} 
-                                alt={course.name} 
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                              />
+                        <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
+                          <motion.div 
+                            initial={{ opacity: 0, y: 35 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
+                            whileHover={{ y: -6 }}
+                            className="bg-white border border-gray-200 hover:border-orange-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
+                          >
+                            {course.img && (
+                              <div className="w-full h-52 overflow-hidden border-b border-gray-100 relative">
+                                <img 
+                                  src={course.img} 
+                                  alt={course.name} 
+                                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                                  <span className="text-white text-xs font-extrabold bg-[#FF8A00] px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                                    View Department Details <ArrowRight className="w-3.5 h-3.5" />
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                            <div className="p-6 flex flex-col justify-between flex-grow">
+                              <div>
+                                <span className="inline-block px-3 py-1 text-xs md:text-sm font-extrabold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-lg mb-3 border border-orange-100">
+                                  B.E.
+                                </span>
+                                <h3 className="font-serif text-lg md:text-[1.2rem] font-bold text-gray-900 leading-snug mb-2 group-hover:text-[#FF8A00] transition-colors">
+                                  {cleanName(course.name)}
+                                </h3>
+                                <p className="text-sm md:text-base text-gray-600 font-medium flex items-center gap-2 mt-1">
+                                  <Clock className="w-4 h-4 text-orange-400 shrink-0" /> Duration: {course.duration}
+                                </p>
+                              </div>
+                              <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <span className="text-xs md:text-sm font-extrabold text-gray-500 uppercase tracking-wider">Approved Intake</span>
+                                <span className="text-sm md:text-base font-black text-slate-900 bg-orange-50/80 border border-orange-100 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                                  <Users className="w-4 h-4 text-[#FF8A00]" /> {course.intake} seats
+                                </span>
+                              </div>
                             </div>
-                          )}
-                          <div className="p-5 flex flex-col justify-between flex-grow">
-                            <div>
-                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-md mb-3 border border-orange-100">
-                                B.E.
-                              </span>
-                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
-                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
-                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                              </p>
-                            </div>
-                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
-                              </span>
-                            </div>
-                          </div>
-                        </motion.div>
+                          </motion.div>
+                        </Link>
                       ))}
                     </div>
                   </div>
 
                   {/* B.Tech. Programmes */}
                   <div>
-                    <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                      <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
-                        <GraduationCap className="w-6 h-6" />
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.5 }}
+                      className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
+                    >
+                      <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
+                        <GraduationCap className="w-7 h-7 text-indigo-600" />
                       </div>
                       <div>
-                        <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Undergraduate B.Tech. Programmes</h2>
-                        <p className="text-[11px] font-bold text-indigo-650 uppercase tracking-widest mt-0.5">4 Years Duration • Full Time</p>
+                        <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900">Undergraduate B.Tech. Programmes</h2>
+                        <p className="text-xs md:text-sm font-bold text-indigo-600 uppercase tracking-widest mt-1">4 Years Duration • Full Time</p>
                       </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                       {ugPrograms.filter(c => c.name.startsWith('B.Tech')).map((course, idx) => (
-                        <motion.div 
-                          key={idx}
-                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-[#FF8A00]/40 transition-all flex flex-col justify-between overflow-hidden"
-                          whileHover={{ y: -2 }}
-                        >
-                          {course.img && (
-                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
-                              <img 
-                                src={course.img} 
-                                alt={course.name} 
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                              />
+                        <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
+                          <motion.div 
+                            initial={{ opacity: 0, y: 35 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.15 }}
+                            transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
+                            whileHover={{ y: -6 }}
+                            className="bg-white border border-gray-200 hover:border-orange-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
+                          >
+                            {course.img && (
+                              <div className="w-full h-52 overflow-hidden border-b border-gray-100 relative">
+                                <img 
+                                  src={course.img} 
+                                  alt={course.name} 
+                                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                                  <span className="text-white text-xs font-extrabold bg-[#FF8A00] px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                                    View Department Details <ArrowRight className="w-3.5 h-3.5" />
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                            <div className="p-6 flex flex-col justify-between flex-grow">
+                              <div>
+                                <span className="inline-block px-3 py-1 text-xs md:text-sm font-extrabold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-lg mb-3 border border-orange-100">
+                                  B.Tech
+                                </span>
+                                <h3 className="font-serif text-lg md:text-[1.2rem] font-bold text-gray-900 leading-snug mb-2 group-hover:text-[#FF8A00] transition-colors">
+                                  {cleanName(course.name)}
+                                </h3>
+                                <p className="text-sm md:text-base text-gray-600 font-medium flex items-center gap-2 mt-1">
+                                  <Clock className="w-4 h-4 text-orange-400 shrink-0" /> Duration: {course.duration}
+                                </p>
+                              </div>
+                              <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <span className="text-xs md:text-sm font-extrabold text-gray-500 uppercase tracking-wider">Approved Intake</span>
+                                <span className="text-sm md:text-base font-black text-slate-900 bg-orange-50/80 border border-orange-100 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                                  <Users className="w-4 h-4 text-[#FF8A00]" /> {course.intake} seats
+                                </span>
+                              </div>
                             </div>
-                          )}
-                          <div className="p-5 flex flex-col justify-between flex-grow">
-                            <div>
-                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-orange-50 text-[#FF8A00] rounded-md mb-3 border border-orange-100">
-                                B.Tech
-                              </span>
-                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
-                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
-                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                              </p>
-                            </div>
-                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
-                              </span>
-                            </div>
-                          </div>
-                        </motion.div>
+                          </motion.div>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -382,46 +419,63 @@ export default function Admission() {
 
                 {/* PG M.E. Programs */}
                 <div>
-                  <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                    <div className="p-2 rounded-xl bg-purple-50 text-purple-650">
-                      <GraduationCap className="w-6 h-6" />
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
+                  >
+                    <div className="p-3 rounded-2xl bg-purple-50 text-purple-650 shadow-sm">
+                      <GraduationCap className="w-7 h-7 text-purple-650" />
                     </div>
                     <div>
-                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Postgraduate M.E. Programmes</h2>
-                      <p className="text-[11px] font-bold text-purple-600 uppercase tracking-widest mt-0.5">2 Years Duration • Full Time</p>
+                      <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900">Postgraduate M.E. Programmes</h2>
+                      <p className="text-xs md:text-sm font-bold text-purple-600 uppercase tracking-widest mt-1">2 Years Duration • Full Time</p>
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                     {pgPrograms.filter(c => c.name.startsWith('M.E.')).map((course, idx) => (
-                      <Link to={`/departments/${course.key}`} key={idx} className="block group">
+                      <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-purple-400/40 transition-all flex flex-col justify-between overflow-hidden h-full"
-                          whileHover={{ y: -2 }}
+                          initial={{ opacity: 0, y: 35 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, amount: 0.15 }}
+                          transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
+                          whileHover={{ y: -6 }}
+                          className="bg-white border border-gray-200 hover:border-purple-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
                           {course.img && (
-                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                            <div className="w-full h-52 overflow-hidden border-b border-gray-100 relative">
                               <img 
                                 src={course.img} 
                                 alt={course.name} 
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                               />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                                <span className="text-white text-xs font-extrabold bg-purple-650 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                                  View Department Details <ArrowRight className="w-3.5 h-3.5" />
+                                </span>
+                              </div>
                             </div>
                           )}
-                          <div className="p-5 flex flex-col justify-between flex-grow">
+                          <div className="p-6 flex flex-col justify-between flex-grow">
                             <div>
-                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-purple-50 text-purple-600 rounded-md mb-3 border border-purple-100">
+                              <span className="inline-block px-3 py-1 text-xs md:text-sm font-extrabold uppercase tracking-wider bg-purple-50 text-purple-650 rounded-lg mb-3 border border-purple-100">
                                 M.E.
                               </span>
-                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
-                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
-                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                              <h3 className="font-serif text-lg md:text-[1.2rem] font-bold text-gray-900 leading-snug mb-2 group-hover:text-purple-650 transition-colors">
+                                {cleanName(course.name)}
+                              </h3>
+                              <p className="text-sm md:text-base text-gray-600 font-medium flex items-center gap-2 mt-1">
+                                <Clock className="w-4 h-4 text-purple-400 shrink-0" /> Duration: {course.duration}
                               </p>
                             </div>
-                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                            <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                              <span className="text-xs md:text-sm font-extrabold text-gray-500 uppercase tracking-wider">Approved Intake</span>
+                              <span className="text-sm md:text-base font-black text-slate-900 bg-purple-50/80 border border-purple-100 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                                <Users className="w-4 h-4 text-purple-650" /> {course.intake} seats
                               </span>
                             </div>
                           </div>
@@ -433,46 +487,63 @@ export default function Admission() {
 
                 {/* PG Professional Programs */}
                 <div>
-                  <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                    <div className="p-2 rounded-xl bg-indigo-50 text-indigo-650">
-                      <GraduationCap className="w-6 h-6" />
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
+                  >
+                    <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
+                      <GraduationCap className="w-7 h-7 text-indigo-600" />
                     </div>
                     <div>
-                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Postgraduate Professional Programmes (MBA / MCA)</h2>
-                      <p className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest mt-0.5">2 Years Duration • Full Time</p>
+                      <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900">Postgraduate Professional Programmes (MBA / MCA)</h2>
+                      <p className="text-xs md:text-sm font-bold text-indigo-600 uppercase tracking-widest mt-1">2 Years Duration • Full Time</p>
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                     {pgPrograms.filter(c => !c.name.startsWith('M.E.')).map((course, idx) => (
-                      <Link to={`/departments/${course.key}`} key={idx} className="block group">
+                      <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-indigo-400/40 transition-all flex flex-col justify-between overflow-hidden h-full"
-                          whileHover={{ y: -2 }}
+                          initial={{ opacity: 0, y: 35 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, amount: 0.15 }}
+                          transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
+                          whileHover={{ y: -6 }}
+                          className="bg-white border border-gray-200 hover:border-indigo-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
                           {course.img && (
-                            <div className="w-full h-48 overflow-hidden border-b border-gray-100">
+                            <div className="w-full h-52 overflow-hidden border-b border-gray-100 relative">
                               <img 
                                 src={course.img} 
                                 alt={course.name} 
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                               />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                                <span className="text-white text-xs font-extrabold bg-indigo-600 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                                  View Department Details <ArrowRight className="w-3.5 h-3.5" />
+                                </span>
+                              </div>
                             </div>
                           )}
-                          <div className="p-5 flex flex-col justify-between flex-grow">
+                          <div className="p-6 flex flex-col justify-between flex-grow">
                             <div>
-                              <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-indigo-50 text-indigo-650 rounded-md mb-3 border border-indigo-100">
+                              <span className="inline-block px-3 py-1 text-xs md:text-sm font-extrabold uppercase tracking-wider bg-indigo-50 text-indigo-650 rounded-lg mb-3 border border-indigo-100">
                                 {course.name.includes('M.B.A') ? 'M.B.A' : 'M.C.A.'}
                               </span>
-                              <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
-                              <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
-                                <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
+                              <h3 className="font-serif text-lg md:text-[1.2rem] font-bold text-gray-900 leading-snug mb-2 group-hover:text-indigo-600 transition-colors">
+                                {cleanName(course.name)}
+                              </h3>
+                              <p className="text-sm md:text-base text-gray-600 font-medium flex items-center gap-2 mt-1">
+                                <Clock className="w-4 h-4 text-indigo-400 shrink-0" /> Duration: {course.duration}
                               </p>
                             </div>
-                            <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Approved Intake</span>
-                              <span className="text-[11px] font-black text-slate-800 bg-gray-100 px-3 py-1 rounded-full flex items-center gap-1">
-                                <Users className="w-3.5 h-3.5 text-gray-400" /> {course.intake} seats
+                            <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                              <span className="text-xs md:text-sm font-extrabold text-gray-500 uppercase tracking-wider">Approved Intake</span>
+                              <span className="text-sm md:text-base font-black text-slate-900 bg-indigo-50/80 border border-indigo-100 px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                                <Users className="w-4 h-4 text-indigo-600" /> {course.intake} seats
                               </span>
                             </div>
                           </div>
@@ -484,69 +555,93 @@ export default function Admission() {
 
                 {/* Ph.D. Programs */}
                 <div>
-                  <div className="flex items-center gap-3 mb-6 border-b border-gray-100 pb-3">
-                    <div className="p-2 rounded-xl bg-pink-50 text-pink-650">
-                      <GraduationCap className="w-6 h-6" />
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
+                  >
+                    <div className="p-3 rounded-2xl bg-pink-50 text-pink-650 shadow-sm">
+                      <GraduationCap className="w-7 h-7 text-pink-650" />
                     </div>
                     <div>
-                      <h2 className="font-title text-xl md:text-2xl font-bold text-gray-900">Doctoral Programmes (Ph.D.)</h2>
-                      <p className="text-[11px] font-bold text-pink-650 uppercase tracking-widest mt-0.5">Research Programs • Full Time / Part Time</p>
+                      <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900">Doctoral Programmes (Ph.D.)</h2>
+                      <p className="text-xs md:text-sm font-bold text-pink-650 uppercase tracking-widest mt-1">Research Programs • Full Time / Part Time</p>
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
                     {phdPrograms.map((course, idx) => (
-                      <motion.div 
-                        key={idx}
-                        className="bg-white border border-gray-200/80 rounded-2xl shadow-sm hover:shadow-md hover:border-pink-400/40 transition-all flex flex-col justify-between overflow-hidden"
-                        whileHover={{ y: -2 }}
-                      >
-                        {course.img && (
-                          <div className="w-full h-48 overflow-hidden border-b border-gray-100">
-                            <img 
-                              src={course.img} 
-                              alt={course.name} 
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                            />
+                      <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
+                        <motion.div 
+                          initial={{ opacity: 0, y: 35 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, amount: 0.15 }}
+                          transition={{ duration: 0.45, delay: (idx % 2) * 0.1, ease: "easeOut" }}
+                          whileHover={{ y: -6 }}
+                          className="bg-white border border-gray-200 hover:border-pink-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
+                        >
+                          {course.img && (
+                            <div className="w-full h-52 overflow-hidden border-b border-gray-100 relative">
+                              <img 
+                                src={course.img} 
+                                alt={course.name} 
+                                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
+                                <span className="text-white text-xs font-extrabold bg-pink-600 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                                  View Department Details <ArrowRight className="w-3.5 h-3.5" />
+                                </span>
+                              </div>
+                            </div>
+                          )}
+                          <div className="p-6 flex flex-col justify-between flex-grow">
+                            <div>
+                              <span className="inline-block px-3 py-1 text-xs md:text-sm font-extrabold uppercase tracking-wider bg-pink-50 text-pink-650 rounded-lg mb-3 border border-pink-100">
+                                Ph.D.
+                              </span>
+                              <h3 className="font-serif text-lg md:text-[1.2rem] font-bold text-gray-900 leading-snug mb-2 group-hover:text-pink-650 transition-colors">
+                                {cleanName(course.name)}
+                              </h3>
+                              <p className="text-sm md:text-base text-gray-600 font-medium flex items-center gap-2 mt-1">
+                                <Clock className="w-4 h-4 text-pink-400 shrink-0" /> Duration: {course.duration}
+                              </p>
+                            </div>
+                            <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between">
+                              <span className="text-xs md:text-sm font-extrabold text-gray-500 uppercase tracking-wider">Affiliated Board</span>
+                              <span className="text-xs md:text-sm font-bold text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full">
+                                Anna University Approved
+                              </span>
+                            </div>
                           </div>
-                        )}
-                        <div className="p-5 flex flex-col justify-between flex-grow">
-                          <div>
-                            <span className="inline-block px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider bg-pink-50 text-pink-650 rounded-md mb-3 border border-pink-100">
-                              Ph.D.
-                            </span>
-                            <h3 className="font-serif text-xs font-bold text-gray-800 leading-snug mb-2">{cleanName(course.name)}</h3>
-                            <p className="text-[11px] text-gray-400 font-semibold flex items-center gap-1.5">
-                              <Clock className="w-3.5 h-3.5 text-gray-300" /> Duration: {course.duration}
-                            </p>
-                          </div>
-                          <div className="mt-4 pt-3 border-t border-gray-50 flex items-center justify-between">
-                            <span className="text-[9px] font-bold text-gray-455 uppercase tracking-wider">Affiliated Board</span>
-                            <span className="text-[9px] font-bold text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full">
-                              Anna University Approved
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
+                        </motion.div>
+                      </Link>
                     ))}
                   </div>
                 </div>
 
                 {/* PDF Link CTA for Courses */}
-                <div className="p-6 bg-gradient-to-r from-gray-50 to-indigo-50/20 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5 }}
+                  className="p-6 bg-gradient-to-r from-gray-50 via-indigo-50/20 to-gray-50 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4"
+                >
                   <div className="text-left">
-                    <h4 className="text-sm font-bold text-gray-900 mb-1">Looking for official admission publications?</h4>
-                    <p className="text-xs text-gray-400 font-semibold">Download the structured official PDF list of all courses offered at APEC.</p>
+                    <h4 className="text-base font-bold text-gray-900 mb-1">Looking for official admission publications?</h4>
+                    <p className="text-xs md:text-sm text-gray-500 font-medium">Download the structured official PDF list of all courses offered at APEC.</p>
                   </div>
                   <a 
                     href="/Documents/PDFs/Admission/1. Courses Offered.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm shrink-0"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs md:text-sm font-bold transition-all shadow-sm shrink-0"
                   >
                     <Download className="w-4 h-4" /> Download Courses List PDF
                   </a>
-                </div>
+                </motion.div>
               </div>
             )}
 

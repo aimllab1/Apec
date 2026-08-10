@@ -220,8 +220,8 @@ export default function DepartmentDetail() {
             {dept.name.replace(/^Department of\s+/i, '')}
           </motion.h1>
 
-          {/* Tab Selection */}
-          <div className="relative mt-2 w-full flex items-center justify-start gap-3">
+          {/* Mobile Mini-Navbar (Retained original design) */}
+          <div className="relative mt-2 w-full flex items-center justify-start gap-3 md:hidden">
             {/* Overview Button */}
             <button
               onClick={() => {
@@ -230,13 +230,13 @@ export default function DepartmentDetail() {
                 setPubSearch('');
                 setIsMoreOpen(false);
               }}
-              className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
+              className={`flex flex-row items-center justify-center gap-2 text-xs font-bold px-5 py-2.5 rounded-xl transition-all cursor-pointer shadow-sm border ${
                 activeSubTab === 'overview' 
                   ? 'bg-indigo-650 text-white border-indigo-650' 
                   : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
               }`}
             >
-              <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+              <BookOpen className="w-4 h-4 shrink-0" />
               <span>Overview</span>
             </button>
 
@@ -244,15 +244,15 @@ export default function DepartmentDetail() {
             <div className="relative">
               <button
                 onClick={() => setIsMoreOpen(!isMoreOpen)}
-                className={`flex flex-row items-center justify-center gap-2 text-xs sm:text-sm font-bold px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all cursor-pointer shadow-sm border ${
+                className={`flex flex-row items-center justify-center gap-2 text-xs font-bold px-5 py-2.5 rounded-xl transition-all cursor-pointer shadow-sm border ${
                   (activeSubTab !== 'overview' || isMoreOpen)
                     ? 'bg-white text-indigo-650 border-indigo-200' 
                     : 'bg-white text-gray-500 border-gray-200 hover:text-indigo-650 hover:bg-gray-50'
                 }`}
               >
-                <MoreVertical className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+                <MoreVertical className="w-4 h-4 shrink-0" />
                 <span>{activeSubTab !== 'overview' ? moreOptions.find(o => o.id === activeSubTab)?.label || 'More' : 'More'}</span>
-                <ChevronDown className={`w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
               </button>
 
               {/* Overlay to close dropdown */}
@@ -284,13 +284,105 @@ export default function DepartmentDetail() {
                             setPubSearch('');
                             setIsMoreOpen(false);
                           }}
-                          className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-bold transition-colors ${
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-xs font-bold transition-colors ${
                             activeSubTab === opt.id 
                               ? 'text-indigo-650 bg-indigo-50/50' 
                               : 'text-gray-600 hover:text-indigo-650 hover:bg-gray-50'
                           }`}
                         >
                           <Icon className="w-4 h-4" />
+                          {opt.label}
+                        </button>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Desktop Elite Mini-Navbar (New Desktop-Only Design) */}
+          <div className="hidden md:flex items-center gap-2 bg-slate-900 text-white p-2 rounded-2xl shadow-xl border border-slate-800 w-full mt-3">
+            {[
+              { id: 'overview', label: 'Overview', icon: BookOpen },
+              { id: 'faculty', label: 'Faculty Directory', icon: Users },
+              { id: 'curriculum', label: 'PEO / PO', icon: Milestone },
+              { id: 'syllabus', label: 'Syllabus', icon: BookOpenCheck },
+              { id: 'labs', label: 'Facilities', icon: Library },
+              { id: 'achievements', label: 'Placements', icon: Briefcase }
+            ].map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeSubTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveSubTab(tab.id);
+                    setFacultySearch('');
+                    setPubSearch('');
+                    setIsMoreOpen(false);
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2.5 text-xs font-black rounded-xl transition-all cursor-pointer whitespace-nowrap grow justify-center ${
+                    isActive 
+                      ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20 font-black' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+
+            {/* Desktop More Options Dropdown */}
+            <div className="relative shrink-0">
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-black rounded-xl transition-all cursor-pointer ${
+                  ['calendar', 'funds', 'events', 'newsletter', 'feedback'].includes(activeSubTab) || isMoreOpen
+                    ? 'bg-amber-500 text-slate-950 shadow-md'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                <MoreVertical className="w-4 h-4" />
+                <span>{['calendar', 'funds', 'events', 'newsletter', 'feedback'].includes(activeSubTab) ? moreOptions.find(o => o.id === activeSubTab)?.label : 'More'}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isMoreOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isMoreOpen && (
+                <div 
+                  className="fixed inset-0 z-40" 
+                  onClick={() => setIsMoreOpen(false)}
+                />
+              )}
+
+              <AnimatePresence>
+                {isMoreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 top-full mt-2 w-56 bg-slate-900 border border-slate-800 text-white rounded-2xl shadow-2xl z-50 overflow-hidden py-2"
+                  >
+                    {moreOptions.filter(o => ['calendar', 'funds', 'events', 'newsletter', 'feedback'].includes(o.id)).map((opt) => {
+                      const Icon = opt.icon;
+                      return (
+                        <button
+                          key={opt.id}
+                          onClick={() => {
+                            setActiveSubTab(opt.id);
+                            setFacultySearch('');
+                            setPubSearch('');
+                            setIsMoreOpen(false);
+                          }}
+                          className={`w-full flex items-center gap-3 px-4 py-2.5 text-xs font-extrabold transition-colors ${
+                            activeSubTab === opt.id 
+                              ? 'text-amber-400 bg-slate-800' 
+                              : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                          }`}
+                        >
+                          <Icon className="w-4 h-4 text-amber-400" />
                           {opt.label}
                         </button>
                       );
