@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Lock, User, Eye, EyeOff, ShieldAlert, KeyRound, CheckCircle2 } from 'lucide-react';
-import { db } from '../firebase';
-import { collection, doc, getDocs, setDoc, deleteDoc, query, where, limit } from 'firebase/firestore';
 import { encryptText, decryptText } from '../utils/crypto';
 
 // Configure your deployed Google Apps Script Web App URL below
@@ -41,35 +39,10 @@ export default function Login() {
     'chemical@apec.edu.in': { role: 'dept_chemical', pass: 'web-development-01' },
     'agri@apec.edu.in': { role: 'dept_agri', pass: 'web-development-01' },
     'aids@apec.edu.in': { role: 'dept_aids', pass: 'web-development-01' },
-    'csd@apec.edu.in': { role: 'dept_csd', pass: 'web-development-01' },
     'mca@apec.edu.in': { role: 'dept_mca', pass: 'web-development-01' },
     'mba@apec.edu.in': { role: 'dept_mba', pass: 'web-development-01' },
     'sh@apec.edu.in': { role: 'dept_sh', pass: 'web-development-01' }
   };
-
-  // Safe background seed for Firestore if empty (non-destructive, zero-latency on UI)
-  useEffect(() => {
-    const seedUsersIfEmpty = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'users'));
-        if (querySnapshot.empty) {
-          console.log("Seeding initial user accounts to Firestore...");
-          for (const [email, config] of Object.entries(ACCOUNT_REGISTRY)) {
-            const encryptedPassword = await encryptText(config.pass);
-            const docId = email.replace(/[^a-zA-Z0-9]/g, '_');
-            await setDoc(doc(db, 'users', docId), {
-              username: email,
-              password: encryptedPassword,
-              role: config.role
-            });
-          }
-        }
-      } catch (err) {
-        console.warn("Firestore seeding check background notice:", err);
-      }
-    };
-    seedUsersIfEmpty();
-  }, []);
 
   const triggerSendOtp = async (email, role) => {
     setIsLoading(true);
@@ -93,7 +66,7 @@ export default function Login() {
         });
         const data = await response.json();
         if (data.success) {
-          setStep(3); // Transition to OTP Screen
+          setStep(3);
         } else {
           setError(data.error || 'Failed to dispatch verification OTP email.');
         }
@@ -125,7 +98,7 @@ export default function Login() {
     const username = usernameInput.trim().toLowerCase();
     const password = passwordInput;
 
-    // 1. Direct instant registry match (zero network latency, guaranteed first-try success)
+    // Direct account registry match
     const localAccount = ACCOUNT_REGISTRY[username];
     if (localAccount && localAccount.pass === password) {
       setUsernameTemp(username);
@@ -134,31 +107,8 @@ export default function Login() {
       return;
     }
 
-    // 2. Database verification for custom/updated credentials
-    try {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('username', '==', username), limit(1));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        const userDoc = querySnapshot.docs[0].data();
-        const decryptedPassword = await decryptText(userDoc.password);
-
-        if (decryptedPassword === password) {
-          setUsernameTemp(userDoc.username);
-          setUserRoleTemp(userDoc.role);
-          await triggerSendOtp(userDoc.username, userDoc.role);
-          return;
-        }
-      }
-
-      setError('Invalid username or password.');
-      setIsLoading(false);
-    } catch (err) {
-      console.error("Authentication error:", err);
-      setError('Invalid username or password.');
-      setIsLoading(false);
-    }
+    setError('Invalid username or password.');
+    setIsLoading(false);
   };
 
   const handleOtpVerifySubmit = async (e) => {

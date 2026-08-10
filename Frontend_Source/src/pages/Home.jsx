@@ -2,8 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Points, PointMaterial } from '@react-three/drei';
-import { db } from '../firebase';
-import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
+
 import { 
   ArrowRight, BookOpen, ShieldAlert, Award, Calendar, User, Eye, Compass, 
   GraduationCap, X, Mail, Phone, Sparkles, Cpu, Wifi, ChevronDown, CheckCircle2,
@@ -272,37 +271,17 @@ export default function Home() {
 
   // Load ads on mount or storage updates
   useEffect(() => {
-    const reloadAds = async () => {
+    const reloadAds = () => {
       let adEnabled = true;
       let loadedAds = [];
 
-      try {
-        const snapEnabled = await getDoc(doc(db, 'system_settings', 'ad_popup_enabled'));
-        if (snapEnabled.exists()) {
-          adEnabled = snapEnabled.data().enabled;
-          localStorage.setItem('apec_ad_popup_enabled', String(adEnabled));
-        } else {
-          const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
-          if (savedEnabled !== null) adEnabled = savedEnabled === 'true';
-        }
-      } catch (err) {
-        const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
-        if (savedEnabled !== null) adEnabled = savedEnabled === 'true';
-      }
+      const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
+      if (savedEnabled !== null) adEnabled = savedEnabled === 'true';
 
       if (adEnabled) {
-        try {
-          const snapAds = await getDoc(doc(db, 'system_settings', 'advertisements'));
-          if (snapAds.exists()) {
-            loadedAds = snapAds.data().items;
-            localStorage.setItem('apec_advertisements', JSON.stringify(loadedAds));
-          } else {
-            const savedAds = localStorage.getItem('apec_advertisements');
-            if (savedAds) loadedAds = JSON.parse(savedAds);
-          }
-        } catch (err) {
-          const savedAds = localStorage.getItem('apec_advertisements');
-          if (savedAds) loadedAds = JSON.parse(savedAds);
+        const savedAds = localStorage.getItem('apec_advertisements');
+        if (savedAds) {
+          try { loadedAds = JSON.parse(savedAds); } catch (e) {}
         }
 
         if (loadedAds.length === 0) {
@@ -508,29 +487,13 @@ export default function Home() {
         date: new Date().toLocaleString()
       };
 
-      try {
-        // Save directly to Firestore inquiries collection
-        await addDoc(collection(db, "inquiries"), newInquiry);
+      const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+      existing.push(newInquiry);
+      localStorage.setItem('apec_inquiries', JSON.stringify(existing));
 
-        // Also update local copy for caching/offline fallback
-        const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-        existing.push(newInquiry);
-        localStorage.setItem('apec_inquiries', JSON.stringify(existing));
-
-        setIsSubmitting(false);
-        setFormSubmitted(true);
-        sessionStorage.setItem('apec_ad_popup_submitted', 'true');
-      } catch (err) {
-        console.error("Firestore database connection failed. Storing locally instead: ", err);
-        // Fallback store in localStorage if database connection fails
-        const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-        existing.push(newInquiry);
-        localStorage.setItem('apec_inquiries', JSON.stringify(existing));
-
-        setIsSubmitting(false);
-        setFormSubmitted(true);
-        sessionStorage.setItem('apec_ad_popup_submitted', 'true');
-      }
+      setIsSubmitting(false);
+      setFormSubmitted(true);
+      sessionStorage.setItem('apec_ad_popup_submitted', 'true');
     }
   };
 

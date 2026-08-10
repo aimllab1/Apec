@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Check, Plus, User, GraduationCap, Calculator } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
 
 const InstagramIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -73,14 +71,15 @@ export default function Contact() {
         id: Date.now(),
         date: new Date().toLocaleString()
       };
-      await addDoc(collection(db, "inquiries"), newInquiry);
+      const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+      localStorage.setItem('apec_inquiries', JSON.stringify([newInquiry, ...existing]));
       
       setSubmitted(true);
       setFormData({ name: '', email: '', contactNumber: '', cutoff: '', department: '', schoolName: '', board: '', yearOfPassing: '' });
       setShowMore(false);
       setTimeout(() => setSubmitted(false), 4000);
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Error saving inquiry:", error);
       alert("Failed to submit inquiry. Please try again.");
     } finally {
       setIsSubmitting(false);

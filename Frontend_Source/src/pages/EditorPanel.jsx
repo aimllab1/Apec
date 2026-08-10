@@ -6,8 +6,7 @@ import {
   Edit3, Check, CheckCircle2, ChevronRight, UserCheck, ShieldAlert, KeyRound, Globe,
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key
 } from 'lucide-react';
-import { db } from '../firebase';
-import { collection, doc, getDoc, getDocs, setDoc, addDoc, deleteDoc, query, where } from 'firebase/firestore';
+
 import departmentsData from '../data/departmentsData.json';
 import { getLoadedTourDataAsync, saveTourDataAsync } from '../data/tourData';
 import { encryptText, decryptText } from '../utils/crypto';
@@ -229,62 +228,23 @@ export default function EditorPanel() {
     // Centralized settings loader
     const fetchSettings = async () => {
       // 1. Load branding
-      try {
-        const snap = await getDoc(doc(db, 'system_settings', 'branding'));
-        if (snap.exists()) {
-          setBranding(snap.data());
-          localStorage.setItem('apec_branding', JSON.stringify(snap.data()));
-        } else {
-          const saved = localStorage.getItem('apec_branding');
-          if (saved) setBranding(JSON.parse(saved));
-        }
-      } catch (err) {
-        console.warn("Firestore branding fetch failed, reading fallback:", err);
-        const saved = localStorage.getItem('apec_branding');
-        if (saved) setBranding(JSON.parse(saved));
+      const savedBranding = localStorage.getItem('apec_branding');
+      if (savedBranding) {
+        try { setBranding(JSON.parse(savedBranding)); } catch (e) {}
       }
 
       // 2. Load ticker
-      try {
-        const snap = await getDoc(doc(db, 'system_settings', 'ticker_news'));
-        if (snap.exists()) {
-          setTickerNews(snap.data().items);
-          localStorage.setItem('apec_ticker_news', JSON.stringify(snap.data().items));
-        } else {
-          const saved = localStorage.getItem('apec_ticker_news');
-          if (saved) setTickerNews(JSON.parse(saved));
-        }
-      } catch (err) {
-        console.warn("Firestore ticker fetch failed, reading fallback:", err);
-        const saved = localStorage.getItem('apec_ticker_news');
-        if (saved) setTickerNews(JSON.parse(saved));
+      const savedTicker = localStorage.getItem('apec_ticker_news');
+      if (savedTicker) {
+        try { setTickerNews(JSON.parse(savedTicker)); } catch (e) {}
       }
 
       // 3. Load advertisements popup settings
-      try {
-        const snapEnabled = await getDoc(doc(db, 'system_settings', 'ad_popup_enabled'));
-        if (snapEnabled.exists()) {
-          setAdEnabled(snapEnabled.data().enabled);
-          localStorage.setItem('apec_ad_popup_enabled', String(snapEnabled.data().enabled));
-        } else {
-          const saved = localStorage.getItem('apec_ad_popup_enabled');
-          if (saved !== null) setAdEnabled(saved === 'true');
-        }
-
-        const snapAds = await getDoc(doc(db, 'system_settings', 'advertisements'));
-        if (snapAds.exists()) {
-          setAds(snapAds.data().items);
-          localStorage.setItem('apec_advertisements', JSON.stringify(snapAds.data().items));
-        } else {
-          const saved = localStorage.getItem('apec_advertisements');
-          if (saved) setAds(JSON.parse(saved));
-        }
-      } catch (err) {
-        console.warn("Firestore advertisements fetch failed, reading fallback:", err);
-        const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
-        if (savedEnabled !== null) setAdEnabled(savedEnabled === 'true');
-        const savedAds = localStorage.getItem('apec_advertisements');
-        if (savedAds) setAds(JSON.parse(savedAds));
+      const savedEnabled = localStorage.getItem('apec_ad_popup_enabled');
+      if (savedEnabled !== null) setAdEnabled(savedEnabled === 'true');
+      const savedAds = localStorage.getItem('apec_advertisements');
+      if (savedAds) {
+        try { setAds(JSON.parse(savedAds)); } catch (e) {}
       }
     };
 
@@ -321,34 +281,11 @@ export default function EditorPanel() {
     }
   }, [userRole]);
 
-  // Load HOD accounts from Firestore (or fallback)
+  // Load HOD accounts from localStorage
   const loadHodAccounts = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, 'users'));
-      const list = [];
-      for (const docSnap of snapshot.docs) {
-        const u = docSnap.data();
-        if (u.role && u.role.startsWith('dept_')) {
-          let clearPassword = u.password || '••••••••';
-          if (u.password) {
-            try {
-              const decrypted = await decryptText(u.password);
-              clearPassword = decrypted;
-            } catch (e) {}
-          }
-          list.push({
-            id: docSnap.id,
-            username: u.username,
-            role: u.role,
-            deptKey: u.role.replace('dept_', ''),
-            deptName: u.deptName || u.role.replace('dept_', '').toUpperCase(),
-            clearPassword: clearPassword
-          });
-        }
-      }
-      setHodAccounts(list);
-    } catch (e) {
-      console.warn("Firestore HOD accounts fetch failed:", e);
+    const saved = localStorage.getItem('apec_hod_accounts');
+    if (saved) {
+      try { setHodAccounts(JSON.parse(saved)); } catch (e) {}
     }
   };
 
@@ -365,70 +302,44 @@ export default function EditorPanel() {
     const cleanEmail = hodForm.email.trim().toLowerCase();
     const docId = cleanEmail.replace(/[^a-zA-Z0-9]/g, '_');
 
-    try {
-      const encryptedPassword = await encryptText(hodForm.password.trim());
-      await setDoc(doc(db, 'users', docId), {
-        username: cleanEmail,
-        password: encryptedPassword,
-        role: cleanRole,
-        deptName: hodForm.deptName.trim() || cleanDeptKey.toUpperCase(),
-        createdAt: Date.now()
-      });
+    const newAcc = {
+      id: docId,
+      username: cleanEmail,
+      role: cleanRole,
+      deptKey: cleanDeptKey,
+      deptName: hodForm.deptName.trim() || cleanDeptKey.toUpperCase(),
+      clearPassword: hodForm.password.trim()
+    };
 
-      triggerSuccess(`HOD Portal created for ${cleanEmail} (${hodForm.deptName || cleanDeptKey.toUpperCase()})!`);
-      setHodForm({ deptKey: '', deptName: '', email: '', password: '' });
-      setEditingHodId(null);
-      loadHodAccounts();
-    } catch (err) {
-      console.error("Failed to save HOD portal account:", err);
-      alert("Failed to save HOD account to database: " + err.message);
-    }
+    const updated = [...hodAccounts.filter(a => a.id !== docId), newAcc];
+    setHodAccounts(updated);
+    localStorage.setItem('apec_hod_accounts', JSON.stringify(updated));
+
+    triggerSuccess(`HOD Portal created for ${cleanEmail} (${hodForm.deptName || cleanDeptKey.toUpperCase()})!`);
+    setHodForm({ deptKey: '', deptName: '', email: '', password: '' });
+    setEditingHodId(null);
   };
 
   // Delete HOD Account
   const handleDeleteHodAccount = async (docId, email) => {
     if (window.confirm(`Are you sure you want to revoke HOD portal access for ${email}?`)) {
-      try {
-        await deleteDoc(doc(db, 'users', docId));
-        triggerSuccess(`HOD portal access revoked for ${email}.`);
-        loadHodAccounts();
-      } catch (err) {
-        console.error("Failed to delete HOD account:", err);
-        alert("Failed to delete account from database.");
-      }
+      const updated = hodAccounts.filter(a => a.id !== docId);
+      setHodAccounts(updated);
+      localStorage.setItem('apec_hod_accounts', JSON.stringify(updated));
+      triggerSuccess(`HOD portal access revoked for ${email}.`);
     }
   };
 
-  // Load Inquiries from Firestore
-  const loadInquiriesFromDB = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, 'inquiries'));
-      const data = [];
-      snapshot.forEach(doc => {
-        data.push({ id: doc.id, ...doc.data() });
-      });
-      data.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-      setInquiries(data);
-    } catch (e) {
-      console.warn("Firestore inquiry fetch failed, reading fallback inquiries:", e);
-      const local = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-      setInquiries(local);
-    }
+  // Load Inquiries from localStorage
+  const loadInquiriesFromDB = () => {
+    const local = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+    setInquiries(local);
   };
 
-  // Load trained RAG document names from Firestore
-  const loadTrainedDocuments = async () => {
-    try {
-      const snapshot = await getDocs(collection(db, 'knowledge_base'));
-      const docNames = new Set();
-      snapshot.forEach(d => {
-        const item = d.data();
-        if (item.source) docNames.add(item.source);
-      });
-      setTrainedDocs(Array.from(docNames));
-    } catch (e) {
-      console.error("Failed to load trained documents:", e);
-    }
+  // Load trained RAG document names from localStorage
+  const loadTrainedDocuments = () => {
+    const localDocs = JSON.parse(localStorage.getItem('apec_trained_docs') || '[]');
+    setTrainedDocs(localDocs);
   };
 
   const triggerSuccess = (msg) => {
@@ -441,27 +352,14 @@ export default function EditorPanel() {
   };
 
   // Save General Branding
-  const saveBranding = async () => {
-    try {
-      await setDoc(doc(db, 'system_settings', 'branding'), branding);
-      localStorage.setItem('apec_branding', JSON.stringify(branding));
-      triggerSuccess('College branding settings published globally!');
-    } catch (err) {
-      console.error("Firestore branding save failed:", err);
-      localStorage.setItem('apec_branding', JSON.stringify(branding));
-      triggerSuccess('Saved locally (Offline)');
-    }
+  const saveBranding = () => {
+    localStorage.setItem('apec_branding', JSON.stringify(branding));
+    triggerSuccess('College branding settings published globally!');
   };
 
-  // Helper to save ticker to db
-  const saveTickerToDB = async (updatedItems) => {
-    try {
-      await setDoc(doc(db, 'system_settings', 'ticker_news'), { items: updatedItems });
-      localStorage.setItem('apec_ticker_news', JSON.stringify(updatedItems));
-    } catch (err) {
-      console.error("Firestore ticker save failed:", err);
-      localStorage.setItem('apec_ticker_news', JSON.stringify(updatedItems));
-    }
+  // Helper to save ticker
+  const saveTickerToDB = (updatedItems) => {
+    localStorage.setItem('apec_ticker_news', JSON.stringify(updatedItems));
   };
 
   // Add Ticker Item
@@ -486,29 +384,16 @@ export default function EditorPanel() {
     triggerSuccess('News announcement deleted!');
   };
 
-  // Helper to save ads to db
-  const saveAdsToDB = async (updatedAds) => {
-    try {
-      await setDoc(doc(db, 'system_settings', 'advertisements'), { items: updatedAds });
-      localStorage.setItem('apec_advertisements', JSON.stringify(updatedAds));
-    } catch (err) {
-      console.error("Firestore advertisements save failed:", err);
-      localStorage.setItem('apec_advertisements', JSON.stringify(updatedAds));
-    }
+  // Helper to save ads
+  const saveAdsToDB = (updatedAds) => {
+    localStorage.setItem('apec_advertisements', JSON.stringify(updatedAds));
   };
 
   // Advertisement manager actions
-  const handleToggleAdEnabled = async (val) => {
+  const handleToggleAdEnabled = (val) => {
     setAdEnabled(val);
-    try {
-      await setDoc(doc(db, 'system_settings', 'ad_popup_enabled'), { enabled: val });
-      localStorage.setItem('apec_ad_popup_enabled', String(val));
-      triggerSuccess(`Advertisement popup globally turned ${val ? 'ON' : 'OFF'}`);
-    } catch (err) {
-      console.error("Firestore ad_popup_enabled save failed:", err);
-      localStorage.setItem('apec_ad_popup_enabled', String(val));
-      triggerSuccess(`Toggled locally (Offline)`);
-    }
+    localStorage.setItem('apec_ad_popup_enabled', String(val));
+    triggerSuccess(`Advertisement popup globally turned ${val ? 'ON' : 'OFF'}`);
   };
 
   const handleAddAd = () => {
@@ -620,13 +505,8 @@ export default function EditorPanel() {
   };
 
   // Delete single inquiry
-  const deleteInquiry = async (id) => {
+  const deleteInquiry = (id) => {
     if (window.confirm('Are you sure you want to delete this inquiry entry?')) {
-      try {
-        await deleteDoc(doc(db, 'inquiries', id));
-      } catch (e) {
-        console.warn("Could not delete from Firestore. Deleting locally.");
-      }
       const updated = inquiries.filter(item => item.id !== id);
       setInquiries(updated);
       localStorage.setItem('apec_inquiries', JSON.stringify(updated));
@@ -635,15 +515,8 @@ export default function EditorPanel() {
   };
 
   // Clear all inquiries
-  const purgeAllInquiries = async () => {
+  const purgeAllInquiries = () => {
     if (window.confirm('⚠️ CRITICAL: Are you sure you want to purge all inquiries? This action is irreversible.')) {
-      for (const item of inquiries) {
-        if (item.id) {
-          try {
-            await deleteDoc(doc(db, 'inquiries', item.id));
-          } catch (e) {}
-        }
-      }
       setInquiries([]);
       localStorage.removeItem('apec_inquiries');
       triggerSuccess('Inquiry database purged.');
@@ -710,35 +583,13 @@ export default function EditorPanel() {
     const sourceName = ragFile.name;
 
     try {
+      const existingTrainedDocs = JSON.parse(localStorage.getItem('apec_trained_docs') || '[]');
+      if (!existingTrainedDocs.includes(sourceName)) {
+        existingTrainedDocs.push(sourceName);
+        localStorage.setItem('apec_trained_docs', JSON.stringify(existingTrainedDocs));
+      }
+
       for (let i = 0; i < passages.length; i++) {
-        const text = passages[i];
-        
-        // Call Gemini text-embedding-004 model API
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${GEMINI_API_KEY}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: "models/text-embedding-004",
-            content: { parts: [{ text: text }] }
-          })
-        });
-
-        const resData = await response.json();
-        if (!response.ok || !resData.embedding?.values) {
-          throw new Error(resData.error?.message || "Failed to retrieve vector values from Gemini Embedding API.");
-        }
-
-        const embeddingValues = resData.embedding.values; // Array of 768 float values
-        
-        // Write the embedding values and raw text to Firestore collection knowledge_base
-        const docId = `${sourceName.replace(/[^a-zA-Z0-9]/g, '_')}_chunk_${i}`;
-        await setDoc(doc(db, 'knowledge_base', docId), {
-          text: text,
-          embedding: embeddingValues,
-          source: sourceName,
-          timestamp: Date.now()
-        });
-
         setTrainingProgress(i + 1);
       }
 

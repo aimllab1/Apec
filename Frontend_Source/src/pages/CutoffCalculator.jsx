@@ -4,8 +4,7 @@ import {
   User, Mail, Phone, GraduationCap, ChevronDown, X, 
   BookOpen, Sparkles, HeartHandshake, ArrowRight, CheckCircle2 
 } from 'lucide-react';
-import { db } from '../firebase';
-import { collection, addDoc } from 'firebase/firestore';
+
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 25 },
@@ -116,21 +115,11 @@ export default function CutoffCalculator({ isEmbedded = false }) {
         date: new Date().toLocaleString()
       };
 
-      try {
-        await addDoc(collection(db, "inquiries"), newInquiry);
-        const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-        existing.push(newInquiry);
-        localStorage.setItem('apec_inquiries', JSON.stringify(existing));
-        setIsSubmitting(false);
-        setFormSubmitted(true);
-      } catch (err) {
-        console.error("Firestore database connection failed. Storing locally instead: ", err);
-        const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-        existing.push(newInquiry);
-        localStorage.setItem('apec_inquiries', JSON.stringify(existing));
-        setIsSubmitting(false);
-        setFormSubmitted(true);
-      }
+      const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+      existing.push(newInquiry);
+      localStorage.setItem('apec_inquiries', JSON.stringify(existing));
+      setIsSubmitting(false);
+      setFormSubmitted(true);
     }
   };
 

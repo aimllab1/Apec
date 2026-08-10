@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { db } from '../firebase';
-import { collection, getDocs, deleteDoc, doc, query } from 'firebase/firestore';
+
 import { 
   Lock, 
   User, 
@@ -33,26 +32,10 @@ export default function AdminPortal() {
     }
   }, [isLoggedIn]);
 
-  const loadInquiries = async () => {
-    try {
-      const q = query(collection(db, 'inquiries'));
-      const querySnapshot = await getDocs(q);
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push({
-          docId: doc.id, // Save doc ID to delete document later
-          ...doc.data()
-        });
-      });
-      // Sort by timestamp descending
-      data.sort((a, b) => (b.id || 0) - (a.id || 0));
-      setInquiries(data);
-    } catch (err) {
-      console.error("Firestore database connection failed. Loading locally: ", err);
-      const localData = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-      localData.sort((a, b) => (b.id || 0) - (a.id || 0));
-      setInquiries(localData);
-    }
+  const loadInquiries = () => {
+    const localData = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
+    localData.sort((a, b) => (b.id || 0) - (a.id || 0));
+    setInquiries(localData);
   };
 
   const handleLoginSubmit = (e) => {
@@ -68,27 +51,12 @@ export default function AdminPortal() {
     }
   };
 
-  const handleDelete = async (id, docId) => {
-    try {
-      if (docId) {
-        // Delete document from Firestore inquiries collection
-        await deleteDoc(doc(db, "inquiries", docId));
-      }
-
-      // Update state and fallback local storage
-      const updated = inquiries.filter(item => item.id !== id);
-      localStorage.setItem('apec_inquiries', JSON.stringify(updated.map(({ docId, ...rest }) => rest)));
-      setInquiries(updated);
-      setDeleteSuccess(true);
-      setTimeout(() => setDeleteSuccess(false), 2000);
-    } catch (err) {
-      console.error("Firestore delete failed. Deleting locally: ", err);
-      const updated = inquiries.filter(item => item.id !== id);
-      localStorage.setItem('apec_inquiries', JSON.stringify(updated.map(({ docId, ...rest }) => rest)));
-      setInquiries(updated);
-      setDeleteSuccess(true);
-      setTimeout(() => setDeleteSuccess(false), 2000);
-    }
+  const handleDelete = (id) => {
+    const updated = inquiries.filter(item => item.id !== id);
+    localStorage.setItem('apec_inquiries', JSON.stringify(updated));
+    setInquiries(updated);
+    setDeleteSuccess(true);
+    setTimeout(() => setDeleteSuccess(false), 2000);
   };
 
   const handleClearAll = () => {

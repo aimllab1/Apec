@@ -1,5 +1,3 @@
-import { db } from '../firebase';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const defaultMapPoints = [
   { id: 1, name: "Main Gate Entrance", x: 78.0, y: 89.8, sceneId: "mainGate" },
@@ -204,26 +202,8 @@ const safeJsonParse = (str, fallback) => {
   }
 };
 
-// Fetch tour configuration from Firestore (falls back to localStorage, then default configurations)
+// Fetch tour configuration (falls back to default configurations)
 export const getLoadedTourDataAsync = async () => {
-  try {
-    const docRef = doc(db, 'tour_config', 'active');
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      // Cache locally
-      if (data.mapPoints) localStorage.setItem('apec_360_points', JSON.stringify(data.mapPoints));
-      if (data.scenes) localStorage.setItem('apec_360_scenes', JSON.stringify(data.scenes));
-      return {
-        mapPoints: data.mapPoints || defaultMapPoints,
-        scenes: data.scenes || defaultScenes
-      };
-    }
-  } catch (e) {
-    console.error("Firestore getLoadedTourDataAsync failed, falling back to local storage:", e);
-  }
-
-  // Fallback to localStorage
   const points = localStorage.getItem('apec_360_points');
   const scenes = localStorage.getItem('apec_360_scenes');
   
@@ -233,26 +213,11 @@ export const getLoadedTourDataAsync = async () => {
   };
 };
 
-// Save tour configuration to Firestore and localStorage
+// Save tour configuration to localStorage
 export const saveTourDataAsync = async (mapPoints, scenes) => {
-  // Update local storage
   localStorage.setItem('apec_360_points', JSON.stringify(mapPoints));
   localStorage.setItem('apec_360_scenes', JSON.stringify(scenes));
-
-  // Update Firestore
-  try {
-    const docRef = doc(db, 'tour_config', 'active');
-    await setDoc(docRef, {
-      mapPoints,
-      scenes,
-      updatedAt: Date.now()
-    });
-    console.log("Tour configuration successfully saved to Firestore!");
-    return true;
-  } catch (e) {
-    console.error("Firestore saveTourDataAsync failed:", e);
-    throw e;
-  }
+  return true;
 };
 
 // Synchronous getter with automatic background Firestore cache warming
