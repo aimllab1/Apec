@@ -209,33 +209,14 @@ export default function Departments() {
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header Hero Section */}
-        <div className="mb-14 text-center max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-wider mb-6 shadow-sm"
-          >
-            <Sparkles className="w-4 h-4 text-indigo-600" />
-            <span>Academic Excellence & Research Centers</span>
-          </motion.div>
-
+        <div className="mb-10 text-center max-w-4xl mx-auto">
           <motion.h1 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 text-slate-900 font-title"
+            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 font-title text-center mb-10"
           >
-            Explore Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-amber-600">Academic Departments</span>
+            Our Academic Departments
           </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium mb-10"
-          >
-            Adiparasakthi Engineering College offers a wide range of Undergraduate, Master of Engineering (M.E.), Professional Postgraduate (MCA / MBA), and Ph.D. Research programs approved by AICTE, UGC Autonomous, and affiliated with Anna University.
-          </motion.p>
 
           {/* Quick Metrics Bar */}
           <motion.div 
