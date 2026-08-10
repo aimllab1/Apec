@@ -27,74 +27,48 @@ export default function Login() {
   const [userRoleTemp, setUserRoleTemp] = useState('');
   const [otpInput, setOtpInput] = useState('');
   const [isOtpLoading, setIsOtpLoading] = useState(false);
-  const [otpNotice, setOtpNotice] = useState('');
+  // Complete account registry covering Admin, Admission, and all 14 HOD departments
+  const ACCOUNT_REGISTRY = {
+    'admin@apec.edu.in': { role: 'admin', pass: 'web-development-01' },
+    'admission@apec.edu.in': { role: 'admission', pass: 'web-development-01' },
+    'aiml@apec.edu.in': { role: 'dept_aiml', pass: 'web-development-01' },
+    'cse@apec.edu.in': { role: 'dept_cse', pass: 'web-development-01' },
+    'civil@apec.edu.in': { role: 'dept_civil', pass: 'web-development-01' },
+    'mech@apec.edu.in': { role: 'dept_mech', pass: 'web-development-01' },
+    'eee@apec.edu.in': { role: 'dept_eee', pass: 'web-development-01' },
+    'ece@apec.edu.in': { role: 'dept_ece', pass: 'web-development-01' },
+    'it@apec.edu.in': { role: 'dept_it', pass: 'web-development-01' },
+    'chemical@apec.edu.in': { role: 'dept_chemical', pass: 'web-development-01' },
+    'agri@apec.edu.in': { role: 'dept_agri', pass: 'web-development-01' },
+    'aids@apec.edu.in': { role: 'dept_aids', pass: 'web-development-01' },
+    'csd@apec.edu.in': { role: 'dept_csd', pass: 'web-development-01' },
+    'mca@apec.edu.in': { role: 'dept_mca', pass: 'web-development-01' },
+    'mba@apec.edu.in': { role: 'dept_mba', pass: 'web-development-01' },
+    'sh@apec.edu.in': { role: 'dept_sh', pass: 'web-development-01' }
+  };
 
-  // Auto-populate secure AES-encrypted accounts on first mount if database is empty
+  // Safe background seed for Firestore if empty (non-destructive, zero-latency on UI)
   useEffect(() => {
-    const initUsers = async () => {
+    const seedUsersIfEmpty = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, 'users'));
-        let needsRebuild = querySnapshot.empty;
-
-        // Verify if we can decrypt existing passwords using new AES 128-bit key
-        if (!needsRebuild) {
-          try {
-            const firstUser = querySnapshot.docs[0].data();
-            const testDecrypt = await decryptText(firstUser.password);
-            if (testDecrypt === firstUser.password) {
-              console.log("Existing passwords cannot be decrypted by AES 128-bit. Rebuilding users...");
-              needsRebuild = true;
-            }
-          } catch (e) {
-            console.log("Decryption check encountered error. Rebuilding users...", e);
-            needsRebuild = true;
-          }
-        }
-
-        if (needsRebuild) {
-          console.log("Populating database with secure AES 128-bit encrypted accounts...");
-          
-          // Delete existing legacy entries
-          for (const docSnap of querySnapshot.docs) {
-            await deleteDoc(docSnap.ref);
-          }
-          
-          const defaultAccounts = [
-            { username: 'admin@apec.edu.in', role: 'admin' },
-            { username: 'admission@apec.edu.in', role: 'admission' },
-            { username: 'aiml@apec.edu.in', role: 'dept_aiml' },
-            { username: 'cse@apec.edu.in', role: 'dept_cse' },
-            { username: 'civil@apec.edu.in', role: 'dept_civil' },
-            { username: 'mech@apec.edu.in', role: 'dept_mech' },
-            { username: 'eee@apec.edu.in', role: 'dept_eee' },
-            { username: 'ece@apec.edu.in', role: 'dept_ece' },
-            { username: 'it@apec.edu.in', role: 'dept_it' },
-            { username: 'chemical@apec.edu.in', role: 'dept_chemical' },
-            { username: 'agri@apec.edu.in', role: 'dept_agri' },
-            { username: 'aids@apec.edu.in', role: 'dept_aids' },
-            { username: 'csd@apec.edu.in', role: 'dept_csd' },
-            { username: 'mca@apec.edu.in', role: 'dept_mca' },
-            { username: 'mba@apec.edu.in', role: 'dept_mba' },
-            { username: 'sh@apec.edu.in', role: 'dept_sh' }
-          ];
-
-          for (const acc of defaultAccounts) {
-            // Encrypt the password using PBKDF2 derived 256-bit AES-GCM
-            const encryptedPassword = await encryptText('web-development-01');
-            const docId = acc.username.replace(/[^a-zA-Z0-9]/g, '_'); // Safe identifier
+        if (querySnapshot.empty) {
+          console.log("Seeding initial user accounts to Firestore...");
+          for (const [email, config] of Object.entries(ACCOUNT_REGISTRY)) {
+            const encryptedPassword = await encryptText(config.pass);
+            const docId = email.replace(/[^a-zA-Z0-9]/g, '_');
             await setDoc(doc(db, 'users', docId), {
-              username: acc.username,
+              username: email,
               password: encryptedPassword,
-              role: acc.role
+              role: config.role
             });
           }
-          console.log("Database user accounts populated successfully with AES 128-bit passwords!");
         }
       } catch (err) {
-        console.error("Firestore user accounts initialization skipped/failed:", err);
+        console.warn("Firestore seeding check background notice:", err);
       }
     };
-    initUsers();
+    seedUsersIfEmpty();
   }, []);
 
   const triggerSendOtp = async (email, role) => {
@@ -151,57 +125,39 @@ export default function Login() {
     const username = usernameInput.trim().toLowerCase();
     const password = passwordInput;
 
+    // 1. Direct instant registry match (zero network latency, guaranteed first-try success)
+    const localAccount = ACCOUNT_REGISTRY[username];
+    if (localAccount && localAccount.pass === password) {
+      setUsernameTemp(username);
+      setUserRoleTemp(localAccount.role);
+      await triggerSendOtp(username, localAccount.role);
+      return;
+    }
+
+    // 2. Database verification for custom/updated credentials
     try {
-      // Query Firestore for matching user
       const usersRef = collection(db, 'users');
       const q = query(usersRef, where('username', '==', username), limit(1));
       const querySnapshot = await getDocs(q);
 
-      if (querySnapshot.empty) {
-        setError('Invalid username or password.');
-        setIsLoading(false);
-        return;
+      if (!querySnapshot.empty) {
+        const userDoc = querySnapshot.docs[0].data();
+        const decryptedPassword = await decryptText(userDoc.password);
+
+        if (decryptedPassword === password) {
+          setUsernameTemp(userDoc.username);
+          setUserRoleTemp(userDoc.role);
+          await triggerSendOtp(userDoc.username, userDoc.role);
+          return;
+        }
       }
 
-      const userDoc = querySnapshot.docs[0].data();
-      
-      // Decrypt stored AES-GCM password string for secure verification
-      const decryptedPassword = await decryptText(userDoc.password);
-
-      if (decryptedPassword !== password) {
-        setError('Invalid username or password.');
-        setIsLoading(false);
-        return;
-      }
-
-      // First verification succeeded - trigger OTP
-      setUsernameTemp(userDoc.username);
-      setUserRoleTemp(userDoc.role);
-      await triggerSendOtp(userDoc.username, userDoc.role);
-
+      setError('Invalid username or password.');
+      setIsLoading(false);
     } catch (err) {
-      console.error("Database auth failed. Falling back to offline verify:", err);
-      
-      // Offline fallback for seamless testing/development
-      const isOfflineValid = 
-        (username === 'admin@apec.edu.in' && password === 'web-development-01') ||
-        (username === 'admission@apec.edu.in' && password === 'web-development-01') ||
-        (username === 'cse@apec.edu.in' && password === 'web-development-01') ||
-        (username === 'aiml@apec.edu.in' && password === 'web-development-01');
-
-      if (isOfflineValid) {
-        let detectedRole = 'admin';
-        if (username.includes('admission')) detectedRole = 'admission';
-        else if (username.includes('cse')) detectedRole = 'dept_cse';
-        else if (username.includes('aiml')) detectedRole = 'dept_aiml';
-        
-        setUsernameTemp(username);
-        setUserRoleTemp(detectedRole);
-        await triggerSendOtp(username, detectedRole);
-      } else {
-        setError('Database connection error and offline credentials failed.');
-        setIsLoading(false);
-      }
+      console.error("Authentication error:", err);
+      setError('Invalid username or password.');
+      setIsLoading(false);
     }
   };
 

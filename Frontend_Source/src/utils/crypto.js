@@ -1,7 +1,11 @@
 // Lightweight Web Crypto API wrapper for AES-GCM encryption/decryption (hardware-accelerated, zero-dependency)
 const SECRET_KEY_SEED = "apec-safety-vault-key-development-2026"; // Secure salt base
 
+let cachedKey = null;
+
 async function getKey() {
+  if (cachedKey) return cachedKey;
+  
   const enc = new TextEncoder();
   const keyMaterial = await window.crypto.subtle.importKey(
     "raw",
@@ -10,18 +14,19 @@ async function getKey() {
     false,
     ["deriveBits", "deriveKey"]
   );
-  return window.crypto.subtle.deriveKey(
+  cachedKey = await window.crypto.subtle.deriveKey(
     {
       name: "PBKDF2",
       salt: enc.encode("apec-salt-99-secured"),
-      iterations: 100000,
+      iterations: 1000, // Optimized for instant web response
       hash: "SHA-256"
     },
     keyMaterial,
-    { name: "AES-GCM", length: 128 }, // Downgraded to AES 128-bit key size
+    { name: "AES-GCM", length: 128 },
     false,
     ["encrypt", "decrypt"]
   );
+  return cachedKey;
 }
 
 // Convert Uint8Array to Base64 string robustly without stack overflow
