@@ -1,0 +1,9 @@
+in the admission tab there are may cells like courses offered there the images of all the
+    courses containes the name of the departments with their image in a container those text are
+    really small increase the size of the text by 50%
+
+
+    if the user click those image container of the department in the course offerd page then it
+    will redirects the user to the particular department page
+
+  when the user scrolls the page below images or text will be come with a animation or transition

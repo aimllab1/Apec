@@ -6,20 +6,12 @@ $networkShareDir = "Z:\"
 
 Write-Host "=== Starting local build process ==="
 
-# 1. Clean and create local build directory
-if (Test-Path $localBuildDir) {
-    Write-Host "Cleaning existing local build directory..."
-    Remove-Item -Path $localBuildDir -Recurse -Force
-}
-New-Item -ItemType Directory -Force -Path $localBuildDir
-
-# 2. Copy source files
-Write-Host "Copying source files to local drive..."
-Copy-Item -Path "$networkShareDir\package.json" -Destination $localBuildDir -Force
-Copy-Item -Path "$networkShareDir\package-lock.json" -Destination $localBuildDir -Force
-Copy-Item -Path "$networkShareDir\index.html" -Destination $localBuildDir -Force
-Copy-Item -Path "$networkShareDir\Project_Settings" -Destination $localBuildDir -Recurse -Force
-Copy-Item -Path "$networkShareDir\Frontend_Source" -Destination $localBuildDir -Recurse -Force
+# 1. Sync source files to local build directory using robocopy
+Write-Host "Syncing source files to local drive..."
+robocopy "$networkShareDir" "$localBuildDir" package.json package-lock.json index.html /NJH /NJS /NDL /NC /NS
+robocopy "$networkShareDir\Project_Settings" "$localBuildDir\Project_Settings" /MIR /NJH /NJS /NDL /NC /NS
+robocopy "$networkShareDir\Frontend_Source" "$localBuildDir\Frontend_Source" /MIR /NJH /NJS /NDL /NC /NS
+robocopy "$networkShareDir\public" "$localBuildDir\public" /MIR /NJH /NJS /NDL /NC /NS
 
 # Save current location and switch to local build dir
 Push-Location $localBuildDir

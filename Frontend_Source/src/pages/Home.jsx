@@ -812,13 +812,13 @@ export default function Home() {
       </section>
 
       {/* Bento Department Visualizer replaced with centered sliding showcase */}
-      <section className="py-24 px-6 bg-transparent relative z-10">
+      <section className="dept-showcase-section py-24 px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           
-          <div className="text-left mb-16">
-            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">Curriculum Explorer</span>
-            <h2 className="font-title text-3xl md:text-4xl font-bold text-white drop-shadow-md">Department Showcase</h2>
-            <p className="text-xs text-gray-400 mt-2 max-w-sm font-semibold font-sans">Explore our individual department portals and their focused structural curricula.</p>
+          <div className="text-center mb-16 flex flex-col items-center">
+            <span className="font-display text-xs uppercase font-extrabold tracking-widest text-indigo-400 bg-indigo-950/60 border border-indigo-500/30 px-3.5 py-1.5 rounded-full inline-block mb-4 shadow-sm">Curriculum Explorer</span>
+            <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Department Showcase</h2>
+            <p className="text-sm md:text-base text-slate-200/90 font-semibold font-sans max-w-2xl text-center">Explore our individual department portals and their focused curricula.</p>
           </div>
 
           <div className="relative max-w-5xl mx-auto px-4 md:px-12 flex flex-col items-center">
@@ -850,41 +850,37 @@ export default function Home() {
                       exit="exit"
                       className="w-full h-full flex items-center justify-center"
                     >
-                      <div className="group relative bg-white/10 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-slate-800/80 rounded-3xl flex flex-col md:flex-row transition-all duration-500 hover:border-indigo-500 hover:shadow-[0_0_30px_rgba(99,102,241,0.25)] overflow-hidden h-auto md:h-[350px] w-full max-w-4xl after:absolute after:inset-0 after:-translate-x-full hover:after:translate-x-full after:bg-gradient-to-r after:from-transparent after:via-white/15 after:to-transparent after:transition-transform after:duration-1000 after:ease-out">
+                      <div className="dept-showcase-card">
                         {/* Left Column: Department Image */}
-                        <div className="w-full md:w-2/5 h-48 md:h-auto overflow-hidden relative border-b md:border-b-0 md:border-r border-white/20 dark:border-slate-800/50 shrink-0">
+                        <div className="dept-image-wrapper">
                           <img 
                             src={dept.img} 
                             alt={dept.name} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            className="dept-image"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70 pointer-events-none" />
                         </div>
 
                         {/* Right Column: Details & Explore */}
-                        <div className="p-5 md:p-8 flex flex-col justify-between items-start text-left flex-grow relative w-full">
-                          {/* Subtle gradient background glow on hover */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                          
-                          <div className="w-full relative z-10">
+                        <div className="dept-content-area">
+                          <div className="w-full relative z-10 flex flex-col">
                             {/* Top row with Icon and Badge */}
-                            <div className="flex justify-between items-center mb-4 md:mb-5">
-                              <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-white/20 dark:bg-slate-800/50 border border-white/25 dark:border-slate-700/50 flex items-center justify-center text-indigo-700 dark:text-indigo-400 group-hover:bg-indigo-650 group-hover:text-white dark:group-hover:text-white transition-all duration-300">
-                                <IconComponent className="w-4.5 h-4.5" />
+                            <div className="dept-top-bar">
+                              <div className="dept-icon-container">
+                                <IconComponent className="w-5 h-5 text-indigo-400" />
                               </div>
-                              <span className="text-[10px] font-mono font-black uppercase tracking-wider px-2.5 py-1 rounded-lg bg-white/20 dark:bg-slate-800/50 border border-white/25 dark:border-slate-700/50 text-indigo-700 dark:text-indigo-400 group-hover:bg-indigo-650 group-hover:text-white dark:group-hover:text-white group-hover:border-indigo-650 transition-all duration-300">
+                              <span className="dept-code-badge">
                                 {dept.code}
                               </span>
                             </div>
                             
-                            <span className="text-[8px] md:text-[9px] uppercase font-bold tracking-widest text-slate-400 dark:text-slate-500 block mb-1">Focused Curriculum Overview</span>
-                            <h3 className="text-base md:text-xl font-black text-slate-900 dark:text-slate-100 mb-1.5 md:mb-2.5 group-hover:text-indigo-650 dark:group-hover:text-indigo-400 transition-colors duration-200">{dept.name}</h3>
-                            <p className="text-xs text-slate-600 dark:text-slate-350 leading-relaxed font-semibold mb-3 md:mb-4 max-w-xl">{dept.details}</p>
+                            <span className="dept-subtitle">Focused Curriculum Overview</span>
+                            <h3 className="dept-title">{dept.name}</h3>
+                            <p className="dept-description">{dept.details}</p>
                           </div>
 
-                          <div className="w-full pt-3 md:pt-4 border-t border-white/20 dark:border-slate-800/80 mt-auto flex justify-between items-center relative z-10">
-                            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest">Autonomous Status</span>
-                            <Link to={`/departments/${dept.key}`} className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-slate-200 group-hover:text-indigo-650 dark:group-hover:text-indigo-400 group-hover:gap-2.5 transition-all">
+                          <div className="dept-bottom-bar">
+                            <span className="dept-status">Autonomous Status</span>
+                            <Link to={`/departments/${dept.key}`} className="dept-link">
                               Explore Portal <ArrowRight className="w-3.5 h-3.5" />
                             </Link>
                           </div>
@@ -902,10 +898,10 @@ export default function Home() {
                 setDirection(-1);
                 setCurrentIdx((prev) => (prev - 1 + depts.length) % depts.length);
               }}
-              className="absolute left-[-16px] md:left-[-32px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-650 hover:text-indigo-650 hover:border-indigo-300 hover:shadow-lg transition-all cursor-pointer z-20"
+              className="absolute left-[-12px] md:left-[-36px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer z-30 border border-slate-200"
               aria-label="Previous department"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-6 h-6 text-slate-850" />
             </button>
 
             <button
@@ -913,10 +909,10 @@ export default function Home() {
                 setDirection(1);
                 setCurrentIdx((prev) => (prev + 1) % depts.length);
               }}
-              className="absolute right-[-16px] md:right-[-32px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white border border-gray-200 shadow-md flex items-center justify-center text-gray-650 hover:text-indigo-650 hover:border-indigo-300 hover:shadow-lg transition-all cursor-pointer z-20"
+              className="absolute right-[-12px] md:right-[-36px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer z-30 border border-slate-200"
               aria-label="Next department"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-6 h-6 text-slate-850" />
             </button>
 
             {/* Dot Indicator Navigation */}
@@ -928,8 +924,8 @@ export default function Home() {
                     setDirection(idx > currentIdx ? 1 : -1);
                     setCurrentIdx(idx);
                   }}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentIdx === idx ? 'w-6 bg-indigo-650' : 'w-2 bg-gray-200 hover:bg-gray-300'
+                  className={`indicator-dot cursor-pointer ${
+                    currentIdx === idx ? 'active' : 'inactive'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

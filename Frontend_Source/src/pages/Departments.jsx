@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Clock, ArrowRight, GraduationCap, BookOpen, Award, Users, Search, 
-  Sparkles, Filter, CheckCircle2, ChevronRight, Layers, Cpu, Database, 
-  Zap, Flame, HardHat, ShieldCheck
+  Clock, ArrowRight, GraduationCap, Search, Sparkles, X, 
+  BookOpen, Award, Users, ShieldCheck, ChevronRight, Layers, Check
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
@@ -36,16 +35,17 @@ const departmentImages = {
 };
 
 const categoryBadgeStyles = {
-  ug_be: { label: 'UG Programme (B.E.)', bg: 'bg-indigo-500/10 border-indigo-500/30 text-indigo-700' },
-  ug_btech: { label: 'UG Programme (B.Tech.)', bg: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700' },
-  pg_me: { label: 'PG Programme (M.E.)', bg: 'bg-amber-500/10 border-amber-500/30 text-amber-700' },
-  pg_other: { label: 'PG Programme (MCA / MBA)', bg: 'bg-purple-500/10 border-purple-500/30 text-purple-700' },
-  phd: { label: 'Ph.D. Research Center', bg: 'bg-rose-500/10 border-rose-500/30 text-rose-700' }
+  ug_be: { label: 'UG (B.E.)', bg: 'bg-indigo-500/10 border-indigo-500/30 text-indigo-700 font-bold' },
+  ug_btech: { label: 'UG (B.Tech)', bg: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-700 font-bold' },
+  pg_me: { label: 'PG (M.E.)', bg: 'bg-amber-500/10 border-amber-500/30 text-amber-700 font-bold' },
+  pg_other: { label: 'PG (MCA / MBA)', bg: 'bg-purple-500/10 border-purple-500/30 text-purple-700 font-bold' },
+  phd: { label: 'Ph.D. Center', bg: 'bg-rose-500/10 border-rose-500/30 text-rose-700 font-bold' }
 };
 
 export default function Departments() {
   const [activeTab, setActiveTab] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const sortOrder = [
     // Undergraduate Programs
@@ -193,67 +193,100 @@ export default function Departments() {
   });
 
   // Counts for summary metrics
-  const totalCount = depts.length;
   const ugCount = depts.filter(d => d.category === 'ug_be' || d.category === 'ug_btech').length;
   const meCount = depts.filter(d => d.category === 'pg_me').length;
   const pgOtherCount = depts.filter(d => d.category === 'pg_other').length;
   const phdCount = depts.filter(d => d.category === 'phd').length;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden text-gray-900">
-      {/* Dynamic Background Mesh */}
-      <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-gradient-to-br from-indigo-200/40 via-purple-200/30 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-gradient-to-tr from-amber-200/40 via-rose-200/30 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(#CBD5E1_1px,transparent_1px)] [background-size:32px_32px] opacity-40 pointer-events-none" />
+    <div className="min-h-screen bg-[#F8FAFC] py-16 px-4 sm:px-6 lg:px-12 relative overflow-hidden text-gray-900">
+      {/* Premium Ambient Background Mesh */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-gradient-to-b from-indigo-100/50 via-amber-100/30 to-transparent rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#E2E8F0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
-        {/* Header Hero Section */}
-        <div className="mb-10 text-center max-w-4xl mx-auto">
+        {/* Elite Centered Heading */}
+        <div className="mb-8 text-center max-w-3xl mx-auto">
           <motion.h1 
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 font-title text-center mb-10"
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-title text-center"
           >
             Our Academic Departments
           </motion.h1>
-
-          {/* Quick Metrics Bar */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-3 rounded-2xl border border-slate-200 shadow-md max-w-3xl mx-auto"
-          >
-            <div className="p-3 text-center rounded-xl bg-slate-50 border border-slate-100">
-              <span className="block text-2xl font-black text-indigo-600">{ugCount}</span>
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">UG Degrees</span>
-            </div>
-            <div className="p-3 text-center rounded-xl bg-amber-50/60 border border-amber-100">
-              <span className="block text-2xl font-black text-amber-600">{meCount}</span>
-              <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">M.E. Programs</span>
-            </div>
-            <div className="p-3 text-center rounded-xl bg-purple-50/60 border border-purple-100">
-              <span className="block text-2xl font-black text-purple-600">{pgOtherCount}</span>
-              <span className="text-[11px] font-bold text-purple-700 uppercase tracking-wider">MCA & MBA</span>
-            </div>
-            <div className="p-3 text-center rounded-xl bg-rose-50/60 border border-rose-100">
-              <span className="block text-2xl font-black text-rose-600">{phdCount}</span>
-              <span className="text-[11px] font-bold text-rose-700 uppercase tracking-wider">Ph.D. Centers</span>
-            </div>
-          </motion.div>
         </div>
 
-        {/* Filter Tabs & Search Controls */}
-        <div className="flex flex-col lg:flex-row gap-4 justify-between items-center mb-10 bg-white/90 backdrop-blur-md border border-slate-200 p-4 sm:p-5 rounded-3xl shadow-sm">
-          
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-2 w-full lg:w-auto">
+        {/* Elite Floating Metrics Bar */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-10 max-w-4xl mx-auto"
+        >
+          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.04)] rounded-2xl p-3 sm:p-4 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+            
+            {/* Metric 1 */}
+            <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-indigo-50/60 border border-indigo-100/80">
+              <div className="w-10 h-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-lg shadow-sm shrink-0">
+                {ugCount}
+              </div>
+              <div className="text-left">
+                <span className="block text-xs font-black text-slate-900 leading-tight">UG Degrees</span>
+                <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider">B.E. / B.Tech</span>
+              </div>
+            </div>
+
+            {/* Metric 2 */}
+            <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-amber-50/60 border border-amber-100/80">
+              <div className="w-10 h-10 rounded-lg bg-amber-600 text-white flex items-center justify-center font-black text-lg shadow-sm shrink-0">
+                {meCount}
+              </div>
+              <div className="text-left">
+                <span className="block text-xs font-black text-slate-900 leading-tight">M.E. Programs</span>
+                <span className="text-[10px] font-extrabold text-amber-600 uppercase tracking-wider">Postgraduate</span>
+              </div>
+            </div>
+
+            {/* Metric 3 */}
+            <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-purple-50/60 border border-purple-100/80">
+              <div className="w-10 h-10 rounded-lg bg-purple-600 text-white flex items-center justify-center font-black text-lg shadow-sm shrink-0">
+                {pgOtherCount}
+              </div>
+              <div className="text-left">
+                <span className="block text-xs font-black text-slate-900 leading-tight">MCA & MBA</span>
+                <span className="text-[10px] font-extrabold text-purple-600 uppercase tracking-wider">Professional</span>
+              </div>
+            </div>
+
+            {/* Metric 4 */}
+            <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-rose-50/60 border border-rose-100/80">
+              <div className="w-10 h-10 rounded-lg bg-rose-600 text-white flex items-center justify-center font-black text-lg shadow-sm shrink-0">
+                {phdCount}
+              </div>
+              <div className="text-left">
+                <span className="block text-xs font-black text-slate-900 leading-tight">Ph.D. Centers</span>
+                <span className="text-[10px] font-extrabold text-rose-600 uppercase tracking-wider">Research</span>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
+
+        {/* Elite Compact Mini-Nav Bar with Inline Search Icon Toggle */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-10 max-w-5xl mx-auto flex items-center justify-between gap-3 bg-slate-900 text-white p-2 sm:p-2.5 rounded-2xl shadow-xl border border-slate-800"
+        >
+          {/* Mini-Nav Category Buttons */}
+          <div className="flex items-center gap-1 sm:gap-1.5 overflow-x-auto scrollbar-none py-1 px-1 grow">
             {[
-              { id: 'all', label: `All Programs (${totalCount})` },
-              { id: 'ug', label: `Undergraduate (${ugCount})` },
+              { id: 'all', label: 'All Programs' },
+              { id: 'ug', label: `UG Degrees (${ugCount})` },
               { id: 'pg_me', label: `M.E. Programs (${meCount})` },
-              { id: 'pg_other', label: `MCA / MBA (${pgOtherCount})` },
+              { id: 'pg_other', label: `MCA & MBA (${pgOtherCount})` },
               { id: 'phd', label: `Ph.D. Centers (${phdCount})` }
             ].map((tab) => (
               <button
@@ -262,10 +295,10 @@ export default function Departments() {
                   setActiveTab(tab.id);
                   setSearchTerm('');
                 }}
-                className={`py-2.5 px-4 text-xs sm:text-sm font-extrabold rounded-xl transition-all cursor-pointer grow lg:grow-0 text-center ${
+                className={`py-2 px-3.5 sm:px-4 text-xs font-extrabold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                   activeTab === tab.id 
-                    ? 'bg-slate-900 text-white shadow-md' 
-                    : 'bg-slate-100/80 text-slate-600 hover:text-slate-900 hover:bg-slate-200/80'
+                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20 font-black' 
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800'
                 }`}
               >
                 {tab.label}
@@ -273,26 +306,47 @@ export default function Departments() {
             ))}
           </div>
 
-          {/* Search Box */}
-          <div className="relative w-full lg:w-80 shrink-0">
-            <input 
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search departments or focus areas..."
-              className="w-full text-sm py-2.5 pl-10 pr-10 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white focus:ring-2 focus:ring-indigo-100 transition-all font-medium text-slate-800 placeholder-slate-400"
-            />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            {searchTerm && (
-              <button 
-                onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-black text-slate-400 hover:text-slate-700 bg-slate-200 hover:bg-slate-300 rounded-full w-5 h-5 flex items-center justify-center cursor-pointer transition-colors"
-              >
-                ✕
-              </button>
-            )}
+          {/* Compact Compact Search Control */}
+          <div className="relative shrink-0 flex items-center pr-1">
+            <AnimatePresence>
+              {isSearchOpen ? (
+                <motion.div 
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: 220 }}
+                  exit={{ opacity: 0, width: 0 }}
+                  className="relative flex items-center"
+                >
+                  <input
+                    type="text"
+                    autoFocus
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search program..."
+                    className="w-full text-xs py-2 pl-8 pr-7 bg-slate-800 border border-slate-700 text-white placeholder-slate-400 rounded-xl outline-none focus:border-amber-400 font-medium"
+                  />
+                  <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 pointer-events-none" />
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setIsSearchOpen(false);
+                    }}
+                    className="absolute right-2 text-slate-400 hover:text-white text-xs cursor-pointer p-0.5"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </motion.div>
+              ) : (
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-2 sm:p-2.5 rounded-xl bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-slate-300 transition-all cursor-pointer flex items-center justify-center shadow-inner"
+                  title="Search Departments"
+                >
+                  <Search className="w-4 h-4" />
+                </button>
+              )}
+            </AnimatePresence>
           </div>
-        </div>
+        </motion.div>
 
         {/* Department Cards Grid */}
         <AnimatePresence mode="wait">
@@ -301,19 +355,19 @@ export default function Departments() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           >
             {filteredDepts.length === 0 ? (
-              <div className="col-span-full p-16 bg-white rounded-3xl border border-dashed border-slate-300 text-center flex flex-col items-center justify-center">
-                <Search className="w-12 h-12 text-slate-300 mb-4" />
-                <h3 className="text-lg font-bold text-slate-700 mb-1">No Departments Found</h3>
-                <p className="text-sm text-slate-500 max-w-md">No programs match your current search query. Try clearing the filter or searching for another keyword.</p>
+              <div className="col-span-full p-14 bg-white rounded-3xl border border-dashed border-slate-300 text-center flex flex-col items-center justify-center">
+                <Search className="w-10 h-10 text-slate-300 mb-3" />
+                <h3 className="text-base font-bold text-slate-700 mb-1">No Matching Department Found</h3>
+                <p className="text-xs text-slate-500 max-w-md mb-4">Try clearing your search keyword or switching category tabs.</p>
                 <button
-                  onClick={() => { setActiveTab('all'); setSearchTerm(''); }}
-                  className="mt-5 px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition-colors shadow-sm"
+                  onClick={() => { setActiveTab('all'); setSearchTerm(''); setIsSearchOpen(false); }}
+                  className="px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-bold hover:bg-amber-500 hover:text-slate-950 transition-colors shadow-sm cursor-pointer"
                 >
-                  Reset Filters
+                  Reset All Filters
                 </button>
               </div>
             ) : (
@@ -326,31 +380,31 @@ export default function Departments() {
                 return (
                   <motion.div 
                     key={dept.key}
-                    whileHover={{ y: -6 }}
-                    transition={{ duration: 0.25 }}
-                    className="group bg-white border border-slate-200/90 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-indigo-400 hover:shadow-[0_20px_45px_rgba(99,102,241,0.08)] transition-all duration-300 text-left"
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.2 }}
+                    className="group bg-white border border-slate-200/90 rounded-3xl overflow-hidden flex flex-col justify-between hover:border-amber-400 hover:shadow-[0_20px_45px_rgba(217,119,6,0.1)] transition-all duration-300 text-left"
                   >
                     <div>
                       {/* Department Image Header */}
-                      <div className="w-full h-52 overflow-hidden relative bg-slate-100">
+                      <div className="w-full h-48 overflow-hidden relative bg-slate-100">
                         <img 
                           src={departmentImages[dept.key] || departmentImages.default} 
                           alt={`${dept.name} Department`}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                           onError={(e) => { e.target.src = departmentImages.default; }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                         
                         {/* Category Badge over Image */}
-                        <div className="absolute top-4 left-4">
-                          <span className={`text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full border backdrop-blur-md ${badgeInfo.bg}`}>
+                        <div className="absolute top-3.5 left-3.5">
+                          <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full border backdrop-blur-md ${badgeInfo.bg}`}>
                             {badgeInfo.label}
                           </span>
                         </div>
 
                         {/* Duration Badge */}
-                        <div className="absolute bottom-3 right-4 flex items-center gap-1 text-[11px] font-extrabold text-white bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
-                          <Clock className="w-3.5 h-3.5 text-amber-400" />
+                        <div className="absolute bottom-3 right-3.5 flex items-center gap-1 text-[10px] font-extrabold text-white bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10">
+                          <Clock className="w-3 h-3 text-amber-400" />
                           <span>{dept.duration}</span>
                         </div>
                       </div>
@@ -358,22 +412,22 @@ export default function Departments() {
                       {/* Content Area */}
                       <div className="p-6">
                         {/* Department Name */}
-                        <h3 className="text-xl font-black text-slate-900 leading-snug mb-3 group-hover:text-indigo-600 transition-colors font-title">
+                        <h3 className="text-xl font-black text-slate-900 leading-snug mb-3 group-hover:text-amber-600 transition-colors font-title">
                           {dept.name}
                         </h3>
 
                         {/* Intake Info */}
-                        <div className="flex items-center gap-2 mb-4 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-100 p-2.5 rounded-xl">
+                        <div className="flex items-center gap-2 mb-4 text-xs font-bold text-slate-600 bg-slate-50 border border-slate-150 p-2.5 rounded-xl">
                           <GraduationCap className="w-4 h-4 text-indigo-600 shrink-0" />
                           <span>Approved Intake: <strong className="text-slate-900">{dept.intake}</strong></span>
                         </div>
 
                         {/* Core Focus Pills */}
-                        <div className="mb-6">
+                        <div className="mb-4">
                           <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider block mb-2">Key Focus Areas</span>
                           <div className="flex flex-wrap gap-1.5">
                             {dept.focus.split(', ').slice(0, 3).map((f, idx) => (
-                              <span key={idx} className="text-[11px] font-bold bg-indigo-50/70 border border-indigo-100 text-indigo-800 px-2.5 py-1 rounded-lg">
+                              <span key={idx} className="text-[10px] font-bold bg-slate-100/80 border border-slate-200 text-slate-700 px-2.5 py-1 rounded-lg">
                                 {f}
                               </span>
                             ))}
@@ -383,28 +437,28 @@ export default function Departments() {
                     </div>
 
                     {/* Stats & Footer Link */}
-                    <div className="px-6 pb-6 pt-2">
+                    <div className="px-6 pb-6 pt-1">
                       <div className="grid grid-cols-3 gap-2 text-center mb-5 border-t border-slate-100 pt-4">
-                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                          <span className="block text-sm font-black text-indigo-600">{facultyCount || 'Expert'}</span>
-                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Faculty</span>
+                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
+                          <span className="block text-xs font-black text-indigo-600">{facultyCount || 'Expert'}</span>
+                          <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Faculty</span>
                         </div>
-                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                          <span className="block text-sm font-black text-emerald-600">{labCount || 'Advanced'}</span>
-                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Labs</span>
+                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
+                          <span className="block text-xs font-black text-emerald-600">{labCount || 'Advanced'}</span>
+                          <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Labs</span>
                         </div>
-                        <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-                          <span className="block text-sm font-black text-amber-600">{placementCount || 'High'}</span>
-                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Placements</span>
+                        <div className="bg-slate-50 p-2 rounded-xl border border-slate-150">
+                          <span className="block text-xs font-black text-amber-600">{placementCount || 'High'}</span>
+                          <span className="text-[9px] uppercase font-bold text-slate-400 tracking-wider">Placed</span>
                         </div>
                       </div>
 
                       <Link 
                         to={`/departments/${dept.key}`}
-                        className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-indigo-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all shadow-md hover:shadow-indigo-500/20 active:scale-95 cursor-pointer"
+                        className="w-full flex items-center justify-center gap-2 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-black text-xs uppercase tracking-wider py-3 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer"
                       >
                         <span>Explore Department Portal</span>
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </motion.div>

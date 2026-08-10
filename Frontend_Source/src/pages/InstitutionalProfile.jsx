@@ -122,22 +122,75 @@ export default function InstitutionalProfile() {
             Institutional Standing
           </h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl">
-              <span className="font-display block text-[8px] font-black text-indigo-600 uppercase tracking-widest mb-1.5">Affiliation</span>
-              <h4 className="text-sm font-bold text-slate-900 mb-1">Anna University</h4>
-              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">Permanently affiliated and registered under Anna University frameworks.</p>
-            </div>
-            <div className="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl">
-              <span className="font-display block text-[8px] font-black text-indigo-600 uppercase tracking-widest mb-1.5">UGC Autonomous</span>
-              <h4 className="text-sm font-bold text-slate-900 mb-1">10-Year Status</h4>
-              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">Granted autonomous status by the UGC to design industry-centric curriculum pathways.</p>
-            </div>
-            <div className="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl">
-              <span className="font-display block text-[8px] font-black text-indigo-600 uppercase tracking-widest mb-1.5">Quality Mark</span>
-              <h4 className="text-sm font-bold text-slate-900 mb-1">NAAC Accredited</h4>
-              <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">Accredited with an 'A' grade for top-tier academic standards and infrastructure.</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            {/* Card 1: Anna University */}
+            <motion.div 
+              variants={fadeInUp}
+              className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
+            >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 mb-5 p-3 rounded-2xl bg-white border border-slate-150 shadow-sm group-hover:shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+                <img 
+                  src="/Images/Logos/university_logo-rem.png" 
+                  alt="Anna University Logo" 
+                  className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
+                />
+              </div>
+              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
+                Affiliation
+              </span>
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-snug">
+                Anna University
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-semibold leading-relaxed">
+                Permanently affiliated and registered under Anna University frameworks.
+              </p>
+            </motion.div>
+
+            {/* Card 2: UGC Autonomous */}
+            <motion.div 
+              variants={fadeInUp}
+              className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
+            >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 mb-5 p-3 rounded-2xl bg-white border border-slate-150 shadow-sm group-hover:shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+                <img 
+                  src="/Images/Logos/UGC.png" 
+                  alt="UGC Autonomous Logo" 
+                  className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
+                />
+              </div>
+              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
+                UGC Autonomous
+              </span>
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-snug">
+                10-Year Status
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-semibold leading-relaxed">
+                Granted autonomous status by the UGC to design industry-centric curriculum pathways.
+              </p>
+            </motion.div>
+
+            {/* Card 3: NAAC Accredited */}
+            <motion.div 
+              variants={fadeInUp}
+              className="p-6 sm:p-8 bg-slate-50/60 border border-slate-200/80 rounded-3xl hover:border-indigo-500 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center group"
+            >
+              <div className="w-24 h-24 sm:w-28 sm:h-28 mb-5 p-3 rounded-2xl bg-white border border-slate-150 shadow-sm group-hover:shadow-md flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
+                <img 
+                  src="/Images/Logos/Naac.png" 
+                  alt="NAAC Accredited Logo" 
+                  className="max-w-full max-h-full object-contain filter drop-shadow-sm" 
+                />
+              </div>
+              <span className="font-display text-[10px] sm:text-xs font-black uppercase tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3 py-1 rounded-full mb-3 inline-block">
+                Quality Mark
+              </span>
+              <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2 leading-snug">
+                NAAC Accredited
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 font-semibold leading-relaxed">
+                Accredited with an 'A' grade for top-tier academic standards and infrastructure.
+              </p>
+            </motion.div>
           </div>
         </motion.div>
 
