@@ -808,7 +808,7 @@ function AppContent({ isLoading, setIsLoading }) {
                         <Link to="/about/profile" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Institution Profile</Link>
                         <Link to="/about/founders" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Founder & Trustees</Link>
                         <Link to="/about/principal" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Principal Desk & Contacts</Link>
-                        <Link to="/faculty" className="block px-5 py-2 text-xs font-extrabold text-[#FF8A00] hover:bg-[#FFE7CC] nav-dropdown-link transition-colors border-t border-gray-100 mt-1 pt-2">Faculty Directory</Link>
+                        <Link to="/faculty" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Faculty Directory</Link>
                       </div>
                     </div>
 
