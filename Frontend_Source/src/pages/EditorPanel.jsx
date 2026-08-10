@@ -66,6 +66,7 @@ export default function EditorPanel() {
   const [depts, setDepts] = useState([]);
   const [selectedDeptIdx, setSelectedDeptIdx] = useState(0);
   const [selectedFacultyIdx, setSelectedFacultyIdx] = useState(null);
+  const [deptSubTab, setDeptSubTab] = useState('faculty'); // 'faculty' | 'overview' | 'outcomes' | 'labs' | 'placements'
   
   // Faculty edit state
   const [editFaculty, setEditFaculty] = useState({
@@ -78,6 +79,22 @@ export default function EditorPanel() {
     joiningDate: '',
     image: ''
   });
+
+  // Handle Faculty Image Upload via FileReader
+  const handleFacultyImageUpload = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Image file size should be less than 5MB.");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setEditFaculty(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // 4. Inquiries State (For Admin/Admission roles)
   const [inquiries, setInquiries] = useState([]);
@@ -459,6 +476,20 @@ export default function EditorPanel() {
       obj[d.key] = d;
     });
     localStorage.setItem('apec_departments_data', JSON.stringify(obj));
+    window.dispatchEvent(new Event('apec_storage_update'));
+  };
+
+  // Helper to update field on currently selected department
+  const updateCurrentDeptField = (field, value) => {
+    const updatedDepts = [...depts];
+    if (updatedDepts[selectedDeptIdx]) {
+      updatedDepts[selectedDeptIdx] = {
+        ...updatedDepts[selectedDeptIdx],
+        [field]: value
+      };
+      saveDepts(updatedDepts);
+      triggerSuccess(`Department ${field} updated successfully!`);
+    }
   };
 
   // Save Faculty Member
@@ -1108,13 +1139,17 @@ export default function EditorPanel() {
               </div>
             )}
 
-            {/* FACULTY DIRECTORY EDITOR */}
+            {/* DEPARTMENT PORTAL CONTENT EDITOR */}
             {activeTab === 'departments' && (userRole === 'admin' || userRole.startsWith('dept_')) && (
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <h3 className="font-title text-xl font-black text-slate-900">Faculty Directories</h3>
-                    <p className="text-xs text-slate-500 font-semibold mt-0.5">Manage details of department personnel.</p>
+                    <h3 className="font-title text-xl font-black text-slate-900">
+                      {userRole.startsWith('dept_') ? `${depts[selectedDeptIdx]?.name || 'Department'} Portal CMS` : 'Department & Faculty Portals'}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                      Edit overview, faculty directory with photo upload, PEOs/POs, facilities, and placement details.
+                    </p>
                   </div>
                   
                   {/* Select Department dropdown (Locked for department roles) */}
@@ -1142,164 +1177,705 @@ export default function EditorPanel() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  
-                  {/* Left Column: Faculty List */}
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center">
-                      <h4 className="text-xs font-black uppercase text-slate-500 tracking-wider">
-                        Directory ({depts[selectedDeptIdx]?.faculty?.length || 0})
-                      </h4>
+                {/* Sub-Navigation for Department Portal Sections */}
+                <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
+                  {[
+                    { id: 'faculty', label: 'Faculty Directory & Photos', icon: Users },
+                    { id: 'overview', label: 'Overview & Vision', icon: BookOpen },
+                    { id: 'outcomes', label: 'PEO / PSO / PO', icon: Milestone },
+                    { id: 'labs', label: 'Facilities & Labs', icon: Library },
+                    { id: 'placements', label: 'Placements', icon: Briefcase }
+                  ].map((sub) => {
+                    const Icon = sub.icon;
+                    const isActive = deptSubTab === sub.id;
+                    return (
                       <button
-                        onClick={addFacultyMember}
-                        className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                        key={sub.id}
+                        onClick={() => setDeptSubTab(sub.id)}
+                        className={`flex items-center gap-2 px-4 py-2 text-xs font-black rounded-xl transition-all cursor-pointer ${
+                          isActive 
+                            ? 'bg-indigo-650 text-white shadow-md' 
+                            : 'text-slate-600 hover:text-indigo-650 hover:bg-white'
+                        }`}
                       >
-                        <Plus className="w-3 h-3" /> Add Faculty Member
+                        <Icon className="w-3.5 h-3.5" />
+                        <span>{sub.label}</span>
                       </button>
+                    );
+                  })}
+                </div>
+
+                {/* SUB-TAB 1: FACULTY DIRECTORY & PHOTO UPLOADER */}
+                {deptSubTab === 'faculty' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {/* Left Column: Faculty List */}
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <h4 className="text-xs font-black uppercase text-slate-500 tracking-wider">
+                          Directory ({depts[selectedDeptIdx]?.faculty?.length || 0})
+                        </h4>
+                        <button
+                          onClick={addFacultyMember}
+                          className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" /> Add Faculty Member
+                        </button>
+                      </div>
+
+                      <div className="border border-slate-200 rounded-2xl divide-y divide-slate-150 overflow-y-auto max-h-[480px] bg-slate-50 shadow-inner">
+                        {(depts[selectedDeptIdx]?.faculty || []).map((f, i) => (
+                          <div 
+                            key={i} 
+                            className={`p-3.5 flex justify-between items-center gap-3 cursor-pointer transition-colors ${
+                              selectedFacultyIdx === i ? 'bg-indigo-50/80 hover:bg-indigo-100/50' : 'hover:bg-slate-100/50'
+                            }`}
+                            onClick={() => selectFacultyForEdit(i)}
+                          >
+                            <div className="flex items-center gap-3 min-w-0">
+                              <div className="w-9 h-9 rounded-full overflow-hidden border border-slate-200 bg-white shrink-0 flex items-center justify-center">
+                                {f.image ? (
+                                  <img src={f.image} alt={f.name} className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+                                ) : null}
+                                <span className="text-[10px] font-bold text-indigo-600" style={{ display: f.image ? 'none' : 'block' }}>
+                                  {f.name ? f.name.charAt(0) : 'F'}
+                                </span>
+                              </div>
+                              <div className="min-w-0">
+                                <span className="text-sm font-bold text-slate-800 block truncate">{f.name}</span>
+                                <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block mt-0.5 truncate">{f.designation}</span>
+                              </div>
+                            </div>
+                            
+                            <div className="flex items-center gap-1.5 shrink-0">
+                              <button
+                                onClick={() => selectFacultyForEdit(i)}
+                                className="p-1.5 hover:bg-indigo-100 text-indigo-650 rounded-lg transition-colors cursor-pointer"
+                                title="Edit faculty member"
+                              >
+                                <Edit3 className="w-3.5 h-3.5" />
+                              </button>
+                              <button
+                                onClick={(e) => { e.stopPropagation(); deleteFacultyMember(i); }}
+                                className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
+                                title="Remove faculty member"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
-                    <div className="border border-slate-200 rounded-2xl divide-y divide-slate-150 overflow-y-auto max-h-[450px] bg-slate-50 shadow-inner">
-                      {(depts[selectedDeptIdx]?.faculty || []).map((f, i) => (
-                        <div 
-                          key={i} 
-                          className={`p-3.5 flex justify-between items-center gap-3 cursor-pointer transition-colors ${
-                            selectedFacultyIdx === i ? 'bg-indigo-50/80 hover:bg-indigo-100/50' : 'hover:bg-slate-100/50'
-                          }`}
-                          onClick={() => selectFacultyForEdit(i)}
-                        >
-                          <div className="min-w-0">
-                            <span className="text-sm font-bold text-slate-800 block truncate">{f.name}</span>
-                            <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block mt-0.5 truncate">{f.designation}</span>
+                    {/* Right Column: Edit Workspace Card */}
+                    <div>
+                      {selectedFacultyIdx === null ? (
+                        <div className="h-full border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center p-8 text-center text-slate-400">
+                          <Users className="w-8 h-8 text-slate-300 mb-2" />
+                          <span className="text-xs font-bold leading-normal">
+                            Select a faculty member from the directory list on the left to edit details and upload photo.
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="border border-slate-200 rounded-2xl p-5 space-y-4 bg-white shadow-sm">
+                          <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider border-b border-slate-100 pb-2">
+                            Edit Faculty Member Details
+                          </h4>
+
+                          {/* Photo Upload & Preview Container */}
+                          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
+                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">Faculty Photo & Upload</label>
+                            <div className="flex items-center gap-4">
+                              {/* Live Image Preview */}
+                              <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-250 bg-white shrink-0 flex items-center justify-center relative shadow-sm">
+                                {editFaculty.image ? (
+                                  <img 
+                                    src={editFaculty.image} 
+                                    alt={editFaculty.name} 
+                                    className="w-full h-full object-cover object-top" 
+                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                  />
+                                ) : null}
+                                <div 
+                                  className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold"
+                                  style={{ display: editFaculty.image ? 'none' : 'flex' }}
+                                >
+                                  <GraduationCap className="w-6 h-6 text-indigo-650" />
+                                </div>
+                              </div>
+
+                              {/* File Upload Controls */}
+                              <div className="flex-1 space-y-1.5">
+                                <label className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-indigo-650 hover:bg-indigo-750 text-white text-xs font-bold rounded-xl cursor-pointer transition-all shadow-sm active:scale-95">
+                                  <Upload className="w-3.5 h-3.5" />
+                                  <span>Upload New Photo</span>
+                                  <input 
+                                    type="file" 
+                                    accept="image/*" 
+                                    onChange={handleFacultyImageUpload} 
+                                    className="hidden" 
+                                  />
+                                </label>
+                                {editFaculty.image && (
+                                  <button
+                                    type="button"
+                                    onClick={() => setEditFaculty({ ...editFaculty, image: '' })}
+                                    className="block text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                                  >
+                                    Remove Current Photo
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="space-y-1 pt-1">
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Image Asset URL / Relative Path</label>
+                              <input 
+                                type="text"
+                                value={editFaculty.image}
+                                onChange={(e) => setEditFaculty({...editFaculty, image: e.target.value})}
+                                placeholder="/Images/Faculty/cse/member.jpg or data:image/..."
+                                className="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg outline-none focus:border-indigo-600 font-mono text-slate-700"
+                              />
+                            </div>
                           </div>
-                          
-                          <div className="flex items-center gap-1.5 shrink-0">
+
+                          <div className="space-y-3">
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Full Name</label>
+                              <input 
+                                type="text"
+                                value={editFaculty.name}
+                                onChange={(e) => setEditFaculty({...editFaculty, name: e.target.value})}
+                                className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Qualification</label>
+                                <input 
+                                  type="text"
+                                  value={editFaculty.qualification}
+                                  onChange={(e) => setEditFaculty({...editFaculty, qualification: e.target.value})}
+                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                                />
+                              </div>
+
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Designation</label>
+                                <input 
+                                  type="text"
+                                  value={editFaculty.designation}
+                                  onChange={(e) => setEditFaculty({...editFaculty, designation: e.target.value})}
+                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                                />
+                              </div>
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">College Role/Dept</label>
+                              <input 
+                                type="text"
+                                value={editFaculty.department}
+                                onChange={(e) => setEditFaculty({...editFaculty, department: e.target.value})}
+                                className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Contact Email</label>
+                                <input 
+                                  type="text"
+                                  value={editFaculty.email}
+                                  onChange={(e) => setEditFaculty({...editFaculty, email: e.target.value})}
+                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                                />
+                              </div>
+
+                              <div className="space-y-1">
+                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Experience</label>
+                                <input 
+                                  type="text"
+                                  value={editFaculty.experience}
+                                  onChange={(e) => setEditFaculty({...editFaculty, experience: e.target.value})}
+                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="pt-3 border-t border-slate-100 flex justify-end gap-2">
                             <button
-                              onClick={() => selectFacultyForEdit(i)}
-                              className="p-1.5 hover:bg-indigo-100 text-indigo-650 rounded-lg transition-colors cursor-pointer"
-                              title="Edit faculty member"
+                              type="button"
+                              onClick={() => setSelectedFacultyIdx(null)}
+                              className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 font-extrabold text-[10px] uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-95"
                             >
-                              <Edit3 className="w-3.5 h-3.5" />
+                              Cancel
                             </button>
                             <button
-                              onClick={(e) => { e.stopPropagation(); deleteFacultyMember(i); }}
-                              className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
-                              title="Remove faculty member"
+                              type="button"
+                              onClick={saveFacultyMember}
+                              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-95 flex items-center gap-1 shadow-sm"
+                            >
+                              <Check className="w-3.5 h-3.5" /> Save Member
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* SUB-TAB 2: OVERVIEW & VISION */}
+                {deptSubTab === 'overview' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
+                      <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider border-b border-slate-200 pb-2">
+                        Basic Department Information
+                      </h4>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Department Full Name</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].name || ''}
+                            onChange={(e) => updateCurrentDeptField('name', e.target.value)}
+                            className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-bold"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Approved Intake Capacity</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].intake || ''}
+                            onChange={(e) => updateCurrentDeptField('intake', e.target.value)}
+                            className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-bold"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Course Duration</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].duration || ''}
+                            onChange={(e) => updateCurrentDeptField('duration', e.target.value)}
+                            className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-bold"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Key Focus Areas (Comma-separated tags)</label>
+                        <input 
+                          type="text"
+                          value={depts[selectedDeptIdx].focus || ''}
+                          onChange={(e) => updateCurrentDeptField('focus', e.target.value)}
+                          className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-bold"
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">About Department (Overview Text)</label>
+                        <textarea 
+                          rows={4}
+                          value={depts[selectedDeptIdx].about || ''}
+                          onChange={(e) => updateCurrentDeptField('about', e.target.value)}
+                          className="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-medium leading-relaxed"
+                        />
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Department Vision Statement</label>
+                        <textarea 
+                          rows={3}
+                          value={depts[selectedDeptIdx].vision || ''}
+                          onChange={(e) => updateCurrentDeptField('vision', e.target.value)}
+                          className="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-medium leading-relaxed"
+                        />
+                      </div>
+
+                      {/* Mission Statements Array */}
+                      <div className="space-y-2 pt-2 border-t border-slate-200">
+                        <div className="flex justify-between items-center">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Mission Statements ({depts[selectedDeptIdx].mission?.length || 0})</label>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const currentMission = depts[selectedDeptIdx].mission || [];
+                              updateCurrentDeptField('mission', [...currentMission, 'New mission statement point']);
+                            }}
+                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Add Mission Point
+                          </button>
+                        </div>
+
+                        {(depts[selectedDeptIdx].mission || []).map((m, idx) => (
+                          <div key={idx} className="flex items-center gap-2">
+                            <input 
+                              type="text"
+                              value={m}
+                              onChange={(e) => {
+                                const updatedMission = [...(depts[selectedDeptIdx].mission || [])];
+                                updatedMission[idx] = e.target.value;
+                                updateCurrentDeptField('mission', updatedMission);
+                              }}
+                              className="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-medium"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updatedMission = depts[selectedDeptIdx].mission.filter((_, i) => i !== idx);
+                                updateCurrentDeptField('mission', updatedMission);
+                              }}
+                              className="p-2 hover:bg-rose-50 text-rose-500 rounded-lg shrink-0 cursor-pointer"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* SUB-TAB 3: PEO / PSO / PO OUTCOMES */}
+                {deptSubTab === 'outcomes' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-6">
+                      
+                      {/* PEOs */}
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                          <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
+                            Program Educational Objectives (PEOs)
+                          </h4>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const peos = depts[selectedDeptIdx].peos || [];
+                              updateCurrentDeptField('peos', [...peos, { code: `PEO${peos.length + 1}`, title: 'New Objective', description: 'Description text' }]);
+                            }}
+                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Add PEO
+                          </button>
+                        </div>
+
+                        {(depts[selectedDeptIdx].peos || []).map((peo, idx) => (
+                          <div key={idx} className="p-3 bg-white border border-slate-200 rounded-xl space-y-2 relative">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const peos = depts[selectedDeptIdx].peos.filter((_, i) => i !== idx);
+                                updateCurrentDeptField('peos', peos);
+                              }}
+                              className="absolute top-2 right-2 p-1 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </button>
+                            <div className="grid grid-cols-3 gap-2 pr-8">
+                              <input 
+                                type="text"
+                                value={peo.code || ''}
+                                onChange={(e) => {
+                                  const peos = [...(depts[selectedDeptIdx].peos || [])];
+                                  peos[idx].code = e.target.value;
+                                  updateCurrentDeptField('peos', peos);
+                                }}
+                                placeholder="Code (PEO1)"
+                                className="text-xs font-bold px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                              />
+                              <input 
+                                type="text"
+                                value={peo.title || ''}
+                                onChange={(e) => {
+                                  const peos = [...(depts[selectedDeptIdx].peos || [])];
+                                  peos[idx].title = e.target.value;
+                                  updateCurrentDeptField('peos', peos);
+                                }}
+                                placeholder="Title"
+                                className="col-span-2 text-xs font-bold px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                              />
+                            </div>
+                            <textarea 
+                              rows={2}
+                              value={peo.description || ''}
+                              onChange={(e) => {
+                                const peos = [...(depts[selectedDeptIdx].peos || [])];
+                                peos[idx].description = e.target.value;
+                                updateCurrentDeptField('peos', peos);
+                              }}
+                              placeholder="Description"
+                              className="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-medium"
+                            />
                           </div>
+                        ))}
+                      </div>
+
+                      {/* PSOs */}
+                      <div className="space-y-3 pt-4 border-t border-slate-200">
+                        <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                          <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
+                            Program Specific Outcomes (PSOs)
+                          </h4>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const psos = depts[selectedDeptIdx].psos || [];
+                              updateCurrentDeptField('psos', [...psos, { code: `PSO${psos.length + 1}`, title: 'New Specific Outcome', description: 'Description text' }]);
+                            }}
+                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Add PSO
+                          </button>
                         </div>
-                      ))}
+
+                        {(depts[selectedDeptIdx].psos || []).map((pso, idx) => (
+                          <div key={idx} className="p-3 bg-white border border-slate-200 rounded-xl space-y-2 relative">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const psos = depts[selectedDeptIdx].psos.filter((_, i) => i !== idx);
+                                updateCurrentDeptField('psos', psos);
+                              }}
+                              className="absolute top-2 right-2 p-1 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                            <div className="grid grid-cols-3 gap-2 pr-8">
+                              <input 
+                                type="text"
+                                value={pso.code || ''}
+                                onChange={(e) => {
+                                  const psos = [...(depts[selectedDeptIdx].psos || [])];
+                                  psos[idx].code = e.target.value;
+                                  updateCurrentDeptField('psos', psos);
+                                }}
+                                placeholder="Code (PSO1)"
+                                className="text-xs font-bold px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                              />
+                              <input 
+                                type="text"
+                                value={pso.title || ''}
+                                onChange={(e) => {
+                                  const psos = [...(depts[selectedDeptIdx].psos || [])];
+                                  psos[idx].title = e.target.value;
+                                  updateCurrentDeptField('psos', psos);
+                                }}
+                                placeholder="Title"
+                                className="col-span-2 text-xs font-bold px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                              />
+                            </div>
+                            <textarea 
+                              rows={2}
+                              value={pso.description || ''}
+                              onChange={(e) => {
+                                const psos = [...(depts[selectedDeptIdx].psos || [])];
+                                psos[idx].description = e.target.value;
+                                updateCurrentDeptField('psos', psos);
+                              }}
+                              placeholder="Description"
+                              className="w-full text-xs p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-medium"
+                            />
+                          </div>
+                        ))}
+                      </div>
+
                     </div>
                   </div>
+                )}
 
-                  {/* Right Column: Edit Workspace Card */}
-                  <div>
-                    {selectedFacultyIdx === null ? (
-                      <div className="h-full border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center p-8 text-center text-slate-400">
-                        <Users className="w-8 h-8 text-slate-300 mb-2" />
-                        <span className="text-xs font-bold leading-normal">
-                          Select a faculty member from the directory list on the left to edit details.
-                        </span>
-                      </div>
-                    ) : (
-                      <div className="border border-slate-200 rounded-2xl p-5 space-y-4 bg-white shadow-sm">
-                        <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider border-b border-slate-100 pb-2">
-                          Edit Faculty Member Details
+                {/* SUB-TAB 4: FACILITIES & LABS */}
+                {deptSubTab === 'labs' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
+                      <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
+                          Department Laboratories & Facilities ({depts[selectedDeptIdx].labs?.length || 0})
                         </h4>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const labs = depts[selectedDeptIdx].labs || [];
+                            updateCurrentDeptField('labs', [...labs, { name: 'Advanced Laboratory', description: 'Lab details and equipment', incharge: 'Prof. Incharge', image: '' }]);
+                          }}
+                          className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" /> Add Laboratory
+                        </button>
+                      </div>
 
-                        <div className="space-y-3.5">
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Full Name</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.name}
-                              onChange={(e) => setEditFaculty({...editFaculty, name: e.target.value})}
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                            />
-                          </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(depts[selectedDeptIdx].labs || []).map((lab, idx) => (
+                          <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-sm">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const labs = depts[selectedDeptIdx].labs.filter((_, i) => i !== idx);
+                                updateCurrentDeptField('labs', labs);
+                              }}
+                              className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
 
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Qualification</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.qualification}
-                              onChange={(e) => setEditFaculty({...editFaculty, qualification: e.target.value})}
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                            />
-                          </div>
+                            <div className="space-y-1">
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Lab Name</label>
+                              <input 
+                                type="text"
+                                value={lab.name || ''}
+                                onChange={(e) => {
+                                  const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                  labs[idx].name = e.target.value;
+                                  updateCurrentDeptField('labs', labs);
+                                }}
+                                className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                              />
+                            </div>
 
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Designation</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.designation}
-                              onChange={(e) => setEditFaculty({...editFaculty, designation: e.target.value})}
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                            />
-                          </div>
+                            <div className="space-y-1">
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Lab In-Charge</label>
+                              <input 
+                                type="text"
+                                value={lab.incharge || ''}
+                                onChange={(e) => {
+                                  const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                  labs[idx].incharge = e.target.value;
+                                  updateCurrentDeptField('labs', labs);
+                                }}
+                                className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                              />
+                            </div>
 
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">College Role/Dept</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.department}
-                              onChange={(e) => setEditFaculty({...editFaculty, department: e.target.value})}
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                            />
-                          </div>
+                            <div className="space-y-1">
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Lab Description</label>
+                              <textarea 
+                                rows={2}
+                                value={lab.description || ''}
+                                onChange={(e) => {
+                                  const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                  labs[idx].description = e.target.value;
+                                  updateCurrentDeptField('labs', labs);
+                                }}
+                                className="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg font-medium"
+                              />
+                            </div>
 
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Contact Email</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.email}
-                              onChange={(e) => setEditFaculty({...editFaculty, email: e.target.value})}
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                            />
+                            {/* Lab Image Upload */}
+                            <div className="space-y-1.5 pt-1">
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">Lab Image</label>
+                              <div className="flex items-center gap-2">
+                                <label className="inline-flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-[10px] font-bold rounded-lg cursor-pointer transition-all">
+                                  <Upload className="w-3 h-3" />
+                                  <span>Choose File</span>
+                                  <input 
+                                    type="file" 
+                                    accept="image/*" 
+                                    onChange={(e) => {
+                                      const file = e.target.files && e.target.files[0];
+                                      if (file) {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                          const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                          labs[idx].image = reader.result;
+                                          updateCurrentDeptField('labs', labs);
+                                        };
+                                        reader.readAsDataURL(file);
+                                      }
+                                    }}
+                                    className="hidden" 
+                                  />
+                                </label>
+                                <input 
+                                  type="text"
+                                  value={lab.image || ''}
+                                  onChange={(e) => {
+                                    const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                    labs[idx].image = e.target.value;
+                                    updateCurrentDeptField('labs', labs);
+                                  }}
+                                  placeholder="Image URL or Path"
+                                  className="flex-1 text-[11px] px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg font-mono"
+                                />
+                              </div>
+                            </div>
                           </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
 
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Experience</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.experience}
-                              onChange={(e) => setEditFaculty({...editFaculty, experience: e.target.value})}
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                            />
-                          </div>
+                {/* SUB-TAB 5: PLACEMENTS */}
+                {deptSubTab === 'placements' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
+                      <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider border-b border-slate-200 pb-2">
+                        Placement Statistics & Highlights
+                      </h4>
 
-                          <div className="space-y-1">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Image Asset URL/Path</label>
-                            <input 
-                              type="text"
-                              value={editFaculty.image}
-                              onChange={(e) => setEditFaculty({...editFaculty, image: e.target.value})}
-                              placeholder="/Images/Faculty/aiml/elamathi.jpg"
-                              className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-mono text-slate-850"
-                            />
-                          </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Placement Rate %</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].placements?.rate || '94%'}
+                            onChange={(e) => {
+                              const pl = depts[selectedDeptIdx].placements || {};
+                              updateCurrentDeptField('placements', { ...pl, rate: e.target.value });
+                            }}
+                            className="w-full text-xs font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                          />
                         </div>
 
-                        <div className="pt-3 border-t border-slate-100 flex justify-end gap-2">
-                          <button
-                            onClick={() => setSelectedFacultyIdx(null)}
-                            className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 font-extrabold text-[10px] uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-95"
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            onClick={saveFacultyMember}
-                            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-95 flex items-center gap-1 shadow-sm"
-                          >
-                            <Check className="w-3.5 h-3.5" /> Save Member
-                          </button>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Highest Package</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].placements?.highestPackage || '12 LPA'}
+                            onChange={(e) => {
+                              const pl = depts[selectedDeptIdx].placements || {};
+                              updateCurrentDeptField('placements', { ...pl, highestPackage: e.target.value });
+                            }}
+                            className="w-full text-xs font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                          />
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Average Package</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].placements?.averagePackage || '4.5 LPA'}
+                            onChange={(e) => {
+                              const pl = depts[selectedDeptIdx].placements || {};
+                              updateCurrentDeptField('placements', { ...pl, averagePackage: e.target.value });
+                            }}
+                            className="w-full text-xs font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                          />
                         </div>
                       </div>
-                    )}
-                  </div>
 
-                </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Top Recruiters (Comma-separated)</label>
+                        <input 
+                          type="text"
+                          value={depts[selectedDeptIdx].placements?.topRecruiters || 'TCS, Infosys, Wipro, Cognizant, Zoho'}
+                          onChange={(e) => {
+                            const pl = depts[selectedDeptIdx].placements || {};
+                            updateCurrentDeptField('placements', { ...pl, topRecruiters: e.target.value });
+                          }}
+                          className="w-full text-xs font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
               </div>
             )}
 

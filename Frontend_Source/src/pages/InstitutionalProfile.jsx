@@ -116,7 +116,7 @@ export default function InstitutionalProfile() {
           className="border-t border-slate-100 pt-16 mb-20"
         >
           <span className="font-display text-[10px] uppercase font-extrabold tracking-widest text-indigo-650 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
-            Accreditations & Affiliations
+            Recognition & Accreditation
           </span>
           <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900 mb-8 leading-tight">
             Institutional Standing
@@ -217,25 +217,25 @@ export default function InstitutionalProfile() {
             {/* IQAC Integration */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 bg-slate-50 border border-slate-200 rounded-3xl hover:border-indigo-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-indigo-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
             >
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 shrink-0">
-                <Award className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-600 shrink-0">
+                <Award className="w-6 h-6" />
               </div>
               <div className="grow text-left">
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">Internal Quality Assurance Cell (IQAC)</h3>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-4">
+                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Internal Quality Assurance Cell (IQAC)</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Drives quality audits, academic parameters, and NAAC accreditation documentation.
                 </p>
-                <div className="flex gap-4">
-                  <Link to="/iqac" className="inline-flex items-center gap-1 text-[10px] font-black text-indigo-600 hover:text-indigo-700">
-                    IQAC Info <ArrowRight className="w-3 h-3" />
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/iqac" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-indigo-600 hover:text-indigo-700">
+                    IQAC Info <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </Link>
-                  <Link to="/iqac-members" className="inline-flex items-center gap-1 text-[10px] font-black text-indigo-600 hover:text-indigo-700">
-                    Members <ArrowRight className="w-3 h-3" />
+                  <Link to="/iqac-members" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-indigo-600 hover:text-indigo-700">
+                    Members <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </Link>
-                  <Link to="/iqac-mom-at" className="inline-flex items-center gap-1 text-[10px] font-black text-indigo-600 hover:text-indigo-700">
-                    Meetings <ArrowRight className="w-3 h-3" />
+                  <Link to="/iqac-mom-at" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-indigo-600 hover:text-indigo-700">
+                    Meetings <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </Link>
                 </div>
               </div>
@@ -244,25 +244,25 @@ export default function InstitutionalProfile() {
             {/* Committees Integration */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 bg-slate-50 border border-slate-200 rounded-3xl hover:border-pink-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-pink-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
             >
-              <div className="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-600 shrink-0">
-                <Users className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-600 shrink-0">
+                <Users className="w-6 h-6" />
               </div>
               <div className="grow text-left">
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">Institutional Committees & Cells</h3>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-4">
+                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Institutional Committees & Cells</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Ensures student welfare, anti-ragging protection, industry tie-ups, and career development support.
                 </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <Link to="/committees/anti-ragging" className="inline-flex items-center gap-0.5 text-[10px] font-black text-pink-600 hover:text-pink-700">
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  <Link to="/committees/anti-ragging" className="inline-flex items-center gap-1 text-xs sm:text-sm font-black text-pink-600 hover:text-pink-700">
                     Anti-Ragging
                   </Link>
-                  <Link to="/committees/iiic" className="inline-flex items-center gap-0.5 text-[10px] font-black text-pink-600 hover:text-pink-700">
+                  <Link to="/committees/iiic" className="inline-flex items-center gap-1 text-xs sm:text-sm font-black text-pink-600 hover:text-pink-700">
                     IIIC
                   </Link>
-                  <Link to="/committees" className="inline-flex items-center gap-1 text-[10px] font-black text-pink-600 hover:text-pink-700">
-                    All Committees <ArrowRight className="w-3 h-3" />
+                  <Link to="/committees" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-pink-600 hover:text-pink-700">
+                    All Committees <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </Link>
                 </div>
               </div>
@@ -271,18 +271,18 @@ export default function InstitutionalProfile() {
             {/* RTI Integration */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 bg-slate-50 border border-slate-200 rounded-3xl hover:border-emerald-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-emerald-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
             >
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
-                <Scale className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 shrink-0">
+                <Scale className="w-6 h-6" />
               </div>
               <div className="grow text-left">
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">Right to Information (RTI)</h3>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-4">
+                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Right to Information (RTI)</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Access statutory disclosures, guidelines, and guidebook publications under the RTI Act.
                 </p>
-                <Link to="/rti" className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-600 hover:text-emerald-700">
-                  Statutory Declaration <ArrowRight className="w-3 h-3" />
+                <Link to="/rti" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-emerald-600 hover:text-emerald-700">
+                  Statutory Declaration <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </Link>
               </div>
             </motion.div>
@@ -290,28 +290,28 @@ export default function InstitutionalProfile() {
             {/* Compliance & Disclosures */}
             <motion.div 
               variants={fadeInUp}
-              className="p-6 bg-slate-50 border border-slate-200 rounded-3xl hover:border-blue-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4"
+              className="p-6 sm:p-7 bg-slate-50 border border-slate-200 rounded-3xl hover:border-blue-500 hover:bg-white transition-all duration-300 shadow-sm flex gap-4 sm:gap-5"
             >
-              <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 shrink-0">
-                <FileText className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-600 shrink-0">
+                <FileText className="w-6 h-6" />
               </div>
               <div className="grow text-left">
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">Compliance & Disclosures</h3>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-4">
+                <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1.5">Compliance & Disclosures</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-4">
                   Access audit profiles, annual accounts, UGC approval letters, and Institutional Development Plans (IDP).
                 </p>
-                <div className="flex flex-wrap gap-x-4 gap-y-1">
-                  <Link to="/disclosures" className="inline-flex items-center gap-0.5 text-[10px] font-black text-blue-600 hover:text-blue-750">
+                <div className="flex flex-wrap gap-x-5 gap-y-2">
+                  <Link to="/disclosures" className="inline-flex items-center gap-1 text-xs sm:text-sm font-black text-blue-600 hover:text-blue-750">
                     Disclosures
                   </Link>
-                  <Link to="/idp" className="inline-flex items-center gap-0.5 text-[10px] font-black text-blue-600 hover:text-blue-750">
+                  <Link to="/idp" className="inline-flex items-center gap-1 text-xs sm:text-sm font-black text-blue-600 hover:text-blue-750">
                     IDP
                   </Link>
-                  <Link to="/r-d-cell" className="inline-flex items-center gap-0.5 text-[10px] font-black text-blue-600 hover:text-blue-750">
+                  <Link to="/r-d-cell" className="inline-flex items-center gap-1 text-xs sm:text-sm font-black text-blue-600 hover:text-blue-750">
                     R&D Cell
                   </Link>
-                  <Link to="/annual-accounts" className="inline-flex items-center gap-1 text-[10px] font-black text-blue-600 hover:text-blue-750">
-                    All Audits <ArrowRight className="w-3 h-3" />
+                  <Link to="/annual-accounts" className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-black text-blue-600 hover:text-blue-750">
+                    All Audits <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </Link>
                 </div>
               </div>

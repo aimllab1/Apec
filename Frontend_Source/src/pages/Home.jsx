@@ -860,6 +860,9 @@ export default function Home() {
                           />
                         </div>
 
+                        {/* Single uniform dark/black transparent overlay */}
+                        <div className="dept-card-overlay" />
+
                         {/* Top-Left Info Container (Name, Icon, Badge) */}
                         <div className="dept-top-left-panel">
                           <div className="dept-header-info">
@@ -892,29 +895,6 @@ export default function Home() {
                 })()}
               </AnimatePresence>
             </div>
-
-            {/* Left and Right navigation buttons */}
-            <button
-              onClick={() => {
-                setDirection(-1);
-                setCurrentIdx((prev) => (prev - 1 + depts.length) % depts.length);
-              }}
-              className="absolute left-[-12px] md:left-[-36px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer z-30 border border-slate-200"
-              aria-label="Previous department"
-            >
-              <ChevronLeft className="w-6 h-6 text-slate-850" />
-            </button>
-
-            <button
-              onClick={() => {
-                setDirection(1);
-                setCurrentIdx((prev) => (prev + 1) % depts.length);
-              }}
-              className="absolute right-[-12px] md:right-[-36px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white text-slate-900 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer z-30 border border-slate-200"
-              aria-label="Next department"
-            >
-              <ChevronRight className="w-6 h-6 text-slate-850" />
-            </button>
 
             {/* Dot Indicator Navigation */}
             <div className="flex gap-2 mt-6 justify-center">

@@ -1060,6 +1060,15 @@ body {
   transform: scale(1.04); /* Subtle scale zoom on hover */
 }
 
+/* Single uniform dark/black transparent overlay */
+.dept-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45); /* Subtle dark transparent overlay */
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* Top-Left Panel */
 .dept-top-left-panel {
   position: absolute;
@@ -1068,16 +1077,15 @@ body {
   width: 80%;
   max-width: 550px;
   height: 55%;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   padding: 24px;
   text-align: left;
-  /* Top-left dark gradient behind text areas */
-  background: radial-gradient(circle at top left, rgba(8, 18, 40, 0.9) 0%, rgba(8, 18, 40, 0.6) 40%, rgba(8, 18, 40, 0) 100%);
-  pointer-events: none; /* Let clicks pass to controls if any */
+  background: transparent; /* No separate background/panel */
+  pointer-events: none;
 }
 
 @media (min-width: 768px) {
@@ -1092,7 +1100,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  pointer-events: auto; /* Re-enable pointer events for elements inside */
+  pointer-events: auto;
 }
 
 .dept-icon-badge-row {
@@ -1146,11 +1154,12 @@ body {
   font-family: var(--font-sans), sans-serif;
   font-size: 9px;
   font-weight: 800;
-  color: #818cf8;
+  color: #a5b4fc; /* Light Indigo for contrast */
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 4px;
   display: block;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .dept-title {
@@ -1158,7 +1167,7 @@ body {
   font-size: 20px;
   font-weight: 900;
   color: #ffffff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85), 0 4px 16px rgba(0, 0, 0, 0.4);
   line-height: 1.2;
 }
 
@@ -1176,15 +1185,14 @@ body {
   width: 85%;
   max-width: 550px;
   height: 60%;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
   padding: 24px;
   text-align: right;
-  /* Bottom-right dark gradient behind text areas */
-  background: radial-gradient(circle at bottom right, rgba(8, 18, 40, 0.92) 0%, rgba(8, 18, 40, 0.6) 45%, rgba(8, 18, 40, 0) 100%);
+  background: transparent; /* No separate background/panel */
   pointer-events: none;
 }
 
@@ -1200,8 +1208,8 @@ body {
   font-family: var(--font-sans), sans-serif;
   font-size: 12px;
   line-height: 1.5;
-  color: rgba(241, 245, 249, 0.9);
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  color: rgba(248, 250, 252, 0.95); /* Bright slate for readability */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85), 0 4px 12px rgba(0, 0, 0, 0.4);
   margin-bottom: 16px;
   max-width: 420px;
   pointer-events: auto;
@@ -1232,16 +1240,25 @@ body {
 
 .dept-status-badge {
   font-family: var(--font-sans), sans-serif;
-  font-size: 9px;
-  font-weight: 800;
+  font-size: 10px;
+  font-weight: 850;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: rgba(165, 180, 252, 0.9); /* light indigo status */
+  color: #ffffff !important; /* pure white text */
+  padding: 5px 12px !important; /* button-like padding */
+  background: rgba(99, 102, 241, 0.5) !important; /* solid/semi-opaque indigo */
+  border: 1.5px solid rgba(165, 180, 252, 0.7) !important; /* visible border */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  padding: 3px 8px;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.25);
-  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.dept-showcase-card:hover .dept-status-badge {
+  background: #4f46e5 !important; /* solid indigo on hover */
+  border-color: #818cf8 !important;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
 }
 
 .dept-link-btn {
@@ -1292,6 +1309,51 @@ body {
 
 .dept-showcase-section .indicator-dot.inactive:hover {
   background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Header Navigation Bar Layout Overrides (preventing text wrapping on laptops) */
+header nav {
+  gap: 4px !important; /* reduce gap between tabs */
+}
+
+@media (min-width: 1200px) {
+  header nav {
+    gap: 8px !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  header nav {
+    gap: 14px !important; /* standard gap on very wide displays */
+  }
+}
+
+.nav-link-dynamic {
+  font-size: 10px !important; /* reduce font size from 11px */
+  letter-spacing: -0.01em !important; /* tighten tracking */
+  padding-left: 6px !important; /* reduce padding */
+  padding-right: 6px !important;
+  border-radius: 6px !important;
+  gap: 3px !important; /* reduce icon gap */
+}
+
+@media (min-width: 1200px) {
+  .nav-link-dynamic {
+    font-size: 10.5px !important;
+    letter-spacing: 0.02em !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .nav-link-dynamic {
+    font-size: 11px !important;
+    letter-spacing: 0.05em !important; /* standard tracking-wider */
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    gap: 4px !important;
+  }
 }
 
 

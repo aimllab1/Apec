@@ -24,17 +24,17 @@ import {
 import CutoffCalculator from './CutoffCalculator';
 
 const scrollRevealProps = {
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 12 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-30px" },
-  transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.75, ease: "easeOut" }
 };
 
 const getCardScrollReveal = (idx = 0) => ({
-  initial: { opacity: 0, y: 24 },
+  initial: { opacity: 0, y: 12 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-30px" },
-  transition: { duration: 0.7, delay: (idx % 2) * 0.08, ease: [0.16, 1, 0.3, 1] }
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.75, delay: (idx % 2) * 0.06, ease: "easeOut" }
 });
 
 export default function Admission() {
@@ -278,10 +278,7 @@ export default function Admission() {
                   {/* B.E. Programmes */}
                   <div>
                     <motion.div 
-                      initial={{ opacity: 0, y: 35 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.15 }}
-                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                      {...scrollRevealProps}
                       className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                     >
                       <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
@@ -297,10 +294,7 @@ export default function Admission() {
                       {ugPrograms.filter(c => !c.name.startsWith('B.Tech')).map((course, idx) => (
                         <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                           <motion.div 
-                            initial={{ opacity: 0, y: 45 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.12 }}
-                            transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                            {...getCardScrollReveal(idx)}
                             whileHover={{ y: -5 }}
                             className="bg-white border border-gray-200 hover:border-orange-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                           >
@@ -346,10 +340,7 @@ export default function Admission() {
                   {/* B.Tech. Programmes */}
                   <div>
                     <motion.div 
-                      initial={{ opacity: 0, y: 35 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, amount: 0.15 }}
-                      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                      {...scrollRevealProps}
                       className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                     >
                       <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
@@ -365,10 +356,7 @@ export default function Admission() {
                       {ugPrograms.filter(c => c.name.startsWith('B.Tech')).map((course, idx) => (
                         <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                           <motion.div 
-                            initial={{ opacity: 0, y: 45 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, amount: 0.12 }}
-                            transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                            {...getCardScrollReveal(idx)}
                             whileHover={{ y: -5 }}
                             className="bg-white border border-gray-200 hover:border-orange-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                           >
@@ -415,10 +403,7 @@ export default function Admission() {
                 {/* PG M.E. Programs */}
                 <div>
                   <motion.div 
-                    initial={{ opacity: 0, y: 35 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    {...scrollRevealProps}
                     className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                   >
                     <div className="p-3 rounded-2xl bg-purple-50 text-purple-650 shadow-sm">
@@ -434,10 +419,7 @@ export default function Admission() {
                     {pgPrograms.filter(c => c.name.startsWith('M.E.')).map((course, idx) => (
                       <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          initial={{ opacity: 0, y: 45 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.12 }}
-                          transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          {...getCardScrollReveal(idx)}
                           whileHover={{ y: -5 }}
                           className="bg-white border border-gray-200 hover:border-purple-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
@@ -483,10 +465,7 @@ export default function Admission() {
                 {/* PG Professional Programs */}
                 <div>
                   <motion.div 
-                    initial={{ opacity: 0, y: 35 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    {...scrollRevealProps}
                     className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                   >
                     <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-650 shadow-sm">
@@ -502,10 +481,7 @@ export default function Admission() {
                     {pgPrograms.filter(c => !c.name.startsWith('M.E.')).map((course, idx) => (
                       <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          initial={{ opacity: 0, y: 45 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.12 }}
-                          transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          {...getCardScrollReveal(idx)}
                           whileHover={{ y: -5 }}
                           className="bg-white border border-gray-200 hover:border-indigo-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
@@ -551,10 +527,7 @@ export default function Admission() {
                 {/* Ph.D. Programs */}
                 <div>
                   <motion.div 
-                    initial={{ opacity: 0, y: 35 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                    {...scrollRevealProps}
                     className="flex items-center gap-3.5 mb-8 border-b border-gray-100 pb-4"
                   >
                     <div className="p-3 rounded-2xl bg-pink-50 text-pink-650 shadow-sm">
@@ -570,10 +543,7 @@ export default function Admission() {
                     {phdPrograms.map((course, idx) => (
                       <Link to={`/departments/${course.key}`} key={idx} className="block group h-full">
                         <motion.div 
-                          initial={{ opacity: 0, y: 45 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, amount: 0.12 }}
-                          transition={{ duration: 0.6, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                          {...getCardScrollReveal(idx)}
                           whileHover={{ y: -5 }}
                           className="bg-white border border-gray-200 hover:border-pink-400/70 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer h-full"
                         >
@@ -618,10 +588,7 @@ export default function Admission() {
 
                 {/* PDF Link CTA for Courses */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="p-6 bg-gradient-to-r from-gray-50 via-indigo-50/20 to-gray-50 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4"
                 >
                   <div className="text-left">
@@ -646,10 +613,7 @@ export default function Admission() {
                 
                 {/* Introduction & Quotas */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="p-6 md:p-8 bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-900 rounded-3xl text-white shadow-md"
                 >
                   <h3 className="font-title text-xl md:text-2xl font-bold mb-4 text-[#FF8A00]">Admission Pathways</h3>
@@ -673,12 +637,7 @@ export default function Admission() {
                 </motion.div>
 
                 {/* UG Program Procedures */}
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
+                <motion.div {...scrollRevealProps}>
                   <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     UG Programmes Admission Procedure
                   </h3>
@@ -736,12 +695,7 @@ export default function Admission() {
                 </motion.div>
 
                 {/* PG Program Procedures */}
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
+                <motion.div {...scrollRevealProps}>
                   <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     PG Programmes Admission Procedure
                   </h3>
@@ -782,12 +736,7 @@ export default function Admission() {
                 </motion.div>
 
                 {/* Intake Capacity Lists */}
-                <motion.div
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
+                <motion.div {...scrollRevealProps}>
                   <h3 className="font-title text-lg md:text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-2">
                     Approved Intake Capacities
                   </h3>
@@ -895,10 +844,7 @@ export default function Admission() {
 
                 {/* Important Notes & Guidelines (Warning Board) */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="p-6 border border-rose-200 bg-rose-50/20 rounded-3xl space-y-4 shadow-sm"
                 >
                   <div className="flex items-center gap-2 text-rose-700">
@@ -941,10 +887,7 @@ export default function Admission() {
 
                 {/* College Admission Inquiry Desk */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="p-6 md:p-8 bg-gradient-to-r from-gray-50 via-indigo-50/10 to-gray-50 border border-gray-200 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
                 >
                   <div>
@@ -975,10 +918,7 @@ export default function Admission() {
                 
                 {/* Intro & Search Filter */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gray-50 p-6 rounded-3xl border border-gray-150 shadow-sm"
                 >
                   <div className="text-left">
@@ -999,10 +939,7 @@ export default function Admission() {
 
                 {/* Category Pills */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 25 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="flex flex-wrap gap-1.5 pb-2"
                 >
                   {categories.map((cat, idx) => (
@@ -1026,10 +963,7 @@ export default function Admission() {
                     {filteredScholarships.map((s, idx) => (
                       <motion.div
                         key={s.id}
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.12 }}
-                        transition={{ duration: 0.55, delay: (idx % 2) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                        {...getCardScrollReveal(idx)}
                         className="p-6 bg-white border border-gray-200 rounded-3xl hover:border-indigo-500 hover:shadow-lg transition-all flex flex-col justify-between"
                       >
                         <div>
@@ -1079,10 +1013,7 @@ export default function Admission() {
 
                 {/* PDF Link CTA for Scholarships */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="p-6 bg-gradient-to-r from-gray-50 to-indigo-50/20 border border-gray-200 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm"
                 >
                   <div className="text-left">
@@ -1108,10 +1039,7 @@ export default function Admission() {
                 
                 {/* Hero card for brochure */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-purple-50/30 border border-indigo-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
                 >
                   <div className="space-y-2">
@@ -1144,10 +1072,7 @@ export default function Admission() {
 
                 {/* Embedded PDF Viewer */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="border border-gray-200 rounded-3xl overflow-hidden bg-gray-50 shadow-md"
                 >
                   <div className="bg-white border-b border-gray-150 px-5 py-3 flex items-center justify-between">
@@ -1171,10 +1096,7 @@ export default function Admission() {
 
                 {/* Compatibility notice */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  {...scrollRevealProps}
                   className="flex items-start gap-2.5 p-4 bg-gray-50 rounded-2xl border border-gray-200 text-xs text-gray-400 font-medium leading-normal"
                 >
                   <Info className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />

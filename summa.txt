@@ -1,0 +1,8 @@
+ Add a smooth faded transition effect when scrolling through the page. Elements should gradually fade in and slightly
+  move upward as they enter the viewport, creating a clean and modern scrolling experience. When scrolling back, the
+  animation should remain smooth and natural without being distracting. Use subtle opacity and transform transitions,
+  with a duration of around 0.6–0.8 seconds and an ease-out timing function. Avoid excessive movement, flickering, or
+  repeated animations. Ensure the effect is responsive and works smoothly on desktop, tablet, and mobile devices.
+
+  i want you to reduce the gap between tabs in the nav bar just beacuse of the size , some of the text becomes two
+    lines so repair it
