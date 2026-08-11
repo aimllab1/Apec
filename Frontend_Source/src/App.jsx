@@ -6,7 +6,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, Phone, Mail, MapPin, 
-  Download, ChevronDown, Send, RotateCw
+  Download, ChevronDown, Send, RotateCw, ChevronRight
 } from 'lucide-react';
 import Preloader from './components/Preloader';
 
@@ -191,6 +191,9 @@ const getSuggestionIcon = (icon) => {
 
 function AppContent({ isLoading, setIsLoading }) {
   const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/editor') || 
+                       location.pathname.startsWith('/admin-portal') || 
+                       location.pathname.startsWith('/admin-profile');
   const isHome = location.pathname === '/';
   const isActive = (path) => {
     if (path === '/') {
@@ -200,6 +203,7 @@ function AppContent({ isLoading, setIsLoading }) {
   };
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
+  const [mobileDepartmentsOpen, setMobileDepartmentsOpen] = useState(false);
   const [mobileUgcOpen, setMobileUgcOpen] = useState(false);
   const [mobileAdmissionOpen, setMobileAdmissionOpen] = useState(false);
   const [mobileCommitteesOpen, setMobileCommitteesOpen] = useState(false);
@@ -568,53 +572,45 @@ function AppContent({ isLoading, setIsLoading }) {
               </div>
             )}
             
-            {/* STACKED HEADER SYSTEM */}
-            <header
-              className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300"
-            >
-              {/* TOP HEADER + NEWS CONTAINER (Logo isolated inside this wrapper ONLY, completely above Nav Bar) */}
-              <div className="relative w-full">
-                {/* LOGO BADGE (Seamless, borderless, shadowless) */}
-                <Link 
-                  to="/" 
-                  className="absolute left-0 top-0 bottom-0 w-[88px] sm:w-[92px] lg:w-[98px] bg-white flex items-center justify-center p-2 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
-                  title="Adhiparasakthi Engineering College"
-                >
-                  <img 
-                    src="/Images/Logos/apec-logo.png" 
-                    alt="APEC Logo" 
-                    className="w-13 h-13 sm:w-15 sm:h-15 lg:w-16 lg:h-16 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300" 
-                  />
-                </Link>
-                
-                {/* TOP BAR: GRAND BRANDING & CORE ACTIONS */}
-                <div className="w-full pl-[98px] lg:pl-[114px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
-                  
-                  {/* College Name & Tagline */}
-                  <Link to="/" className="flex items-center shrink-0">
-                    <div className="text-left flex flex-col justify-center max-w-[170px] xs:max-w-[210px] sm:max-w-md lg:max-w-none">
-                      <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight text-indigo-950 block leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
-                        {branding.collegeName}
-                      </span>
-                      <span className="font-mono text-[6.5px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-indigo-650">
-                        {branding.tagline}
-                      </span>
-                    </div>
+            {/* STACKED HEADER SYSTEM (Hidden on Admin / HOD Portal Routes) */}
+            {!isAdminRoute && (
+              <header
+                className="w-full sticky top-0 z-40 bg-white/95 text-gray-900 border-b border-gray-100 backdrop-blur-md shadow-sm transition-colors duration-300"
+              >
+                {/* TOP HEADER + NEWS CONTAINER */}
+                <div className="relative w-full">
+                  <Link 
+                    to="/" 
+                    className="absolute left-0 top-0 bottom-0 w-[88px] sm:w-[92px] lg:w-[98px] bg-white flex items-center justify-center p-2 z-30 group/cornerlogo transition-all hover:bg-slate-50 shrink-0 overflow-hidden"
+                    title="Adhiparasakthi Engineering College"
+                  >
+                    <img 
+                      src="/Images/Logos/apec-logo.png" 
+                      alt="APEC Logo" 
+                      className="w-13 h-13 sm:w-15 sm:h-15 lg:w-16 lg:h-16 object-contain group-hover/cornerlogo:scale-105 transition-transform duration-300" 
+                    />
                   </Link>
-                  {/* Right Actions & Mobile Toggle */}
-                  <div className="flex items-center gap-6">
-                    {/* Desktop Right Action Panel */}
-                    <div className="hidden lg:flex items-center gap-4">
-                      <button 
-                        onClick={() => setIsPanoOpen(true)}
-                        className="relative w-10 h-10 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer group/vrbtn"
-                        title="Open 360° VR Campus Tour"
-                      >
-                        {/* Pulse background shine */}
-                        <span className="absolute inset-0 rounded-full bg-black/5 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
-                        
-                        {/* Minimalist Panoramic 360 Circular Arrow Logo (Expanded, Padding Removed) */}
-                        <div className="relative w-8 h-8 flex items-center justify-center overflow-visible text-black">
+                  
+                  <div className="w-full pl-[98px] lg:pl-[114px] pr-4 md:pr-6 h-[60px] sm:h-[70px] lg:h-auto py-1.5 lg:py-0.5 flex items-center justify-between gap-2 md:gap-10">
+                    <Link to="/" className="flex items-center shrink-0">
+                      <div className="text-left flex flex-col justify-center max-w-[170px] xs:max-w-[210px] sm:max-w-md lg:max-w-none">
+                        <span className="font-title text-[9px] xs:text-[11px] sm:text-xs md:text-sm lg:text-base xl:text-lg font-black tracking-tight text-indigo-950 block leading-tight drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
+                          {branding.collegeName}
+                        </span>
+                        <span className="font-mono text-[6.5px] xs:text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] uppercase font-black tracking-wider block mt-0.5 text-indigo-650">
+                          {branding.tagline}
+                        </span>
+                      </div>
+                    </Link>
+                    <div className="flex items-center gap-6">
+                      <div className="hidden lg:flex items-center gap-4">
+                        <button 
+                          onClick={() => setIsPanoOpen(true)}
+                          className="relative w-10 h-10 rounded-full bg-[#f3f4f6] hover:bg-[#e5e7eb] hover:scale-[1.08] active:scale-95 transition-all flex items-center justify-center shrink-0 shadow-sm cursor-pointer group/vrbtn"
+                          title="Open 360° VR Campus Tour"
+                        >
+                          <span className="absolute inset-0 rounded-full bg-black/5 opacity-0 group-hover/vrbtn:opacity-100 transition-opacity" />
+                          <div className="relative w-8 h-8 flex items-center justify-center overflow-visible text-black">
                           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" className="relative overflow-visible">
                             {/* Panoramic Circular Arrow loop */}
                             <path d="M23 12a11 11 0 1 1-3.2-7.8L23 8" className="animate-[spin_16s_linear_infinite] origin-center" />
@@ -791,13 +787,13 @@ function AppContent({ isLoading, setIsLoading }) {
                     <div className="relative group py-0">
                       <button 
                         className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
-                          isActive('/about') || isActive('/faculty')
+                          isActive('/about')
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         About <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-                        {(isActive('/about') || isActive('/faculty')) && (
+                        {isActive('/about') && (
                           <motion.span 
                             layoutId="activeNavMark" 
                             className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
@@ -809,8 +805,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         <Link to="/about/profile" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Institution Profile</Link>
                         <Link to="/about/founders" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Founder & Trustees</Link>
                         <Link to="/about/principal" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Principal Desk & Contacts</Link>
-                        <Link to="/alumni" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Alumni Cell</Link>
-                        <Link to="/faculty" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Faculty Directory</Link>
                       </div>
                     </div>
 
@@ -844,64 +838,74 @@ function AppContent({ isLoading, setIsLoading }) {
                     <div className="group py-0">
                       <button 
                         className={`text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 nav-link-dynamic relative px-2 py-0.5 rounded-lg ${
-                          isActive('/departments') 
+                          isActive('/departments') || isActive('/faculty')
                             ? 'text-[#FF8A00] font-black bg-[#FFE7CC]/50' 
                             : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC] font-black'
                         }`}
                       >
                         Departments <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-                        {isActive('/departments') && (
+                        {(isActive('/departments') || isActive('/faculty')) && (
                           <motion.span 
                             layoutId="activeNavMark" 
                             className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
                           />
                         )}
                       </button>
-                      <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 grid grid-cols-4 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[1000px] text-left gap-6 opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
-                        <div>
-                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.E.)</span>
-                          <div className="space-y-1">
-                            <Link to="/departments/civil" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Civil Engineering</Link>
-                            <Link to="/departments/mech" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Mechanical Engineering</Link>
-                            <Link to="/departments/eee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electrical & Electronics Engg.</Link>
-                            <Link to="/departments/ece" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electronics & Communication Engg.</Link>
-                            <Link to="/departments/cse" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Computer Science & Engg.</Link>
-                            <Link to="/departments/aiml" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">CSE (AI & ML)</Link>
-                            <Link to="/departments/csd" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Computer Science & Design (CSD)</Link>
+                      <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[1000px] text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu z-50">
+                        <div className="grid grid-cols-4 gap-6">
+                          <div>
+                            <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.E.)</span>
+                            <div className="space-y-1">
+                              <Link to="/departments/civil" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Civil Engineering</Link>
+                              <Link to="/departments/mech" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Mechanical Engineering</Link>
+                              <Link to="/departments/eee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electrical & Electronics Engg.</Link>
+                              <Link to="/departments/ece" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Electronics & Communication Engg.</Link>
+                              <Link to="/departments/cse" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Computer Science & Engg.</Link>
+                              <Link to="/departments/aiml" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">CSE (AI & ML)</Link>
+                              <Link to="/departments/csd" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Computer Science & Design (CSD)</Link>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.Tech.)</span>
-                          <div className="space-y-1">
-                            <Link to="/departments/it" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Information Technology</Link>
-                            <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Chemical Engineering</Link>
-                            <Link to="/departments/agri" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Agricultural Engineering</Link>
-                            <Link to="/departments/aids" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Artificial Intelligence & Data Science (AI & DS)</Link>
+                          <div>
+                            <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.Tech.)</span>
+                            <div className="space-y-1">
+                              <Link to="/departments/it" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Information Technology</Link>
+                              <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Chemical Engineering</Link>
+                              <Link to="/departments/agri" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Agricultural Engineering</Link>
+                              <Link to="/departments/aids" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Artificial Intelligence & Data Science (AI & DS)</Link>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Postgraduate & Sciences</span>
-                          <div className="space-y-1">
-                            <Link to="/departments/mca" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Master of Computer Apps (MCA)</Link>
-                            <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Management Studies (MBA)</Link>
-                            <div className="pt-2">
-                              <span className="text-[9px] uppercase font-black text-gray-400 tracking-wider block px-2 mb-1.5">M.E. Programmes</span>
-                              <Link to="/departments/me-cse" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Computer Science & Engg.</Link>
-                              <Link to="/departments/me-thermal" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Thermal Engineering</Link>
-                              <Link to="/departments/me-vlsi" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - VLSI Design</Link>
-                              <Link to="/departments/me-ped" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Power Electronics & Drives</Link>
-                              <Link to="/departments/me-cem" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Construction Engg. & Mgmt.</Link>
+                          <div>
+                            <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Postgraduate & Sciences</span>
+                            <div className="space-y-1">
+                              <Link to="/departments/mca" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Master of Computer Apps (MCA)</Link>
+                              <Link to="/departments/mba" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Management Studies (MBA)</Link>
+                              <div className="pt-2">
+                                <span className="text-[9px] uppercase font-black text-gray-400 tracking-wider block px-2 mb-1.5">M.E. Programmes</span>
+                                <Link to="/departments/me-cse" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Computer Science & Engg.</Link>
+                                <Link to="/departments/me-thermal" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Thermal Engineering</Link>
+                                <Link to="/departments/me-vlsi" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - VLSI Design</Link>
+                                <Link to="/departments/me-ped" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Power Electronics & Drives</Link>
+                                <Link to="/departments/me-cem" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">M.E. - Construction Engg. & Mgmt.</Link>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Doctor of Philosophy (Ph.D.)</span>
+                            <div className="space-y-1">
+                              <Link to="/departments/phd-civil" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Civil Engg.</Link>
+                              <Link to="/departments/phd-mech" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Mechanical Engg.</Link>
+                              <Link to="/departments/phd-ece" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Electronics & Comm. Engg.</Link>
+                              <Link to="/departments/phd-eee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Electrical & Elect. Engg.</Link>
                             </div>
                           </div>
                         </div>
-                        <div>
-                          <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Doctor of Philosophy (Ph.D.)</span>
-                          <div className="space-y-1">
-                            <Link to="/departments/phd-civil" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Civil Engg.</Link>
-                            <Link to="/departments/phd-mech" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Mechanical Engg.</Link>
-                            <Link to="/departments/phd-ece" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Electronics & Comm. Engg.</Link>
-                            <Link to="/departments/phd-eee" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">PhD - Electrical & Elect. Engg.</Link>
-                          </div>
+                        {/* Premium bottom strip linking to Faculty Directory */}
+                        <div className="border-t border-gray-150 pt-4 mt-4 flex items-center justify-between">
+                          <span className="text-[10px] uppercase font-black text-slate-400 tracking-wider">APEC Academic Directories</span>
+                          <Link to="/faculty" className="inline-flex items-center gap-1.5 text-xs font-black text-[#FF8A00] hover:text-[#FF8A00] bg-[#FFE7CC]/50 hover:bg-[#FFE7CC] border border-[#FF8A00]/20 px-3.5 py-1.5 rounded-xl transition-all">
+                            <span>Open Faculty Directory</span>
+                            <ChevronRight className="w-3.5 h-3.5 text-[#FF8A00]" />
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -1170,6 +1174,7 @@ function AppContent({ isLoading, setIsLoading }) {
                 </div>
               </div>
             </header>
+          )}
 
             {/* Mobile Navigation Drawer */}
             <AnimatePresence>
@@ -1230,30 +1235,9 @@ function AppContent({ isLoading, setIsLoading }) {
                         </button>
                         {mobileAboutOpen && (
                           <div className="pl-3 mt-2 space-y-2 flex flex-col border-l border-[#FFD6A5]/60">
-                            <Link to="/about/profile" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Institution Profile</Link>
-                            <Link to="/about/founders" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Founder & Trustees</Link>
-                            <Link to="/about/principal" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Principal Desk & Contacts</Link>
-                            <Link to="/alumni" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Alumni Cell</Link>
-                            <div className="pt-2 border-t border-gray-150">
-                              <Link to="/faculty" onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-[#FF8A00] flex items-center justify-between pr-2 mb-2">
-                                <span>Faculty Directory (All)</span>
-                                <span className="text-[9px] bg-amber-100 text-[#FF8A00] px-1.5 py-0.5 rounded font-black">B.E. / B.Tech</span>
-                              </Link>
-                              <div className="pl-2 space-y-1.5 text-[11px]">
-                                <span className="text-[10px] font-black uppercase text-indigo-600 block">B.E. Faculty</span>
-                                <Link to="/faculty?dept=Computer%20Science%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. CSE Faculty</Link>
-                                <Link to="/faculty?dept=Electronics%20and%20Communication%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. ECE Faculty</Link>
-                                <Link to="/faculty?dept=Electrical%20and%20Electronics%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. EEE Faculty</Link>
-                                <Link to="/faculty?dept=Department%20of%20Mechanical%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. Mechanical Faculty</Link>
-                                <Link to="/faculty?dept=Civil%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. Civil Faculty</Link>
-                                <Link to="/faculty?dept=Artificial%20Intelligence%20and%20Machine%20Learning" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.E. AIML Faculty</Link>
-
-                                <span className="text-[10px] font-black uppercase text-emerald-600 block pt-1.5">B.Tech. Faculty</span>
-                                <Link to="/faculty?dept=Information%20Technology" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.Tech IT Faculty</Link>
-                                <Link to="/faculty?dept=Chemical%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.Tech Chemical Faculty</Link>
-                                <Link to="/faculty?dept=Agricultural%20Engineering" onClick={() => setMobileMenuOpen(false)} className="block text-gray-600 hover:text-[#FF8A00]">B.Tech Agri Faculty</Link>
-                              </div>
-                            </div>
+                            <Link to="/about/profile" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-550">Institution Profile</Link>
+                            <Link to="/about/founders" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-550">Founder & Trustees</Link>
+                            <Link to="/about/principal" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-550">Principal Desk & Contacts</Link>
                           </div>
                         )}
                       </div>
@@ -1278,7 +1262,25 @@ function AppContent({ isLoading, setIsLoading }) {
                         )}
                       </div>
 
-                      <Link to="/departments" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-700 block border-b border-gray-150 pb-2">Departments</Link>
+                      {/* Collapsible Mobile Departments Section */}
+                      <div className="border-b border-gray-150 pb-2">
+                        <button 
+                          onClick={() => setMobileDepartmentsOpen(!mobileDepartmentsOpen)} 
+                          className="w-full text-left text-sm font-semibold text-gray-700 flex items-center justify-between focus:outline-none"
+                        >
+                          <span>Departments</span>
+                          <ChevronDown className={`w-4 h-4 transition-transform ${mobileDepartmentsOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                        {mobileDepartmentsOpen && (
+                          <div className="pl-3 mt-2 space-y-2 flex flex-col border-l border-[#FFD6A5]/60">
+                            <Link to="/departments" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-550 block">All Departments</Link>
+                            <Link to="/faculty" onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-[#FF8A00] flex items-center justify-between pr-2 mt-1">
+                              <span>Faculty Directory (All)</span>
+                              <span className="text-[9px] bg-amber-100 text-[#FF8A00] px-1.5 py-0.5 rounded font-black">Open</span>
+                            </Link>
+                          </div>
+                        )}
+                      </div>
                       <Link to="/facilities" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-700 block border-b border-gray-150 pb-2">Facilities</Link>
                       <Link to="/placements" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-700 block border-b border-gray-150 pb-2">Placements</Link>
                       
@@ -1501,6 +1503,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/committees/:id" element={<PageTransition><Committees /></PageTransition>} />
                    <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
                   <Route path="/editor-panel" element={<PageTransition><EditorPanel /></PageTransition>} />
+                  <Route path="/editor" element={<PageTransition><EditorPanel /></PageTransition>} />
                   <Route path="/cutoff-calculator" element={<PageTransition><CutoffCalculator /></PageTransition>} />
                 </Routes>
               </AnimatePresence>

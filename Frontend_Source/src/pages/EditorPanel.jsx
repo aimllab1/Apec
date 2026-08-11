@@ -5,12 +5,22 @@ import {
   Save, AlertCircle, RefreshCw, Users, FileText, Settings, Plus, Minus, Trash2, 
   Edit3, Check, CheckCircle2, ChevronRight, UserCheck, ShieldAlert, KeyRound, Globe,
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key,
-  BookOpen, Milestone, Library, Briefcase, GraduationCap
+  BookOpen, Milestone, Library, Briefcase, GraduationCap, BarChart3, PieChart, TrendingUp, Clock, PhoneCall, MessageSquare, Filter, Tag, Activity, Layers, ExternalLink, Copy, ArrowUpRight, BookOpenCheck,
+  Calendar, CalendarDays, Coins, PartyPopper, MessageCircle
 } from 'lucide-react';
 
 import departmentsData from '../data/departmentsData.json';
 import { getLoadedTourDataAsync, saveTourDataAsync } from '../data/tourData';
 import { encryptText, decryptText } from '../utils/crypto';
+import { 
+  fetchInquiries, 
+  updateInquiryStatus as syncUpdateInquiryStatus, 
+  updateInquiryNotes as syncUpdateInquiryNotes, 
+  deleteInquiry as syncDeleteInquiry, 
+  purgeAllInquiries as syncPurgeAllInquiries,
+  getDepartmentFeedbacks,
+  deleteDepartmentFeedback
+} from '../utils/inquiryService';
 
 // Google API Key from global memory rule
 const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
@@ -29,8 +39,11 @@ export default function EditorPanel() {
     }
   }, [isLoggedIn, navigate]);
 
-  // Tab State: 'branding' | 'ticker' | 'departments' | 'inquiries' | 'rag_training'
-  const [activeTab, setActiveTab] = useState('departments');
+  // Tab State: 'dashboard' | 'branding' | 'ticker' | 'departments' | 'inquiries' | 'rag_training' | '360_tour' | 'hod_portals' | 'ads'
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [inquiryStatusFilter, setInquiryStatusFilter] = useState('ALL');
+  const [editingNoteInquiry, setEditingNoteInquiry] = useState(null);
+  const [noteInputText, setNoteInputText] = useState('');
 
   // Success Notification state
   const [showSuccess, setShowSuccess] = useState(false);
@@ -78,7 +91,8 @@ export default function EditorPanel() {
     email: '',
     experience: '',
     joiningDate: '',
-    image: ''
+    image: '',
+    orcid: ''
   });
 
   // Handle Faculty Image Upload via FileReader
@@ -100,6 +114,31 @@ export default function EditorPanel() {
   // 4. Inquiries State (For Admin/Admission roles)
   const [inquiries, setInquiries] = useState([]);
   const [inquirySearch, setInquirySearch] = useState('');
+  const [isSyncingInquiries, setIsSyncingInquiries] = useState(false);
+
+  // Load Inquiries from Central Database & Local Cache
+  const loadInquiriesFromDB = async () => {
+    setIsSyncingInquiries(true);
+    try {
+      const data = await fetchInquiries();
+      setInquiries(data);
+    } catch (e) {
+      console.error('[EditorPanel] Failed to fetch inquiries:', e);
+    } finally {
+      setIsSyncingInquiries(false);
+    }
+  };
+
+  // Real-time periodic synchronization for Admission & Admin roles
+  useEffect(() => {
+    if (activeTab === 'inquiries' || activeTab === 'dashboard') {
+      loadInquiriesFromDB();
+      const interval = setInterval(() => {
+        loadInquiriesFromDB();
+      }, 8000);
+      return () => clearInterval(interval);
+    }
+  }, [activeTab]);
 
   // 5. RAG Training State (For Admin only)
   const [ragFile, setRagFile] = useState(null);
@@ -243,9 +282,9 @@ export default function EditorPanel() {
     if (userRole.startsWith('dept_')) {
       setActiveTab('departments');
     } else if (userRole === 'admission') {
-      setActiveTab('inquiries');
+      setActiveTab('dashboard');
     } else {
-      setActiveTab('branding');
+      setActiveTab('dashboard');
     }
 
     // Centralized settings loader
@@ -293,7 +332,7 @@ export default function EditorPanel() {
     }
 
     // Load Inquiries if authorized
-    if (userRole === 'admin' || userRole === 'admission') {
+    if (userRole === 'admin' || userRole === 'admission' || userRole.startsWith('dept_')) {
       loadInquiriesFromDB();
     }
 
@@ -351,12 +390,6 @@ export default function EditorPanel() {
       localStorage.setItem('apec_hod_accounts', JSON.stringify(updated));
       triggerSuccess(`HOD portal access revoked for ${email}.`);
     }
-  };
-
-  // Load Inquiries from localStorage
-  const loadInquiriesFromDB = () => {
-    const local = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-    setInquiries(local);
   };
 
   // Load trained RAG document names from localStorage
@@ -471,7 +504,8 @@ export default function EditorPanel() {
       email: faculty.email || '',
       experience: faculty.experience || '',
       joiningDate: faculty.joiningDate || '',
-      image: faculty.image || ''
+      image: faculty.image || '',
+      orcid: faculty.orcid || ''
     });
   };
 
@@ -518,7 +552,8 @@ export default function EditorPanel() {
       email: 'newfaculty@apec.edu.in',
       experience: '1 Year',
       joiningDate: 'June 1, 2026',
-      image: ''
+      image: '',
+      orcid: ''
     };
     const updatedDepts = [...depts];
     if (!updatedDepts[selectedDeptIdx].faculty) {
@@ -542,34 +577,63 @@ export default function EditorPanel() {
   };
 
   // Delete single inquiry
-  const deleteInquiry = (id) => {
+  const deleteInquiry = async (id) => {
     if (window.confirm('Are you sure you want to delete this inquiry entry?')) {
       const updated = inquiries.filter(item => item.id !== id);
       setInquiries(updated);
-      localStorage.setItem('apec_inquiries', JSON.stringify(updated));
+      await syncDeleteInquiry(id);
       triggerSuccess('Inquiry log deleted.');
     }
   };
 
+  // Update single inquiry lead status
+  const updateInquiryStatus = async (id, newStatus) => {
+    const updated = inquiries.map(item => item.id === id ? { ...item, status: newStatus } : item);
+    setInquiries(updated);
+    await syncUpdateInquiryStatus(id, newStatus);
+    triggerSuccess(`Lead status updated to '${newStatus}'.`);
+  };
+
+  // Save single inquiry notes
+  const updateInquiryNotes = async (id, notesText) => {
+    const updated = inquiries.map(item => item.id === id ? { ...item, notes: notesText } : item);
+    setInquiries(updated);
+    await syncUpdateInquiryNotes(id, notesText);
+    triggerSuccess('Candidate remarks saved.');
+    setEditingNoteInquiry(null);
+  };
+
   // Clear all inquiries
-  const purgeAllInquiries = () => {
+  const purgeAllInquiries = async () => {
     if (window.confirm('⚠️ CRITICAL: Are you sure you want to purge all inquiries? This action is irreversible.')) {
       setInquiries([]);
-      localStorage.removeItem('apec_inquiries');
+      await syncPurgeAllInquiries();
       triggerSuccess('Inquiry database purged.');
     }
   };
 
   // Export inquiries to CSV
   const exportInquiriesToCSV = () => {
-    let csv = 'Name,Cutoff,Phone,Department,Date\n';
+    if (inquiries.length === 0) {
+      alert("No inquiries available to export.");
+      return;
+    }
+    let csv = 'Candidate Name,Email,Phone,Cutoff,Department,Lead Status,Date,Remarks\n';
     inquiries.forEach(item => {
-      csv += `"${item.name || ''}","${item.cutoff || ''}","${item.phone || ''}","${item.dept || ''}","${item.date || ''}"\n`;
+      const name = (item.name || '').replace(/"/g, '""');
+      const email = (item.email || '').replace(/"/g, '""');
+      const phone = `'${item.phone || ''}`;
+      const cutoff = item.cutoff || 'N/A';
+      const dept = (item.dept || '').replace(/"/g, '""');
+      const status = item.status || 'New';
+      const date = (item.date || new Date(item.timestamp || Date.now()).toLocaleString()).replace(/"/g, '""');
+      const notes = (item.notes || item.message || '').replace(/"/g, '""');
+      csv += `"${name}","${email}","${phone}","${cutoff}","${dept}","${status}","${date}","${notes}"\n`;
     });
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.setAttribute("download", `APEC_Inquiries_${Date.now()}.csv`);
+    link.setAttribute("download", `APEC_Admissions_Leads_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -709,13 +773,52 @@ export default function EditorPanel() {
     }
   };
 
+  // Analytics calculations
+  const totalInquiries = inquiries.length;
+  const newLeadsCount = inquiries.filter(i => (!i.status || i.status === 'New')).length;
+  const enrolledCount = inquiries.filter(i => i.status === 'Enrolled').length;
+  const inContactCount = inquiries.filter(i => i.status === 'In Contact' || i.status === 'Follow Up').length;
+
+  const courseCounts = inquiries.reduce((acc, item) => {
+    const deptKey = (item.dept || 'General').toUpperCase();
+    acc[deptKey] = (acc[deptKey] || 0) + 1;
+    return acc;
+  }, {});
+
+  let topCourse = 'N/A';
+  let topCourseCount = 0;
+  Object.entries(courseCounts).forEach(([course, count]) => {
+    if (count > topCourseCount) {
+      topCourse = course;
+      topCourseCount = count;
+    }
+  });
+
+  const totalFacultyCount = depts.reduce((acc, d) => acc + (d.faculty ? d.faculty.length : 0), 0);
+
   const filteredInquiries = inquiries.filter(item => {
+    // If HOD role, restrict inquiries to current department
+    if (userRole.startsWith('dept_') && depts[selectedDeptIdx]) {
+      const targetDeptKey = (depts[selectedDeptIdx].key || '').toLowerCase();
+      const targetDeptName = (depts[selectedDeptIdx].name || '').toLowerCase();
+      const itemDept = (item.dept || '').toLowerCase();
+      const isDeptMatch = itemDept.includes(targetDeptKey) || 
+                          targetDeptName.includes(itemDept) || 
+                          itemDept.includes(targetDeptName);
+      if (!isDeptMatch) return false;
+    }
+
     const searchLower = inquirySearch.toLowerCase();
-    return (
+    const matchesSearch = (
       (item.name || '').toLowerCase().includes(searchLower) ||
       (item.dept || '').toLowerCase().includes(searchLower) ||
-      (item.phone || '').includes(searchLower)
+      (item.phone || '').includes(searchLower) ||
+      (item.email || '').toLowerCase().includes(searchLower) ||
+      (item.notes || item.message || '').toLowerCase().includes(searchLower)
     );
+    const itemStatus = item.status || 'New';
+    const matchesStatus = (inquiryStatusFilter === 'ALL') || (itemStatus === inquiryStatusFilter);
+    return matchesSearch && matchesStatus;
   });
 
   return (
@@ -793,68 +896,245 @@ export default function EditorPanel() {
           {/* Left panel tabs (Restricted based on roles) */}
           <div className="lg:col-span-1 flex flex-col gap-2">
             
-            {userRole === 'admin' && (
+            {/* HOD ROLE CUSTOM NAVIGATION */}
+            {userRole.startsWith('dept_') ? (
               <>
                 <button
-                  onClick={() => { setActiveTab('branding'); setSelectedFacultyIdx(null); }}
+                  onClick={() => { setActiveTab('dashboard'); setSelectedFacultyIdx(null); }}
                   className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                    activeTab === 'branding' 
+                    activeTab === 'dashboard' 
                       ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
                       : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <Globe className="w-4 h-4" /> Branding & Contact
+                    <Shield className="w-4 h-4 text-amber-300" /> HOD Dashboard
                   </span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
 
                 <button
-                  onClick={() => { setActiveTab('ticker'); setSelectedFacultyIdx(null); }}
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('faculty'); setSelectedFacultyIdx(null); }}
                   className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                    activeTab === 'ticker' 
+                    activeTab === 'departments' && deptSubTab === 'faculty' 
                       ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
                       : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <FileText className="w-4 h-4" /> News Ticker
+                    <Users className="w-4 h-4 text-indigo-400" /> Faculty Directory
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('overview'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'overview' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <BookOpen className="w-4 h-4 text-emerald-400" /> Overview & HOD Desk
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('outcomes'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'outcomes' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Milestone className="w-4 h-4 text-purple-400" /> PEOs / PSOs / POs
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('syllabus'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'syllabus' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <BookOpenCheck className="w-4 h-4 text-emerald-400" /> Syllabus & Regulations
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('labs'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'labs' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Library className="w-4 h-4 text-amber-400" /> Laboratories & Facilities
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('placements'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'placements' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Briefcase className="w-4 h-4 text-blue-400" /> Placements & Grants
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('events'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'events' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <PartyPopper className="w-4 h-4 text-pink-400" /> Hosted & Attended Events
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('newsletters'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'newsletters' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <FileText className="w-4 h-4 text-teal-400" /> Newsletters (PDF)
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('departments'); setDeptSubTab('feedback'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'departments' && deptSubTab === 'feedback' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <MessageCircle className="w-4 h-4 text-orange-400" /> Department Feedbacks
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+
+                <button
+                  onClick={() => { setActiveTab('inquiries'); setSelectedFacultyIdx(null); }}
+                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                    activeTab === 'inquiries' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                  }`}
+                >
+                  <span className="flex items-center gap-2.5">
+                    <Database className="w-4 h-4 text-rose-400" /> Department Leads
                   </span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </>
-            )}
+            ) : (
+              <>
+                {(userRole === 'admin' || userRole === 'admission') && (
+                  <button
+                    onClick={() => { setActiveTab('dashboard'); setSelectedFacultyIdx(null); }}
+                    className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                      activeTab === 'dashboard' 
+                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <BarChart3 className="w-4 h-4 text-indigo-200" /> Executive Analytics
+                    </span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
 
-            {(userRole === 'admin' || userRole.startsWith('dept_')) && (
-              <button
-                onClick={() => { setActiveTab('departments'); setSelectedFacultyIdx(null); }}
-                className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                  activeTab === 'departments' 
-                    ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                }`}
-              >
-                <span className="flex items-center gap-2.5">
-                  <Users className="w-4 h-4" /> Faculty Directories
-                </span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            )}
+                {userRole === 'admin' && (
+                  <>
+                    <button
+                      onClick={() => { setActiveTab('branding'); setSelectedFacultyIdx(null); }}
+                      className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                        activeTab === 'branding' 
+                          ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                          : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <Globe className="w-4 h-4" /> Branding & Contact
+                      </span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
 
-            {(userRole === 'admin' || userRole === 'admission') && (
-              <button
-                onClick={() => { setActiveTab('inquiries'); setSelectedFacultyIdx(null); }}
-                className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                  activeTab === 'inquiries' 
-                    ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                }`}
-              >
-                <span className="flex items-center gap-2.5">
-                  <Database className="w-4 h-4" /> Inquiries & leads
-                </span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+                    <button
+                      onClick={() => { setActiveTab('ticker'); setSelectedFacultyIdx(null); }}
+                      className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                        activeTab === 'ticker' 
+                          ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                          : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <FileText className="w-4 h-4" /> News Ticker
+                      </span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </>
+                )}
+
+                {userRole === 'admin' && (
+                  <button
+                    onClick={() => { setActiveTab('departments'); setSelectedFacultyIdx(null); }}
+                    className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                      activeTab === 'departments' 
+                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Users className="w-4 h-4" /> Faculty Directories
+                    </span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+
+                {(userRole === 'admin' || userRole === 'admission') && (
+                  <button
+                    onClick={() => { setActiveTab('inquiries'); setSelectedFacultyIdx(null); }}
+                    className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                      activeTab === 'inquiries' 
+                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                    }`}
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Database className="w-4 h-4" /> Inquiries & leads
+                    </span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </>
             )}
 
             {userRole === 'admin' && (
@@ -925,6 +1205,413 @@ export default function EditorPanel() {
           {/* Right Panel Main Workspace */}
           <div className="lg:col-span-3 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
             
+            {/* DEPARTMENT HOD EXECUTIVE DASHBOARD */}
+            {activeTab === 'dashboard' && userRole.startsWith('dept_') && depts[selectedDeptIdx] && (
+              <div className="space-y-8">
+                {/* HOD Hero Header Banner */}
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-900 text-white p-7 md:p-8 shadow-2xl border border-indigo-700/30 text-left">
+                  <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+                  <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-[11px] font-extrabold uppercase tracking-wider mb-3">
+                        <Shield className="w-3.5 h-3.5 text-amber-400" /> HOD Department Console
+                      </div>
+                      <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white">
+                        {depts[selectedDeptIdx].name}
+                      </h2>
+                      <p className="text-xs text-indigo-200/80 mt-1 max-w-xl font-medium leading-relaxed">
+                        Welcome to your department administration workspace. Update HOD messages, faculty profiles, lab facilities, placement records, and candidate inquiries.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <a
+                        href={`/departments/${depts[selectedDeptIdx].key}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-extrabold text-xs uppercase tracking-wider transition-all border border-white/15 cursor-pointer flex items-center gap-2"
+                      >
+                        <ExternalLink className="w-4 h-4 text-indigo-300" /> Preview Page
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* HOD Department Metric Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                  {/* Card 1: Faculty Count */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Department Faculty</span>
+                      <span className="text-3xl font-black text-slate-900 block mt-1">
+                        {depts[selectedDeptIdx].faculty ? depts[selectedDeptIdx].faculty.length : 0}
+                      </span>
+                      <button
+                        onClick={() => { setActiveTab('departments'); setDeptSubTab('faculty'); }}
+                        className="text-[10px] font-bold text-indigo-600 hover:underline mt-2 inline-flex items-center gap-1 cursor-pointer"
+                      >
+                        Manage Directory <ChevronRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform">
+                      <Users className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Card 2: Department Inquiries */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Department Leads</span>
+                      <span className="text-3xl font-black text-slate-900 block mt-1">
+                        {inquiries.filter(i => (i.dept || '').toLowerCase().includes((depts[selectedDeptIdx].key || '').toLowerCase()) || (i.dept || '').toLowerCase().includes((depts[selectedDeptIdx].name || '').toLowerCase())).length}
+                      </span>
+                      <button
+                        onClick={() => setActiveTab('inquiries')}
+                        className="text-[10px] font-bold text-emerald-600 hover:underline mt-2 inline-flex items-center gap-1 cursor-pointer"
+                      >
+                        View Student Inquiries <ChevronRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
+                      <Database className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Card 3: Labs Count */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Lab Facilities</span>
+                      <span className="text-3xl font-black text-slate-900 block mt-1">
+                        {depts[selectedDeptIdx].labs ? depts[selectedDeptIdx].labs.length : 0} Rooms
+                      </span>
+                      <button
+                        onClick={() => { setActiveTab('departments'); setDeptSubTab('labs'); }}
+                        className="text-[10px] font-bold text-amber-600 hover:underline mt-2 inline-flex items-center gap-1 cursor-pointer"
+                      >
+                        Edit Labs & Specs <ChevronRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
+                      <Library className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Card 4: Placement Rate */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Placement Rate</span>
+                      <span className="text-2xl font-black text-slate-900 block mt-1">
+                        {depts[selectedDeptIdx].placements?.rate || '90%+'}
+                      </span>
+                      <button
+                        onClick={() => { setActiveTab('departments'); setDeptSubTab('placements'); }}
+                        className="text-[10px] font-bold text-purple-600 hover:underline mt-2 inline-flex items-center gap-1 cursor-pointer"
+                      >
+                        Update Stats <ChevronRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                      <Briefcase className="w-6 h-6" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* HOD Quick Management Control Grid */}
+                <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 text-left">
+                  <h3 className="font-title text-base font-black text-slate-900 flex items-center gap-2">
+                    <Settings className="w-4 h-4 text-indigo-600" /> Department Management Modules
+                  </h3>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button
+                      onClick={() => { setActiveTab('departments'); setDeptSubTab('faculty'); }}
+                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Users className="w-5 h-5" />
+                      </div>
+                      <h4 className="font-black text-slate-900 text-sm">Faculty Directory</h4>
+                      <p className="text-xs text-slate-400 font-semibold mt-1">Add, edit designations, qualifications, and upload faculty photos.</p>
+                    </button>
+
+                    <button
+                      onClick={() => { setActiveTab('departments'); setDeptSubTab('overview'); }}
+                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <BookOpen className="w-5 h-5" />
+                      </div>
+                      <h4 className="font-black text-slate-900 text-sm">Overview & HOD Desk</h4>
+                      <p className="text-xs text-slate-400 font-semibold mt-1">Update HOD Message, Vision, Mission, and department intro.</p>
+                    </button>
+
+                    <button
+                      onClick={() => { setActiveTab('departments'); setDeptSubTab('outcomes'); }}
+                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Milestone className="w-5 h-5" />
+                      </div>
+                      <h4 className="font-black text-slate-900 text-sm">PEO / PSO / Outcomes</h4>
+                      <p className="text-xs text-slate-400 font-semibold mt-1">Configure NBA & NAAC Program Educational Objectives & Outcomes.</p>
+                    </button>
+
+                    <button
+                      onClick={() => { setActiveTab('departments'); setDeptSubTab('labs'); }}
+                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Library className="w-5 h-5" />
+                      </div>
+                      <h4 className="font-black text-slate-900 text-sm">Laboratories & Facilities</h4>
+                      <p className="text-xs text-slate-400 font-semibold mt-1">Manage lab rooms, equipment inventory, and facility photos.</p>
+                    </button>
+
+                    <button
+                      onClick={() => { setActiveTab('departments'); setDeptSubTab('placements'); }}
+                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Briefcase className="w-5 h-5" />
+                      </div>
+                      <h4 className="font-black text-slate-900 text-sm">Placement Statistics</h4>
+                      <p className="text-xs text-slate-400 font-semibold mt-1">Edit placement percentage, packages, and recruiter list.</p>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveTab('inquiries')}
+                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Database className="w-5 h-5" />
+                      </div>
+                      <h4 className="font-black text-slate-900 text-sm">Department Inquiries</h4>
+                      <p className="text-xs text-slate-400 font-semibold mt-1">Review student admission leads interested in your department.</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* EXECUTIVE ANALYTICS DASHBOARD */}
+            {activeTab === 'dashboard' && (userRole === 'admin' || userRole === 'admission') && (
+              <div className="space-y-8">
+                {/* Hero Header Banner */}
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-850 to-slate-950 text-white p-7 md:p-8 shadow-2xl border border-indigo-700/30">
+                  <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+                  <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-[11px] font-extrabold uppercase tracking-wider mb-3">
+                        <Shield className="w-3.5 h-3.5 text-indigo-400" /> Executive Master Command Center
+                      </div>
+                      <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white">
+                        Welcome back, <span className="text-indigo-300 capitalize">{userEmail ? userEmail.split('@')[0] : userRole}</span>
+                      </h2>
+                      <p className="text-xs text-indigo-200/80 mt-1 max-w-xl font-medium leading-relaxed">
+                        Monitor real-time admission inquiries, departmental interest distribution, faculty directories, and system sync state.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/15 text-xs text-right">
+                        <span className="block text-[9px] uppercase tracking-wider text-indigo-300 font-extrabold">System Date</span>
+                        <span className="font-mono font-bold text-white">{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      </div>
+                      <button
+                        onClick={() => setActiveTab('inquiries')}
+                        className="px-4 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-indigo-500/30 cursor-pointer flex items-center gap-2"
+                      >
+                        <Database className="w-4 h-4" /> Manage Leads ({totalInquiries})
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Stat Cards Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {/* Card 1: Inquiries */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Total Admission Inquiries</span>
+                      <span className="text-3xl font-black text-slate-900 block mt-1">{totalInquiries}</span>
+                      <div className="flex items-center gap-1.5 mt-2">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-extrabold border border-emerald-200">
+                          <TrendingUp className="w-3 h-3" /> {newLeadsCount} New Leads
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform">
+                      <Users className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Card 2: Top Course */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Top Demanded Course</span>
+                      <span className="text-base font-black text-slate-900 block mt-1 truncate max-w-[140px]" title={topCourse}>
+                        {topCourse}
+                      </span>
+                      <div className="flex items-center gap-1.5 mt-2">
+                        <span className="text-[10px] font-bold text-slate-500">
+                          {topCourseCount} request{topCourseCount !== 1 ? 's' : ''} ({totalInquiries ? Math.round((topCourseCount / totalInquiries) * 100) : 0}%)
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
+                      <GraduationCap className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Card 3: Total Faculty */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Faculty Members</span>
+                      <span className="text-3xl font-black text-slate-900 block mt-1">{totalFacultyCount}</span>
+                      <div className="flex items-center gap-1.5 mt-2">
+                        <span className="text-[10px] font-bold text-indigo-600">
+                          Across {depts.length} Departments
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
+                      <BookOpen className="w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Card 4: System Sync */}
+                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
+                    <div>
+                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">System CMS State</span>
+                      <span className="text-sm font-black text-slate-900 block mt-1">Live CMS Operational</span>
+                      <div className="flex items-center gap-1.5 mt-2">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-[10px] font-extrabold border border-indigo-200">
+                          <CheckCircle2 className="w-3 h-3 text-indigo-500" /> Sync Active
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                      <Database className="w-6 h-6" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Department Demand Distribution & Pipeline Stages */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {/* Department Demand Bar Chart */}
+                  <div className="lg:col-span-2 bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <h3 className="font-title text-base font-black text-slate-900 flex items-center gap-2">
+                          <BarChart3 className="w-4 h-4 text-indigo-600" /> Department Inquiry Demand Distribution
+                        </h3>
+                        <p className="text-xs text-slate-400 font-semibold mt-0.5">Live student preference metrics across engineering disciplines</p>
+                      </div>
+                      <span className="text-xs font-mono font-bold text-indigo-600 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-xs">
+                        {totalInquiries} Leads Total
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 pt-1">
+                      {Object.entries(courseCounts).length === 0 ? (
+                        <div className="p-8 text-center text-xs font-semibold text-slate-400">
+                          No department inquiry data recorded yet.
+                        </div>
+                      ) : (
+                        Object.entries(courseCounts)
+                          .sort((a, b) => b[1] - a[1])
+                          .map(([deptName, count]) => {
+                            const percentage = totalInquiries ? Math.round((count / totalInquiries) * 100) : 0;
+                            return (
+                              <div key={deptName} className="space-y-1">
+                                <div className="flex justify-between items-center text-xs font-bold">
+                                  <span className="text-slate-800 uppercase tracking-wide flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-indigo-600" />
+                                    {deptName}
+                                  </span>
+                                  <span className="font-mono text-slate-500">
+                                    {count} lead{count !== 1 ? 's' : ''} ({percentage}%)
+                                  </span>
+                                </div>
+                                <div className="w-full bg-white border border-slate-200 rounded-full h-3 overflow-hidden p-0.5">
+                                  <motion.div
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${percentage}%` }}
+                                    transition={{ duration: 0.7, ease: "easeOut" }}
+                                    className="bg-gradient-to-r from-indigo-500 to-purple-600 h-full rounded-full"
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Admissions Pipeline & Quick Action Cards */}
+                  <div className="space-y-6">
+                    {/* Pipeline Stage Summary */}
+                    <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                      <h3 className="font-title text-base font-black text-slate-900 flex items-center gap-2">
+                        <Activity className="w-4 h-4 text-emerald-600" /> Admissions Pipeline
+                      </h3>
+                      <div className="space-y-2.5">
+                        <div className="p-3 rounded-2xl bg-amber-50/80 border border-amber-200 flex items-center justify-between text-xs font-bold text-amber-900">
+                          <span className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" /> New Inquiry Leads
+                          </span>
+                          <span className="font-mono text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-lg">{newLeadsCount}</span>
+                        </div>
+
+                        <div className="p-3 rounded-2xl bg-blue-50/80 border border-blue-200 flex items-center justify-between text-xs font-bold text-blue-900">
+                          <span className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-blue-500" /> In Contact / Counseling
+                          </span>
+                          <span className="font-mono text-blue-800 bg-blue-200/60 px-2.5 py-0.5 rounded-lg">{inContactCount}</span>
+                        </div>
+
+                        <div className="p-3 rounded-2xl bg-emerald-50/80 border border-emerald-200 flex items-center justify-between text-xs font-bold text-emerald-900">
+                          <span className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Confirmed Enrolled
+                          </span>
+                          <span className="font-mono text-emerald-800 bg-emerald-200/60 px-2.5 py-0.5 rounded-lg">{enrolledCount}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Quick Launch Hub */}
+                    <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                      <h3 className="font-title text-xs font-black text-slate-400 uppercase tracking-wider">Quick Actions</h3>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <button
+                          onClick={exportInquiriesToCSV}
+                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
+                        >
+                          <Download className="w-4 h-4 text-indigo-600" /> Export CSV
+                        </button>
+                        <button
+                          onClick={() => setActiveTab('hod_portals')}
+                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
+                        >
+                          <KeyRound className="w-4 h-4 text-amber-500" /> HOD Access
+                        </button>
+                        <button
+                          onClick={() => setActiveTab('ads')}
+                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
+                        >
+                          <Megaphone className="w-4 h-4 text-purple-600" /> Popup Ads
+                        </button>
+                        <button
+                          onClick={() => setActiveTab('rag_training')}
+                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
+                        >
+                          <Sparkles className="w-4 h-4 text-indigo-600" /> AI Knowledge
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* BRANDING EDITOR */}
             {activeTab === 'branding' && userRole === 'admin' && (
               <div className="space-y-6">
@@ -1270,33 +1957,7 @@ export default function EditorPanel() {
                   </div>
                 </div>
 
-                {/* Sub-Navigation for Department Portal Sections */}
-                <div className="flex flex-wrap items-center gap-2 bg-slate-100 p-1.5 rounded-2xl border border-slate-200">
-                  {[
-                    { id: 'faculty', label: 'Faculty Directory & Photos', icon: Users },
-                    { id: 'overview', label: 'Overview & Vision', icon: BookOpen },
-                    { id: 'outcomes', label: 'PEO / PSO / PO', icon: Milestone },
-                    { id: 'labs', label: 'Facilities & Labs', icon: Library },
-                    { id: 'placements', label: 'Placements', icon: Briefcase }
-                  ].map((sub) => {
-                    const Icon = sub.icon;
-                    const isActive = deptSubTab === sub.id;
-                    return (
-                      <button
-                        key={sub.id}
-                        onClick={() => setDeptSubTab(sub.id)}
-                        className={`flex items-center gap-2 px-4 py-2 text-xs font-black rounded-xl transition-all cursor-pointer ${
-                          isActive 
-                            ? 'bg-indigo-650 text-white shadow-md' 
-                            : 'text-slate-600 hover:text-indigo-650 hover:bg-white'
-                        }`}
-                      >
-                        <Icon className="w-3.5 h-3.5" />
-                        <span>{sub.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+
 
                 {/* SUB-TAB 1: FACULTY DIRECTORY & PHOTO UPLOADER */}
                 {deptSubTab === 'faculty' && (
@@ -1483,6 +2144,20 @@ export default function EditorPanel() {
                                   value={editFaculty.experience}
                                   onChange={(e) => setEditFaculty({...editFaculty, experience: e.target.value})}
                                   className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                                />
+                              </div>
+
+                              <div className="space-y-1 col-span-2">
+                                <label className="text-[10px] font-black uppercase text-emerald-700 tracking-wider flex items-center gap-1">
+                                  <span className="w-3.5 h-3.5 bg-emerald-600 text-white rounded flex items-center justify-center text-[9px] font-mono">iD</span>
+                                  ORCID Identifier (e.g. 0009-0004-5988-5664)
+                                </label>
+                                <input 
+                                  type="text"
+                                  value={editFaculty.orcid || ''}
+                                  onChange={(e) => setEditFaculty({...editFaculty, orcid: e.target.value})}
+                                  placeholder="0009-0004-5988-5664"
+                                  className="w-full text-xs px-3 py-2 bg-emerald-50/50 border border-emerald-200 rounded-lg outline-none focus:border-emerald-600 focus:bg-white font-mono font-bold text-slate-800"
                                 />
                               </div>
                             </div>
@@ -1768,11 +2443,113 @@ export default function EditorPanel() {
                         ))}
                       </div>
 
+                      <div className="pt-4 border-t border-slate-200 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('Program Educational Objectives & Outcomes saved successfully!');
+                          }}
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-2"
+                        >
+                          <Save className="w-4 h-4" /> Save Outcomes (PEO / PSO / PO)
+                        </button>
+                      </div>
+
                     </div>
                   </div>
                 )}
 
-                {/* SUB-TAB 4: FACILITIES & LABS */}
+                {/* SUB-TAB 4: SYLLABUS & REGULATIONS */}
+                {deptSubTab === 'syllabus' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
+                      <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
+                          Department Syllabus & Academic Regulations
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('Syllabus & Academic Regulations saved successfully!');
+                          }}
+                          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5"
+                        >
+                          <Save className="w-3.5 h-3.5" /> Save Syllabus Details
+                        </button>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Regulation & Title</label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].syllabus?.title || `${depts[selectedDeptIdx].name} Curriculum & Syllabus (2021 Regulation)`}
+                            onChange={(e) => {
+                              const syl = depts[selectedDeptIdx].syllabus || {};
+                              updateCurrentDeptField('syllabus', { ...syl, title: e.target.value });
+                            }}
+                            placeholder="2021 Regulation - Anna University / Autonomous Curriculum"
+                            className="w-full text-xs font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">Syllabus PDF Document Link / File Upload</label>
+                          <div className="flex items-center gap-2">
+                            <label className="inline-flex items-center gap-1 px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl cursor-pointer transition-all">
+                              <Upload className="w-3.5 h-3.5" />
+                              <span>Upload File</span>
+                              <input 
+                                type="file" 
+                                accept=".pdf,.doc,.docx,image/*" 
+                                onChange={(e) => {
+                                  const file = e.target.files && e.target.files[0];
+                                  if (file) {
+                                    const reader = new FileReader();
+                                    reader.onloadend = () => {
+                                      const syl = depts[selectedDeptIdx].syllabus || {};
+                                      updateCurrentDeptField('syllabus', { ...syl, link: reader.result });
+                                    };
+                                    reader.readAsDataURL(file);
+                                  }
+                                }}
+                                className="hidden" 
+                              />
+                            </label>
+                            <input 
+                              type="text"
+                              value={depts[selectedDeptIdx].syllabus?.link || ''}
+                              onChange={(e) => {
+                                const syl = depts[selectedDeptIdx].syllabus || {};
+                                updateCurrentDeptField('syllabus', { ...syl, link: e.target.value });
+                              }}
+                              placeholder="https://apec.edu.in/downloads/aiml-syllabus.pdf"
+                              className="flex-1 text-xs font-mono font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Curriculum & Course Scheme Description</label>
+                          <textarea 
+                            rows={3}
+                            value={depts[selectedDeptIdx].syllabus?.description || ''}
+                            onChange={(e) => {
+                              const syl = depts[selectedDeptIdx].syllabus || {};
+                              updateCurrentDeptField('syllabus', { ...syl, description: e.target.value });
+                            }}
+                            placeholder="Describe the credit structure, semester core courses, electives, and lab guidelines..."
+                            className="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl font-medium"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* SUB-TAB 5: FACILITIES & LABS */}
                 {deptSubTab === 'labs' && depts[selectedDeptIdx] && (
                   <div className="space-y-6 text-left">
                     <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
@@ -1780,16 +2557,28 @@ export default function EditorPanel() {
                         <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
                           Department Laboratories & Facilities ({depts[selectedDeptIdx].labs?.length || 0})
                         </h4>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const labs = depts[selectedDeptIdx].labs || [];
-                            updateCurrentDeptField('labs', [...labs, { name: 'Advanced Laboratory', description: 'Lab details and equipment', incharge: 'Prof. Incharge', image: '' }]);
-                          }}
-                          className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
-                        >
-                          <Plus className="w-3 h-3" /> Add Laboratory
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const labs = depts[selectedDeptIdx].labs || [];
+                              updateCurrentDeptField('labs', [...labs, { name: 'Advanced Laboratory', description: 'Lab details and equipment', incharge: 'Prof. Incharge', image: '' }]);
+                            }}
+                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer mr-2"
+                          >
+                            <Plus className="w-3 h-3" /> Add Laboratory
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              saveDepts(depts);
+                              triggerSuccess('Laboratory facilities saved successfully!');
+                            }}
+                            className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1"
+                          >
+                            <Save className="w-3.5 h-3.5" /> Save Labs
+                          </button>
+                        </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1889,17 +2678,42 @@ export default function EditorPanel() {
                           </div>
                         ))}
                       </div>
+
+                      <div className="pt-4 border-t border-slate-200 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('All laboratory facilities saved successfully!');
+                          }}
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-2"
+                        >
+                          <Save className="w-4 h-4" /> Save Laboratory Facilities
+                        </button>
+                      </div>
                     </div>
                   </div>
                 )}
 
-                {/* SUB-TAB 5: PLACEMENTS */}
+                {/* SUB-TAB 6: PLACEMENTS */}
                 {deptSubTab === 'placements' && depts[selectedDeptIdx] && (
                   <div className="space-y-6 text-left">
                     <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
-                      <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider border-b border-slate-200 pb-2">
-                        Placement Statistics & Highlights
-                      </h4>
+                      <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
+                          Placement Statistics & Highlights
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('Placement records & highlights saved successfully!');
+                          }}
+                          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5"
+                        >
+                          <Save className="w-3.5 h-3.5" /> Save Placement Records
+                        </button>
+                      </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="space-y-1">
@@ -1954,6 +2768,719 @@ export default function EditorPanel() {
                           className="w-full text-xs font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
                         />
                       </div>
+
+                      {/* Placement Banner Image Input */}
+                      <div className="space-y-1.5 pt-2 border-t border-slate-200">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">Placement Banner / Highlight Image</label>
+                        <div className="flex items-center gap-2">
+                          <label className="inline-flex items-center gap-1 px-3.5 py-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl cursor-pointer transition-all">
+                            <Upload className="w-3.5 h-3.5" />
+                            <span>Upload Banner</span>
+                            <input 
+                              type="file" 
+                              accept="image/*" 
+                              onChange={(e) => {
+                                const file = e.target.files && e.target.files[0];
+                                if (file) {
+                                  const reader = new FileReader();
+                                  reader.onloadend = () => {
+                                    const pl = depts[selectedDeptIdx].placements || {};
+                                    updateCurrentDeptField('placements', { ...pl, image: reader.result });
+                                  };
+                                  reader.readAsDataURL(file);
+                                }
+                              }}
+                              className="hidden" 
+                            />
+                          </label>
+                          <input 
+                            type="text"
+                            value={depts[selectedDeptIdx].placements?.image || ''}
+                            onChange={(e) => {
+                              const pl = depts[selectedDeptIdx].placements || {};
+                              updateCurrentDeptField('placements', { ...pl, image: e.target.value });
+                            }}
+                            placeholder="Placement banner image URL or path"
+                            className="flex-1 text-xs font-mono font-bold px-3 py-2 bg-white border border-slate-200 rounded-xl"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Placement Overview Description */}
+                      <div className="space-y-1 pt-2">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Placement Highlights Description</label>
+                        <textarea 
+                          rows={3}
+                          value={depts[selectedDeptIdx].placements?.description || ''}
+                          onChange={(e) => {
+                            const pl = depts[selectedDeptIdx].placements || {};
+                            updateCurrentDeptField('placements', { ...pl, description: e.target.value });
+                          }}
+                          placeholder="Highlight department placement achievements, top packages offered, training programs, and career statistics..."
+                          className="w-full text-xs p-3 bg-white border border-slate-200 rounded-xl font-medium"
+                        />
+                      </div>
+
+                      {/* Funds Received & Research Grants Manager */}
+                      <div className="pt-4 border-t border-slate-200 space-y-4">
+                        <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                          <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider flex items-center gap-1.5">
+                            <Coins className="w-4 h-4 text-amber-500" /> Funds Received & Research Grants ({depts[selectedDeptIdx].grants?.length || 0})
+                          </h4>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const gr = depts[selectedDeptIdx].grants || [];
+                              updateCurrentDeptField('grants', [...gr, { agency: 'DST-SERB / AICTE', title: 'Research & Modernization Grant', pi: 'Dr. Principal Investigator', amount: '₹ 15,00,000', year: '2025-2026' }]);
+                            }}
+                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Add Research Grant
+                          </button>
+                        </div>
+
+                        <div className="space-y-3">
+                          {(depts[selectedDeptIdx].grants || []).map((grant, gIdx) => (
+                            <div key={gIdx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-xs">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const gr = depts[selectedDeptIdx].grants.filter((_, i) => i !== gIdx);
+                                  updateCurrentDeptField('grants', gr);
+                                }}
+                                className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pr-8">
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Funding Agency</label>
+                                  <input 
+                                    type="text"
+                                    value={grant.agency || ''}
+                                    onChange={(e) => {
+                                      const gr = [...(depts[selectedDeptIdx].grants || [])];
+                                      gr[gIdx].agency = e.target.value;
+                                      updateCurrentDeptField('grants', gr);
+                                    }}
+                                    placeholder="DST, AICTE, TNSCST, ICMR, Industry"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Project Title</label>
+                                  <input 
+                                    type="text"
+                                    value={grant.title || ''}
+                                    onChange={(e) => {
+                                      const gr = [...(depts[selectedDeptIdx].grants || [])];
+                                      gr[gIdx].title = e.target.value;
+                                      updateCurrentDeptField('grants', gr);
+                                    }}
+                                    placeholder="Project / Scheme Title"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Principal Investigator (Faculty PI)</label>
+                                  <input 
+                                    type="text"
+                                    value={grant.pi || ''}
+                                    onChange={(e) => {
+                                      const gr = [...(depts[selectedDeptIdx].grants || [])];
+                                      gr[gIdx].pi = e.target.value;
+                                      updateCurrentDeptField('grants', gr);
+                                    }}
+                                    placeholder="Dr. Faculty Coordinator"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2">
+                                  <div className="space-y-1">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Amount Received (₹)</label>
+                                    <input 
+                                      type="text"
+                                      value={grant.amount || ''}
+                                      onChange={(e) => {
+                                        const gr = [...(depts[selectedDeptIdx].grants || [])];
+                                        gr[gIdx].amount = e.target.value;
+                                        updateCurrentDeptField('grants', gr);
+                                      }}
+                                      placeholder="₹ 15,00,000"
+                                      className="w-full text-xs font-bold px-3 py-1.5 bg-emerald-50 text-emerald-900 border border-emerald-200 rounded-lg"
+                                    />
+                                  </div>
+
+                                  <div className="space-y-1">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Year / Sanction</label>
+                                    <input 
+                                      type="text"
+                                      value={grant.year || ''}
+                                      onChange={(e) => {
+                                        const gr = [...(depts[selectedDeptIdx].grants || [])];
+                                        gr[gIdx].year = e.target.value;
+                                        updateCurrentDeptField('grants', gr);
+                                      }}
+                                      placeholder="2025-2026"
+                                      className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-200 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('Placement records & funds received saved successfully!');
+                          }}
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-2"
+                        >
+                          <Save className="w-4 h-4" /> Save Placement Records & Research Grants
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* SUB-TAB 7: HOSTED & ATTENDED EVENTS */}
+                {deptSubTab === 'events' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-6">
+                      <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider flex items-center gap-2">
+                          <PartyPopper className="w-4 h-4 text-pink-500" /> Department Events (Hosted & Attended)
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('Department events saved successfully!');
+                          }}
+                          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5"
+                        >
+                          <Save className="w-3.5 h-3.5" /> Save Events List
+                        </button>
+                      </div>
+
+                      {/* 1. HOSTED EVENTS */}
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <h5 className="text-xs font-black uppercase text-pink-700 tracking-wider flex items-center gap-1.5">
+                            🎪 1. Hosted Events (Organized by Department) ({depts[selectedDeptIdx].hostedEvents?.length || 0})
+                          </h5>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const hosted = depts[selectedDeptIdx].hostedEvents || [];
+                              updateCurrentDeptField('hostedEvents', [...hosted, { name: 'National Level Symposium / Workshop', date: 'October 15, 2025', venue: 'APEC Main Auditorium', speaker: 'Dr. Guest Speaker', description: 'Interactive technical sessions and competitions', image: '' }]);
+                            }}
+                            className="text-xs font-black text-pink-650 hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Add Hosted Event
+                          </button>
+                        </div>
+
+                        <div className="space-y-3">
+                          {(depts[selectedDeptIdx].hostedEvents || []).map((event, evIdx) => (
+                            <div key={evIdx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-xs">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const hosted = depts[selectedDeptIdx].hostedEvents.filter((_, i) => i !== evIdx);
+                                  updateCurrentDeptField('hostedEvents', hosted);
+                                }}
+                                className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pr-8">
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Event Name</label>
+                                  <input 
+                                    type="text"
+                                    value={event.name || ''}
+                                    onChange={(e) => {
+                                      const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                      hosted[evIdx].name = e.target.value;
+                                      updateCurrentDeptField('hostedEvents', hosted);
+                                    }}
+                                    placeholder="Symposium / Conference / Workshop Name"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2">
+                                  <div className="space-y-1">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Date</label>
+                                    <input 
+                                      type="text"
+                                      value={event.date || ''}
+                                      onChange={(e) => {
+                                        const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                        hosted[evIdx].date = e.target.value;
+                                        updateCurrentDeptField('hostedEvents', hosted);
+                                      }}
+                                      placeholder="October 15, 2025"
+                                      className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                    />
+                                  </div>
+
+                                  <div className="space-y-1">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Venue / Location</label>
+                                    <input 
+                                      type="text"
+                                      value={event.venue || ''}
+                                      onChange={(e) => {
+                                        const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                        hosted[evIdx].venue = e.target.value;
+                                        updateCurrentDeptField('hostedEvents', hosted);
+                                      }}
+                                      placeholder="APEC Auditorium"
+                                      className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Resource Person / Keynote Speaker</label>
+                                  <input 
+                                    type="text"
+                                    value={event.speaker || ''}
+                                    onChange={(e) => {
+                                      const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                      hosted[evIdx].speaker = e.target.value;
+                                      updateCurrentDeptField('hostedEvents', hosted);
+                                    }}
+                                    placeholder="Dr. Eminent Guest"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Event Photo URL / Upload</label>
+                                  <div className="flex items-center gap-2">
+                                    <label className="inline-flex items-center gap-1 px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-lg cursor-pointer">
+                                      <Upload className="w-3 h-3" />
+                                      <span>Upload</span>
+                                      <input 
+                                        type="file" 
+                                        accept="image/*" 
+                                        onChange={(e) => {
+                                          const file = e.target.files && e.target.files[0];
+                                          if (file) {
+                                            const reader = new FileReader();
+                                            reader.onloadend = () => {
+                                              const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                              hosted[evIdx].image = reader.result;
+                                              updateCurrentDeptField('hostedEvents', hosted);
+                                            };
+                                            reader.readAsDataURL(file);
+                                          }
+                                        }}
+                                        className="hidden" 
+                                      />
+                                    </label>
+                                    <input 
+                                      type="text"
+                                      value={event.image || ''}
+                                      onChange={(e) => {
+                                        const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                        hosted[evIdx].image = e.target.value;
+                                        updateCurrentDeptField('hostedEvents', hosted);
+                                      }}
+                                      placeholder="Photo URL"
+                                      className="flex-1 text-[11px] px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg font-mono"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <textarea 
+                                rows={2}
+                                value={event.description || ''}
+                                onChange={(e) => {
+                                  const hosted = [...(depts[selectedDeptIdx].hostedEvents || [])];
+                                  hosted[evIdx].description = e.target.value;
+                                  updateCurrentDeptField('hostedEvents', hosted);
+                                }}
+                                placeholder="Event summary, participants count, outcomes..."
+                                className="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg font-medium"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* 2. ATTENDED EVENTS */}
+                      <div className="space-y-4 pt-4 border-t border-slate-200">
+                        <div className="flex justify-between items-center">
+                          <h5 className="text-xs font-black uppercase text-indigo-700 tracking-wider flex items-center gap-1.5">
+                            🎓 2. Attended Events (Faculty & Student Participation Outside) ({depts[selectedDeptIdx].attendedEvents?.length || 0})
+                          </h5>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const attended = depts[selectedDeptIdx].attendedEvents || [];
+                              updateCurrentDeptField('attendedEvents', [...attended, { name: 'AICTE Faculty Development Program on GenAI', date: 'November 20, 2025', hostOrg: 'IIT Madras', participant: 'Prof. Faculty Member', description: '5-Day Intensive FDP training on Deep Learning models', image: '' }]);
+                            }}
+                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            <Plus className="w-3 h-3" /> Add Attended Event
+                          </button>
+                        </div>
+
+                        <div className="space-y-3">
+                          {(depts[selectedDeptIdx].attendedEvents || []).map((event, atIdx) => (
+                            <div key={atIdx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-xs">
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const attended = depts[selectedDeptIdx].attendedEvents.filter((_, i) => i !== atIdx);
+                                  updateCurrentDeptField('attendedEvents', attended);
+                                }}
+                                className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pr-8">
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Event / FDP Title</label>
+                                  <input 
+                                    type="text"
+                                    value={event.name || ''}
+                                    onChange={(e) => {
+                                      const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                      attended[atIdx].name = e.target.value;
+                                      updateCurrentDeptField('attendedEvents', attended);
+                                    }}
+                                    placeholder="FDP / Conference / Workshop Title"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-2">
+                                  <div className="space-y-1">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Date</label>
+                                    <input 
+                                      type="text"
+                                      value={event.date || ''}
+                                      onChange={(e) => {
+                                        const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                        attended[atIdx].date = e.target.value;
+                                        updateCurrentDeptField('attendedEvents', attended);
+                                      }}
+                                      placeholder="November 20, 2025"
+                                      className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                    />
+                                  </div>
+
+                                  <div className="space-y-1">
+                                    <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Host Institution</label>
+                                    <input 
+                                      type="text"
+                                      value={event.hostOrg || ''}
+                                      onChange={(e) => {
+                                        const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                        attended[atIdx].hostOrg = e.target.value;
+                                        updateCurrentDeptField('attendedEvents', attended);
+                                      }}
+                                      placeholder="IIT Madras / Anna University"
+                                      className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                    />
+                                  </div>
+                                </div>
+
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Participant Name(s)</label>
+                                  <input 
+                                    type="text"
+                                    value={event.participant || ''}
+                                    onChange={(e) => {
+                                      const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                      attended[atIdx].participant = e.target.value;
+                                      updateCurrentDeptField('attendedEvents', attended);
+                                    }}
+                                    placeholder="Prof. Faculty / Student Name"
+                                    className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+
+                                <div className="space-y-1">
+                                  <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Certificate / Photo</label>
+                                  <div className="flex items-center gap-2">
+                                    <label className="inline-flex items-center gap-1 px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-lg cursor-pointer">
+                                      <Upload className="w-3 h-3" />
+                                      <span>Upload</span>
+                                      <input 
+                                        type="file" 
+                                        accept="image/*,.pdf" 
+                                        onChange={(e) => {
+                                          const file = e.target.files && e.target.files[0];
+                                          if (file) {
+                                            const reader = new FileReader();
+                                            reader.onloadend = () => {
+                                              const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                              attended[atIdx].image = reader.result;
+                                              updateCurrentDeptField('attendedEvents', attended);
+                                            };
+                                            reader.readAsDataURL(file);
+                                          }
+                                        }}
+                                        className="hidden" 
+                                      />
+                                    </label>
+                                    <input 
+                                      type="text"
+                                      value={event.image || ''}
+                                      onChange={(e) => {
+                                        const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                        attended[atIdx].image = e.target.value;
+                                        updateCurrentDeptField('attendedEvents', attended);
+                                      }}
+                                      placeholder="Certificate / Photo Link"
+                                      className="flex-1 text-[11px] px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg font-mono"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <textarea 
+                                rows={2}
+                                value={event.description || ''}
+                                onChange={(e) => {
+                                  const attended = [...(depts[selectedDeptIdx].attendedEvents || [])];
+                                  attended[atIdx].description = e.target.value;
+                                  updateCurrentDeptField('attendedEvents', attended);
+                                }}
+                                placeholder="Summary of training skills acquired..."
+                                className="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg font-medium"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                )}
+
+                {/* SUB-TAB 8: NEWSLETTERS (PDF) */}
+                {deptSubTab === 'newsletters' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
+                      <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider flex items-center gap-1.5">
+                          <FileText className="w-4 h-4 text-teal-600" /> Department Newsletters & Magazines (PDF) ({depts[selectedDeptIdx].newsletters?.length || 0})
+                        </h4>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const news = depts[selectedDeptIdx].newsletters || [];
+                            updateCurrentDeptField('newsletters', [...news, { title: 'Department Tech Magazine Vol 4 Issue 1', date: 'Semester Odd 2025-2026', link: '', summary: 'Highlights student projects, faculty publications, and events.' }]);
+                          }}
+                          className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" /> Add Newsletter PDF
+                        </button>
+                      </div>
+
+                      <div className="space-y-3">
+                        {(depts[selectedDeptIdx].newsletters || []).map((nl, nIdx) => (
+                          <div key={nIdx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-xs">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const news = depts[selectedDeptIdx].newsletters.filter((_, i) => i !== nIdx);
+                                updateCurrentDeptField('newsletters', news);
+                              }}
+                              className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pr-8">
+                              <div className="space-y-1">
+                                <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Newsletter Title / Volume</label>
+                                <input 
+                                  type="text"
+                                  value={nl.title || ''}
+                                  onChange={(e) => {
+                                    const news = [...(depts[selectedDeptIdx].newsletters || [])];
+                                    news[nIdx].title = e.target.value;
+                                    updateCurrentDeptField('newsletters', news);
+                                  }}
+                                  placeholder="AIML Tech Magazine Vol 4"
+                                  className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                />
+                              </div>
+
+                              <div className="space-y-1">
+                                <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Publication Date / Edition</label>
+                                <input 
+                                  type="text"
+                                  value={nl.date || ''}
+                                  onChange={(e) => {
+                                    const news = [...(depts[selectedDeptIdx].newsletters || [])];
+                                    news[nIdx].date = e.target.value;
+                                    updateCurrentDeptField('newsletters', news);
+                                  }}
+                                  placeholder="Odd Semester 2025-2026"
+                                  className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                />
+                              </div>
+
+                              <div className="space-y-1 col-span-2">
+                                <label className="text-[9px] font-black uppercase text-teal-700 tracking-wider block">Upload Newsletter PDF Document</label>
+                                <div className="flex items-center gap-2">
+                                  <label className="inline-flex items-center gap-1 px-3 py-1.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold rounded-lg cursor-pointer transition-all">
+                                    <Upload className="w-3.5 h-3.5" />
+                                    <span>Upload PDF</span>
+                                    <input 
+                                      type="file" 
+                                      accept=".pdf,.doc,.docx" 
+                                      onChange={(e) => {
+                                        const file = e.target.files && e.target.files[0];
+                                        if (file) {
+                                          const reader = new FileReader();
+                                          reader.onloadend = () => {
+                                            const news = [...(depts[selectedDeptIdx].newsletters || [])];
+                                            news[nIdx].link = reader.result;
+                                            updateCurrentDeptField('newsletters', news);
+                                          };
+                                          reader.readAsDataURL(file);
+                                        }
+                                      }}
+                                      className="hidden" 
+                                    />
+                                  </label>
+                                  <input 
+                                    type="text"
+                                    value={nl.link || ''}
+                                    onChange={(e) => {
+                                      const news = [...(depts[selectedDeptIdx].newsletters || [])];
+                                      news[nIdx].link = e.target.value;
+                                      updateCurrentDeptField('newsletters', news);
+                                    }}
+                                    placeholder="PDF URL (e.g. https://apec.edu.in/newsletter.pdf)"
+                                    className="flex-1 text-xs font-mono font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-200 flex justify-end">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            saveDepts(depts);
+                            triggerSuccess('Department newsletters saved successfully!');
+                          }}
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-2"
+                        >
+                          <Save className="w-4 h-4" /> Save Newsletters List
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* SUB-TAB 9: DEPARTMENT FEEDBACK RESPONSES */}
+                {deptSubTab === 'feedback' && depts[selectedDeptIdx] && (
+                  <div className="space-y-6 text-left">
+                    <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
+                      <div className="flex justify-between items-center border-b border-slate-200 pb-2">
+                        <div>
+                          <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider flex items-center gap-1.5">
+                            <MessageCircle className="w-4 h-4 text-orange-500" /> Department Feedback Responses
+                          </h4>
+                          <p className="text-[11px] text-slate-500 font-medium mt-0.5">Direct feedback submitted by students, parents, alumni, and stakeholders for {depts[selectedDeptIdx].name}.</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            window.dispatchEvent(new Event('apec_storage_update'));
+                            triggerSuccess('Feedbacks refreshed from database!');
+                          }}
+                          className="px-3 py-1.5 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 font-extrabold text-xs rounded-xl cursor-pointer shadow-xs flex items-center gap-1"
+                        >
+                          <RefreshCw className="w-3.5 h-3.5" /> Refresh
+                        </button>
+                      </div>
+
+                      {(() => {
+                        const targetDeptKey = depts[selectedDeptIdx].key.toLowerCase();
+                        const targetDeptName = depts[selectedDeptIdx].name.toLowerCase();
+                        const allFb = getDepartmentFeedbacks();
+                        const deptFb = allFb.filter(item => {
+                          const itemDept = (item.dept || '').toLowerCase();
+                          return itemDept.includes(targetDeptKey) || targetDeptName.includes(itemDept) || itemDept.includes(targetDeptName) || itemDept === 'general';
+                        });
+
+                        if (deptFb.length === 0) {
+                          return (
+                            <div className="p-8 bg-white border border-slate-200 rounded-2xl text-center space-y-2">
+                              <MessageSquare className="w-10 h-10 text-slate-300 mx-auto" />
+                              <h5 className="text-sm font-black text-slate-700">No Feedback Responses Received Yet</h5>
+                              <p className="text-xs text-slate-400 font-semibold">Submitted feedback forms for your department will appear here in real-time.</p>
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div className="space-y-3">
+                            {deptFb.map((fb, fIdx) => (
+                              <div key={fIdx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-xs">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    deleteDepartmentFeedback(fb.id);
+                                    triggerSuccess('Feedback record removed');
+                                  }}
+                                  className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </button>
+
+                                <div className="flex flex-wrap items-center justify-between gap-2 pr-8 border-b border-slate-100 pb-2">
+                                  <div>
+                                    <h5 className="text-sm font-black text-slate-900">{fb.name}</h5>
+                                    <span className="text-[10px] font-bold text-slate-400">{fb.date || 'Recent'}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700">
+                                      {fb.section || 'General'}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="text-xs text-slate-700 font-semibold bg-slate-50/80 p-3 rounded-xl border border-slate-150 leading-relaxed">
+                                  "{fb.message}"
+                                </div>
+
+                                <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-500 font-semibold pt-1">
+                                  <span>Email: {fb.email || 'N/A'}</span>
+                                  <span>Contact: {fb.phone || 'N/A'}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
                 )}
@@ -1966,11 +3493,25 @@ export default function EditorPanel() {
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <h3 className="font-title text-xl font-black text-slate-900">Leads & Admissions Inquiries</h3>
-                    <p className="text-xs text-slate-500 font-semibold mt-0.5">View and manage contact submission inquiries gathered across the portal.</p>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-title text-xl font-black text-slate-900">Leads & Admissions Inquiry Pipeline</h3>
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live DB Sync
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 font-semibold mt-0.5">Real-time database sync across Localhost, Local Network (IP), and Deployed Web.</p>
                   </div>
                   
-                  <div className="flex gap-2 w-full sm:w-auto">
+                  <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+                    <button
+                      onClick={loadInquiriesFromDB}
+                      disabled={isSyncingInquiries}
+                      className="inline-flex items-center gap-1.5 px-3 py-2 border border-indigo-200 text-indigo-700 bg-indigo-50 hover:bg-indigo-100 font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer shadow-sm transition-all"
+                      title="Sync with central database"
+                    >
+                      <RefreshCw className={`w-3.5 h-3.5 ${isSyncingInquiries ? 'animate-spin text-indigo-600' : ''}`} />
+                      <span>{isSyncingInquiries ? 'Syncing...' : 'Sync Now'}</span>
+                    </button>
                     <button
                       onClick={exportInquiriesToCSV}
                       className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-slate-200 text-slate-700 bg-slate-50 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer shadow-sm"
@@ -1988,16 +3529,52 @@ export default function EditorPanel() {
                   </div>
                 </div>
 
+                {/* Pipeline Status Tabs */}
+                <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+                  {[
+                    { key: 'ALL', label: 'All Inquiries', count: inquiries.length },
+                    { key: 'New', label: 'New Leads', count: inquiries.filter(i => (!i.status || i.status === 'New')).length },
+                    { key: 'In Contact', label: 'In Contact', count: inquiries.filter(i => i.status === 'In Contact').length },
+                    { key: 'Follow Up', label: 'Follow Up', count: inquiries.filter(i => i.status === 'Follow Up').length },
+                    { key: 'Enrolled', label: 'Enrolled', count: inquiries.filter(i => i.status === 'Enrolled').length },
+                    { key: 'Archived', label: 'Archived', count: inquiries.filter(i => i.status === 'Archived').length },
+                  ].map(tab => (
+                    <button
+                      key={tab.key}
+                      onClick={() => setInquiryStatusFilter(tab.key)}
+                      className={`px-3 py-1.5 rounded-xl font-extrabold flex items-center gap-2 transition-all cursor-pointer shrink-0 border ${
+                        inquiryStatusFilter === tab.key
+                          ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
+                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span>{tab.label}</span>
+                      <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-mono font-bold ${
+                        inquiryStatusFilter === tab.key ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-700'
+                      }`}>
+                        {tab.count}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
                 {/* Search Bar */}
-                <div className="relative">
-                  <input 
-                    type="text"
-                    placeholder="Search inquiries by name, phone or preferred department..."
-                    value={inquirySearch}
-                    onChange={(e) => setInquirySearch(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
-                  />
-                  <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <div className="relative flex-1 w-full">
+                    <input 
+                      type="text"
+                      placeholder="Search candidate name, email, phone, course, or remarks..."
+                      value={inquirySearch}
+                      onChange={(e) => setInquirySearch(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                    />
+                    <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  </div>
+                  {inquirySearch && (
+                    <span className="text-xs font-bold text-indigo-600 shrink-0">
+                      Found {filteredInquiries.length} matching leads
+                    </span>
+                  )}
                 </div>
 
                 {/* Table */}
@@ -2006,45 +3583,173 @@ export default function EditorPanel() {
                     <table className="w-full text-left border-collapse">
                       <thead>
                         <tr className="bg-slate-50 border-b border-slate-200">
-                          <th className="p-3 text-[10px] font-black text-slate-500 uppercase tracking-wider">Candidate</th>
-                          <th className="p-3 text-[10px] font-black text-slate-500 uppercase tracking-wider">Contact No</th>
-                          <th className="p-3 text-[10px] font-black text-slate-500 uppercase tracking-wider">Cutoff (TNEA)</th>
-                          <th className="p-3 text-[10px] font-black text-slate-500 uppercase tracking-wider">Department</th>
-                          <th className="p-3 text-[10px] font-black text-slate-500 uppercase tracking-wider">Date</th>
-                          <th className="p-3 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center">Action</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Candidate & Email</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Contact</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Cutoff</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Department</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Lead Status</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider">Date & Remarks</th>
+                          <th className="p-3.5 text-[10px] font-black text-slate-500 uppercase tracking-wider text-center">Actions</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100">
                         {filteredInquiries.length === 0 ? (
                           <tr>
-                            <td colSpan="6" className="p-8 text-center text-xs font-bold text-slate-400">
-                              No inquiries found matching your filters.
+                            <td colSpan="7" className="p-10 text-center text-xs font-bold text-slate-400">
+                              <Database className="w-8 h-8 mx-auto text-slate-300 mb-2" />
+                              No inquiry leads found matching your criteria.
                             </td>
                           </tr>
                         ) : (
-                          filteredInquiries.map((item, idx) => (
-                            <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                              <td className="p-3 text-xs font-bold text-slate-800">{item.name}</td>
-                              <td className="p-3 text-xs font-semibold text-slate-600">{item.phone}</td>
-                              <td className="p-3 text-xs font-mono font-bold text-indigo-600">{item.cutoff || 'N/A'}</td>
-                              <td className="p-3 text-xs font-bold text-slate-700 uppercase">{item.dept}</td>
-                              <td className="p-3 text-[11px] font-semibold text-slate-400">{item.date || new Date(item.timestamp).toLocaleString()}</td>
-                              <td className="p-3 text-center">
-                                <button
-                                  onClick={() => deleteInquiry(item.id)}
-                                  className="text-red-500 hover:text-red-700 p-1 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                                  title="Delete Entry"
-                                >
-                                  <Trash2 className="w-3.5 h-3.5" />
-                                </button>
-                              </td>
-                            </tr>
-                          ))
+                          filteredInquiries.map((item, idx) => {
+                            const currentStatus = item.status || 'New';
+                            return (
+                              <tr key={item.id || idx} className="hover:bg-slate-50/50 transition-colors">
+                                <td className="p-3.5">
+                                  <span className="font-extrabold text-slate-900 text-xs block">{item.name || 'Anonymous'}</span>
+                                  {item.email && (
+                                    <a href={`mailto:${item.email}`} className="text-[11px] text-indigo-600 font-semibold hover:underline block truncate max-w-[180px]">
+                                      {item.email}
+                                    </a>
+                                  )}
+                                </td>
+
+                                <td className="p-3.5">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="text-xs font-mono font-bold text-slate-700">{item.phone || 'N/A'}</span>
+                                    {item.phone && (
+                                      <a href={`tel:${item.phone}`} className="p-1 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors" title="Call Candidate">
+                                        <PhoneCall className="w-3 h-3" />
+                                      </a>
+                                    )}
+                                  </div>
+                                </td>
+
+                                <td className="p-3.5 text-xs font-mono font-bold text-indigo-600">
+                                  {item.cutoff || 'N/A'}
+                                </td>
+
+                                <td className="p-3.5">
+                                  <span className="inline-block px-2.5 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 font-extrabold rounded-lg text-[10px] uppercase">
+                                    {item.dept || 'General'}
+                                  </span>
+                                </td>
+
+                                <td className="p-3.5">
+                                  <select
+                                    value={currentStatus}
+                                    onChange={(e) => updateInquiryStatus(item.id, e.target.value)}
+                                    className={`text-[11px] font-extrabold px-2.5 py-1 rounded-lg border outline-none cursor-pointer ${
+                                      currentStatus === 'New' ? 'bg-amber-50 text-amber-800 border-amber-200' :
+                                      currentStatus === 'In Contact' ? 'bg-blue-50 text-blue-800 border-blue-200' :
+                                      currentStatus === 'Enrolled' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' :
+                                      currentStatus === 'Follow Up' ? 'bg-purple-50 text-purple-800 border-purple-200' :
+                                      'bg-slate-100 text-slate-700 border-slate-200'
+                                    }`}
+                                  >
+                                    <option value="New">New Lead</option>
+                                    <option value="In Contact">In Contact</option>
+                                    <option value="Follow Up">Follow Up</option>
+                                    <option value="Enrolled">Enrolled</option>
+                                    <option value="Archived">Archived</option>
+                                  </select>
+                                </td>
+
+                                <td className="p-3.5 max-w-xs">
+                                  <span className="text-[10px] font-semibold text-slate-400 block">
+                                    {item.date || new Date(item.timestamp || Date.now()).toLocaleDateString()}
+                                  </span>
+                                  <span className="text-xs text-slate-600 font-medium truncate block max-w-[180px]" title={item.notes || item.message}>
+                                    {item.notes ? `📝 ${item.notes}` : (item.message || <span className="italic text-slate-300">No remarks</span>)}
+                                  </span>
+                                </td>
+
+                                <td className="p-3.5 text-center">
+                                  <div className="flex items-center justify-center gap-1">
+                                    <button
+                                      onClick={() => {
+                                        setEditingNoteInquiry(item);
+                                        setNoteInputText(item.notes || item.message || '');
+                                      }}
+                                      className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer"
+                                      title="Add/Edit Candidate Remarks"
+                                    >
+                                      <Edit3 className="w-3.5 h-3.5" />
+                                    </button>
+                                    <button
+                                      onClick={() => deleteInquiry(item.id)}
+                                      className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                                      title="Delete Entry"
+                                    >
+                                      <Trash2 className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })
                         )}
                       </tbody>
                     </table>
                   </div>
                 </div>
+
+                {/* Candidate Notes Modal */}
+                <AnimatePresence>
+                  {editingNoteInquiry && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4"
+                    >
+                      <motion.div
+                        initial={{ scale: 0.95, y: 10 }}
+                        animate={{ scale: 1, y: 0 }}
+                        exit={{ scale: 0.95, y: 10 }}
+                        className="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border border-slate-200 text-left space-y-4"
+                      >
+                        <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+                          <h4 className="font-title text-base font-black text-slate-900">
+                            Candidate Remarks: {editingNoteInquiry.name}
+                          </h4>
+                          <button
+                            onClick={() => setEditingNoteInquiry(null)}
+                            className="text-slate-400 hover:text-slate-600 text-lg font-bold cursor-pointer"
+                          >
+                            ×
+                          </button>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">
+                            Admin Internal Notes / Counseling Progress
+                          </label>
+                          <textarea
+                            value={noteInputText}
+                            onChange={(e) => setNoteInputText(e.target.value)}
+                            rows="4"
+                            placeholder="Add counseling notes, cut-off details, or status updates..."
+                            className="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                          />
+                        </div>
+                        <div className="flex justify-end gap-2 pt-2">
+                          <button
+                            onClick={() => setEditingNoteInquiry(null)}
+                            className="px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            onClick={() => updateInquiryNotes(editingNoteInquiry.id, noteInputText)}
+                            className="px-5 py-2 text-xs font-black uppercase tracking-wider text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl cursor-pointer shadow-md"
+                          >
+                            Save Remarks
+                          </button>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
 

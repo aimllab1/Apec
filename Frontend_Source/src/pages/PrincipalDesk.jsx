@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   User, Mail, Phone, MapPin, 
   Download, Award, BookOpen, Clock, 
-  MessageSquare, GraduationCap, Building, ShieldAlert 
+  MessageSquare, GraduationCap, Building, ShieldAlert,
+  Users, ChevronRight
 } from 'lucide-react';
 import principalImg from '../principal.webp';
 import vpImg from '../Vice principal.jpg';
@@ -58,7 +60,7 @@ export default function PrincipalDesk() {
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
             Principal's Desk & Directory
           </h1>
-          <p className="text-sm md:text-base text-slate-550 leading-relaxed max-w-3xl font-semibold">
+          <p className="text-sm sm:text-base md:text-lg text-slate-750 leading-relaxed sm:leading-loose w-full text-justify font-bold">
             Welcome to the Office of the Principal. Explore the academic vision, leadership credentials, and direct institutional contacts directory for general communication.
           </p>
         </motion.div>
@@ -226,7 +228,7 @@ export default function PrincipalDesk() {
           <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
             Academic Leadership Desk
           </h2>
-          <p className="text-xs text-slate-400 font-semibold mb-12 max-w-xl">
+          <p className="text-sm sm:text-base text-slate-750 font-bold leading-relaxed mb-12 w-full text-justify">
             Brief profiles of our academic officers coordinating departmental excellence and student developments.
           </p>
 
@@ -234,29 +236,29 @@ export default function PrincipalDesk() {
             
             {/* Vice Principal */}
             <div className="flex flex-col md:flex-row gap-8 items-start bg-slate-50/50 border border-slate-150 p-6 md:p-8 rounded-3xl hover:border-indigo-300 hover:bg-white transition-all duration-300">
-              <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden shrink-0 bg-slate-100 shadow-sm border border-slate-200">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden shrink-0 bg-slate-100 shadow-sm border border-slate-200">
                 <img src={vpImg} alt="Dr. A. Bhuvaneshwari" className="w-full h-full object-cover object-top" />
               </div>
               <div className="text-left grow">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
                   <div>
-                    <h3 className="text-lg font-black text-slate-900">Dr. A. Bhuvaneshwari, M.E., Ph.D.</h3>
-                    <span className="text-[10px] text-indigo-650 font-extrabold uppercase tracking-widest mt-0.5 block">Vice Principal</span>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900">Dr. A. Bhuvaneshwari, M.E., Ph.D.</h3>
+                    <span className="text-xs sm:text-sm text-indigo-650 font-black uppercase tracking-widest mt-1 block">Vice Principal</span>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md">
+                  <span className="text-xs font-mono font-bold text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg">
                     Office: Main Block
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-semibold mb-4">
                   Dr. A. Bhuvaneshwari serves as the Vice Principal of Adhiparasakthi Engineering College, bringing extensive expertise in engineering academics and institutional governance. She actively supports student welfare initiatives, academic policy implementation, and quality enhancement programs across all departments.
                 </p>
                 <div className="flex flex-wrap gap-x-6 gap-y-2 pt-3 border-t border-slate-200/50">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-700 font-bold">
-                    <Mail className="w-3.5 h-3.5 text-indigo-600" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-800 font-extrabold">
+                    <Mail className="w-4 h-4 text-indigo-600" />
                     <a href="mailto:viceprincipal@apec.ac.in" className="hover:underline">viceprincipal@apec.ac.in</a>
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-700 font-bold">
-                    <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-800 font-extrabold">
+                    <GraduationCap className="w-4 h-4 text-indigo-600" />
                     <span>M.E., Ph.D. (Computer Science & Engineering)</span>
                   </div>
                 </div>
@@ -264,32 +266,62 @@ export default function PrincipalDesk() {
             </div>
 
             {/* Dean */}
-            <div className="flex flex-col md:flex-row gap-8 items-start bg-slate-50/50 border border-slate-150 p-6 md:p-8 rounded-3xl hover:border-pink-300 hover:bg-white transition-all duration-300">
-              <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden shrink-0 bg-slate-100 shadow-sm border border-slate-200">
+            <div className="flex flex-col md:flex-row gap-8 items-start bg-slate-50/50 border border-slate-150 p-6 md:p-8 rounded-3xl hover:border-indigo-300 hover:bg-white transition-all duration-300">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl overflow-hidden shrink-0 bg-slate-100 shadow-sm border border-slate-200">
                 <img src={deanImg} alt="Dr. V. Ramasamy" className="w-full h-full object-cover object-top" />
               </div>
               <div className="text-left grow">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
                   <div>
-                    <h3 className="text-lg font-black text-slate-900">Dr. V. Ramasamy, Ph.D.</h3>
-                    <span className="text-[10px] text-pink-650 font-extrabold uppercase tracking-widest mt-0.5 block">Dean (Academic Affairs)</span>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900">Dr. V. Ramasamy, Ph.D.</h3>
+                    <span className="text-xs sm:text-sm text-indigo-650 font-black uppercase tracking-widest mt-1 block">Dean (Academic Affairs)</span>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-slate-500 bg-slate-100 border border-slate-200 px-2.5 py-1 rounded-md">
+                  <span className="text-xs font-mono font-bold text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg">
                     Office: Admin Block
                   </span>
                 </div>
-                <p className="text-xs text-slate-500 leading-relaxed font-semibold mb-4">
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-semibold mb-4">
                   Dr. V. Ramasamy is the Dean of Adhiparasakthi Engineering College, responsible for overseeing academic affairs and ensuring compliance with Anna University curriculum standards. Under his leadership, the institution has expanded its digital infrastructure and championed student-centric department innovations.
                 </p>
                 <div className="flex flex-wrap gap-x-6 gap-y-2 pt-3 border-t border-slate-200/50">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-700 font-bold">
-                    <Mail className="w-3.5 h-3.5 text-pink-650" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-800 font-extrabold">
+                    <Mail className="w-4 h-4 text-indigo-600" />
                     <a href="mailto:dean@apec.ac.in" className="hover:underline">dean@apec.ac.in</a>
                   </div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-700 font-bold">
-                    <GraduationCap className="w-3.5 h-3.5 text-pink-650" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-800 font-extrabold">
+                    <GraduationCap className="w-4 h-4 text-indigo-600" />
                     <span>Ph.D. (Electrical Engineering)</span>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Faculty Directory Option Box */}
+            <div className="flex flex-col md:flex-row gap-8 items-start bg-slate-50/50 border border-slate-150 p-6 md:p-8 rounded-3xl hover:border-indigo-300 hover:bg-white transition-all duration-300">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-indigo-50 border border-indigo-150 flex items-center justify-center shrink-0 shadow-sm">
+                <Users className="w-10 h-10 md:w-14 md:h-14 text-indigo-650" />
+              </div>
+              <div className="text-left grow">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900">Faculty Directory</h3>
+                    <span className="text-xs sm:text-sm text-indigo-650 font-black uppercase tracking-widest mt-1 block">APEC Portal</span>
+                  </div>
+                  <span className="text-xs font-mono font-bold text-[#FF8A00] bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg uppercase">
+                    Department Wise
+                  </span>
+                </div>
+                <p className="text-sm sm:text-base text-slate-655 leading-relaxed font-semibold mb-4">
+                  Access the complete, updated database of academic professors, assistant professors, and research guides across all undergraduate (B.E./B.Tech.), postgraduate (M.E./MCA/MBA), and Ph.D. departments.
+                </p>
+                <div className="pt-3 border-t border-slate-200/50 mt-4 flex">
+                  <Link 
+                    to="/faculty" 
+                    className="inline-flex items-center gap-1.5 text-xs font-black text-white bg-slate-950 hover:bg-slate-800 px-5 py-2.5 rounded-xl transition-all shadow-sm active:scale-95 cursor-pointer"
+                  >
+                    <span>Open Faculty Directory</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -311,65 +343,65 @@ export default function PrincipalDesk() {
           <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
             Institutional Contacts Directory
           </h2>
-          <p className="text-xs text-slate-400 font-semibold mb-8 max-w-xl">
+          <p className="text-sm sm:text-base text-slate-750 font-bold leading-relaxed mb-8 w-full text-justify">
             Get in touch with our admissions department, principal office, or general administrative desks.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             
             {/* Admissions */}
-            <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col justify-between hover:border-indigo-500 hover:bg-white hover:shadow-md transition-all duration-300">
+            <div className="p-6 md:p-7 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col justify-between hover:border-indigo-500 hover:bg-white hover:shadow-md transition-all duration-300">
               <div>
-                <span className="font-display block text-[8px] font-black text-indigo-600 uppercase tracking-widest mb-3">Office node 1</span>
-                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Admissions Cell</h4>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-6">Connect with our dedicated help desk regarding course intakes, counseling codes, and admission procedures.</p>
+                <span className="font-display block text-xs font-black text-indigo-600 uppercase tracking-widest mb-3">Office node 1</span>
+                <h4 className="text-lg sm:text-xl font-black text-slate-900 mb-2">Admissions Cell</h4>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-6">Connect with our dedicated help desk regarding course intakes, counseling codes, and admission procedures.</p>
               </div>
-              <div className="space-y-2 border-t border-slate-100 pt-4 mt-auto">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                  <Phone className="w-3.5 h-3.5 text-indigo-600" />
+              <div className="space-y-2.5 border-t border-slate-150 pt-4 mt-auto">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800">
+                  <Phone className="w-4 h-4 text-indigo-600 shrink-0" />
                   <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-600 transition-colors font-mono">{branding.helpline1}</a>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                  <Phone className="w-3.5 h-3.5 text-indigo-600" />
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800">
+                  <Phone className="w-4 h-4 text-indigo-600 shrink-0" />
                   <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-600 transition-colors font-mono">{branding.helpline2}</a>
                 </div>
               </div>
             </div>
 
             {/* Academic Office */}
-            <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col justify-between hover:border-pink-500 hover:bg-white hover:shadow-md transition-all duration-300">
+            <div className="p-6 md:p-7 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col justify-between hover:border-indigo-500 hover:bg-white hover:shadow-md transition-all duration-300">
               <div>
-                <span className="font-display block text-[8px] font-black text-pink-600 uppercase tracking-widest mb-3">Office node 2</span>
-                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Academic Deans</h4>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-6">Contact the offices of the Vice Principal and Academic Deans regarding curriculum schedules and department details.</p>
+                <span className="font-display block text-xs font-black text-indigo-600 uppercase tracking-widest mb-3">Office node 2</span>
+                <h4 className="text-lg sm:text-xl font-black text-slate-900 mb-2">Academic Deans</h4>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-6">Contact the offices of the Vice Principal and Academic Deans regarding curriculum schedules and department details.</p>
               </div>
-              <div className="space-y-2 border-t border-slate-100 pt-4 mt-auto">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                  <Mail className="w-3.5 h-3.5 text-pink-600" />
-                  <a href="mailto:viceprincipal@apec.ac.in" className="hover:text-pink-600 transition-colors break-all">viceprincipal@apec.ac.in</a>
+              <div className="space-y-2.5 border-t border-slate-150 pt-4 mt-auto">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800">
+                  <Mail className="w-4 h-4 text-indigo-600 shrink-0" />
+                  <a href="mailto:viceprincipal@apec.ac.in" className="hover:text-indigo-600 transition-colors break-all">viceprincipal@apec.ac.in</a>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                  <Mail className="w-3.5 h-3.5 text-pink-600" />
-                  <a href="mailto:dean@apec.ac.in" className="hover:text-pink-600 transition-colors break-all">dean@apec.ac.in</a>
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800">
+                  <Mail className="w-4 h-4 text-indigo-600 shrink-0" />
+                  <a href="mailto:dean@apec.ac.in" className="hover:text-indigo-600 transition-colors break-all">dean@apec.ac.in</a>
                 </div>
               </div>
             </div>
 
             {/* General Administration */}
-            <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col justify-between hover:border-emerald-500 hover:bg-white hover:shadow-md transition-all duration-300">
+            <div className="p-6 md:p-7 bg-slate-50 border border-slate-200 rounded-3xl flex flex-col justify-between hover:border-emerald-500 hover:bg-white hover:shadow-md transition-all duration-300">
               <div>
-                <span className="font-display block text-[8px] font-black text-emerald-600 uppercase tracking-widest mb-3">Office node 3</span>
-                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Administrative Officer</h4>
-                <p className="text-[11px] text-slate-500 leading-relaxed font-semibold mb-6">Get in touch with general operations, vendor support desks, scholarship queries, and campus logistics.</p>
+                <span className="font-display block text-xs font-black text-emerald-600 uppercase tracking-widest mb-3">Office node 3</span>
+                <h4 className="text-lg sm:text-xl font-black text-slate-900 mb-2">Administrative Officer</h4>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold mb-6">Get in touch with general operations, vendor support desks, scholarship queries, and campus logistics.</p>
               </div>
-              <div className="space-y-2 border-t border-slate-100 pt-4 mt-auto">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                  <Mail className="w-3.5 h-3.5 text-emerald-600" />
+              <div className="space-y-2.5 border-t border-slate-150 pt-4 mt-auto">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800">
+                  <Mail className="w-4 h-4 text-emerald-600 shrink-0" />
                   <a href="mailto:admin@apec.ac.in" className="hover:text-emerald-600 transition-colors break-all font-mono">admin@apec.ac.in</a>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="text-slate-700">Admin Office, Melmaruvathur</span>
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-extrabold text-slate-800">
+                  <MapPin className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span className="text-slate-800">Admin Office, Melmaruvathur</span>
                 </div>
               </div>
             </div>

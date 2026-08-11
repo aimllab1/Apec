@@ -1,0 +1,21 @@
+[
+  {
+    "id": "inq_1786429153217_cjs6n",
+    "name": "Dr. Test Student",
+    "phone": "9876543210",
+    "cutoff": "194.50",
+    "dept": "CSE",
+    "email": "teststudent@example.com",
+    "source": "Admission Popup Modal",
+    "status": "In Contact",
+    "notes": "",
+    "maths": null,
+    "physics": null,
+    "chemistry": null,
+    "schoolName": "",
+    "board": "",
+    "yearOfPassing": "",
+    "date": "11/8/2026, 11:49:13 am",
+    "createdAt": 1786429153543
+  }
+]

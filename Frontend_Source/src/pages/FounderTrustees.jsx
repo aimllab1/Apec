@@ -121,7 +121,7 @@ export default function FounderTrustees() {
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
             Founders & Management
           </h1>
-          <p className="text-sm md:text-base text-slate-550 leading-relaxed max-w-3xl font-semibold">
+          <p className="text-sm sm:text-base md:text-lg text-slate-650 leading-relaxed sm:leading-loose w-full text-justify font-bold">
             Adhiparasakthi Engineering College is guided by the spiritual ideals, compassion, and leadership of our founder and trustees. Under their stewardship, the institution has provided world-class technical education to students from all walks of life.
           </p>
         </motion.div>
@@ -134,18 +134,18 @@ export default function FounderTrustees() {
           variants={staggerContainer}
           className="border-t border-slate-100 pt-16 mb-24"
         >
-          <div className="flex flex-col lg:flex-row gap-12 items-start">
+          <div className="flex flex-col-reverse lg:flex-row gap-12 items-start">
             {/* Left: Biography */}
             <div className="w-full lg:w-7/12">
               <span className="font-display text-[9px] uppercase font-black tracking-widest text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md mb-4 inline-block">
                 Founder & Spiritual Guide
               </span>
               <h2 className="font-title text-2xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                His Holiness Arulthiru Bangaru Adigalar (Amma)
+                His Holiness Arulthiru Bangaru Siddhar (Amma)
               </h2>
               <div className="space-y-4 text-xs md:text-sm text-slate-550 font-semibold leading-relaxed">
                 <p>
-                  His Holiness Arulthiru Bangaru Adigalar, affectionately revered as 'AMMA' by millions of followers, established the ACMEC Trust (Adhiparasakthi Charitable, Medical, Educational and Cultural Trust) in 1978. 
+                  His Holiness Arulthiru Bangaru Siddhar, affectionately revered as 'AMMA' by millions of followers, established the ACMEC Trust (Adhiparasakthi Charitable, Medical, Educational and Cultural Trust) in 1978. 
                 </p>
                 <p>
                   Believing that "Service to humanity is service to God," Amma focused on breaking traditional boundaries. Under his guidance, the Trust became a force for social reform—pioneering accessible higher education, high-tech healthcare, and vocational courses. 
@@ -173,24 +173,28 @@ export default function FounderTrustees() {
             {/* Right: Image Frame */}
             <div className="w-full lg:w-5/12 flex justify-center">
               <div className="relative group max-w-sm w-full p-2 bg-slate-50 border border-slate-200 rounded-[32px] shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-500/30">
-                <div className="overflow-hidden rounded-[24px]">
+                <div className="overflow-hidden rounded-[24px] relative">
                   <img 
                     src={bangaruImg} 
-                    alt="Arulthiru Bangaru Sidhar (Amma)" 
+                    alt="Arulthiru Bangaru Siddhar (Amma)" 
                     className="w-full h-[420px] object-cover rounded-[24px] grayscale-[10%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700" 
                   />
-                </div>
-                <div className="absolute bottom-6 left-6 right-6 bg-slate-950/95 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-left shadow-lg">
-                  <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-400 block mb-0.5">Founder</span>
-                  <h4 className="font-serif text-sm font-bold text-white leading-tight">Arulthiru Bangaru Adigalar</h4>
-                  <span className="font-display text-[9px] text-slate-450 font-semibold uppercase tracking-wider block mt-0.5">Founder (1940 – 2023)</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent rounded-[24px]" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left z-10">
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-1.5">
+                      Arulthiru Bangaru Siddhar
+                    </h4>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest block drop-shadow">
+                      FOUNDER (1940 – 2023)
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* 2. PRESIDENT SECTION: Sakthi Tmt. V. Lakshmi Bangaru Adigalar */}
+        {/* 2. PRESIDENT SECTION: Sakthi Tmt. V. Lakshmi Bangaru Siddhar */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -198,18 +202,18 @@ export default function FounderTrustees() {
           variants={staggerContainer}
           className="border-t border-slate-100 pt-16 mb-24"
         >
-          <div className="flex flex-col lg:flex-row-reverse gap-12 items-start">
+          <div className="flex flex-col-reverse lg:flex-row-reverse gap-12 items-start">
             {/* Left: Biography */}
             <div className="w-full lg:w-7/12">
               <span className="font-display text-[9px] uppercase font-black tracking-widest text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md mb-4 inline-block">
                 Trust President
               </span>
               <h2 className="font-title text-2xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                Sakthi Tmt. V. Lakshmi Bangaru Adigalar
+                Sakthi Tmt. V. Lakshmi Bangaru Siddhar
               </h2>
               <div className="space-y-4 text-xs md:text-sm text-slate-550 font-semibold leading-relaxed">
                 <p>
-                  As the President of the ACMEC Trust, Sakthi Tmt. V. Lakshmi Bangaru Adigalar has successfully transitioned the institution into a modern, research-first environment. 
+                  As the President of the ACMEC Trust, Sakthi Tmt. V. Lakshmi Bangaru Siddhar has successfully transitioned the institution into a modern, research-first environment. 
                 </p>
                 <p>
                   Her presidential leadership is defined by a strong commitment to girls' engineering education, rural enrollment drives, and state-of-the-art campus expansions. Under her oversight, the Trust awards millions in academic scholarships annually to deserving candidates.
@@ -237,17 +241,21 @@ export default function FounderTrustees() {
             {/* Right: Image Frame */}
             <div className="w-full lg:w-5/12 flex justify-center">
               <div className="relative group max-w-sm w-full p-2 bg-slate-50 border border-slate-200 rounded-[32px] shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.01] hover:border-pink-500/30">
-                <div className="overflow-hidden rounded-[24px]">
+                <div className="overflow-hidden rounded-[24px] relative">
                   <img 
                     src={lakshmiImg} 
-                    alt="V. Lakshmi Bangaru Adigalar" 
+                    alt="V. Lakshmi Bangaru Siddhar" 
                     className="w-full h-[420px] object-cover rounded-[24px] grayscale-[10%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700" 
                   />
-                </div>
-                <div className="absolute bottom-6 left-6 right-6 bg-slate-950/95 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-left shadow-lg">
-                  <span className="font-display text-[9px] uppercase tracking-widest font-black text-pink-400 block mb-0.5">President</span>
-                  <h4 className="font-serif text-sm font-bold text-white leading-tight">V. Lakshmi Bangaru Adigalar</h4>
-                  <span className="font-display text-[9px] text-slate-450 font-semibold uppercase tracking-wider block mt-0.5">Trust President</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent rounded-[24px]" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left z-10">
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-1.5">
+                      Sakthi Tmt. V. Lakshmi Bangaru Siddhar
+                    </h4>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest block drop-shadow">
+                      PRESIDENT
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -262,7 +270,7 @@ export default function FounderTrustees() {
           variants={staggerContainer}
           className="border-t border-slate-100 pt-16 mb-24"
         >
-          <div className="flex flex-col lg:flex-row gap-12 items-start">
+          <div className="flex flex-col-reverse lg:flex-row gap-12 items-start">
             {/* Left: Biography */}
             <div className="w-full lg:w-7/12">
               <span className="font-display text-[9px] uppercase font-black tracking-widest text-indigo-650 bg-indigo-50 px-3 py-1 rounded-md mb-4 inline-block">
@@ -309,17 +317,21 @@ export default function FounderTrustees() {
             {/* Right: Image Frame */}
             <div className="w-full lg:w-5/12 flex justify-center">
               <div className="relative group max-w-sm w-full p-2 bg-slate-50 border border-slate-200 rounded-[32px] shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-500/30">
-                <div className="overflow-hidden rounded-[24px]">
+                <div className="overflow-hidden rounded-[24px] relative">
                   <img 
                     src={senthilImg} 
                     alt="Dr. G. B. Senthil Kumar" 
                     className="w-full h-[420px] object-cover object-top rounded-[24px] grayscale-[10%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700" 
                   />
-                </div>
-                <div className="absolute bottom-6 left-6 right-6 bg-slate-950/95 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-left shadow-lg">
-                  <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-400 block mb-0.5">Correspondent</span>
-                  <h4 className="font-serif text-sm font-bold text-white leading-tight">Dr. G. B. Senthil Kumar</h4>
-                  <span className="font-display text-[9px] text-slate-450 font-semibold uppercase tracking-wider block mt-0.5">Trust Correspondent</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent rounded-[24px]" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left z-10">
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-1.5">
+                      Dr. G. B. Senthil Kumar
+                    </h4>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest block drop-shadow">
+                      CORRESPONDENT
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

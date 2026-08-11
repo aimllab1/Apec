@@ -35,6 +35,27 @@ async function getHandler() {
   return cachedHandler;
 }
 
+// Handler cache for inquiries API
+let cachedInquiriesHandler = null;
+let cachedInquiriesMtime = 0;
+
+async function getInquiriesHandler() {
+  const fullPath = path.resolve(process.cwd(), 'Backend_API/api/inquiries.js');
+  try {
+    const { mtimeMs } = fs.statSync(fullPath);
+    if (!cachedInquiriesHandler || mtimeMs > cachedInquiriesMtime) {
+      console.log('[Vite API] Reloading Backend_API/api/inquiries.js (file changed)');
+      const url = pathToFileURL(fullPath).href + `?t=${Date.now()}`;
+      const mod = await import(/* @vite-ignore */ url);
+      cachedInquiriesHandler = mod.default;
+      cachedInquiriesMtime = mtimeMs;
+    }
+  } catch (e) {
+    console.error('[Vite API] Failed to load inquiries handler:', e.message);
+  }
+  return cachedInquiriesHandler;
+}
+
 // Create a fresh session object
 function createSession() {
   return {
@@ -87,6 +108,47 @@ export default defineConfig({
       name: 'api-server',
       configureServer(server) {
         server.middlewares.use(async (req, res, next) => {
+          // Handle /api/inquiries
+          if (req.url && req.url.startsWith('/api/inquiries')) {
+            const inquiriesHandler = await getInquiriesHandler();
+            if (inquiriesHandler) {
+              let body = '';
+              req.on('data', chunk => { body += chunk; });
+              req.on('end', async () => {
+                try {
+                  const parsedBody = body ? JSON.parse(body) : {};
+                  const urlObj = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+                  const query = Object.fromEntries(urlObj.searchParams.entries());
+
+                  const vercelReq = {
+                    body: parsedBody,
+                    query,
+                    url: req.url,
+                    method: req.method,
+                    headers: req.headers
+                  };
+                  const vercelRes = {
+                    setHeader(key, val) { res.setHeader(key, val); return this; },
+                    status(code) { res.statusCode = code; return this; },
+                    end(data) { res.end(data); return this; },
+                    json(data) {
+                      res.setHeader('Content-Type', 'application/json');
+                      res.end(JSON.stringify(data));
+                    }
+                  };
+                  await inquiriesHandler(vercelReq, vercelRes);
+                } catch (err) {
+                  console.error('[Inquiries API Error]:', err.message);
+                  res.statusCode = 500;
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify({ error: 'Server error processing inquiry' }));
+                }
+              });
+              return;
+            }
+          }
+
+          // Handle /api/chat
           if (req.url && req.url.startsWith('/api/chat')) {
             if (req.method === 'POST') {
               let body = '';
@@ -113,7 +175,9 @@ export default defineConfig({
                     headers: req.headers
                   };
                   const vercelRes = {
+                    setHeader(key, val) { res.setHeader(key, val); return this; },
                     status(code) { res.statusCode = code; return this; },
+                    end(data) { res.end(data); return this; },
                     json(data) {
                       res.setHeader('Content-Type', 'application/json');
                       res.end(JSON.stringify(data));
@@ -139,11 +203,14 @@ export default defineConfig({
     }
   ],
   server: {
-    
+    host: true,
     watch: {
       usePolling: true,
       ignored: ['**/.env', '**/vite.config.js']
     },
+  },
+  preview: {
+    host: true,
   },
   optimizeDeps: {
     entries: ['index.html'],

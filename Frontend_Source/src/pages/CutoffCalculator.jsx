@@ -4,6 +4,7 @@ import {
   User, Mail, Phone, GraduationCap, ChevronDown, X, 
   BookOpen, Sparkles, HeartHandshake, ArrowRight, CheckCircle2 
 } from 'lucide-react';
+import { submitInquiry } from '../utils/inquiryService';
 
 
 const fadeInUp = {
@@ -105,21 +106,23 @@ export default function CutoffCalculator({ isEmbedded = false }) {
     e.preventDefault();
     if (validateForm()) {
       setIsSubmitting(true);
-      const newInquiry = {
-        ...formData,
-        maths: mathsMark,
-        physics: physicsMark,
-        chemistry: chemistryMark,
-        cutoff: cutoff.toFixed(1),
-        id: Date.now(),
-        date: new Date().toLocaleString()
-      };
-
-      const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-      existing.push(newInquiry);
-      localStorage.setItem('apec_inquiries', JSON.stringify(existing));
-      setIsSubmitting(false);
-      setFormSubmitted(true);
+      try {
+        await submitInquiry({
+          name: formData.name.trim(),
+          phone: formData.phone.trim(),
+          dept: formData.dept,
+          cutoff: cutoff.toFixed(1),
+          maths: mathsMark,
+          physics: physicsMark,
+          chemistry: chemistryMark,
+          source: 'Cutoff Calculator Desk'
+        });
+      } catch (err) {
+        console.error('Error submitting cutoff inquiry:', err);
+      } finally {
+        setIsSubmitting(false);
+        setFormSubmitted(true);
+      }
     }
   };
 

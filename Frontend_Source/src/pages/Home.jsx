@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import AchievementBadge from '../components/AchievementBadge';
+import { submitInquiry } from '../utils/inquiryService';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -173,7 +174,7 @@ function LeadershipCard({ name, role, desc, img }) {
   
   return (
     <div 
-      className="w-full h-[430px] [perspective:1000px] cursor-pointer"
+      className="w-full max-w-[290px] xs:max-w-[320px] md:max-w-none mx-auto h-[320px] xs:h-[350px] md:h-[430px] [perspective:1000px] cursor-pointer"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
       onClick={() => setIsFlipped(!isFlipped)}
@@ -185,26 +186,26 @@ function LeadershipCard({ name, role, desc, img }) {
         {/* FRONT SIDE: Portrait image and Title overlay with Pure White Border + Mild Gold BoxShadow */}
         <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] rounded-3xl border-2 border-white shadow-[0_0_25px_rgba(245,158,11,0.45)] overflow-hidden bg-white">
           <img src={img} alt={name} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 text-left">
-            <h4 className="font-title text-lg md:text-xl font-bold text-white mb-1 leading-snug drop-shadow-md">{name}</h4>
-            <span className="font-display text-xs font-extrabold text-amber-300 uppercase tracking-wider">{role}</span>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-4 xs:p-5 md:p-6 text-left">
+            <h4 className="font-title text-sm xs:text-base md:text-lg font-bold text-white mb-1 leading-snug drop-shadow-md">{name}</h4>
+            <span className="font-display text-[10px] xs:text-xs font-extrabold text-amber-300 uppercase tracking-wider">{role}</span>
           </div>
         </div>
 
         {/* BACK SIDE: Detailed biography info card with Pure White Border + Mild Gold BoxShadow */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl border-2 border-white shadow-[0_0_25px_rgba(245,158,11,0.45)] bg-white/90 backdrop-blur-xl text-slate-900 p-7 md:p-8 flex flex-col justify-between text-left">
+        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-3xl border-2 border-white shadow-[0_0_25px_rgba(245,158,11,0.45)] bg-white/90 backdrop-blur-xl text-slate-900 p-4 xs:p-5 md:p-7 flex flex-col justify-between text-left">
           <div>
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center mb-5 shadow-sm">
-              <User className="w-6 h-6 text-amber-600" />
+            <div className="w-9 h-9 xs:w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-amber-50 border border-amber-200/80 flex items-center justify-center mb-2 xs:mb-3 md:mb-5 shadow-sm">
+              <User className="w-5 h-5 xs:w-6 h-6 text-amber-600" />
             </div>
-            <h4 className="font-title text-lg md:text-xl font-bold text-slate-900 mb-1.5 leading-snug">{name}</h4>
-            <span className="font-display text-xs font-extrabold text-amber-600 uppercase tracking-wider block mb-4">{role}</span>
-            <p className="text-sm text-slate-700 leading-relaxed font-semibold">{desc}</p>
+            <h4 className="font-title text-sm xs:text-base md:text-lg font-bold text-slate-900 mb-1 leading-snug">{name}</h4>
+            <span className="font-display text-[10px] xs:text-xs font-extrabold text-amber-600 uppercase tracking-wider block mb-2 xs:mb-3 md:mb-4">{role}</span>
+            <p className="text-[11px] xs:text-xs md:text-sm text-slate-700 leading-relaxed font-semibold">{desc}</p>
           </div>
           
-          <div className="pt-4 border-t border-slate-200/80">
-            <Link to="/about" className="inline-flex items-center gap-2 text-xs md:text-sm font-extrabold text-amber-600 hover:text-amber-800 hover:gap-3 transition-all">
-              Read Biography <ArrowRight className="w-4 h-4 text-amber-600" />
+          <div className="pt-3 xs:pt-4 border-t border-slate-200/80">
+            <Link to="/about" className="inline-flex items-center gap-2 text-[11px] xs:text-xs md:text-sm font-extrabold text-amber-600 hover:text-amber-800 hover:gap-3 transition-all">
+              Read Biography <ArrowRight className="w-3.5 h-3.5 xs:w-4 h-4 text-amber-600" />
             </Link>
           </div>
         </div>
@@ -262,15 +263,31 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Close helper that saves closure to sessionStorage for visit-once behavior
+  // Close helper for current view
   const handleCloseAdModal = () => {
     setShowAdModal(false);
-    sessionStorage.setItem('apec_ad_popup_closed', 'true');
   };
 
   // Load ads on mount or storage updates
   useEffect(() => {
     const reloadAds = () => {
+      // Check if user is logged into an administrative / admission / HOD portal
+      const isLoggedIn = localStorage.getItem('is_logged_in') === 'true';
+      const userRole = (localStorage.getItem('user_role') || '').toLowerCase();
+      const isPortalRole = isLoggedIn && (
+        userRole === 'admin' || 
+        userRole === 'admission' || 
+        userRole.startsWith('dept_') || 
+        userRole.includes('hod') ||
+        userRole === 'staff'
+      );
+
+      if (isPortalRole) {
+        setActiveAds([]);
+        setShowAdModal(false);
+        return;
+      }
+
       let adEnabled = true;
       let loadedAds = [];
 
@@ -323,18 +340,40 @@ export default function Home() {
     };
   }, []);
 
-  // Trigger ad popup after page is fully loaded and interactive, plus a 400ms delay
+  // Trigger ad popup every time website loads/reloads (Public viewing pages only)
   useEffect(() => {
-    const isClosed = sessionStorage.getItem('apec_ad_popup_closed') === 'true';
-    const isSubmitted = sessionStorage.getItem('apec_ad_popup_submitted') === 'true';
-    
-    if (isClosed || isSubmitted) {
+    // Check if user is an authenticated portal user (admin, admission, hod)
+    const isLoggedIn = localStorage.getItem('is_logged_in') === 'true';
+    const userRole = (localStorage.getItem('user_role') || '').toLowerCase();
+    const isPortalRole = isLoggedIn && (
+      userRole === 'admin' || 
+      userRole === 'admission' || 
+      userRole.startsWith('dept_') || 
+      userRole.includes('hod') ||
+      userRole === 'staff'
+    );
+
+    // Check if current URL is a portal path
+    const currentPath = (window.location.pathname || '').toLowerCase();
+    const isPortalPath = 
+      currentPath.includes('admin') || 
+      currentPath.includes('login') || 
+      currentPath.includes('editor') || 
+      currentPath.includes('portal');
+
+    if (isPortalRole || isPortalPath) {
+      setShowAdModal(false);
       return;
     }
 
     const startTimer = () => {
       return setTimeout(() => {
-        setShowAdModal(true);
+        // Re-verify portal status before opening
+        const activeLogin = localStorage.getItem('is_logged_in') === 'true';
+        const activeRole = (localStorage.getItem('user_role') || '').toLowerCase();
+        if (!activeLogin && !activeRole.startsWith('dept_') && activeRole !== 'admin' && activeRole !== 'admission') {
+          setShowAdModal(true);
+        }
       }, 400);
     };
 
@@ -480,19 +519,20 @@ export default function Home() {
     e.preventDefault();
     if (validateForm()) {
       setIsSubmitting(true);
-      const newInquiry = {
-        ...formData,
-        id: Date.now(),
-        date: new Date().toLocaleString()
-      };
-
-      const existing = JSON.parse(localStorage.getItem('apec_inquiries') || '[]');
-      existing.push(newInquiry);
-      localStorage.setItem('apec_inquiries', JSON.stringify(existing));
-
-      setIsSubmitting(false);
-      setFormSubmitted(true);
-      sessionStorage.setItem('apec_ad_popup_submitted', 'true');
+      try {
+        await submitInquiry({
+          name: formData.name.trim(),
+          cutoff: formData.cutoff,
+          phone: formData.phone.trim(),
+          dept: formData.dept,
+          source: 'Admission Popup Modal'
+        });
+      } catch (err) {
+        console.error('Error submitting inquiry:', err);
+      } finally {
+        setIsSubmitting(false);
+        setFormSubmitted(true);
+      }
     }
   };
 
@@ -614,9 +654,9 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative flex flex-col justify-start pt-6 pb-12 px-6 bg-transparent z-10">
+      <section className="relative flex flex-col justify-start pt-6 pb-6 md:pb-12 px-4 sm:px-6 bg-transparent z-10">
         
-        <div className="w-full max-w-[1800px] mx-auto px-6 flex flex-col items-center relative z-10">
+        <div className="w-full max-w-[1800px] mx-auto px-1 sm:px-6 flex flex-col items-center relative z-10">
           
           {/* Hero Text — pinned to top */}
           <div className="w-full text-center mb-2">
@@ -678,8 +718,8 @@ export default function Home() {
           </div>
 
           {/* Institutional Credentials Card — 3-Column Layout with Enlarged Anna University & NAAC Logos */}
-          <div className="w-full max-w-3xl mx-auto bg-transparent mt-2 p-1 select-none relative z-10">
-            <div className="flex flex-col items-center justify-center text-center mb-4">
+          <div className="w-full max-w-3xl mx-auto bg-transparent mt-2 p-0.5 sm:p-1 select-none relative z-10">
+            <div className="flex flex-col items-center justify-center text-center mb-3 md:mb-4">
               <span className="font-display text-[10px] sm:text-[11px] uppercase tracking-widest font-black text-amber-300 bg-black/60 border border-amber-400/40 px-3.5 py-1 rounded-full shadow-md backdrop-blur-md">
                 Recognition & Accreditation
               </span>
@@ -702,14 +742,14 @@ export default function Home() {
                 }}
                 className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[76%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
+                <div className="w-full h-[72%] sm:h-[76%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
                   <img src="/Images/Logos/university_logo-rem.png" alt="Anna University Logo" className="w-auto h-full max-h-24 sm:max-h-30 md:max-h-36 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1 pb-1">
-                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
+                  <h4 className="font-title text-[9px] min-[360px]:text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     Anna University
                   </h4>
-                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
+                  <p className="text-[7px] min-[360px]:text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     Affiliated
                   </p>
                 </div>
@@ -730,14 +770,14 @@ export default function Home() {
                 }}
                 className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[65%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
+                <div className="w-full h-[62%] sm:h-[65%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
                   <img src="/Images/Logos/UGC.png" alt="UGC Logo" className="w-auto h-full max-h-16 sm:max-h-20 md:max-h-24 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1 pb-1">
-                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
+                  <h4 className="font-title text-[9px] min-[360px]:text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     UGC Autonomous
                   </h4>
-                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
+                  <p className="text-[7px] min-[360px]:text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     10 Years Status
                   </p>
                 </div>
@@ -758,14 +798,14 @@ export default function Home() {
                 }}
                 className="aspect-square w-full flex flex-col items-center justify-center p-0.5 sm:p-1 text-center group cursor-pointer bg-white/10 backdrop-blur-[4px] border-0 rounded-2xl shadow-[0_0_22px_rgba(245,158,11,0.55)] hover:bg-white/20 transition-all duration-300 overflow-hidden"
               >
-                <div className="w-full h-[76%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
+                <div className="w-full h-[72%] sm:h-[76%] flex items-center justify-center p-0.5 transition-transform duration-300 group-hover:scale-108">
                   <img src="/Images/Logos/Naac.png" alt="NAAC Accredited Logo" className="w-auto h-full max-h-24 sm:max-h-30 md:max-h-36 object-contain filter drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)]" />
                 </div>
                 <div className="mt-0 flex flex-col items-center justify-center px-1 pb-1">
-                  <h4 className="font-title text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
+                  <h4 className="font-title text-[9px] min-[360px]:text-[10px] sm:text-xs md:text-sm font-extrabold text-white leading-none drop-shadow-md group-hover:text-amber-300 transition-colors">
                     NAAC Accredited
                   </h4>
-                  <p className="text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
+                  <p className="text-[7px] min-[360px]:text-[8px] sm:text-[10px] md:text-xs text-slate-100 font-bold tracking-tight leading-none mt-0.5">
                     Grade 'A'
                   </p>
                 </div>
@@ -778,9 +818,9 @@ export default function Home() {
 
 
       {/* Leadership Section */}
-      <section className="pt-12 md:pt-16 pb-24 px-6 bg-transparent relative z-10">
+      <section className="pt-8 md:pt-16 pb-12 md:pb-24 px-4 sm:px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 flex flex-col items-center">
+          <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Management & Founders</h2>
           </div>
 
@@ -789,14 +829,14 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, margin: "-120px" }}
             variants={staggerContainer}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
+            className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 max-w-5xl mx-auto"
           >
             {[
               { name: "Arulthiru Bangaru Sidhar (Amma)", role: "Founder", desc: "Ordained the ACMEC Trust to establish medical, educational, and cultural service foundations.", img: "/Images/College/bangaru_sidhar.jpg" },
               { name: "Sakthi Tmt. V. Lakshmi Bangaru Sidhar", role: "President", desc: "Guiding the institution towards global academic and professional leadership.", img: "/Images/College/lakshmi_sidhar.jpg" },
               { name: "Sakthi Thiru. Dr. G. B. Senthil Kumar", role: "Correspondent", desc: "Directing administrative functions and infrastructure expansions for students.", img: "/Images/College/senthil_kumar.jpg" }
             ].map((person, idx) => (
-              <motion.div key={idx} variants={twistReveal}>
+              <motion.div key={idx} variants={twistReveal} className="flex justify-center w-full">
                 <LeadershipCard 
                   name={person.name} 
                   role={person.role} 
@@ -818,99 +858,98 @@ export default function Home() {
             <p className="text-sm md:text-base text-slate-200/90 font-semibold font-sans max-w-2xl text-center">Explore our individual department portals and their focused curricula.</p>
           </div>
 
-          <div className="relative max-w-5xl mx-auto w-full px-4 md:px-6">
-            <div className="dept-showcase-gold-container w-full flex flex-col items-center">
-              {/* Carousel card container */}
-              <div className="w-full min-h-[420px] md:min-h-[380px] relative overflow-hidden flex items-center justify-center py-4">
-                <AnimatePresence initial={false} custom={direction} mode="wait">
-                  {(() => {
-                    const dept = depts[currentIdx];
-                    const deptIcons = {
-                      AIML: Cpu,
-                      CSE: Code,
-                      IT: Database,
-                      CHEM: Beaker,
-                      MECH: Settings,
-                      CIVIL: Building,
-                      MCA: Laptop,
-                      ECE: Wifi,
-                      EEE: Zap
-                    };
-                    const IconComponent = deptIcons[dept.code] || BookOpen;
+          <div className="relative max-w-5xl mx-auto px-4 md:px-12 flex flex-col items-center">
+            {/* Carousel card container */}
+            <div className="w-full min-h-[420px] md:min-h-[380px] relative overflow-hidden flex items-center justify-center py-4">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
+                {(() => {
+                  const dept = depts[currentIdx];
+                  const deptIcons = {
+                    AIML: Cpu,
+                    CSE: Code,
+                    IT: Database,
+                    CHEM: Beaker,
+                    MECH: Settings,
+                    CIVIL: Building,
+                    MCA: Laptop,
+                    ECE: Wifi,
+                    EEE: Zap
+                  };
+                  const IconComponent = deptIcons[dept.code] || BookOpen;
 
-                    return (
-                      <motion.div
-                        key={currentIdx}
-                        custom={direction}
-                        variants={slideVariants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        className="w-full h-full flex items-center justify-center"
-                      >
-                        <div className="dept-showcase-card">
-                          {/* Edge-to-edge Background Image */}
-                          <div className="dept-bg-image-wrapper">
-                            <img 
-                              src={dept.img} 
-                              alt={dept.name} 
-                              className="dept-bg-image"
-                            />
-                          </div>
+                  return (
+                    <motion.div
+                      key={currentIdx}
+                      custom={direction}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      className="w-full h-full flex items-center justify-center"
+                    >
+                      <div className="dept-showcase-card">
+                        {/* Edge-to-edge Background Image */}
+                        <div className="dept-bg-image-wrapper">
+                          <img 
+                            src={dept.img} 
+                            alt={dept.name} 
+                            className="dept-bg-image"
+                          />
+                        </div>
 
-                          {/* Single uniform dark/black transparent overlay */}
-                          <div className="dept-card-overlay" />
+                        {/* Single uniform dark/black transparent overlay */}
+                        <div className="dept-card-overlay" />
 
-                          {/* Top-Left Info Container (Name, Icon, Badge) */}
-                          <div className="dept-top-left-panel">
-                            <div className="dept-header-info">
-                              <div className="dept-icon-badge-row">
-                                <div className="dept-icon-container">
-                                  <IconComponent className="w-5 h-5 text-indigo-300" />
-                                </div>
-                                <span className="dept-code-badge">
-                                  {dept.code}
-                                </span>
+                        {/* Top-Left Info Container (Name, Icon, Badge) */}
+                        <div className="dept-top-left-panel">
+                          <div className="dept-header-info">
+                            <div className="dept-icon-badge-row">
+                              <div className="dept-icon-container">
+                                <IconComponent className="w-5 h-5 text-indigo-300" />
                               </div>
-                              <span className="dept-subtitle">Focused Curriculum Overview</span>
-                              <h3 className="dept-title">{dept.name}</h3>
+                              <span className="dept-code-badge">
+                                {dept.code}
+                              </span>
                             </div>
-                          </div>
-
-                          {/* Bottom-Right Info Container (Description, Explore Link) */}
-                          <div className="dept-bottom-right-panel">
-                            <p className="dept-description">{dept.details}</p>
-                            <div className="dept-actions">
-                              <span className="dept-status-badge">Autonomous Status</span>
-                              <Link to={`/departments/${dept.key}`} className="dept-link-btn">
-                                Explore Portal <ArrowRight className="w-3.5 h-3.5" />
-                              </Link>
-                            </div>
+                            <span className="dept-subtitle">Focused Curriculum Overview</span>
+                            <h3 className="dept-title">{dept.name}</h3>
                           </div>
                         </div>
-                      </motion.div>
-                    );
-                  })()}
-                </AnimatePresence>
-              </div>
 
-              {/* Dot Indicator Navigation */}
-              <div className="flex gap-2 mt-4 justify-center pb-2">
-                {depts.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      setDirection(idx > currentIdx ? 1 : -1);
-                      setCurrentIdx(idx);
-                    }}
-                    className={`indicator-dot cursor-pointer ${
-                      currentIdx === idx ? 'active' : 'inactive'
-                    }`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
-              </div>
+                        {/* Bottom-Right Info Container (Description, Explore Link) */}
+                        <div className="dept-bottom-right-panel">
+                          <p className="dept-description">{dept.details}</p>
+                          <div className="dept-actions">
+                            <span className="dept-status-badge">Autonomous Status</span>
+                            <Link to={`/departments/${dept.key}`} className="dept-link-btn">
+                              Explore Portal <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })()}
+              </AnimatePresence>
             </div>
+
+            {/* Dot Indicator Navigation */}
+            <div className="flex gap-2 mt-6 justify-center">
+              {depts.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setDirection(idx > currentIdx ? 1 : -1);
+                    setCurrentIdx(idx);
+                  }}
+                  className={`indicator-dot cursor-pointer ${
+                    currentIdx === idx ? 'active' : 'inactive'
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+
           </div>
 
         </div>
@@ -1026,10 +1065,6 @@ export default function Home() {
                 {/* Background image overlay */}
                 <div className="benefit-card-overlay" />
 
-                {/* Circular Glass Badge */}
-                <div className="benefit-badge">
-                  {idx + 1}
-                </div>
 
                 {/* Bottom gradient text overlay */}
                 <div className="card-content text-left">
@@ -1098,7 +1133,7 @@ export default function Home() {
           </button>
 
           {/* ── LEFT PANEL: College Facility Slideshow (desktop only) ── */}
-          <div className="hidden md:flex flex-col w-[42%] shrink-0 relative overflow-hidden bg-slate-900 rounded-l-[28px]">
+          <div className="hidden md:flex flex-col w-[calc(42%+10px)] shrink-0 relative overflow-hidden bg-slate-900 rounded-l-[28px]">
             {/* Background Image Slideshow */}
             <div 
               className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
@@ -1110,11 +1145,11 @@ export default function Home() {
             {/* Dark gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30 flex flex-col items-center justify-center p-6 text-center select-none">
               {/* College Logo */}
-              <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-xl mb-3.5">
+              <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-xl mb-3.5 mx-auto">
                 <img
                   src="/Images/Logos/apec-logo.png"
                   alt="Logo"
-                  className="w-12 h-12 object-contain filter brightness-100 contrast-100 rounded-full"
+                  className="w-12 h-12 object-contain filter brightness-100 contrast-100 rounded-full mx-auto"
                 />
               </div>
 
@@ -1131,24 +1166,10 @@ export default function Home() {
                 Affiliated to Anna University
               </p>
             </div>
-
-            {/* Facility Indicators Bottom Bar */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 pt-2">
-              {adFacilityImages.map((fac, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setAdFacilityIdx(idx)}
-                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === adFacilityIdx ? 'w-5 bg-indigo-400' : 'w-1.5 bg-white/60 hover:bg-white'
-                  }`}
-                  title={fac.title}
-                />
-              ))}
-            </div>
           </div>
 
           {/* ── RIGHT PANEL: Admissions Inquiry Form ── */}
-          <div className="flex flex-col w-full md:w-[58%] p-5 md:p-6 max-h-[90vh] overflow-y-auto">
+          <div className="flex flex-col w-full md:w-[calc(58%-10px)] p-5 md:p-6 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-center md:justify-start mb-5">
               <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
                 {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}

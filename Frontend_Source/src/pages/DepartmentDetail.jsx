@@ -5,10 +5,51 @@ import {
   Search, Mail, GraduationCap, Trophy, 
   BookOpenCheck, UserCheck, Milestone, Library, FileText,
   // New icons for department hero & KPIs
-  Cpu, Laptop, BrainCircuit, Zap, Settings, Hammer, FlaskConical, Sprout, Building, ExternalLink, MoreVertical, ChevronDown
+  Cpu, Laptop, BrainCircuit, Zap, Settings, Hammer, FlaskConical, Sprout, Building, ExternalLink, MoreVertical, ChevronDown,
+  User, X, CheckCircle2, Calendar, Coins, PartyPopper, MessageCircle, Send, Download
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
+import facultyData from '../ai/knowledge/faculty.json';
+import { submitDepartmentFeedback } from '../utils/inquiryService';
+
+// Helper to determine top-right badge (HOD, PRINCIPAL, DEAN)
+const getTopRightBadge = (member, currentDept) => {
+  const deptStr = ((currentDept || '') + ' ' + (member?.department || '') + ' ' + (member?.department_key || '')).toLowerCase();
+  if (deptStr.includes('science') && deptStr.includes('humanities')) {
+    return null; // Explicitly remove HOD tag for Science & Humanities department
+  }
+  const name = (member.name || '').toLowerCase().trim();
+  if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 'PRINCIPAL';
+  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 'HOD';
+  if (name.includes('ramasamy')) return 'DEAN';
+  return null;
+};
+
+// Rank weighting for sorting faculty
+const getRankWeight = (member) => {
+  const name = (member.name || '').toLowerCase().trim();
+  if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 1;
+  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 2;
+  if (name.includes('ramasamy')) return 3;
+  const d = (member.designation || '').toLowerCase();
+  if (d.includes('professor') && !d.includes('assistant') && !d.includes('associate')) return 4;
+  if (d.includes('associate professor')) return 5;
+  if (d.includes('assistant professor')) return 6;
+  return 7;
+};
+
+// Clean academic designation helper (Designation below name)
+const formatDesignation = (designation, name) => {
+  if (!designation) return 'Professor';
+  let d = designation.trim();
+  if (/head\s+of\s+(the\s+)?department/gi.test(d) || d.toLowerCase() === 'hod' || d.toLowerCase() === 'professor & head') {
+    return 'Professor';
+  }
+  d = d.replace(/Principal,?\s*/gi, '').replace(/Dean,?\s*/gi, '').replace(/HOD,?\s*/gi, '').replace(/Coordinator,?\s*/gi, '').trim();
+  if (!d) return 'Professor';
+  return d;
+};
 
 const departmentImages = {
   aiml: '/Images/Dept/aiml dept.jpg',
@@ -40,12 +81,27 @@ const departmentImages = {
 export default function DepartmentDetail() {
   const { id } = useParams();
   
-  // Dynamically load from localStorage config to support the content editor
-  const dept = (() => {
+  // Dynamically load from localStorage config & subscribe to CMS live updates
+  const [deptData, setDeptData] = useState(() => {
     const saved = localStorage.getItem('apec_departments_data');
     const data = saved ? JSON.parse(saved) : departmentsData;
     return data[id] || data.cse;
-  })();
+  });
+
+  useEffect(() => {
+    const loadDept = () => {
+      const saved = localStorage.getItem('apec_departments_data');
+      const data = saved ? JSON.parse(saved) : departmentsData;
+      if (data[id]) {
+        setDeptData(data[id]);
+      }
+    };
+    loadDept();
+    window.addEventListener('apec_storage_update', loadDept);
+    return () => window.removeEventListener('apec_storage_update', loadDept);
+  }, [id]);
+
+  const dept = deptData;
   const deptImage = departmentImages[id] || departmentImages[dept.key] || departmentImages.default;
 
   // Department icon mapping
@@ -146,9 +202,16 @@ export default function DepartmentDetail() {
   const [facultySearch, setFacultySearch] = useState('');
   // Local state for publication search
   const [pubSearch, setPubSearch] = useState('');
+  // Local state for selected faculty member details modal
+  const [selectedFacultyMember, setSelectedFacultyMember] = useState(null);
 
   // Local state for sub-publication tabs (journals, books, conferences)
   const [activePubType, setActivePubType] = useState('journals');
+
+  // Local state for event tabs & feedback form
+  const [activeEventSubTab, setActiveEventSubTab] = useState('hosted');
+  const [feedbackForm, setFeedbackForm] = useState({ name: '', section: 'General Feedback', email: '', phone: '', message: '' });
+  const [feedbackSent, setFeedbackSent] = useState(false);
 
   if (!dept) {
     return (
@@ -161,12 +224,93 @@ export default function DepartmentDetail() {
     );
   }
 
-  // Filtered Faculty
-  const filteredFaculty = (dept.faculty || []).filter(f => 
-    f.name.toLowerCase().includes(facultySearch.toLowerCase()) ||
-    (f.qualification || '').toLowerCase().includes(facultySearch.toLowerCase()) ||
-    (f.designation || '').toLowerCase().includes(facultySearch.toLowerCase())
-  );
+  // Build Faculty Image Lookup Map from departmentsData
+  const facultyImageMap = React.useMemo(() => {
+    const map = {
+      'dr. m. vivekanandhan': '/Images/Faculty/vivekandhan.jpg',
+      'dr. vivekanandhan m': '/Images/Faculty/vivekandhan.jpg'
+    };
+    if (departmentsData) {
+      Object.values(departmentsData).forEach(deptObj => {
+        if (deptObj && Array.isArray(deptObj.faculty)) {
+          deptObj.faculty.forEach(f => {
+            if (f.name && f.image) {
+              map[f.name.toLowerCase().trim()] = f.image;
+            }
+          });
+        }
+      });
+    }
+    return map;
+  }, []);
+
+  // Build Faculty ORCID Lookup Map from departmentsData
+  const facultyOrcidMap = React.useMemo(() => {
+    const map = {};
+    const savedCMS = localStorage.getItem('apec_departments_data');
+    let depts = departmentsData;
+    if (savedCMS) {
+      try { depts = JSON.parse(savedCMS); } catch (e) {}
+    }
+    if (depts) {
+      Object.values(depts).forEach(deptObj => {
+        if (deptObj && Array.isArray(deptObj.faculty)) {
+          deptObj.faculty.forEach(f => {
+            if (f.name && f.orcid) {
+              map[f.name.toLowerCase().trim()] = f.orcid;
+            }
+          });
+        }
+      });
+    }
+    return map;
+  }, []);
+
+  // Filtered and Sorted Faculty using the central facultyData
+  const filteredFaculty = React.useMemo(() => {
+    if (!dept || !dept.name) return [];
+    const targetDeptLower = dept.name.toLowerCase().trim();
+
+    // First filter by current department
+    let list = facultyData.filter(member => {
+      const memberDept = (member.department || '').trim().toLowerCase();
+      const memberKey = (member.department_key || '').trim().toLowerCase();
+
+      // Check MCA matching
+      if (targetDeptLower.includes('mca') || targetDeptLower.includes('computer applications')) {
+        return memberDept.includes('mca') || memberDept.includes('computer applications') || memberKey === 'mca';
+      }
+
+      // Check S&H matching
+      if (targetDeptLower.includes('science') && targetDeptLower.includes('humanities')) {
+        return memberDept === 'science & humanities' || memberKey === 'sh';
+      }
+
+      // Standard matching logic
+      const isMatch = memberDept === targetDeptLower || 
+                      targetDeptLower.includes(memberDept) || 
+                      memberDept.includes(targetDeptLower) ||
+                      (memberKey && targetDeptLower.includes(memberKey)) ||
+                      (dept.key && memberKey === dept.key.toLowerCase());
+
+      return isMatch;
+    });
+
+    // Then filter by search input
+    if (facultySearch.trim()) {
+      const query = facultySearch.toLowerCase().trim();
+      list = list.filter(f => 
+        f.name.toLowerCase().includes(query) ||
+        (f.qualification || '').toLowerCase().includes(query) ||
+        (f.designation || '').toLowerCase().includes(query)
+      );
+    }
+
+    // Sort by Academic Hierarchy
+    list.sort((a, b) => getRankWeight(a) - getRankWeight(b));
+
+    return list;
+  }, [dept, facultySearch]);
 
   // Filtered Journals
   const filteredJournals = (dept.publications?.journals || []).filter(j => 
@@ -178,7 +322,7 @@ export default function DepartmentDetail() {
   // More options structure
   const moreOptions = [
     { id: 'faculty', label: 'Faculty Directory', icon: Users },
-    { id: 'curriculum', label: 'PEO / PSO / PO', icon: Milestone },
+    { id: 'curriculum', label: 'PEOs / PSOs / POs', icon: Milestone },
     { id: 'syllabus', label: 'Curriculum & Syllabus', icon: BookOpenCheck },
     { id: 'labs', label: 'Facilities', icon: Library },
     { id: 'calendar', label: 'Academic Calendar', icon: Clock },
@@ -306,7 +450,7 @@ export default function DepartmentDetail() {
             {[
               { id: 'overview', label: 'Overview', icon: BookOpen },
               { id: 'faculty', label: 'Faculty Directory', icon: Users },
-              { id: 'curriculum', label: 'PEO / PO', icon: Milestone },
+              { id: 'curriculum', label: 'PEOs / PSOs / POs', icon: Milestone },
               { id: 'syllabus', label: 'Syllabus', icon: BookOpenCheck },
               { id: 'labs', label: 'Facilities', icon: Library },
               { id: 'achievements', label: 'Placements', icon: Briefcase }
@@ -603,85 +747,105 @@ export default function DepartmentDetail() {
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 text-left">
-                      {filteredFaculty.map((f, idx) => (
-                        <div 
-                          key={idx}
-                          className="bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-4 sm:p-4 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 hover:border-indigo-300 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
-                        >
-                          {/* Background soft blurs for premium aesthetic */}
-                          <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50/40 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-100/50 transition-colors" />
+                      {filteredFaculty.map((f, idx) => {
+                        const photoSrc = f.image || facultyImageMap[f.name?.toLowerCase().trim()] || null;
+                        const topRightBadge = getTopRightBadge(f, dept.name);
 
-                          {/* Left side: Image / Fallback Avatar */}
-                          <div className="relative shrink-0 w-20 h-20 sm:w-32 sm:h-32 rounded-full sm:rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50 flex items-center justify-center">
-                            {f.image ? (
-                              <img 
-                                src={f.image} 
-                                alt={f.name} 
-                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                                onError={(e) => {
-                                  e.target.style.display = 'none';
-                                  e.target.nextSibling.style.display = 'flex';
-                                }}
-                              />
-                            ) : null}
-                            {/* Fallback avatar */}
-                            <div 
-                              className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold"
-                              style={{ display: f.image ? 'none' : 'flex' }}
-                            >
-                              <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-650" />
+                        return (
+                          <div 
+                            key={idx}
+                            onClick={() => setSelectedFacultyMember(f)}
+                            className={`bg-white border rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 hover:shadow-lg transition-all duration-300 relative overflow-hidden group cursor-pointer ${
+                              topRightBadge === 'PRINCIPAL'
+                                ? 'border-[#FF8A00] ring-1 ring-amber-400/60'
+                                : topRightBadge === 'HOD'
+                                ? 'border-amber-300 ring-1 ring-amber-200/60'
+                                : topRightBadge === 'DEAN'
+                                ? 'border-indigo-300 ring-1 ring-indigo-200/60'
+                                : 'border-gray-200 hover:border-indigo-300'
+                            }`}
+                          >
+                            {/* Background soft blurs for premium aesthetic */}
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50/40 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-100/50 transition-colors" />
+
+                            {/* Left side: Image / Fallback Avatar */}
+                            <div className="relative shrink-0 w-20 h-20 sm:w-32 sm:h-32 rounded-full sm:rounded-2xl overflow-hidden border border-gray-150 shadow-sm bg-gray-50 flex items-center justify-center">
+                              {photoSrc ? (
+                                <img 
+                                  src={photoSrc} 
+                                  alt={f.name} 
+                                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                  }}
+                                />
+                              ) : null}
+                              {/* Fallback avatar */}
+                              <div 
+                                className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold"
+                                style={{ display: photoSrc ? 'none' : 'flex' }}
+                              >
+                                <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-650" />
+                              </div>
                             </div>
-                          </div>
 
-                          {/* Right side: Information */}
-                          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start justify-between py-0.5 self-stretch text-center sm:text-left">
-                            <div className="w-full flex flex-col items-center sm:items-start">
-                              <div className="flex flex-col sm:flex-row flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
-                                <h4 className="text-base sm:text-lg lg:text-xl font-black text-gray-900 leading-snug">{f.name}</h4>
-                                {f.qualification && (
-                                  <span className="text-[9px] font-black bg-indigo-50 border border-indigo-150 px-2 py-0.5 rounded text-indigo-650 uppercase font-mono tracking-wider shrink-0 mt-0.5 sm:mt-0">
-                                    {f.qualification}
+                            {/* Right side: Information */}
+                            <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start justify-between py-0.5 self-stretch text-center sm:text-left">
+                              <div className="w-full flex flex-col items-center sm:items-start">
+                                <div className="flex flex-row items-center justify-between gap-1.5 sm:gap-2 mb-1 w-full flex-wrap">
+                                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                    <h4 className="text-base sm:text-lg lg:text-xl font-black text-gray-900 leading-snug group-hover:text-indigo-650 transition-colors">{f.name}</h4>
+                                    {f.qualification && (
+                                      <span className="text-[9px] font-black bg-indigo-50 border border-indigo-150 px-2 py-0.5 rounded text-indigo-650 uppercase font-mono tracking-wider shrink-0 mt-0.5 sm:mt-0">
+                                        {f.qualification}
+                                      </span>
+                                    )}
+                                  </div>
+                                  
+                                  {topRightBadge && (
+                                    <span className={`text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shrink-0 shadow-2xs border ${
+                                      topRightBadge === 'PRINCIPAL'
+                                        ? 'bg-[#FF8A00] text-white border-amber-600 font-black'
+                                        : topRightBadge === 'HOD' 
+                                        ? 'bg-amber-100 text-amber-900 border-amber-300' 
+                                        : 'bg-indigo-100 text-indigo-900 border-indigo-300'
+                                    }`}>
+                                      {topRightBadge}
+                                    </span>
+                                  )}
+                                </div>
+                                
+                                <span className="text-[11px] sm:text-xs md:text-sm text-indigo-650 font-extrabold uppercase tracking-wider block mb-1">
+                                  {formatDesignation(f.designation, f.name)}
+                                </span>
+                                
+                                {f.department && (
+                                  <span className="text-xs sm:text-sm text-gray-550 font-bold block mb-3 leading-relaxed">
+                                    {f.department}
                                   </span>
                                 )}
                               </div>
-                              
-                              <span className="text-[11px] sm:text-xs md:text-sm text-indigo-650 font-extrabold uppercase tracking-wider block mb-1">
-                                {(/head\s+of\s+(the\s+)?department/gi.test(f.designation || '') || (f.designation || '').toLowerCase() === 'hod' || (f.designation || '').toLowerCase() === 'professor & head') ? 'Professor' : f.designation}
-                              </span>
-                              
-                              {f.department && (
-                                <span className="text-xs sm:text-sm text-gray-550 font-bold block mb-3 leading-relaxed">
-                                  {f.department}
-                                </span>
-                              )}
-                            </div>
 
-                            {/* Contact/Options & Additional Metadata */}
-                            <div className="flex items-center justify-between gap-4 mt-auto pt-3 border-t border-gray-100 w-full">
-                              <div className="flex items-center gap-4">
-                                {f.experience && (
-                                  <div className="text-[10px] sm:text-xs text-gray-550 font-extrabold flex items-center gap-1.5">
-                                    <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                                    <span>Exp: {f.experience.split(',')[0]}</span>
-                                  </div>
-                                )}
-                              </div>
+                              {/* Contact/Options & Additional Metadata */}
+                              <div className="flex items-center justify-between gap-4 mt-auto pt-3 border-t border-gray-100 w-full">
+                                <div className="flex items-center gap-4">
+                                  {f.experience && f.experience !== 'N/A' && (
+                                    <div className="text-[10px] sm:text-xs text-gray-550 font-extrabold flex items-center gap-1.5">
+                                      <Clock className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+                                      <span>Exp: {f.experience.split(',')[0]}</span>
+                                    </div>
+                                  )}
+                                </div>
 
-                              <div className="flex items-center gap-2">
-                                {f.email && (
-                                  <a 
-                                    href={`mailto:${f.email}`}
-                                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gray-900 hover:bg-indigo-650 text-white flex items-center justify-center shadow hover:shadow-indigo-500/30 transition-all transform hover:scale-110 active:scale-95 cursor-pointer"
-                                    title={`Email: ${f.email}`}
-                                  >
-                                    <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                                  </a>
-                                )}
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[10px] font-extrabold text-indigo-650 opacity-0 group-hover:opacity-100 transition-opacity">View Profile &rarr;</span>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -722,6 +886,9 @@ export default function DepartmentDetail() {
               {/* TAB 4: CURRICULUM OBJECTIVES */}
               {activeSubTab === 'curriculum' && (
                 <div className="space-y-6 sm:space-y-10 text-left">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-indigo-650 flex items-center gap-2 mb-4">
+                    <Milestone className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-650" /> PEOs / PSOs / POs
+                  </h2>
                   
                   {/* PEOs & PSOs grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
@@ -739,7 +906,22 @@ export default function DepartmentDetail() {
                               <span className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-650 text-[10px] sm:text-xs font-black flex items-center justify-center shrink-0 mt-0.5">
                                 {idx + 1}
                               </span>
-                              <span>{peo}</span>
+                              <span>
+                                {typeof peo === 'object' && peo !== null ? (
+                                  <div>
+                                    <span className="font-extrabold text-gray-900 block">
+                                      {peo.code || `PEO${idx + 1}`}: {peo.title}
+                                    </span>
+                                    {peo.description && (
+                                      <span className="text-xs text-gray-600 font-normal block mt-1 leading-relaxed">
+                                        {peo.description}
+                                      </span>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <span>{typeof peo === 'string' ? peo : (peo.title || peo.description || JSON.stringify(peo))}</span>
+                                )}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -760,7 +942,22 @@ export default function DepartmentDetail() {
                               <span className="w-5.5 h-5.5 sm:w-6 sm:h-6 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-650 text-[10px] sm:text-xs font-black flex items-center justify-center shrink-0 mt-0.5">
                                 {idx + 1}
                               </span>
-                              <span>{pso}</span>
+                              <span>
+                                {typeof pso === 'object' && pso !== null ? (
+                                  <div>
+                                    <span className="font-extrabold text-gray-900 block">
+                                      {pso.code || `PSO${idx + 1}`}: {pso.title}
+                                    </span>
+                                    {pso.description && (
+                                      <span className="text-xs text-gray-600 font-normal block mt-1 leading-relaxed">
+                                        {pso.description}
+                                      </span>
+                                    )}
+                                  </div>
+                                ) : (
+                                  <span>{typeof pso === 'string' ? pso : (pso.title || pso.description || JSON.stringify(pso))}</span>
+                                )}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -794,6 +991,63 @@ export default function DepartmentDetail() {
                     )}
                   </div>
 
+                </div>
+              )}
+
+              {/* TAB 4.5: SYLLABUS & CURRICULUM */}
+              {activeSubTab === 'syllabus' && (
+                <div className="space-y-6 sm:space-y-8 text-left">
+                  <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                      <div>
+                        <span className="px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[10px] font-black uppercase tracking-wider rounded-full inline-block mb-3">
+                          Academic Curriculum & Regulations
+                        </span>
+                        <h2 className="text-xl sm:text-2xl font-black font-title text-white">
+                          {dept.syllabus?.title || `${dept.name} Curriculum & Syllabus`}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-indigo-200/80 mt-2 max-w-2xl font-medium leading-relaxed">
+                          {dept.syllabus?.description || 'Explore the comprehensive semester-wise course scheme, regulation guidelines, and core subject credit distribution.'}
+                        </p>
+                      </div>
+                      {dept.syllabus?.link && (
+                        <a
+                          href={dept.syllabus.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-5 py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-lg flex items-center gap-2 shrink-0 cursor-pointer"
+                        >
+                          <Download className="w-4 h-4" /> Download Syllabus PDF
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Semester Scheme Overview */}
+                  <div className="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-3xl space-y-4">
+                    <h3 className="text-lg font-black text-indigo-950 font-title flex items-center gap-2">
+                      <BookOpenCheck className="w-5 h-5 text-indigo-650" /> Semester Scheme & Subject Structure
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-600 font-semibold leading-relaxed">
+                      The program follows AICTE & Anna University model curriculum covering Professional Core, Professional Electives, Open Electives, and Employability Enhancement Courses.
+                    </p>
+                    {dept.syllabus?.link ? (
+                      <div className="pt-2">
+                        <a 
+                          href={dept.syllabus.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-xs font-bold text-indigo-650 hover:underline"
+                        >
+                          <ExternalLink className="w-4 h-4" /> View Full Regulation PDF Document
+                        </a>
+                      </div>
+                    ) : (
+                      <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 font-semibold">
+                        The updated syllabus document for this department can be downloaded from the HOD desk or central college portal.
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -1033,12 +1287,62 @@ export default function DepartmentDetail() {
                 <div className="space-y-8 sm:space-y-10 text-left">
                   
                   {/* placements block */}
-                  <div className="bg-gray-50 border border-gray-150 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-3xl">
-                    <h3 className="text-lg sm:text-xl font-black text-indigo-650 mb-4 sm:mb-6 font-title flex items-center gap-2">
-                      <Briefcase className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 text-indigo-650" /> Student Placement Records
+                  <div className="bg-gray-50 border border-gray-150 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-3xl space-y-6">
+                    <h3 className="text-lg sm:text-xl font-black text-indigo-650 font-title flex items-center gap-2">
+                      <Briefcase className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 text-indigo-650" /> Student Placement Records & Highlights
                     </h3>
+
+                    {/* Placement Banner Image */}
+                    {typeof dept.placements === 'object' && !Array.isArray(dept.placements) && dept.placements?.image && (
+                      <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-md max-h-80 w-full bg-slate-900">
+                        <img 
+                          src={dept.placements.image} 
+                          alt="Placement Highlights" 
+                          className="w-full h-full object-cover max-h-80"
+                        />
+                      </div>
+                    )}
+
+                    {/* Placement Description & Key Metrics */}
+                    {typeof dept.placements === 'object' && !Array.isArray(dept.placements) && (
+                      <div className="space-y-4">
+                        {dept.placements.description && (
+                          <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-semibold bg-white p-4 rounded-2xl border border-gray-200">
+                            {dept.placements.description}
+                          </p>
+                        )}
+
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                          <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 block">Placement Rate</span>
+                            <span className="text-2xl font-black text-emerald-650 block mt-1">{dept.placements.rate || '94%'}</span>
+                          </div>
+                          <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 block">Highest Package</span>
+                            <span className="text-2xl font-black text-indigo-650 block mt-1">{dept.placements.highestPackage || '12 LPA'}</span>
+                          </div>
+                          <div className="bg-white p-4 rounded-2xl border border-gray-200 shadow-xs">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 block">Average Package</span>
+                            <span className="text-2xl font-black text-blue-650 block mt-1">{dept.placements.averagePackage || '4.5 LPA'}</span>
+                          </div>
+                        </div>
+
+                        {dept.placements.topRecruiters && (
+                          <div className="p-4 bg-white rounded-2xl border border-gray-200">
+                            <span className="text-[10px] font-black uppercase tracking-wider text-gray-400 block mb-2">Key Recruiting Partners</span>
+                            <div className="flex flex-wrap gap-2">
+                              {dept.placements.topRecruiters.split(',').map((rec, rIdx) => (
+                                <span key={rIdx} className="px-3 py-1 bg-indigo-50 border border-indigo-100 text-indigo-900 font-extrabold text-xs rounded-full">
+                                  {rec.trim()}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                     
-                    {(!dept.placements || dept.placements.length === 0) ? (
+                    {Array.isArray(dept.placements) && (dept.placements.length === 0 ? (
                       <p className="text-xs sm:text-sm text-gray-550 font-semibold text-center py-6 sm:py-8">First-batch students currently building projects; placements commencing soon.</p>
                     ) : (
                       <div>
@@ -1088,7 +1392,7 @@ export default function DepartmentDetail() {
                           ))}
                         </div>
                       </div>
-                    )}
+                    ))}
                   </div>
 
                   {/* toppers & university ranks grid */}
@@ -1204,9 +1508,447 @@ export default function DepartmentDetail() {
                 </div>
               )}
 
+              {/* TAB 7: FUNDS RECEIVED & RESEARCH GRANTS */}
+              {activeSubTab === 'funds' && (
+                <div className="space-y-6 text-left">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-indigo-650 flex items-center gap-2 mb-4">
+                    <Coins className="w-5 h-5 sm:w-6 sm:h-6 text-amber-500" /> Funds Received & Research Grants
+                  </h2>
+                  {(!dept.grants || dept.grants.length === 0) ? (
+                    <div className="p-8 bg-gray-50 border border-dashed border-gray-250 rounded-3xl text-center text-gray-500 text-xs sm:text-sm font-semibold">
+                      No external funding records logged for this department yet.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                      {dept.grants.map((g, idx) => (
+                        <div key={idx} className="bg-gray-50 border border-gray-200 p-5 rounded-2xl space-y-3 hover:border-indigo-300 transition-all shadow-xs">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="px-3 py-1 bg-amber-500/10 border border-amber-400/30 text-amber-800 text-[10px] font-black uppercase rounded-full">
+                              {g.agency || 'Funding Agency'}
+                            </span>
+                            <span className="text-xs font-black text-emerald-700 font-mono bg-emerald-50 px-2.5 py-0.5 rounded-lg border border-emerald-200">
+                              {g.amount || '—'}
+                            </span>
+                          </div>
+                          <h4 className="text-sm font-bold text-gray-900 leading-snug">{g.title}</h4>
+                          <div className="text-xs text-gray-600 space-y-1 font-medium pt-2 border-t border-gray-200">
+                            <p><span className="font-bold text-gray-500">Principal Investigator:</span> {g.pi}</p>
+                            <p><span className="font-bold text-gray-500">Sanction Period:</span> {g.year}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* TAB 8: HOSTED & ATTENDED EVENTS */}
+              {activeSubTab === 'events' && (
+                <div className="space-y-6 text-left">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-indigo-650 flex items-center gap-2">
+                      <PartyPopper className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" /> Department Events & Activities
+                    </h2>
+                    
+                    <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-xl border border-gray-200">
+                      <button
+                        onClick={() => setActiveEventSubTab('hosted')}
+                        className={`px-3.5 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
+                          activeEventSubTab === 'hosted' ? 'bg-indigo-650 text-white shadow-xs' : 'text-gray-600 hover:text-indigo-650'
+                        }`}
+                      >
+                        🎪 Hosted Events ({(dept.hostedEvents || []).length})
+                      </button>
+                      <button
+                        onClick={() => setActiveEventSubTab('attended')}
+                        className={`px-3.5 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
+                          activeEventSubTab === 'attended' ? 'bg-indigo-650 text-white shadow-xs' : 'text-gray-600 hover:text-indigo-650'
+                        }`}
+                      >
+                        🎓 Attended Events ({(dept.attendedEvents || []).length})
+                      </button>
+                    </div>
+                  </div>
+
+                  {activeEventSubTab === 'hosted' && (
+                    (!dept.hostedEvents || dept.hostedEvents.length === 0) ? (
+                      <div className="p-8 bg-gray-50 border border-dashed border-gray-250 rounded-3xl text-center text-gray-500 text-xs sm:text-sm font-semibold">
+                        No department-hosted events published yet.
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {dept.hostedEvents.map((ev, idx) => (
+                          <div key={idx} className="bg-gray-50 border border-gray-200 rounded-3xl overflow-hidden shadow-xs hover:shadow-md transition-all">
+                            {ev.image && (
+                              <div className="h-44 w-full overflow-hidden bg-slate-900 relative">
+                                <img src={ev.image} alt={ev.name} className="w-full h-full object-cover" />
+                                <div className="absolute top-3 left-3 px-3 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-black uppercase rounded-full">
+                                  {ev.date}
+                                </div>
+                              </div>
+                            )}
+                            <div className="p-6 space-y-3">
+                              <span className="text-[10px] font-black uppercase text-pink-650 tracking-wider">Hosted Symposium / Workshop</span>
+                              <h3 className="text-base font-black text-gray-900 leading-snug">{ev.name}</h3>
+                              <p className="text-xs text-gray-600 font-medium leading-relaxed">{ev.description}</p>
+                              <div className="pt-3 border-t border-gray-200 text-xs text-gray-500 font-medium space-y-1">
+                                {ev.venue && <p>📍 <span className="font-bold text-gray-700">Venue:</span> {ev.venue}</p>}
+                                {ev.speaker && <p>🎤 <span className="font-bold text-gray-700">Keynote / Resource Person:</span> {ev.speaker}</p>}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  )}
+
+                  {activeEventSubTab === 'attended' && (
+                    (!dept.attendedEvents || dept.attendedEvents.length === 0) ? (
+                      <div className="p-8 bg-gray-50 border border-dashed border-gray-250 rounded-3xl text-center text-gray-500 text-xs sm:text-sm font-semibold">
+                        No external attended events logged yet.
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {dept.attendedEvents.map((ev, idx) => (
+                          <div key={idx} className="bg-gray-50 border border-gray-200 rounded-3xl overflow-hidden shadow-xs hover:shadow-md transition-all">
+                            {ev.image && (
+                              <div className="h-44 w-full overflow-hidden bg-slate-900 relative">
+                                <img src={ev.image} alt={ev.name} className="w-full h-full object-cover" />
+                                <div className="absolute top-3 left-3 px-3 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-black uppercase rounded-full">
+                                  {ev.date}
+                                </div>
+                              </div>
+                            )}
+                            <div className="p-6 space-y-3">
+                              <span className="text-[10px] font-black uppercase text-indigo-650 tracking-wider">External FDP / Participation</span>
+                              <h3 className="text-base font-black text-gray-900 leading-snug">{ev.name}</h3>
+                              <p className="text-xs text-gray-600 font-medium leading-relaxed">{ev.description}</p>
+                              <div className="pt-3 border-t border-gray-200 text-xs text-gray-500 font-medium space-y-1">
+                                {ev.hostOrg && <p>🏛️ <span className="font-bold text-gray-700">Host Organization:</span> {ev.hostOrg}</p>}
+                                {ev.participant && <p>👤 <span className="font-bold text-gray-700">Participants:</span> {ev.participant}</p>}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  )}
+                </div>
+              )}
+
+              {/* TAB 9: DEPARTMENT NEWSLETTERS (PDF) */}
+              {activeSubTab === 'newsletter' && (
+                <div className="space-y-6 text-left">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-indigo-650 flex items-center gap-2 mb-4">
+                    <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" /> Department Newsletters & Magazines
+                  </h2>
+                  {(!dept.newsletters || dept.newsletters.length === 0) ? (
+                    <div className="p-8 bg-gray-50 border border-dashed border-gray-250 rounded-3xl text-center text-gray-500 text-xs sm:text-sm font-semibold">
+                      No newsletter PDF documents published for this department yet.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {dept.newsletters.map((nl, idx) => (
+                        <div key={idx} className="bg-gray-50 border border-gray-200 p-6 rounded-3xl space-y-4 hover:border-indigo-300 transition-all shadow-xs flex flex-col justify-between">
+                          <div className="space-y-2">
+                            <span className="px-3 py-1 bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-black uppercase rounded-full">
+                              {nl.date || 'Newsletter Issue'}
+                            </span>
+                            <h3 className="text-lg font-black text-gray-900 leading-snug">{nl.title}</h3>
+                            <p className="text-xs text-gray-600 font-medium leading-relaxed">{nl.summary || 'Click below to read and download the full department newsletter PDF document.'}</p>
+                          </div>
+                          {nl.link ? (
+                            <a
+                              href={nl.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
+                            >
+                              <Download className="w-4 h-4" /> Click to Open Newsletter (PDF)
+                            </a>
+                          ) : (
+                            <div className="p-3 bg-gray-200 text-gray-600 text-xs font-semibold rounded-xl text-center">PDF document coming soon</div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* TAB 10: DEPARTMENT FEEDBACK FORM */}
+              {activeSubTab === 'feedback' && (
+                <div className="space-y-6 text-left max-w-2xl mx-auto">
+                  <div className="text-center space-y-2">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-indigo-650 flex items-center justify-center gap-2">
+                      <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" /> Share Department Feedback
+                    </h2>
+                    <p className="text-xs sm:text-sm text-gray-600 font-medium">Your feedback is submitted directly to the {dept.name} Head of Department (HOD) desk.</p>
+                  </div>
+
+                  {feedbackSent ? (
+                    <div className="p-8 bg-emerald-50 border border-emerald-200 rounded-3xl text-center space-y-3">
+                      <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+                      <h3 className="text-lg font-black text-emerald-900">Feedback Submitted Successfully!</h3>
+                      <p className="text-xs text-emerald-700 font-medium">Thank you for sharing your valuable input. The HOD has received your response.</p>
+                      <button
+                        onClick={() => {
+                          setFeedbackSent(false);
+                          setFeedbackForm({ name: '', section: 'General Feedback', email: '', phone: '', message: '' });
+                        }}
+                        className="px-5 py-2 bg-emerald-600 text-white text-xs font-black rounded-xl cursor-pointer"
+                      >
+                        Submit Another Response
+                      </button>
+                    </div>
+                  ) : (
+                    <form
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        await submitDepartmentFeedback({
+                          ...feedbackForm,
+                          dept: dept.name,
+                          department: dept.name
+                        });
+                        setFeedbackSent(true);
+                      }}
+                      className="bg-gray-50 border border-gray-200 p-6 sm:p-8 rounded-3xl space-y-4 shadow-sm"
+                    >
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-gray-500 tracking-wider">Your Full Name</label>
+                        <input 
+                          type="text"
+                          required
+                          value={feedbackForm.name}
+                          onChange={(e) => setFeedbackForm({ ...feedbackForm, name: e.target.value })}
+                          placeholder="Student / Parent / Alumni Name"
+                          className="w-full text-xs font-bold px-4 py-2.5 bg-white border border-gray-250 rounded-xl outline-none focus:border-indigo-650"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-gray-500 tracking-wider">Stakeholder Section</label>
+                          <select
+                            value={feedbackForm.section}
+                            onChange={(e) => setFeedbackForm({ ...feedbackForm, section: e.target.value })}
+                            className="w-full text-xs font-bold px-4 py-2.5 bg-white border border-gray-250 rounded-xl outline-none focus:border-indigo-650 cursor-pointer"
+                          >
+                            <option value="Student Feedback">Student Feedback</option>
+                            <option value="Parent Feedback">Parent Feedback</option>
+                            <option value="Alumni Feedback">Alumni Feedback</option>
+                            <option value="Academic Curriculum">Academic Curriculum</option>
+                            <option value="Infrastructure & Labs">Infrastructure & Labs</option>
+                            <option value="General Feedback">General Feedback</option>
+                          </select>
+                        </div>
+
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-black uppercase text-gray-500 tracking-wider">Contact Phone / Email</label>
+                          <input 
+                            type="text"
+                            value={feedbackForm.phone || feedbackForm.email}
+                            onChange={(e) => setFeedbackForm({ ...feedbackForm, phone: e.target.value, email: e.target.value })}
+                            placeholder="Phone number or Email"
+                            className="w-full text-xs font-bold px-4 py-2.5 bg-white border border-gray-250 rounded-xl outline-none focus:border-indigo-650"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-[10px] font-black uppercase text-gray-500 tracking-wider">Feedback & Detailed Suggestions</label>
+                        <textarea 
+                          rows={4}
+                          required
+                          value={feedbackForm.message}
+                          onChange={(e) => setFeedbackForm({ ...feedbackForm, message: e.target.value })}
+                          placeholder="Write your feedback message or suggestions here..."
+                          className="w-full text-xs font-medium p-4 bg-white border border-gray-250 rounded-xl outline-none focus:border-indigo-650"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="w-full py-3 bg-indigo-650 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all"
+                      >
+                        <Send className="w-4 h-4" /> Submit Response to Department HOD
+                      </button>
+                    </form>
+                  )}
+                </div>
+              )}
+
             </motion.div>
           </AnimatePresence>
         </div>
+
+        {/* POPUP MODAL FOR FACULTY DETAILS */}
+        <AnimatePresence>
+          {selectedFacultyMember && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-md">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl relative overflow-hidden"
+              >
+                {/* Close Button */}
+                <button 
+                  onClick={() => setSelectedFacultyMember(null)}
+                  className="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-gray-700 flex items-center justify-center transition-colors cursor-pointer z-10"
+                >
+                  <X className="w-5 h-5 stroke-[2.5]" />
+                </button>
+
+                {/* Modal Header: Portrait Photo & Main Name */}
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b border-gray-150 pb-6 mb-6 text-center sm:text-left">
+                  {/* Perfect Ratio Portrait Modal Image */}
+                  <div className="w-24 h-24 sm:w-32 sm:h-32 aspect-square rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0 shadow-md relative">
+                    {selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()] ? (
+                      <img 
+                        src={selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]} 
+                        alt={selectedFacultyMember.name}
+                        className="w-full h-full object-cover object-top"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                    ) : null}
+                    <div 
+                      className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold"
+                      style={{ display: (selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]) ? 'none' : 'flex' }}
+                    >
+                      <User className="w-12 h-12 text-slate-400" />
+                    </div>
+                  </div>
+
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+                      <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-title">{selectedFacultyMember.name}</h2>
+                      {getTopRightBadge(selectedFacultyMember, dept.name) && (
+                        <span className={`text-[10px] font-black border px-2.5 py-0.5 rounded-full uppercase ${
+                          getTopRightBadge(selectedFacultyMember, dept.name) === 'PRINCIPAL'
+                            ? 'bg-[#FF8A00] text-white border-amber-600'
+                            : getTopRightBadge(selectedFacultyMember, dept.name) === 'HOD' 
+                            ? 'text-amber-900 bg-amber-100 border-amber-300' 
+                            : 'text-indigo-900 bg-indigo-100 border-indigo-300'
+                        }`}>
+                          {getTopRightBadge(selectedFacultyMember, dept.name)}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs sm:text-sm font-extrabold text-[#FF8A00] mb-2">
+                      {formatDesignation(selectedFacultyMember.designation, selectedFacultyMember.name)}
+                    </p>
+                    <span className="inline-block text-[11px] font-bold text-gray-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+                      {selectedFacultyMember.department}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Modal Details Grid */}
+                <div className="space-y-3.5 mb-6 text-left">
+                  {/* Qualification */}
+                  <div className="p-3.5 bg-slate-50 border border-slate-150 rounded-2xl flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0">
+                      <GraduationCap className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Qualification</span>
+                      <span className="text-xs sm:text-sm font-extrabold text-gray-800">
+                        {selectedFacultyMember.qualification || 'Master of Engineering'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Department */}
+                  <div className="p-3.5 bg-slate-50 border border-slate-150 rounded-2xl flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center shrink-0">
+                      <Building className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Academic Department</span>
+                      <span className="text-xs sm:text-sm font-extrabold text-gray-800">
+                        {selectedFacultyMember.department}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Experience */}
+                  {selectedFacultyMember.experience && selectedFacultyMember.experience !== 'N/A' && (
+                    <div className="p-3.5 bg-slate-50 border border-slate-150 rounded-2xl flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                        <Clock className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Total Academic Experience</span>
+                        <span className="text-xs sm:text-sm font-extrabold text-gray-800">
+                          {selectedFacultyMember.experience}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Email Address */}
+                  {selectedFacultyMember.email && selectedFacultyMember.email !== 'N/A' && (
+                    <div className="p-3.5 bg-slate-50 border border-slate-150 rounded-2xl flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <div className="w-8 h-8 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+                          <Mail className="w-4 h-4" />
+                        </div>
+                        <div className="overflow-hidden">
+                          <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Official Email Address</span>
+                          <a href={`mailto:${selectedFacultyMember.email}`} className="text-xs sm:text-sm font-extrabold text-indigo-650 hover:underline truncate block">
+                            {selectedFacultyMember.email}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ORCID iD Identifier */}
+                  {(selectedFacultyMember.orcid || facultyOrcidMap[selectedFacultyMember.name?.toLowerCase().trim()]) && (
+                    <div className="p-3.5 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-xs shrink-0 shadow-sm font-mono">
+                          iD
+                        </div>
+                        <div className="overflow-hidden">
+                          <span className="text-[10px] font-black text-emerald-800 uppercase tracking-wider block">ORCID Identifier</span>
+                          <a
+                            href={`https://orcid.org/${selectedFacultyMember.orcid || facultyOrcidMap[selectedFacultyMember.name?.toLowerCase().trim()]}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs sm:text-sm font-extrabold text-emerald-700 hover:text-emerald-900 hover:underline font-mono truncate block flex items-center gap-1"
+                          >
+                            https://orcid.org/{selectedFacultyMember.orcid || facultyOrcidMap[selectedFacultyMember.name?.toLowerCase().trim()]}
+                            <ExternalLink className="w-3.5 h-3.5 inline ml-1 text-emerald-600" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer Action */}
+                <div className="pt-4 border-t border-gray-150 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>Verified APEC Faculty</span>
+                  </div>
+                  <button 
+                    onClick={() => setSelectedFacultyMember(null)}
+                    className="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs rounded-xl transition-colors cursor-pointer"
+                  >
+                    Close Profile
+                  </button>
+                </div>
+
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>

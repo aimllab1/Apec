@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --config Project_Settings/vite.config.js",
+    "dev": "vite --config Project_Settings/vite.config.js --host",
     "build": "vite build --config Project_Settings/vite.config.js",
     "lint": "oxlint -c Project_Settings/.oxlintrc.json",
-    "preview": "vite preview --config Project_Settings/vite.config.js"
+    "preview": "vite preview --config Project_Settings/vite.config.js --host"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

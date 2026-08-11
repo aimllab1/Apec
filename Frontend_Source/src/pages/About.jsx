@@ -197,7 +197,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="border-t border-gray-100 pt-16 mb-20 text-left"
         >
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
             {/* Left: Founder Biography */}
             <div className="w-full lg:w-7/12">
               <span className="font-display text-[10px] uppercase font-extrabold tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full inline-block mb-3.5">
@@ -230,25 +230,28 @@ export default function About() {
             <div className="w-full lg:w-5/12 flex justify-center">
               <div className="relative group max-w-sm w-full p-2 bg-gray-50 border border-gray-200/80 rounded-[32px] shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-500/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-purple-500/5 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="overflow-hidden rounded-[24px]">
+                <div className="overflow-hidden rounded-[24px] relative">
                   <img 
                     src={bangaruImg} 
                     alt="Arulthiru Bangaru Sidhar (Amma)" 
                     className="w-full h-[400px] object-cover rounded-[24px] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 shadow-inner" 
                   />
-                </div>
-                {/* Caption tag */}
-                <div className="absolute bottom-6 left-6 right-6 bg-slate-950/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-left shadow-lg transform group-hover:translate-y-[-2px] transition-transform duration-500">
-                  <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-400 block mb-0.5">Founder</span>
-                  <h4 className="font-serif text-sm font-bold text-white leading-tight">Arulthiru Bangaru Sidhar (Amma)</h4>
-                  <span className="font-display text-[10px] text-gray-450 font-semibold uppercase tracking-wider block mt-0.5">Amma (1940 – 2023)</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent rounded-[24px]" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left z-10">
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-1.5">
+                      Arulthiru Bangaru Siddhar (Amma)
+                    </h4>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest block drop-shadow">
+                      FOUNDER (1940 – 2023)
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Chairperson Spotlight (Sakthi Tmt. V. Lakshmi Bangaru Adigalar) */}
+        {/* Chairperson Spotlight (Sakthi Tmt. V. Lakshmi Bangaru Siddhar) */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -268,20 +271,21 @@ export default function About() {
             >
               <div className="relative group max-w-sm w-full p-2 bg-gray-50 border border-gray-200/80 rounded-[32px] shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-500/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-purple-500/5 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="overflow-hidden rounded-[24px]">
+                <div className="overflow-hidden rounded-[24px] relative">
                   <img 
                     src={lakshmiImg} 
-                    alt="Sakthi Tmt. V. Lakshmi Bangaru Sidhar
-                  " 
+                    alt="Sakthi Tmt. V. Lakshmi Bangaru Siddhar" 
                     className="w-full h-[400px] object-cover rounded-[24px] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 shadow-inner" 
                   />
-                </div>
-                
-                {/* Caption Tag */}
-                <div className="absolute bottom-6 left-6 right-6 bg-slate-950/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-left shadow-lg transform group-hover:translate-y-[-2px] transition-transform duration-500">
-                  <span className="font-display text-[9px] uppercase tracking-widest font-black text-indigo-400 block mb-0.5">President Desk</span>
-                  <h4 className="font-serif text-sm font-bold text-white leading-tight">V. Lakshmi Bangaru Sidhar</h4>
-                  <span className="font-display text-[10px] text-gray-400 font-semibold uppercase tracking-wider block mt-0.5">President</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent rounded-[24px]" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left z-10">
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-1.5">
+                      Sakthi Tmt. V. Lakshmi Bangaru Siddhar
+                    </h4>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest block drop-shadow">
+                      PRESIDENT
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -327,7 +331,7 @@ export default function About() {
           transition={{ duration: 0.85, ease: "easeOut" }}
           className="border-t border-gray-100 pt-16 mb-20 text-left"
         >
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
             
             {/* Left: Correspondent Image Card with Fade/Scale Entrance Animation */}
             <motion.div 
@@ -339,19 +343,21 @@ export default function About() {
             >
               <div className="relative group max-w-sm w-full p-2 bg-gray-50 border border-gray-200/80 rounded-[32px] shadow-lg overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.01] hover:border-indigo-500/30">
                 <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 via-purple-500/5 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                <div className="overflow-hidden rounded-[24px]">
+                <div className="overflow-hidden rounded-[24px] relative">
                   <img 
                     src={senthilImg} 
                     alt="Dr. G. B. Senthil Kumar" 
                     className="w-full h-[400px] object-cover object-top rounded-[24px] grayscale-[15%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700 shadow-inner" 
                   />
-                </div>
-                
-                {/* Holographic caption tag overlay */}
-                <div className="absolute bottom-6 left-6 right-6 bg-slate-950/90 backdrop-blur-md border border-white/10 rounded-2xl p-4 text-left shadow-lg transform group-hover:translate-y-[-2px] transition-transform duration-500">
-                  <span className="font-display text-[9px] uppercase tracking-widest font-black text-pink-400 block mb-0.5">Management Desk</span>
-                  <h4 className="font-serif text-sm font-bold text-white leading-tight">Dr. G. B. Senthil Kumar</h4>
-                  <span className="font-display text-[10px] text-gray-400 font-semibold uppercase tracking-wider block mt-0.5">Correspondent</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent rounded-[24px]" />
+                  <div className="absolute bottom-6 left-6 right-6 text-left z-10">
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-1.5">
+                      Dr. G. B. Senthil Kumar
+                    </h4>
+                    <span className="font-display text-xs sm:text-sm font-black text-amber-400 uppercase tracking-widest block drop-shadow">
+                      CORRESPONDENT
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>

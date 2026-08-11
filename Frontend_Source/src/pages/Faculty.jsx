@@ -177,6 +177,28 @@ export default function Faculty() {
     return map;
   }, []);
 
+  // Build Faculty ORCID Lookup Map from departmentsData
+  const facultyOrcidMap = useMemo(() => {
+    const map = {};
+    const savedCMS = localStorage.getItem('apec_departments_data');
+    let depts = departmentsData;
+    if (savedCMS) {
+      try { depts = JSON.parse(savedCMS); } catch (e) {}
+    }
+    if (depts) {
+      Object.values(depts).forEach(deptObj => {
+        if (deptObj && Array.isArray(deptObj.faculty)) {
+          deptObj.faculty.forEach(f => {
+            if (f.name && f.orcid) {
+              map[f.name.toLowerCase().trim()] = f.orcid;
+            }
+          });
+        }
+      });
+    }
+    return map;
+  }, []);
+
   // Strict & Pure Faculty Filtering & Hierarchy Sorting per Department
   const departmentFacultyMembers = useMemo(() => {
     if (!selectedDept) return [];
@@ -632,6 +654,29 @@ export default function Faculty() {
                           <span className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Official Email Address</span>
                           <a href={`mailto:${selectedFacultyMember.email}`} className="text-xs sm:text-sm font-extrabold text-indigo-650 hover:underline truncate block">
                             {selectedFacultyMember.email}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ORCID iD Identifier */}
+                  {(selectedFacultyMember.orcid || facultyOrcidMap[selectedFacultyMember.name?.toLowerCase().trim()]) && (
+                    <div className="p-3.5 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 overflow-hidden">
+                        <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-xs shrink-0 shadow-sm font-mono">
+                          iD
+                        </div>
+                        <div className="overflow-hidden">
+                          <span className="text-[10px] font-black text-emerald-800 uppercase tracking-wider block">ORCID Identifier</span>
+                          <a
+                            href={`https://orcid.org/${selectedFacultyMember.orcid || facultyOrcidMap[selectedFacultyMember.name?.toLowerCase().trim()]}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs sm:text-sm font-extrabold text-emerald-700 hover:text-emerald-900 hover:underline font-mono truncate block flex items-center gap-1"
+                          >
+                            https://orcid.org/{selectedFacultyMember.orcid || facultyOrcidMap[selectedFacultyMember.name?.toLowerCase().trim()]}
+                            <ExternalLink className="w-3.5 h-3.5 inline ml-1 text-emerald-600" />
                           </a>
                         </div>
                       </div>
