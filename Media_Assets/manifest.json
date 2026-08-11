@@ -1,6 +1,8 @@
 {
   "short_name": "APEC",
   "name": "Adhiparasakthi Engineering College",
+  "id": "apec_college_portal_v1",
+  "description": "Adhiparasakthi Engineering College (Autonomous), Melmaruvathur - Official Web Application Portal",
   "icons": [
     {
       "src": "/apec-logo.png",
@@ -9,15 +11,16 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/apec-logo.png",
+      "src": "/Images/Logos/apec-logo.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "background_color": "#07113A",
   "theme_color": "#07113A",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "any"
 }

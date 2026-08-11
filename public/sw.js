@@ -1,46 +1,60 @@
-const CACHE_NAME = 'apec-portal-v1';
-const STATIC_ASSETS = [
+const CACHE_NAME = 'apec-pwa-v2';
+const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
   '/apec-logo.png'
 ];
 
-// Install Event
+// Install Event - Safe Caching
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
-    }).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then(async (cache) => {
+      for (const asset of ASSETS_TO_CACHE) {
+        try {
+          await cache.add(asset);
+        } catch (e) {
+          console.warn('[SW Cache Warning] Optional asset cache skipped:', asset, e);
+        }
+      }
+    })
   );
+  self.skipWaiting();
 });
 
 // Activate Event
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then((keys) => {
       return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
-            return caches.delete(cache);
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
           }
         })
       );
-    }).then(() => self.clients.claim())
+    })
   );
+  self.clients.claim();
 });
 
-// Fetch Event (Network-First Strategy with Cache Fallback)
+// Fetch Event (Network-First with Cache Fallback)
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-  
+  if (
+    event.request.method !== 'GET' || 
+    event.request.url.startsWith('chrome-extension') ||
+    event.request.url.includes('firestore.googleapis.com')
+  ) {
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((networkResponse) => {
         if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
-          const responseToCache = networkResponse.clone();
+          const cacheCopy = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
+            cache.put(event.request, cacheCopy);
           });
         }
         return networkResponse;
@@ -50,8 +64,8 @@ self.addEventListener('fetch', (event) => {
           if (cachedResponse) {
             return cachedResponse;
           }
-          if (event.request.headers.get('accept')?.includes('text/html')) {
-            return caches.match('/index.html');
+          if (event.request.mode === 'navigate') {
+            return caches.match('/index.html') || caches.match('/');
           }
         });
       })

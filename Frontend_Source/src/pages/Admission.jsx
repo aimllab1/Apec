@@ -227,14 +227,13 @@ export default function Admission() {
             Join Adhiparasakthi Engineering College
           </h1>
           <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto font-medium">
-            Explore our diverse programs, view step-by-step admission procedures, access state & national scholarships, and download our official information brochure.
+            Explore our diverse programs, view step-by-step admission procedures, access state & national scholarships, and use our cutoff calculator.
           </p>
         </motion.div>
 
         {/* TAB BUTTONS (NAVIGATION) */}
         <div className="flex flex-wrap justify-center items-center gap-2 mb-10 border-b border-gray-150 pb-4">
           {[
-            { id: 'brochure', label: 'Information Brochure', icon: FileText },
             { id: 'courses', label: 'Courses Offered', icon: GraduationCap },
             { id: 'procedure', label: 'Admission Procedure', icon: FileCheck },
             { id: 'cutoff', label: 'Cutoff Calculator', icon: Calculator },
@@ -1033,80 +1032,7 @@ export default function Admission() {
               </div>
             )}
 
-            {/* TAB 4: BROCHURE */}
-            {activeTab === 'brochure' && (
-              <div className="space-y-8 text-left">
-                
-                {/* Hero card for brochure */}
-                <motion.div 
-                  {...scrollRevealProps}
-                  className="p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-purple-50/30 border border-indigo-100 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm"
-                >
-                  <div className="space-y-2">
-                    <span className="font-display text-xs uppercase tracking-widest font-black text-indigo-650 block">Official Publication</span>
-                    <h3 className="font-title text-3xl md:text-4xl font-bold text-gray-900">APEC Information Brochure</h3>
-                    <p className="text-base md:text-xl text-gray-500 leading-relaxed font-semibold max-w-xl">
-                      Read about our campus guidelines, academic cells, state-of-the-art laboratory infrastructures, campus events, and placement highlights in the official college brochure.
-                    </p>
-                  </div>
-                  
-                  {/* Actions */}
-                  <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
-                    <a 
-                      href="/Documents/PDFs/bro.pdf" 
-                      download="APEC_Admission_Brochure.pdf" 
-                      className="flex items-center justify-center gap-2 px-5 py-3 bg-[#FF8A00] hover:bg-[#E07B00] text-white rounded-xl text-base uppercase tracking-wider font-extrabold transition-all shadow-md shadow-orange-500/10 text-center"
-                    >
-                      <Download className="w-4 h-4" /> Download PDF (6.8 MB)
-                    </a>
-                    <a 
-                      href="/Documents/PDFs/bro.pdf" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex items-center justify-center gap-2 px-5 py-3 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 rounded-xl text-base uppercase tracking-wider font-extrabold transition-all text-center"
-                    >
-                      <ExternalLink className="w-4 h-4" /> Open In New Tab
-                    </a>
-                  </div>
-                </motion.div>
 
-                {/* Embedded PDF Viewer */}
-                <motion.div 
-                  {...scrollRevealProps}
-                  className="border border-gray-200 rounded-3xl overflow-hidden bg-gray-50 shadow-md"
-                >
-                  <div className="bg-white border-b border-gray-150 px-5 py-3 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <FileText className="w-4 h-4 text-indigo-650" />
-                      <span className="text-base font-black uppercase tracking-wider text-slate-800">Inline Brochure Document Preview</span>
-                    </div>
-                    <span className="font-mono text-xs text-gray-400 font-bold">PDF Format</span>
-                  </div>
-                  
-                  <div className="relative w-full h-[650px] bg-[#5c6370]">
-                    {/* Embedded frame */}
-                    <iframe 
-                      src="/Documents/PDFs/bro.pdf#toolbar=0" 
-                      title="APEC Brochure PDF"
-                      className="w-full h-full border-none"
-                      style={{ pointerEvents: 'auto' }}
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Compatibility notice */}
-                <motion.div 
-                  {...scrollRevealProps}
-                  className="flex items-start gap-2.5 p-4 bg-gray-50 rounded-2xl border border-gray-200 text-base text-gray-400 font-medium leading-normal"
-                >
-                  <Info className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
-                  <p>
-                    <strong>PDF Loading Issue?</strong> Some mobile web browsers may disable inline PDF previews. If the document does not display above, please use the <strong>Download PDF</strong> or <strong>Open in New Tab</strong> options to view it directly.
-                  </p>
-                </motion.div>
-
-              </div>
-            )}
 
             {/* TAB 5: CUTOFF CALCULATOR */}
             {activeTab === 'cutoff' && (

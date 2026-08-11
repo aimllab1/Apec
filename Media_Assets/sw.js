@@ -1,17 +1,22 @@
-const CACHE_NAME = 'apec-pwa-v1';
+const CACHE_NAME = 'apec-pwa-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/favicon.svg',
-  '/apec-logo.png',
-  '/manifest.json'
+  '/manifest.json',
+  '/apec-logo.png'
 ];
 
-// Install Event
+// Install Event - Safe Caching
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      for (const asset of ASSETS_TO_CACHE) {
+        try {
+          await cache.add(asset);
+        } catch (e) {
+          console.warn('[SW Cache Warning] Optional asset cache skipped:', asset, e);
+        }
+      }
     })
   );
   self.skipWaiting();
@@ -35,12 +40,10 @@ self.addEventListener('activate', (event) => {
 
 // Fetch Event (Network-First with Cache Fallback)
 self.addEventListener('fetch', (event) => {
-  // Only cache GET requests and skip chrome-extension/firebase requests
   if (
     event.request.method !== 'GET' || 
-    event.request.url.startsWith('chrome-extension') || 
-    event.request.url.includes('firestore.googleapis.com') ||
-    event.request.url.includes('identitytoolkit.googleapis.com')
+    event.request.url.startsWith('chrome-extension') ||
+    event.request.url.includes('firestore.googleapis.com')
   ) {
     return;
   }
@@ -48,8 +51,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request)
       .then((networkResponse) => {
-        // Cache successful network responses
-        if (networkResponse.status === 200) {
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
           const cacheCopy = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, cacheCopy);
@@ -58,14 +60,12 @@ self.addEventListener('fetch', (event) => {
         return networkResponse;
       })
       .catch(() => {
-        // Fallback to cache if network is offline
         return caches.match(event.request).then((cachedResponse) => {
           if (cachedResponse) {
             return cachedResponse;
           }
-          // Default offline fallback if index.html is requested
           if (event.request.mode === 'navigate') {
-            return caches.match('/');
+            return caches.match('/index.html') || caches.match('/');
           }
         });
       })
