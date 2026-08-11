@@ -373,7 +373,7 @@ export default function CutoffCalculator({ isEmbedded = false }) {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 25, opacity: 0 }}
               transition={{ type: 'spring', damping: 28, stiffness: 200 }}
-              className="relative w-full max-w-lg bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto p-6 md:p-8 flex flex-col"
+              className="relative w-full max-w-xl md:max-w-2xl bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto p-6 md:p-10 flex flex-col"
             >
               {/* Institution Header inside the form */}
               <div className="flex flex-col items-center text-center mb-6">

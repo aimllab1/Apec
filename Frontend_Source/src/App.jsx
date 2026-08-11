@@ -6,7 +6,8 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, Phone, Mail, MapPin, 
-  Download, ChevronDown, Send, RotateCw, ChevronRight
+  Download, ChevronDown, ChevronUp, Send, RotateCw, ChevronRight, Smartphone, Laptop,
+  ExternalLink
 } from 'lucide-react';
 import Preloader from './components/Preloader';
 
@@ -47,6 +48,7 @@ import AlumniCell from './pages/AlumniCell';
 import Nirf from './pages/Nirf';
 import InstrumentationCell from './pages/InstrumentationCell';
 import Committees from './pages/Committees';
+import Coe from './pages/Coe';
 import { getLocalResponse } from './ai/engine/localAIClient.js';
 import { getLoadedTourDataAsync } from './data/tourData';
 
@@ -219,6 +221,252 @@ function AppContent({ isLoading, setIsLoading }) {
     helpline1: '7418064336',
     helpline2: '7418065336',
   });
+
+  const [activeAccordion, setActiveAccordion] = useState({});
+  const toggleAccordion = (sectionKey) => {
+    setActiveAccordion(prev => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey]
+    }));
+  };
+
+  const aboutLinks = [
+    { label: 'About APEC', to: '/about' },
+    { label: 'Vision & Mission', to: '/about' },
+    { label: 'Management & Founders', to: '/about/founders' },
+    { label: 'Institutional Profile', to: '/about/profile' },
+    { label: 'Principal\'s Desk', to: '/about/principal' },
+    { label: 'UGC Autonomous Status', to: '/ugc-self-disclosure' },
+    { label: 'Mandatory Disclosure', to: '/mandatory-disclosure' },
+    { label: 'Contact Directory', to: '/contact' }
+  ];
+
+  const academicsLinks = [
+    { label: 'Departments List', to: '/departments' },
+    { label: 'Undergraduate (B.E.)', to: '/departments' },
+    { label: 'Postgraduate (M.E.)', to: '/departments' },
+    { label: 'Postgraduate (MCA / MBA)', to: '/departments' },
+    { label: 'Research & Development', to: '/r-d-cell' },
+    { label: 'Academic Facilities', to: '/facilities' },
+    { label: 'Lab Infrastructure', to: '/facilities/labs' },
+    { label: 'Curriculum & Regulations', to: '/coe' }
+  ];
+
+  const admissionsLinks = [
+    { label: 'Admissions 2026–2027', to: '/admission' },
+    { label: 'Admission Enquiry', to: '/admission' },
+    { label: 'Courses Offered', to: '/admission' },
+    { label: 'Approved Intake', to: '/admission' },
+    { label: 'Cutoff Calculator', to: '/cutoff-calculator' },
+    { label: 'Admission Process', to: '/admission' },
+    { label: 'Fee Information', to: '/fee-payment' },
+    { label: 'Admissions Desk Contact', to: '/contact' }
+  ];
+
+  const studentLinks = [
+    { label: 'Campus Facilities', to: '/facilities' },
+    { label: 'Central Library', to: '/facilities/library' },
+    { label: 'Residential Hostels', to: '/facilities/hostels' },
+    { label: 'Sports & Gymnasium', to: '/facilities/sports' },
+    { label: 'Transportation & Bus', to: '/facilities/transport' },
+    { label: 'Green Campus Profile', to: '/facilities/campus' },
+    { label: 'Committees & Cells', to: '/committees' },
+    { label: 'Alumni Network Cell', to: '/alumni' }
+  ];
+
+  const placementLinks = [
+    { label: 'Training & Placement', to: '/placements' },
+    { label: 'Placement Records', to: '/placements' },
+    { label: 'Our Recruiters', to: '/placements' },
+    { label: 'Placement Statistics', to: '/placements' },
+    { label: 'Career Guidance Cell', to: '/committees/career-guidance' },
+    { label: 'Industry Interaction (IIIC)', to: '/committees/iiic' },
+    { label: 'Training Programmes', to: '/placements' },
+    { label: 'Placement Officer Contact', to: '/contact' }
+  ];
+
+  const committeeLinks = [
+    { label: 'IQAC Portal', to: '/iqac' },
+    { label: 'Anti-Ragging Committee', to: '/committees/anti-ragging' },
+    { label: 'Women Empowerment Cell', to: '/committees/women-empowerment' },
+    { label: 'SC/ST Welfare Committee', to: '/committees/sc-st-committee' },
+    { label: 'Electoral Literacy Club', to: '/committees/electoral-literacy' },
+    { label: 'Entrepreneurship Cell', to: '/committees/entrepreneurship' },
+    { label: 'Career Guidance Cell', to: '/committees/career-guidance' },
+    { label: 'Industry Interaction (IIIC)', to: '/committees/iiic' }
+  ];
+
+  const accreditationLinks = [
+    { label: 'Anna University', to: 'https://www.annauniv.edu/', isExternal: true },
+    { label: 'UGC Autonomous Status', to: '/ugc-self-disclosure' },
+    { label: 'NAAC Disclosures', to: '/disclosures' },
+    { label: 'NIRF Data Portal', to: '/nirf' },
+    { label: 'IQAC Cell Details', to: '/iqac' },
+    { label: 'Right to Information (RTI)', to: '/rti' },
+    { label: 'Mandatory Disclosure', to: '/mandatory-disclosure' },
+    { label: 'Annual Audit Accounts', to: '/annual-accounts' }
+  ];
+
+  const quickLinks = [
+    { label: '360° VR Campus Tour', onClick: () => setIsPanoOpen(true) },
+    { label: 'Fee Payment Portal', to: '/fee-payment' },
+    { label: 'Apply / Admission Inquiry', to: '/admission' },
+    { label: 'Department Portals', to: '/departments' },
+    { label: 'Placement Statistics', to: '/placements' },
+    { label: 'Campus Facilities', to: '/facilities' },
+    { label: 'Committees & Cells', to: '/committees' },
+    { label: 'Portal Admin Login', to: '/login' }
+  ];
+
+  const renderCategory = (key, title, links) => {
+    const isOpen = !!activeAccordion[key];
+    return (
+      <div className="flex flex-col text-left select-none">
+        {/* Mobile Accordion Header Button */}
+        <button 
+          type="button"
+          onClick={() => toggleAccordion(key)}
+          className="md:hidden w-full flex items-center justify-between text-left py-3 font-title text-xs tracking-wider font-bold text-amber-400 uppercase border-b border-slate-800/60 cursor-pointer"
+        >
+          <span>{title}</span>
+          <span className="text-amber-400 shrink-0">
+            {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+          </span>
+        </button>
+        
+        {/* Desktop Header (Static) */}
+        <h4 className="hidden md:block font-title text-xs tracking-[0.12em] font-black text-amber-400 uppercase mb-4 border-b border-amber-500/10 pb-2">
+          {title}
+        </h4>
+
+        {/* Desktop Links List */}
+        <div className="hidden md:block">
+          <ul className="space-y-2.5">
+            {links.map((link, idx) => (
+              <li key={idx} className="flex items-center">
+                {link.isExternal ? (
+                  <a 
+                    href={link.to} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-[11px] text-slate-350 hover:text-white transition-colors duration-200 font-sans font-semibold flex items-center gap-1 group"
+                  >
+                    {link.label}
+                    <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover:opacity-60 transition-opacity" />
+                  </a>
+                ) : link.onClick ? (
+                  <button 
+                    type="button"
+                    onClick={link.onClick}
+                    className="text-[11px] text-slate-300 hover:text-white transition-colors duration-200 font-sans font-semibold cursor-pointer text-left focus:outline-none"
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link 
+                    to={link.to} 
+                    className="text-[11px] text-slate-300 hover:text-white transition-colors duration-200 font-sans font-semibold"
+                  >
+                    {link.label}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Mobile Animated Links List using Framer Motion */}
+        <div className="md:hidden w-full">
+          <AnimatePresence initial={false}>
+            {isOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <ul className="space-y-2.5 pt-2 pb-4">
+                  {links.map((link, idx) => (
+                    <li key={idx} className="flex items-center">
+                      {link.isExternal ? (
+                        <a 
+                          href={link.to} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-[11px] text-slate-300 hover:text-white transition-colors duration-200 font-sans font-semibold flex items-center gap-1"
+                        >
+                          {link.label}
+                          <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                        </a>
+                      ) : link.onClick ? (
+                        <button 
+                          type="button"
+                          onClick={link.onClick}
+                          className="text-[11px] text-slate-300 hover:text-white transition-colors duration-200 font-sans font-semibold cursor-pointer text-left focus:outline-none"
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <Link 
+                          to={link.to} 
+                          className="text-[11px] text-slate-300 hover:text-white transition-colors duration-200 font-sans font-semibold"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  };
+
+  // PWA Deferred Prompt State for Desktop & Mobile Installation
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
+  const [showPwaModal, setShowPwaModal] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      setIsAppInstalled(true);
+    }
+
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    const handleAppInstalled = () => {
+      setIsAppInstalled(true);
+      setDeferredPrompt(null);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setIsAppInstalled(true);
+      }
+      setDeferredPrompt(null);
+    } else {
+      setShowPwaModal(true);
+    }
+  };
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -625,6 +873,12 @@ function AppContent({ isLoading, setIsLoading }) {
                       </button>
 
                       <Link 
+                        to="/coe" 
+                        className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-amber-600 hover:text-amber-700 transition-all bg-amber-50 hover:bg-amber-100/80 border border-amber-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
+                      >
+                        <span>COE</span>
+                      </Link>
+                      <Link 
                         to="/fee-payment" 
                         className="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider text-emerald-600 hover:text-emerald-700 transition-all bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/40 px-2.5 py-1.5 rounded-xl cursor-pointer shadow-sm hover:shadow-md hover:scale-[1.02]"
                       >
@@ -826,11 +1080,11 @@ function AppContent({ isLoading, setIsLoading }) {
                         )}
                       </button>
                       <div className="absolute top-full left-0 block bg-white border border-gray-150 shadow-xl rounded-xl py-3 w-56 text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu">
+                        <Link to="/admission?tab=brochure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Information Brochure</Link>
                         <Link to="/admission?tab=courses" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Courses Offered</Link>
                         <Link to="/admission?tab=procedure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Admission Procedure</Link>
-                        <Link to="/admission?tab=scholarships" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Scholarships</Link>
-                        <Link to="/admission?tab=brochure" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Information Brochure</Link>
                         <Link to="/admission?tab=cutoff" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Cutoff Calculator</Link>
+                        <Link to="/admission?tab=scholarships" className="block px-5 py-2 text-xs font-extrabold text-gray-700 hover:bg-[#FFE7CC] hover:text-[#FF8A00] nav-dropdown-link transition-colors">Scholarships</Link>
                       </div>
                     </div>
 
@@ -1115,6 +1369,7 @@ function AppContent({ isLoading, setIsLoading }) {
                       )}
                     </Link>
 
+
                     {/* Contact Link */}
                     <Link 
                       to="/contact" 
@@ -1253,11 +1508,11 @@ function AppContent({ isLoading, setIsLoading }) {
                         </button>
                         {mobileAdmissionOpen && (
                           <div className="pl-3 mt-2 space-y-2 flex flex-col border-l border-[#FFD6A5]/60">
+                            <Link to="/admission?tab=brochure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Information Brochure</Link>
                             <Link to="/admission?tab=courses" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Courses Offered</Link>
                             <Link to="/admission?tab=procedure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Admission Procedure</Link>
-                            <Link to="/admission?tab=scholarships" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Scholarships</Link>
-                            <Link to="/admission?tab=brochure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Information Brochure</Link>
                             <Link to="/admission?tab=cutoff" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Cutoff Calculator</Link>
+                            <Link to="/admission?tab=scholarships" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Scholarships</Link>
                           </div>
                         )}
                       </div>
@@ -1380,6 +1635,14 @@ function AppContent({ isLoading, setIsLoading }) {
                       </button>
                       
                       <Link 
+                        to="/coe"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="text-left text-sm font-bold text-amber-600 bg-amber-50/50 border border-amber-100 px-4 py-2.5 rounded-xl flex items-center justify-between hover:bg-amber-50 transition-colors"
+                      >
+                        <span>COE Portal</span>
+                        <span className="text-[10px] uppercase font-black tracking-wider text-amber-500 bg-amber-100/50 px-2 py-0.5 rounded-md">Examinations</span>
+                      </Link>
+                      <Link 
                         to="/fee-payment"
                         onClick={() => setMobileMenuOpen(false)}
                         className="text-left text-sm font-bold text-emerald-600 bg-emerald-50/50 border border-emerald-100 px-4 py-2.5 rounded-xl flex items-center justify-between hover:bg-emerald-50 transition-colors"
@@ -1477,6 +1740,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/facilities" element={<PageTransition><Facilities /></PageTransition>} />
                   <Route path="/placements" element={<PageTransition><Placements /></PageTransition>} />
                   <Route path="/departments" element={<PageTransition><Departments /></PageTransition>} />
+                  <Route path="/coe" element={<PageTransition><Coe /></PageTransition>} />
                   <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
                   <Route path="/feedback" element={<PageTransition><Contact /></PageTransition>} />
                   <Route path="/fee-payment" element={<PageTransition><FeePayment /></PageTransition>} />
@@ -1856,113 +2120,192 @@ function AppContent({ isLoading, setIsLoading }) {
             </div>
 
             {/* Clean, Sleek, Compact Footer */}
-            <footer className="footer bg-gray-50 border-t border-gray-100 relative select-none">
-              <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            {/* Redesigned Premium Footer */}
+            <footer className="bg-gradient-to-br from-[#050c2e] via-[#07113a] to-[#030922] text-slate-100 border-t border-amber-500/15 relative overflow-hidden select-none py-12 px-6 md:py-16 md:px-12 z-10">
+              
+              {/* Crest Watermark */}
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-[0.015] bg-no-repeat bg-center z-0" 
+                style={{ 
+                  backgroundImage: "url('/Images/Logos/apec-logo.png')", 
+                  backgroundSize: "400px" 
+                }} 
+              />
+
+              {/* Top Gold Thin Border Light */}
+              <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-amber-500/15 to-transparent pointer-events-none z-10" />
+
+              <div className="max-w-7xl mx-auto relative z-10">
                 
-                {/* Left Section (College Branding) */}
-                <div className="footer-brand select-none">
-                  <img 
-                    src="/Images/Logos/apec-logo.png" 
-                    alt="Adhiparasakthi Engineering College Logo" 
-                    className="footer-logo mix-blend-multiply shrink-0" 
-                  />
-                  <div className="footer-brand-text">
-                    <h3 className="font-title text-xs md:text-sm font-black tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-950 bg-clip-text text-transparent block leading-none drop-shadow-sm uppercase">
-                      {branding.collegeName}
-                    </h3>
-                    <span className="font-mono text-[9px] uppercase font-black text-indigo-650 tracking-wider block mt-1">
-                      {branding.tagline}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Center Section: Copyright & Socials */}
-                <div className="flex flex-col items-center gap-4 text-center w-full md:w-auto">
-                  <div className="footer-copyright font-sans text-xs md:text-sm tracking-wider uppercase leading-relaxed font-semibold">
-                    <p>© 2026 ADHIPARASAKTHI ENGINEERING COLLEGE</p>
-                    <p>ALL RIGHTS RESERVED.</p>
-                  </div>
-                  <div className="flex items-center justify-center gap-3">
-                    <a 
-                      href="https://www.instagram.com/apec1984/?hl=en" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="social-icon instagram flex items-center justify-center"
-                      aria-label="Instagram"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                      </svg>
-                    </a>
-                    <a 
-                      href="https://www.facebook.com/adhiparasakthiengineeringcollege/" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="social-icon facebook flex items-center justify-center"
-                      aria-label="Facebook"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                      </svg>
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/school/adhiparasakthi-engineering-college/?originalSubdomain=in" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="social-icon linkedin flex items-center justify-center"
-                      aria-label="LinkedIn"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                        <rect x="2" y="9" width="4" height="12"></rect>
-                        <circle cx="4" cy="4" r="2"></circle>
-                      </svg>
-                    </a>
-                    <a 
-                      href="https://www.youtube.com/channel/UCHONHHxcE0lM8G60CEJT09Q" 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="social-icon youtube flex items-center justify-center"
-                      aria-label="YouTube"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right Section Contact */}
-                <div className="footer-contact w-full md:w-auto">
-                  <div className="footer-contact-item flex items-center gap-2 text-sm font-bold text-[#07113A]">
-                    <span className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
-                      <Phone className="w-3.5 h-3.5 text-indigo-650" /> Helpline:
-                    </span>
-                    <a 
-                      href={`tel:+91${branding.helpline1}`} 
-                      className="hover:text-indigo-650 transition-colors"
-                    >
-                      {branding.helpline1}
-                    </a>
-                  </div>
+                {/* ── SECTION 1: COLLEGE BRANDING & SOCIALS ── */}
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-8 border-b border-slate-800 pb-10 mb-10 select-none">
                   
-                  <div className="footer-contact-item flex items-center gap-2 text-sm font-bold text-[#07113A]">
-                    <span className="flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-wider text-gray-400">
-                      <Mail className="w-3.5 h-3.5 text-indigo-650" /> Email:
-                    </span>
-                    <a 
-                      href="mailto:principal@apec.edu.in" 
-                      className="email-text hover:text-indigo-650 transition-colors"
-                    >
-                      principal@apec.edu.in
-                    </a>
+                  {/* Brand Branding Panel */}
+                  <div className="flex items-start gap-4 max-w-xl">
+                    <img 
+                      src="/Images/Logos/apec-logo.png" 
+                      alt="APEC Logo" 
+                      className="w-14 h-14 md:w-16 md:h-16 object-contain bg-white/10 p-1.5 rounded-xl border border-white/20 shadow-md shrink-0 filter brightness-100" 
+                    />
+                    <div className="flex flex-col text-left">
+                      <h3 className="font-title text-sm md:text-base lg:text-lg font-black tracking-wider text-white uppercase leading-tight drop-shadow-md">
+                        {branding.collegeName}
+                      </h3>
+                      <span className="font-mono text-[9px] md:text-[10px] uppercase font-black text-amber-400 tracking-[0.16em] mt-1.5 block leading-none">
+                        {branding.tagline} • AFFILIATED TO ANNA UNIVERSITY
+                      </span>
+                      <p className="text-[11px] md:text-xs text-slate-400 font-medium leading-relaxed mt-3.5 max-w-md">
+                        Adhiparasakthi Engineering College (APEC) was established in 1984 as a premier self-financing institution, dedicated to delivering quality technical education, promoting innovation, and building professional excellence.
+                      </p>
+                    </div>
                   </div>
+
+                  {/* Social Channels Panel */}
+                  <div className="flex flex-col items-start lg:items-end gap-3 shrink-0">
+                    <span className="font-display text-[10px] font-black uppercase text-amber-400/90 tracking-widest leading-none">
+                      Connect With Us
+                    </span>
+                    <div className="flex items-center gap-3 mt-1">
+                      <a 
+                        href="https://www.instagram.com/apec1984/?hl=en" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-9 h-9 rounded-full bg-slate-900/60 border border-slate-800 hover:border-amber-400/50 text-slate-400 hover:text-amber-400 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm"
+                        aria-label="Instagram"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                      </a>
+                      <a 
+                        href="https://www.facebook.com/adhiparasakthiengineeringcollege/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-9 h-9 rounded-full bg-slate-900/60 border border-slate-800 hover:border-amber-400/50 text-slate-400 hover:text-amber-400 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm"
+                        aria-label="Facebook"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                      </a>
+                      <a 
+                        href="https://www.linkedin.com/school/adhiparasakthi-engineering-college/?originalSubdomain=in" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-9 h-9 rounded-full bg-slate-900/60 border border-slate-800 hover:border-amber-400/50 text-slate-400 hover:text-amber-400 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm"
+                        aria-label="LinkedIn"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                          <rect x="2" y="9" width="4" height="12"></rect>
+                          <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                      </a>
+                      <a 
+                        href="https://www.youtube.com/channel/UCHONHHxcE0lM8G60CEJT09Q" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="w-9 h-9 rounded-full bg-slate-900/60 border border-slate-800 hover:border-amber-400/50 text-slate-400 hover:text-amber-400 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm"
+                        aria-label="YouTube"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                          <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* ── MIDDLE BODY GRID (3 Columns) ── */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-8 md:gap-x-12 mb-12">
+                  
+                  {/* Column 1 */}
+                  <div className="space-y-10">
+                    {renderCategory('about', 'About & Institution', aboutLinks)}
+                    {renderCategory('studentCampus', 'Student & Campus', studentLinks)}
+                    {renderCategory('accreditationLinks', 'Accreditation & Important Links', accreditationLinks)}
+                  </div>
+
+                  {/* Column 2 */}
+                  <div className="space-y-10">
+                    {renderCategory('academics', 'Academics', academicsLinks)}
+                    {renderCategory('placementCareer', 'Placement & Career', placementLinks)}
+                    {renderCategory('quickAccess', 'Quick Access', quickLinks)}
+                  </div>
+
+                  {/* Column 3 (Admissions, Committees, and Contact Info Card) */}
+                  <div className="space-y-10">
+                    {renderCategory('admissions', 'Admissions', admissionsLinks)}
+                    {renderCategory('committeesCells', 'Committees & Cells', committeeLinks)}
+                    
+                    {/* Dedicated Contact Block */}
+                    <div className="flex flex-col text-left select-none bg-slate-900/40 p-5 rounded-2xl border border-slate-800/80 shadow-md">
+                      <h4 className="font-title text-xs tracking-[0.12em] font-black text-amber-400 uppercase mb-4 border-b border-amber-500/10 pb-2">
+                        Contact Info
+                      </h4>
+                      <ul className="space-y-4">
+                        <li className="flex items-start gap-3">
+                          <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                          <div className="flex flex-col text-slate-300 text-xs leading-relaxed font-semibold">
+                            <span>Adhiparasakthi Engineering College</span>
+                            <span>Melmaruvathur, Kanchipuram District,</span>
+                            <span>Tamil Nadu - 603319, India</span>
+                          </div>
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <Phone className="w-4 h-4 text-amber-400 shrink-0" />
+                          <div className="flex flex-col text-slate-300 text-xs font-bold font-mono">
+                            <a href={`tel:+91${branding.helpline1}`} className="hover:text-white transition-colors">
+                              +91 {branding.helpline1}
+                            </a>
+                            <a href={`tel:+91${branding.helpline2}`} className="hover:text-white transition-colors">
+                              +91 {branding.helpline2}
+                            </a>
+                          </div>
+                        </li>
+                        <li className="flex items-center gap-3">
+                          <Mail className="w-4 h-4 text-amber-400 shrink-0" />
+                          <a 
+                            href="mailto:principal@apec.edu.in" 
+                            className="text-xs text-slate-300 hover:text-white transition-colors font-bold font-mono"
+                          >
+                            principal@apec.edu.in
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* ── BOTTOM SEPARATED COPYRIGHT BAR ── */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-800/60 pt-6 select-none">
+                  
+                  {/* Copyright Text */}
+                  <span className="font-sans text-[10px] md:text-xs tracking-wider text-slate-400 font-bold uppercase text-center md:text-left">
+                    © {new Date().getFullYear()} ADHIPARASAKTHI ENGINEERING COLLEGE. ALL RIGHTS RESERVED.
+                  </span>
+
+                  {/* Small links for legal (Privacy, Terms etc) */}
+                  <div className="flex items-center gap-4 text-[10px] md:text-xs text-slate-455 font-bold uppercase">
+                    <Link to="/mandatory-disclosure" className="hover:text-white transition-colors">
+                      Mandatory Disclosure
+                    </Link>
+                    <span className="text-slate-650 select-none">|</span>
+                    <Link to="/rti" className="hover:text-white transition-colors">
+                      RTI Portal
+                    </Link>
+                  </div>
+
                 </div>
 
               </div>
+
             </footer>
 
           </motion.div>
@@ -1977,6 +2320,67 @@ function AppContent({ isLoading, setIsLoading }) {
             onClose={() => setIsPanoOpen(false)} 
             initialScene="mainGate" 
           />
+        )}
+      </AnimatePresence>
+
+      {/* PWA App Installation Guide Modal */}
+      <AnimatePresence>
+        {showPwaModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative text-left space-y-5"
+            >
+              <button
+                onClick={() => setShowPwaModal(false)}
+                className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 bg-slate-100 rounded-full cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-900 text-white p-2 flex items-center justify-center shrink-0 shadow-md">
+                  <img src="/Images/Logos/apec-logo.png" alt="APEC Logo" className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-slate-900 font-title">Install APEC Web Application</h3>
+                  <span className="text-[10px] font-black uppercase text-indigo-650 tracking-wider">Desktop & Mobile Standalone App</span>
+                </div>
+              </div>
+
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                Install Adhiparasakthi Engineering College as a standalone app on your Desktop PC, Laptop, or Mobile Home Screen for instant 1-click launch and offline resiliency.
+              </p>
+
+              <div className="space-y-3 pt-2 border-t border-slate-150 text-xs font-semibold text-slate-700">
+                <div className="flex items-start gap-2.5">
+                  <Laptop className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold block text-slate-900">Desktop (Chrome / Edge / Brave):</span>
+                    Click <span className="font-extrabold text-indigo-700">Install APEC</span> or click the install icon <Download className="w-3 h-3 inline" /> in your address bar.
+                  </div>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <Smartphone className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold block text-slate-900">Mobile (Android & iOS):</span>
+                    Tap browser <span className="font-extrabold text-emerald-700">Share / Menu</span> and select <span className="font-extrabold text-emerald-700">"Add to Home Screen"</span>.
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  onClick={() => setShowPwaModal(false)}
+                  className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl cursor-pointer transition-all shadow-md"
+                >
+                  Understood!
+                </button>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>

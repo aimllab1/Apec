@@ -818,7 +818,7 @@ export default function Home() {
 
 
       {/* Leadership Section */}
-      <section className="pt-8 md:pt-16 pb-12 md:pb-24 px-4 sm:px-6 bg-transparent relative z-10">
+      <section className="pt-12 md:pt-16 pb-12 md:pb-16 px-4 sm:px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Management & Founders</h2>
@@ -850,15 +850,15 @@ export default function Home() {
       </section>
 
       {/* Bento Department Visualizer replaced with centered sliding showcase */}
-      <section className="dept-showcase-section py-24 px-6 relative z-10">
+      <section className="dept-showcase-section pt-12 md:pt-16 pb-12 md:pb-16 px-4 sm:px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           
-          <div className="text-center mb-16 flex flex-col items-center">
+          <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Department Showcase</h2>
             <p className="text-sm md:text-base text-slate-200/90 font-semibold font-sans max-w-2xl text-center">Explore our individual department portals and their focused curricula.</p>
           </div>
 
-          <div className="relative max-w-5xl mx-auto px-4 md:px-12 flex flex-col items-center">
+          <div className="relative w-full max-w-[1120px] mx-auto px-0 sm:px-6 md:px-12 flex flex-col items-center">
             {/* Carousel card container */}
             <div className="w-full min-h-[420px] md:min-h-[380px] relative overflow-hidden flex items-center justify-center py-4">
               <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -956,9 +956,9 @@ export default function Home() {
       </section>
 
       {/* WHY JOIN APEC FEATURE GRID */}
-      <section className="why-join-gallery py-24 px-6 bg-transparent relative z-10">
+      <section className="why-join-gallery pt-12 md:pt-16 pb-12 md:pb-16 px-4 sm:px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 flex flex-col items-center">
+          <div className="text-center mb-8 md:mb-16 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Why Join Adhiparasakthi Engineering College?</h2>
           </div>
 
@@ -1121,256 +1121,281 @@ export default function Home() {
             }
           }}
           animate={showAdModal ? "visible" : "hidden"}
-          className="relative w-full md:max-w-2xl bg-white border border-gray-200 rounded-t-[2.5rem] md:rounded-[28px] shadow-2xl z-10 mx-auto max-h-[92vh] md:max-h-[90vh] overflow-y-auto flex flex-col md:flex-row border-t md:border"
+          className="relative w-full max-w-xl md:max-w-4xl lg:max-w-6xl rounded-t-[2.5rem] md:rounded-[36px] overflow-hidden shadow-2xl border border-white/20 bg-slate-950 flex flex-col md:flex-row min-h-[560px] max-h-[92vh] md:max-h-[90vh] overflow-y-auto z-10 mx-auto"
         >
+          {/* ── FULL COVER BACKGROUND IMAGE ── */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out transform scale-105"
+            style={{ 
+              backgroundImage: `url(${activeAds.length > 0 && activeAds[currentAdIdx]?.imgUrl ? activeAds[currentAdIdx].imgUrl : adFacilityImages[adFacilityIdx].url})`
+            }}
+          />
+          
+          {/* Aesthetic Dark Gradient & Glass Vignette Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-950/50 backdrop-blur-[1px]" />
+
           {/* Close Button */}
           <button
             onClick={handleCloseAdModal}
-            className="absolute top-4 right-4 md:top-5 md:right-5 z-25 p-1.5 bg-white/80 hover:bg-rose-100 text-gray-500 hover:text-rose-600 rounded-full shadow-sm border border-gray-200 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
+            className="absolute top-4 right-4 md:top-5 md:right-5 z-30 p-2 bg-slate-900/60 hover:bg-rose-600 text-white backdrop-blur-md rounded-full shadow-lg border border-white/20 transition-all duration-300 hover:rotate-90 hover:scale-110 cursor-pointer flex items-center justify-center"
             aria-label="Close"
           >
-            <X className="w-4 h-4" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
 
-          {/* ── LEFT PANEL: College Facility Slideshow (desktop only) ── */}
-          <div className="hidden md:flex flex-col w-[calc(42%+10px)] shrink-0 relative overflow-hidden bg-slate-900 rounded-l-[28px]">
-            {/* Background Image Slideshow */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
-              style={{ 
-                backgroundImage: `url(${adFacilityImages[adFacilityIdx].url})`
-              }}
-            />
-            
-            {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/30 flex flex-col items-center justify-center p-6 text-center select-none">
-              {/* College Logo */}
-              <div className="w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-xl mb-3.5 mx-auto">
-                <img
-                  src="/Images/Logos/apec-logo.png"
-                  alt="Logo"
-                  className="w-12 h-12 object-contain filter brightness-100 contrast-100 rounded-full mx-auto"
-                />
+          {/* ── SIDE CORNER: College Logo & Name & Branding ── */}
+          <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 md:p-10 md:w-5/12 lg:w-1/2 text-left select-none">
+            {/* Top / Corner Branding */}
+            <div>
+              {/* College Logo Badge */}
+              <div className="flex items-center gap-3.5 mb-4">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-xl shrink-0">
+                  <img
+                    src="/Images/Logos/apec-logo.png"
+                    alt="APEC Logo"
+                    className="w-11 h-11 sm:w-12 sm:h-12 object-contain filter brightness-105 contrast-105 rounded-full"
+                  />
+                </div>
+                <div>
+                  <span className="inline-block text-[9px] sm:text-[10px] font-extrabold tracking-widest text-amber-300 uppercase px-2.5 py-0.5 bg-amber-400/15 backdrop-blur-md rounded-full border border-amber-400/30 shadow-sm">
+                    Autonomous Institution
+                  </span>
+                  <p className="text-[10px] sm:text-[11px] text-slate-200 font-bold mt-1 drop-shadow">
+                    Affiliated to Anna University • AICTE Approved
+                  </p>
+                </div>
               </div>
 
-              {/* College Name under Logo */}
-              <h3 className="font-serif text-lg sm:text-xl font-black text-white leading-tight tracking-tight drop-shadow-lg max-w-[220px]">
-                Adhiparasakthi Engineering College
+              {/* College Title / Ad Title */}
+              <h3 className="font-title text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight drop-shadow-xl mt-2">
+                {activeAds.length > 0 && activeAds[currentAdIdx]?.title 
+                  ? activeAds[currentAdIdx].title 
+                  : "Adhiparasakthi Engineering College"}
               </h3>
 
-              {/* Subtitle / Tagline */}
-              <span className="inline-block text-[9px] sm:text-[10px] font-bold tracking-widest text-indigo-100 uppercase mt-2.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full border border-white/30 shadow-sm">
-                Autonomous Institution
-              </span>
-              <p className="text-[10px] text-slate-100 font-semibold mt-1.5 drop-shadow">
-                Affiliated to Anna University
+              <p className="text-xs sm:text-sm text-slate-200 font-semibold mt-2.5 max-w-md leading-relaxed drop-shadow-md">
+                {activeAds.length > 0 && activeAds[currentAdIdx]?.details 
+                  ? activeAds[currentAdIdx].details 
+                  : "Empowering next-generation innovators with world-class engineering education, high-tech research labs & assured placements."}
               </p>
+            </div>
+
+            {/* Bottom Highlights Badges */}
+            <div className="hidden md:flex flex-wrap items-center gap-2 mt-8 pt-6 border-t border-white/15">
+              <span className="text-[10px] font-extrabold uppercase px-3 py-1 bg-white/15 backdrop-blur-md rounded-full text-white border border-white/20">
+                TNEA Code: 1401
+              </span>
+              <span className="text-[10px] font-extrabold uppercase px-3 py-1 bg-emerald-500/25 backdrop-blur-md rounded-full text-emerald-200 border border-emerald-400/30">
+                NAAC 'A' Grade
+              </span>
+              <span className="text-[10px] font-extrabold uppercase px-3 py-1 bg-indigo-500/25 backdrop-blur-md rounded-full text-indigo-200 border border-indigo-400/30">
+                NBA Accredited
+              </span>
             </div>
           </div>
 
-          {/* ── RIGHT PANEL: Admissions Inquiry Form ── */}
-          <div className="flex flex-col w-full md:w-[calc(58%-10px)] p-5 md:p-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-center md:justify-start mb-5">
-              <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
-                {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
-              </span>
-            </div>
+          {/* ── OVERLAY: Admissions Inquiry Form Above Cover Image ── */}
+          <div className="relative z-10 w-full md:w-7/12 lg:w-1/2 p-4 sm:p-6 md:p-8 flex items-center justify-center">
+            <div className="w-full max-w-md bg-white/95 backdrop-blur-2xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl border border-white/60">
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-sans inline-block text-[9px] font-extrabold tracking-wider text-indigo-700 bg-indigo-50 border border-indigo-100 px-3.5 py-1.5 rounded-full uppercase">
+                  {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
+                </span>
+              </div>
 
-            <AnimatePresence mode="wait">
-              {!formSubmitted ? (
-                <motion.div
-                  key="form-container"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.25 }}
-                  className="w-full text-left"
-                >
-                  <form onSubmit={handleFormSubmit} className="space-y-3.5">
-                    {/* Name Input */}
-                    <div>
-                      <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Full Name</label>
-                      <div className="relative">
-                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-450 pointer-events-none">
-                          <User className="w-4 h-4" />
-                        </span>
-                        <input
-                          type="text"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          placeholder="Your full name"
-                          className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
-                            formErrors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                          }`}
-                        />
-                      </div>
-                      {formErrors.name && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.name}</p>}
-                    </div>
-
-                    {/* Email & Phone grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                      {/* Cutoff */}
-                      <div>
-                        <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Cutoff (Out of 200)</label>
-                        <div className="relative">
-                          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-450 pointer-events-none">
-                            <Calculator className="w-4 h-4" />
-                          </span>
-                          <input
-                            type="number"
-                            name="cutoff"
-                            max="200"
-                            min="0"
-                            step="0.01"
-                            value={formData.cutoff}
-                            onChange={handleInputChange}
-                            placeholder="Enter cutoff"
-                            className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
-                              formErrors.cutoff ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                            }`}
-                          />
-                        </div>
-                        {formErrors.cutoff && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.cutoff}</p>}
-                      </div>
-
-                      {/* Phone */}
-                      <div>
-                        <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Mobile Number</label>
-                        <div className="relative">
-                          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-455 pointer-events-none">
-                            <Phone className="w-4 h-4" />
-                          </span>
-                          <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            placeholder="10-digit mobile"
-                            className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
-                              formErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                            }`}
-                          />
-                        </div>
-                        {formErrors.phone && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.phone}</p>}
-                      </div>
-                    </div>
-
-                    {/* Preferred Department */}
-                    <div>
-                      <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1">Preferred Department</label>
-                      <div className="relative">
-                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-455 pointer-events-none">
-                          <GraduationCap className="w-4 h-4" />
-                        </span>
-                        <select
-                          name="dept"
-                          value={formData.dept}
-                          onChange={handleInputChange}
-                          className={`w-full text-xs pl-9 pr-9 py-2.5 bg-gray-50 border rounded-xl outline-none appearance-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold cursor-pointer ${
-                            formErrors.dept ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
-                          }`}
-                        >
-                          <option value="">Select a Department</option>
-                          <option value="CSE">Computer Science & Engineering (B.E.)</option>
-                          <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
-                          <option value="EEE">Electrical & Electronics Eng. (B.E.)</option>
-                          <option value="ECE">Electronics & Communication Eng. (B.E.)</option>
-                          <option value="MECH">Mechanical Engineering (B.E.)</option>
-                          <option value="CIVIL">Civil Engineering (B.E.)</option>
-                          <option value="IT">Information Technology (B.Tech.)</option>
-                          <option value="CHEM">Chemical Engineering (B.Tech.)</option>
-                          <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
-                          <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
-                          <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
-                          <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
-                        </select>
-                        <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-455 pointer-events-none">
-                          <ChevronDown className="w-4 h-4" />
-                        </span>
-                      </div>
-                      {formErrors.dept && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.dept}</p>}
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer mt-2 animate-gradient-border"
-                    >
-                      {isSubmitting ? (
-                        <span className="flex items-center justify-center gap-2">
-                          <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Processing Submission...
-                        </span>
-                      ) : (
-                        'Submit Inquiry Now'
-                      )}
-                    </button>
-                  </form>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="success-container"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  className="text-center py-6 flex flex-col items-center justify-center grow w-full"
-                >
-                  {/* Animated Success Badge */}
+              <AnimatePresence mode="wait">
+                {!formSubmitted ? (
                   <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: 'spring', damping: 12, stiffness: 120, delay: 0.1 }}
-                    className="w-14 h-14 bg-green-50 border border-green-200 text-green-600 rounded-full flex items-center justify-center mb-4 shadow-sm"
+                    key="form-container"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.25 }}
+                    className="w-full text-left"
                   >
-                    <CheckCircle2 className="w-8 h-8" />
+                    <form onSubmit={handleFormSubmit} className="space-y-3">
+                      {/* Name Input */}
+                      <div>
+                        <label className="block text-[9px] uppercase font-black text-gray-500 tracking-wider mb-1">Full Name</label>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
+                            <User className="w-4 h-4" />
+                          </span>
+                          <input
+                            type="text"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="Your full name"
+                            className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
+                              formErrors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                            }`}
+                          />
+                        </div>
+                        {formErrors.name && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.name}</p>}
+                      </div>
+
+                      {/* Cutoff & Phone grid */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {/* Cutoff */}
+                        <div>
+                          <label className="block text-[9px] uppercase font-black text-gray-500 tracking-wider mb-1">Cutoff (Out of 200)</label>
+                          <div className="relative">
+                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
+                              <Calculator className="w-4 h-4" />
+                            </span>
+                            <input
+                              type="number"
+                              name="cutoff"
+                              max="200"
+                              min="0"
+                              step="0.01"
+                              value={formData.cutoff}
+                              onChange={handleInputChange}
+                              placeholder="Cutoff"
+                              className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none ${
+                                formErrors.cutoff ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                              }`}
+                            />
+                          </div>
+                          {formErrors.cutoff && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.cutoff}</p>}
+                        </div>
+
+                        {/* Phone */}
+                        <div>
+                          <label className="block text-[9px] uppercase font-black text-gray-500 tracking-wider mb-1">Mobile Number</label>
+                          <div className="relative">
+                            <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
+                              <Phone className="w-4 h-4" />
+                            </span>
+                            <input
+                              type="tel"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              placeholder="10-digit mobile"
+                              className={`w-full text-xs pl-9 pr-4 py-2.5 bg-gray-50 border rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold ${
+                                formErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                              }`}
+                            />
+                          </div>
+                          {formErrors.phone && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.phone}</p>}
+                        </div>
+                      </div>
+
+                      {/* Preferred Department */}
+                      <div>
+                        <label className="block text-[9px] uppercase font-black text-gray-500 tracking-wider mb-1">Preferred Department</label>
+                        <div className="relative">
+                          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
+                            <GraduationCap className="w-4 h-4" />
+                          </span>
+                          <select
+                            name="dept"
+                            value={formData.dept}
+                            onChange={handleInputChange}
+                            className={`w-full text-xs pl-9 pr-9 py-2.5 bg-gray-50 border rounded-xl outline-none appearance-none focus:bg-white focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all font-semibold cursor-pointer ${
+                              formErrors.dept ? 'border-red-500 focus:border-red-500' : 'border-gray-200'
+                            }`}
+                          >
+                            <option value="">Select a Department</option>
+                            <option value="CSE">Computer Science & Engineering (B.E.)</option>
+                            <option value="AIML">CSE (Artificial Intelligence & Machine Learning) (B.E.)</option>
+                            <option value="EEE">Electrical & Electronics Eng. (B.E.)</option>
+                            <option value="ECE">Electronics & Communication Eng. (B.E.)</option>
+                            <option value="MECH">Mechanical Engineering (B.E.)</option>
+                            <option value="CIVIL">Civil Engineering (B.E.)</option>
+                            <option value="IT">Information Technology (B.Tech.)</option>
+                            <option value="CHEM">Chemical Engineering (B.Tech.)</option>
+                            <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
+                            <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>
+                            <option value="MCA">Master of Computer Applications (MCA) (P.G.)</option>
+                            <option value="MBA">Master of Business Administration (MBA) (P.G.)</option>
+                          </select>
+                          <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 pointer-events-none">
+                            <ChevronDown className="w-4 h-4" />
+                          </span>
+                        </div>
+                        {formErrors.dept && <p className="text-[9px] font-bold text-red-500 mt-1">{formErrors.dept}</p>}
+                      </div>
+
+                      {/* Submit Button */}
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 disabled:opacity-50 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg hover:shadow-indigo-500/25 transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer mt-1 animate-gradient-border"
+                      >
+                        {isSubmitting ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            Processing Submission...
+                          </span>
+                        ) : (
+                          'Submit Inquiry Now'
+                        )}
+                      </button>
+                    </form>
                   </motion.div>
-                  
-                  <h4 className="font-sans text-xl md:text-2xl font-black text-gray-900 mb-1 tracking-tight">Inquiry Registered</h4>
-                  <p className="font-sans text-[10px] text-indigo-650 font-extrabold mb-4 uppercase tracking-wider">
-                    Thank You, {formData.name}
-                  </p>
-                  
-                  <div className="bg-gray-50 border border-gray-150 rounded-2xl p-4 text-left max-w-sm w-full mb-4 space-y-3 shadow-sm text-xs">
-                    <div className="flex justify-between items-center pb-2 border-b border-gray-200/60">
-                      <span className="text-gray-400 font-bold uppercase tracking-wider text-[8px]">Selected Course</span>
-                      <span className="font-bold text-indigo-600">{formData.dept}</span>
-                    </div>
-                    
-                    <div className="text-[9px] text-gray-400 font-bold uppercase tracking-widest block text-center pt-1">
-                      For Further Details Contact
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-455 font-semibold text-[9px]">Admissions Cell</span>
-                        <span className="font-bold text-gray-800 font-mono">
-                          <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-655 hover:underline">{branding.helpline1}</a> / <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-655 hover:underline">{branding.helpline2}</a>
-                        </span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-455 font-semibold text-[9px]">Principal Office</span>
-                        <span className="font-bold text-gray-800 font-mono">
-                          <a href="tel:+919894657971" className="hover:text-indigo-655 hover:underline">9894657971</a>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-gray-555 max-w-xs leading-relaxed mb-6 font-semibold">
-                    Our admissions team will reach out shortly with direct counseling assistance.
-                  </p>
-
-                  <button
-                    onClick={handleCloseAdModal}
-                    className="bg-gray-950 hover:bg-gray-800 text-white font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition-all duration-200 cursor-pointer shadow hover:shadow-lg active:scale-95"
+                ) : (
+                  <motion.div
+                    key="success-container"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-center py-4 flex flex-col items-center justify-center grow w-full"
                   >
-                    Close Window
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    {/* Animated Success Badge */}
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: 'spring', damping: 12, stiffness: 120, delay: 0.1 }}
+                      className="w-12 h-12 bg-green-50 border border-green-200 text-green-600 rounded-full flex items-center justify-center mb-3 shadow-sm"
+                    >
+                      <CheckCircle2 className="w-7 h-7" />
+                    </motion.div>
+                    
+                    <h4 className="font-sans text-lg sm:text-xl font-black text-gray-900 mb-0.5 tracking-tight">Inquiry Registered</h4>
+                    <p className="font-sans text-[10px] text-indigo-650 font-extrabold mb-3 uppercase tracking-wider">
+                      Thank You, {formData.name}
+                    </p>
+                    
+                    <div className="bg-gray-50 border border-gray-150 rounded-2xl p-3.5 text-left max-w-sm w-full mb-3 space-y-2.5 shadow-sm text-xs">
+                      <div className="flex justify-between items-center pb-2 border-b border-gray-200/60">
+                        <span className="text-gray-400 font-bold uppercase tracking-wider text-[8px]">Selected Course</span>
+                        <span className="font-bold text-indigo-600 text-[11px]">{formData.dept}</span>
+                      </div>
+                      
+                      <div className="space-y-1.5">
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-500 font-semibold text-[9px]">Admissions Cell</span>
+                          <span className="font-bold text-gray-800 font-mono text-[11px]">
+                            <a href={`tel:+91${branding.helpline1}`} className="hover:text-indigo-650 hover:underline">{branding.helpline1}</a> / <a href={`tel:+91${branding.helpline2}`} className="hover:text-indigo-650 hover:underline">{branding.helpline2}</a>
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-gray-500 font-semibold text-[9px]">Principal Office</span>
+                          <span className="font-bold text-gray-800 font-mono text-[11px]">
+                            <a href="tel:+919894657971" className="hover:text-indigo-650 hover:underline">9894657971</a>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-gray-500 max-w-xs leading-relaxed mb-4 font-semibold">
+                      Our admissions team will reach out shortly with direct counseling assistance.
+                    </p>
+
+                    <button
+                      onClick={handleCloseAdModal}
+                      className="bg-gray-950 hover:bg-gray-800 text-white font-black text-xs uppercase tracking-wider px-6 py-2.5 rounded-xl transition-all duration-200 cursor-pointer shadow hover:shadow-lg active:scale-95"
+                    >
+                      Close Window
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </motion.div>
       </motion.div>

@@ -1,6 +1,8 @@
 {
   "short_name": "APEC",
-  "name": "Adhiparasakthi Engineering College",
+  "name": "Adhiparasakthi Engineering College (Autonomous)",
+  "id": "apec_college_portal_v1",
+  "description": "Official Web Application & Campus Management System for Adhiparasakthi Engineering College, Melmaruvathur.",
   "icons": [
     {
       "src": "/apec-logo.png",
@@ -16,8 +18,30 @@
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "background_color": "#07113A",
   "theme_color": "#07113A",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "any",
+  "categories": ["education", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "HOD / Admin Portal",
+      "short_name": "Portal",
+      "description": "Access Department CMS & Executive Dashboard",
+      "url": "/editor"
+    },
+    {
+      "name": "Departments",
+      "short_name": "Depts",
+      "description": "View Academic Departments & Faculty Directories",
+      "url": "/departments"
+    },
+    {
+      "name": "Fee Payment",
+      "short_name": "Fee",
+      "description": "Online Fee Payment Portal",
+      "url": "/fee-payment"
+    }
+  ]
 }

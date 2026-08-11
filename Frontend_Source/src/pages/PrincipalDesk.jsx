@@ -75,32 +75,32 @@ export default function PrincipalDesk() {
                 <img 
                   src={principalImg} 
                   alt="Dr. J. Raja, Principal" 
-                  className="w-full h-[320px] object-cover object-center rounded-[20px] grayscale-[5%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700" 
+                  className="w-full h-[340px] sm:h-[360px] object-cover object-[center_15%] rounded-[20px] grayscale-[5%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700" 
                 />
               </div>
             </div>
             
             {/* Quick Contacts Card */}
-            <div className="w-full max-w-xs mt-6 p-5 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-4">
+            <div className="w-full max-w-xs sm:max-w-sm mt-6 p-5 sm:p-6 bg-slate-50 border border-slate-200 rounded-2xl text-left space-y-4 shadow-xs">
               <div className="flex gap-3 items-start">
-                <Mail className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                <Mail className="w-4.5 h-4.5 text-indigo-600 shrink-0 mt-0.5" />
                 <div className="min-w-0">
-                  <span className="text-[9px] uppercase tracking-wider font-bold text-slate-450 block">Official Email</span>
-                  <a href="mailto:principal@apec.ac.in" className="text-xs font-bold text-slate-800 hover:text-indigo-600 break-all">principal@apec.ac.in</a>
+                  <span className="text-xs uppercase tracking-wider font-extrabold text-slate-500 block mb-0.5">Official Email</span>
+                  <a href="mailto:principal@apec.ac.in" className="text-sm font-bold text-slate-900 hover:text-indigo-600 break-all">principal@apec.ac.in</a>
                 </div>
               </div>
               <div className="flex gap-3 items-start">
-                <Building className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
+                <Building className="w-4.5 h-4.5 text-indigo-600 shrink-0 mt-0.5" />
                 <div className="min-w-0">
-                  <span className="text-[9px] uppercase tracking-wider font-bold text-slate-455 block">Office Location</span>
-                  <span className="text-xs font-bold text-slate-700 block">Principal's Office, Main Block, APEC Campus</span>
+                  <span className="text-xs uppercase tracking-wider font-extrabold text-slate-500 block mb-0.5">Office Location</span>
+                  <span className="text-sm font-bold text-slate-900 block leading-snug">Principal's Office, Main Block, APEC Campus</span>
                 </div>
               </div>
               <button 
                 onClick={handleDownloadCV}
-                className="w-full bg-slate-950 hover:bg-slate-800 text-white font-black text-[10px] uppercase tracking-wider py-3 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow hover:shadow-md hover:scale-[1.01]"
+                className="w-full bg-slate-950 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow hover:shadow-md hover:scale-[1.01]"
               >
-                <Download className="w-3.5 h-3.5" />
+                <Download className="w-4 h-4" />
                 Download Academic CV
               </button>
             </div>
@@ -114,11 +114,11 @@ export default function PrincipalDesk() {
             <h2 className="font-title text-2xl md:text-3xl font-bold text-slate-900 mb-2 leading-tight">
               Dr. J. Raja, Ph.D.
             </h2>
-            <span className="font-display text-xs font-bold text-gray-400 uppercase tracking-widest block mb-6">
+            <span className="font-display text-xs sm:text-sm font-bold text-gray-500 uppercase tracking-widest block mb-6">
               Principal & Academic Chair, APEC (Autonomous)
             </span>
             
-            <div className="space-y-4 text-xs md:text-sm text-slate-550 font-semibold leading-relaxed mb-6">
+            <div className="space-y-4 text-sm md:text-base text-slate-650 font-semibold leading-relaxed mb-6">
               <p>
                 Dr. J. Raja is a distinguished academic leader, research guide, and the Principal of Adhiparasakthi Engineering College, Melmaruvathur. Under his executive direction, APEC has implemented major innovations under its autonomous curriculum status, establishing research collaborations and digital training portals.
               </p>
@@ -130,39 +130,39 @@ export default function PrincipalDesk() {
             {/* Responsibilities and Interests */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-slate-100">
               <div>
-                <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                  <Award className="w-4 h-4 text-indigo-600" /> Key Responsibilities
+                <h4 className="text-sm font-extrabold text-slate-900 uppercase tracking-widest mb-3.5 flex items-center gap-2">
+                  <Award className="w-4.5 h-4.5 text-indigo-600" /> Key Responsibilities
                 </h4>
-                <ul className="space-y-2 text-xs text-slate-500 font-semibold leading-relaxed list-none text-left">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-650 font-semibold leading-relaxed list-none text-left">
                   <li className="flex items-start">
-                    <span className="inline-block w-1 h-1 rounded-full bg-indigo-500 mt-2 mr-2 shrink-0" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 mr-2.5 shrink-0" />
                     <span>Academic & general administrative leadership of the autonomous college.</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1 h-1 rounded-full bg-indigo-500 mt-2 mr-2 shrink-0" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 mr-2.5 shrink-0" />
                     <span>Overseeing Anna University and AICTE compliance audits.</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1 h-1 rounded-full bg-indigo-500 mt-2 mr-2 shrink-0" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2 mr-2.5 shrink-0" />
                     <span>Directing quality assurance operations and industry MoUs.</span>
                   </li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-widest mb-3 flex items-center gap-1.5">
-                  <BookOpen className="w-4 h-4 text-purple-650" /> Research Interests
+                <h4 className="text-sm font-extrabold text-slate-900 uppercase tracking-widest mb-3.5 flex items-center gap-2">
+                  <BookOpen className="w-4.5 h-4.5 text-purple-650" /> Research Interests
                 </h4>
-                <ul className="space-y-2 text-xs text-slate-500 font-semibold leading-relaxed list-none text-left">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-650 font-semibold leading-relaxed list-none text-left">
                   <li className="flex items-start">
-                    <span className="inline-block w-1 h-1 rounded-full bg-purple-500 mt-2 mr-2 shrink-0" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 mr-2.5 shrink-0" />
                     <span>Structural Engineering & Sustainability.</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1 h-1 rounded-full bg-purple-500 mt-2 mr-2 shrink-0" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 mr-2.5 shrink-0" />
                     <span>Sustainable Concrete Technology & Infrastructure.</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="inline-block w-1 h-1 rounded-full bg-purple-500 mt-2 mr-2 shrink-0" />
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 mr-2.5 shrink-0" />
                     <span>Outcome-Based Engineering Education Policies.</span>
                   </li>
                 </ul>
@@ -296,35 +296,22 @@ export default function PrincipalDesk() {
               </div>
             </div>
 
-            {/* Faculty Directory Option Box */}
-            <div className="flex flex-col md:flex-row gap-8 items-start bg-slate-50/50 border border-slate-150 p-6 md:p-8 rounded-3xl hover:border-indigo-300 hover:bg-white transition-all duration-300">
-              <div className="w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-indigo-50 border border-indigo-150 flex items-center justify-center shrink-0 shadow-sm">
-                <Users className="w-10 h-10 md:w-14 md:h-14 text-indigo-650" />
+            {/* Faculty Directory Option */}
+            <Link 
+              to="/faculty" 
+              className="flex items-center justify-between gap-4 p-5 border border-slate-150 rounded-3xl hover:border-[#FF8A00] hover:bg-[#FFF4E8]/10 transition-all group cursor-pointer"
+            >
+              <div className="text-left">
+                <h3 className="text-lg sm:text-xl font-black text-slate-900 group-hover:text-[#FF8A00] transition-colors">Faculty Directory</h3>
+                <span className="text-xs text-slate-400 font-extrabold uppercase tracking-widest block mt-0.5">APEC Portal</span>
               </div>
-              <div className="text-left grow">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900">Faculty Directory</h3>
-                    <span className="text-xs sm:text-sm text-indigo-650 font-black uppercase tracking-widest mt-1 block">APEC Portal</span>
-                  </div>
-                  <span className="text-xs font-mono font-bold text-[#FF8A00] bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg uppercase">
-                    Department Wise
-                  </span>
-                </div>
-                <p className="text-sm sm:text-base text-slate-655 leading-relaxed font-semibold mb-4">
-                  Access the complete, updated database of academic professors, assistant professors, and research guides across all undergraduate (B.E./B.Tech.), postgraduate (M.E./MCA/MBA), and Ph.D. departments.
-                </p>
-                <div className="pt-3 border-t border-slate-200/50 mt-4 flex">
-                  <Link 
-                    to="/faculty" 
-                    className="inline-flex items-center gap-1.5 text-xs font-black text-white bg-slate-950 hover:bg-slate-800 px-5 py-2.5 rounded-xl transition-all shadow-sm active:scale-95 cursor-pointer"
-                  >
-                    <span>Open Faculty Directory</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </Link>
-                </div>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-mono font-bold text-[#FF8A00] bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg uppercase">
+                  Department Wise
+                </span>
+                <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-[#FF8A00] transition-colors shrink-0" />
               </div>
-            </div>
+            </Link>
 
           </div>
         </motion.div>

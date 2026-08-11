@@ -234,11 +234,11 @@ export default function Admission() {
         {/* TAB BUTTONS (NAVIGATION) */}
         <div className="flex flex-wrap justify-center items-center gap-2 mb-10 border-b border-gray-150 pb-4">
           {[
+            { id: 'brochure', label: 'Information Brochure', icon: FileText },
             { id: 'courses', label: 'Courses Offered', icon: GraduationCap },
             { id: 'procedure', label: 'Admission Procedure', icon: FileCheck },
-            { id: 'scholarships', label: 'Scholarships', icon: Coins },
-            { id: 'brochure', label: 'Information Brochure', icon: FileText },
-            { id: 'cutoff', label: 'Cutoff Calculator', icon: Calculator }
+            { id: 'cutoff', label: 'Cutoff Calculator', icon: Calculator },
+            { id: 'scholarships', label: 'Scholarships', icon: Coins }
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
