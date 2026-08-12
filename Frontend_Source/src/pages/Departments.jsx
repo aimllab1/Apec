@@ -26,7 +26,7 @@ const departmentImages = {
   'me-vlsi': '/Images/Dept/m.e.vlsi.jpg',
   'me-ped': '/Images/Dept/power-electronics-electrical-drives.jpg',
   'me-cem': '/Images/Dept/m.e.construction engg and mangement.jpg',
-  sh: '/Images/Dept/cse dept.png',
+  sh: '/Images/Dept/S&H dept.jpg',
   'phd-civil': '/Images/Dept/phd.civil.jpg',
   'phd-mech': '/Images/Dept/phd.mech.jpg',
   'phd-eee': '/Images/Dept/phd.eee.jpg',

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Save, AlertCircle, RefreshCw, Users, FileText, Settings, Plus, Minus, Trash2, 
-  Edit3, Check, CheckCircle2, ChevronRight, UserCheck, ShieldAlert, KeyRound, Globe,
+  Edit3, Check, CheckCircle2, ChevronRight, ChevronDown, UserCheck, ShieldAlert, KeyRound, Globe,
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key,
   BookOpen, Milestone, Library, Briefcase, GraduationCap, BarChart3, PieChart, TrendingUp, Clock, PhoneCall, MessageSquare, Filter, Tag, Activity, Layers, ExternalLink, Copy, ArrowUpRight, BookOpenCheck,
   Calendar, CalendarDays, Coins, PartyPopper, MessageCircle
@@ -81,6 +81,7 @@ export default function EditorPanel() {
   const [selectedDeptIdx, setSelectedDeptIdx] = useState(0);
   const [selectedFacultyIdx, setSelectedFacultyIdx] = useState(null);
   const [deptSubTab, setDeptSubTab] = useState('faculty'); // 'faculty' | 'overview' | 'outcomes' | 'labs' | 'placements'
+  const [isAddFacilityOpen, setIsAddFacilityOpen] = useState(false);
   
   // Faculty edit state
   const [editFaculty, setEditFaculty] = useState({
@@ -280,7 +281,7 @@ export default function EditorPanel() {
   useEffect(() => {
     // Determine default tab based on role
     if (userRole.startsWith('dept_')) {
-      setActiveTab('departments');
+      setActiveTab('dashboard');
     } else if (userRole === 'admission') {
       setActiveTab('dashboard');
     } else {
@@ -320,6 +321,51 @@ export default function EditorPanel() {
     } else {
       loadedDepts = Object.values(departmentsData);
     }
+
+    // Normalize labs/facilities format to support objects and clear default dummy text values
+    loadedDepts = loadedDepts.map(d => {
+      if (d.labs && Array.isArray(d.labs)) {
+        d.labs = d.labs.map(lab => {
+          if (typeof lab === 'string') {
+            const isMock = lab === 'Advanced Laboratory' || lab === 'New Classroom' || lab === 'New Laboratory' || lab === 'New Library';
+            return {
+              name: isMock ? '' : lab,
+              type: 'laboratory',
+              incharge: '',
+              description: '',
+              images: []
+            };
+          } else if (lab && typeof lab === 'object') {
+            const normalized = { ...lab };
+            
+            // Clear default/mock values
+            const mockNames = ['Advanced Laboratory', 'New Classroom', 'New Laboratory', 'New Library'];
+            const mockIncharges = ['Prof. Incharge'];
+            const mockDescriptions = ['Lab details and equipment', 'Smart classroom details', 'Departmental library details'];
+            
+            if (!normalized.name || mockNames.includes(normalized.name)) {
+              normalized.name = '';
+            }
+            if (!normalized.type) {
+              normalized.type = 'laboratory';
+            }
+            if (!normalized.incharge || mockIncharges.includes(normalized.incharge)) {
+              normalized.incharge = '';
+            }
+            if (!normalized.description || mockDescriptions.includes(normalized.description)) {
+              normalized.description = '';
+            }
+            if (!normalized.images) {
+              normalized.images = normalized.image ? [normalized.image] : [];
+            }
+            return normalized;
+          }
+          return lab;
+        });
+      }
+      return d;
+    });
+
     setDepts(loadedDepts);
 
     // Apply department role lock
@@ -978,7 +1024,7 @@ export default function EditorPanel() {
                   }`}
                 >
                   <span className="flex items-center gap-2.5">
-                    <Library className="w-4 h-4 text-amber-400" /> Laboratories & Facilities
+                    <Library className="w-4 h-4 text-amber-400" /> Facilities
                   </span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
@@ -1927,9 +1973,7 @@ export default function EditorPanel() {
                     <h3 className="font-title text-xl font-black text-slate-900">
                       {userRole.startsWith('dept_') ? `${depts[selectedDeptIdx]?.name || 'Department'} Portal CMS` : 'Department & Faculty Portals'}
                     </h3>
-                    <p className="text-xs text-slate-500 font-semibold mt-0.5">
-                      Edit overview, faculty directory with photo upload, PEOs/POs, facilities, and placement details.
-                    </p>
+
                   </div>
                   
                   {/* Select Department dropdown (Locked for department roles) */}
@@ -2555,76 +2599,133 @@ export default function EditorPanel() {
                     <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
                       <div className="flex justify-between items-center border-b border-slate-200 pb-2">
                         <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider">
-                          Department Laboratories & Facilities ({depts[selectedDeptIdx].labs?.length || 0})
+                          Department Facilities ({depts[selectedDeptIdx].labs?.length || 0})
                         </h4>
                         <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const labs = depts[selectedDeptIdx].labs || [];
-                              updateCurrentDeptField('labs', [...labs, { name: 'Advanced Laboratory', description: 'Lab details and equipment', incharge: 'Prof. Incharge', image: '' }]);
-                            }}
-                            className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer mr-2"
-                          >
-                            <Plus className="w-3 h-3" /> Add Laboratory
-                          </button>
+                          <div className="relative">
+                            <button
+                              type="button"
+                              onClick={() => setIsAddFacilityOpen(!isAddFacilityOpen)}
+                              className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer mr-2 bg-transparent border-0"
+                            >
+                              <Plus className="w-3 h-3" /> Add <ChevronDown className="w-3 h-3" />
+                            </button>
+                            {isAddFacilityOpen && (
+                              <div className="absolute right-0 top-full mt-1 bg-white border border-slate-200 shadow-xl rounded-xl py-1.5 w-36 z-50 text-left">
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const labs = depts[selectedDeptIdx].labs || [];
+                                    updateCurrentDeptField('labs', [...labs, { name: '', type: 'classroom', incharge: '', description: '', images: [] }]);
+                                    setIsAddFacilityOpen(false);
+                                  }}
+                                  className="w-full px-4 py-2 text-xs font-extrabold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors text-left flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
+                                >
+                                  🏫 Classroom
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const labs = depts[selectedDeptIdx].labs || [];
+                                    updateCurrentDeptField('labs', [...labs, { name: '', type: 'laboratory', incharge: '', description: '', images: [] }]);
+                                    setIsAddFacilityOpen(false);
+                                  }}
+                                  className="w-full px-4 py-2 text-xs font-extrabold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors text-left flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
+                                >
+                                  🔬 Laboratory
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const labs = depts[selectedDeptIdx].labs || [];
+                                    updateCurrentDeptField('labs', [...labs, { name: '', type: 'library', incharge: '', description: '', images: [] }]);
+                                    setIsAddFacilityOpen(false);
+                                  }}
+                                  className="w-full px-4 py-2 text-xs font-extrabold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors text-left flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
+                                >
+                                  📚 Library
+                                </button>
+                              </div>
+                            )}
+                          </div>
                           <button
                             type="button"
                             onClick={() => {
                               saveDepts(depts);
-                              triggerSuccess('Laboratory facilities saved successfully!');
+                              triggerSuccess('Facilities saved successfully!');
                             }}
-                            className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1"
+                            className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1 border-0"
                           >
-                            <Save className="w-3.5 h-3.5" /> Save Labs
+                            <Save className="w-3.5 h-3.5" /> Save
                           </button>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {(depts[selectedDeptIdx].labs || []).map((lab, idx) => (
-                          <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-sm">
+                          <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-sm text-left">
                             <button
                               type="button"
                               onClick={() => {
                                 const labs = depts[selectedDeptIdx].labs.filter((_, i) => i !== idx);
                                 updateCurrentDeptField('labs', labs);
                               }}
-                              className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer"
+                              className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer border-0 bg-transparent"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
 
-                            <div className="space-y-1">
-                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Lab Name</label>
-                              <input 
-                                type="text"
-                                value={lab.name || ''}
-                                onChange={(e) => {
-                                  const labs = [...(depts[selectedDeptIdx].labs || [])];
-                                  labs[idx].name = e.target.value;
-                                  updateCurrentDeptField('labs', labs);
-                                }}
-                                className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
-                              />
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              <div className="space-y-1">
+                                <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">Facility Type</label>
+                                <select 
+                                  value={lab.type || 'laboratory'}
+                                  onChange={(e) => {
+                                    const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                    labs[idx].type = e.target.value;
+                                    updateCurrentDeptField('labs', labs);
+                                  }}
+                                  className="w-full text-xs font-bold px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-slate-700 cursor-pointer"
+                                >
+                                  <option value="classroom">🏫 Classroom</option>
+                                  <option value="laboratory">🔬 Laboratory</option>
+                                  <option value="library">📚 Library</option>
+                                </select>
+                              </div>
+
+                              <div className="space-y-1">
+                                <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">Facility Name</label>
+                                <input 
+                                  type="text"
+                                  value={lab.name || ''}
+                                  onChange={(e) => {
+                                    const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                    labs[idx].name = e.target.value;
+                                    updateCurrentDeptField('labs', labs);
+                                  }}
+                                  placeholder="e.g. Advanced AI/ML Laboratory"
+                                  className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
+                                />
+                              </div>
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Lab In-Charge</label>
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">In-Charge</label>
                               <input 
                                 type="text"
                                 value={lab.incharge || ''}
                                 onChange={(e) => {
-                                  const labs = [...(depts[selectedDeptIdx].labs || [])];
-                                  labs[idx].incharge = e.target.value;
-                                  updateCurrentDeptField('labs', labs);
+                                    const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                    labs[idx].incharge = e.target.value;
+                                    updateCurrentDeptField('labs', labs);
                                 }}
+                                placeholder="e.g. Dr. K. Raja / Assistant Prof."
                                 className="w-full text-xs font-bold px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg"
                               />
                             </div>
 
                             <div className="space-y-1">
-                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Lab Description</label>
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">Description</label>
                               <textarea 
                                 rows={2}
                                 value={lab.description || ''}
@@ -2633,17 +2734,45 @@ export default function EditorPanel() {
                                   labs[idx].description = e.target.value;
                                   updateCurrentDeptField('labs', labs);
                                 }}
+                                placeholder="Describe the facility seating capacity, available software packages, or lab instruments..."
                                 className="w-full text-xs p-2 bg-slate-50 border border-slate-200 rounded-lg font-medium"
                               />
                             </div>
 
-                            {/* Lab Image Upload */}
-                            <div className="space-y-1.5 pt-1">
-                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">Lab Image</label>
-                              <div className="flex items-center gap-2">
-                                <label className="inline-flex items-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-[10px] font-bold rounded-lg cursor-pointer transition-all">
+                            {/* Multiple Images Upload & Manage */}
+                            <div className="space-y-2 pt-1.5">
+                              <label className="text-[9px] font-black uppercase text-slate-400 tracking-wider block">Facility Images</label>
+                              
+                              {/* Thumbnail preview list */}
+                              {((lab.images || (lab.image ? [lab.image] : []))).length > 0 && (
+                                <div className="flex flex-wrap gap-2 p-2 bg-slate-50 border border-slate-150 rounded-xl">
+                                  {(lab.images || (lab.image ? [lab.image] : [])).map((img, imgIdx) => (
+                                    <div key={imgIdx} className="relative w-14 h-14 rounded-lg overflow-hidden border border-slate-200 group">
+                                      <img src={img} alt="preview" className="w-full h-full object-cover" />
+                                      <button
+                                        type="button"
+                                        onClick={() => {
+                                          const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                          const currentImages = labs[idx].images || (labs[idx].image ? [labs[idx].image] : []);
+                                          const updatedImages = currentImages.filter((_, i) => i !== imgIdx);
+                                          labs[idx].images = updatedImages;
+                                          labs[idx].image = updatedImages[0] || '';
+                                          updateCurrentDeptField('labs', labs);
+                                        }}
+                                        className="absolute inset-0 bg-rose-500/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer border-0"
+                                      >
+                                        <Trash2 className="w-3.5 h-3.5" />
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+
+                              {/* Upload / Add Controls */}
+                              <div className="flex flex-col sm:flex-row gap-2">
+                                <label className="inline-flex items-center justify-center gap-1 px-3 py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-[10px] font-bold rounded-lg cursor-pointer transition-all shrink-0">
                                   <Upload className="w-3 h-3" />
-                                  <span>Choose File</span>
+                                  <span>Upload Photo</span>
                                   <input 
                                     type="file" 
                                     accept="image/*" 
@@ -2653,7 +2782,9 @@ export default function EditorPanel() {
                                         const reader = new FileReader();
                                         reader.onloadend = () => {
                                           const labs = [...(depts[selectedDeptIdx].labs || [])];
-                                          labs[idx].image = reader.result;
+                                          const currentImages = labs[idx].images || (labs[idx].image ? [labs[idx].image] : []);
+                                          labs[idx].images = [...currentImages, reader.result];
+                                          labs[idx].image = labs[idx].images[0];
                                           updateCurrentDeptField('labs', labs);
                                         };
                                         reader.readAsDataURL(file);
@@ -2662,17 +2793,47 @@ export default function EditorPanel() {
                                     className="hidden" 
                                   />
                                 </label>
-                                <input 
-                                  type="text"
-                                  value={lab.image || ''}
-                                  onChange={(e) => {
-                                    const labs = [...(depts[selectedDeptIdx].labs || [])];
-                                    labs[idx].image = e.target.value;
-                                    updateCurrentDeptField('labs', labs);
-                                  }}
-                                  placeholder="Image URL or Path"
-                                  className="flex-1 text-[11px] px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg font-mono"
-                                />
+                                
+                                <div className="flex-1 flex gap-1">
+                                  <input 
+                                    type="text"
+                                    id={`new-url-input-${idx}`}
+                                    placeholder="Paste Image URL..."
+                                    className="flex-1 text-[11px] px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg font-mono"
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        const val = e.target.value.trim();
+                                        if (val) {
+                                          const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                          const currentImages = labs[idx].images || (labs[idx].image ? [labs[idx].image] : []);
+                                          labs[idx].images = [...currentImages, val];
+                                          labs[idx].image = labs[idx].images[0];
+                                          updateCurrentDeptField('labs', labs);
+                                          e.target.value = '';
+                                        }
+                                      }
+                                    }}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      const inputEl = document.getElementById(`new-url-input-${idx}`);
+                                      const val = inputEl ? inputEl.value.trim() : '';
+                                      if (val) {
+                                        const labs = [...(depts[selectedDeptIdx].labs || [])];
+                                        const currentImages = labs[idx].images || (labs[idx].image ? [labs[idx].image] : []);
+                                        labs[idx].images = [...currentImages, val];
+                                        labs[idx].image = labs[idx].images[0];
+                                        updateCurrentDeptField('labs', labs);
+                                        inputEl.value = '';
+                                      }
+                                    }}
+                                    className="px-2 py-1 bg-indigo-50 border border-indigo-150 text-indigo-650 hover:bg-indigo-100 rounded-lg text-[10px] font-bold cursor-pointer shrink-0 border-0"
+                                  >
+                                    Add URL
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -2684,11 +2845,11 @@ export default function EditorPanel() {
                           type="button"
                           onClick={() => {
                             saveDepts(depts);
-                            triggerSuccess('All laboratory facilities saved successfully!');
+                            triggerSuccess('All facilities saved successfully!');
                           }}
-                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-2"
+                          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-2 border-0"
                         >
-                          <Save className="w-4 h-4" /> Save Laboratory Facilities
+                          <Save className="w-4 h-4" /> Save Facilities
                         </button>
                       </div>
                     </div>

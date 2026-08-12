@@ -314,20 +314,17 @@ export default function RDCell() {
       <div className="max-w-6xl mx-auto relative z-10 text-left">
         
         {/* Header Block */}
-        <div className="mb-6 border-b border-gray-200 pb-6 w-full text-left">
-          <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block mb-4 uppercase">
+        <div className="mb-8 border-b border-gray-200 pb-6 w-full text-left">
+          <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block mb-3 uppercase">
             APEC R&D CELL
           </span>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black font-title tracking-tight text-gray-900 leading-tight">
             Research & Development Cell
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-slate-650 font-bold leading-relaxed sm:leading-loose w-full text-justify max-w-none">
-            Facilitating scholarly breakthroughs, collaborative funding grants, and high-impact doctoral studies at Adhiparasakthi Engineering College.
-          </p>
         </div>
 
         {/* Stats Summary Rows */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm hover:border-[#FFE7CC] transition-all duration-300">
             <span className="block text-3xl font-black text-[#FF8A00]">{totalAwardedScholars}</span>
             <span className="text-[10px] uppercase font-black text-gray-500 tracking-wider">Degrees Awarded</span>

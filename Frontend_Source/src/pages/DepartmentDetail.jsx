@@ -70,12 +70,55 @@ const departmentImages = {
   'me-vlsi': '/Images/Dept/m.e.vlsi.jpg',
   'me-ped': '/Images/Dept/power-electronics-electrical-drives.jpg',
   'me-cem': '/Images/Dept/m.e.construction engg and mangement.jpg',
-  sh: '/Images/Dept/cse dept.png',
+  sh: '/Images/Dept/S&H dept.jpg',
   'phd-civil': '/Images/Dept/phd.civil.jpg',
   'phd-mech': '/Images/Dept/phd.mech.jpg',
   'phd-eee': '/Images/Dept/phd.eee.jpg',
   'phd-ece': '/Images/Dept/phd.ece.jpg',
   default: '/Images/Dept/cse dept.png'
+};
+
+const normalizeLabs = (department) => {
+  if (!department) return department;
+  const d = { ...department };
+  if (d.labs && Array.isArray(d.labs)) {
+    d.labs = d.labs.map(lab => {
+      if (typeof lab === 'string') {
+        const isMock = lab === 'Advanced Laboratory' || lab === 'New Classroom' || lab === 'New Laboratory' || lab === 'New Library';
+        return {
+          name: isMock ? '' : lab,
+          type: 'laboratory',
+          incharge: '',
+          description: '',
+          images: []
+        };
+      } else if (lab && typeof lab === 'object') {
+        const normalized = { ...lab };
+        const mockNames = ['Advanced Laboratory', 'New Classroom', 'New Laboratory', 'New Library'];
+        const mockIncharges = ['Prof. Incharge'];
+        const mockDescriptions = ['Lab details and equipment', 'Smart classroom details', 'Departmental library details'];
+        
+        if (!normalized.name || mockNames.includes(normalized.name)) {
+          normalized.name = '';
+        }
+        if (!normalized.type) {
+          normalized.type = 'laboratory';
+        }
+        if (!normalized.incharge || mockIncharges.includes(normalized.incharge)) {
+          normalized.incharge = '';
+        }
+        if (!normalized.description || mockDescriptions.includes(normalized.description)) {
+          normalized.description = '';
+        }
+        if (!normalized.images) {
+          normalized.images = normalized.image ? [normalized.image] : [];
+        }
+        return normalized;
+      }
+      return lab;
+    });
+  }
+  return d;
 };
 
 export default function DepartmentDetail() {
@@ -85,7 +128,8 @@ export default function DepartmentDetail() {
   const [deptData, setDeptData] = useState(() => {
     const saved = localStorage.getItem('apec_departments_data');
     const data = saved ? JSON.parse(saved) : departmentsData;
-    return data[id] || data.cse;
+    const target = data[id] || data.cse;
+    return normalizeLabs(target);
   });
 
   useEffect(() => {
@@ -93,7 +137,7 @@ export default function DepartmentDetail() {
       const saved = localStorage.getItem('apec_departments_data');
       const data = saved ? JSON.parse(saved) : departmentsData;
       if (data[id]) {
-        setDeptData(data[id]);
+        setDeptData(normalizeLabs(data[id]));
       }
     };
     loadDept();
@@ -864,20 +908,100 @@ export default function DepartmentDetail() {
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 text-left">
-                      {dept.labs.map((lab, idx) => (
-                        <div 
-                          key={idx}
-                          className="p-4 sm:p-6 bg-gray-50 border border-gray-150 rounded-xl sm:rounded-2xl flex items-start gap-3 sm:gap-4 hover:border-indigo-300 hover:bg-white hover:shadow-sm transition-all duration-300"
-                        >
-                          <div className="bg-indigo-50 border border-indigo-100 text-indigo-650 p-2 sm:p-2.5 rounded-lg sm:rounded-xl shrink-0">
-                            <Library className="w-4 h-4 sm:w-5.5 sm:h-5.5" />
+                      {dept.labs.map((lab, idx) => {
+                        const isObj = typeof lab === 'object' && lab !== null;
+                        if (!isObj) {
+                          return (
+                            <div 
+                              key={idx}
+                              className="p-4 sm:p-6 bg-gray-50 border border-gray-150 rounded-xl sm:rounded-2xl flex items-start gap-3 sm:gap-4 hover:border-indigo-300 hover:bg-white hover:shadow-sm transition-all duration-300 text-left"
+                            >
+                              <div className="bg-indigo-50 border border-indigo-100 text-indigo-650 p-2 sm:p-2.5 rounded-lg sm:rounded-xl shrink-0">
+                                <Library className="w-4 h-4 sm:w-5.5 sm:h-5.5" />
+                              </div>
+                              <div>
+                                <span className="text-[9px] sm:text-[10px] font-black uppercase text-indigo-650 tracking-wider block mb-1">Laboratory {String(idx + 1).padStart(2, '0')}</span>
+                                <h4 className="text-xs sm:text-sm md:text-base font-black text-gray-800 leading-relaxed">{lab}</h4>
+                              </div>
+                            </div>
+                          );
+                        }
+
+                        const name = lab.name || 'Unnamed Facility';
+                        const type = lab.type || 'laboratory';
+                        const incharge = lab.incharge || '';
+                        const desc = lab.description || '';
+                        
+                        let images = [];
+                        if (Array.isArray(lab.images)) {
+                          images = lab.images.filter(img => typeof img === 'string' && img.trim() !== '');
+                        } else if (typeof lab.image === 'string' && lab.image.trim() !== '') {
+                          images = [lab.image];
+                        }
+
+                        let FacilityIcon = Library;
+                        if (type === 'classroom') FacilityIcon = Laptop;
+                        else if (type === 'laboratory') FacilityIcon = FlaskConical;
+                        else if (type === 'library') FacilityIcon = BookOpen;
+
+                        return (
+                          <div 
+                            key={idx}
+                            className="p-5 bg-white border border-gray-150 rounded-2xl flex flex-col justify-between hover:border-indigo-300 hover:shadow-md hover:bg-white transition-all duration-300 space-y-4 text-left"
+                          >
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <div className="bg-indigo-50 border border-indigo-100 text-indigo-650 p-2 rounded-xl shrink-0">
+                                  <FacilityIcon className="w-5 h-5 text-indigo-650" />
+                                </div>
+                                <span className="text-[9px] sm:text-[10px] font-black uppercase bg-indigo-50 text-indigo-650 border border-indigo-100/50 px-2 py-0.5 rounded-full tracking-wider">
+                                  {type}
+                                </span>
+                              </div>
+                              <div>
+                                <h4 className="text-xs sm:text-sm md:text-base font-black text-gray-850 leading-snug">{name}</h4>
+                                {incharge && (
+                                  <p className="text-[10px] text-indigo-650 font-bold mt-1">
+                                    In-Charge: <span className="text-gray-600 font-semibold">{incharge}</span>
+                                  </p>
+                                )}
+                                {desc && (
+                                  <p className="text-[11px] sm:text-xs text-gray-500 font-medium mt-1.5 leading-relaxed">{desc}</p>
+                                )}
+                              </div>
+                            </div>
+
+                            {images.length > 0 && (
+                              <div className="pt-2 shrink-0">
+                                {images.length === 1 ? (
+                                  <img 
+                                    src={images[0]} 
+                                    alt={name} 
+                                    className="w-full h-32 sm:h-36 object-cover rounded-xl border border-gray-150" 
+                                  />
+                                ) : (
+                                  <div className="grid grid-cols-2 gap-2">
+                                    {images.slice(0, 4).map((img, imgIdx) => (
+                                      <div key={imgIdx} className="relative h-16 sm:h-20 rounded-xl overflow-hidden border border-gray-150">
+                                        <img 
+                                          src={img} 
+                                          alt={`${name} ${imgIdx + 1}`} 
+                                          className="w-full h-full object-cover" 
+                                        />
+                                        {imgIdx === 3 && images.length > 4 && (
+                                          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center text-[10px] sm:text-xs font-bold text-white">
+                                            +{images.length - 4} More
+                                          </div>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            )}
                           </div>
-                          <div>
-                            <span className="text-[9px] sm:text-[10px] font-black uppercase text-indigo-650 tracking-wider block mb-1">Laboratory {String(idx + 1).padStart(2, '0')}</span>
-                            <h4 className="text-xs sm:text-sm md:text-base font-black text-gray-800 leading-relaxed">{lab}</h4>
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   )}
                 </div>

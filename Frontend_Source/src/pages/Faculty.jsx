@@ -37,7 +37,7 @@ const deptImageMap = {
   'Computer Applications': '/Images/Dept/MCA.jpg',
   'Master of Computer Applications (MCA)': '/Images/Dept/MCA.jpg',
   'Management Studies (MBA)': '/Images/Dept/MBA.jpg',
-  'Science & Humanities': '/Images/Dept/cse dept.png',
+  'Science & Humanities': '/Images/Dept/S&H dept.jpg',
   'PhD - Civil Engg.': '/Images/Dept/phd.civil.jpg',
   'PhD - Mechanical Engg.': '/Images/Dept/phd.mech.jpg',
   'PhD - Electronics and Communication Engg.': '/Images/Dept/phd.ece.jpg',

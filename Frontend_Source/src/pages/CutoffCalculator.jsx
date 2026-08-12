@@ -280,6 +280,7 @@ export default function CutoffCalculator({ isEmbedded = false }) {
               <div data-lenis-prevent className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[340px] overflow-y-auto pr-2 custom-scrollbar">
                 {[
                   { name: "CSE (AI & ML)", cut: 165 },
+                  { name: "AI & DS (AD)", cut: 160 },
                   { name: "Computer Science", cut: 160 },
                   { name: "Information Technology", cut: 155 },
                   { name: "Electronics (ECE)", cut: 145 },
@@ -518,6 +519,7 @@ export default function CutoffCalculator({ isEmbedded = false }) {
                             <option value="CIVIL">Civil Engineering (B.E.)</option>
                             {/* B.Tech Departments */}
                             <option value="IT">Information Technology (B.Tech.)</option>
+                            <option value="AIDS">Artificial Intelligence & Data Science (AI & DS / AD) (B.Tech.)</option>
                             <option value="CHEM">Chemical Engineering (B.Tech.)</option>
                             <option value="CSD">Computer Science & Design (CSD) (B.Tech.)</option>
                             <option value="AGRI">Agricultural Engineering (Agri) (B.Tech.)</option>

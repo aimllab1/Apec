@@ -378,31 +378,14 @@ export default function Home() {
       return;
     }
 
-    const startTimer = () => {
-      return setTimeout(() => {
-        // Re-verify portal status before opening
-        const activeLogin = localStorage.getItem('is_logged_in') === 'true';
-        const activeRole = (localStorage.getItem('user_role') || '').toLowerCase();
-        if (!activeLogin && !activeRole.startsWith('dept_') && activeRole !== 'admin' && activeRole !== 'admission') {
-          setShowAdModal(true);
-        }
-      }, 400);
-    };
-
-    let timer;
-
-    if (document.readyState === 'complete') {
-      timer = startTimer();
-    } else {
-      const handleLoad = () => {
-        timer = startTimer();
-      };
-      window.addEventListener('load', handleLoad);
-      return () => {
-        window.removeEventListener('load', handleLoad);
-        clearTimeout(timer);
-      };
-    }
+    // Trigger popup reliably after a brief initial render delay on every refresh / load
+    const timer = setTimeout(() => {
+      const activeLogin = localStorage.getItem('is_logged_in') === 'true';
+      const activeRole = (localStorage.getItem('user_role') || '').toLowerCase();
+      if (!activeLogin && !activeRole.startsWith('dept_') && activeRole !== 'admin' && activeRole !== 'admission') {
+        setShowAdModal(true);
+      }
+    }, 600);
 
     return () => {
       clearTimeout(timer);
@@ -676,7 +659,7 @@ export default function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative flex flex-col justify-start pt-12 pb-10 md:pt-20 md:pb-16 px-4 sm:px-6 bg-transparent z-10">
+      <section className="relative flex flex-col justify-start pt-12 pb-6 md:pt-20 md:pb-10 px-4 sm:px-6 bg-transparent z-10">
         
         <div className="w-full max-w-[1800px] mx-auto px-1 sm:px-6 flex flex-col items-center relative z-10">
           
@@ -840,9 +823,9 @@ export default function Home() {
 
 
       {/* Leadership Section */}
-      <section className="py-12 md:py-20 px-4 sm:px-6 bg-transparent relative z-10">
+      <section className="py-6 md:py-10 px-4 sm:px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 md:mb-12 flex flex-col items-center">
+          <div className="text-center mb-4 md:mb-8 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Management & Founders</h2>
           </div>
 
@@ -967,10 +950,10 @@ export default function Home() {
       </section>
 
       {/* Bento Department Visualizer replaced with centered sliding showcase */}
-      <section className="dept-showcase-section py-12 md:py-20 px-4 sm:px-6 relative z-10">
+      <section className="dept-showcase-section py-6 md:py-10 px-4 sm:px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           
-          <div className="text-center mb-8 md:mb-12 flex flex-col items-center">
+          <div className="text-center mb-4 md:mb-8 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Department Showcase</h2>
           </div>
 
@@ -1072,9 +1055,9 @@ export default function Home() {
       </section>
 
       {/* WHY JOIN APEC FEATURE GRID */}
-      <section className="why-join-gallery py-12 md:py-20 px-4 sm:px-6 bg-transparent relative z-10">
+      <section className="why-join-gallery py-6 md:py-10 px-4 sm:px-6 bg-transparent relative z-10">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 md:mb-12 flex flex-col items-center">
+          <div className="text-center mb-4 md:mb-8 flex flex-col items-center">
             <h2 className="font-title text-3xl md:text-5xl font-black text-white drop-shadow-lg mb-3 uppercase tracking-wide">Why Join Adhiparasakthi Engineering College?</h2>
           </div>
 
@@ -1089,7 +1072,11 @@ export default function Home() {
               <motion.div 
                 key={idx} 
                 variants={twistReveal}
-                className="benefit-card select-none cursor-pointer relative overflow-hidden"
+                whileHover={{ 
+                  scale: 1.02, 
+                  boxShadow: '0 0 35px rgba(251, 191, 36, 0.75)' 
+                }}
+                className="benefit-card select-none cursor-pointer relative overflow-hidden shadow-[0_0_22px_rgba(245,158,11,0.55)] border border-amber-400/40 hover:border-amber-300 transition-all duration-300"
               >
                 {/* Background image / slideshow wrapper */}
                 <div className="benefit-image-wrapper absolute inset-0 w-full h-full">
@@ -1198,66 +1185,58 @@ export default function Home() {
       </section>
 
       {/* Admissions Advertisement Modal Overlay */}
-      <motion.div
-        animate={showAdModal ? "visible" : "hidden"}
-        initial={{ opacity: 0, pointerEvents: "none", visibility: "hidden" }}
-        variants={{
-          hidden: { opacity: 0, pointerEvents: "none", transitionEnd: { visibility: "hidden" } },
-          visible: { opacity: 1, pointerEvents: "auto", visibility: "visible" }
-        }}
-        transition={{ ease: "easeOut", duration: 0.3 }}
-        className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-6 bg-slate-950/75 backdrop-blur-md overflow-y-auto no-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {/* Backdrop click to close */}
-        <div className="absolute inset-0 cursor-pointer" onClick={handleCloseAdModal} />
+      <AnimatePresence>
+        {showAdModal && (
+          <motion.div
+            key="ad-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ ease: "easeOut", duration: 0.3 }}
+            className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-6 bg-slate-950/75 backdrop-blur-md overflow-y-auto no-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {/* Backdrop click to close */}
+            <div className="absolute inset-0 cursor-pointer" onClick={handleCloseAdModal} />
 
-        {/* Custom Embedded CSS animations */}
-        <style dangerouslySetInnerHTML={{__html: `
-          @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-gradient-border {
-            background-size: 200% 200%;
-            animation: gradient-shift 5s ease infinite;
-          }
-          .no-scrollbar::-webkit-scrollbar {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-          }
-          .no-scrollbar {
-            -ms-overflow-style: none !important;
-            scrollbar-width: none !important;
-          }
-        `}} />
+            {/* Custom Embedded CSS animations */}
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes gradient-shift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+              .animate-gradient-border {
+                background-size: 200% 200%;
+                animation: gradient-shift 5s ease infinite;
+              }
+              .no-scrollbar::-webkit-scrollbar {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
+              }
+              .no-scrollbar {
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
+              }
+            `}} />
 
-        <motion.div
-          variants={{
-            hidden: isMobile 
-              ? { y: '100%', opacity: 0, scale: 0.9 } 
-              : { scale: 0.85, opacity: 0, y: 25 },
-            visible: { 
-              y: 0, 
-              scale: 1, 
-              opacity: 1,
-              transition: { type: 'spring', damping: 22, stiffness: 280 }
-            }
-          }}
-          animate={showAdModal ? "visible" : "hidden"}
-          className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl rounded-t-[2.5rem] md:rounded-[32px] overflow-hidden shadow-2xl bg-slate-950 flex flex-col items-center justify-center min-h-[540px] max-h-[92vh] md:max-h-[90vh] overflow-y-auto no-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden z-10 mx-auto"
-        >
-          {/* ── FULL COVER BACKGROUND IMAGE (POPUP ZOOM EFFECT) ── */}
-          <motion.div 
-            initial={{ scale: 1.15 }}
-            animate={{ scale: showAdModal ? 1.04 : 1.15 }}
-            transition={{ duration: 1.4, ease: "easeOut" }}
-            className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
-            style={{ 
-              backgroundImage: `url(${activeAds.length > 0 && activeAds[currentAdIdx]?.imgUrl ? activeAds[currentAdIdx].imgUrl : adFacilityImages[adFacilityIdx].url})`
-            }}
-          />
+            <motion.div
+              initial={isMobile ? { y: '100%', opacity: 0, scale: 0.9 } : { scale: 0.85, opacity: 0, y: 25 }}
+              animate={{ y: 0, scale: 1, opacity: 1 }}
+              exit={isMobile ? { y: '100%', opacity: 0, scale: 0.9 } : { scale: 0.85, opacity: 0, y: 25 }}
+              transition={{ type: 'spring', damping: 22, stiffness: 280 }}
+              className="relative w-full max-w-lg md:max-w-xl lg:max-w-2xl rounded-t-[2.5rem] md:rounded-[32px] overflow-hidden shadow-2xl bg-slate-950 flex flex-col items-center justify-center min-h-[540px] max-h-[92vh] md:max-h-[90vh] overflow-y-auto no-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden z-10 mx-auto"
+            >
+              {/* ── FULL COVER BACKGROUND IMAGE (POPUP ZOOM EFFECT) ── */}
+              <motion.div 
+                initial={{ scale: 1.15 }}
+                animate={{ scale: 1.04 }}
+                transition={{ duration: 1.4, ease: "easeOut" }}
+                className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
+                style={{ 
+                  backgroundImage: `url(${activeAds.length > 0 && activeAds[currentAdIdx]?.imgUrl ? activeAds[currentAdIdx].imgUrl : adFacilityImages[adFacilityIdx].url})`
+                }}
+              />
           
           {/* Aesthetic Dark Gradient & Glass Vignette Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/70 to-slate-950/85 backdrop-blur-[1px]" />
@@ -1299,6 +1278,44 @@ export default function Home() {
                   Affiliated to Anna University • AICTE Approved • TNEA: 1401
                 </span>
               </div>
+
+              {/* Advertisement Details Banner Text */}
+              {activeAds.length > 0 && activeAds[currentAdIdx]?.details && (
+                <p className="text-[11px] sm:text-xs text-slate-100 font-medium text-center max-w-md mx-auto mt-2.5 px-3.5 py-1.5 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 drop-shadow">
+                  {activeAds[currentAdIdx].details}
+                </p>
+              )}
+
+              {/* Event / Function Countdown Timer Badge */}
+              {activeAds.length > 0 && activeAds[currentAdIdx]?.functionDate && (() => {
+                const target = new Date(activeAds[currentAdIdx].functionDate);
+                const diffDays = Math.ceil((target - new Date()) / (1000 * 60 * 60 * 24));
+                if (diffDays > 0) {
+                  return (
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-400/20 border border-amber-400/40 rounded-full text-amber-200 text-[10px] font-black uppercase tracking-wider mt-2 shadow-sm">
+                      <Clock className="w-3.5 h-3.5 text-amber-300" />
+                      <span>{diffDays} Days Remaining for Event</span>
+                    </div>
+                  );
+                }
+                return null;
+              })()}
+
+              {/* Multi-Ad Pagination Dots Indicator */}
+              {activeAds.length > 1 && (
+                <div className="flex items-center justify-center gap-1.5 mt-2">
+                  {activeAds.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentAdIdx(i)}
+                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        currentAdIdx === i ? 'w-5 bg-amber-400' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                      }`}
+                      aria-label={`Go to ad ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Fully Transparent Admissions Inquiry Form */}
@@ -1307,9 +1324,19 @@ export default function Home() {
                 <span className="font-sans inline-block text-[9px] sm:text-[10px] font-extrabold tracking-wider text-amber-300 bg-amber-400/20 border border-amber-400/35 backdrop-blur-md px-3.5 py-1.5 rounded-full uppercase shadow-sm">
                   {`Admission Inquiry for ${new Date().getFullYear()}-${String(new Date().getFullYear() + 1).slice(-2)}`}
                 </span>
-                <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-200 uppercase tracking-widest hidden sm:inline-block drop-shadow">
-                  Direct Counseling
-                </span>
+                {activeAds.length > 0 && activeAds[currentAdIdx]?.link ? (
+                  <Link
+                    to={activeAds[currentAdIdx].link}
+                    onClick={handleCloseAdModal}
+                    className="text-[9px] sm:text-[10px] font-extrabold text-amber-300 hover:text-amber-200 underline uppercase tracking-widest inline-flex items-center gap-1 drop-shadow"
+                  >
+                    Explore Details <ArrowRight className="w-3 h-3" />
+                  </Link>
+                ) : (
+                  <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-200 uppercase tracking-widest hidden sm:inline-block drop-shadow">
+                    Direct Counseling
+                  </span>
+                )}
               </div>
 
               <AnimatePresence mode="wait">
@@ -1415,6 +1442,7 @@ export default function Home() {
                             <option value="MECH" className="bg-slate-900 text-white font-medium">Mechanical Engineering (B.E.)</option>
                             <option value="CIVIL" className="bg-slate-900 text-white font-medium">Civil Engineering (B.E.)</option>
                             <option value="IT" className="bg-slate-900 text-white font-medium">Information Technology (B.Tech.)</option>
+                            <option value="AIDS" className="bg-slate-900 text-white font-medium">Artificial Intelligence & Data Science (AI & DS / AD) (B.Tech.)</option>
                             <option value="CHEM" className="bg-slate-900 text-white font-medium">Chemical Engineering (B.Tech.)</option>
                             <option value="CSD" className="bg-slate-900 text-white font-medium">Computer Science & Design (CSD) (B.Tech.)</option>
                             <option value="AGRI" className="bg-slate-900 text-white font-medium">Agricultural Engineering (Agri) (B.Tech.)</option>
@@ -1508,6 +1536,8 @@ export default function Home() {
           </div>
         </motion.div>
       </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

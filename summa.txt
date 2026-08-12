@@ -6,3 +6,14 @@
 
   i want you to reduce the gap between tabs in the nav bar just beacuse of the size , some of the text becomes two
     lines so repair it
+
+in department login page if the hod clicks the editor panel the system automatically
+  opens the faculty directory page i want you to show hod dashboard first
+
+  edit the text laboratories & facilities as facilities in the sidebar of the departmen
+  editor panel page and
+
+  in the after edit the facilities in the sidebar in the top right there is the add
+  laboratorory page now i want you to change it as "Add" after clicking it, it will ask
+  for which is to be add like classroom , laboratory , library  by after click which
+  facility is to be added each facility has a name , incharge , description , images

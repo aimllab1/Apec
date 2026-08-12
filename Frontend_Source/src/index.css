@@ -634,8 +634,9 @@ body {
   height: 300px; /* Mobile height */
   border-radius: 20px; /* Rounded corners around the entire card */
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 22px rgba(245, 158, 11, 0.55), 0 12px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   background-color: #07113a;
 }
 
@@ -653,8 +654,9 @@ body {
 }
 
 .why-join-gallery .benefit-card:hover {
-  transform: translateY(-6px); /* Card moves upward by a few pixels */
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-6px) scale(1.02); /* Card moves upward by a few pixels */
+  box-shadow: 0 0 35px rgba(251, 191, 36, 0.75), 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(251, 191, 36, 0.75);
 }
 
 /* Image wrapper containing slideshows or static images */

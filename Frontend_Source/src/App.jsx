@@ -1172,8 +1172,8 @@ function AppContent({ isLoading, setIsLoading }) {
                           />
                         )}
                       </button>
-                      <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[1100px] text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu z-50">
-                        <div className="grid grid-cols-5 gap-6">
+                      <div className="absolute top-[calc(100%-2px)] left-1/2 -translate-x-1/2 bg-white border border-gray-150 shadow-2xl rounded-2xl p-6 w-[960px] text-left opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-150 delay-100 group-hover:delay-0 nav-dropdown-menu z-50">
+                        <div className="grid grid-cols-4 gap-6">
                           <div>
                             <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Undergraduate (B.E.)</span>
                             <div className="space-y-1">
@@ -1193,12 +1193,11 @@ function AppContent({ isLoading, setIsLoading }) {
                               <Link to="/departments/chemical" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Chemical Engineering</Link>
                               <Link to="/departments/agri" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Agricultural Engineering</Link>
                               <Link to="/departments/aids" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Artificial Intelligence & Data Science (AI & DS)</Link>
-                            </div>
-                          </div>
-                          <div>
-                            <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Science & Humanities (S&H)</span>
-                            <div className="space-y-1">
-                              <Link to="/departments/sh" className="block text-xs font-bold text-[#FF8A00] bg-[#FFE7CC]/50 hover:bg-[#FFE7CC] px-2 py-1.5 rounded nav-dropdown-link transition-all">Science & Humanities</Link>
+                              <div className="border-t border-gray-150 my-1.5" />
+                              <div className="pt-1">
+                                <span className="text-[9px] uppercase font-black text-gray-400 tracking-wider block px-2 mb-1.5">Science & Humanities</span>
+                                <Link to="/departments/sh" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Science & Humanities (S&H)</Link>
+                              </div>
                             </div>
                           </div>
                           <div>
@@ -1258,7 +1257,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         <div>
                           <span className="text-[10px] uppercase font-black text-gray-400 tracking-wider block mb-3">Institutional Compliance & Strategy</span>
                           <div className="space-y-1">
-                            <Link to="/r-d-cell" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">R & D Cell</Link>
                             <Link to="/idp" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">IDP (Institutional Development Plan)</Link>
                             <Link to="/ugc-self-disclosure" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">UGC Self Disclosure Guidelines</Link>
                             <Link to="/mandatory-disclosure" className="block text-xs font-extrabold text-gray-700 hover:text-[#FF8A00] hover:bg-[#FFE7CC] px-2 py-1 rounded nav-dropdown-link transition-all">Mandatory Disclosure</Link>
@@ -1424,6 +1422,24 @@ function AppContent({ isLoading, setIsLoading }) {
                       </div>
                     </div>
 
+                    {/* R & D Cell Direct Nav Link */}
+                    <Link 
+                      to="/r-d-cell" 
+                      className={`text-[11px] uppercase tracking-wider transition-all nav-link-dynamic relative px-2 py-0.5 rounded-lg block font-black ${
+                        isActive('/r-d-cell') 
+                          ? 'text-[#FF8A00] bg-[#FFE7CC]/50' 
+                          : 'text-black hover:text-[#FF8A00] hover:bg-[#FFE7CC]'
+                      }`}
+                    >
+                      R & D Cell
+                      {isActive('/r-d-cell') && (
+                        <motion.span 
+                          layoutId="activeNavMark" 
+                          className="absolute bottom-0 left-2 right-2 h-0.5 rounded-full bg-[#FF8A00]" 
+                        />
+                      )}
+                    </Link>
+
                     {/* Alumni Cell Direct Nav Link */}
                     <Link 
                       to="/alumni" 
@@ -1441,7 +1457,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         />
                       )}
                     </Link>
-
 
                     {/* Contact Link */}
                     <Link 
@@ -1601,7 +1616,7 @@ function AppContent({ isLoading, setIsLoading }) {
                         {mobileDepartmentsOpen && (
                           <div className="pl-3 mt-2 space-y-2 flex flex-col border-l border-[#FFD6A5]/60">
                             <Link to="/departments" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-550 block">All Departments</Link>
-                            <Link to="/departments/sh" onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-[#FF8A00] bg-[#FFE7CC]/50 px-2 py-1 rounded block">Science & Humanities (S&H)</Link>
+                            <Link to="/departments/sh" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-550 block">Science & Humanities (S&H)</Link>
                             <Link to="/faculty" onClick={() => setMobileMenuOpen(false)} className="text-xs font-bold text-[#FF8A00] flex items-center justify-between pr-2 mt-1">
                               <span>Faculty Directory (All)</span>
                               <span className="text-[9px] bg-amber-100 text-[#FF8A00] px-1.5 py-0.5 rounded font-black">Open</span>
@@ -1623,7 +1638,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         </button>
                         {mobileUgcOpen && (
                           <div className="pl-3 mt-2 space-y-2 flex flex-col border-l border-[#FFD6A5]/60">
-                            <Link to="/r-d-cell" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">R & D Cell</Link>
                             <Link to="/idp" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">IDP (Institutional Development Plan)</Link>
                             <Link to="/ugc-self-disclosure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">UGC Self Disclosure Guidelines</Link>
                             <Link to="/mandatory-disclosure" onClick={() => setMobileMenuOpen(false)} className="text-xs font-semibold text-gray-500">Mandatory Disclosure</Link>
@@ -1689,6 +1703,9 @@ function AppContent({ isLoading, setIsLoading }) {
                           </div>
                         )}
                       </div>
+
+                      {/* R & D Cell Mobile Link */}
+                      <Link to="/r-d-cell" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-700 block border-b border-gray-150 pb-2">R & D Cell</Link>
 
                       {/* Alumni Cell Mobile Link */}
                       <Link to="/alumni" onClick={() => setMobileMenuOpen(false)} className="text-sm font-semibold text-gray-700 block border-b border-gray-150 pb-2">Alumni Cell</Link>
@@ -1817,6 +1834,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/mandatory-disclosure" element={<PageTransition><MandatoryDisclosure /></PageTransition>} />
                   <Route path="/annual-accounts" element={<PageTransition><AnnualAccounts /></PageTransition>} />
                   <Route path="/ugc-undertaking" element={<PageTransition><UgcUndertaking /></PageTransition>} />
+                  <Route path="/ugc-approval-letter" element={<PageTransition><UgcApprovalLetter /></PageTransition>} />
                   
                   {/* Separate detail files */}
                   <Route path="/departments/:id" element={<PageTransition><DepartmentDetail /></PageTransition>} />
@@ -2218,29 +2236,95 @@ function AppContent({ isLoading, setIsLoading }) {
                   {renderDesktopAccreditationAccordion()}
                 </div>
 
-                {/* ── MOBILE IDENTITY & CONTACT (Visible only on mobile) ── */}
-                <div className="md:hidden flex flex-col gap-4 border-b border-gray-200/80 pb-4 mb-4">
-                  {/* Brand Branding Panel */}
-                  <div className="flex items-center gap-3">
-                    <img 
-                      src="/Images/Logos/apec-logo.png" 
-                      alt="APEC Logo" 
-                      className="w-10 h-10 object-contain shrink-0" 
-                    />
-                    <div className="flex flex-col text-left">
-                      <h3 className="font-title text-xs font-black tracking-tight text-[#07113A] uppercase leading-tight">
-                        {branding.collegeName}
-                      </h3>
-                      <span className="font-mono text-[8px] uppercase font-black text-amber-600 tracking-wider mt-0.5 block leading-none">
-                        {branding.tagline} • AFFILIATED TO ANNA UNIVERSITY
-                      </span>
+                {/* ── MOBILE AREA 1: College Identity (Visible only on mobile, top of footer) ── */}
+                <div className="md:hidden flex items-center gap-3 border-b border-gray-200/80 pb-4 mb-4">
+                  <img 
+                    src="/Images/Logos/apec-logo.png" 
+                    alt="APEC Logo" 
+                    className="w-10 h-10 object-contain shrink-0" 
+                  />
+                  <div className="flex flex-col text-left">
+                    <h3 className="font-title text-xs font-black tracking-tight text-[#07113A] uppercase leading-tight">
+                      {branding.collegeName}
+                    </h3>
+                    <span className="font-mono text-[8px] uppercase font-black text-amber-600 tracking-wider mt-0.5 block leading-none">
+                      {branding.tagline} • AFFILIATED TO ANNA UNIVERSITY
+                    </span>
+                  </div>
+                </div>
+
+                {/* ── MOBILE AREA 2: ACCORDION NAVIGATION (Visible only on mobile, after identity) ── */}
+                <div className="md:hidden flex flex-col border-b border-gray-200/80 pb-4 mb-4">
+                  {renderMobileAccordion('about', 'ABOUT', aboutLinks)}
+                  {renderMobileAccordion('academics', 'ACADEMICS', academicsLinks)}
+                  {renderMobileAccordion('admissions', 'ADMISSIONS & CAREER', admissionsCareerLinks)}
+                  {renderMobileAccordion('campus', 'CAMPUS & SERVICES', campusServicesLinks)}
+                  {renderMobileAccreditationAccordion()}
+                </div>
+
+                {/* ── ACCREDITATION & AFFILIATION LOGO BAR (Centered horizontal row) ── */}
+                <div className="border-b border-gray-200/80 pb-4 mb-4 select-none">
+                  <span className="text-[9px] font-black uppercase text-amber-600 tracking-[0.15em] block mb-3 text-center">
+                    Accreditation & Affiliation
+                  </span>
+                  <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-2">
+                    {/* Anna University */}
+                    <div className="flex items-center gap-2 group cursor-pointer transition-all duration-300">
+                      <img 
+                        src="/Images/Logos/university_logo-rem.png" 
+                        alt="Anna University" 
+                        className="h-8 w-auto object-contain filter grayscale-0 opacity-100 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)] md:grayscale md:opacity-80 md:drop-shadow-none md:group-hover:grayscale-0 md:group-hover:opacity-100 md:group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)] transition-all duration-300" 
+                      />
+                      <div className="flex flex-col text-left">
+                        <span className="text-[10px] font-bold leading-tight text-amber-600 md:text-[#07113A] md:group-hover:text-amber-600 transition-colors duration-300">Anna University</span>
+                        <span className="text-[8px] text-slate-500 font-bold">Affiliated Institution</span>
+                      </div>
+                    </div>
+
+                    {/* UGC */}
+                    <div className="flex items-center gap-2 group cursor-pointer transition-all duration-300">
+                      <img 
+                        src="/Images/Logos/UGC.png" 
+                        alt="UGC" 
+                        className="h-8 w-auto object-contain filter grayscale-0 opacity-100 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)] md:grayscale md:opacity-80 md:drop-shadow-none md:group-hover:grayscale-0 md:group-hover:opacity-100 md:group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)] transition-all duration-300" 
+                      />
+                      <div className="flex flex-col text-left">
+                        <span className="text-[10px] font-bold leading-tight text-amber-600 md:text-[#07113A] md:group-hover:text-amber-600 transition-colors duration-300 font-sans">UGC Autonomous</span>
+                        <span className="text-[8px] text-slate-500 font-bold">10 Years Status</span>
+                      </div>
+                    </div>
+
+                    {/* NAAC */}
+                    <div className="flex items-center gap-2 group cursor-pointer transition-all duration-300">
+                      <img 
+                        src="/Images/Logos/Naac.png" 
+                        alt="NAAC" 
+                        className="h-8 w-auto object-contain filter grayscale-0 opacity-100 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)] md:grayscale md:opacity-80 md:drop-shadow-none md:group-hover:grayscale-0 md:group-hover:opacity-100 md:group-hover:drop-shadow-[0_0_8px_rgba(245,158,11,0.6)] transition-all duration-300" 
+                      />
+                      <div className="flex flex-col text-left">
+                        <span className="text-[10px] font-bold leading-tight text-amber-600 md:text-[#07113A] md:group-hover:text-amber-600 transition-colors duration-300 font-sans">NAAC Accredited</span>
+                        <span className="text-[8px] text-slate-500 font-bold">Grade 'A'</span>
+                      </div>
+                    </div>
+
+                    {/* AICTE & NBA Badges */}
+                    <div className="flex items-center gap-2">
+                      <div className="bg-amber-50 border border-amber-400 text-amber-600 shadow-[0_0_6px_rgba(245,158,11,0.25)] px-2 py-1 rounded text-[9px] font-extrabold tracking-wider md:bg-slate-100 md:border-slate-200/80 md:text-slate-800 md:shadow-none md:hover:bg-amber-50 md:hover:border-amber-400 md:hover:text-amber-600 transition-all cursor-pointer">
+                        AICTE APPROVED
+                      </div>
+                      <div className="bg-amber-50 border border-amber-400 text-amber-600 shadow-[0_0_6px_rgba(245,158,11,0.25)] px-2 py-1 rounded text-[9px] font-extrabold tracking-wider md:bg-slate-100 md:border-slate-200/80 md:text-slate-800 md:shadow-none md:hover:bg-amber-50 md:hover:border-amber-400 md:hover:text-amber-600 transition-all cursor-pointer font-sans">
+                        NBA ACCREDITED
+                      </div>
                     </div>
                   </div>
+                </div>
 
+                {/* ── MOBILE AREA 3: HELPLINES, EMAIL & SOCIAL MEDIA (Visible only on mobile, below Accreditation) ── */}
+                <div className="md:hidden flex flex-col gap-4 border-b border-gray-200/80 pb-4 mb-4">
                   {/* Helplines and Email */}
-                  <div className="flex flex-col gap-2 text-left pl-1">
+                  <div className="flex flex-col gap-2.5 text-left pl-1">
                     <div className="flex flex-col">
-                      <span className="text-[9px] font-black uppercase text-amber-600 tracking-wider">Helpline</span>
+                      <span className="text-[9px] font-black uppercase text-amber-600 tracking-wider">Helplines</span>
                       <span className="text-sm font-bold text-[#07113A] font-mono mt-0.5">
                         <a href={`tel:+91${branding.helpline1}`} className="hover:underline">+91 {branding.helpline1}</a> / <a href={`tel:+91${branding.helpline2}`} className="hover:underline">{branding.helpline2}</a>
                       </span>
@@ -2254,7 +2338,7 @@ function AppContent({ isLoading, setIsLoading }) {
                   </div>
 
                   {/* Social media links */}
-                  <div className="flex items-center gap-3 pl-1">
+                  <div className="flex items-center gap-3 pl-1 pt-1">
                     <a 
                       href="https://www.instagram.com/apec1984/?hl=en" 
                       target="_blank" 
@@ -2313,72 +2397,6 @@ function AppContent({ isLoading, setIsLoading }) {
                         <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
                       </svg>
                     </a>
-                  </div>
-                </div>
-
-                {/* ── MOBILE ACCORDION Menu (hidden on desktop) ── */}
-                <div className="md:hidden flex flex-col border-b border-gray-200/80 pb-4 mb-4">
-                  {renderMobileAccordion('about', 'ABOUT', aboutLinks)}
-                  {renderMobileAccordion('academics', 'ACADEMICS', academicsLinks)}
-                  {renderMobileAccordion('admissions', 'ADMISSIONS & CAREER', admissionsCareerLinks)}
-                  {renderMobileAccordion('campus', 'CAMPUS & SERVICES', campusServicesLinks)}
-                  {renderMobileAccreditationAccordion()}
-                </div>
-
-                {/* ── ACCREDITATION & AFFILIATION LOGO BAR ── */}
-                <div className="border-b border-gray-200/80 pb-4 mb-4 select-none">
-                  <span className="text-[9px] font-black uppercase text-amber-600 tracking-[0.15em] block mb-3 text-center md:text-left">
-                    Accreditation & Affiliation
-                  </span>
-                  <div className="flex flex-wrap items-center justify-center md:justify-start gap-5 md:gap-8">
-                    {/* Anna University */}
-                    <div className="flex items-center gap-2 group cursor-pointer transition-all duration-300">
-                      <img 
-                        src="/Images/Logos/university_logo-rem.png" 
-                        alt="Anna University" 
-                        className="h-8 w-auto object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300" 
-                      />
-                      <div className="flex flex-col text-left">
-                        <span className="text-[10px] font-bold text-[#07113A] leading-tight group-hover:text-amber-600 transition-colors duration-300">Anna University</span>
-                        <span className="text-[8px] text-slate-500 font-bold">Affiliated Institution</span>
-                      </div>
-                    </div>
-
-                    {/* UGC */}
-                    <div className="flex items-center gap-2 group cursor-pointer transition-all duration-300">
-                      <img 
-                        src="/Images/Logos/UGC.png" 
-                        alt="UGC" 
-                        className="h-8 w-auto object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300" 
-                      />
-                      <div className="flex flex-col text-left">
-                        <span className="text-[10px] font-bold text-[#07113A] leading-tight group-hover:text-amber-600 transition-colors duration-300 font-sans">UGC Autonomous</span>
-                        <span className="text-[8px] text-slate-500 font-bold">10 Years Status</span>
-                      </div>
-                    </div>
-
-                    {/* NAAC */}
-                    <div className="flex items-center gap-2 group cursor-pointer transition-all duration-300">
-                      <img 
-                        src="/Images/Logos/Naac.png" 
-                        alt="NAAC" 
-                        className="h-8 w-auto object-contain filter grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-300" 
-                      />
-                      <div className="flex flex-col text-left">
-                        <span className="text-[10px] font-bold text-[#07113A] leading-tight group-hover:text-amber-600 transition-colors duration-300 font-sans">NAAC Accredited</span>
-                        <span className="text-[8px] text-slate-500 font-bold">Grade 'A'</span>
-                      </div>
-                    </div>
-
-                    {/* AICTE & NBA Badges */}
-                    <div className="flex items-center gap-2">
-                      <div className="bg-slate-100 border border-slate-200/80 px-2 py-1 rounded text-[9px] font-extrabold text-slate-800 tracking-wider hover:bg-amber-50 hover:border-amber-400 hover:text-amber-600 transition-all cursor-pointer">
-                        AICTE APPROVED
-                      </div>
-                      <div className="bg-slate-100 border border-slate-200/80 px-2 py-1 rounded text-[9px] font-extrabold text-slate-800 tracking-wider hover:bg-amber-50 hover:border-amber-400 hover:text-amber-600 transition-all cursor-pointer font-sans">
-                        NBA ACCREDITED
-                      </div>
-                    </div>
                   </div>
                 </div>
 

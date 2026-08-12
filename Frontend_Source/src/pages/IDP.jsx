@@ -109,17 +109,19 @@ export default function IDP() {
         
         {/* Header Block */}
         <div className="mb-6 border-b border-gray-200 pb-6 w-full text-left">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block uppercase">
+          <div className="flex items-center justify-between gap-3 mb-4 w-full">
+            <span className="text-[10px] sm:text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-3 py-1.5 sm:px-4 sm:py-2 rounded-full inline-block uppercase">
               UGC Compliance
             </span>
             <a 
               href={pdfUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-2.5 bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-md hover:shadow-indigo-500/10 active:scale-95 transition-all shrink-0 border border-indigo-750"
+              title="Download Official IDP PDF"
+              className="flex items-center justify-center gap-2 bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider p-2.5 sm:px-5 sm:py-3 rounded-xl shadow-md hover:shadow-indigo-500/10 active:scale-95 transition-all shrink-0 border border-indigo-750"
             >
-              <Download className="w-4 h-4" /> Download Official IDP PDF
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline">Download Official IDP PDF</span>
             </a>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
@@ -135,7 +137,7 @@ export default function IDP() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative pl-6 md:pl-10 border-l border-gray-200 space-y-12"
+          className="relative pl-0 md:pl-10 border-l-0 md:border-l border-gray-200 space-y-8 md:space-y-12"
         >
           {timelineData.map((item, idx) => (
             <motion.div 
@@ -143,16 +145,18 @@ export default function IDP() {
               variants={cardVariants}
               className="relative"
             >
-              {/* Timeline Bullet Indicator */}
-              <div 
-                className="absolute -left-[35px] md:-left-[51px] top-0 w-8 h-8 rounded-full bg-white border-2 flex items-center justify-center shadow-sm"
-                style={{ borderColor: item.colorCode }}
-              >
-                <span className="text-[10px] font-black text-gray-900">{item.year}</span>
+              {/* Timeline Centered Year Badge on Mobile / Left Bullet on Desktop */}
+              <div className="flex justify-center md:block mb-2 md:mb-0">
+                <div 
+                  className="relative md:absolute md:-left-[51px] md:top-0 px-3 py-0.5 md:px-0 md:py-0 md:w-8 md:h-8 rounded-full bg-white border-2 flex items-center justify-center shadow-sm z-10"
+                  style={{ borderColor: item.colorCode }}
+                >
+                  <span className="text-[11px] md:text-[10px] font-black text-gray-900">{item.year}</span>
+                </div>
               </div>
 
               {/* Year Card */}
-              <div className={`border border-gray-250 p-6 md:p-8 rounded-3xl bg-white shadow-sm hover:shadow-md transition-shadow ${item.theme}`}>
+              <div className={`border border-gray-250 p-5 md:p-8 rounded-3xl bg-white shadow-sm hover:shadow-md transition-shadow ${item.theme}`}>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-12 h-12 bg-white border border-gray-200 rounded-2xl flex items-center justify-center shadow-sm">
                     {item.icon}

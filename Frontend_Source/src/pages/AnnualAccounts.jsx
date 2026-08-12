@@ -83,15 +83,17 @@ export default function AnnualAccounts() {
         
         {/* Header Block */}
         <div className="mb-6 border-b border-gray-200 pb-6 w-full text-left">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block uppercase">
+          <div className="flex items-center justify-between gap-3 mb-4 w-full">
+            <span className="text-[10px] sm:text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-3 py-1.5 sm:px-4 sm:py-2 rounded-full inline-block uppercase">
               Financial Audit Disclosures
             </span>
             <Link 
               to="/mandatory-disclosure" 
-              className="flex items-center gap-2 bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-md hover:shadow-indigo-500/10 active:scale-95 transition-all shrink-0 border border-indigo-750"
+              title="Mandatory Disclosure"
+              className="flex items-center justify-center gap-2 bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider p-2.5 sm:px-5 sm:py-3 rounded-xl shadow-md hover:shadow-indigo-500/10 active:scale-95 transition-all shrink-0 border border-indigo-750"
             >
-              Mandatory Disclosure <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 sm:hidden" />
+              <span className="hidden sm:inline-flex items-center gap-2">Mandatory Disclosure <ArrowRight className="w-4 h-4" /></span>
             </Link>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
