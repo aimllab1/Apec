@@ -57,7 +57,7 @@ export default function Nirf() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-gray-900 py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-gray-900 pt-6 md:pt-10 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/3 w-[600px] h-[600px] bg-amber-100/20 rounded-full blur-3xl pointer-events-none" />
@@ -66,18 +66,16 @@ export default function Nirf() {
       <div className="max-w-6xl mx-auto relative z-10 text-left">
         
         {/* Header Block */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16 border-b border-gray-200 pb-10">
-          <div>
-            <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block mb-4 uppercase">
-              National Rankings
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
-              National Institutional Ranking Framework (NIRF)
-            </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl leading-relaxed">
-              Official submissions and parameters reporting for the Ministry of Education's national ranking system. Access reports across Overall, Engineering, Management, and SDG categories.
-            </p>
-          </div>
+        <div className="mb-6 border-b border-gray-200 pb-6 w-full text-left">
+          <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block mb-4 uppercase">
+            National Rankings
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
+            National Institutional Ranking Framework (NIRF)
+          </h1>
+          <p className="text-sm sm:text-base md:text-lg text-slate-650 font-bold leading-relaxed sm:leading-loose w-full text-justify">
+            Official submissions and parameters reporting for the Ministry of Education's national ranking system. Access reports across Overall, Engineering, Management, and SDG categories.
+          </p>
         </div>
 
         {/* Dashboard Grid */}
@@ -85,7 +83,7 @@ export default function Nirf() {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="space-y-12"
+          className="space-y-6 sm:space-y-8"
         >
           {nirfCategories.map((category, catIdx) => {
             const IconComponent = category.icon;

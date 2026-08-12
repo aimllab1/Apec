@@ -4,12 +4,12 @@ import {
   GraduationCap, FileText, Calendar, Bell, Info, User, 
   CheckCircle2, AlertTriangle, RefreshCw, BarChart2, BookOpen, 
   Settings, UploadCloud, Users, Layers, ShieldAlert, Award, 
-  FileSpreadsheet, PlusCircle, Power, Menu, X, ArrowUpRight, Search, Eye, Download
+  FileSpreadsheet, PlusCircle, Power, Menu, X, ArrowUpRight, Search, Eye, Download, Clipboard
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CoeAdmin() {
-  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard', 'departments', 'students', 'examinations', 'results-upload', 'results-pending', 'results-published', 'notifications', 'reports', 'settings'
+  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard', 'departments', 'students', 'examinations', 'results-upload', 'results-pending', 'results-published', 'requests', 'notifications', 'reports', 'settings'
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [resultsMenuOpen, setResultsMenuOpen] = useState(true);
 
@@ -34,6 +34,137 @@ export default function CoeAdmin() {
     { regNo: "4208", name: "Elango V", subjectCode: "CS8601", subjectName: "Mobile Computing", marks: null, grade: "WH", credits: 3, status: "WITHHELD" }
   ];
 
+  // Timetable State seeded inside localStorage for connection with Student Portal
+  const [timetable, setTimetable] = useState(() => {
+    const saved = localStorage.getItem('apec_coe_timetable');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    const initialTimetable = [
+      { id: 1, exam: "End Semester Examinations April/May 2026", dept: "B.E. Computer Science and Engineering", sem: "Semester VI", code: "CS8601", name: "Mobile Computing", date: "2026-06-22", time: "10:00 AM - 01:00 PM", hall: "LH-201" },
+      { id: 2, exam: "End Semester Examinations April/May 2026", dept: "B.E. Computer Science and Engineering", sem: "Semester VI", code: "CS8602", name: "Compiler Design", date: "2026-06-24", time: "10:00 AM - 01:00 PM", hall: "LH-201" },
+      { id: 3, exam: "End Semester Examinations April/May 2026", dept: "B.E. Computer Science and Engineering", sem: "Semester VI", code: "CS8603", name: "Artificial Intelligence", date: "2026-06-26", time: "10:00 AM - 01:00 PM", hall: "LH-202" },
+      { id: 4, exam: "End Semester Examinations April/May 2026", dept: "B.E. Computer Science and Engineering", sem: "Semester VI", code: "CS8651", name: "Internet Programming", date: "2026-06-29", time: "10:00 AM - 01:00 PM", hall: "LH-203" }
+    ];
+    localStorage.setItem('apec_coe_timetable', JSON.stringify(initialTimetable));
+    return initialTimetable;
+  });
+
+  // Timetable entry form input states
+  const [newExam, setNewExam] = useState('End Semester Examinations April/May 2026');
+  const [newDept, setNewDept] = useState('B.E. Computer Science and Engineering');
+  const [newSem, setNewSem] = useState('Semester VI');
+  const [newCode, setNewCode] = useState('');
+  const [newName, setNewName] = useState('');
+  const [newDate, setNewDate] = useState('');
+  const [newTime, setNewTime] = useState('10:00 AM - 01:00 PM');
+  const [newHall, setNewHall] = useState('LH-201');
+
+  const handleAddTimetable = (e) => {
+    e.preventDefault();
+    if (!newCode.trim() || !newName.trim() || !newDate) {
+      alert("Please fill in Subject Code, Subject Name, and Exam Date.");
+      return;
+    }
+    const entry = {
+      id: Date.now(),
+      exam: newExam,
+      dept: newDept,
+      sem: newSem,
+      code: newCode.toUpperCase().trim(),
+      name: newName.trim(),
+      date: newDate,
+      time: newTime,
+      hall: newHall.trim()
+    };
+    const updated = [...timetable, entry];
+    setTimetable(updated);
+    localStorage.setItem('apec_coe_timetable', JSON.stringify(updated));
+    
+    // Reset inputs
+    setNewCode('');
+    setNewName('');
+    setNewDate('');
+  };
+
+  const handleDeleteTimetable = (id) => {
+    const updated = timetable.filter(item => item.id !== id);
+    setTimetable(updated);
+    localStorage.setItem('apec_coe_timetable', JSON.stringify(updated));
+  };
+
+  // Revaluation Requests state synced dynamically with localStorage
+  const [revalRequests, setRevalRequests] = useState(() => {
+    const saved = localStorage.getItem('apec_revaluation_requests');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    const initialRequests = [
+      { id: 101, regNo: "4204", studentName: "Arjun Kumar S", sem: "Semester V", code: "CS8501", name: "Theory of Computation", currentMarks: 85, currentGrade: "A+", status: "Under Review", date: "11-08-2026", remarks: "Paper sent to external valuation board." }
+    ];
+    localStorage.setItem('apec_revaluation_requests', JSON.stringify(initialRequests));
+    return initialRequests;
+  });
+
+  // Correction Requests state synced dynamically with localStorage
+  const [correctRequests, setCorrectRequests] = useState(() => {
+    const saved = localStorage.getItem('apec_correction_requests');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {}
+    }
+    const initialRequests = [
+      { id: 201, regNo: "4204", studentName: "Arjun Kumar S", sem: "Semester V", code: "CS8591", name: "Computer Networks", type: "Marks Discrepancy", desc: "Internal marks of 20 out of 20 were not added correctly to final grades.", file: "IA_CSE_SemV.pdf", status: "Pending", date: "11-08-2026", remarks: "" }
+    ];
+    localStorage.setItem('apec_correction_requests', JSON.stringify(initialRequests));
+    return initialRequests;
+  });
+
+  // Active sub-tab inside requests tab ('reval' or 'correct')
+  const [requestsSubTab, setRequestsSubTab] = useState('reval');
+  const [selectedReqItem, setSelectedReqItem] = useState(null);
+  const [showReqActionModal, setShowReqActionModal] = useState(false);
+  const [reqRemarksInput, setReqRemarksInput] = useState('');
+  const [reqStatusInput, setReqStatusInput] = useState('Under Review');
+  const [reqTargetType, setReqTargetType] = useState('reval'); // 'reval' or 'correct'
+
+  const handleOpenReqModal = (item, type) => {
+    setSelectedReqItem(item);
+    setReqTargetType(type);
+    setReqStatusInput(item.status);
+    setReqRemarksInput(item.remarks || '');
+    setShowReqActionModal(true);
+  };
+
+  const handleUpdateReq = () => {
+    if (reqTargetType === 'reval') {
+      const updated = revalRequests.map(r => {
+        if (r.id === selectedReqItem.id) {
+          return { ...r, status: reqStatusInput, remarks: reqRemarksInput };
+        }
+        return r;
+      });
+      setRevalRequests(updated);
+      localStorage.setItem('apec_revaluation_requests', JSON.stringify(updated));
+    } else {
+      const updated = correctRequests.map(r => {
+        if (r.id === selectedReqItem.id) {
+          return { ...r, status: reqStatusInput, remarks: reqRemarksInput };
+        }
+        return r;
+      });
+      setCorrectRequests(updated);
+      localStorage.setItem('apec_correction_requests', JSON.stringify(updated));
+    }
+    setShowReqActionModal(false);
+    setSelectedReqItem(null);
+  };
+
   // Pending Results Workflow List State
   const [pendingList, setPendingList] = useState([
     { 
@@ -50,7 +181,8 @@ export default function CoeAdmin() {
         { code: "CS8602", name: "Compiler Design", marks: 76, grade: "A", credits: 4, status: "PASS" },
         { code: "CS8603", name: "Artificial Intelligence", marks: 91, grade: "O", credits: 3, status: "PASS" },
         { code: "CS8651", name: "Internet Programming", marks: 82, grade: "A+", credits: 3, status: "PASS" },
-        { code: "CS8611", name: "Mini Project", marks: 95, grade: "O", credits: 2, status: "PASS" }
+        { code: "CS8611", name: "Mini Project", marks: 95, grade: "O", credits: 2, status: "PASS" },
+        { code: "HS8561", name: "Professional Communication", marks: 89, grade: "A+", credits: 2, status: "PASS" }
       ]
     },
     { 
@@ -153,7 +285,7 @@ export default function CoeAdmin() {
         ${sidebarOpen ? 'block' : 'hidden lg:flex'}
       `}>
         {/* Sidebar Header */}
-        <div className="p-5 border-b border-slate-800 flex items-center gap-3">
+        <div className="p-5 border-b border-slate-805 flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0 shadow-md">
             <img src="/Images/Logos/apec-logo.png" alt="APEC Logo" className="w-full h-full object-contain" />
           </div>
@@ -170,7 +302,7 @@ export default function CoeAdmin() {
           <button 
             onClick={() => { setActiveTab('dashboard'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'dashboard' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'dashboard' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <BarChart2 className="w-4 h-4" />
@@ -181,7 +313,7 @@ export default function CoeAdmin() {
           <button 
             onClick={() => { setActiveTab('departments'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'departments' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'departments' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -192,7 +324,7 @@ export default function CoeAdmin() {
           <button 
             onClick={() => { setActiveTab('students'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'students' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'students' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <Users className="w-4 h-4" />
@@ -203,7 +335,7 @@ export default function CoeAdmin() {
           <button 
             onClick={() => { setActiveTab('examinations'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'examinations' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'examinations' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <Calendar className="w-4 h-4" />
@@ -253,11 +385,22 @@ export default function CoeAdmin() {
             )}
           </div>
 
+          {/* Student Requests Item */}
+          <button 
+            onClick={() => { setActiveTab('requests'); setSidebarOpen(false); }}
+            className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
+              activeTab === 'requests' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+            }`}
+          >
+            <Clipboard className="w-4 h-4" />
+            <span>Student Requests</span>
+          </button>
+
           {/* Notifications Item */}
           <button 
             onClick={() => { setActiveTab('notifications'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'notifications' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'notifications' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <Bell className="w-4 h-4" />
@@ -268,7 +411,7 @@ export default function CoeAdmin() {
           <button 
             onClick={() => { setActiveTab('reports'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'reports' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'reports' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <Award className="w-4 h-4" />
@@ -279,7 +422,7 @@ export default function CoeAdmin() {
           <button 
             onClick={() => { setActiveTab('settings'); setSidebarOpen(false); }}
             className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-colors cursor-pointer ${
-              activeTab === 'settings' ? 'bg-indigo-650 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
+              activeTab === 'settings' ? 'bg-indigo-655 text-white shadow-md' : 'hover:bg-slate-800 hover:text-white'
             }`}
           >
             <Settings className="w-4 h-4" />
@@ -317,6 +460,7 @@ export default function CoeAdmin() {
               {activeTab === 'results-upload' && "Simulate Result Ingestion"}
               {activeTab === 'results-pending' && "Awaiting Examination Approvals"}
               {activeTab === 'results-published' && "Published Examination Registers"}
+              {activeTab === 'requests' && "Revaluation & Corrections Workspace"}
               {activeTab === 'notifications' && "Broadcast Announcements"}
               {activeTab === 'reports' && "Academic Performance Reporting"}
               {activeTab === 'settings' && "System Parameters"}
@@ -444,11 +588,11 @@ export default function CoeAdmin() {
 
                 {/* Program */}
                 <div>
-                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1.5">Select Program</label>
+                  <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1.5">Select Program</label>
                   <select 
                     value={selectedProg}
                     onChange={(e) => setSelectedProg(e.target.value)}
-                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-800"
+                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-805"
                   >
                     <option>Undergraduate (UG)</option>
                     <option>Postgraduate (PG)</option>
@@ -457,11 +601,11 @@ export default function CoeAdmin() {
 
                 {/* Semester */}
                 <div>
-                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1.5">Select Semester</label>
+                  <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1.5">Select Semester</label>
                   <select 
                     value={selectedSem}
                     onChange={(e) => setSelectedSem(e.target.value)}
-                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-800"
+                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-805"
                   >
                     <option>Semester I</option>
                     <option>Semester II</option>
@@ -474,11 +618,11 @@ export default function CoeAdmin() {
 
                 {/* Regulation */}
                 <div>
-                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1.5">Select Regulation</label>
+                  <label className="block text-[9px] uppercase font-black text-gray-455 tracking-wider mb-1.5">Select Regulation</label>
                   <select 
                     value={selectedReg}
                     onChange={(e) => setSelectedReg(e.target.value)}
-                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-800"
+                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-805"
                   >
                     <option>Regulation 2021</option>
                     <option>Regulation 2023</option>
@@ -520,9 +664,9 @@ export default function CoeAdmin() {
               <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-gray-150">
                 <button 
                   onClick={() => alert("Downloading spreadsheet layout template (APEC_Result_Upload_Template.xlsx)")}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-600 hover:text-indigo-650 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-600 hover:text-indigo-655 transition-all cursor-pointer"
                 >
-                  <Download className="w-4 h-4 text-emerald-600 animate-pulse" />
+                  <Download className="w-4 h-4 text-emerald-605 animate-pulse" />
                   <span>Download Template</span>
                 </button>
 
@@ -545,7 +689,7 @@ export default function CoeAdmin() {
                   <button 
                     disabled={!fileAttached}
                     onClick={() => setShowPreview(true)}
-                    className="flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-gray-355 disabled:opacity-50 text-gray-700 font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
+                    className="flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-gray-355 disabled:opacity-50 text-gray-705 font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
                   >
                     <span>Preview Results</span>
                   </button>
@@ -577,7 +721,7 @@ export default function CoeAdmin() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-2xl text-xs font-bold flex items-center gap-2"
+                  className="bg-emerald-50 border border-emerald-200 text-emerald-805 p-4 rounded-2xl text-xs font-bold flex items-center gap-2"
                 >
                   <CheckCircle2 className="w-5 h-5 text-emerald-650 shrink-0" />
                   <span>Success: Grades uploaded and recorded to pending buffer queue. Student portals will be notified upon admin publish verification.</span>
@@ -589,7 +733,7 @@ export default function CoeAdmin() {
             {validationRun && (
               <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-4">
                 <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                  <ShieldAlert className="w-4 h-4 text-amber-500" /> Grade Sheet Validation Logs
+                  <ShieldAlert className="w-4 h-4 text-amber-505" /> Grade Sheet Validation Logs
                 </h4>
                 <div className="bg-slate-900 rounded-2xl p-4 font-mono text-[11px] leading-relaxed space-y-2 max-h-48 overflow-y-auto">
                   <p className="text-emerald-400">[VALIDATION SUCCESS] 5 out of 5 student rows parsed. Struct matches Regulation 2021 scheme.</p>
@@ -602,13 +746,13 @@ export default function CoeAdmin() {
             {/* Result Preview spreadsheet */}
             {showPreview && (
               <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm space-y-4">
-                <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                <h4 className="text-xs font-black text-slate-850 uppercase tracking-wider flex items-center gap-1.5">
                   <Eye className="w-4 h-4 text-indigo-650" /> Grade Sheet Data Preview
                 </h4>
                 <div className="overflow-x-auto border border-gray-200 rounded-2xl">
                   <table className="w-full text-xs text-left border-collapse">
                     <thead>
-                      <tr className="bg-slate-50 border-b border-gray-200 text-gray-450 uppercase text-[9px] font-black tracking-wider">
+                      <tr className="bg-slate-50 border-b border-gray-200 text-gray-455 uppercase text-[9px] font-black tracking-wider">
                         <th className="px-5 py-4">Register Number</th>
                         <th className="px-5 py-4">Student Name</th>
                         <th className="px-5 py-4">Subject Code</th>
@@ -632,10 +776,10 @@ export default function CoeAdmin() {
                           <td className="px-5 py-4 text-center">
                             <span className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase ${
                               row.status === 'PASS' 
-                                ? 'bg-green-50 text-green-600 border border-green-100' 
+                                ? 'bg-green-50 text-green-600' 
                                 : row.status === 'FAIL'
-                                ? 'bg-rose-50 text-rose-600 border border-rose-100'
-                                : 'bg-amber-50 text-amber-600 border border-amber-100'
+                                ? 'bg-rose-50 text-rose-600'
+                                : 'bg-amber-50 text-amber-600'
                             }`}>
                               {row.status}
                             </span>
@@ -652,7 +796,7 @@ export default function CoeAdmin() {
 
         {/* Tab 3: Pending Results Section */}
         {activeTab === 'results-pending' && (
-          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm text-left animate-fade-in space-y-6">
+          <div className="bg-white border border-gray-202 rounded-3xl p-6 shadow-sm text-left animate-fade-in space-y-6">
             <div>
               <h3 className="text-base font-black text-slate-900 font-title mb-1">Awaiting Academic Approval</h3>
               <p className="text-xs text-gray-400 font-semibold leading-relaxed">
@@ -663,7 +807,7 @@ export default function CoeAdmin() {
             <div className="overflow-x-auto border border-gray-200 rounded-2xl">
               <table className="w-full text-xs text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-gray-200 text-gray-450 uppercase text-[9px] font-black tracking-wider">
+                  <tr className="bg-slate-50 border-b border-gray-200 text-gray-455 uppercase text-[9px] font-black tracking-wider">
                     <th className="px-5 py-4">Upload Details</th>
                     <th className="px-5 py-4">Department & Exam</th>
                     <th className="px-5 py-4 text-center">Semester</th>
@@ -694,8 +838,8 @@ export default function CoeAdmin() {
                       <td className="px-5 py-4 text-center">
                         <span className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase ${
                           item.validationStatus.includes('Passed')
-                            ? 'bg-emerald-50 text-emerald-600 border border-emerald-100'
-                            : 'bg-amber-50 text-amber-600 border border-[#FFE7CC]'
+                            ? 'bg-emerald-50 text-emerald-600'
+                            : 'bg-amber-50 text-amber-600'
                         }`}>
                           {item.validationStatus}
                         </span>
@@ -708,7 +852,7 @@ export default function CoeAdmin() {
                             : item.status === 'HOD Approved'
                             ? 'bg-blue-50 text-blue-600 border-blue-200'
                             : item.status === 'COE Approved'
-                            ? 'bg-indigo-50 text-indigo-650 border-indigo-200'
+                            ? 'bg-indigo-50 text-indigo-655 border-indigo-200'
                             : item.status === 'Rejected'
                             ? 'bg-rose-50 text-rose-600 border-rose-200'
                             : 'bg-green-50 text-green-600 border-green-200'
@@ -725,7 +869,7 @@ export default function CoeAdmin() {
                               setSelectedPendingItem(item);
                               setShowReviewModal(true);
                             }}
-                            className="text-[9px] font-black uppercase tracking-wider text-indigo-650 bg-indigo-50 hover:bg-indigo-100 border border-indigo-150 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer"
+                            className="text-[9px] font-black uppercase tracking-wider text-indigo-655 bg-indigo-50 hover:bg-indigo-100 border border-indigo-150 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer"
                           >
                             View
                           </button>
@@ -744,7 +888,7 @@ export default function CoeAdmin() {
                           {item.status === 'COE Approved' && (
                             <button 
                               onClick={() => handleActionClick(item, 'publish')}
-                              className="text-[9px] font-black uppercase tracking-wider text-white bg-emerald-650 hover:bg-emerald-600 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer shadow-sm"
+                              className="text-[9px] font-black uppercase tracking-wider text-white bg-emerald-650 hover:bg-emerald-650 px-2.5 py-1.5 rounded-lg transition-all cursor-pointer shadow-sm"
                             >
                               Publish
                             </button>
@@ -790,7 +934,7 @@ export default function CoeAdmin() {
 
               {/* Search bar mock */}
               <div className="relative shrink-0 w-full sm:w-64">
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-450 pointer-events-none">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 pointer-events-none">
                   <Search className="w-4 h-4" />
                 </span>
                 <input 
@@ -804,7 +948,7 @@ export default function CoeAdmin() {
             <div className="overflow-x-auto border border-gray-200 rounded-2xl">
               <table className="w-full text-xs text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-gray-200 text-gray-450 uppercase text-[9px] font-black tracking-wider">
+                  <tr className="bg-slate-50 border-b border-gray-200 text-gray-455 uppercase text-[9px] font-black tracking-wider">
                     <th className="px-5 py-4">Department</th>
                     <th className="px-5 py-4">Semester</th>
                     <th className="px-5 py-4 text-center">Published Date</th>
@@ -839,8 +983,317 @@ export default function CoeAdmin() {
           </div>
         )}
 
+        {/* Tab: Examinations (Timetable Management) */}
+        {activeTab === 'examinations' && (
+          <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm text-left animate-fade-in space-y-8">
+            <div>
+              <h3 className="text-base font-black text-slate-900 font-title mb-1">Manage Examination Timetable</h3>
+              <p className="text-xs text-gray-400 font-semibold leading-relaxed">
+                Add, update, or remove exam schedule parameters. Changes propagate instantly to student hall tickets and timetables.
+              </p>
+            </div>
+
+            {/* Timetable Addition Form */}
+            <form onSubmit={handleAddTimetable} className="p-5 border border-gray-200 rounded-2xl bg-slate-50 space-y-4">
+              <h4 className="text-xs font-black text-slate-805 uppercase tracking-wider">Add Exam Slot</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Examination</label>
+                  <select 
+                    value={newExam}
+                    onChange={(e) => setNewExam(e.target.value)}
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  >
+                    <option>End Semester Examinations April/May 2026</option>
+                    <option>End Semester Examinations Nov/Dec 2025</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Department</label>
+                  <select 
+                    value={newDept}
+                    onChange={(e) => setNewDept(e.target.value)}
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  >
+                    <option>B.E. Computer Science and Engineering</option>
+                    <option>B.E. Electronics & Communication Engg.</option>
+                    <option>B.E. Electrical & Electronics Engg.</option>
+                    <option>B.E. Mechanical Engineering</option>
+                    <option>B.Tech Chemical Engineering</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Semester</label>
+                  <select 
+                    value={newSem}
+                    onChange={(e) => setNewSem(e.target.value)}
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-855"
+                  >
+                    <option>Semester I</option>
+                    <option>Semester II</option>
+                    <option>Semester III</option>
+                    <option>Semester IV</option>
+                    <option>Semester V</option>
+                    <option>Semester VI</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Subject Code</label>
+                  <input 
+                    type="text" 
+                    value={newCode}
+                    onChange={(e) => setNewCode(e.target.value)}
+                    placeholder="e.g. CS8601"
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Subject Name</label>
+                  <input 
+                    type="text" 
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                    placeholder="e.g. Mobile Computing"
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Exam Date</label>
+                  <input 
+                    type="date" 
+                    value={newDate}
+                    onChange={(e) => setNewDate(e.target.value)}
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Exam Time</label>
+                  <select 
+                    value={newTime}
+                    onChange={(e) => setNewTime(e.target.value)}
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  >
+                    <option>10:00 AM - 01:00 PM</option>
+                    <option>02:00 PM - 05:00 PM</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[9px] uppercase font-black text-gray-400 tracking-wider mb-1">Exam Hall</label>
+                  <input 
+                    type="text" 
+                    value={newHall}
+                    onChange={(e) => setNewHall(e.target.value)}
+                    placeholder="e.g. LH-201"
+                    className="w-full text-xs px-3 py-2 bg-white border border-gray-250 rounded-xl outline-none font-semibold text-slate-850"
+                  />
+                </div>
+              </div>
+              <div className="flex justify-end pt-2">
+                <button 
+                  type="submit"
+                  className="flex items-center gap-1.5 bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl shadow-md cursor-pointer transition-all active:scale-95"
+                >
+                  <PlusCircle className="w-4 h-4" /> Add Slot
+                </button>
+              </div>
+            </form>
+
+            {/* Timetable List Grid */}
+            <div className="space-y-4">
+              <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider">Scheduled Exam Roster</h4>
+              <div className="overflow-x-auto border border-gray-200 rounded-2xl">
+                <table className="w-full text-xs text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-gray-200 text-gray-450 uppercase text-[9px] font-black tracking-wider">
+                      <th className="px-5 py-4">Department & Sem</th>
+                      <th className="px-5 py-4">Subject</th>
+                      <th className="px-5 py-4 text-center">Exam Date</th>
+                      <th className="px-5 py-4 text-center">Time Slot</th>
+                      <th className="px-5 py-4 text-center">Hall No</th>
+                      <th className="px-5 py-4 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+                    {timetable.map((item) => (
+                      <tr key={item.id} className="hover:bg-slate-50/50">
+                        <td className="px-5 py-4">
+                          <span className="text-slate-900 font-bold block">{item.dept}</span>
+                          <span className="text-[10px] text-gray-400 block mt-0.5">{item.sem} | {item.exam}</span>
+                        </td>
+                        <td className="px-5 py-4">
+                          <span className="font-mono font-bold text-gray-905 block">{item.code}</span>
+                          <span className="text-xs text-slate-655 block mt-0.5">{item.name}</span>
+                        </td>
+                        <td className="px-5 py-4 text-center font-mono font-bold text-indigo-650">{item.date}</td>
+                        <td className="px-5 py-4 text-center font-mono text-gray-505">{item.time}</td>
+                        <td className="px-5 py-4 text-center font-bold">{item.hall}</td>
+                        <td className="px-5 py-4 text-center">
+                          <button 
+                            type="button"
+                            onClick={() => handleDeleteTimetable(item.id)}
+                            className="text-[9px] font-black uppercase tracking-wider text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-150 px-3 py-1.5 rounded-lg transition-all cursor-pointer"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Tab: Revaluation & Corrections Management Workspace */}
+        {activeTab === 'requests' && (
+          <div className="bg-white border border-gray-202 rounded-3xl p-6 shadow-sm text-left animate-fade-in space-y-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h3 className="text-base font-black text-slate-900 font-title mb-1">Academic Requests Control</h3>
+                <p className="text-xs text-gray-400 font-semibold">Track student revaluation scripts and grade correction requests.</p>
+              </div>
+
+              {/* Sub tabs selector */}
+              <div className="flex gap-2 shrink-0">
+                <button 
+                  onClick={() => setRequestsSubTab('reval')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
+                    requestsSubTab === 'reval' ? 'bg-indigo-655 text-white shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-gray-600'
+                  }`}
+                >
+                  Revaluations
+                </button>
+                <button 
+                  onClick={() => setRequestsSubTab('correct')}
+                  className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer ${
+                    requestsSubTab === 'correct' ? 'bg-indigo-655 text-white shadow-sm' : 'bg-slate-100 hover:bg-slate-200 text-gray-600'
+                  }`}
+                >
+                  Result Corrections
+                </button>
+              </div>
+            </div>
+
+            {/* List rendering */}
+            {requestsSubTab === 'reval' ? (
+              <div className="overflow-x-auto border border-gray-200 rounded-2xl">
+                <table className="w-full text-xs text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-gray-200 text-gray-455 uppercase text-[9px] font-black tracking-wider">
+                      <th className="px-5 py-4">Submission Date</th>
+                      <th className="px-5 py-4">Student Info</th>
+                      <th className="px-5 py-4">Subject</th>
+                      <th className="px-5 py-4 text-center">Current Grade</th>
+                      <th className="px-5 py-4 text-center">Status</th>
+                      <th className="px-5 py-4 text-center">Remarks</th>
+                      <th className="px-5 py-4 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+                    {revalRequests.map((req) => (
+                      <tr key={req.id} className="hover:bg-slate-50/50">
+                        <td className="px-5 py-4 font-mono">{req.date}</td>
+                        <td className="px-5 py-4">
+                          <span className="text-slate-900 font-bold block">{req.studentName}</span>
+                          <span className="text-[10px] text-gray-400 block font-mono">Reg: {req.regNo}</span>
+                        </td>
+                        <td className="px-5 py-4">
+                          <span className="font-mono block">{req.code}</span>
+                          <span className="text-[10px] text-gray-450 block">{req.name} | {req.sem}</span>
+                        </td>
+                        <td className="px-5 py-4 text-center font-bold text-indigo-655">{req.currentGrade} ({req.currentMarks} Marks)</td>
+                        <td className="px-5 py-4 text-center">
+                          <span className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase border ${
+                            req.status === 'Completed'
+                              ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                              : req.status === 'Rejected'
+                              ? 'bg-rose-50 text-rose-600 border-rose-200'
+                              : req.status === 'Under Review'
+                              ? 'bg-blue-50 text-blue-600 border-blue-200'
+                              : 'bg-yellow-50 text-yellow-600 border-yellow-200'
+                          }`}>
+                            {req.status}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 italic text-gray-400 text-left max-w-[180px] truncate">{req.remarks || 'No remarks'}</td>
+                        <td className="px-5 py-4 text-center">
+                          <button 
+                            onClick={() => handleOpenReqModal(req, 'reval')}
+                            className="text-[9px] font-black uppercase bg-indigo-655 hover:bg-indigo-600 text-white px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                          >
+                            Manage
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className="overflow-x-auto border border-gray-200 rounded-2xl">
+                <table className="w-full text-xs text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-gray-200 text-gray-455 uppercase text-[9px] font-black tracking-wider">
+                      <th className="px-5 py-4">Date Submitted</th>
+                      <th className="px-5 py-4">Student Info</th>
+                      <th className="px-5 py-4">Subject & Issue Type</th>
+                      <th className="px-5 py-4">Description</th>
+                      <th className="px-5 py-4">Attachment</th>
+                      <th className="px-5 py-4 text-center">Status</th>
+                      <th className="px-5 py-4 text-center">Remarks</th>
+                      <th className="px-5 py-4 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100 font-semibold text-gray-700">
+                    {correctRequests.map((req) => (
+                      <tr key={req.id} className="hover:bg-slate-50/50">
+                        <td className="px-5 py-4 font-mono">{req.date}</td>
+                        <td className="px-5 py-4">
+                          <span className="text-slate-900 font-bold block">{req.studentName}</span>
+                          <span className="text-[10px] text-gray-400 block font-mono">Reg: {req.regNo}</span>
+                        </td>
+                        <td className="px-5 py-4">
+                          <span className="text-[#FF8A00] font-bold block">{req.type}</span>
+                          <span className="text-[10px] text-gray-450 block font-mono">{req.code} | {req.sem}</span>
+                        </td>
+                        <td className="px-5 py-4 max-w-[200px] truncate text-left">{req.desc}</td>
+                        <td className="px-5 py-4 font-mono text-gray-405 font-bold flex items-center gap-1">
+                          <FileText className="w-4 h-4 text-emerald-600" /> {req.file}
+                        </td>
+                        <td className="px-5 py-4 text-center">
+                          <span className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase border ${
+                            req.status === 'Completed'
+                              ? 'bg-emerald-50 text-emerald-600 border-emerald-200'
+                              : req.status === 'Rejected'
+                              ? 'bg-rose-50 text-rose-600 border-rose-200'
+                              : req.status === 'Under Review'
+                              ? 'bg-blue-50 text-blue-600 border-blue-200'
+                              : 'bg-yellow-50 text-yellow-600 border-yellow-200'
+                          }`}>
+                            {req.status}
+                          </span>
+                        </td>
+                        <td className="px-5 py-4 italic text-gray-400 text-left max-w-[150px] truncate">{req.remarks || 'No remarks'}</td>
+                        <td className="px-5 py-4 text-center">
+                          <button 
+                            onClick={() => handleOpenReqModal(req, 'correct')}
+                            className="text-[9px] font-black uppercase bg-indigo-655 hover:bg-indigo-600 text-white px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
+                          >
+                            Manage
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Tab 5: Placeholders for remaining sidebar items */}
-        {['departments', 'students', 'examinations', 'notifications', 'reports', 'settings'].includes(activeTab) && (
+        {['departments', 'students', 'notifications', 'reports', 'settings'].includes(activeTab) && (
           <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-sm text-center flex flex-col items-center justify-center min-h-[350px] animate-fade-in">
             <div className="w-14 h-14 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-650 mb-5">
               <Info className="w-7 h-7" />
@@ -851,7 +1304,7 @@ export default function CoeAdmin() {
             <p className="text-xs text-gray-400 font-semibold max-w-sm leading-relaxed mb-6">
               Additional database structures and administrator actions will be available in subsequent deployment versions.
             </p>
-            <div className="inline-block text-[10px] font-black uppercase text-indigo-650 bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-full">
+            <div className="inline-block text-[10px] font-black uppercase text-indigo-655 bg-indigo-50 border border-indigo-100 px-4 py-2 rounded-full">
               Status: Placeholder Module
             </div>
           </div>
@@ -874,7 +1327,7 @@ export default function CoeAdmin() {
               {/* Modal Header */}
               <div className="p-6 border-b border-gray-200 flex justify-between items-center bg-slate-50">
                 <div>
-                  <span className="text-[10px] font-black uppercase text-indigo-650 tracking-wider block mb-0.5">Review Grade Sheet records</span>
+                  <span className="text-[10px] font-black uppercase text-indigo-655 tracking-wider block mb-0.5">Review Grade Sheet records</span>
                   <h3 className="text-base font-black font-title text-slate-900 leading-tight">
                     {selectedPendingItem.dept} — {selectedPendingItem.sem}
                   </h3>
@@ -924,7 +1377,7 @@ export default function CoeAdmin() {
                       {selectedPendingItem.subjects.map((sub, idx) => (
                         <tr key={idx} className="hover:bg-slate-50/50">
                           <td className="px-4 py-3 font-mono font-bold text-gray-900">{sub.code}</td>
-                          <td className="px-4 py-3 text-gray-850 font-bold">{sub.name}</td>
+                          <td className="px-4 py-3 text-gray-855 font-bold">{sub.name}</td>
                           <td className="px-4 py-3 text-center font-mono">{sub.marks !== null ? sub.marks : '--'}</td>
                           <td className="px-4 py-3 text-center font-black text-indigo-650">{sub.grade}</td>
                           <td className="px-4 py-3 text-center">{sub.credits}</td>
@@ -997,6 +1450,76 @@ export default function CoeAdmin() {
                   className="px-5 py-2.5 bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md hover:shadow-indigo-500/10"
                 >
                   Confirm Action
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* 3. Revaluation & Result Correction Request Update Modal */}
+      <AnimatePresence>
+        {showReqActionModal && selectedReqItem && (
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-slate-955/75 backdrop-blur-sm select-none text-left">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white border border-gray-200 p-6 sm:p-8 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden space-y-5"
+            >
+              <div>
+                <span className="text-[9px] font-black uppercase text-indigo-655 tracking-wider block mb-0.5">Manage Student Request</span>
+                <h3 className="text-base font-black font-title text-slate-950 leading-tight">
+                  Update Request Status
+                </h3>
+                <p className="text-[11px] text-gray-400 font-bold block mt-1">
+                  Student: {selectedReqItem.studentName} ({selectedReqItem.regNo})
+                  <br />
+                  Subject: {selectedReqItem.code} - {selectedReqItem.name}
+                </p>
+              </div>
+
+              <div className="space-y-4 border-t border-gray-100 pt-4">
+                {/* Select Status */}
+                <div>
+                  <label className="block text-[9px] font-black uppercase text-gray-400 tracking-wider mb-1.5">Request Status</label>
+                  <select 
+                    value={reqStatusInput}
+                    onChange={(e) => setReqStatusInput(e.target.value)}
+                    className="w-full text-xs px-3.5 py-2.5 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-800"
+                  >
+                    <option>Submitted</option>
+                    <option>Under Review</option>
+                    <option>Completed</option>
+                    <option>Rejected</option>
+                  </select>
+                </div>
+
+                {/* Remarks textarea */}
+                <div>
+                  <label className="block text-[9px] font-black uppercase text-gray-400 tracking-wider mb-1.5">COE Remarks</label>
+                  <textarea 
+                    value={reqRemarksInput}
+                    onChange={(e) => setReqRemarksInput(e.target.value)}
+                    rows="3"
+                    placeholder="Enter evaluation remarks or justification..."
+                    className="w-full text-xs p-3 bg-gray-50 border border-gray-250 rounded-xl outline-none focus:bg-white font-semibold text-slate-800"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
+                <button 
+                  onClick={() => { setShowReqActionModal(false); setSelectedReqItem(null); }}
+                  className="px-4 py-2.5 bg-white hover:bg-slate-50 border border-gray-300 text-gray-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={handleUpdateReq}
+                  className="px-5 py-2.5 bg-indigo-655 hover:bg-indigo-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md"
+                >
+                  Update Request
                 </button>
               </div>
             </motion.div>

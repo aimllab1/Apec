@@ -43,7 +43,7 @@ const documents = [
 
 export default function Rti() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-gray-900 py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-gray-900 pt-6 md:pt-10 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
       {/* Background */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-100/30 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-[120px] pointer-events-none" />
@@ -57,7 +57,7 @@ export default function Rti() {
           initial="hidden"
           animate="visible"
           custom={0}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
           <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 text-[10px] font-extrabold uppercase tracking-widest px-5 py-2.5 rounded-full mb-6">
             <Scale className="w-3.5 h-3.5" /> Right to Information Act, 2005
@@ -65,7 +65,7 @@ export default function Rti() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight text-gray-900 leading-tight mb-5">
             RTI — Right to Information
           </h1>
-          <p className="text-sm md:text-base text-gray-500 font-semibold max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-slate-650 font-bold leading-relaxed sm:leading-loose w-full text-justify">
             The Right to Information Act, 2005 (22 of 2005) enacted by the Parliament provides citizens the right to secure access to information under the control of public authorities.
           </p>
         </motion.div>
@@ -76,7 +76,7 @@ export default function Rti() {
           initial="hidden"
           animate="visible"
           custom={1}
-          className="bg-white border border-gray-200 rounded-3xl p-6 md:p-10 shadow-sm mb-10"
+          className="bg-white border border-gray-200 rounded-3xl p-6 md:p-10 shadow-sm mb-6"
         >
           <div className="flex items-start gap-4 mb-6">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0">
@@ -88,7 +88,7 @@ export default function Rti() {
             </div>
           </div>
           
-          <div className="space-y-4 text-xs md:text-sm font-semibold text-gray-600 leading-relaxed">
+          <div className="space-y-4 text-xs md:text-sm font-bold text-slate-650 leading-relaxed sm:leading-loose w-full text-justify">
             <p>
               The Right to Information Act, 2005 (22 of 2005) has been enacted by the Parliament and has come into force from 15 June, 2005. This Act provides for right to information for citizens to secure access to information under the control of public authorities.
             </p>

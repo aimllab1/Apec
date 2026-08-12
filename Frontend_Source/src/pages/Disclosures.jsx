@@ -197,7 +197,7 @@ export default function Disclosures() {
   const filteredGeneralList = getFilteredDocs();
 
   return (
-    <div className="min-h-screen bg-slate-50 text-gray-900 py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-50 text-gray-900 pt-6 md:pt-10 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-[#FFE7CC]/40 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-1/3 w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-3xl pointer-events-none" />
@@ -206,22 +206,20 @@ export default function Disclosures() {
       <div className="max-w-6xl mx-auto relative z-10 text-left">
         
         {/* Header Block */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-16 border-b border-gray-200 pb-10">
-          <div>
-            <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block mb-4 uppercase">
-              Statutory Disclosures & Ratings
-            </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
-              Statutory Disclosures (NIRF, AICTE & MD)
-            </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl leading-relaxed">
-              Access the official institutional reports, mandatory disclosures, national rankings (NIRF), AICTE approval processes, NAAC & NBA accreditations, audited statements, and service rules.
-            </p>
-          </div>
+        <div className="mb-6 border-b border-gray-200 pb-6 w-full text-left">
+          <span className="text-xs font-extrabold tracking-widest text-[#FF8A00] bg-[#FFE7CC]/60 border border-[#FFE7CC] px-4 py-2 rounded-full inline-block mb-4 uppercase">
+            Statutory Disclosures & Ratings
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
+            Statutory Disclosures (NIRF, AICTE & MD)
+          </h1>
+          <p className="text-sm sm:text-base md:text-lg text-slate-650 font-bold leading-relaxed sm:leading-loose w-full text-justify">
+            Access the official institutional reports, mandatory disclosures, national rankings (NIRF), AICTE approval processes, NAAC & NBA accreditations, audited statements, and service rules.
+          </p>
         </div>
 
         {/* Search & Tabs Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
           {/* Tab Selection */}
           <div className="flex border-b border-gray-200 overflow-x-auto whitespace-nowrap scrollbar-none w-full md:w-auto">
             <button 

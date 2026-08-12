@@ -354,6 +354,15 @@ export default function CutoffCalculator({ isEmbedded = false }) {
                 background-size: 200% 200%;
                 animation: gradient-shift 5s ease infinite;
               }
+              .no-scrollbar::-webkit-scrollbar {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
+              }
+              .no-scrollbar {
+                -ms-overflow-style: none !important;
+                scrollbar-width: none !important;
+              }
             `}} />
 
             {/* Always Static/Floating Close Button */}
@@ -373,7 +382,7 @@ export default function CutoffCalculator({ isEmbedded = false }) {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 25, opacity: 0 }}
               transition={{ type: 'spring', damping: 28, stiffness: 200 }}
-              className="relative w-full max-w-xl md:max-w-2xl bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto p-6 md:p-10 flex flex-col"
+              className="relative w-full max-w-xl md:max-w-2xl bg-white border border-gray-200 rounded-[28px] shadow-2xl z-10 mx-auto max-h-[90vh] overflow-y-auto no-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden p-6 md:p-10 flex flex-col"
             >
               {/* Institution Header inside the form */}
               <div className="flex flex-col items-center text-center mb-6">
