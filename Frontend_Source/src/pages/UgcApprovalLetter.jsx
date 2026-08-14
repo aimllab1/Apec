@@ -83,7 +83,7 @@ export default function UgcApprovalLetter() {
           {/* PDF Viewer Frame */}
           <div className="w-full h-[500px] xs:h-[580px] sm:h-[720px] rounded-2xl overflow-hidden bg-slate-100 border border-gray-200 shadow-inner">
             <iframe 
-              src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`} 
+              src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`} 
               className="w-full h-full border-none"
               title="Official UGC Autonomous Approval Letter PDF"
             />

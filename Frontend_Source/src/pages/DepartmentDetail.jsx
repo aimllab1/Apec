@@ -145,6 +145,18 @@ export default function DepartmentDetail() {
     return () => window.removeEventListener('apec_storage_update', loadDept);
   }, [id]);
 
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (selectedFacultyMember) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedFacultyMember]);
+
   const dept = deptData;
   const deptImage = departmentImages[id] || departmentImages[dept.key] || departmentImages.default;
 
@@ -257,17 +269,6 @@ export default function DepartmentDetail() {
   const [feedbackForm, setFeedbackForm] = useState({ name: '', section: 'General Feedback', email: '', phone: '', message: '' });
   const [feedbackSent, setFeedbackSent] = useState(false);
 
-  if (!dept) {
-    return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center text-gray-900">
-        <div className="text-center">
-          <h2 className="text-2xl font-black mb-4">Department Not Found</h2>
-          <Link to="/departments" className="text-indigo-600 hover:underline text-sm font-bold">Back to Departments</Link>
-        </div>
-      </div>
-    );
-  }
-
   // Build Faculty Image Lookup Map from departmentsData
   const facultyImageMap = React.useMemo(() => {
     const map = {
@@ -355,6 +356,17 @@ export default function DepartmentDetail() {
 
     return list;
   }, [dept, facultySearch]);
+
+  if (!dept) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center text-gray-900">
+        <div className="text-center">
+          <h2 className="text-2xl font-black mb-4">Department Not Found</h2>
+          <Link to="/departments" className="text-indigo-600 hover:underline text-sm font-bold">Back to Departments</Link>
+        </div>
+      </div>
+    );
+  }
 
   // Filtered Journals
   const filteredJournals = (dept.publications?.journals || []).filter(j => 
@@ -814,24 +826,19 @@ export default function DepartmentDetail() {
 
                             {/* Left side: Image / Fallback Avatar */}
                             <div className="relative shrink-0 w-20 h-20 sm:w-32 sm:h-32 rounded-full sm:rounded-2xl overflow-hidden border border-gray-150 shadow-sm bg-gray-50 flex items-center justify-center">
-                              {photoSrc ? (
+                              <div className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold">
+                                <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-650" />
+                              </div>
+                              {photoSrc && (
                                 <img 
                                   src={photoSrc} 
                                   alt={f.name} 
-                                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                                  className="absolute inset-0 w-full h-full object-cover object-top z-10 group-hover:scale-105 transition-transform duration-300"
                                   onError={(e) => {
                                     e.target.style.display = 'none';
-                                    e.target.nextSibling.style.display = 'flex';
                                   }}
                                 />
-                              ) : null}
-                              {/* Fallback avatar */}
-                              <div 
-                                className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold"
-                                style={{ display: photoSrc ? 'none' : 'flex' }}
-                              >
-                                <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 text-indigo-650" />
-                              </div>
+                              )}
                             </div>
 
                             {/* Right side: Information */}
@@ -1908,8 +1915,8 @@ export default function DepartmentDetail() {
 
         {/* POPUP MODAL FOR FACULTY DETAILS */}
         <AnimatePresence>
-          {selectedFacultyMember && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-md">
+          {selectedFacultyMember && createPortal(
+            <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4 sm:p-6 bg-slate-950/60 backdrop-blur-md">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -1928,23 +1935,19 @@ export default function DepartmentDetail() {
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 border-b border-gray-150 pb-6 mb-6 text-center sm:text-left">
                   {/* Perfect Ratio Portrait Modal Image */}
                   <div className="w-24 h-24 sm:w-32 sm:h-32 aspect-square rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0 shadow-md relative">
-                    {selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()] ? (
+                    <div className="absolute inset-0 bg-slate-100 flex items-center justify-center text-slate-400 font-bold">
+                      <User className="w-12 h-12 text-slate-400" />
+                    </div>
+                    {(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]) && (
                       <img 
                         src={selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]} 
                         alt={selectedFacultyMember.name}
-                        className="w-full h-full object-cover object-top"
+                        className="absolute inset-0 w-full h-full object-cover object-top z-10"
                         onError={(e) => {
                           e.target.style.display = 'none';
-                          e.target.nextSibling.style.display = 'flex';
                         }}
                       />
-                    ) : null}
-                    <div 
-                      className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold"
-                      style={{ display: (selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]) ? 'none' : 'flex' }}
-                    >
-                      <User className="w-12 h-12 text-slate-400" />
-                    </div>
+                    )}
                   </div>
 
                   <div className="flex-1">
@@ -2070,7 +2073,8 @@ export default function DepartmentDetail() {
                 </div>
 
               </motion.div>
-            </div>
+            </div>,
+            document.body
           )}
         </AnimatePresence>
 
