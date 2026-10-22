@@ -219,46 +219,51 @@ export default defineConfig({
             }
           }
 
-          // Handle /api/upload-image (Save uploaded custom home images directly to Media_Assets/Images/Hero)
-          if (req.url && req.url.startsWith('/api/upload-image')) {
+          // Handle /api/upload and /api/upload-image (Save uploaded assets directly to Media_Assets)
+          if (req.url && (req.url.startsWith('/api/upload-image') || req.url.startsWith('/api/upload'))) {
             if (req.method === 'POST') {
               let body = '';
               req.on('data', chunk => { body += chunk; });
               req.on('end', () => {
                 try {
-                  const { filename, dataUrl } = JSON.parse(body);
+                  const { filename, dataUrl, folder = 'Uploads' } = JSON.parse(body);
                   if (!dataUrl || !filename) {
                     res.statusCode = 400;
                     res.end(JSON.stringify({ error: 'Missing filename or dataUrl' }));
                     return;
                   }
 
-                  const matches = dataUrl.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+                  const matches = dataUrl.match(/^data:([A-Za-z0-9-+\/.]+);base64,(.+)$/);
                   if (!matches || matches.length !== 3) {
                     res.statusCode = 400;
                     res.end(JSON.stringify({ error: 'Invalid data URL format' }));
                     return;
                   }
 
+                  const mimeType = matches[1];
                   const imageBuffer = Buffer.from(matches[2], 'base64');
                   const sanitizedName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
-                  const targetDir = path.resolve(__dirname, '../Media_Assets/Images/Hero');
+                  const sanitizedFolder = folder.replace(/[^a-zA-Z0-9_-]/g, '_');
+                  const isPdf = mimeType.includes('pdf') || filename.toLowerCase().endsWith('.pdf');
+                  const baseCat = isPdf ? 'Documents' : 'Images';
+                  
+                  const targetDir = path.resolve(__dirname, `../Media_Assets/${baseCat}/${sanitizedFolder}`);
                   if (!fs.existsSync(targetDir)) {
                     fs.mkdirSync(targetDir, { recursive: true });
                   }
 
-                  const finalFilename = `custom_${Date.now()}_${sanitizedName}`;
+                  const finalFilename = `${Date.now()}_${sanitizedName}`;
                   const finalFilePath = path.join(targetDir, finalFilename);
                   fs.writeFileSync(finalFilePath, imageBuffer);
 
-                  console.log(`[Vite API] Saved uploaded image to: ${finalFilePath}`);
-                  const publicUrl = `/Images/Hero/${finalFilename}`;
+                  const publicUrl = `/${baseCat}/${sanitizedFolder}/${finalFilename}`;
+                  console.log(`[Vite API] Saved uploaded file to: ${finalFilePath} -> ${publicUrl}`);
 
                   res.setHeader('Content-Type', 'application/json');
                   res.statusCode = 200;
-                  res.end(JSON.stringify({ success: true, url: publicUrl, message: 'Image uploaded successfully' }));
+                  res.end(JSON.stringify({ success: true, url: publicUrl, fileName: finalFilename, message: 'File uploaded successfully' }));
                 } catch (err) {
-                  console.error('[Upload Image API Error]:', err.message);
+                  console.error('[Upload API Error]:', err.message);
                   res.statusCode = 500;
                   res.end(JSON.stringify({ error: err.message }));
                 }
@@ -363,6 +368,7 @@ export default defineConfig({
   ],
   server: {
     host: true,
+    allowedHosts: true,
     watch: {
       usePolling: true,
       ignored: ['**/.env', '**/vite.config.js']
@@ -370,6 +376,7 @@ export default defineConfig({
   },
   preview: {
     host: true,
+    allowedHosts: true,
   },
   optimizeDeps: {
     entries: ['index.html'],

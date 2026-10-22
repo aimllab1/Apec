@@ -6,13 +6,14 @@ import {
   Edit3, Check, CheckCircle2, ChevronRight, ChevronDown, UserCheck, ShieldAlert, KeyRound, Globe,
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key,
   BookOpen, Milestone, Library, Briefcase, GraduationCap, BarChart3, PieChart, TrendingUp, Clock, PhoneCall, MessageSquare, Filter, Tag, Activity, Layers, ExternalLink, Copy, ArrowUpRight, BookOpenCheck,
-  Calendar, CalendarDays, Coins, PartyPopper, MessageCircle, LogOut, Layout, Sliders
+  Calendar, CalendarDays, Coins, PartyPopper, MessageCircle, LogOut, Layout, Sliders, X
 } from 'lucide-react';
 
 import departmentsData from '../data/departmentsData.json';
 import { getLoadedTourDataAsync, saveTourDataAsync } from '../data/tourData';
 import { encryptText, decryptText } from '../utils/crypto';
 import HomeManager from '../components/admin/HomeManager';
+import { uploadFile } from '../utils/storage';
 import { 
   fetchInquiries, 
   updateInquiryStatus as syncUpdateInquiryStatus, 
@@ -106,19 +107,55 @@ export default function EditorPanel() {
     orcid: ''
   });
 
-  // Handle Faculty Image Upload via FileReader
-  const handleFacultyImageUpload = (e) => {
+  // --- Dynamic Section Add/Edit Modals State ---
+  const [isAddFacultyModalOpen, setIsAddFacultyModalOpen] = useState(false);
+  const [facultyModalForm, setFacultyModalForm] = useState({
+    name: '',
+    qualification: '',
+    designation: 'Assistant Professor',
+    department: '',
+    email: '',
+    experience: '',
+    joiningDate: '',
+    image: '',
+    orcid: ''
+  });
+  const [isUploadingFacultyPhoto, setIsUploadingFacultyPhoto] = useState(false);
+
+  const [isFacilityModalOpen, setIsFacilityModalOpen] = useState(false);
+  const [editingFacilityIdx, setEditingFacilityIdx] = useState(null);
+  const [facilityModalForm, setFacilityModalForm] = useState({
+    name: '',
+    type: 'laboratory',
+    incharge: '',
+    description: '',
+    image: '',
+    images: []
+  });
+  const [isUploadingFacilityPhoto, setIsUploadingFacilityPhoto] = useState(false);
+
+  const [isAddTickerModalOpen, setIsAddTickerModalOpen] = useState(false);
+  const [tickerModalForm, setTickerModalForm] = useState({
+    text: '',
+    link: '/admission',
+    icon: '📢'
+  });
+
+  // Handle Faculty Image Upload with persistent server storage
+  const handleFacultyImageUpload = async (e) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Image file size should be less than 5MB.");
+      if (file.size > 10 * 1024 * 1024) {
+        alert("Image file size should be less than 10MB.");
         return;
       }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEditFaculty(prev => ({ ...prev, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      try {
+        const res = await uploadFile(file, 'Faculty');
+        setEditFaculty(prev => ({ ...prev, image: res.downloadURL }));
+        triggerSuccess("Faculty photo uploaded and saved successfully!");
+      } catch (err) {
+        console.warn("Upload error:", err);
+      }
     }
   };
 
@@ -642,27 +679,134 @@ export default function EditorPanel() {
     triggerSuccess('Faculty details updated successfully!');
   };
 
-  // Add Faculty Member
-  const addFacultyMember = () => {
-    const newFaculty = {
-      name: 'New Faculty Member',
-      qualification: 'B.E., M.E.',
+  // Open Add Faculty Modal with blank real fields (no dummy data)
+  const openAddFacultyModal = () => {
+    const currentDept = depts[selectedDeptIdx];
+    setFacultyModalForm({
+      name: '',
+      qualification: '',
       designation: 'Assistant Professor',
-      department: depts[selectedDeptIdx].name,
-      email: 'newfaculty@apec.edu.in',
-      experience: '1 Year',
-      joiningDate: 'June 1, 2026',
+      department: currentDept?.name || '',
+      email: '',
+      experience: '',
+      joiningDate: '',
       image: '',
       orcid: ''
+    });
+    setIsAddFacultyModalOpen(true);
+  };
+
+  // Save Faculty from Modal to Department
+  const handleSaveFacultyModal = () => {
+    if (!facultyModalForm.name.trim()) {
+      alert("Faculty Name is required.");
+      return;
+    }
+    const currentDept = depts[selectedDeptIdx];
+    if (!currentDept) return;
+
+    const facultyEntry = {
+      name: facultyModalForm.name.trim(),
+      qualification: facultyModalForm.qualification.trim() || 'M.E.',
+      designation: facultyModalForm.designation.trim() || 'Assistant Professor',
+      department: facultyModalForm.department.trim() || currentDept.name,
+      email: facultyModalForm.email.trim() || `${facultyModalForm.name.toLowerCase().replace(/[^a-z]/g, '')}@apec.edu.in`,
+      experience: facultyModalForm.experience.trim() || '1 Year',
+      joiningDate: facultyModalForm.joiningDate.trim() || new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      image: facultyModalForm.image || '',
+      orcid: facultyModalForm.orcid.trim() || ''
     };
+
     const updatedDepts = [...depts];
     if (!updatedDepts[selectedDeptIdx].faculty) {
       updatedDepts[selectedDeptIdx].faculty = [];
     }
-    updatedDepts[selectedDeptIdx].faculty.unshift(newFaculty);
+    updatedDepts[selectedDeptIdx].faculty.unshift(facultyEntry);
     saveDepts(updatedDepts);
-    selectFacultyForEdit(0);
-    triggerSuccess('New faculty slot created! Edit details on the right.');
+    setIsAddFacultyModalOpen(false);
+    triggerSuccess(`Faculty "${facultyEntry.name}" added to directory successfully!`);
+  };
+
+  // Open Facility Modal for Add or Edit
+  const openAddFacilityModal = () => {
+    setFacilityModalForm({
+      name: '',
+      type: 'laboratory',
+      incharge: '',
+      description: '',
+      image: '',
+      images: []
+    });
+    setEditingFacilityIdx(null);
+    setIsFacilityModalOpen(true);
+  };
+
+  const openEditFacilityModal = (idx) => {
+    const targetLab = depts[selectedDeptIdx]?.labs?.[idx];
+    if (!targetLab) return;
+    setFacilityModalForm({
+      name: targetLab.name || '',
+      type: targetLab.type || 'laboratory',
+      incharge: targetLab.incharge || '',
+      description: targetLab.description || '',
+      image: targetLab.image || (targetLab.images && targetLab.images[0]) || '',
+      images: targetLab.images || []
+    });
+    setEditingFacilityIdx(idx);
+    setIsFacilityModalOpen(true);
+  };
+
+  // Save Facility from Modal
+  const handleSaveFacilityModal = () => {
+    if (!facilityModalForm.name.trim()) {
+      alert("Facility / Lab Name is required.");
+      return;
+    }
+    const currentDept = depts[selectedDeptIdx];
+    if (!currentDept) return;
+
+    const facilityEntry = {
+      name: facilityModalForm.name.trim(),
+      type: facilityModalForm.type || 'laboratory',
+      incharge: facilityModalForm.incharge.trim(),
+      description: facilityModalForm.description.trim(),
+      image: facilityModalForm.image || '',
+      images: facilityModalForm.image ? [facilityModalForm.image] : []
+    };
+
+    const updatedDepts = [...depts];
+    const currentLabs = [...(updatedDepts[selectedDeptIdx].labs || [])];
+    
+    if (editingFacilityIdx !== null && editingFacilityIdx >= 0) {
+      currentLabs[editingFacilityIdx] = facilityEntry;
+      triggerSuccess(`Facility "${facilityEntry.name}" updated successfully!`);
+    } else {
+      currentLabs.unshift(facilityEntry);
+      triggerSuccess(`Facility "${facilityEntry.name}" added successfully!`);
+    }
+
+    updatedDepts[selectedDeptIdx].labs = currentLabs;
+    saveDepts(updatedDepts);
+    setIsFacilityModalOpen(false);
+    setEditingFacilityIdx(null);
+  };
+
+  // Ticker Modal Save
+  const handleSaveTickerModal = () => {
+    if (!tickerModalForm.text.trim()) {
+      alert("Announcement headline is required.");
+      return;
+    }
+    const item = {
+      text: tickerModalForm.text.trim(),
+      link: tickerModalForm.link.trim() || '/admission',
+      icon: tickerModalForm.icon || '📢'
+    };
+    const updated = [...tickerNews, item];
+    setTickerNews(updated);
+    saveTickerToDB(updated);
+    setIsAddTickerModalOpen(false);
+    triggerSuccess("Announcement added to live ticker!");
   };
 
   // Delete Faculty Member
@@ -1876,9 +2020,18 @@ export default function EditorPanel() {
              {/* TICKER EDITOR */}
             {activeTab === 'ticker' && userRole === 'admin' && (
               <div className="space-y-6">
-                <div>
-                  <h3 className="font-title text-xl font-black text-slate-900">News Ticker Announcements</h3>
-                  <p className="text-xs text-slate-500 font-semibold mt-0.5">Control the scroll marquee news slides with optional hyperlinks.</p>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <h3 className="font-title text-xl font-black text-slate-900">News Ticker Announcements</h3>
+                    <p className="text-xs text-slate-500 font-semibold mt-0.5">Control the scroll marquee news slides with optional hyperlinks.</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsAddTickerModalOpen(true)}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5 self-start sm:self-center"
+                  >
+                    <Plus className="w-4 h-4" /> Add Announcement
+                  </button>
                 </div>
 
                 {/* Add new slide */}
@@ -2170,7 +2323,7 @@ export default function EditorPanel() {
                           Directory ({depts[selectedDeptIdx]?.faculty?.length || 0})
                         </h4>
                         <button
-                          onClick={addFacultyMember}
+                          onClick={openAddFacultyModal}
                           className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
                         >
                           <Plus className="w-3 h-3" /> Add Faculty Member
@@ -2705,15 +2858,22 @@ export default function EditorPanel() {
                               <input 
                                 type="file" 
                                 accept=".pdf,.doc,.docx,image/*" 
-                                onChange={(e) => {
+                                onChange={async (e) => {
                                   const file = e.target.files && e.target.files[0];
                                   if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
+                                    try {
+                                      const res = await uploadFile(file, 'Curriculum');
                                       const syl = depts[selectedDeptIdx].syllabus || {};
-                                      updateCurrentDeptField('syllabus', { ...syl, link: reader.result });
-                                    };
-                                    reader.readAsDataURL(file);
+                                      updateCurrentDeptField('syllabus', { ...syl, link: res.url });
+                                      triggerSuccess('Syllabus document uploaded and saved to server!');
+                                    } catch (err) {
+                                      const reader = new FileReader();
+                                      reader.onloadend = () => {
+                                        const syl = depts[selectedDeptIdx].syllabus || {};
+                                        updateCurrentDeptField('syllabus', { ...syl, link: reader.result });
+                                      };
+                                      reader.readAsDataURL(file);
+                                    }
                                   }
                                 }}
                                 className="hidden" 
@@ -2759,52 +2919,13 @@ export default function EditorPanel() {
                           Department Facilities ({depts[selectedDeptIdx].labs?.length || 0})
                         </h4>
                         <div className="flex items-center gap-2">
-                          <div className="relative">
-                            <button
-                              type="button"
-                              onClick={() => setIsAddFacilityOpen(!isAddFacilityOpen)}
-                              className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer mr-2 bg-transparent border-0"
-                            >
-                              <Plus className="w-3 h-3" /> Add <ChevronDown className="w-3 h-3" />
-                            </button>
-                            {isAddFacilityOpen && (
-                              <div className="absolute right-0 top-full mt-1 bg-white border border-slate-200 shadow-xl rounded-xl py-1.5 w-36 z-50 text-left">
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const labs = depts[selectedDeptIdx].labs || [];
-                                    updateCurrentDeptField('labs', [...labs, { name: '', type: 'classroom', incharge: '', description: '', images: [] }]);
-                                    setIsAddFacilityOpen(false);
-                                  }}
-                                  className="w-full px-4 py-2 text-xs font-extrabold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors text-left flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
-                                >
-                                  🏫 Classroom
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const labs = depts[selectedDeptIdx].labs || [];
-                                    updateCurrentDeptField('labs', [...labs, { name: '', type: 'laboratory', incharge: '', description: '', images: [] }]);
-                                    setIsAddFacilityOpen(false);
-                                  }}
-                                  className="w-full px-4 py-2 text-xs font-extrabold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors text-left flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
-                                >
-                                  🔬 Laboratory
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const labs = depts[selectedDeptIdx].labs || [];
-                                    updateCurrentDeptField('labs', [...labs, { name: '', type: 'library', incharge: '', description: '', images: [] }]);
-                                    setIsAddFacilityOpen(false);
-                                  }}
-                                  className="w-full px-4 py-2 text-xs font-extrabold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors text-left flex items-center gap-1.5 cursor-pointer border-0 bg-transparent"
-                                >
-                                  📚 Library
-                                </button>
-                              </div>
-                            )}
-                          </div>
+                          <button
+                            type="button"
+                            onClick={openAddFacilityModal}
+                            className="px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all flex items-center gap-1.5 border border-indigo-200 shadow-xs"
+                          >
+                            <Plus className="w-3.5 h-3.5" /> Add Facility / Lab
+                          </button>
                           <button
                             type="button"
                             onClick={() => {
@@ -2821,16 +2942,27 @@ export default function EditorPanel() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {(depts[selectedDeptIdx].labs || []).map((lab, idx) => (
                           <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3 relative shadow-sm text-left">
-                            <button
-                              type="button"
-                              onClick={() => {
-                                const labs = depts[selectedDeptIdx].labs.filter((_, i) => i !== idx);
-                                updateCurrentDeptField('labs', labs);
-                              }}
-                              className="absolute top-3 right-3 p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer border-0 bg-transparent"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
+                            <div className="absolute top-3 right-3 flex items-center gap-1">
+                              <button
+                                type="button"
+                                onClick={() => openEditFacilityModal(idx)}
+                                className="p-1.5 text-indigo-600 hover:bg-indigo-50 rounded-lg cursor-pointer border-0 bg-transparent transition-colors"
+                                title="Edit Facility (with Photo Upload)"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const labs = depts[selectedDeptIdx].labs.filter((_, i) => i !== idx);
+                                  updateCurrentDeptField('labs', labs);
+                                }}
+                                className="p-1.5 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer border-0 bg-transparent transition-colors"
+                                title="Delete Facility"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div className="space-y-1">
@@ -3149,7 +3281,7 @@ export default function EditorPanel() {
                             type="button"
                             onClick={() => {
                               const gr = depts[selectedDeptIdx].grants || [];
-                              updateCurrentDeptField('grants', [...gr, { agency: 'DST-SERB / AICTE', title: 'Research & Modernization Grant', pi: 'Dr. Principal Investigator', amount: '₹ 15,00,000', year: '2025-2026' }]);
+                              updateCurrentDeptField('grants', [...gr, { agency: '', title: '', pi: '', amount: '', year: '' }]);
                             }}
                             className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
                           >
@@ -3300,7 +3432,7 @@ export default function EditorPanel() {
                             type="button"
                             onClick={() => {
                               const hosted = depts[selectedDeptIdx].hostedEvents || [];
-                              updateCurrentDeptField('hostedEvents', [...hosted, { name: 'National Level Symposium / Workshop', date: 'October 15, 2025', venue: 'APEC Main Auditorium', speaker: 'Dr. Guest Speaker', description: 'Interactive technical sessions and competitions', image: '' }]);
+                              updateCurrentDeptField('hostedEvents', [...hosted, { name: '', date: '', venue: '', speaker: '', description: '', image: '' }]);
                             }}
                             className="text-xs font-black text-pink-650 hover:underline flex items-center gap-1 cursor-pointer"
                           >
@@ -3450,7 +3582,7 @@ export default function EditorPanel() {
                             type="button"
                             onClick={() => {
                               const attended = depts[selectedDeptIdx].attendedEvents || [];
-                              updateCurrentDeptField('attendedEvents', [...attended, { name: 'AICTE Faculty Development Program on GenAI', date: 'November 20, 2025', hostOrg: 'IIT Madras', participant: 'Prof. Faculty Member', description: '5-Day Intensive FDP training on Deep Learning models', image: '' }]);
+                              updateCurrentDeptField('attendedEvents', [...attended, { name: '', date: '', hostOrg: '', participant: '', description: '', image: '' }]);
                             }}
                             className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
                           >
@@ -3606,7 +3738,7 @@ export default function EditorPanel() {
                           type="button"
                           onClick={() => {
                             const news = depts[selectedDeptIdx].newsletters || [];
-                            updateCurrentDeptField('newsletters', [...news, { title: 'Department Tech Magazine Vol 4 Issue 1', date: 'Semester Odd 2025-2026', link: '', summary: 'Highlights student projects, faculty publications, and events.' }]);
+                            updateCurrentDeptField('newsletters', [...news, { title: '', date: '', link: '', summary: '' }]);
                           }}
                           className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
                         >
@@ -4811,6 +4943,419 @@ export default function EditorPanel() {
           </div>
 
         </div>
+
+        {/* ============================================================ */}
+        {/* ADD FACULTY MODAL POPUP                                       */}
+        {/* ============================================================ */}
+        <AnimatePresence>
+          {isAddFacultyModalOpen && (
+            <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl border border-slate-200 text-left space-y-5 my-8"
+              >
+                <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+                  <div>
+                    <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                      <Users className="w-5 h-5 text-indigo-600" /> Add Faculty Member
+                    </h3>
+                    <p className="text-xs text-slate-400 font-medium">Department of {depts[selectedDeptIdx]?.name}</p>
+                  </div>
+                  <button
+                    onClick={() => setIsAddFacultyModalOpen(false)}
+                    className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer transition-all"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Photo Upload Box */}
+                <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-4">
+                  <div className="w-16 h-16 rounded-2xl overflow-hidden border border-slate-200 bg-white shrink-0 flex items-center justify-center relative shadow-sm">
+                    {facultyModalForm.image ? (
+                      <img src={facultyModalForm.image} alt="Preview" className="w-full h-full object-cover object-top" />
+                    ) : (
+                      <GraduationCap className="w-7 h-7 text-indigo-400" />
+                    )}
+                  </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">Faculty Portrait Photo</span>
+                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl cursor-pointer shadow-sm transition-all">
+                      <Upload className="w-3.5 h-3.5" />
+                      <span>{isUploadingFacultyPhoto ? 'Uploading...' : 'Choose Photo'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        disabled={isUploadingFacultyPhoto}
+                        onChange={async (e) => {
+                          const file = e.target.files && e.target.files[0];
+                          if (!file) return;
+                          setIsUploadingFacultyPhoto(true);
+                          try {
+                            const res = await uploadFile(file, 'Faculty');
+                            setFacultyModalForm(prev => ({ ...prev, image: res.downloadURL }));
+                          } catch (err) {
+                            console.warn("Upload error:", err);
+                          } finally {
+                            setIsUploadingFacultyPhoto(false);
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                    {facultyModalForm.image && (
+                      <button
+                        type="button"
+                        onClick={() => setFacultyModalForm(prev => ({ ...prev, image: '' }))}
+                        className="ml-2 text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="sm:col-span-2 space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Full Name *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Dr. K. Saravanan, Ph.D."
+                      value={facultyModalForm.name}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, name: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Designation *</label>
+                    <select
+                      value={facultyModalForm.designation}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, designation: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800 cursor-pointer"
+                    >
+                      <option value="Professor & Head">Professor & Head</option>
+                      <option value="Professor">Professor</option>
+                      <option value="Associate Professor">Associate Professor</option>
+                      <option value="Assistant Professor">Assistant Professor</option>
+                      <option value="Lab Instructor">Lab Instructor</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Qualification *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. M.E., Ph.D."
+                      value={facultyModalForm.qualification}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, qualification: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Contact Email</label>
+                    <input
+                      type="email"
+                      placeholder="faculty@apec.edu.in"
+                      value={facultyModalForm.email}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, email: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Experience</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 8 Years"
+                      value={facultyModalForm.experience}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, experience: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Joining Date</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. July 2021"
+                      value={facultyModalForm.joiningDate}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, joiningDate: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-emerald-700 tracking-wider block">ORCID Identifier</label>
+                    <input
+                      type="text"
+                      placeholder="0009-0004-xxxx-xxxx"
+                      value={facultyModalForm.orcid}
+                      onChange={(e) => setFacultyModalForm({ ...facultyModalForm, orcid: e.target.value })}
+                      className="w-full text-xs font-mono font-bold px-3.5 py-2.5 bg-emerald-50/40 border border-emerald-200 rounded-xl outline-none focus:border-emerald-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex justify-end gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setIsAddFacultyModalOpen(false)}
+                    className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveFacultyModal}
+                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer shadow-md flex items-center gap-2"
+                  >
+                    <Check className="w-4 h-4" /> Save & Add to Directory
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* ============================================================ */}
+        {/* ADD / EDIT FACILITY & LAB MODAL POPUP                        */}
+        {/* ============================================================ */}
+        <AnimatePresence>
+          {isFacilityModalOpen && (
+            <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl border border-slate-200 text-left space-y-5 my-8"
+              >
+                <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+                  <div>
+                    <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                      <Library className="w-5 h-5 text-indigo-600" />
+                      {editingFacilityIdx !== null ? 'Edit Facility / Lab' : 'Add Facility / Lab'}
+                    </h3>
+                    <p className="text-xs text-slate-400 font-medium">Department of {depts[selectedDeptIdx]?.name}</p>
+                  </div>
+                  <button
+                    onClick={() => { setIsFacilityModalOpen(false); setEditingFacilityIdx(null); }}
+                    className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer transition-all"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Facility / Lab Name *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Advanced Artificial Intelligence Computing Lab"
+                      value={facilityModalForm.name}
+                      onChange={(e) => setFacilityModalForm({ ...facilityModalForm, name: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Facility Type</label>
+                      <select
+                        value={facilityModalForm.type}
+                        onChange={(e) => setFacilityModalForm({ ...facilityModalForm, type: e.target.value })}
+                        className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800 cursor-pointer"
+                      >
+                        <option value="laboratory">🔬 Laboratory</option>
+                        <option value="classroom">🏫 Smart Classroom</option>
+                        <option value="library">📚 Department Library</option>
+                        <option value="seminar">🏛 Seminar Hall / Research Centre</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Faculty / Staff In-Charge</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Dr. M. Rajesh, M.E., Ph.D."
+                        value={facilityModalForm.incharge}
+                        onChange={(e) => setFacilityModalForm({ ...facilityModalForm, incharge: e.target.value })}
+                        className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Equipment & Facility Details</label>
+                    <textarea
+                      rows={3}
+                      placeholder="List key hardware, software tools, seating capacity, or research specializations..."
+                      value={facilityModalForm.description}
+                      onChange={(e) => setFacilityModalForm({ ...facilityModalForm, description: e.target.value })}
+                      className="w-full text-xs font-medium p-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  {/* Photo Upload */}
+                  <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-4">
+                    <div className="w-16 h-12 rounded-xl overflow-hidden border border-slate-200 bg-white shrink-0 flex items-center justify-center relative shadow-sm">
+                      {facilityModalForm.image ? (
+                        <img src={facilityModalForm.image} alt="Preview" className="w-full h-full object-cover" />
+                      ) : (
+                        <Library className="w-5 h-5 text-indigo-400" />
+                      )}
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">Facility Photo</span>
+                      <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl cursor-pointer shadow-sm transition-all">
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>{isUploadingFacilityPhoto ? 'Uploading...' : 'Upload Image'}</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          disabled={isUploadingFacilityPhoto}
+                          onChange={async (e) => {
+                            const file = e.target.files && e.target.files[0];
+                            if (!file) return;
+                            setIsUploadingFacilityPhoto(true);
+                            try {
+                              const res = await uploadFile(file, 'Labs');
+                              setFacilityModalForm(prev => ({ ...prev, image: res.downloadURL }));
+                            } catch (err) {
+                              console.warn("Upload error:", err);
+                            } finally {
+                              setIsUploadingFacilityPhoto(false);
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
+                      {facilityModalForm.image && (
+                        <button
+                          type="button"
+                          onClick={() => setFacilityModalForm(prev => ({ ...prev, image: '' }))}
+                          className="ml-2 text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex justify-end gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => { setIsFacilityModalOpen(false); setEditingFacilityIdx(null); }}
+                    className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveFacilityModal}
+                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer shadow-md flex items-center gap-2"
+                  >
+                    <Check className="w-4 h-4" /> {editingFacilityIdx !== null ? 'Save Changes' : 'Add Facility'}
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        {/* ============================================================ */}
+        {/* ADD TICKER ANNOUNCEMENT MODAL                                 */}
+        {/* ============================================================ */}
+        <AnimatePresence>
+          {isAddTickerModalOpen && (
+            <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                className="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-slate-200 text-left space-y-5"
+              >
+                <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+                  <div>
+                    <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                      <FileText className="w-5 h-5 text-indigo-600" /> New Ticker Announcement
+                    </h3>
+                    <p className="text-xs text-slate-400 font-medium">Published live on institutional marquee track</p>
+                  </div>
+                  <button
+                    onClick={() => setIsAddTickerModalOpen(false)}
+                    className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer transition-all"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Announcement Headline *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Admissions Open for B.E. / B.Tech / MBA / MCA 2026–2027"
+                      value={tickerModalForm.text}
+                      onChange={(e) => setTickerModalForm({ ...tickerModalForm, text: e.target.value })}
+                      className="w-full text-xs font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Destination Page Link</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. /admission or /placements"
+                      value={tickerModalForm.link}
+                      onChange={(e) => setTickerModalForm({ ...tickerModalForm, link: e.target.value })}
+                      className="w-full text-xs font-mono font-bold px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-600 tracking-wider block">Headline Icon / Emoji</label>
+                    <div className="flex gap-2">
+                      {['📢', '🏛', '🎓', '🎖', '👨‍💼', '🚀', '⭐'].map(emoji => (
+                        <button
+                          key={emoji}
+                          type="button"
+                          onClick={() => setTickerModalForm({ ...tickerModalForm, icon: emoji })}
+                          className={`w-9 h-9 rounded-xl border text-sm flex items-center justify-center cursor-pointer transition-all ${
+                            tickerModalForm.icon === emoji ? 'border-indigo-600 bg-indigo-50 scale-110 shadow-xs' : 'border-slate-200 hover:bg-slate-50'
+                          }`}
+                        >
+                          {emoji}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex justify-end gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setIsAddTickerModalOpen(false)}
+                    className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSaveTickerModal}
+                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer shadow-md flex items-center gap-2"
+                  >
+                    <Check className="w-4 h-4" /> Publish Announcement
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>

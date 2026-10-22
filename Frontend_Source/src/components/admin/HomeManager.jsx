@@ -4,9 +4,10 @@ import {
   Save, RotateCcw, Plus, Trash2, ArrowUp, ArrowDown, Upload, Image, 
   ExternalLink, Eye, EyeOff, Check, AlertCircle, Sparkles, Award, 
   Calendar, Layers, TrendingUp, BookOpen, Users, ShieldCheck, Briefcase, 
-  Cpu, GraduationCap, X, CheckCircle2, ChevronRight, Sliders, RefreshCw
+  Cpu, GraduationCap, X, CheckCircle2, ChevronRight, Sliders, RefreshCw, Edit3
 } from 'lucide-react';
 import defaultHomeData from '../../data/homeData.json';
+import { uploadFile } from '../../utils/storage';
 
 // Curated college preset images available out-of-the-box
 const PRESET_COLLEGE_IMAGES = [
@@ -42,6 +43,37 @@ export default function HomeManager() {
   const [uploadLoading, setUploadLoading] = useState(false);
   const [customUrlInput, setCustomUrlInput] = useState('');
   const fileInputRef = useRef(null);
+
+  // Add/Edit Slide Modal State
+  const [isSlideModalOpen, setIsSlideModalOpen] = useState(false);
+  const [slideModalSection, setSlideModalSection] = useState('achievements'); // 'achievements' | 'upcoming'
+  const [slideEditingIdx, setSlideEditingIdx] = useState(null);
+  const [slideModalForm, setSlideModalForm] = useState({
+    tag: '',
+    title: '',
+    link: '',
+    imageUrl: '',
+    alt: ''
+  });
+
+  // Add/Edit Feature Modal State
+  const [isFeatureModalOpen, setIsFeatureModalOpen] = useState(false);
+  const [featureEditingIdx, setFeatureEditingIdx] = useState(null);
+  const [featureModalForm, setFeatureModalForm] = useState({
+    title: '',
+    description: '',
+    icon: 'Sparkles',
+    link: '',
+    badge: ''
+  });
+
+  // Add Stat Modal State
+  const [isStatModalOpen, setIsStatModalOpen] = useState(false);
+  const [statModalForm, setStatModalForm] = useState({
+    value: '',
+    label: '',
+    icon: 'Award'
+  });
 
   // Load existing home data on mount
   useEffect(() => {
@@ -188,28 +220,95 @@ export default function HomeManager() {
     reader.readAsDataURL(file);
   };
 
-  // --- Slide Manipulations ---
-  const addSlide = (section) => {
-    const newId = `${section === 'achievements' ? 'ach' : 'up'}-${Date.now()}`;
-    const newSlide = {
-      id: newId,
+  // --- Slide Modal Handlers ---
+  const openAddSlideModal = (section) => {
+    setSlideModalSection(section);
+    setSlideEditingIdx(null);
+    setSlideModalForm({
       tag: section === 'achievements' ? 'ACHIEVEMENT' : 'EVENT',
-      title: 'New Headline or Recognition',
-      alt: 'APEC Milestone',
-      imageUrl: section === 'achievements' ? '/Images/Hero/achivement_1.jpeg' : '/Images/Hero/fresher_day.jpeg',
-      link: section === 'achievements' ? '/about' : '/facilities'
+      title: '',
+      link: section === 'achievements' ? '/placements' : '/events',
+      imageUrl: '',
+      alt: ''
+    });
+    setIsSlideModalOpen(true);
+  };
+
+  const openEditSlideModal = (section, idx) => {
+    const list = section === 'achievements' 
+      ? data.achievementsSection.slides 
+      : data.upcomingSection.slides;
+    const target = list?.[idx];
+    if (!target) return;
+    setSlideModalSection(section);
+    setSlideEditingIdx(idx);
+    setSlideModalForm({
+      tag: target.tag || '',
+      title: target.title || '',
+      link: target.link || '',
+      imageUrl: target.imageUrl || '',
+      alt: target.alt || ''
+    });
+    setIsSlideModalOpen(true);
+  };
+
+  const handleSaveSlideModal = () => {
+    if (!slideModalForm.title.trim()) {
+      alert("Slide Headline / Title is required.");
+      return;
+    }
+    const isEdit = slideEditingIdx !== null;
+    const currentList = slideModalSection === 'achievements' 
+      ? data.achievementsSection.slides 
+      : data.upcomingSection.slides;
+    const existingId = isEdit && currentList[slideEditingIdx] ? currentList[slideEditingIdx].id : null;
+
+    const newSlide = {
+      id: existingId || `${slideModalSection === 'achievements' ? 'ach' : 'up'}-${Date.now()}`,
+      tag: slideModalForm.tag.trim() || (slideModalSection === 'achievements' ? 'ACHIEVEMENT' : 'EVENT'),
+      title: slideModalForm.title.trim(),
+      alt: slideModalForm.alt.trim() || slideModalForm.title.trim(),
+      imageUrl: slideModalForm.imageUrl.trim() || (slideModalSection === 'achievements' ? '/Images/Hero/achivement_1.jpeg' : '/Images/Hero/fresher_day.jpeg'),
+      link: slideModalForm.link.trim() || (slideModalSection === 'achievements' ? '/about' : '/facilities')
     };
 
     setData(prev => {
       const copy = JSON.parse(JSON.stringify(prev));
-      if (section === 'achievements') {
-        copy.achievementsSection.slides.push(newSlide);
+      const list = slideModalSection === 'achievements' 
+        ? copy.achievementsSection.slides 
+        : copy.upcomingSection.slides;
+      if (isEdit) {
+        list[slideEditingIdx] = newSlide;
       } else {
-        copy.upcomingSection.slides.push(newSlide);
+        list.push(newSlide);
       }
       return copy;
     });
-    showNotification("New slide added. You can now replace its image and details.");
+
+    setIsSlideModalOpen(false);
+    showNotification(isEdit ? "Slide updated! Click 'Save & Publish' to persist." : "New slide added! Click 'Save & Publish' to persist.");
+  };
+
+  const handleModalSlideFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadLoading(true);
+    try {
+      const res = await uploadFile(file, 'Hero');
+      if (res && res.url) {
+        setSlideModalForm(prev => ({ ...prev, imageUrl: res.url }));
+        showNotification("Slide poster uploaded successfully!");
+      }
+    } catch (err) {
+      console.warn("Upload fallback to data URL", err);
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSlideModalForm(prev => ({ ...prev, imageUrl: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    } finally {
+      setUploadLoading(false);
+    }
   };
 
   const deleteSlide = (section, index) => {
@@ -243,20 +342,64 @@ export default function HomeManager() {
   };
 
   // --- Features Section Helpers ---
-  const addFeature = () => {
-    const newFeature = {
-      id: `feat-${Date.now()}`,
-      title: 'New College Highlight',
-      description: 'Highlight exceptional academic or campus infrastructure here.',
+  const openAddFeatureModal = () => {
+    setFeatureEditingIdx(null);
+    setFeatureModalForm({
+      title: '',
+      description: '',
       icon: 'Sparkles',
       link: '/about',
-      badge: 'New'
+      badge: ''
+    });
+    setIsFeatureModalOpen(true);
+  };
+
+  const openEditFeatureModal = (idx) => {
+    const target = data.featuresSection?.items?.[idx];
+    if (!target) return;
+    setFeatureEditingIdx(idx);
+    setFeatureModalForm({
+      title: target.title || '',
+      description: target.description || '',
+      icon: target.icon || 'Sparkles',
+      link: target.link || '',
+      badge: target.badge || ''
+    });
+    setIsFeatureModalOpen(true);
+  };
+
+  const handleSaveFeatureModal = () => {
+    if (!featureModalForm.title.trim() || !featureModalForm.description.trim()) {
+      alert("Highlight Card Title and Description are required.");
+      return;
+    }
+    const isEdit = featureEditingIdx !== null;
+    const existingId = isEdit && data.featuresSection?.items?.[featureEditingIdx]
+      ? data.featuresSection.items[featureEditingIdx].id
+      : `feat-${Date.now()}`;
+
+    const newFeature = {
+      id: existingId,
+      title: featureModalForm.title.trim(),
+      description: featureModalForm.description.trim(),
+      icon: featureModalForm.icon || 'Sparkles',
+      link: featureModalForm.link.trim() || '/about',
+      badge: featureModalForm.badge.trim()
     };
+
     setData(prev => {
       const copy = JSON.parse(JSON.stringify(prev));
-      copy.featuresSection.items.push(newFeature);
+      if (!copy.featuresSection.items) copy.featuresSection.items = [];
+      if (isEdit) {
+        copy.featuresSection.items[featureEditingIdx] = newFeature;
+      } else {
+        copy.featuresSection.items.push(newFeature);
+      }
       return copy;
     });
+
+    setIsFeatureModalOpen(false);
+    showNotification(isEdit ? "Highlight card updated!" : "New highlight card added!");
   };
 
   const deleteFeature = (index) => {
@@ -266,6 +409,49 @@ export default function HomeManager() {
         copy.featuresSection.items.splice(index, 1);
         return copy;
       });
+      showNotification("Highlight card removed.");
+    }
+  };
+
+  // --- Quick Stats Helpers ---
+  const openAddStatModal = () => {
+    setStatModalForm({
+      value: '',
+      label: '',
+      icon: 'Award'
+    });
+    setIsStatModalOpen(true);
+  };
+
+  const handleSaveStatModal = () => {
+    if (!statModalForm.value.trim() || !statModalForm.label.trim()) {
+      alert("Metric Value and Label are required.");
+      return;
+    }
+    const newStat = {
+      id: `stat-${Date.now()}`,
+      value: statModalForm.value.trim(),
+      label: statModalForm.label.trim(),
+      icon: statModalForm.icon || 'Award'
+    };
+    setData(prev => {
+      const copy = JSON.parse(JSON.stringify(prev));
+      if (!copy.quickStats.items) copy.quickStats.items = [];
+      copy.quickStats.items.push(newStat);
+      return copy;
+    });
+    setIsStatModalOpen(false);
+    showNotification("New key statistic added!");
+  };
+
+  const deleteStat = (idx) => {
+    if (window.confirm("Remove this key statistic counter?")) {
+      setData(prev => {
+        const copy = JSON.parse(JSON.stringify(prev));
+        copy.quickStats.items.splice(idx, 1);
+        return copy;
+      });
+      showNotification("Statistic counter removed.");
     }
   };
 
@@ -477,7 +663,7 @@ export default function HomeManager() {
                 </h3>
                 <button
                   type="button"
-                  onClick={() => addSlide('achievements')}
+                  onClick={() => openAddSlideModal('achievements')}
                   className="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -588,6 +774,14 @@ export default function HomeManager() {
                   <div className="flex md:flex-col items-center gap-1.5 shrink-0 self-end md:self-center">
                     <button
                       type="button"
+                      onClick={() => openEditSlideModal('achievements', idx)}
+                      className="p-1.5 rounded-lg border border-indigo-200 text-indigo-600 hover:bg-indigo-50 cursor-pointer"
+                      title="Edit Slide Details (Modal)"
+                    >
+                      <Edit3 className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => moveSlide('achievements', idx, -1)}
                       disabled={idx === 0}
                       className="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 disabled:opacity-30 cursor-pointer"
@@ -686,7 +880,7 @@ export default function HomeManager() {
                 </h3>
                 <button
                   type="button"
-                  onClick={() => addSlide('upcoming')}
+                  onClick={() => openAddSlideModal('upcoming')}
                   className="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -797,6 +991,14 @@ export default function HomeManager() {
                   <div className="flex md:flex-col items-center gap-1.5 shrink-0 self-end md:self-center">
                     <button
                       type="button"
+                      onClick={() => openEditSlideModal('upcoming', idx)}
+                      className="p-1.5 rounded-lg border border-indigo-200 text-indigo-600 hover:bg-indigo-50 cursor-pointer"
+                      title="Edit Slide Details (Modal)"
+                    >
+                      <Edit3 className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => moveSlide('upcoming', idx, -1)}
                       disabled={idx === 0}
                       className="p-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 disabled:opacity-30 cursor-pointer"
@@ -885,7 +1087,7 @@ export default function HomeManager() {
                 </h3>
                 <button
                   type="button"
-                  onClick={addFeature}
+                  onClick={openAddFeatureModal}
                   className="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -933,14 +1135,24 @@ export default function HomeManager() {
                         />
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => deleteFeature(idx)}
-                        className="p-1 rounded-md text-red-500 hover:bg-red-50 cursor-pointer"
-                        title="Remove Card"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => openEditFeatureModal(idx)}
+                          className="p-1 rounded-md text-indigo-600 hover:bg-indigo-50 cursor-pointer"
+                          title="Edit Card (Modal)"
+                        >
+                          <Edit3 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => deleteFeature(idx)}
+                          className="p-1 rounded-md text-red-500 hover:bg-red-50 cursor-pointer"
+                          title="Remove Card"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
 
                     <div>
@@ -1017,7 +1229,7 @@ export default function HomeManager() {
         {subTab === 'stats' && (
           <div className="space-y-6">
             
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex items-center justify-between">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <input
                   type="checkbox"
@@ -1033,6 +1245,15 @@ export default function HomeManager() {
                   Enable Quick Key Statistics Bar
                 </label>
               </div>
+
+              <button
+                type="button"
+                onClick={openAddStatModal}
+                className="px-3.5 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-all self-start sm:self-center"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Statistic</span>
+              </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1045,22 +1266,32 @@ export default function HomeManager() {
                     <span className="text-[10px] font-black uppercase text-slate-400">
                       Statistic #{idx + 1}
                     </span>
-                    <select
-                      value={st.icon || 'Award'}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setData(prev => {
-                          const copy = JSON.parse(JSON.stringify(prev));
-                          copy.quickStats.items[idx].icon = val;
-                          return copy;
-                        });
-                      }}
-                      className="px-2 py-1 text-xs font-bold border border-slate-200 rounded-lg bg-slate-50 cursor-pointer"
-                    >
-                      {AVAILABLE_ICONS.map(ic => (
-                        <option key={ic} value={ic}>{ic}</option>
-                      ))}
-                    </select>
+                    <div className="flex items-center gap-1.5">
+                      <select
+                        value={st.icon || 'Award'}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setData(prev => {
+                            const copy = JSON.parse(JSON.stringify(prev));
+                            copy.quickStats.items[idx].icon = val;
+                            return copy;
+                          });
+                        }}
+                        className="px-2 py-1 text-xs font-bold border border-slate-200 rounded-lg bg-slate-50 cursor-pointer"
+                      >
+                        {AVAILABLE_ICONS.map(ic => (
+                          <option key={ic} value={ic}>{ic}</option>
+                        ))}
+                      </select>
+                      <button
+                        type="button"
+                        onClick={() => deleteStat(idx)}
+                        className="p-1 text-rose-500 hover:bg-rose-50 rounded-lg cursor-pointer transition-colors"
+                        title="Delete Statistic"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
 
                   <div>
@@ -1329,6 +1560,419 @@ export default function HomeManager() {
                 </div>
               </div>
 
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ─────────────────────────────────────────────────────────────
+          ADD / EDIT SLIDE MODAL (NO DUMMY VALUES, REAL FILE UPLOAD)
+          ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isSlideModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl max-h-[90vh] shadow-2xl flex flex-col overflow-hidden text-left"
+            >
+              <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-600 flex items-center justify-center">
+                    <Image className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-slate-800">
+                      {slideEditingIdx !== null ? 'Edit Slide Details' : `Add ${slideModalSection === 'achievements' ? 'Achievement' : 'Upcoming Event'} Slide`}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 font-medium">Fill in authentic slide headline, tag, poster image and link.</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsSlideModalOpen(false)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="p-6 overflow-y-auto space-y-4 grow">
+                {/* Section selection if new */}
+                {slideEditingIdx === null && (
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Showcase Container</label>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSlideModalSection('achievements');
+                          setSlideModalForm(prev => ({ ...prev, tag: 'ACHIEVEMENT', link: '/placements' }));
+                        }}
+                        className={`flex-1 py-2 px-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                          slideModalSection === 'achievements' 
+                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm' 
+                            : 'bg-slate-50 text-slate-650 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        Achievements Showcase
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSlideModalSection('upcoming');
+                          setSlideModalForm(prev => ({ ...prev, tag: 'EVENT', link: '/events' }));
+                        }}
+                        className={`flex-1 py-2 px-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                          slideModalSection === 'upcoming' 
+                            ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm' 
+                            : 'bg-slate-50 text-slate-650 border-slate-200 hover:bg-slate-100'
+                        }`}
+                      >
+                        Upcoming Events
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Badge / Tag */}
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Category Badge / Tag</label>
+                    <div className="flex gap-1 flex-wrap">
+                      {['PLACEMENTS', 'ACHIEVEMENT', 'GOLD MEDAL', 'EVENT', 'CONVOCATION', 'RESEARCH'].map(tg => (
+                        <button
+                          key={tg}
+                          type="button"
+                          onClick={() => setSlideModalForm(prev => ({ ...prev, tag: tg }))}
+                          className="text-[9px] px-2 py-0.5 rounded-full bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 font-bold transition-colors cursor-pointer"
+                        >
+                          {tg}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <input
+                    type="text"
+                    value={slideModalForm.tag}
+                    onChange={(e) => setSlideModalForm(prev => ({ ...prev, tag: e.target.value }))}
+                    placeholder="e.g. PLACEMENTS, GOLD MEDAL, CONVOCATION"
+                    className="w-full text-xs font-bold px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+
+                {/* Headline / Title */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Slide Headline / Title *</label>
+                  <input
+                    type="text"
+                    value={slideModalForm.title}
+                    onChange={(e) => setSlideModalForm(prev => ({ ...prev, title: e.target.value }))}
+                    placeholder="e.g. 100% Campus Placement Drive & Tier-1 Recruitment Honors"
+                    className="w-full text-xs font-bold px-3 py-2.5 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+
+                {/* Target Link */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Optional Target Link</label>
+                  <input
+                    type="text"
+                    value={slideModalForm.link}
+                    onChange={(e) => setSlideModalForm(prev => ({ ...prev, link: e.target.value }))}
+                    placeholder="e.g. /placements, /events, or external URL"
+                    className="w-full text-xs font-medium px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+
+                {/* Poster Image File Upload & Preview */}
+                <div className="space-y-2 pt-2 border-t border-slate-100">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider block">Slide Poster Image</label>
+                  
+                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                    {/* Preview Thumbnail */}
+                    <div className="w-full sm:w-44 aspect-video rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shrink-0 relative flex items-center justify-center">
+                      {slideModalForm.imageUrl ? (
+                        <img 
+                          src={slideModalForm.imageUrl} 
+                          alt="Poster Preview" 
+                          className="w-full h-full object-cover"
+                          onError={(e) => { e.target.style.display = 'none'; }}
+                        />
+                      ) : (
+                        <div className="text-center p-2 text-slate-400 text-[10px] font-bold">
+                          No Poster Selected
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Upload button & URL input */}
+                    <div className="grow space-y-2 w-full">
+                      <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs cursor-pointer border border-indigo-200 transition-all">
+                        <Upload className="w-3.5 h-3.5" />
+                        <span>Upload Poster from Device</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleModalSlideFileUpload}
+                        />
+                      </label>
+                      <input
+                        type="text"
+                        value={slideModalForm.imageUrl}
+                        onChange={(e) => setSlideModalForm(prev => ({ ...prev, imageUrl: e.target.value }))}
+                        placeholder="Or enter Image URL / preset path..."
+                        className="w-full text-xs font-medium px-3 py-1.5 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Preset quick picks */}
+                  <div className="pt-2">
+                    <span className="text-[9px] font-black uppercase text-slate-400 block mb-1">Quick Select College Preset:</span>
+                    <div className="grid grid-cols-4 sm:grid-cols-6 gap-1.5 max-h-24 overflow-y-auto p-1 bg-slate-50 rounded-xl border border-slate-150">
+                      {PRESET_COLLEGE_IMAGES.map((preset, pIdx) => (
+                        <button
+                          key={pIdx}
+                          type="button"
+                          onClick={() => setSlideModalForm(prev => ({ ...prev, imageUrl: preset.url }))}
+                          className="aspect-video rounded-lg overflow-hidden border border-slate-200 hover:border-indigo-500 relative cursor-pointer"
+                          title={preset.label}
+                        >
+                          <img src={preset.url} alt={preset.label} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-2 bg-slate-50">
+                <button
+                  type="button"
+                  onClick={() => setIsSlideModalOpen(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-650 hover:bg-slate-200/60 cursor-pointer transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveSlideModal}
+                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-sm transition-all"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  <span>{slideEditingIdx !== null ? 'Save Changes' : 'Add Slide'}</span>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ─────────────────────────────────────────────────────────────
+          ADD / EDIT FEATURE HIGHLIGHT CARD MODAL
+          ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isFeatureModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg shadow-2xl flex flex-col overflow-hidden text-left"
+            >
+              <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-600 flex items-center justify-center">
+                    <Sparkles className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-slate-800">
+                      {featureEditingIdx !== null ? 'Edit Highlight Card' : 'Add Campus Highlight Card'}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 font-medium">Configure feature card title, description, and icon.</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsFeatureModalOpen(false)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-3.5 grow">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Icon</label>
+                    <select
+                      value={featureModalForm.icon}
+                      onChange={(e) => setFeatureModalForm(prev => ({ ...prev, icon: e.target.value }))}
+                      className="w-full text-xs font-bold px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50 cursor-pointer"
+                    >
+                      {AVAILABLE_ICONS.map(ic => (
+                        <option key={ic} value={ic}>{ic}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Badge Tag</label>
+                    <input
+                      type="text"
+                      value={featureModalForm.badge}
+                      onChange={(e) => setFeatureModalForm(prev => ({ ...prev, badge: e.target.value }))}
+                      placeholder="e.g. Accredited, Top Tier"
+                      className="w-full text-xs font-bold px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Feature Title *</label>
+                  <input
+                    type="text"
+                    value={featureModalForm.title}
+                    onChange={(e) => setFeatureModalForm(prev => ({ ...prev, title: e.target.value }))}
+                    placeholder="e.g. NBA & NAAC 'A' Grade Accreditation"
+                    className="w-full text-xs font-bold px-3 py-2.5 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Description *</label>
+                  <textarea
+                    rows={3}
+                    value={featureModalForm.description}
+                    onChange={(e) => setFeatureModalForm(prev => ({ ...prev, description: e.target.value }))}
+                    placeholder="Enter detailed description of this campus feature or achievement..."
+                    className="w-full text-xs font-medium p-3 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Target Link</label>
+                  <input
+                    type="text"
+                    value={featureModalForm.link}
+                    onChange={(e) => setFeatureModalForm(prev => ({ ...prev, link: e.target.value }))}
+                    placeholder="/about, /academics, etc."
+                    className="w-full text-xs font-medium px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+              </div>
+
+              <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-2 bg-slate-50">
+                <button
+                  type="button"
+                  onClick={() => setIsFeatureModalOpen(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-650 hover:bg-slate-200/60 cursor-pointer transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveFeatureModal}
+                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-sm transition-all"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  <span>{featureEditingIdx !== null ? 'Save Changes' : 'Add Card'}</span>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* ─────────────────────────────────────────────────────────────
+          ADD STATISTIC COUNTER MODAL
+          ───────────────────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {isStatModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              className="bg-white border border-slate-200 rounded-3xl w-full max-w-md shadow-2xl flex flex-col overflow-hidden text-left"
+            >
+              <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-600 flex items-center justify-center">
+                    <Award className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-black text-slate-800">Add Key Statistic Counter</h3>
+                    <p className="text-[11px] text-slate-500 font-medium">Add an institutional metric or numerical achievement.</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsStatModalOpen(false)}
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 cursor-pointer transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-3.5 grow">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Icon</label>
+                  <select
+                    value={statModalForm.icon}
+                    onChange={(e) => setStatModalForm(prev => ({ ...prev, icon: e.target.value }))}
+                    className="w-full text-xs font-bold px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50 cursor-pointer"
+                  >
+                    {AVAILABLE_ICONS.map(ic => (
+                      <option key={ic} value={ic}>{ic}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Metric Counter Value *</label>
+                  <input
+                    type="text"
+                    value={statModalForm.value}
+                    onChange={(e) => setStatModalForm(prev => ({ ...prev, value: e.target.value }))}
+                    placeholder="e.g. 98%+, 150+, 45+, 50 LPA"
+                    className="w-full text-base font-black px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50 text-indigo-700"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Metric Label *</label>
+                  <input
+                    type="text"
+                    value={statModalForm.label}
+                    onChange={(e) => setStatModalForm(prev => ({ ...prev, label: e.target.value }))}
+                    placeholder="e.g. Placement Assistance, Eminent Faculty Members"
+                    className="w-full text-xs font-bold px-3 py-2 border border-slate-200 rounded-xl outline-none focus:border-indigo-500 bg-slate-50"
+                  />
+                </div>
+              </div>
+
+              <div className="px-6 py-4 border-t border-slate-100 flex items-center justify-end gap-2 bg-slate-50">
+                <button
+                  type="button"
+                  onClick={() => setIsStatModalOpen(false)}
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-650 hover:bg-slate-200/60 cursor-pointer transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSaveStatModal}
+                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer shadow-sm transition-all"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Add Statistic</span>
+                </button>
+              </div>
             </motion.div>
           </div>
         )}

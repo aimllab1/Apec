@@ -57,6 +57,7 @@ import InstitutionalHeader from './components/InstitutionalHeader';
 import InstitutionalFooter from './components/InstitutionalFooter';
 import { getLocalResponse } from './ai/engine/localAIClient.js';
 import { getLoadedTourDataAsync } from './data/tourData';
+import { getDepartmentFromSubdomain, isSubdomainMode } from './utils/subdomain';
 
 // Scroll to Top on Page Change
 function ScrollToTop() {
@@ -204,7 +205,8 @@ function AppContent({ isLoading, setIsLoading }) {
                        location.pathname.startsWith('/admin-profile') ||
                        location.pathname.startsWith('/admin/home') ||
                        location.pathname.startsWith('/home-editor');
-  const isHome = location.pathname === '/';
+  const activeDeptSubdomain = getDepartmentFromSubdomain();
+  const isHome = location.pathname === '/' && !activeDeptSubdomain;
   const isActive = (path) => {
     if (path === '/') {
       return location.pathname === '/';
@@ -887,7 +889,15 @@ function AppContent({ isLoading, setIsLoading }) {
             <main className="grow">
               <AnimatePresence mode="wait">
                 <Routes location={location} key={location.pathname}>
-                  <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                  {activeDeptSubdomain ? (
+                    <>
+                      <Route path="/" element={<PageTransition><DepartmentDetail departmentId={activeDeptSubdomain} /></PageTransition>} />
+                      <Route path="/departments" element={<PageTransition><DepartmentDetail departmentId={activeDeptSubdomain} /></PageTransition>} />
+                      <Route path="/college-home" element={<PageTransition><Home /></PageTransition>} />
+                    </>
+                  ) : (
+                    <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+                  )}
                   <Route path="/about" element={<PageTransition><InstitutionalProfile /></PageTransition>} />
                   <Route path="/about/profile" element={<PageTransition><InstitutionalProfile /></PageTransition>} />
                   <Route path="/about/founders" element={<PageTransition><FounderTrustees /></PageTransition>} />
@@ -903,7 +913,9 @@ function AppContent({ isLoading, setIsLoading }) {
                   <Route path="/admission" element={<PageTransition><Admission /></PageTransition>} />
                   <Route path="/facilities" element={<PageTransition><Facilities /></PageTransition>} />
                   <Route path="/placements" element={<PageTransition><Placements /></PageTransition>} />
-                  <Route path="/departments" element={<PageTransition><Departments /></PageTransition>} />
+                  {!activeDeptSubdomain && (
+                    <Route path="/departments" element={<PageTransition><Departments /></PageTransition>} />
+                  )}
                   <Route path="/academics" element={<PageTransition><Departments /></PageTransition>} />
                   <Route path="/academics/departments" element={<PageTransition><Departments /></PageTransition>} />
                   <Route path="/regulations" element={<PageTransition><Regulations /></PageTransition>} />

@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import departmentsData from '../data/departmentsData.json';
+import { getDepartmentUrl } from '../utils/subdomain';
 
 const departmentImages = {
   aiml: '/Images/Dept/aiml dept.jpg',
@@ -453,13 +454,13 @@ export default function Departments() {
                         </div>
 
                         {/* CTA Link */}
-                        <Link 
-                          to={`/departments/${dept.key}`}
+                        <a 
+                          href={getDepartmentUrl(dept.key)}
                           className="w-full flex items-center justify-center gap-1.5 bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-black text-[10.5px] sm:text-xs uppercase tracking-wider py-2.5 rounded-xl transition-all shadow-sm active:scale-95 cursor-pointer mt-1"
                         >
                           <span>Explore Portal</span>
                           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </motion.div>

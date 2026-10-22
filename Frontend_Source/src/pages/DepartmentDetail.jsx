@@ -15,6 +15,7 @@ import departmentsData from '../data/departmentsData.json';
 import facultyData from '../ai/knowledge/faculty.json';
 import FacultyOrcidQr from '../components/FacultyOrcidQr';
 import { submitDepartmentFeedback } from '../utils/inquiryService';
+import { getRootCollegeUrl, isSubdomainMode } from '../utils/subdomain';
 
 // Helper to determine top-right badge (HOD, PRINCIPAL, VICE PRINCIPAL, DEAN)
 const getTopRightBadge = (member, currentDept) => {
@@ -882,8 +883,9 @@ const resolveDepartment = (data, slug) => {
   return found || data.cse || null;
 };
 
-export default function DepartmentDetail() {
-  const { id } = useParams();
+export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
+  const { id: paramId } = useParams();
+  const id = propDeptId || paramId;
   const [searchParams] = useSearchParams();
   
   // Dynamically load from localStorage config & subscribe to CMS live updates
@@ -935,9 +937,16 @@ export default function DepartmentDetail() {
     };
   }, [id]);
 
+  useEffect(() => {
+    if (deptData?.name) {
+      document.title = `${deptData.name} | APEC`;
+    }
+  }, [deptData?.name]);
+
   // Local state for tabs, initialize with URL query param if present
   const queryTab = searchParams.get('tab');
   const [activeSubTab, setActiveSubTab] = useState(queryTab || 'overview');
+  const [topperYearFilter, setTopperYearFilter] = useState('All');
 
   useEffect(() => {
     const qTab = searchParams.get('tab');
@@ -1195,7 +1204,11 @@ export default function DepartmentDetail() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center text-gray-900">
         <div className="text-center">
           <h2 className="text-2xl font-black mb-4">Department Not Found</h2>
-          <Link to="/departments" className="text-indigo-600 hover:underline text-sm font-bold">Back to Departments</Link>
+          {isSubdomainMode() ? (
+            <a href={getRootCollegeUrl('/departments')} className="text-indigo-600 hover:underline text-sm font-bold">Back to College Portal</a>
+          ) : (
+            <Link to="/departments" className="text-indigo-600 hover:underline text-sm font-bold">Back to Departments</Link>
+          )}
         </div>
       </div>
     );
@@ -1208,8 +1221,6 @@ export default function DepartmentDetail() {
     j.journal.toLowerCase().includes(pubSearch.toLowerCase())
   );
 
-  // Local state for topper year filter
-  const [topperYearFilter, setTopperYearFilter] = useState('All');
 
   // More options structure
   const moreOptions = [
@@ -1245,12 +1256,21 @@ export default function DepartmentDetail() {
             animate={{ opacity: 1, x: 0 }}
             className="flex flex-wrap items-center gap-2.5"
           >
-            <Link 
-              to="/departments" 
-              className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-gray-550 hover:text-indigo-650 transition-colors bg-white hover:bg-gray-50 border border-gray-200/80 px-4 py-1.5 rounded-full shadow-xs"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Departments
-            </Link>
+            {isSubdomainMode() ? (
+              <a 
+                href={getRootCollegeUrl('/departments')} 
+                className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-gray-550 hover:text-indigo-650 transition-colors bg-white hover:bg-gray-50 border border-gray-200/80 px-4 py-1.5 rounded-full shadow-xs"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" /> Back to College Portal
+              </a>
+            ) : (
+              <Link 
+                to="/departments" 
+                className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-gray-550 hover:text-indigo-650 transition-colors bg-white hover:bg-gray-50 border border-gray-200/80 px-4 py-1.5 rounded-full shadow-xs"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" /> Back to Departments
+              </Link>
+            )}
 
             {typeof window !== 'undefined' && localStorage.getItem('is_logged_in') === 'true' && (
               <Link

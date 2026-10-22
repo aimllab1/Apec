@@ -7,12 +7,14 @@ import {
 import logo40Years from '../assets/logo40Years.js';
 import ugcLogo from '../assets/ugcLogo.js';
 import apecLogo from '../assets/apecLogo.js';
+import { getRootCollegeUrl, isSubdomainMode } from '../utils/subdomain';
 
 export default function InstitutionalHeader({ setIsPanoOpen }) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState({});
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const homeUrl = isSubdomainMode() ? getRootCollegeUrl('/') : '/';
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [currentUserRole, setCurrentUserRole] = useState('');
 
@@ -69,13 +71,45 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
     };
   }, [mobileMenuOpen]);
 
-  const tickerItems = [
+  const DEFAULT_TICKER_ITEMS = [
     { text: "UGC Autonomous 10 Years Status Conferred", icon: "🏛", link: "/ugc-self-disclosure" },
     { text: "95%+ Placement Track Record – 150+ Top Recruiters", icon: "👨‍💼", link: "/placements" },
     { text: "Admissions Open for B.E. / B.Tech / M.E. / MBA / MCA 2026–2027", icon: "📢", link: "/admission" },
     { text: "NAAC Accredited Institution with Grade 'A'", icon: "🎖", link: "/about/profile" },
     { text: "Anna University Affiliated Autonomous Institution", icon: "🎓", link: "/about/profile" },
   ];
+
+  const [tickerItems, setTickerItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('apec_ticker_news');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return DEFAULT_TICKER_ITEMS;
+  });
+
+  useEffect(() => {
+    const updateTicker = () => {
+      try {
+        const saved = localStorage.getItem('apec_ticker_news');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setTickerItems(parsed);
+          }
+        }
+      } catch (e) {}
+    };
+
+    window.addEventListener('storage', updateTicker);
+    window.addEventListener('apec_storage_update', updateTicker);
+    return () => {
+      window.removeEventListener('storage', updateTicker);
+      window.removeEventListener('apec_storage_update', updateTicker);
+    };
+  }, []);
 
   return (
     <header className="w-full relative z-[100] select-none">
@@ -99,7 +133,7 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
                 
                 <div className="flex items-center gap-3 lg:gap-4 xl:gap-6">
                   {/* College Logo in Sunburst Medallion */}
-                  <Link to="/" className="relative flex items-center justify-center group shrink-0" title="APEC Home">
+                  <a href={homeUrl} className="relative flex items-center justify-center group shrink-0" title="APEC Home">
                     <div className="relative w-[82px] h-[82px] lg:w-[96px] lg:h-[96px] xl:w-[124px] xl:h-[124px] 2xl:w-[134px] 2xl:h-[134px] aspect-square flex items-center justify-center select-none group-hover:scale-105 transition-all duration-300 ease-out">
                       {/* SVG Sunburst Medallion Background (Rotates continuously behind the stationary logo) */}
                       <svg 
@@ -148,7 +182,7 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
                         />
                       </div>
                     </div>
-                  </Link>
+                  </a>
 
                   {/* Branding Typography */}
                   <div className="flex flex-col items-center justify-center min-w-0 pr-1 lg:pr-2 select-none">
@@ -388,7 +422,7 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
         <div className="lg:hidden flex items-center justify-between w-full h-[64px] sm:h-[70px] bg-[#041744] px-2.5 sm:px-4 border-b border-[#D4A347]/60 shadow-md select-none relative z-30">
           
           {/* Left: Brand Identity (Enlarged Logo + Clear Visible Screen-Responsive College Name) */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 pr-1" title="APEC Home">
+          <a href={homeUrl} className="flex items-center gap-2 sm:gap-3 group min-w-0 pr-1" title="APEC Home">
             {/* Enlarged College Logo Medallion */}
             <div className="relative w-[50px] h-[50px] xs:w-[54px] xs:h-[54px] sm:w-[60px] sm:h-[60px] aspect-square shrink-0 flex items-center justify-center">
               <svg 
@@ -448,7 +482,7 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
                 </span>
               </div>
             </div>
-          </Link>
+          </a>
 
           {/* Right: ONLY 360 Degree Tour + Menu Hamburger Icon */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
@@ -541,8 +575,8 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
         <div className="w-full max-w-[1850px] mx-auto px-1.5 sm:px-2 lg:px-3 xl:px-6 flex items-center justify-center flex-wrap gap-1.5 lg:gap-2 xl:gap-3 2xl:gap-4 relative">
           
           {/* 1. HOME (Active Gold Pill) */}
-          <Link 
-            to="/" 
+          <a 
+            href={homeUrl} 
             className={`rounded-full px-3 lg:px-3.5 xl:px-5 py-1.5 text-[9.5px] lg:text-[10px] xl:text-[11.5px] font-black uppercase tracking-wider transition-all duration-200 shadow-xs flex items-center justify-center whitespace-nowrap ${
               isActive('/') 
                 ? 'bg-[#D4A347] text-black shadow-md ring-2 ring-[#F5E5B8]' 
@@ -550,8 +584,8 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
             }`}
             style={{ fontFamily: "'Playfair Display', 'Cinzel', 'Times New Roman', Georgia, serif" }}
           >
-            HOME
-          </Link>
+            {isSubdomainMode() ? 'COLLEGE HOME' : 'HOME'}
+          </a>
 
           {/* 2. ABOUT Dropdown */}
           <div 
@@ -1161,15 +1195,15 @@ export default function InstitutionalHeader({ setIsPanoOpen }) {
                 </div>
 
                 {/* 1. HOME */}
-                <Link
-                  to="/"
+                <a
+                  href={homeUrl}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`block py-2 px-3 rounded-xl font-bold text-xs uppercase tracking-wider ${
                     isActive('/') ? 'bg-[#D4A347] text-[#071B52]' : 'hover:bg-white/10 text-white'
                   }`}
                 >
-                  HOME
-                </Link>
+                  {isSubdomainMode() ? 'COLLEGE HOME' : 'HOME'}
+                </a>
 
                 {/* 2. ABOUT Accordion */}
                 <div className="border-b border-white/10 pb-2">
