@@ -1,0 +1,465 @@
+[
+  {
+    "key": "aiml",
+    "name": "Artificial Intelligence and Machine Learning",
+    "about": "The department of Artificial Intelligence and Machine Learning was established in the year of 2023 with an intake of 30 students in UG. The department is equipped with fully established laboratory such as Artificial Intelligence and Machine Laboratory.",
+    "vision": "To achieve excellence in Artificial Intelligence and Machine learning education, cutting-edge research discoveries, and innovation in AI and ML for the betterment of society.",
+    "mission": [
+      "To impart competencies and expertise’s in the field of artificial intelligence and machine learning.",
+      "To nurture a dynamic and collaborative research environment to push the boundaries of AI and ML",
+      "To foster entrepreneurship and innovation by intellectual advancements to address the real-world challenges and create economic prospects"
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "chemical",
+    "name": "Chemical Engineering",
+    "about": "The Department of Chemical Engineering was started in the year 1997. The Department has a sanctioned student intake of 40 for UG, affiliated to Anna University. Chemical Engineering is the branch of engineering that deals with the application of physical science (Physics and Chemistry) with mathematics, to the process of converting raw materials or chemicals into more useful or valuable forms. Majority of the passed out students are well placed in the country and many have completed higher studies in abroad and well placed there. Right from its inception, the Department has been doing its best to bring about excellence in academics. The Department has been aware of the role of chemical engineers in building of the modern India and has been taking appropriate steps to encourage research and developmental activities. The department has highly qualified core faculty of high professional profile to meet the emerging trends and challenges in the field of chemical engineering and allied areas on a global platform. The curricula and syllabi for the undergraduate courses have been periodically updated in line with modern day developments in the chemical engineering arena and taking into account the demands of industry and R&D institutions. The department has fully equipped undergraduate laboratories in the core areas of chemical engineering to impart practical knowledge to the students. Constantly our Department is producing University rank holders every year. Till date, 30 rank holders from both Madras and Anna University have excelled from the department, out of it one Gold medal. Besides strong academic input, students are strongly supported and guided to do mini-projects and gain hands on experience with the chemical engineering equipment's. Students are highly encouraged to participate in Workshops and technical symposium organized by the affiliated institutions to cater to the needs of the industry. Industrial visits and lectures from academic and industrial experts add a new dimension to the teaching learning process. The Department of Chemical engineering has signed Memorandum of Understanding (MOU) with 30 leading industries, which paves a great support for the enhancement of the students’ academic background and career.",
+    "vision": "To attain national recognition in training Engineers both professionally as well as morally for meeting the challenging needs of Chemical & allied industries and societal demands of ethical Engineers.",
+    "mission": [
+      "Providing high quality Engineers in tune with changing needs of Chemical and allied industries.",
+      "Promoting industry academia relationship for mutual benefit and growth.",
+      "Cultivating a spirit of service and ethical conduct among students."
+    ],
+    "labs": [
+      "Heat Transfer Lab",
+      "Mass Transfer Lab",
+      "Process Control Lab",
+      "Mechanical Operation Lab",
+      "Fluid Mechanics Lab",
+      "Technical Analysis Lab",
+      "Chemical Reaction Engineering Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "civil",
+    "name": "Civil Engineering",
+    "about": "The Department of Civil Engineering was established in the year of 1984 with an intake of 60 students in UG. In 2006 M.E-Construction Engineering and Management was started with an intake of 18 and the Research centre was approved by Anna University, Chennai in the year 2011. The Department is NBA accredited in the year 2004, 2009 and 2013. The department is equipped with fully established laboratories such as Soil Mechanics Laboratory, Environmental Engineering Laboratory, Survey Laboratory, CADD Lab, Fluid Mechanics and Machinery Laboratory, Concrete Laboratory Highway Laboratory and Strength of Materials Laboratory. The Association of Civil Engineers is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department has been a member of reputed societies such Indian Concrete Institute (ICI), Indian Society for technical education (ISTE) etc.",
+    "vision": "To produce high class Civil Engineers who will work for the environmentally suitable for pollution free air, potable drinking water and comfortable accommodation so as to develop our motherland towards a modest standard of living at par with the developed nations.",
+    "mission": [
+      "Inculcating quality consciousness among graduates by imparting world expertise.",
+      "Creating a sense of ethics and service for the benefit of society.",
+      "Making high class quality engineers to achieve International standards, to significantly contribute for the development of country."
+    ],
+    "labs": [
+      "Automatic Weather Station",
+      "Hydraulic Engineering Lab",
+      "Concrete and Highway Lab",
+      "Survey Laboratory",
+      "Engineering Practices Lab",
+      "Environmental Engineering Lab",
+      "Strength of Materials Lab",
+      "CADD Lab",
+      "Soil Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "mca",
+    "name": "Computer Applications",
+    "about": "",
+    "vision": "To be the source of bringing out globally competent pioneering computing professionals, researchers, innovators and entrepreneurs and thereby succeed and contribute value to the knowledge-based economy and society.",
+    "mission": [
+      "To offer high-grade, value-based Post-graduate programme in the field of Computer Applications",
+      "To provide conductive environment so as to achieve excellence in teaching-learning, and development activities.",
+      "To facilitate students to nurture skills to practice their professions competently to meet the ever-changing needs of society."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "cse",
+    "name": "Computer Science Engineering",
+    "about": "Department of Computer Science and Engineering was established in the year 1993. It started undergraduate course with 30 students as intake of and now strengthens to 90. In addition, PG programme M.E. Computer Science and Engineering was started in the year 2009 with 18 students as intake. The department has been affiliated to Anna University Technology, Chennai. The alacrity of the students to learn makes it easier for the department of computer science and engineering to produce top-notch engineers who are being recruited by companies all over the world. We provide the following programmes.",
+    "vision": "To be a globally recognized leader in computer science and engineering education, research, and innovation, driving advancements that address societal challenges and shape the future of technology.",
+    "mission": [
+      "Foster a culture of interdisciplinary collaboration, encouraging students and faculty to explore innovative solutions that integrate computer science and engineering with other domains such as medicine, business, and the humanities.",
+      "Conduct impactful research that advances the frontiers of computer science and engineering, addressing fundamental questions and tackling real-world problems with creativity and rigor.",
+      "Engage with industry, government, and other stakeholders to translate research discoveries into practical applications, driving economic growth and societal progress."
+    ],
+    "labs": [
+      "Operating Systems Laboratory",
+      "Artificial Intelligence and Machine Learning Laboratory",
+      "Computer Networks Laboratory",
+      "Data Science Laboratory",
+      "Database Management Systems Laboratory",
+      "Digital Principles & Computer Organization Laboratory",
+      "Data Structures Laboratory",
+      "Object Oriented Programming Laboratory"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "mech",
+    "name": "Department of Mechanical Engineering",
+    "about": "",
+    "vision": "The Department of Mechanical Engineering of Adhiparasakthi Engineering College strives hard to produce globally competitive Mechanical Engineers with good attitude to serve the changing needs of the society.",
+    "mission": [
+      "Imbibing the skill of innovative teaching and learning process to assure transfer of fundamental knowledge.",
+      "Continuous improvement in developing the competency among the students to succeed in solving the contemporary engineering challenges through value based education.",
+      "Developing the leadership skills through team work."
+    ],
+    "labs": [
+      "image",
+      "Welding Lab",
+      "image",
+      "Dynamics Lab",
+      "image",
+      "Heat Engines Lab",
+      "image",
+      "Machine Shop",
+      "image",
+      "Mechatronics Lab",
+      "image",
+      "Heat & Mass Transfer Lab",
+      "image",
+      "Metrology & Measurements Lab",
+      "image",
+      "CAD/CAM Lab",
+      "image",
+      "RESEARCH & DEVELOPMENT",
+      "image",
+      "CNC Lathe",
+      "image",
+      "CNC Milling",
+      "image",
+      "Performance Test on Engine",
+      "Numbers of Work Stations 30 (I9,) With Wifi -Facility",
+      "Licensed Software",
+      "AUTO CADD, Solid Works, ANSYS, Hyper mesh, Creo, Lab view, Hydrosim, Pneumosim. Other Accessories",
+      "A – 3 Plotter, ALL in One Printer & Scanner, Smart Printer with Wifi Facility.",
+      "TEACHING MODELS",
+      "Engineering Graphics Models                     : 10",
+      "Lathe Demo                                                 : 02",
+      "Engine Cut section Model                          : 01",
+      "Solar Flat Plate Collector                            : 01",
+      "LCD PROJECTOR                                          : 5",
+      "CHARTS                                                       : 15",
+      "NPTEL CD’S                                                 : 25",
+      "DEPARTMENT LIBRARY",
+      "Number of Books             : 1160",
+      "Journals                            : 05",
+      "Back Volumes                  : 225",
+      "NPTEL Web Course CD’s : 10",
+      "No of project Books        : 250",
+      "image",
+      "Student"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "it",
+    "name": "Information Technology",
+    "about": "",
+    "vision": "To train well educated skilled and disciplined IT Professionals through planned technological education to fit in the profession and to cater to the changing needs of the society through Innovation and Service.",
+    "mission": [
+      "To impart high quality education by leveraging new technologies that help the socio-economic growth of the society",
+      "To inspire the students to develop innovative solutions that addresses the challenging demands of the modern computing world.",
+      "To inculcate strong ethical values and attitude to serve the mankind professionally and responsibly"
+    ],
+    "labs": [
+      "Data Structures and Algorithms Laboratory",
+      "Object Oriented Programming Laboratory",
+      "Data Science Laboratory",
+      "Operating Systems Laboratory",
+      "Database Management Systems Laboratory",
+      "Full Stack Web Development Laboratory",
+      "Mobile Applications Development Laboratory",
+      "Embedded Systems and IoT Laboratory",
+      "Computer Networks Laboratory",
+      "Artificial Intelligence and Machine Learning Laboratory",
+      "Web Essentials Laboratory",
+      "DEPARTMENT LIBRARY",
+      "Number of Books : 1200",
+      "Journals : 05",
+      "Back Volumes : 277",
+      "IS Codes : 240",
+      "of project Books : 350",
+      "Student:"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "eee",
+    "name": "Electrical and Electronics Engineering",
+    "about": "The department of Electrical and Electronics Engineering was established in the year of 1993 with an intake of 30 students and 1994 with an intake of 60 students in UG. In 2009 M.E-Power Electronics and Drives was started with an intake of 18 and Research centre was approved by Anna University, Chennai in the year 2011. The Department is NBA accredited in the year 2004, 2008 and 2012. The department is equipped with fully established laboratories such as Power electronics Laboratory, Power Systems Laboratory, Electrical Machines-I and II Laboratory, Control & Instrumentation Laboratory, Electronic Devices and Circuits Laboratory, Linear Integrated Circuits Laboratory, Microprocessor and Microcontroller Laboratory and Engineering Workshop Laboratory. The Association of Electrical Engineers is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department has been a member of reputed societies such Institute of Electrical and Electronics Engineer (IEEE), Indian Society for technical education (ISTE) etc.",
+    "vision": "To produce high class Electrical and Electronics Engineering (EEE) Department is committed to create World class engineers who are recognized in their society, research and also Renowned with human values and ethics.",
+    "mission": [
+      "To achieve excellence in teaching and research at par with international standards by providing high quality teaching and learning environment.",
+      "Creating a sense of ethics and service for the benefit of society.",
+      "Producing competent and socially conscience EEE engineers fully equipped with highest personal and professional standards to achieve overall development of the country.",
+      "Empowering students and professionals with the state-of-art knowledge and technological skills."
+    ],
+    "labs": [
+      "Electrical Machines-I Laboratory",
+      "Electrical Machines-II Laboratory",
+      "Control and Instrumentation Laboratory",
+      "Power Electronics Laboratory",
+      "Power Electronics And Drives Laboratory",
+      "Engineering Workshop Laboratory",
+      "Research & Development (R&D) Laboratory",
+      "Power System Simulation Laboratory"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "ece",
+    "name": "Electronics and Communication Engineering",
+    "about": "The Department of Electronics and Communication Engineering (ECE) aims to provide cutting-edge education in communication networks, microelectronics, signal processing, embedded systems, and VLSI design.",
+    "vision": "To be a center of excellence in electronics and communication engineering education and research, creating innovators and entrepreneurs for global development.",
+    "mission": [
+      "To deliver quality education through state-of-the-art laboratory infrastructure and teaching methodologies.",
+      "To foster research and development in wireless systems, VLSI, and signal processing.",
+      "To groom students with interpersonal skills, ethics, and professional excellence."
+    ],
+    "labs": [
+      "VLSI Design Lab",
+      "Embedded Systems Lab",
+      "Analog and Digital Communication Lab",
+      "Digital Signal Processing Lab",
+      "Microprocessors and Microcontrollers Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "mba",
+    "name": "Management Studies (MBA)",
+    "about": "The Department of Management Studies (MBA) provides professional business education that combines managerial theory with practical leadership skills, preparing students for dynamic corporate careers.",
+    "vision": "To be a premier business school that develops innovative and ethical business leaders with a global outlook.",
+    "mission": [
+      "To deliver rigorous and contemporary management education.",
+      "To promote entrepreneurial thinking and leadership skills.",
+      "To cultivate social responsibility and ethical decision-making in future managers."
+    ],
+    "labs": [
+      "Management Information Systems Lab",
+      "Communication & Leadership Lab",
+      "Business Data Analytics Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "sh",
+    "name": "Science & Humanities",
+    "about": "The Department of Science & Humanities bridges the transition of engineering aspirants into professional disciplines by imparting strong foundations in Mathematics, Physics, Chemistry, and English Communication.",
+    "vision": "To lay a solid foundation in basic sciences and humanities, enabling engineering students to excel in their chosen technical fields with a holistic outlook.",
+    "mission": [
+      "To deliver top-quality teaching in basic sciences and communication skills.",
+      "To nurture critical thinking and scientific inquiry.",
+      "To shape well-rounded, ethical professionals."
+    ],
+    "labs": [
+      "Engineering Physics Lab",
+      "Engineering Chemistry Lab",
+      "Language and Communication Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "csd",
+    "name": "Computer Science & Design (CSD)",
+    "about": "The Department of Computer Science & Design (CSD) focuses on the intersection of computer science, computing technologies, and design-oriented applications like UI/UX, graphics, interactive systems, and game design.",
+    "vision": "To produce creative computing professionals equipped with deep technical knowledge and design excellence.",
+    "mission": [
+      "To teach modern computing and design concepts.",
+      "To encourage project-based learning in interactive media, web technologies, and user experience.",
+      "To promote multidisciplinary collaborations and entrepreneurship."
+    ],
+    "labs": [
+      "UI/UX Design Studio",
+      "Computer Graphics and Animation Lab",
+      "Web Design & Development Lab",
+      "Mobile Application Design Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "agri",
+    "name": "Agricultural Engineering",
+    "about": "The Department of Agricultural Engineering focuses on engineering applications in agriculture, including farm machinery, soil and water conservation, food processing technology, and sustainable farming systems.",
+    "vision": "To develop agricultural engineers who can address food security and agricultural sustainability challenges through engineering innovations.",
+    "mission": [
+      "To impart skills in farm automation, irrigation, and post-harvest technology.",
+      "To conduct research for improving agricultural productivity and resource management.",
+      "To empower students to serve rural communities and agricultural industries."
+    ],
+    "labs": [
+      "Farm Machinery and Power Lab",
+      "Soil and Water Conservation Engineering Lab",
+      "Irrigation and Drainage Engineering Lab",
+      "Post-Harvest and Food Processing Technology Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "phd-civil",
+    "name": "PhD - Civil Engg.",
+    "about": "The Ph.D. program in Civil Engineering offers opportunities for advanced research and academic inquiry in structural engineering, environmental engineering, geotechnical engineering, and construction management.",
+    "vision": "To achieve international recognition in structural and environmental research, contributing to sustainable infrastructural development.",
+    "mission": [
+      "To perform high-impact research addressing structural durability and environmental issues.",
+      "To foster collaborations with national and international research organizations.",
+      "To publish innovative findings in top-tier science and engineering journals."
+    ],
+    "labs": [
+      "Advanced Structural Research Lab",
+      "Geotechnical Research Center",
+      "Environmental Engineering Research Wing"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "phd-mech",
+    "name": "PhD - Mechanical Engg.",
+    "about": "The Ph.D. program in Mechanical Engineering provides research pathways in materials science, thermal engineering, fluid machinery, robotics, CAD/CAM, and advanced manufacturing systems.",
+    "vision": "To drive innovations in mechanical sciences, robotics, and thermal engineering through rigorous scientific research and industrial partnership.",
+    "mission": [
+      "To conduct cutting-edge research in manufacturing systems and materials engineering.",
+      "To mentor doctoral scholars to be research leaders in industry and academia.",
+      "To secure patents and commercialize innovative mechanical designs."
+    ],
+    "labs": [
+      "Advanced Manufacturing Research Lab",
+      "Thermal Analysis Research Wing",
+      "Materials and Composites Testing Center"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "phd-ece",
+    "name": "PhD - Electronics and Communication Engg.",
+    "about": "The Ph.D. program in Electronics and Communication Engineering (ECE) aims to conduct cutting-edge research in wireless networks, microelectronics, VLSI systems, embedded design, and digital signal processing.",
+    "vision": "To lead research in telecommunications and microelectronic systems, fostering innovation and technological development for the future.",
+    "mission": [
+      "To carry out advanced research in communication systems, IoT architectures, and chip designs.",
+      "To produce highly skilled research professionals ready for technology hubs and universities.",
+      "To establish collaborative research laboratories with leading electronics enterprises."
+    ],
+    "labs": [
+      "Advanced Communications Research Lab",
+      "VLSI & Embedded Systems Design Suite",
+      "Digital Signal Processing Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "phd-eee",
+    "name": "PhD - Electrical and Electronics Engg.",
+    "about": "The Ph.D. program in Electrical and Electronics Engineering (EEE) focuses on power electronics, electrical machinery designs, smart grid architectures, renewable energy integration, and control instrumentation systems.",
+    "vision": "To be a premier center for electrical engineering research, addressing power management and clean energy challenges globally.",
+    "mission": [
+      "To conduct research in power systems, electric vehicles, and clean energy storage.",
+      "To guide research scholars in solving industrial power and grid integration problems.",
+      "To bridge academic research and practical power grid applications."
+    ],
+    "labs": [
+      "Advanced Power Systems Research Lab",
+      "Smart Grids & Renewable Energy Simulation Center",
+      "Power Electronics Design Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "aids",
+    "name": "Artificial Intelligence and Data Science",
+    "about": "The Department of Artificial Intelligence and Data Science (AI & DS) aims to provide a strong foundation in data engineering, machine learning pipelines, predictive modeling, statistical learning, and database architectures.",
+    "vision": "To produce globally competent professionals in AI and Data Science who contribute to societal growth through innovative research and ethical application of intelligence systems.",
+    "mission": [
+      "To deliver deep education in mathematical foundations, machine learning algorithms, and modern data infrastructures.",
+      "To cultivate collaboration with top data companies for industrial training and project opportunities.",
+      "To foster academic research and intellectual curiosity in analytics and cognitive engineering."
+    ],
+    "labs": [
+      "Artificial Intelligence and Cognition Lab",
+      "Data Analytics and Visualizations Lab",
+      "Big Data Frameworks Lab",
+      "Database Systems and SQL Lab"
+    ],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-cse",
+    "name": "M.E. Computer Science and Engineering",
+    "about": "The M.E. program in Computer Science and Engineering offers advanced coursework and research opportunities in algorithms, computer networks, data science, software engineering, and artificial intelligence.",
+    "vision": "To be a center of excellence in advanced computer science education and research, producing professionals who lead innovative solutions.",
+    "mission": [
+      "To impart advanced technical knowledge and research skills in computer science.",
+      "To foster innovation, collaboration, and ethical engineering practices."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-vlsi",
+    "name": "M.E. VLSI Design",
+    "about": "The M.E. program in VLSI Design focuses on advanced microelectronics, analog and digital IC design, testing and verification, embedded systems, and computer-aided design (CAD) of VLSI systems.",
+    "vision": "To produce industry-ready VLSI professionals and researchers capable of leading innovations in semiconductor and microelectronic systems.",
+    "mission": [
+      "To offer high-quality research-oriented education in semiconductor technology.",
+      "To collaborate with industry partners to solve microelectronics challenges."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-ped",
+    "name": "M.E. Power Electronics & Drives",
+    "about": "The M.E. program in Power Electronics & Drives prepares engineering students for advanced study and careers in electric drives, smart grids, renewable energy systems, and power converter technologies.",
+    "vision": "To advance knowledge and innovation in power electronic systems and green energy technologies.",
+    "mission": [
+      "To provide comprehensive education in advanced power devices and control technologies.",
+      "To drive sustainable energy research through academic and industrial partnerships."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-thermal",
+    "name": "M.E. Thermal Engineering",
+    "about": "The M.E. program in Thermal Engineering provides in-depth study of heat transfer, fluid dynamics, thermodynamics, combustion, and renewable energy technologies.",
+    "vision": "To be a leader in thermal science education and research, addressing energy efficiency and sustainable development challenges.",
+    "mission": [
+      "To cultivate advanced analytical and research capabilities in thermal sciences.",
+      "To develop energy-efficient technologies and sustainable thermal designs."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  },
+  {
+    "key": "me-cem",
+    "name": "M.E. Construction Engineering and Management",
+    "about": "The M.E. program in Construction Engineering and Management integrates engineering principles with business management to oversee complex infrastructure, construction contracts, scheduling, and project execution.",
+    "vision": "To develop global leaders in construction engineering who manage projects efficiently, sustainably, and ethically.",
+    "mission": [
+      "To deliver advanced education in project management, materials, and contracts.",
+      "To foster research in sustainable materials and construction technologies."
+    ],
+    "labs": [],
+    "courses_offered": [],
+    "seat_intake": "N/A"
+  }
+]

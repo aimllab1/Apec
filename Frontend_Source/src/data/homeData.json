@@ -1,0 +1,128 @@
+{
+  "achievementsSection": {
+    "enabled": true,
+    "title": "Achievements",
+    "autoplay": true,
+    "interval": 8000,
+    "slides": [
+      {
+        "id": "ach-2",
+        "tag": "ACHIEVEMENT",
+        "title": "Student Academic Excellence & Recognition",
+        "alt": "APEC Student Achievements & Excellence",
+        "imageUrl": "/Images/Hero/achivement_1.jpeg",
+        "link": "/about"
+      },
+      {
+        "id": "ach-3",
+        "tag": "GOLD MEDALIST",
+        "title": "Anna University Rank Holders & Gold Medals",
+        "alt": "APEC Gold Medal Award & Academic Excellence",
+        "imageUrl": "/Images/Hero/gold_medal.jpeg",
+        "link": "/about"
+      },
+      {
+        "id": "ach-1792050355924",
+        "tag": "Campas Entrance",
+        "title": "",
+        "alt": "APEC Milestone",
+        "imageUrl": "/Images/Panorama/Main_Gate.webp",
+        "link": ""
+      }
+    ]
+  },
+  "upcomingSection": {
+    "enabled": true,
+    "title": "Upcoming",
+    "autoplay": true,
+    "interval": 7000,
+    "slides": [
+      {
+        "id": "up-1",
+        "tag": "EVENT",
+        "title": "APEC Freshers Day & Welcome Celebrations",
+        "alt": "APEC Freshers Day & Welcome Celebrations",
+        "imageUrl": "/Images/Hero/fresher_day.jpeg",
+        "link": "/facilities"
+      }
+    ]
+  },
+  "quickStats": {
+    "enabled": false,
+    "items": [
+      {
+        "id": "stat-1",
+        "value": "40+",
+        "label": "Years of Excellence",
+        "icon": "Award"
+      },
+      {
+        "id": "stat-2",
+        "value": "95%+",
+        "label": "Placement Record",
+        "icon": "TrendingUp"
+      },
+      {
+        "id": "stat-3",
+        "value": "100+",
+        "label": "Advanced Laboratories",
+        "icon": "BookOpen"
+      },
+      {
+        "id": "stat-4",
+        "value": "10,000+",
+        "label": "Global Alumni Network",
+        "icon": "Users"
+      }
+    ]
+  },
+  "featuresSection": {
+    "enabled": false,
+    "title": "Key Campus Highlights",
+    "subtitle": "Discover what sets Adhiparasakthi Engineering College apart",
+    "items": [
+      {
+        "id": "feat-1",
+        "title": "UGC Autonomous & NAAC 'A'",
+        "description": "Autonomous curriculum aligned with emerging industry standards and Anna University accreditation.",
+        "icon": "ShieldCheck",
+        "link": "/about",
+        "badge": "Accredited"
+      },
+      {
+        "id": "feat-2",
+        "title": "Top Tier Placements",
+        "description": "Consistent high placements in tier-1 multinational tech, engineering, and core companies.",
+        "icon": "Briefcase",
+        "link": "/placements",
+        "badge": "95%+ Success"
+      },
+      {
+        "id": "feat-3",
+        "title": "Cutting-edge R&D & Labs",
+        "description": "State-of-the-art AI, IoT, robotics, and multidisciplinary engineering research facilities.",
+        "icon": "Cpu",
+        "link": "/r-d-cell",
+        "badge": "Advanced"
+      },
+      {
+        "id": "feat-4",
+        "title": "Holistic Student Life",
+        "description": "Vibrant sports, cultural festivals, student symposiums, clubs, and green residential campus.",
+        "icon": "Sparkles",
+        "link": "/facilities",
+        "badge": "Campus"
+      }
+    ]
+  },
+  "welcomeBanner": {
+    "enabled": false,
+    "badge": "Admissions 2026–2027 Open",
+    "title": "Shaping Future Innovators & Engineers",
+    "description": "Empowering students through values, transformative engineering education, and industry-ready technical skills.",
+    "primaryBtnText": "Explore Programs",
+    "primaryBtnLink": "/departments",
+    "secondaryBtnText": "Campus VR Tour",
+    "secondaryBtnAction": "openPano"
+  }
+}

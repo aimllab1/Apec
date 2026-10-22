@@ -1,0 +1,1918 @@
+{
+  "college_info": {
+    "name": "Adhiparasakthi Engineering College",
+    "short_name": "APEC",
+    "established": "1984",
+    "location": "Melmaruvathur, Tamil Nadu - 603319, India",
+    "accreditation": "NAAC Accredited Institution, UGC Autonomous College, Affiliated to Anna University",
+    "tnea_counseling_code": "1401",
+    "helpline": "+91 7418064336 / 7418065336",
+    "email": "principal@apec.edu.in",
+    "website": "https://apec.edu.in",
+    "description": "Adhiparasakthi Engineering College (APEC) was established in 1984 with the blessings of Arulthiru Bangaru Adigalar. It is an autonomous institution affiliated to Anna University, offering undergraduate (B.E. and B.Tech.), postgraduate (M.E., MBA, MCA), and Ph.D. programs."
+  },
+  "administration": [
+    {
+      "name": "Dr. J. Raja, Ph.D.",
+      "role": "Principal",
+      "qualifications": "Ph.D. (Engineering)",
+      "department": "Office of the Principal",
+      "bio": "Dr. J. Raja is a distinguished academic leader and the Principal of Adhiparasakthi Engineering College, Melmaruvathur. With decades of experience in engineering education and research, he has guided the institution toward achieving autonomous status and strengthening its academic reputation.",
+      "contact": "principal@apec.ac.in",
+      "office": "Principal's Office, Main Block, APEC Campus"
+    },
+    {
+      "name": "Dr. A. Bhuvaneshwari, M.E., Ph.D.",
+      "role": "Vice Principal",
+      "qualifications": "M.E., Ph.D.",
+      "department": "Office of the Vice Principal",
+      "bio": "Dr. A. Bhuvaneshwari serves as the Vice Principal of Adhiparasakthi Engineering College, bringing extensive expertise in engineering academics and institutional governance. She actively supports student welfare initiatives and academic policy implementation.",
+      "contact": "viceprincipal@apec.ac.in",
+      "office": "Vice Principal's Office, Main Block, APEC Campus"
+    },
+    {
+      "name": "Dr. V. Ramasamy, Ph.D.",
+      "role": "Dean",
+      "qualifications": "Ph.D.",
+      "department": "Dean's Office — Academic Affairs",
+      "bio": "Dr. V. Ramasamy is the Dean of Adhiparasakthi Engineering College, responsible for overseeing academic affairs and ensuring compliance with Anna University curriculum standards. Under his leadership, the institution has expanded its digital infrastructure.",
+      "contact": "dean@apec.ac.in",
+      "office": "Dean's Office, Administrative Block, APEC Campus"
+    },
+    {
+      "name": "Mr. M. Sadanandan, MBA",
+      "role": "Administrative Officer",
+      "qualifications": "MBA",
+      "department": "General Administration",
+      "bio": "Mr. M. Sadanandan serves as the Administrative Officer of Adhiparasakthi Engineering College, managing the institution's administrative frameworks, campus logistics, resource allocation, and general corporate relations.",
+      "contact": "admin@apec.ac.in",
+      "office": "Administrative Officer's Office, Admin Block, APEC Campus"
+    }
+  ],
+  "placements": {
+    "placement_percentage": "92%",
+    "offers_generated_yearly": "350+",
+    "recruiting_partners": "50+",
+    "highest_ctc": "12 LPA",
+    "partners": [
+      {
+        "name": "Tata Consultancy Services (TCS)",
+        "type": "MOU Partner"
+      },
+      {
+        "name": "Wipro Technologies",
+        "type": "MOU Partner"
+      },
+      {
+        "name": "Cognizant Technology Solutions (CTS)",
+        "type": "Recruiter"
+      },
+      {
+        "name": "Infosys",
+        "type": "Recruiter"
+      },
+      {
+        "name": "HCL Technologies",
+        "type": "MOU Partner"
+      },
+      {
+        "name": "Accenture",
+        "type": "Recruiter"
+      },
+      {
+        "name": "TVS Motors",
+        "type": "Industrial MOU"
+      },
+      {
+        "name": "FANUC India",
+        "type": "Industrial Partner"
+      }
+    ],
+    "training_activities": [
+      {
+        "title": "Campus Recruitment Training (CRT)",
+        "desc": "Aptitude, logical reasoning, and programming drills starting from the third year."
+      },
+      {
+        "title": "MOU Tie-ups & Internships",
+        "desc": "Active collaborations with core automation, chemical, and software development cells."
+      },
+      {
+        "title": "Mock Interview Drills",
+        "desc": "Conducted by alumni working in tech cells to refine students' communications and soft skills."
+      }
+    ]
+  },
+  "admissions": {
+    "apply_url": "/contact",
+    "ug_programs": [
+      {
+        "name": "B.E. - Civil Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 60
+      },
+      {
+        "name": "B.E. - Mechanical Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 60
+      },
+      {
+        "name": "B.E. - Electronics and Communication Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 90
+      },
+      {
+        "name": "B.E. - Electrical and Electronics Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 60
+      },
+      {
+        "name": "B.E. - Computer Science and Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 90
+      },
+      {
+        "name": "B.Tech. - Information Technology",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 60
+      },
+      {
+        "name": "B.Tech. - Chemical Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 40
+      },
+      {
+        "name": "B.Tech. - Agricultural Engineering",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 40
+      },
+      {
+        "name": "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 30
+      },
+      {
+        "name": "B.E. - Computer Science & Engineering (Computer System Design)",
+        "duration": "4 Years",
+        "type": "Under Graduate Programme",
+        "intake": 30
+      }
+    ],
+    "pg_programs": [
+      {
+        "name": "M.E. - Computer Science and Engineering",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 9
+      },
+      {
+        "name": "M.E. - Thermal Engineering",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 18
+      },
+      {
+        "name": "M.E. - VLSI Design",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 9
+      },
+      {
+        "name": "M.E. - Power Electronics & Drives Engineering",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 9
+      },
+      {
+        "name": "M.E. - Construction Engineering and Management",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 18
+      },
+      {
+        "name": "M.B.A. (Master of Business Administration)",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 60
+      },
+      {
+        "name": "M.C.A. (Master of Computer Applications)",
+        "duration": "2 Years",
+        "type": "Post Graduate Programme",
+        "intake": 60
+      }
+    ],
+    "phd_programs": [
+      {
+        "name": "PhD - Civil Engineering",
+        "duration": "Minimum 2 Years (Full Time)",
+        "type": "Doctoral Programmes (PhD)"
+      },
+      {
+        "name": "PhD - Mechanical Engineering",
+        "duration": "Minimum 2 Years (Full Time)",
+        "type": "Doctoral Programmes (PhD)"
+      },
+      {
+        "name": "PhD - Electrical and Electronics Engineering",
+        "duration": "Minimum 2 Years (Full Time)",
+        "type": "Doctoral Programmes (PhD)"
+      },
+      {
+        "name": "PhD - Electronics and Communication Engineering",
+        "duration": "Minimum 2 Years (Full Time)",
+        "type": "Doctoral Programmes (PhD)"
+      }
+    ],
+    "scholarships": [
+      {
+        "title": "Lead to Serve... Wings to Your Dreams...",
+        "amount": "Rs. 25,000",
+        "provider": "Sakthi Peedam and Spiritual Center of North America, USA",
+        "category": "Need-based",
+        "description": "Awarded every year to economically poor students with good academic performance and leadership qualities."
+      },
+      {
+        "title": "Dr. G. B. Senthilkumar Scholarship",
+        "amount": "Variable",
+        "provider": "APEC Management",
+        "category": "Merit-cum-Means",
+        "description": "Provided to students who demonstrate excellence in academic scores and are in need of financial assistance."
+      }
+    ]
+  },
+  "facilities": [
+    {
+      "name": "Central Library",
+      "description": "APEC Central Library houses over 50,000 books, subscriptions to leading international and national journals, digital library access with IEEE, Springer, and ScienceDirect, separate reading halls, and automated book issue system."
+    },
+    {
+      "name": "Laboratory Infrastructures",
+      "description": "Fully equipped labs for all engineering departments: computer engineering labs with high-speed internet, AI/ML laboratories, mechanical engineering workshop machinery, chemical engineering process labs, electronics and communication circuit labs, and electrical machines lab."
+    },
+    {
+      "name": "Hostel Blocks",
+      "description": "Separate, secure hostel facilities for boys and girls inside the campus. Features include study halls, recreation rooms, multi-gym, Wi-Fi connectivity, medical care unit, and hygiene-certified mess offering nutritious meals."
+    },
+    {
+      "name": "Transport & Bus Routes",
+      "description": "APEC operates a fleet of transport buses connecting the campus with major towns and suburbs across Kanchipuram, Chengalpattu, Villupuram, and Chennai districts, ensuring safe and timely travel for day scholars.",
+      "bus_routes": [
+        {
+          "id": "02",
+          "name": "Esur (Route 02)",
+          "busNo": "TN19 K9234",
+          "driver": "Pannerselvam C",
+          "phone": "9894745125",
+          "stops": [
+            {
+              "name": "Esur (ஈசூர்)",
+              "time": "07:25 AM",
+              "threeMonth": "3750",
+              "sixMonth": "7500"
+            },
+            {
+              "name": "Arasur (அரசூர்)",
+              "time": "07:30 AM",
+              "threeMonth": "3600",
+              "sixMonth": "7200"
+            },
+            {
+              "name": "Polambakkam (தபாலம்பா ் ம்)",
+              "time": "08:25 AM",
+              "threeMonth": "2100",
+              "sixMonth": "4200"
+            },
+            {
+              "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+              "time": "08:30 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "03",
+          "name": "Chengalpattu (Route 03)",
+          "busNo": "TN19 K9333",
+          "driver": "Guru A",
+          "phone": "7092053189",
+          "stops": [
+            {
+              "name": "Chengalpattu (தசங் ல்பட்டு)",
+              "time": "07:40 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Mamandur (மாமை் டூர்)",
+              "time": "07:50 AM",
+              "threeMonth": "4250",
+              "sixMonth": "8500"
+            },
+            {
+              "name": "Padalam (படாளம்)",
+              "time": "07:55 AM",
+              "threeMonth": "4000",
+              "sixMonth": "8000"
+            },
+            {
+              "name": "Melavalam Pettai (வமலேளம் வபட்ணட)",
+              "time": "08:00 AM",
+              "threeMonth": "3200",
+              "sixMonth": "6400"
+            },
+            {
+              "name": "Karunguzhi (ருங்குழி)",
+              "time": "08:05 AM",
+              "threeMonth": "3000",
+              "sixMonth": "6000"
+            },
+            {
+              "name": "Madhuranthagam (மதுராந்ெ ம்)",
+              "time": "08:10 AM",
+              "threeMonth": "2550",
+              "sixMonth": "5100"
+            },
+            {
+              "name": "Pakkam (பா ் ம்)",
+              "time": "08:15 AM",
+              "threeMonth": "2000",
+              "sixMonth": "4000"
+            },
+            {
+              "name": "Sirunavalur (சிறுநாேலூர்)",
+              "time": "08:20 AM",
+              "threeMonth": "1800",
+              "sixMonth": "3600"
+            },
+            {
+              "name": "Oonamalai (ஊனமணல)",
+              "time": "08:25 AM",
+              "threeMonth": "1500",
+              "sixMonth": "3000"
+            },
+            {
+              "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+              "time": "08:30 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "04",
+          "name": "Thellar (Route 04)",
+          "busNo": "TN19 E3690",
+          "driver": "Ramesh K",
+          "phone": "9442492892",
+          "stops": [
+            {
+              "name": "Thellar (தெள்ளார்)",
+              "time": "07:10 AM",
+              "threeMonth": "5500",
+              "sixMonth": "11000"
+            },
+            {
+              "name": "Kodityalam (கோடியாலம்)",
+              "time": "07:15 AM",
+              "threeMonth": "5500",
+              "sixMonth": "11000"
+            },
+            {
+              "name": "Theyyar (தெய்யார்)",
+              "time": "07:20 AM",
+              "threeMonth": "5500",
+              "sixMonth": "11000"
+            },
+            {
+              "name": "Nallur (நல்லூர்)",
+              "time": "07:30 AM",
+              "threeMonth": "5000",
+              "sixMonth": "10000"
+            },
+            {
+              "name": "Eramalur (ஏமலூர்)",
+              "time": "07:35 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Padur (பாதூர்)",
+              "time": "07:40 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Veppankarunai (வேப்பங்குருணை)",
+              "time": "07:50 AM",
+              "threeMonth": "4250",
+              "sixMonth": "8500"
+            },
+            {
+              "name": "Ettipattu (எட்டிப்பட்டு)",
+              "time": "07:55 AM",
+              "threeMonth": "4250",
+              "sixMonth": "8500"
+            },
+            {
+              "name": "Orathi (ஒரெ்தி)",
+              "time": "08:00 AM",
+              "threeMonth": "4000",
+              "sixMonth": "8000"
+            },
+            {
+              "name": "Porankal (தபாறங் கல்)",
+              "time": "08:05 AM",
+              "threeMonth": "3750",
+              "sixMonth": "7500"
+            },
+            {
+              "name": "Attivakkam (அெ்திோ ் ம்)",
+              "time": "08:10 AM",
+              "threeMonth": "3750",
+              "sixMonth": "7500"
+            },
+            {
+              "name": "Minnalchitthamur (மின்னல்சிெ்ெமூர்)",
+              "time": "08:15 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Thozhpedu (தொழுவபடு)",
+              "time": "08:20 AM",
+              "threeMonth": "2550",
+              "sixMonth": "5100"
+            },
+            {
+              "name": "Arapedu (அறவபடு)",
+              "time": "08:25 AM",
+              "threeMonth": "2550",
+              "sixMonth": "5100"
+            },
+            {
+              "name": "Acharappakkam (அச்சரப்பா ் ம்)",
+              "time": "08:30 AM",
+              "threeMonth": "1800",
+              "sixMonth": "3600"
+            },
+            {
+              "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+              "time": "08:35 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "05",
+          "name": "Tindivanam (Route 05)",
+          "busNo": "TN19 Z 3609",
+          "driver": "Lakshmanan C",
+          "phone": "9626460927",
+          "stops": [
+            {
+              "name": "Tindivanam Mailam Road (மர ் ாைம் சாணல)",
+              "time": "07:15 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Jayapuram (தஜயபுரம்)",
+              "time": "07:20 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Women’s Police Station (ம ளிர் காவல்)",
+              "time": "07:30 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Taluk Office (ொலுக்கா)",
+              "time": "07:35 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Gingee Bus Stop (தசஞ்சி)",
+              "time": "07:30 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Santhaimedu (சந்ணெவமடு)",
+              "time": "07:35 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Pattanam (பட்டைம்)",
+              "time": "07:40 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "College Road (ல்லூரி சாணல)",
+              "time": "07:50 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Saram (சாரம்)",
+              "time": "08:00 AM",
+              "threeMonth": "4200",
+              "sixMonth": "8400"
+            },
+            {
+              "name": "Olakkur (ஒல ்கூர்)",
+              "time": "08:05 AM",
+              "threeMonth": "4200",
+              "sixMonth": "8400"
+            },
+            {
+              "name": "Padhiri (பாதிரி)",
+              "time": "08:10 AM",
+              "threeMonth": "4000",
+              "sixMonth": "8000"
+            },
+            {
+              "name": "Ongur (ஓங்கூர்)",
+              "time": "08:12 AM",
+              "threeMonth": "3750",
+              "sixMonth": "7500"
+            },
+            {
+              "name": "Toll Gate (வடால் வ ட்டு)",
+              "time": "08:15 AM",
+              "threeMonth": "3300",
+              "sixMonth": "6600"
+            },
+            {
+              "name": "Thozhpeadu (தொழுவபடு)",
+              "time": "08:20 AM",
+              "threeMonth": "2550",
+              "sixMonth": "5100"
+            },
+            {
+              "name": "Arappeadu (அரப்வபடு)",
+              "time": "08:25 AM",
+              "threeMonth": "2550",
+              "sixMonth": "5100"
+            },
+            {
+              "name": "Acharapakkam (அச்சரப்பா ் ம்)",
+              "time": "08:30 AM",
+              "threeMonth": "1800",
+              "sixMonth": "3600"
+            },
+            {
+              "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+              "time": "08:35 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "06",
+          "name": "Uthiramerur (Route 06)",
+          "busNo": "TN19 T7722 SML",
+          "driver": "Kumar V",
+          "phone": "9790034195",
+          "stops": [
+            {
+              "name": "Uthramerrur (உெ்திரவமரூர்)",
+              "time": "07:40 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Kavanoor (ாேனூர்)",
+              "time": "07:45 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Kammalampoondi (ம்மாளம்பூை் டி)",
+              "time": "07:50 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Pazhathottam (பழெ்வொட்டம்)",
+              "time": "07:50 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Theettalam kootroad (தீட்டாளம் கூட்வராடு)",
+              "time": "07:55 AM",
+              "threeMonth": "4000",
+              "sixMonth": "8000"
+            },
+            {
+              "name": "Elendathur (எலந்ெெ்தூர்)",
+              "time": "08:00 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Kiliyanoor (கிளியனூர்)",
+              "time": "08:05 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Pasunkarunai (பசுங் ருணை)",
+              "time": "08:10 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Madhur (மாதுர்)",
+              "time": "08:15 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Kizhammur (கிழாமூர்)",
+              "time": "08:20 AM",
+              "threeMonth": "3000",
+              "sixMonth": "6000"
+            },
+            {
+              "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+              "time": "08:30 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "09",
+          "name": "Vandavasi (Route 09)",
+          "busNo": "TN19 Z9459",
+          "driver": "Mujip Basha A",
+          "phone": "8489797864",
+          "stops": [
+            {
+              "name": "Vandavasi old Bus stand (வந்ைவோசி)",
+              "time": "07:50 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Vandavasi gov Hospital",
+              "time": "07:55 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Birthur (பிர்தூர்)",
+              "time": "08:00 AM",
+              "threeMonth": "4350",
+              "sixMonth": "8700"
+            },
+            {
+              "name": "Kadaisikulam (ேரடசிகυளம்)",
+              "time": "08:05 AM",
+              "threeMonth": "4250",
+              "sixMonth": "8500"
+            },
+            {
+              "name": "Maruthadu (மருைோடு)",
+              "time": "08:10 AM",
+              "threeMonth": "4000",
+              "sixMonth": "8000"
+            },
+            {
+              "name": "Kilkodungalore (கீழ்கேோடுங்ேோலூர்)",
+              "time": "08:15 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Salavedu (சோலரவடு)",
+              "time": "08:20 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Keezhseesamangalam (கீழ்சீசமங்ேலம்)",
+              "time": "08:25 AM",
+              "threeMonth": "3250",
+              "sixMonth": "6500"
+            },
+            {
+              "name": "Ramapuram (ரோமோபுரம்)",
+              "time": "08:30 AM",
+              "threeMonth": "2250",
+              "sixMonth": "4500"
+            },
+            {
+              "name": "Melmaruvathur (ரமல்மருவை்தூர்)",
+              "time": "08:35 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "10",
+          "name": "Cheyyar (Route 10)",
+          "busNo": "TN19 BS 0405",
+          "driver": "Ramesh M",
+          "phone": "63741785797",
+          "stops": [
+            {
+              "name": "Arni Koot Road (ஆரணி கூட்டு ரரோடு)",
+              "time": "07:15 AM",
+              "threeMonth": "6500",
+              "sixMonth": "13000"
+            },
+            {
+              "name": "Toll Gate (ரடோல் ரேட்)",
+              "time": "07:18 AM",
+              "threeMonth": "6500",
+              "sixMonth": "13000"
+            },
+            {
+              "name": "Anakkavur (அனே்ேோவூர்)",
+              "time": "07:20 AM",
+              "threeMonth": "6250",
+              "sixMonth": "12500"
+            },
+            {
+              "name": "Sugar Mill (சர்ே்ேரர ஆரல)",
+              "time": "07:25 AM",
+              "threeMonth": "6250",
+              "sixMonth": "12500"
+            },
+            {
+              "name": "Vinayagapuram (விநோயேபுரம்)",
+              "time": "07:25 AM",
+              "threeMonth": "6250",
+              "sixMonth": "12500"
+            },
+            {
+              "name": "Kolamandhai (கேோளமந்ரை)",
+              "time": "07:30 AM",
+              "threeMonth": "6200",
+              "sixMonth": "12400"
+            },
+            {
+              "name": "Purisai (புரிரச)",
+              "time": "07:35 AM",
+              "threeMonth": "6100",
+              "sixMonth": "12200"
+            },
+            {
+              "name": "Echur (எச்சூர்)",
+              "time": "07:40 AM",
+              "threeMonth": "6000",
+              "sixMonth": "12000"
+            },
+            {
+              "name": "Ammayapattu (அம்ரமயப்பட்டு)",
+              "time": "07:45 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Vandavasi (வந்ைவோசி)",
+              "time": "07:50 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Kadaisikulam (ேரடசிகுளம்)",
+              "time": "07:55 AM",
+              "threeMonth": "4250",
+              "sixMonth": "8500"
+            },
+            {
+              "name": "Maruthadu (மருைோடு)",
+              "time": "08:00 AM",
+              "threeMonth": "4000",
+              "sixMonth": "8000"
+            },
+            {
+              "name": "Kilkodungalore (கீழ்கேோடுங்ேோலூர்)",
+              "time": "08:05 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Salavedu (சோலரவடு)",
+              "time": "08:10 AM",
+              "threeMonth": "3500",
+              "sixMonth": "7000"
+            },
+            {
+              "name": "Keezhseesamangalam (கீழ்சீசமங்ேலம்)",
+              "time": "08:15 AM",
+              "threeMonth": "3250",
+              "sixMonth": "6500"
+            },
+            {
+              "name": "Ramapuram (ரோமோபுரம்)",
+              "time": "08:20 AM",
+              "threeMonth": "2250",
+              "sixMonth": "4500"
+            },
+            {
+              "name": "Melmaruvathur (ரமல்மருவை்தூர்)",
+              "time": "08:30 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        },
+        {
+          "id": "11",
+          "name": "Marakkanam (Route 11)",
+          "busNo": "TN19 BS 0909",
+          "driver": "Kanniyappan E",
+          "phone": "9894868521",
+          "stops": [
+            {
+              "name": "Murukkeri (முரு ்வ ரி)",
+              "time": "07:00 AM",
+              "threeMonth": "9000",
+              "sixMonth": "18000"
+            },
+            {
+              "name": "Kanthadu (ந்ொடு)",
+              "time": "07:10 AM",
+              "threeMonth": "8750",
+              "sixMonth": "17500"
+            },
+            {
+              "name": "Marakkanam (மர ் ாைம்)",
+              "time": "07:15 AM",
+              "threeMonth": "8500",
+              "sixMonth": "17000"
+            },
+            {
+              "name": "Vennangupattu (தேை் ைங்குபட்டு)",
+              "time": "07:30 AM",
+              "threeMonth": "4800",
+              "sixMonth": "9600"
+            },
+            {
+              "name": "Kadapakkam (டப்பா ் ம்)",
+              "time": "07:40 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Panaiyur (பணனயூர்)",
+              "time": "07:45 AM",
+              "threeMonth": "4500",
+              "sixMonth": "9000"
+            },
+            {
+              "name": "Ellaiyaamman Kovil (எல்ணலயம்மன்)",
+              "time": "07:50 AM",
+              "threeMonth": "4330",
+              "sixMonth": "8660"
+            },
+            {
+              "name": "Cheyyur (தசய்யூர்)",
+              "time": "08:00 AM",
+              "threeMonth": "4050",
+              "sixMonth": "8100"
+            },
+            {
+              "name": "Oonambakkam (ஊனம்பா ் ம்)",
+              "time": "08:10 AM",
+              "threeMonth": "3300",
+              "sixMonth": "6600"
+            },
+            {
+              "name": "Kattudevathur (ாட்டுவெேெ்தூர்)",
+              "time": "08:15 AM",
+              "threeMonth": "3000",
+              "sixMonth": "6000"
+            },
+            {
+              "name": "Chithamur (சிெ்ெaமூர்)",
+              "time": "08:20 AM",
+              "threeMonth": "2100",
+              "sixMonth": "4200"
+            },
+            {
+              "name": "Polambakkam (தபாலம்பா ் ம்)",
+              "time": "08:25 AM",
+              "threeMonth": "2100",
+              "sixMonth": "4200"
+            },
+            {
+              "name": "Melmaruvathur (வமல்மருேெ்தூர்)",
+              "time": "08:30 AM",
+              "threeMonth": "-",
+              "sixMonth": "-"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "departments": [
+    {
+      "key": "aiml",
+      "name": "Artificial Intelligence and Machine Learning",
+      "about": "The department of Artificial Intelligence and Machine Learning was established in the year of 2023 with an intake of 30 students in UG. The department is equipped with fully established laboratory such as Artificial Intelligence and Machine Laboratory.",
+      "vision": "To achieve excellence in Artificial Intelligence and Machine learning education, cutting-edge research discoveries, and innovation in AI and ML for the betterment of society.",
+      "mission": [
+        "To impart competencies and expertise’s in the field of artificial intelligence and machine learning.",
+        "To nurture a dynamic and collaborative research environment to push the boundaries of AI and ML",
+        "To foster entrepreneurship and innovation by intellectual advancements to address the real-world challenges and create economic prospects"
+      ],
+      "faculty": [
+        {
+          "name": "Dr. N. Elamathi",
+          "designation": "Head of Department",
+          "qualification": "ME, Ph.D",
+          "email": "elamathi@apec.edu.in",
+          "experience": "19 Years, 10 Months"
+        },
+        {
+          "name": "Mr. J. Senthil Kumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.Tech.",
+          "email": "omsakthisenthil@gmail.com",
+          "experience": "35 Years,  Months"
+        },
+        {
+          "name": "Ms. R. Menaga",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "menagashanthi1121@gmail.com",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mr. Nagaraj Jaya Sridhar J",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "SRICHARAN1406@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mrs. Poornima Devi K",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "POORNI.SPELL@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        }
+      ]
+    },
+    {
+      "key": "chemical",
+      "name": "Chemical Engineering",
+      "about": "The Department of Chemical Engineering was started in the year 1997. The Department has a sanctioned student intake of 40 for UG, affiliated to Anna University. Chemical Engineering is the branch of engineering that deals with the application of physical science (Physics and Chemistry) with mathematics, to the process of converting raw materials or chemicals into more useful or valuable forms. Majority of the passed out students are well placed in the country and many have completed higher studies in abroad and well placed there. Right from its inception, the Department has been doing its best to bring about excellence in academics. The Department has been aware of the role of chemical engineers in building of the modern India and has been taking appropriate steps to encourage research and developmental activities. The department has highly qualified core faculty of high professional profile to meet the emerging trends and challenges in the field of chemical engineering and allied areas on a global platform. The curricula and syllabi for the undergraduate courses have been periodically updated in line with modern day developments in the chemical engineering arena and taking into account the demands of industry and R&D institutions. The department has fully equipped undergraduate laboratories in the core areas of chemical engineering to impart practical knowledge to the students. Constantly our Department is producing University rank holders every year. Till date, 30 rank holders from both Madras and Anna University have excelled from the department, out of it one Gold medal. Besides strong academic input, students are strongly supported and guided to do mini-projects and gain hands on experience with the chemical engineering equipment's. Students are highly encouraged to participate in Workshops and technical symposium organized by the affiliated institutions to cater to the needs of the industry. Industrial visits and lectures from academic and industrial experts add a new dimension to the teaching learning process. The Department of Chemical engineering has signed Memorandum of Understanding (MOU) with 30 leading industries, which paves a great support for the enhancement of the students’ academic background and career.",
+      "vision": "To attain national recognition in training Engineers both professionally as well as morally for meeting the challenging needs of Chemical & allied industries and societal demands of ethical Engineers.",
+      "mission": [
+        "Providing high quality Engineers in tune with changing needs of Chemical and allied industries.",
+        "Promoting industry academia relationship for mutual benefit and growth.",
+        "Cultivating a spirit of service and ethical conduct among students."
+      ],
+      "faculty": [
+        {
+          "name": "Dr.B.GANESH",
+          "designation": "Head of Department",
+          "qualification": "M.Tech., Ph.D.",
+          "email": "ganeshevst@gmail.com",
+          "experience": "10 Years, 0 Months"
+        },
+        {
+          "name": "Dr. Magesh Rangaraju",
+          "designation": "Professor",
+          "qualification": "M.Tech., PhD",
+          "email": "mageshr@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mr.S.Velmurugan",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "velmuruganchemical@gmail.com",
+          "experience": "26 Years, 1 Months"
+        },
+        {
+          "name": "Ms.M.SELVAPRATHIPA",
+          "designation": "Assistant Professor",
+          "qualification": "M.Tech., (Ph.D.)",
+          "email": "prathipa@apec.edu.in",
+          "experience": "6 Years, 4 Months"
+        },
+        {
+          "name": "Mr. S. Ranjithsingh",
+          "designation": "Assistant Professor",
+          "qualification": "M. Tech.",
+          "email": "safetysingh1996@gmail.com",
+          "experience": "0 Years, 4 Months"
+        },
+        {
+          "name": "Ms. T. S. Swetha",
+          "designation": "Assistant Professor",
+          "qualification": "M.Tech",
+          "email": "swethats@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Ms. G. Saraswathy",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "saraswathyg@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        }
+      ]
+    },
+    {
+      "key": "civil",
+      "name": "Civil Engineering",
+      "about": "The Department of Civil Engineering was established in the year of 1984 with an intake of 60 students in UG. In 2006 M.E-Construction Engineering and Management was started with an intake of 18 and the Research centre was approved by Anna University, Chennai in the year 2011. The Department is NBA accredited in the year 2004, 2009 and 2013. The department is equipped with fully established laboratories such as Soil Mechanics Laboratory, Environmental Engineering Laboratory, Survey Laboratory, CADD Lab, Fluid Mechanics and Machinery Laboratory, Concrete Laboratory Highway Laboratory and Strength of Materials Laboratory. The Association of Civil Engineers is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department has been a member of reputed societies such Indian Concrete Institute (ICI), Indian Society for technical education (ISTE) etc.",
+      "vision": "To produce high class Civil Engineers who will work for the environmentally suitable for pollution free air, potable drinking water and comfortable accommodation so as to develop our motherland towards a modest standard of living at par with the developed nations.",
+      "mission": [
+        "Inculcating quality consciousness among graduates by imparting world expertise.",
+        "Creating a sense of ethics and service for the benefit of society.",
+        "Making high class quality engineers to achieve International standards, to significantly contribute for the development of country."
+      ],
+      "faculty": [
+        {
+          "name": "Dr.V.Ramasamy",
+          "designation": "Dean, Professor",
+          "qualification": "M.E., Ph.D",
+          "email": "rams_apec@yahoo.co.in",
+          "experience": "32 Years, 8 Months"
+        },
+        {
+          "name": "Dr.A.Krishnamoorthi",
+          "designation": "Head of Department",
+          "qualification": "M.E., Ph.D.",
+          "email": "krish_moor2006@yahoo.com",
+          "experience": "27 Years, 5 Months"
+        },
+        {
+          "name": "Dr.K.Thiagarajan",
+          "designation": "Associate Professor",
+          "qualification": "M.Tech., Ph.D",
+          "email": "rajan.thiaga080@gmail.com",
+          "experience": "4 Years, 7 Months"
+        },
+        {
+          "name": "Dr.P.Somiyadevi",
+          "designation": "Assistant Professor",
+          "qualification": "M.E,Ph.D.",
+          "email": "somiya86@gmail.com",
+          "experience": "17 Years,  Months"
+        },
+        {
+          "name": "Mr.S.Rethinakumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "rethinaindu@gmail.com",
+          "experience": "11 Years,  Months"
+        },
+        {
+          "name": "Mr.S.Selvakumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "selvaashika3@gmail.com",
+          "experience": "11 Years, 1 Months"
+        },
+        {
+          "name": "Mr.G.Karthikkumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "karthikkumarg5@gmail.com",
+          "experience": "9 Years,  Months"
+        },
+        {
+          "name": "Mr.S.Maluvu",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "maluvus@gmail.com",
+          "experience": "9 Years,  Months"
+        },
+        {
+          "name": "Mr.S.Karthikeyan",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D)",
+          "email": "karthikeyan9111@gmail.com",
+          "experience": "9 Years, 7 Months"
+        },
+        {
+          "name": "Mr.S.Parthiban",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D)",
+          "email": "Parthiban@apec.edu.in",
+          "experience": "5 Years,  Months"
+        },
+        {
+          "name": "Ms. I. Sakthidevi",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "sakthidevisak@gmail.com",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Ms. Sangeetha E",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "sangeethaelumalai07@gmail.com",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Ms. K. Gomathi",
+          "designation": "Assistant Professor",
+          "qualification": "M. E.",
+          "email": "gomathi9418@gmail.com",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Ms. M. Abinaya",
+          "designation": "Assistant Professor",
+          "qualification": "M. Tech.",
+          "email": "abinayasundari2808@gmail.com",
+          "experience": "Years,  Months"
+        }
+      ]
+    },
+    {
+      "key": "mca",
+      "name": "Computer Applications",
+      "about": "",
+      "vision": "To be the source of bringing out globally competent pioneering computing professionals, researchers, innovators and entrepreneurs and thereby succeed and contribute value to the knowledge-based economy and society.",
+      "mission": [
+        "To offer high-grade, value-based Post-graduate programme in the field of Computer Applications",
+        "To provide conductive environment so as to achieve excellence in teaching-learning, and development activities.",
+        "To facilitate students to nurture skills to practice their professions competently to meet the ever-changing needs of society."
+      ],
+      "faculty": [
+        {
+          "name": "Dr. S. Selvaraj",
+          "designation": "Professor",
+          "qualification": "MCA. Ph.D",
+          "email": "mca@apec.edu.in",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Dr. S. Arunkumar",
+          "designation": "Assistant Professor",
+          "qualification": "MCA, M.Phil., Ph.D.",
+          "email": "arunkumar@apec.edu.in",
+          "experience": ""
+        },
+        {
+          "name": "07TGMC0797",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "28 Years, 7 Months"
+        },
+        {
+          "name": "Mr. E. Janakiraman",
+          "designation": "Assistant Professor",
+          "qualification": "MCA, M.Phil",
+          "email": "janakiraman@apec.edu.in",
+          "experience": "5 Years, 10 Months"
+        },
+        {
+          "name": "Ms. A. Yamuna",
+          "designation": "Assistant Professor",
+          "qualification": "MCA",
+          "email": "yamuanan97@gmail.com",
+          "experience": "4 Years, 10 Months"
+        },
+        {
+          "name": "Ms. C. Amuthavalli",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "M.C.A.",
+          "designation": "Assistant Professor",
+          "qualification": "",
+          "email": "amuthavallic@apec.edu.in",
+          "experience": ""
+        },
+        {
+          "name": "4204419",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mrs. Sakthi S",
+          "designation": "Assistant Professor",
+          "qualification": "MCA",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "SSAKTHI28@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mrs. M. Seetha",
+          "designation": "Assistant Professor",
+          "qualification": "MCA",
+          "email": "sita110594@gmail.com",
+          "experience": "Years,  Months"
+        }
+      ]
+    },
+    {
+      "key": "cse",
+      "name": "Computer Science Engineering",
+      "about": "Department of Computer Science and Engineering was established in the year 1993. It started undergraduate course with 30 students as intake of and now strengthens to 90. In addition, PG programme M.E. Computer Science and Engineering was started in the year 2009 with 18 students as intake. The department has been affiliated to Anna University Technology, Chennai. The alacrity of the students to learn makes it easier for the department of computer science and engineering to produce top-notch engineers who are being recruited by companies all over the world. We provide the following programmes.",
+      "vision": "To be a globally recognized leader in computer science and engineering education, research, and innovation, driving advancements that address societal challenges and shape the future of technology.",
+      "mission": [
+        "Foster a culture of interdisciplinary collaboration, encouraging students and faculty to explore innovative solutions that integrate computer science and engineering with other domains such as medicine, business, and the humanities.",
+        "Conduct impactful research that advances the frontiers of computer science and engineering, addressing fundamental questions and tackling real-world problems with creativity and rigor.",
+        "Engage with industry, government, and other stakeholders to translate research discoveries into practical applications, driving economic growth and societal progress."
+      ],
+      "faculty": [
+        {
+          "name": "Dr. C. Dhaya",
+          "designation": "Head of Department",
+          "qualification": "M.E., Ph.D.",
+          "email": "dhaya@apec.edu.in",
+          "experience": "25 Years, 0 Months"
+        },
+        {
+          "name": "Dr. S. Jayashri",
+          "designation": "Professor",
+          "qualification": "M.E., PhD",
+          "email": "jayashris@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mr. G. Sekar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D.)",
+          "email": "sekar@apec.edu.in",
+          "experience": "16 Years, 0 Months"
+        },
+        {
+          "name": "Mr. G. Srinivasan",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "srinivasan@apec.edu.in",
+          "experience": "14 Years, 1 Months"
+        },
+        {
+          "name": "Mr. K. Chairmadurai",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D.)",
+          "email": "chairmadurai@apec.edu.in",
+          "experience": "9 Years, 0 Months"
+        },
+        {
+          "name": "Ms. A. Jayanthi",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "jayanthiarumugam90@gmail.com",
+          "experience": "5 Years, 9 Months"
+        },
+        {
+          "name": "Ms. P. Gajalakshmi",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D.)",
+          "email": "gajalakshmigctme@gmail.com",
+          "experience": "4 Years, 10 Months"
+        },
+        {
+          "name": "Ms. M. Devika",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "m.devika2007@gmail.com",
+          "experience": "4 Years, 9 Months"
+        },
+        {
+          "name": "Mr. S. Hariganesan",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "hariganesan@apec.edu.in",
+          "experience": "3 Years, 4 Months"
+        },
+        {
+          "name": "Ms. S. Swetha",
+          "designation": "Assistant Professor",
+          "qualification": "M. E.",
+          "email": "swethasasikumar07@gmail.com",
+          "experience": "1 Years, 7 Months"
+        },
+        {
+          "name": "Ms. Manonmani G",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "MANOLASKHMI@GMAIL.COM",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Ms. P. Banu Priya",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "banupriya@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Ms. K. Muthu Priya",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "muthupriyak@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mrs. Mahalakshmi M",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "MMDPSS123@GMAIL.COM",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mrs.Padmapriya. T.M",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "APECPRIYA@GMAIL.COM",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mrs.Thamarai Selvi.V",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "THAMARAIVASU.SELVI06@GMAIL.COM",
+          "experience": "0 Years, 0 Months"
+        }
+      ]
+    },
+    {
+      "key": "mech",
+      "name": "Department of Mechanical Engineering",
+      "about": "",
+      "vision": "The Department of Mechanical Engineering of Adhiparasakthi Engineering College strives hard to produce globally competitive Mechanical Engineers with good attitude to serve the changing needs of the society.",
+      "mission": [
+        "Imbibing the skill of innovative teaching and learning process to assure transfer of fundamental knowledge.",
+        "Continuous improvement in developing the competency among the students to succeed in solving the contemporary engineering challenges through value based education.",
+        "Developing the leadership skills through team work."
+      ],
+      "faculty": [
+        {
+          "name": "Dr.C.K.Dhinakarraj",
+          "designation": "Head of Department",
+          "qualification": "M.E,Ph.D",
+          "email": "ckd@apec.edu.in",
+          "experience": "30 Years, 5 Months"
+        },
+        {
+          "name": "Dr.R.Kamaljayaraj",
+          "designation": "Associate Professor",
+          "qualification": "M.E,Ph.D",
+          "email": "doctormothilal@gmail.com",
+          "experience": "24 Years, 1 Months"
+        },
+        {
+          "name": "Dr. Gajalakshmi K",
+          "designation": "Associate Professor",
+          "qualification": "M.E,Ph.D.",
+          "email": "kg@apec.edu.in",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Dr. Vivekanandhan M",
+          "designation": "Associate Professor",
+          "qualification": "M.E,Ph.D.",
+          "email": "vivekanandhanm@apec.edu.in",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mr.K.Dhandapani",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "dhandapanitvm@gmail.com",
+          "experience": "19 Years, 6 Months"
+        },
+        {
+          "name": "Mr.Gopikannan.S",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "gopikannan@rediffmail.com",
+          "experience": "14 Years,  Months"
+        },
+        {
+          "name": "Mr.Sathishbabu.R",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D)",
+          "email": "sathish2432403@gmail.com",
+          "experience": "14 Years,  Months"
+        },
+        {
+          "name": "Mr.Yogeshwaran.K.B",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "kbyapec@gmail.com",
+          "experience": "13 Years,  Months"
+        },
+        {
+          "name": "Mr.Parthiban.R",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "Parthiban@apec.edu.in",
+          "experience": "13 Years,  Months"
+        },
+        {
+          "name": "Mr.Balamurugan.M",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "asmbalamurugan@gmail.com",
+          "experience": "11 Years,  Months"
+        },
+        {
+          "name": "Mr.Balasubramaniasaravanan.T",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "saravanathangappan@gmail.com",
+          "experience": "9 Years, 11 Months"
+        },
+        {
+          "name": "Mr. Mohan S",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "mohans4590@gmail.com",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mr. Manigandan. C",
+          "designation": "Assistant Professor",
+          "qualification": "M.E",
+          "email": "manindhu198@gmail.com",
+          "experience": "Years,  Months"
+        }
+      ]
+    },
+    {
+      "key": "it",
+      "name": "Information Technology",
+      "about": "",
+      "vision": "To train well educated skilled and disciplined IT Professionals through planned technological education to fit in the profession and to cater to the changing needs of the society through Innovation and Service.",
+      "mission": [
+        "To impart high quality education by leveraging new technologies that help the socio-economic growth of the society",
+        "To inspire the students to develop innovative solutions that addresses the challenging demands of the modern computing world.",
+        "To inculcate strong ethical values and attitude to serve the mankind professionally and responsibly"
+      ],
+      "faculty": [
+        {
+          "name": "Dr. A. Bhuvaneswari",
+          "designation": "Head of Department",
+          "qualification": "M.E., Ph.D",
+          "email": "bhuvaneswari@apec.edu.in",
+          "experience": ""
+        },
+        {
+          "name": "00TGIT0441",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "29 Years, 11 Months"
+        },
+        {
+          "name": "Mrs.Vasanthi.M.D",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "VASUSOFT1310@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mrs. Thulasilakshmi.S",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "NTHULASILAKSHMI112@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mrs. Lalitha M",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "lalitham@apec.edu.in",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mr. K. Hema Kumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "hemakumark@apec.edu.in",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mrs. Maria Salomi.E.M",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "MARIASALOMIAPEC24@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mr. Sakthivel P",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "SAKTHIBTECH1998@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        },
+        {
+          "name": "Mr. Lavanya.S",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.,",
+          "email": "",
+          "experience": ""
+        },
+        {
+          "name": "APEC.IT.LAVANYA@GMAIL.COM",
+          "designation": "",
+          "qualification": "",
+          "email": "",
+          "experience": "Years,  Months"
+        }
+      ]
+    },
+    {
+      "key": "eee",
+      "name": "Electrical and Electronics Engineering",
+      "about": "The department of Electrical and Electronics Engineering was established in the year of 1993 with an intake of 30 students and 1994 with an intake of 60 students in UG. In 2009 M.E-Power Electronics and Drives was started with an intake of 18 and Research centre was approved by Anna University, Chennai in the year 2011. The Department is NBA accredited in the year 2004, 2008 and 2012. The department is equipped with fully established laboratories such as Power electronics Laboratory, Power Systems Laboratory, Electrical Machines-I and II Laboratory, Control & Instrumentation Laboratory, Electronic Devices and Circuits Laboratory, Linear Integrated Circuits Laboratory, Microprocessor and Microcontroller Laboratory and Engineering Workshop Laboratory. The Association of Electrical Engineers is regularly organizing seminars, Guest lectures and Industrial Visits for the benefit of student community. Our Department has been a member of reputed societies such Institute of Electrical and Electronics Engineer (IEEE), Indian Society for technical education (ISTE) etc.",
+      "vision": "To produce high class Electrical and Electronics Engineering (EEE) Department is committed to create World class engineers who are recognized in their society, research and also Renowned with human values and ethics.",
+      "mission": [
+        "To achieve excellence in teaching and research at par with international standards by providing high quality teaching and learning environment.",
+        "Creating a sense of ethics and service for the benefit of society.",
+        "Producing competent and socially conscience EEE engineers fully equipped with highest personal and professional standards to achieve overall development of the country.",
+        "Empowering students and professionals with the state-of-art knowledge and technological skills."
+      ],
+      "faculty": [
+        {
+          "name": "Dr.P.Rajivgandhi",
+          "designation": "Head of Department",
+          "qualification": "M.E., Ph.D.",
+          "email": "rajivgandhi@apec.edu.in",
+          "experience": "12 Years, 0 Months"
+        },
+        {
+          "name": "Dr.S.A.Elankurisil",
+          "designation": "Professor",
+          "qualification": "M.E., Ph.D.",
+          "email": "elankurisil@apec.edu.in",
+          "experience": "28 Years, 11 Months"
+        },
+        {
+          "name": "Dr. R. Srivel",
+          "designation": "Associate Professor",
+          "qualification": "M.E., Ph.D.",
+          "email": "srivel@apec.edu.in",
+          "experience": "5 Years, 8 Months"
+        },
+        {
+          "name": "Mrs.P.Tamizharasi",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., (Ph.D.)",
+          "email": "tamizharasi@apec.edu.in",
+          "experience": "23 Years, 6 Months"
+        },
+        {
+          "name": "Dr.N.Manimaran",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., Ph.D.",
+          "email": "manimaran@apec.edu.in",
+          "experience": "18 Years, 7 Months"
+        },
+        {
+          "name": "Mr. P. Ramesh",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "rameshrara84@gmail.com",
+          "experience": "10 Years, 5 Months"
+        },
+        {
+          "name": "Dr.S.Muthukumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E., Ph.D.",
+          "email": "muthukumar@apec.edu.in",
+          "experience": "5 Years, 8 Months"
+        },
+        {
+          "name": "Mr.D.Sarathkumar",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "sarathkumar@apec.edu.in",
+          "experience": "4 Years, 10 Months"
+        },
+        {
+          "name": "Dr.T.Kuntavai",
+          "designation": "Assistant Professor",
+          "qualification": "ME, Ph.D",
+          "email": "kuntavai2000@gmail.com",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mrs.D.K.Shobana",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "shobananadhakumar85@gmail.com",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mrs.V.Vanitha",
+          "designation": "Assistant Professor",
+          "qualification": "ME",
+          "email": "surenthuya@gmail.com",
+          "experience": "0 Years, 0 Months"
+        },
+        {
+          "name": "Mr. B. Sakthivel",
+          "designation": "Assistant Professor",
+          "qualification": "M.E.",
+          "email": "sakthivelb@apec.edu.in",
+          "experience": "0 Years, 0 Months"
+        }
+      ]
+    },
+    {
+      "key": "ece",
+      "name": "Electronics and Communication Engineering",
+      "about": "The Department of Electronics and Communication Engineering (ECE) aims to provide cutting-edge education in communication networks, microelectronics, signal processing, embedded systems, and VLSI design.",
+      "vision": "To be a center of excellence in electronics and communication engineering education and research, creating innovators and entrepreneurs for global development.",
+      "mission": [
+        "To deliver quality education through state-of-the-art laboratory infrastructure and teaching methodologies.",
+        "To foster research and development in wireless systems, VLSI, and signal processing.",
+        "To groom students with interpersonal skills, ethics, and professional excellence."
+      ],
+      "faculty": [
+        {
+          "name": "Faculty members directory",
+          "designation": "Staff",
+          "qualification": "",
+          "email": "ece@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "mba",
+      "name": "Management Studies (MBA)",
+      "about": "The Department of Management Studies (MBA) provides professional business education that combines managerial theory with practical leadership skills, preparing students for dynamic corporate careers.",
+      "vision": "To be a premier business school that develops innovative and ethical business leaders with a global outlook.",
+      "mission": [
+        "To deliver rigorous and contemporary management education.",
+        "To promote entrepreneurial thinking and leadership skills.",
+        "To cultivate social responsibility and ethical decision-making in future managers."
+      ],
+      "faculty": [
+        {
+          "name": "Faculty members directory",
+          "designation": "Staff",
+          "qualification": "",
+          "email": "mba@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "sh",
+      "name": "Science & Humanities",
+      "about": "The Department of Science & Humanities bridges the transition of engineering aspirants into professional disciplines by imparting strong foundations in Mathematics, Physics, Chemistry, and English Communication.",
+      "vision": "To lay a solid foundation in basic sciences and humanities, enabling engineering students to excel in their chosen technical fields with a holistic outlook.",
+      "mission": [
+        "To deliver top-quality teaching in basic sciences and communication skills.",
+        "To nurture critical thinking and scientific inquiry.",
+        "To shape well-rounded, ethical professionals."
+      ],
+      "faculty": [
+        {
+          "name": "Faculty members directory",
+          "designation": "Staff",
+          "qualification": "",
+          "email": "sh@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "csd",
+      "name": "Computer Science & Design (CSD)",
+      "about": "The Department of Computer Science & Design (CSD) focuses on the intersection of computer science, computing technologies, and design-oriented applications like UI/UX, graphics, interactive systems, and game design.",
+      "vision": "To produce creative computing professionals equipped with deep technical knowledge and design excellence.",
+      "mission": [
+        "To teach modern computing and design concepts.",
+        "To encourage project-based learning in interactive media, web technologies, and user experience.",
+        "To promote multidisciplinary collaborations and entrepreneurship."
+      ],
+      "faculty": [
+        {
+          "name": "Faculty members directory",
+          "designation": "Staff",
+          "qualification": "",
+          "email": "csd@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "agri",
+      "name": "Agricultural Engineering",
+      "about": "The Department of Agricultural Engineering focuses on engineering applications in agriculture, including farm machinery, soil and water conservation, food processing technology, and sustainable farming systems.",
+      "vision": "To develop agricultural engineers who can address food security and agricultural sustainability challenges through engineering innovations.",
+      "mission": [
+        "To impart skills in farm automation, irrigation, and post-harvest technology.",
+        "To conduct research for improving agricultural productivity and resource management.",
+        "To empower students to serve rural communities and agricultural industries."
+      ],
+      "faculty": [
+        {
+          "name": "Faculty members directory",
+          "designation": "Staff",
+          "qualification": "",
+          "email": "agri@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "phd-civil",
+      "name": "PhD - Civil Engg.",
+      "about": "The Ph.D. program in Civil Engineering offers opportunities for advanced research and academic inquiry in structural engineering, environmental engineering, geotechnical engineering, and construction management.",
+      "vision": "To achieve international recognition in structural and environmental research, contributing to sustainable infrastructural development.",
+      "mission": [
+        "To perform high-impact research addressing structural durability and environmental issues.",
+        "To foster collaborations with national and international research organizations.",
+        "To publish innovative findings in top-tier science and engineering journals."
+      ],
+      "faculty": [
+        {
+          "name": "Research Coordinators",
+          "designation": "Professor & Research Guide",
+          "qualification": "Ph.D.",
+          "email": "phd.civil@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "phd-mech",
+      "name": "PhD - Mechanical Engg.",
+      "about": "The Ph.D. program in Mechanical Engineering provides research pathways in materials science, thermal engineering, fluid machinery, robotics, CAD/CAM, and advanced manufacturing systems.",
+      "vision": "To drive innovations in mechanical sciences, robotics, and thermal engineering through rigorous scientific research and industrial partnership.",
+      "mission": [
+        "To conduct cutting-edge research in manufacturing systems and materials engineering.",
+        "To mentor doctoral scholars to be research leaders in industry and academia.",
+        "To secure patents and commercialize innovative mechanical designs."
+      ],
+      "faculty": [
+        {
+          "name": "Research Coordinators",
+          "designation": "Professor & Research Guide",
+          "qualification": "Ph.D.",
+          "email": "phd.mech@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "phd-ece",
+      "name": "PhD - Electronics and Communication Engg.",
+      "about": "The Ph.D. program in Electronics and Communication Engineering (ECE) aims to conduct cutting-edge research in wireless networks, microelectronics, VLSI systems, embedded design, and digital signal processing.",
+      "vision": "To lead research in telecommunications and microelectronic systems, fostering innovation and technological development for the future.",
+      "mission": [
+        "To carry out advanced research in communication systems, IoT architectures, and chip designs.",
+        "To produce highly skilled research professionals ready for technology hubs and universities.",
+        "To establish collaborative research laboratories with leading electronics enterprises."
+      ],
+      "faculty": [
+        {
+          "name": "Research Coordinators",
+          "designation": "Professor & Research Guide",
+          "qualification": "Ph.D.",
+          "email": "phd.ece@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "phd-eee",
+      "name": "PhD - Electrical and Electronics Engg.",
+      "about": "The Ph.D. program in Electrical and Electronics Engineering (EEE) focuses on power electronics, electrical machinery designs, smart grid architectures, renewable energy integration, and control instrumentation systems.",
+      "vision": "To be a premier center for electrical engineering research, addressing power management and clean energy challenges globally.",
+      "mission": [
+        "To conduct research in power systems, electric vehicles, and clean energy storage.",
+        "To guide research scholars in solving industrial power and grid integration problems.",
+        "To bridge academic research and practical power grid applications."
+      ],
+      "faculty": [
+        {
+          "name": "Research Coordinators",
+          "designation": "Professor & Research Guide",
+          "qualification": "Ph.D.",
+          "email": "phd.eee@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    },
+    {
+      "key": "aids",
+      "name": "Artificial Intelligence and Data Science",
+      "about": "The Department of Artificial Intelligence and Data Science (AI & DS) aims to provide a strong foundation in data engineering, machine learning pipelines, predictive modeling, statistical learning, and database architectures.",
+      "vision": "To produce globally competent professionals in AI and Data Science who contribute to societal growth through innovative research and ethical application of intelligence systems.",
+      "mission": [
+        "To deliver deep education in mathematical foundations, machine learning algorithms, and modern data infrastructures.",
+        "To cultivate collaboration with top data companies for industrial training and project opportunities.",
+        "To foster academic research and intellectual curiosity in analytics and cognitive engineering."
+      ],
+      "faculty": [
+        {
+          "name": "Department HOD & Faculty",
+          "designation": "Professor & Head",
+          "qualification": "Ph.D.",
+          "email": "hod.aids@apec.edu.in",
+          "experience": ""
+        }
+      ]
+    }
+  ],
+  "cutoff_calculator": {
+    "description": "APEC provides an online TNEA Cutoff Calculator tool for students to calculate their engineering admission cutoff score out of 200 marks.",
+    "formula": "Cutoff = Mathematics (100) + (Physics / 2) (50) + (Chemistry / 2) (50)",
+    "instructions": "Enter your marks out of 100 in Mathematics, Physics, and Chemistry. The calculator takes the full Mathematics score, adds half of the Physics score, and adds half of the Chemistry score to output a total out of 200."
+  },
+  "fee_payment": {
+    "payment_modes": [
+      "Net Banking",
+      "UPI Payment (GPay, PhonePe, Paytm, etc.)",
+      "Direct Bank Deposit"
+    ],
+    "bank_details": {
+      "bank_name": "Central Bank of India",
+      "branch": "Melmaruvathur",
+      "ifsc_code": "CBIN0283083",
+      "account_name": "Adhiparasakthi Engineering College"
+    },
+    "upi_scan_to_pay": "The Smart Fee Portal allows users to input Student Name, Department, and Amount to generate a customized UPI QR Code for instant scanning and payment.",
+    "important_instructions": "Please make sure to mention your Admission Number / Register Number in the transaction remarks or notes for payment verification."
+  }
+}

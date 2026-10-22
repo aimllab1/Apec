@@ -1,0 +1,37 @@
+{
+  "counseling_code": "1401",
+  "eligibility": {
+    "hsc_requirements": "Candidates must have passed Higher Secondary Examinations (+2) with Mathematics, Physics, and Chemistry (PCM) as core subjects.",
+    "min_average_marks": {
+      "OC": "45% average in PCM",
+      "BC_BCM": "40% average in PCM",
+      "MBC_DNC": "40% average in PCM",
+      "SC_SCA_ST": "40% average in PCM"
+    }
+  },
+  "scholarships": [
+    {
+      "title": "Lead to Serve... Wings to Your Dreams...",
+      "provider": "Sakthi Peedam and Spiritual Center of North America, USA",
+      "amount": "Rs. 25,000 annually",
+      "eligibility": "Awarded to economically disadvantaged students with strong academic scores and leadership traits."
+    },
+    {
+      "title": "Dr. G. B. Senthilkumar Scholarship",
+      "provider": "APEC College Management",
+      "amount": "Variable fee concessions",
+      "eligibility": "Merit-cum-means scholarship provided to students exhibiting high academic rank needing financial aid."
+    }
+  ],
+  "documents_required": [
+    "TNEA Counseling Allotment Order",
+    "10th Standard Mark Sheet",
+    "12th Standard (+2) Mark Sheet",
+    "Transfer Certificate (TC)",
+    "Community Certificate (if applicable)",
+    "First Graduate Certificate & Joint Declaration (if applicable)",
+    "Nativity Certificate (if applicable)",
+    "Income Certificate (for tuition fee concession)",
+    "Recent passport-sized photographs"
+  ]
+}
