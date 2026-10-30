@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  Award, Shield, FileText, Mail, Building, 
-  Users, ChevronRight, Search, Laptop, Clock, ArrowLeft,
-  GraduationCap, MapPin, Sparkles
+  Mail, Building, Users, Search, ArrowLeft, MapPin, Clock
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -164,23 +162,17 @@ const coeTechnicalStaff = [
   {
     id: 1,
     name: "Ms. G. Preethi",
-    role: "Technical Assistant",
-    office: "COE Data & Records Section",
-    desc: "Examination record management, student marks data entry, and portal technical administration."
+    office: "COE Data & Records Section"
   },
   {
     id: 2,
     name: "Mr. M. Vetrivendhan",
-    role: "Technical Assistant / Systems Admin",
-    office: "COE Systems & Network",
-    desc: "Confidential network security, central valuation server management, and hardware infrastructure."
+    office: "COE Systems & Network"
   },
   {
     id: 3,
     name: "Mrs. B. Lakshmi Priya",
-    role: "Office Assistant",
-    office: "COE Confidential Section",
-    desc: "Examination documentation, candidate hall allocation records, and confidential certificate handling."
+    office: "COE Confidential Section"
   }
 ];
 
@@ -230,43 +222,25 @@ export default function Coe() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-slate-800 font-sans selection:bg-amber-100 selection:text-[#07113A]">
       
-      {/* Breadcrumb Navigation - Matching Department Pages */}
-      <div className="bg-white border-b border-gray-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex items-center gap-2 text-xs text-gray-500 font-semibold flex-wrap">
-            <Link to="/" className="hover:text-indigo-650 transition-colors">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-            <Link to="/departments" className="hover:text-indigo-650 transition-colors">Academics</Link>
-            <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-            <span className="text-[#07113A] font-bold">Office of Controller of Examinations</span>
+      {/* Page Header - Clean & Focused */}
+      <section className="bg-white border-b border-gray-200/80 py-3.5 sm:py-4.5 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black font-title tracking-tight text-[#07113A]">
+                Office of Controller of Examinations
+              </h1>
+              <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-amber-500 to-indigo-600 rounded-full mt-1.5" />
+            </div>
+            <Link 
+              to="/departments" 
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-650 transition-colors bg-slate-50 hover:bg-indigo-50 border border-slate-200 px-3 py-1.5 rounded-full shrink-0 shadow-2xs"
+            >
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Back to </span>Departments
+            </Link>
           </div>
         </div>
-      </div>
-
-      {/* Hero Header Section - Consistent with Department Detail Header */}
-      <section className="bg-white border-b border-gray-200/80 py-4 sm:py-5 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-          
-          {/* Status Badges */}
-          <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-[10px] sm:text-xs font-black tracking-widest text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full uppercase flex items-center gap-1.5">
-              <Shield className="w-3.5 h-3.5 text-amber-600" />
-              Autonomous Examination Cell
-            </span>
-            <span className="text-[10px] sm:text-xs font-black tracking-widest text-indigo-700 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full uppercase">
-              Anna University Affiliated
-            </span>
-            <span className="text-[10px] sm:text-xs font-black tracking-widest text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full uppercase">
-              UGC Autonomous Status
-            </span>
-          </div>
-
-          {/* Department Main Title in font-title font */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-title tracking-tight text-[#07113A] leading-tight">
-            Office of Controller of Examinations
-          </h1>
-
-          </div>
       </section>
 
       {/* Main Content Body */}
@@ -278,68 +252,86 @@ export default function Coe() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="bg-white border-2 border-amber-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+            className="bg-white border-2 border-amber-200/90 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
             {/* Top decorative gradient glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50/50 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-10 relative z-10">
-              
-              {/* COE Portrait Image */}
-              <div className="relative shrink-0">
-                <div className="w-36 h-48 sm:w-44 sm:h-56 md:w-52 md:h-64 rounded-2xl overflow-hidden border-2 border-amber-300/80 shadow-md bg-slate-100 flex items-center justify-center">
-                  <StaffAvatar 
-                    name={coe.name} 
-                    image={coe.image} 
-                    className="w-full h-full object-cover object-top" 
-                  />
+            <div className="relative z-10">
+              {/* Upper Section: Photo + Faculty Identity */}
+              <div className="flex items-center gap-3.5 sm:gap-6 md:gap-8">
+                
+                {/* Portrait Image */}
+                <div className="relative shrink-0">
+                  <div className="w-24 h-32 sm:w-36 sm:h-46 md:w-44 md:h-56 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-amber-300/80 shadow-md bg-slate-100 flex items-center justify-center">
+                    <StaffAvatar 
+                      name={coe.name} 
+                      image={coe.image} 
+                      className="w-full h-full object-cover object-top" 
+                    />
+                  </div>
+                  {/* Official Role Ribbon */}
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-max">
+                    <span className="inline-block text-[9px] sm:text-xs font-black tracking-wider sm:tracking-widest uppercase px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#07113A] text-amber-400 border border-amber-400/50 shadow-xs">
+                      {coe.badge}
+                    </span>
+                  </div>
                 </div>
-                {/* Official Role Ribbon */}
-                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-max">
-                  <span className="inline-block text-xs font-black tracking-widest uppercase px-3.5 py-1 rounded-full bg-[#07113A] text-amber-400 border border-amber-400/50 shadow-sm">
-                    {coe.badge}
-                  </span>
+
+                {/* COE Details */}
+                <div className="flex-1 min-w-0 text-left">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 mb-1">
+                    <h3 className="text-base sm:text-2xl md:text-3xl font-black font-title text-[#07113A] tracking-tight leading-tight">
+                      {coe.name}
+                    </h3>
+                    {coe.qualification && (
+                      <span className="text-[9px] sm:text-xs font-black bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md text-amber-800 uppercase font-mono tracking-wider">
+                        {coe.qualification}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-[11px] sm:text-sm md:text-base font-extrabold text-indigo-650 uppercase tracking-wide leading-snug mb-0.5 sm:mb-1">
+                    {coe.designation}
+                  </p>
+
+                  <p className="text-[11px] sm:text-sm text-slate-600 font-semibold leading-snug">
+                    {coe.department}
+                  </p>
+
+                  {/* Desktop/Tablet Contact Info */}
+                  <div className="hidden sm:flex flex-wrap items-center gap-2.5 text-xs mt-3.5">
+                    <a 
+                      href={`mailto:${coe.email}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold hover:bg-indigo-100 transition-colors shadow-2xs"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                      <span>{coe.email}</span>
+                    </a>
+
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                      <span>{coe.office}</span>
+                    </span>
+                  </div>
                 </div>
+
               </div>
 
-              {/* COE Detailed Information */}
-              <div className="flex-1 text-center md:text-left">
-                
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 mb-2">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-title text-[#07113A] tracking-tight">
-                    {coe.name}
-                  </h3>
-                  {coe.qualification && (
-                    <span className="text-xs sm:text-sm font-black bg-amber-50 border border-amber-200 px-3 py-1 rounded-lg text-amber-800 uppercase font-mono tracking-wider shadow-2xs">
-                      {coe.qualification}
-                    </span>
-                  )}
+              {/* Mobile Contact Bar (Visible on < sm) */}
+              <div className="sm:hidden mt-3 pt-2.5 border-t border-slate-150/80 flex flex-col gap-1.5 text-xs">
+                <a 
+                  href={`mailto:${coe.email}`}
+                  className="inline-flex items-center justify-center gap-2 py-1.5 px-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-800 text-[11px] font-bold hover:bg-indigo-100 transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                  <span className="truncate">{coe.email}</span>
+                </a>
+
+                <div className="inline-flex items-center justify-center gap-1.5 py-1 px-2.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 text-[10.5px] font-medium text-center">
+                  <MapPin className="w-3 h-3 text-slate-500 shrink-0" />
+                  <span className="truncate">{coe.office}</span>
                 </div>
-
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-extrabold text-indigo-650 uppercase tracking-wider mb-1.5">
-                  {coe.designation}
-                </p>
-
-                <p className="text-xs sm:text-sm md:text-base text-slate-600 font-semibold mb-5">
-                  {coe.department}
-                </p>
-
-                {/* Office & Contact Directory Info */}
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm">
-                  <a 
-                    href={`mailto:${coe.email}`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold hover:bg-indigo-100 transition-colors shadow-2xs"
-                  >
-                    <Mail className="w-4 h-4 text-indigo-600" />
-                    <span>{coe.email}</span>
-                  </a>
-
-                  <span className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-medium">
-                    <MapPin className="w-4 h-4 text-slate-500" />
-                    <span>{coe.office}</span>
-                  </span>
-                </div>
-
               </div>
 
             </div>
@@ -352,68 +344,86 @@ export default function Coe() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.1 }}
-            className="bg-white border-2 border-indigo-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-7 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+            className="bg-white border-2 border-indigo-200/90 rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 md:p-6 shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
           >
             {/* Top decorative gradient glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50/50 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8 md:gap-10 relative z-10">
-              
-              {/* Deputy COE Portrait Image */}
-              <div className="relative shrink-0">
-                <div className="w-36 h-48 sm:w-44 sm:h-56 md:w-52 md:h-64 rounded-2xl overflow-hidden border-2 border-indigo-300/80 shadow-md bg-slate-100 flex items-center justify-center">
-                  <StaffAvatar 
-                    name={deputyCoe.name} 
-                    image={deputyCoe.image} 
-                    className="w-full h-full object-cover object-top" 
-                  />
+            <div className="relative z-10">
+              {/* Upper Section: Photo + Faculty Identity */}
+              <div className="flex items-center gap-3.5 sm:gap-6 md:gap-8">
+                
+                {/* Portrait Image */}
+                <div className="relative shrink-0">
+                  <div className="w-24 h-32 sm:w-36 sm:h-46 md:w-44 md:h-56 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-indigo-300/80 shadow-md bg-slate-100 flex items-center justify-center">
+                    <StaffAvatar 
+                      name={deputyCoe.name} 
+                      image={deputyCoe.image} 
+                      className="w-full h-full object-cover object-top" 
+                    />
+                  </div>
+                  {/* Official Role Ribbon */}
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-max">
+                    <span className="inline-block text-[9px] sm:text-xs font-black tracking-wider sm:tracking-widest uppercase px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-[#07113A] text-indigo-300 border border-indigo-300/50 shadow-xs">
+                      {deputyCoe.badge}
+                    </span>
+                  </div>
                 </div>
-                {/* Official Role Ribbon */}
-                <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-max">
-                  <span className="inline-block text-xs font-black tracking-widest uppercase px-3.5 py-1 rounded-full bg-[#07113A] text-indigo-300 border border-indigo-300/50 shadow-sm">
-                    {deputyCoe.badge}
-                  </span>
+
+                {/* Deputy COE Details */}
+                <div className="flex-1 min-w-0 text-left">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2.5 mb-1">
+                    <h3 className="text-base sm:text-2xl md:text-3xl font-black font-title text-[#07113A] tracking-tight leading-tight">
+                      {deputyCoe.name}
+                    </h3>
+                    {deputyCoe.qualification && (
+                      <span className="text-[9px] sm:text-xs font-black bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md text-indigo-800 uppercase font-mono tracking-wider">
+                        {deputyCoe.qualification}
+                      </span>
+                    )}
+                  </div>
+
+                  <p className="text-[11px] sm:text-sm md:text-base font-extrabold text-indigo-650 uppercase tracking-wide leading-snug mb-0.5 sm:mb-1">
+                    {deputyCoe.designation}
+                  </p>
+
+                  <p className="text-[11px] sm:text-sm text-slate-600 font-semibold leading-snug">
+                    {deputyCoe.department}
+                  </p>
+
+                  {/* Desktop/Tablet Contact Info */}
+                  <div className="hidden sm:flex flex-wrap items-center gap-2.5 text-xs mt-3.5">
+                    <a 
+                      href={`mailto:${deputyCoe.email}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold hover:bg-indigo-100 transition-colors shadow-2xs"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                      <span>{deputyCoe.email}</span>
+                    </a>
+
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-medium">
+                      <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                      <span>{deputyCoe.office}</span>
+                    </span>
+                  </div>
                 </div>
+
               </div>
 
-              {/* Deputy COE Detailed Information */}
-              <div className="flex-1 text-center md:text-left">
-                
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 mb-2">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-title text-[#07113A]">
-                    {deputyCoe.name}
-                  </h3>
-                  {deputyCoe.qualification && (
-                    <span className="text-xs sm:text-sm font-black bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-lg text-indigo-800 uppercase font-mono tracking-wider shadow-2xs">
-                      {deputyCoe.qualification}
-                    </span>
-                  )}
+              {/* Mobile Contact Bar (Visible on < sm) */}
+              <div className="sm:hidden mt-3 pt-2.5 border-t border-slate-150/80 flex flex-col gap-1.5 text-xs">
+                <a 
+                  href={`mailto:${deputyCoe.email}`}
+                  className="inline-flex items-center justify-center gap-2 py-1.5 px-3 rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-800 text-[11px] font-bold hover:bg-indigo-100 transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-indigo-600 shrink-0" />
+                  <span className="truncate">{deputyCoe.email}</span>
+                </a>
+
+                <div className="inline-flex items-center justify-center gap-1.5 py-1 px-2.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-600 text-[10.5px] font-medium text-center">
+                  <MapPin className="w-3 h-3 text-slate-500 shrink-0" />
+                  <span className="truncate">{deputyCoe.office}</span>
                 </div>
-
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-extrabold text-indigo-650 uppercase tracking-wider mb-1.5">
-                  {deputyCoe.designation}
-                </p>
-
-                <p className="text-xs sm:text-sm md:text-base text-slate-600 font-semibold mb-5">
-                  {deputyCoe.department}
-                </p>
-
-                {/* Office & Contact Directory Info */}
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-xs sm:text-sm">
-                  <a 
-                    href={`mailto:${deputyCoe.email}`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-800 font-bold hover:bg-indigo-100 transition-colors shadow-2xs"
-                  >
-                    <Mail className="w-4 h-4 text-indigo-600" />
-                    <span>{deputyCoe.email}</span>
-                  </a>
-
-                  <span className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-medium">
-                    <MapPin className="w-4 h-4 text-slate-500" />
-                    <span>{deputyCoe.office}</span>
-                  </span>
-                </div>
-
               </div>
 
             </div>
@@ -512,11 +522,11 @@ export default function Coe() {
                   {staff.email ? (
                     <a 
                       href={`mailto:${staff.email}`}
-                      className="text-[10px] sm:text-[11px] text-slate-500 hover:text-indigo-650 font-medium flex items-center gap-1.5 truncate max-w-full transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 w-full py-1.5 px-2 rounded-lg bg-indigo-50/70 hover:bg-indigo-100 border border-indigo-150 text-indigo-700 text-[10px] sm:text-[11px] font-bold transition-all shadow-2xs"
                       title={staff.email}
                     >
-                      <Mail className="w-3 h-3 text-indigo-500 shrink-0" />
-                      <span className="truncate">{staff.email}</span>
+                      <Mail className="w-3 h-3 text-indigo-600 shrink-0" />
+                      <span className="truncate">Email</span>
                     </a>
                   ) : (
                     <span className="text-[10px] text-slate-400 italic">COE Cell Member</span>
@@ -543,35 +553,27 @@ export default function Coe() {
 
         {/* 4. TECHNICAL & SUPPORT STAFF DIRECTORY */}
         <section className="text-left pt-2">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-6 bg-slate-700 rounded-full" />
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-[#07113A] tracking-tight">
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
+            <span className="w-1.5 h-5 bg-slate-700 rounded-full" />
+            <h2 className="text-lg sm:text-xl md:text-2xl font-black font-title text-[#07113A] tracking-tight">
               Technical & Support Staff
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             {coeTechnicalStaff.map((tech) => (
               <div 
                 key={tech.id}
-                className="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between"
+                className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-slate-200/90 shadow-2xs hover:shadow-xs transition-all flex items-center gap-3"
               >
-                <div>
-                  <div className="flex items-center gap-3.5 mb-3">
-                    <div className="w-11 h-11 rounded-xl bg-indigo-50 border border-indigo-150 flex items-center justify-center text-indigo-650 font-black text-sm shrink-0">
-                      {tech.name.split(' ').pop()?.[0] || 'T'}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-sm sm:text-base text-[#07113A]">{tech.name}</h4>
-                      <p className="text-[11px] sm:text-xs text-amber-700 font-bold uppercase tracking-wide">{tech.role}</p>
-                    </div>
-                  </div>
-                  <div className="text-xs text-slate-500 font-semibold mb-2 flex items-center gap-1.5">
-                    <Building className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{tech.office}</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                    {tech.desc}
+                <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-150 flex items-center justify-center text-indigo-650 font-black text-sm shrink-0">
+                  {tech.name.split(' ').pop()?.[0] || 'T'}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-bold text-xs sm:text-sm text-[#07113A] truncate">{tech.name}</h4>
+                  <p className="text-[11px] sm:text-xs text-slate-500 font-medium truncate flex items-center gap-1 mt-0.5">
+                    <Building className="w-3 h-3 text-slate-400 shrink-0" />
+                    <span className="truncate">{tech.office}</span>
                   </p>
                 </div>
               </div>
