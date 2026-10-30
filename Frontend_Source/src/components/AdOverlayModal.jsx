@@ -22,45 +22,16 @@ export default function AdOverlayModal({ forceOpen = null, onClose = null }) {
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const loadAndEvaluateAds = () => {
-    // 1. Check global toggle
-    const enabledSetting = localStorage.getItem('apec_ad_popup_enabled');
-    const isGloballyEnabled = enabledSetting === null ? true : enabledSetting === 'true';
-
-    // If controlled via forceOpen (e.g. Preview button in admin panel)
+    // Only open when explicitly requested via forceOpen (e.g. Preview button in admin panel)
     if (forceOpen === true) {
       setIsOpen(true);
       loadAdsList();
       return;
     }
 
-    if (forceOpen === false) {
-      setIsOpen(false);
-      return;
-    }
-
-    // Default public mode (e.g. homepage)
-    if (!isGloballyEnabled) {
-      setIsOpen(false);
-      return;
-    }
-
-    const valid = loadAdsList();
-
-    // Check if dismissed in this session
-    const dismissed = sessionStorage.getItem('apec_ad_closed');
-    if (dismissed === 'true') {
-      setIsOpen(false);
-      return;
-    }
-
-    if (valid.length > 0) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 700);
-      return () => clearTimeout(timer);
-    } else {
-      setIsOpen(false);
-    }
+    // Auto-popup is completely disabled to avoid interrupting users
+    setIsOpen(false);
+    return;
   };
 
   const loadAdsList = () => {

@@ -5,7 +5,6 @@ import {
   ChevronLeft, ChevronRight, Award, Calendar, Sparkles 
 } from 'lucide-react';
 import PanoramaModal from '../components/PanoramaModal';
-import AdOverlayModal from '../components/AdOverlayModal';
 import defaultHomeData from '../data/homeData.json';
 const achievement1Img = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340136/apec/Hero/achivement_1.jpg';
 const placementsImg = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340151/apec/Hero/placements.jpg';
@@ -471,11 +470,6 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ─────────────────────────────────────────────────────────────
-          SPECIAL ADVERTISEMENT OVERLAY POPUP
-          Managed in Admin Console (Ads Overlay Manager)
-          ───────────────────────────────────────────────────────────── */}
-      <AdOverlayModal />
 
     </div>
   );
