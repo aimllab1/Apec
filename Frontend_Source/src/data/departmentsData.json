@@ -69,17 +69,6 @@
     ],
     "faculty": [
       {
-        "name": "New Faculty Member",
-        "qualification": "B.E., M.E.",
-        "designation": "Assistant Professor",
-        "department": "Artificial Intelligence and Machine Learning",
-        "email": "newfaculty@apec.edu.in",
-        "experience": "1 Year",
-        "joiningDate": "June 1, 2026",
-        "image": "",
-        "orcid": ""
-      },
-      {
         "name": "Dr. N. Elamathi",
         "qualification": "ME, Ph.D",
         "designation": "Head of Department",
@@ -182,7 +171,18 @@
         "link": "",
         "summary": "Highlights student projects, faculty publications, and events."
       }
-    ]
+    ],
+    "syllabus": {
+      "title": "B.E. Artificial Intelligence and Machine Learning - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/aiml-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/aiml-syllabus.pdf",
+      "fileName": "B.E.Cse (AIML).pdf",
+      "fileSize": "7.0 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Artificial Intelligence and Machine Learning.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/IandC/B.E.Cse%20(AIML).pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/aiml-page-1.png"
+    }
   },
   "chemical": {
     "key": "chemical",
@@ -614,7 +614,18 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "B.Tech Chemical Engineering - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/chemical-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/chemical-syllabus.pdf",
+      "fileName": "B.Tech.CE.pdf",
+      "fileSize": "6.8 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Chemical Engineering.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/Tech/B.Tech.CE.pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/chemical-page-1.png"
+    }
   },
   "civil": {
     "key": "civil",
@@ -1477,7 +1488,17 @@
         }
       ]
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "B.E. Civil Engineering - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/civil-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/civil-syllabus.pdf",
+      "fileName": "BE.Civil.pdf",
+      "fileSize": "11.9 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Civil Engineering.",
+      "previewImage": "/Documents/PDFs/Curriculum/civil-page-1.png"
+    }
   },
   "mca": {
     "key": "mca",
@@ -1532,6 +1553,19 @@
     ],
     "faculty": [
       {
+        "name": "Dr. S. Arunkumar",
+        "qualification": "MCA, M.Phil., Ph.D.",
+        "designation": "Head of Department",
+        "department": "Computer Applications",
+        "email": "arunkumar@apec.edu.in",
+        "facultyId": "",
+        "experience": "0 Years, 0 Months",
+        "joiningDate": "",
+        "teachingSince": "",
+        "image": "/Images/Faculty/MCA/arun kumar.jpg",
+        "isHod": true
+      },
+      {
         "name": "Dr. S. Selvaraj",
         "qualification": "MCA. Ph.D",
         "designation": "Professor",
@@ -1542,18 +1576,6 @@
         "joiningDate": "January 1, 2024",
         "teachingSince": "",
         "image": "/Images/Faculty/MCA/selva raj.jpg"
-      },
-      {
-        "name": "Dr. S. Arunkumar",
-        "qualification": "MCA, M.Phil., Ph.D.",
-        "designation": "Assistant Professor",
-        "department": "Computer Applications",
-        "email": "arunkumar@apec.edu.in",
-        "facultyId": "",
-        "experience": "0 Years, 0 Months",
-        "joiningDate": "",
-        "teachingSince": "",
-        "image": "/Images/Faculty/MCA/arun kumar.jpg"
       },
       {
         "name": "Mr. E. Janakiraman",
@@ -1897,7 +1919,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "Computer Applications Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for Computer Applications."
+    }
   },
   "cse": {
     "key": "cse",
@@ -2925,6 +2956,55 @@
         "yearSem": "Semester VII",
         "gpa": "9.02",
         "rank": "4"
+      }
+    ],
+    "syllabus": {
+      "title": "B.E. Computer Science Engineering - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/cse-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/cse-syllabus.pdf",
+      "fileName": "B.E.CSE.pdf",
+      "fileSize": "6.9 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Computer Science Engineering.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/IandC/B.E.CSE.pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/cse-page-1.png"
+    },
+    "newsletters": [
+      {
+        "title": "The Times of Neural APEC - July 2026",
+        "edition": "Vol. 2026-27 • July Issue",
+        "date": "July 2026",
+        "academicYear": "AY 2026-2027 (Odd Sem)",
+        "link": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-07-july.pdf",
+        "downloadUrl": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-07-july.pdf",
+        "docxLink": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-07-july.docx",
+        "fileName": "Department of CSE News Letter26-27 JULY.pdf",
+        "fileSize": "3.3 MB",
+        "summary": "Features Cybersecurity Training, Java Training Programs, Parents & Class Committee Meetings, Software Engineering Workshop, CSI Kancheepuram Chapter Awards (Best Leadership & Active Participation), SIH Guidance, and Cyber Forensics Industrial Visit."
+      },
+      {
+        "title": "The Times of Neural APEC - August 2026",
+        "edition": "Vol. 2026-27 • August Issue",
+        "date": "August 2026",
+        "academicYear": "AY 2026-2027 (Odd Sem)",
+        "link": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-08-august.pdf",
+        "downloadUrl": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-08-august.pdf",
+        "docxLink": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-08-august.docx",
+        "fileName": "Department of CSE News Letter26-27 AUGUST.pdf",
+        "fileSize": "4.4 MB",
+        "summary": "Highlights 5-Day Agentic AI Engineering Training, 'Let's Build a GPT Model from Scratch' Workshop, CSI Student Chapter Leadership, IIITDM Kancheepuram Visit, Anna University 9th Ranker Ms. Swathika, IBM SkillBuild AI, and SIH Launch."
+      },
+      {
+        "title": "The Times of Neural APEC - September 2026",
+        "edition": "Vol. 2026-27 • September Issue",
+        "date": "September 2026",
+        "academicYear": "AY 2026-2027 (Odd Sem)",
+        "link": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-09-september.pdf",
+        "downloadUrl": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-09-september.pdf",
+        "docxLink": "/Documents/PDFs/Newsletters/CSE/cse-newsletter-2026-09-september.docx",
+        "fileName": "Department of CSE News Letter26-27 Septmber.pdf",
+        "fileSize": "2.4 MB",
+        "summary": "Showcases APEC Internal Hackathon 2026 (SIH), Prize Winners at UCET Technical Events ('Idea Sphere' & 'Rhythm Pick'), CSI Saturday Technical Activities, Introduction to Quantum Computing Seminar, and Video Creation & Digital Media Workshop."
       }
     ]
   },
@@ -4167,7 +4247,18 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "B.E. Department of Mechanical Engineering - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/mech-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/mech-syllabus.pdf",
+      "fileName": "B.E.Mech.pdf",
+      "fileSize": "6.2 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Department of Mechanical Engineering.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/Mech/B.E.Mech.pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/mech-page-1.png"
+    }
   },
   "it": {
     "key": "it",
@@ -4810,7 +4901,18 @@
         "gpa": "8.72",
         "rank": "II"
       }
-    ]
+    ],
+    "syllabus": {
+      "title": "B.Tech Information Technology - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/it-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/it-syllabus.pdf",
+      "fileName": "B.Tech.IT.pdf",
+      "fileSize": "7.1 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Information Technology.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/IandC/B.Tech.IT.pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/it-page-1.png"
+    }
   },
   "eee": {
     "key": "eee",
@@ -5563,7 +5665,18 @@
         }
       ]
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "B.E. Electrical and Electronics Engineering - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/eee-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/eee-syllabus.pdf",
+      "fileName": "B.E. EEE.pdf",
+      "fileSize": "5.5 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Electrical and Electronics Engineering.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/EEE/B.E.%20EEE.pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/eee-page-1.png"
+    }
   },
   "ece": {
     "key": "ece",
@@ -5601,7 +5714,7 @@
       {
         "name": "Dr. M. Malathi",
         "qualification": "M.E., Ph.D.",
-        "designation": "Head of Department",
+        "designation": "Vice Principal, Head of Department & Professor",
         "department": "Electronics & Communication Engineering",
         "email": "ecemalathi@gmail.com",
         "facultyId": "01TGIT0519",
@@ -5847,7 +5960,18 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "B.E. Electronics and Communication Engineering - Regulation 2021 Curriculum & Syllabus",
+      "regulation": "Regulation 2021 (R-2021)",
+      "link": "/Documents/PDFs/Curriculum/ece-syllabus.pdf",
+      "downloadUrl": "/Documents/PDFs/Curriculum/ece-syllabus.pdf",
+      "fileName": "B.E.ECE.pdf",
+      "fileSize": "6.5 MB",
+      "description": "Official Anna University & Autonomous Regulation 2021 Choice Based Credit System (CBCS) curriculum, semester I–VIII course scheme, subject syllabi, credit distribution, and laboratory regulations for Electronics and Communication Engineering.",
+      "officialUrl": "https://cac.annauniv.edu/aidetails/afug_2021_fu/Revised/IandC/B.E.ECE.pdf",
+      "previewImage": "/Documents/PDFs/Curriculum/ece-page-1.png"
+    }
   },
   "mba": {
     "key": "mba",
@@ -5871,28 +5995,37 @@
     "pos": [],
     "faculty": [
       {
+        "name": "Vinithasri V",
+        "qualification": "M.E.",
+        "designation": "Assistant Professor",
+        "department": "Management Studies (MBA)",
+        "email": "vinivenkat62@gmail.com",
+        "experience": "1 Year",
+        "joiningDate": "22/07/2026",
+        "image": "/Images/Faculty/1793335936191_vinithasri.jpg",
+        "orcid": ""
+      },
+      {
         "name": "Dr. M. Saviour",
         "qualification": "Ph.D",
-        "designation": "Head of Department",
+        "designation": "Professor",
         "department": "Management Studies",
         "email": "saviour@apec.edu.in",
-        "facultyId": "09TGMB0940",
         "experience": "28 Years, 0 Months",
         "joiningDate": "February 2, 2009",
-        "teachingSince": "June 20, 1998",
-        "image": "/Images/Faculty/MBA/saviour.jpg"
+        "image": "/Images/Faculty/MBA/saviour.jpg",
+        "orcid": ""
       },
       {
         "name": "Mr.V.Thamaraiselvan",
         "qualification": "B.E,MBA,(Ph.D)",
-        "designation": "Assistant Professor",
+        "designation": "Head of the Department",
         "department": "Management Studies",
         "email": "thamaraiselvan@apec.edu.in",
-        "facultyId": "12TGMB1168",
         "experience": "14 Years, 0 Months",
         "joiningDate": "July 1, 2012",
-        "teachingSince": "June 29, 2012",
-        "image": "/Images/Faculty/MBA/thamarai selvan.jpg"
+        "image": "/Images/Faculty/MBA/thamarai selvan.jpg",
+        "orcid": ""
       },
       {
         "name": "Mrs. P. Kavitha",
@@ -5973,7 +6106,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "Management Studies (MBA) Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for Management Studies (MBA)."
+    }
   },
   "sh": {
     "key": "sh",
@@ -6339,7 +6481,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "Science & Humanities Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for Science & Humanities."
+    }
   },
   "csd": {
     "key": "csd",
@@ -6411,7 +6562,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "Computer Science & Design (CSD) Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for Computer Science & Design (CSD)."
+    }
   },
   "agri": {
     "key": "agri",
@@ -6483,7 +6643,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "Agricultural Engineering Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for Agricultural Engineering."
+    }
   },
   "phd-civil": {
     "key": "phd-civil",
@@ -6548,7 +6717,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "PhD - Civil Engg. Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for PhD - Civil Engg.."
+    }
   },
   "phd-mech": {
     "key": "phd-mech",
@@ -6613,7 +6791,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "PhD - Mechanical Engg. Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for PhD - Mechanical Engg.."
+    }
   },
   "phd-ece": {
     "key": "phd-ece",
@@ -6678,7 +6865,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "PhD - Electronics and Communication Engg. Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for PhD - Electronics and Communication Engg.."
+    }
   },
   "phd-eee": {
     "key": "phd-eee",
@@ -6743,7 +6939,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "PhD - Electrical and Electronics Engg. Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for PhD - Electrical and Electronics Engg.."
+    }
   },
   "aids": {
     "key": "aids",
@@ -6815,7 +7020,16 @@
       "books": [],
       "conferences": []
     },
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "Artificial Intelligence and Data Science Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for Artificial Intelligence and Data Science."
+    }
   },
   "me-cse": {
     "key": "me-cse",
@@ -6843,7 +7057,16 @@
     "labs": [],
     "placements": [],
     "rankHolders": [],
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "M.E. Computer Science and Engineering Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for M.E. Computer Science and Engineering."
+    }
   },
   "me-vlsi": {
     "key": "me-vlsi",
@@ -6871,7 +7094,16 @@
     "labs": [],
     "placements": [],
     "rankHolders": [],
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "M.E. VLSI Design Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for M.E. VLSI Design."
+    }
   },
   "me-ped": {
     "key": "me-ped",
@@ -6899,7 +7131,16 @@
     "labs": [],
     "placements": [],
     "rankHolders": [],
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "M.E. Power Electronics & Drives Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for M.E. Power Electronics & Drives."
+    }
   },
   "me-thermal": {
     "key": "me-thermal",
@@ -6927,7 +7168,16 @@
     "labs": [],
     "placements": [],
     "rankHolders": [],
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "M.E. Thermal Engineering Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for M.E. Thermal Engineering."
+    }
   },
   "me-cem": {
     "key": "me-cem",
@@ -6955,6 +7205,15 @@
     "labs": [],
     "placements": [],
     "rankHolders": [],
-    "toppers": []
+    "toppers": [],
+    "syllabus": {
+      "title": "M.E. Construction Engineering and Management Curriculum & Syllabus",
+      "regulation": "Regulation 2021 / Autonomous",
+      "link": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "downloadUrl": "/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip",
+      "fileName": "REG 21 (SYLLABUS).zip",
+      "fileSize": "58 MB",
+      "description": "Access the complete Regulation 2021 curriculum and academic syllabus handbook for M.E. Construction Engineering and Management."
+    }
   }
 }

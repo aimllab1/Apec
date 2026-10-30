@@ -10,6 +10,7 @@ import {
 import facultyData from '../ai/knowledge/faculty.json';
 import departmentsData from '../data/departmentsData.json';
 import FacultyOrcidQr from '../components/FacultyOrcidQr';
+import { getFacultyImageUrl, handleFacultyImageError } from '../utils/facultyImageResolver';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -23,27 +24,27 @@ const staggerContainer = {
 
 // Department Banner Images Mapping
 const deptImageMap = {
-  'Civil Engineering': '/Images/Dept/civil dept.jpg',
-  'Mechanical Engineering': '/Images/Dept/mech dept.jpg',
-  'Department of Mechanical Engineering': '/Images/Dept/mech dept.jpg',
-  'Electrical and Electronics Engineering': '/Images/Dept/eee dept.jpg',
-  'Electronics and Communication Engineering': '/Images/Dept/ece dept.jpg',
-  'Computer Science and Engineering': '/Images/Dept/cse dept.png',
-  'Computer Science Engineering': '/Images/Dept/cse dept.png',
-  'Artificial Intelligence and Machine Learning': '/Images/Dept/aiml dept.jpg',
-  'Computer Science & Design (CSD)': '/Images/Dept/csd  dept.jpg',
-  'Information Technology': '/Images/Dept/it dept.jpg',
-  'Chemical Engineering': '/Images/Dept/chem dept.jpg',
-  'Agricultural Engineering': '/Images/Dept/agri dept.jpg',
-  'Artificial Intelligence and Data Science': '/Images/Dept/ai ds dept.jpg',
-  'Computer Applications': '/Images/Dept/MCA.jpg',
-  'Master of Computer Applications (MCA)': '/Images/Dept/MCA.jpg',
-  'Management Studies (MBA)': '/Images/Dept/MBA.jpg',
-  'Science & Humanities': '/Images/Dept/S&H dept.jpg',
-  'PhD - Civil Engg.': '/Images/Dept/phd.civil.jpg',
-  'PhD - Mechanical Engg.': '/Images/Dept/phd.mech.jpg',
-  'PhD - Electronics and Communication Engg.': '/Images/Dept/phd.ece.jpg',
-  'PhD - Electrical and Electronics Engg.': '/Images/Dept/phd.eee.jpg'
+  'Civil Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340156/apec/Dept/civil_dept.jpg',
+  'Mechanical Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340199/apec/Dept/mech_dept.jpg',
+  'Department of Mechanical Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340199/apec/Dept/mech_dept.jpg',
+  'Electrical and Electronics Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340191/apec/Dept/eee_dept.jpg',
+  'Electronics and Communication Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340163/apec/Dept/ece_dept.jpg',
+  'Computer Science and Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png',
+  'Computer Science Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png',
+  'Artificial Intelligence and Machine Learning': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340154/apec/Dept/aiml_dept.jpg',
+  'Computer Science & Design (CSD)': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340157/apec/Dept/csd__dept.jpg',
+  'Information Technology': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340192/apec/Dept/it_dept.jpg',
+  'Chemical Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340155/apec/Dept/chem_dept.jpg',
+  'Agricultural Engineering': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340152/apec/Dept/agri_dept.jpg',
+  'Artificial Intelligence and Data Science': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340153/apec/Dept/ai_ds_dept.jpg',
+  'Computer Applications': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340197/apec/Dept/MCA.jpg',
+  'Master of Computer Applications (MCA)': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340197/apec/Dept/MCA.jpg',
+  'Management Studies (MBA)': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340196/apec/Dept/MBA.jpg',
+  'Science & Humanities': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340205/apec/Dept/S_H_dept.jpg',
+  'PhD - Civil Engg.': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340200/apec/Dept/phd_civil.jpg',
+  'PhD - Mechanical Engg.': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340203/apec/Dept/phd_mech.jpg',
+  'PhD - Electronics and Communication Engg.': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340201/apec/Dept/phd_ece.jpg',
+  'PhD - Electrical and Electronics Engg.': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340202/apec/Dept/phd_eee.jpg'
 };
 
 // Program Categorization (B.E., B.Tech., PG, Ph.D.)
@@ -102,6 +103,11 @@ const getTopRightBadge = (member, currentDept) => {
   if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 'PRINCIPAL';
   if (name.includes('bhuvaneswari') || name.includes('bhuvaneshwari') || (member.designation && member.designation.toLowerCase().includes('vice principal'))) return 'VICE PRINCIPAL';
   if (name.includes('ramasamy') || (member.designation && member.designation.toLowerCase().includes('dean'))) return 'DEAN';
+  if (name.includes('arunkumar') || name.includes('arun kumar')) {
+    if (deptStr.includes('mca') || deptStr.includes('computer applications') || (member?.department_key === 'mca')) {
+      return 'HOD';
+    }
+  }
   if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 'HOD';
   return null;
 };
@@ -109,10 +115,11 @@ const getTopRightBadge = (member, currentDept) => {
 // Rank weighting for sorting faculty
 const getRankWeight = (member) => {
   const name = (member.name || '').toLowerCase().trim();
+  const deptStr = ((member?.department || '') + ' ' + (member?.department_key || '')).toLowerCase();
   if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 1;
   if (name.includes('bhuvaneswari') || name.includes('bhuvaneshwari') || (member.designation && member.designation.toLowerCase().includes('vice principal'))) return 2;
   if (name.includes('ramasamy') || (member.designation && member.designation.toLowerCase().includes('dean'))) return 3;
-  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 4;
+  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head')) || ((name.includes('arunkumar') || name.includes('arun kumar')) && (deptStr.includes('mca') || deptStr.includes('computer applications')))) return 4;
   const d = (member.designation || '').toLowerCase();
   if (d.includes('professor') && !d.includes('assistant') && !d.includes('associate')) return 5;
   if (d.includes('associate professor')) return 6;
@@ -180,14 +187,33 @@ export default function Faculty() {
 
   const [liveDeptsData, setLiveDeptsData] = useState(() => {
     const saved = localStorage.getItem('apec_departments_data');
-    return saved ? JSON.parse(saved) : departmentsData;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') {
+          if (!parsed?.mca?.faculty?.[0]?.name?.toLowerCase().includes('arun')) {
+            parsed.mca = departmentsData.mca;
+          }
+          return parsed;
+        }
+      } catch (e) {}
+    }
+    return departmentsData;
   });
 
   useEffect(() => {
     const syncDepts = () => {
       const saved = localStorage.getItem('apec_departments_data');
       if (saved) {
-        try { setLiveDeptsData(JSON.parse(saved)); } catch (e) {}
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            if (!parsed?.mca?.faculty?.[0]?.name?.toLowerCase().includes('arun')) {
+              parsed.mca = departmentsData.mca;
+            }
+            setLiveDeptsData(parsed);
+          }
+        } catch (e) {}
       }
     };
 
@@ -215,9 +241,9 @@ export default function Faculty() {
   // Build Faculty Image Lookup Map from liveDeptsData
   const facultyImageMap = useMemo(() => {
     const map = {
-      'dr. m. vivekanandhan': '/Images/Faculty/vivekandhan.jpg',
-      'dr. vivekanandhan m': '/Images/Faculty/vivekandhan.jpg',
-      'ms.m.selvaprathipa': '/Images/Faculty/chemical/saraswathy.jpg'
+      'dr. m. vivekanandhan': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338344/apec/Faculty/1793338343070_mech_Dr__Vivekanandhan_M_b64.png',
+      'dr. vivekanandhan m': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338344/apec/Faculty/1793338343070_mech_Dr__Vivekanandhan_M_b64.png',
+      'ms.m.selvaprathipa': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338303/apec/Faculty/1793338303691_chemical_saraswathy_jpg.jpg'
     };
     const depts = liveDeptsData || departmentsData;
     if (depts) {
@@ -302,14 +328,18 @@ export default function Faculty() {
     }
 
     const filtered = list.filter(member => {
-      const nameMatch = (member.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        (member.qualification || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
-                        (member.email || '').toLowerCase().includes(searchQuery.toLowerCase());
+      const qLower = searchQuery.toLowerCase().trim();
+      const qClean = qLower.replace(/[\s\.]+/g, '');
+      const memNameClean = (member.name || '').toLowerCase().replace(/[\s\.]+/g, '');
+      const nameMatch = (member.name || '').toLowerCase().includes(qLower) ||
+                        (qClean.length > 2 && memNameClean.includes(qClean)) ||
+                        (member.qualification || '').toLowerCase().includes(qLower) ||
+                        (member.email || '').toLowerCase().includes(qLower);
       
       let roleMatch = true;
       if (roleFilter !== 'All') {
         if (roleFilter === 'Head of Department') {
-          roleMatch = member.isHod || (member.designation && member.designation.toLowerCase().includes('head'));
+          roleMatch = member.isHod || (member.designation && member.designation.toLowerCase().includes('head')) || ((member.name || '').toLowerCase().includes('arun') && ((selectedDept || '').toLowerCase().includes('mca') || (selectedDept || '').toLowerCase().includes('computer applications')));
         } else {
           roleMatch = (member.designation || '').toLowerCase().includes(roleFilter.toLowerCase());
         }
@@ -368,7 +398,10 @@ export default function Faculty() {
             {categoryGroups.map((group, groupIdx) => {
               const matchedDepts = group.depts.filter(deptName => {
                 if (!searchQuery.trim()) return true;
-                return deptName.toLowerCase().includes(searchQuery.toLowerCase());
+                const q = searchQuery.toLowerCase().trim();
+                const textToSearch = `${deptName} ${group.title} ${group.badge} Department of ${deptName}`.toLowerCase();
+                const terms = q.split(/\s+/).filter(w => !['of', 'the', 'in', 'and', '&'].includes(w));
+                return terms.every(term => textToSearch.includes(term)) || deptName.toLowerCase().includes(q);
               });
 
               if (matchedDepts.length === 0) return null;
@@ -396,7 +429,7 @@ export default function Faculty() {
                     className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5"
                   >
                     {matchedDepts.map((deptName, idx) => {
-                      const imgPath = deptImageMap[deptName] || '/Images/Dept/cse dept.png';
+                      const imgPath = deptImageMap[deptName] || 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png';
                       return (
                         <motion.div
                           key={idx}
@@ -412,7 +445,7 @@ export default function Faculty() {
                                 alt={deptName}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                 onError={(e) => {
-                                  e.target.src = '/Images/Dept/cse dept.png';
+                                  e.target.src = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png';
                                 }}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
@@ -526,7 +559,7 @@ export default function Faculty() {
                 className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 text-left"
               >
                 {departmentFacultyMembers.map((member, idx) => {
-                  const photoSrc = member.image || facultyImageMap[member.name?.toLowerCase().trim()] || null;
+                  const photoSrc = getFacultyImageUrl(member.image || facultyImageMap[member.name?.toLowerCase().trim()], member.name);
                   const topRightBadge = getTopRightBadge(member, selectedDept);
 
                   return (
@@ -560,7 +593,7 @@ export default function Faculty() {
                             alt={member.name} 
                             className="absolute inset-0 w-full h-full object-cover object-top z-10 group-hover:scale-105 transition-transform duration-300"
                             onError={(e) => {
-                              e.target.style.display = 'none';
+                              handleFacultyImageError(e, member.name, photoSrc);
                             }}
                           />
                         )}
@@ -687,13 +720,13 @@ export default function Faculty() {
                         <div className="absolute inset-0 bg-slate-100 flex items-center justify-center text-slate-400 font-bold">
                           <User className="w-14 h-14 text-slate-400" />
                         </div>
-                        {(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]) && (
+                        {getFacultyImageUrl(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()], selectedFacultyMember.name) && (
                           <img 
-                            src={selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]} 
+                            src={getFacultyImageUrl(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()], selectedFacultyMember.name)} 
                             alt={selectedFacultyMember.name}
                             className="absolute inset-0 w-full h-full object-cover object-top z-10"
                             onError={(e) => {
-                              e.target.style.display = 'none';
+                              handleFacultyImageError(e, selectedFacultyMember.name, e.target.src);
                             }}
                           />
                         )}

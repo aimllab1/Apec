@@ -1,0 +1,1890 @@
+[
+  {
+    "id": "APECFAQ001",
+    "category": "Identity",
+    "department": null,
+    "question": "Tell me about Adhiparasakthi Engineering College (APEC).",
+    "variations": [
+      "Tell me about Adhiparasakthi Engineering College (APEC).",
+      "APEC college pathi sollunga.",
+      "What is APEC?",
+      "Tell me about the college."
+    ],
+    "answer": "Adhiparasakthi Engineering College (APEC) was established in 1984. It is an NAAC Accredited Institution, UGC Autonomous College, Affiliated to Anna University, ISO 9001:2015 Certified. It is managed by Adhiparasakthi Charitable, Medical, Educational and Cultural Trust (ACMEC Trust), Melmaruvathur (Estd. 1978).",
+    "keywords": [
+      "profile",
+      "established",
+      "accreditation",
+      "trust",
+      "apec"
+    ],
+    "source_id": "master_001",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ002",
+    "category": "Founders",
+    "department": null,
+    "question": "Who founded Adhiparasakthi Engineering College?",
+    "variations": [
+      "Who founded Adhiparasakthi Engineering College?",
+      "APEC founder yaaru?",
+      "Who started the college?",
+      "College founders details"
+    ],
+    "answer": "The founders of Adhiparasakthi Engineering College (APEC) are Spiritual Guru His Holiness Arulthiru Bangaru Adigalar (Founder President, ACMEC Trust) and Trust Founders Sakthi Thiru. D. Gopala Naicker & Sakthi Thirumathi. G. Meenambal.",
+    "keywords": [
+      "founders",
+      "trust",
+      "president",
+      "bangaru adigalar",
+      "gopala naicker",
+      "meenambal"
+    ],
+    "source_id": "master_002",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ003",
+    "category": "Principal",
+    "department": null,
+    "question": "Who is the Principal of APEC?",
+    "variations": [
+      "Who is the Principal of APEC?",
+      "Principal name enna?",
+      "Who heads APEC?",
+      "APEC principal yaaru?"
+    ],
+    "answer": "The Principal of Adhiparasakthi Engineering College (APEC) is Dr. J. Raja, Ph.D..",
+    "keywords": [
+      "principal",
+      "head of college",
+      "raja",
+      "principal name",
+      "who is principal"
+    ],
+    "source_id": "master_003",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ004",
+    "category": "Administration",
+    "department": null,
+    "question": "Who are the key administrators of APEC?",
+    "variations": [
+      "Who are the key administrators of APEC?",
+      "College management members yaaru?",
+      "APEC administrators list",
+      "Who are the college officials?"
+    ],
+    "answer": "Key Administrators of APEC: Chairperson: Sakthi Tmt. V. Lakshmi Bangaru Adigalar. Correspondent: Sakthi Thiru Dr. G.B. Senthil Kumar. Principal: Dr. J. Raja, Ph.D.. Dean: Dr. V. Ramasamy, Ph.D.. Administrative Officer: Mr. M. Sadanandan, MBA.",
+    "keywords": [
+      "administrators",
+      "chairperson",
+      "chairman",
+      "correspondent",
+      "dean",
+      "administrative officer"
+    ],
+    "source_id": "master_004",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ005",
+    "category": "Contact",
+    "department": null,
+    "question": "What are the official contact details of APEC?",
+    "variations": [
+      "What are the official contact details of APEC?",
+      "APEC phone number and email enna?",
+      "How can I contact the college?",
+      "College contact details"
+    ],
+    "answer": "Contact Directory: Helpline: 7418064336, 7418065336. Principal Office: 044-27529585. Email: principal@apec.edu.in. Website: https://apec.edu.in.",
+    "keywords": [
+      "contact",
+      "helpline",
+      "email",
+      "website",
+      "phone"
+    ],
+    "source_id": "master_005",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ006",
+    "category": "Vision",
+    "department": null,
+    "question": "What is the vision of APEC?",
+    "variations": [
+      "What is the vision of APEC?",
+      "APEC vision enna?",
+      "What is the college vision statement?",
+      "College vision sollunga."
+    ],
+    "answer": "Vision: Adhiparasakthi Engineering College is committed to creating high quality Engineers, who have a sense of service and spirituality in order to advance the growth of the society at large through the adoption of appropriate technologies and ensure their sustainability.",
+    "keywords": [
+      "vision",
+      "goal"
+    ],
+    "source_id": "master_006",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ007",
+    "category": "Mission",
+    "department": null,
+    "question": "What is the mission of APEC?",
+    "variations": [
+      "What is the mission of APEC?",
+      "APEC mission enna?",
+      "What are the college objectives?",
+      "College mission sollunga."
+    ],
+    "answer": "Mission: Imparting high quality education with emphasis on contemporary technologies that helps achieve growth across the spectrum of society. Cultivating empathy and Discipline. Creating spiritual environment.",
+    "keywords": [
+      "mission",
+      "objectives"
+    ],
+    "source_id": "master_007",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ008",
+    "category": "Library",
+    "department": null,
+    "question": "What are the facilities and resources available in the APEC Central Library?",
+    "variations": [
+      "What are the facilities and resources available in the APEC Central Library?",
+      "Library la enna facilities irukku?",
+      "How many books are in the central library?",
+      "APEC library details"
+    ],
+    "answer": "The Central Library is a Two-storied exclusive block with 4000 sq.m area. It has 68468 volumes and 29718 titles. It uses AUTO-LIB Software System (fully computerized circulation & Bar-coded integration using LS 300 kbi/f scanner).",
+    "keywords": [
+      "library",
+      "books",
+      "volumes",
+      "digital library"
+    ],
+    "source_id": "master_008",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ009",
+    "category": "Hostel",
+    "department": null,
+    "question": "What facilities and accommodation capacity are available in the boys' hostel?",
+    "variations": [
+      "What facilities and accommodation capacity are available in the boys' hostel?",
+      "Hostel facilities enna?",
+      "Boys and girls hostel details",
+      "APEC hostel capacity and amenities"
+    ],
+    "answer": "The Gents Hostel has a capacity of 1200 across Three 3-storied structural blocks. Amenities include Wi-Fi, Generator backup, and Gym.",
+    "keywords": [
+      "hostel",
+      "boys",
+      "gents"
+    ],
+    "source_id": "master_009",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ010",
+    "category": "Hostel",
+    "department": null,
+    "question": "What facilities and accommodation capacity are available in the girls' hostel?",
+    "variations": [
+      "What facilities and accommodation capacity are available in the girls' hostel?",
+      "Hostel facilities enna?",
+      "Boys and girls hostel details",
+      "APEC hostel capacity and amenities"
+    ],
+    "answer": "The Ladies Hostel has a capacity of 800 across Four 3-storied structural blocks. Amenities include Wi-Fi and washing machines.",
+    "keywords": [
+      "hostel",
+      "girls",
+      "ladies"
+    ],
+    "source_id": "master_010",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ011",
+    "category": "Hostel",
+    "department": null,
+    "question": "What common dining and recreation facilities are available in the hostels?",
+    "variations": [
+      "What common dining and recreation facilities are available in the hostels?",
+      "Hostel facilities enna?",
+      "Boys and girls hostel details",
+      "APEC hostel capacity and amenities"
+    ],
+    "answer": "Shared Hostel Features: Two expansive dining complexes with a capacity of 600 persons each, utilizing automated steam cooking technology and mineral water supply filters.. Recreation: Table Tennis, Carrom, Chess, Television & Audio System lounges.",
+    "keywords": [
+      "mess",
+      "food",
+      "recreation",
+      "facilities"
+    ],
+    "source_id": "master_011",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ012",
+    "category": "Hospital",
+    "department": null,
+    "question": "What medical and healthcare facilities are available on the APEC campus?",
+    "variations": [
+      "What medical and healthcare facilities are available on the APEC campus?",
+      "College campus la hospital irukka?",
+      "What medical help is available?",
+      "Hospital facilities details"
+    ],
+    "answer": "Health Care: Adhiparasakthi Hospital (Multi-Specialty complex situated inside the college campus block). Provides completely free consultation, diagnostics, deliveries, surgeries, and treatments for all regular students and staff members.",
+    "keywords": [
+      "hospital",
+      "health",
+      "medical",
+      "clinic"
+    ],
+    "source_id": "master_012",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ013",
+    "category": "Facilities",
+    "department": null,
+    "question": "What general facilities and amenities are available on the APEC campus?",
+    "variations": [
+      "What general facilities and amenities are available on the APEC campus?",
+      "Campus la enna facilities irukku?",
+      "What amenities does APEC provide?",
+      "College facilities list"
+    ],
+    "answer": "General Amenities: Clobas ERP for paperless workflows. On-campus banking extension counters (Central Bank of India with 24-Hour ATM, State Bank of India with ATM, Tamilnad Mercantile Bank ATM). College Bookstore supply house. Fully-equipped safe student Canteen. Dedicated Staff Quarters community. Free TNPSC Coaching classes conducted on Saturdays & Sundays. Helmet and driving license compliance mandates for two-wheelers. Share auto transit links from the regional bus terminal directly into the university block. Power Grid: 1000 KVA captive substation unit ensuring zero downtime.",
+    "keywords": [
+      "amenities",
+      "bank",
+      "atm",
+      "canteen"
+    ],
+    "source_id": "master_013",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ014",
+    "category": "Rules",
+    "department": null,
+    "question": "What are the college timings, attendance requirements and classroom gadget rules?",
+    "variations": [
+      "What are the college timings, attendance requirements and classroom gadget rules?",
+      "College rules enna?",
+      "What are the student rules and timings?",
+      "APEC dress code details"
+    ],
+    "answer": "Timings: 9:00 a.m. to 3:50 p.m. (Students must enter by 8:50 a.m.). Attendance: Minimum 75% attendance for theoretical subjects; strict 100% attendance required for laboratory practical sections.. Electronic Gadgets: Mobile phones, external cameras, or generic personal computing electronics are strictly prohibited inside lecture theatres and active classrooms.",
+    "keywords": [
+      "timings",
+      "attendance",
+      "gadgets",
+      "mobile",
+      "rules"
+    ],
+    "source_id": "master_014",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ015",
+    "category": "Rules",
+    "department": null,
+    "question": "What is the dress code for boys at APEC?",
+    "variations": [
+      "What is the dress code for boys at APEC?",
+      "College rules enna?",
+      "What are the student rules and timings?",
+      "APEC dress code details"
+    ],
+    "answer": "Dress Code for Boys: Allowed - Formal trousers with plain shirts neatly tucked in, Tie mandatory for post-graduate learners, Shoes are compulsory across campus boundaries, Blue trousers and shirts uniform inside industrial workshops and engineering labs. Banned - Jeans, T-shirts, Open sandals/chapels, Long hairstyles or unkempt beards.",
+    "keywords": [
+      "dress code",
+      "boys",
+      "uniform",
+      "clothes"
+    ],
+    "source_id": "master_015",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ016",
+    "category": "Rules",
+    "department": null,
+    "question": "What is the dress code for girls at APEC?",
+    "variations": [
+      "What is the dress code for girls at APEC?",
+      "College rules enna?",
+      "What are the student rules and timings?",
+      "APEC dress code details"
+    ],
+    "answer": "Dress Code for Girls: Allowed - Formal Salwar Kameez / Chudidhar sets with a neatly pinned shawl, The lateral slit on the Chudidhar outfit must extend below knee level, Blue overcoat utility layer required during technical workshop/laboratory exercises. Banned - Jeans, T-shirts, Loose dangling garments within chemical/machinery zones.",
+    "keywords": [
+      "dress code",
+      "girls",
+      "uniform",
+      "clothes"
+    ],
+    "source_id": "master_016",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ017",
+    "category": "Admissions",
+    "department": null,
+    "question": "What are the admission process, application fee and cutoff details at APEC?",
+    "variations": [
+      "What are the admission process, application fee and cutoff details at APEC?",
+      "APEC admission epdi?",
+      "What is the application fee and cutoff formula?",
+      "Admission details sollunga."
+    ],
+    "answer": "Admission details: Application cost is Rs. 700/- applicable for both UG & PG registration paths. Selection basis: Consortium Entrance Examination results paired with Anna University single window allocations. Original certificates and two authenticated Xerox copies must be handed in during induction.. Cutoff formula: Cutoff = Mathematics Marks (Out of 100) + [Physics Marks (Out of 100) / 2] + [Chemistry Marks (Out of 100) / 2]. FEES ONCE PAID WILL NOT BE REFUNDED either in full or partially under any circumstances.",
+    "keywords": [
+      "admission",
+      "cutoff",
+      "fees",
+      "application",
+      "refund"
+    ],
+    "source_id": "master_017",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ018",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the Lead to Serve scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the Lead to Serve scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: Lead to Serve... Wings to Your Dreams.... Disbursement: Rs. 25,000 disbursed annually. Funded by: Sakthi Peedam and Spiritual Center of North America, USA. Criteria: Awarded to economically underprivileged students demonstrating strong performance metrics and leadership traits.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_018",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ019",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the Arulthiru Amma Scholarship scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the Arulthiru Amma Scholarship scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: Arulthiru Amma Scholarship. Disbursement: Covers tuition values either partially or completely. Funded by: Adhiparasakthi Charitable, Medical, Educational and Cultural Trust, Melmaruvathur. Criteria: Awarded to high-achieving high school board students on a pure merit basis.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_019",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ020",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the Full Fee Concession for SC/ST Learners scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the Full Fee Concession for SC/ST Learners scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: Full Fee Concession for SC/ST Learners. Disbursement: 100% tuition coverage exemption. Funded by: State Government Department. Criteria: Applicable for all SC/ST category students whose total family income sits beneath Rs. 2,50,000/- per year, regardless of quota channel.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_020",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ021",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the Government of India Post-Matric Endowment scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the Government of India Post-Matric Endowment scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: Government of India Post-Matric Endowment. Disbursement: Cash allowances awarded over tuition waivers. Funded by: Government of India. Criteria: SC/ST candidates whose total family earnings sit under Rs. 2,50,000/- annually.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_021",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ022",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the Higher Educational Hostel Allowance for SC/ST scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the Higher Educational Hostel Allowance for SC/ST scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: Higher Educational Hostel Allowance for SC/ST. Disbursement: Rs. 8,000/- disbursed annually. Funded by: State Department. Criteria: Awarded to SC/ST students residing within university hostel facilities whose total household income is below Rs. 1,00,000/- yearly.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_022",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ023",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the State Post-Matric / Free Education Matrix for BC/MBC/DNC scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the State Post-Matric / Free Education Matrix for BC/MBC/DNC scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: State Post-Matric / Free Education Matrix for BC/MBC/DNC. Disbursement: Exemption from paying specific course charges, university evaluation fees, and material stipends. Funded by: District Backward Class Welfare Office. Criteria: Hindu religion adherents from BC/MBC categories with a minimum of 40% aggregate in HSC evaluations, whose family income falls below Rs. 2,00,000/-.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_023",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ024",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the First Generation Graduate Concession scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the First Generation Graduate Concession scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: First Generation Graduate Concession. Disbursement: Rs. 20,000/- state grant. Funded by: State Government of Tamil Nadu. Criteria: Valid for certified first-generation technical graduates entering via the single-window counseling channel, conditional on a family income below Rs. 2,00,000/-.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_024",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ025",
+    "category": "Scholarships",
+    "department": null,
+    "question": "What are the details and eligibility criteria for the AICTE Tuition Fee Waiver Matrix scholarship?",
+    "variations": [
+      "What are the details and eligibility criteria for the AICTE Tuition Fee Waiver Matrix scholarship?",
+      "APEC scholarship details sollunga.",
+      "What financial aid is available?",
+      "Who can apply for this scholarship?"
+    ],
+    "answer": "Scholarship: AICTE Tuition Fee Waiver Matrix. Disbursement: Rs. 20,000/- technical fee waiver award. Funded by: AICTE Regulatory Body. Criteria: Exclusively mapped to the top 5% of top scorers within each individual branch of engineering.",
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "concession"
+    ],
+    "source_id": "master_025",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ026",
+    "category": "Placements",
+    "department": null,
+    "question": "What was APEC's Naan Mudhalvan placement ranking in 2024?",
+    "variations": [
+      "What was APEC's Naan Mudhalvan placement ranking in 2024?",
+      "APEC placement details enna?",
+      "Which companies visit APEC?",
+      "Placement package details"
+    ],
+    "answer": "Naan Mudhalvan Placement Rankings 2024: APEC ranks 33rd Position (33-வது இடம்) in Tamil Nadu and 3rd Position (3-வது இடம்) in Chengalpattu District.",
+    "keywords": [
+      "ranking",
+      "naan mudhalvan",
+      "placement rank"
+    ],
+    "source_id": "master_026",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ027",
+    "category": "Placements",
+    "department": null,
+    "question": "Which companies recruit students from APEC and what MoUs are listed?",
+    "variations": [
+      "Which companies recruit students from APEC and what MoUs are listed?",
+      "APEC placement details enna?",
+      "Which companies visit APEC?",
+      "Placement package details"
+    ],
+    "answer": "Campus Recruiters include: TCS, Capgemini, HCL, Cognizant, Infosys, UniHiring, L&T Infotech, American Megatrends, Renault Nissan, Wipro, Infiniti Solutions, GoDB Tech, Effivity, Aspire Systems, Tech Mahindra and many more. MoUs with: Vimanna Labs (Aviate-Navigate-Communicate), Tessolve semiconductor block, Garuda Aerospace academy, Bhumi organization networks, VEI Technologies research cell.",
+    "keywords": [
+      "recruiters",
+      "companies",
+      "mou",
+      "hiring"
+    ],
+    "source_id": "master_027",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ028",
+    "category": "Placements",
+    "department": null,
+    "question": "What were the highest placement package and top offers listed for 2024–2025?",
+    "variations": [
+      "What were the highest placement package and top offers listed for 2024–2025?",
+      "APEC placement details enna?",
+      "Which companies visit APEC?",
+      "Placement package details"
+    ],
+    "answer": "Placement Drives 2024-2025: Highest package offered is 36 LPA. Top visiting companies include Goldman Sachs (36 LPA), Luminous Power (12 LPA), Rinex Technologies (10 LPA), Kaar Technologies (8 LPA).",
+    "keywords": [
+      "highest package",
+      "salary",
+      "placement drives",
+      "ctc"
+    ],
+    "source_id": "master_028",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ029",
+    "category": "Committees",
+    "department": null,
+    "question": "What anti-ragging measures and penalties are described by APEC?",
+    "variations": [
+      "What anti-ragging measures and penalties are described by APEC?",
+      "Anti-ragging rules enna?",
+      "What student support cells are there?",
+      "College committees details"
+    ],
+    "answer": "Anti-Ragging: Strict anti-ragging measures enforced under state and UGC provisions. zero cases documented across the past decade.. Penalties: Rigorous criminal imprisonment extending up to 3 years coupled with a fine of Rs. 50,000/-.",
+    "keywords": [
+      "ragging",
+      "anti-ragging",
+      "committee"
+    ],
+    "source_id": "master_029",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ030",
+    "category": "Committees",
+    "department": null,
+    "question": "What student support committees and career guidance services are available at APEC?",
+    "variations": [
+      "What student support committees and career guidance services are available at APEC?",
+      "Anti-ragging rules enna?",
+      "What student support cells are there?",
+      "College committees details"
+    ],
+    "answer": "Women Empowerment Cell: Settling student disputes and addressing gender-specific grievances inside college limits. Career Guidance Cell: Tracking corporate job vectors, setting up diagnostic mock evaluation tests (TOEFL, GRE, GMAT), and running specialized corporate preparation modules..",
+    "keywords": [
+      "women empowerment",
+      "career guidance",
+      "cell"
+    ],
+    "source_id": "master_030",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ031",
+    "category": "Courses",
+    "department": null,
+    "question": "Which undergraduate B.E. and B.Tech programmes are listed at APEC?",
+    "variations": [
+      "Which undergraduate B.E. and B.Tech programmes are listed at APEC?",
+      "What courses can I study at APEC?",
+      "APEC course list sollunga.",
+      "Which programmes are available?"
+    ],
+    "answer": "Undergraduate (B.E/B.Tech) Programs: B.E. - Civil Engineering, B.E. - Mechanical Engineering, B.E. - Electronics and Communication Engineering, B.E. - Electrical and Electronics Engineering, B.E. - Computer Science and Engineering, B.Tech. - Information Technology, B.Tech. - Chemical Engineering, B.Tech. - Agricultural Engineering, B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning), B.E. - Computer Science & Engineering (Computer System Design).",
+    "keywords": [
+      "undergraduate",
+      "b.e",
+      "b.tech",
+      "ug"
+    ],
+    "source_id": "master_031",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ032",
+    "category": "Courses",
+    "department": null,
+    "question": "Which postgraduate M.E., MBA and MCA programmes are listed at APEC?",
+    "variations": [
+      "Which postgraduate M.E., MBA and MCA programmes are listed at APEC?",
+      "What courses can I study at APEC?",
+      "APEC course list sollunga.",
+      "Which programmes are available?"
+    ],
+    "answer": "Postgraduate (M.E/MBA/MCA) Programs: M.B.A. - Master of Business Administration, M.C.A. - Master of Computer Applications, M.E. - Construction Engineering and Management, M.E. - Thermal Engineering, M.E. - VLSI Design, M.E. - Power Electronics and Drives Engineering, M.E. - Computer Science and Engineering.",
+    "keywords": [
+      "postgraduate",
+      "m.e",
+      "mba",
+      "mca",
+      "pg"
+    ],
+    "source_id": "master_032",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ033",
+    "category": "Courses",
+    "department": null,
+    "question": "Which PhD research programmes are listed at APEC?",
+    "variations": [
+      "Which PhD research programmes are listed at APEC?",
+      "What courses can I study at APEC?",
+      "APEC course list sollunga.",
+      "Which programmes are available?"
+    ],
+    "answer": "Doctoral (PhD) Programs: PhD - Chemistry, PhD - Physics, PhD - Civil Engineering, PhD - Mechanical Engineering, PhD - Electronics and Communication Engineering, PhD - Electrical and Electronics Engineering, PhD - Computer Science & Engineering.",
+    "keywords": [
+      "phd",
+      "doctoral",
+      "research"
+    ],
+    "source_id": "master_033",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ034",
+    "category": "About",
+    "department": "AIML",
+    "question": "Tell me about the AIML department at APEC.",
+    "variations": [
+      "Tell me about the AIML department at APEC.",
+      "AIML department details sollunga.",
+      "APEC AIML pathi sollunga.",
+      "AIML details at APEC"
+    ],
+    "answer": "About AIML Department: The department of Artificial Intelligence and Machine Learning was established in the year 2023 with an intake of 30 students in UG. Equipped with a comprehensive Artificial Intelligence and Machine Laboratory infrastructure.",
+    "keywords": [
+      "AIML",
+      "aiml",
+      "artificial intelligence",
+      "machine learning",
+      "ai",
+      "ml",
+      "about",
+      "department"
+    ],
+    "source_id": "master_034",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ035",
+    "category": "HOD",
+    "department": "AIML",
+    "question": "Who is the Head of Department (HOD) of AIML at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of AIML at APEC?",
+      "AIML department details sollunga.",
+      "Who is in charge of AIML department?",
+      "AIML details at APEC"
+    ],
+    "answer": "The Head of Department for AIML is Dr. N. Elamathi (ME, Ph.D. - Joined Sept 1, 2007).",
+    "keywords": [
+      "AIML",
+      "aiml",
+      "artificial intelligence",
+      "machine learning",
+      "ai",
+      "ml",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_035",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ036",
+    "category": "Faculty",
+    "department": "AIML",
+    "question": "Who are the faculty members in the AIML department at APEC?",
+    "variations": [
+      "Who are the faculty members in the AIML department at APEC?",
+      "AIML department details sollunga.",
+      "APEC AIML pathi sollunga.",
+      "AIML details at APEC"
+    ],
+    "answer": "Faculty in AIML: Dr. N. Elamathi (Head of Department), Mr. J. Senthil Kumar (Assistant Professor), Ms. R. Menaga (Assistant Professor), Mr. Nagaraj Jaya Sridhar J (Assistant Professor), Mrs. Poornima Devi K (Assistant Professor).",
+    "keywords": [
+      "AIML",
+      "aiml",
+      "artificial intelligence",
+      "machine learning",
+      "ai",
+      "ml",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_036",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ037",
+    "category": "About",
+    "department": "Chem",
+    "question": "Tell me about the Chem department at APEC.",
+    "variations": [
+      "Tell me about the Chem department at APEC.",
+      "Chem department details sollunga.",
+      "APEC Chem pathi sollunga.",
+      "Chem details at APEC"
+    ],
+    "answer": "About Chem Department: Launched in 1997 with a sanctioned intake of 40 for UG under Anna University. Features full-spectrum process labs like Heat Transfer Lab, Mass Transfer Lab, Process Control Lab, and Mechanical Operation Lab. Holds over 30 valid industrial MoUs.",
+    "keywords": [
+      "Chem",
+      "chem",
+      "chemical",
+      "about",
+      "department"
+    ],
+    "source_id": "master_037",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ038",
+    "category": "HOD",
+    "department": "Chem",
+    "question": "Who is the Head of Department (HOD) of Chem at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of Chem at APEC?",
+      "Chem department details sollunga.",
+      "Who is in charge of Chem department?",
+      "Chem details at APEC"
+    ],
+    "answer": "The Head of Department for Chem is Dr. B. Ganesh (M.Tech., Ph.D. - Joined July 1, 2016).",
+    "keywords": [
+      "Chem",
+      "chem",
+      "chemical",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_038",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ039",
+    "category": "Faculty",
+    "department": "Chem",
+    "question": "Who are the faculty members in the Chem department at APEC?",
+    "variations": [
+      "Who are the faculty members in the Chem department at APEC?",
+      "Chem department details sollunga.",
+      "APEC Chem pathi sollunga.",
+      "Chem details at APEC"
+    ],
+    "answer": "Faculty in Chem: Dr. B. Ganesh (Head of Department), Dr. Magesh Rangaraju (Professor), Mr. S. Velmurugan (Assistant Professor), Ms. M. Selvaprathipa (Assistant Professor), Mr. S. Ranjithsingh (Assistant Professor), Ms. T.S. Swetha (Assistant Professor), Ms. G. Saraswathy (Assistant Professor).",
+    "keywords": [
+      "Chem",
+      "chem",
+      "chemical",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_039",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ040",
+    "category": "About",
+    "department": "Civil",
+    "question": "Tell me about the Civil department at APEC.",
+    "variations": [
+      "Tell me about the Civil department at APEC.",
+      "Civil department details sollunga.",
+      "APEC Civil pathi sollunga.",
+      "Civil details at APEC"
+    ],
+    "answer": "About Civil Department: Established in 1984 with an intake of 60 students. Expanded with M.E. Construction Engg. in 2006 (intake 18) and Ph.D Research Centre in 2011. Laboratories include Soil Mechanics, Environmental, Survey, CADD, Fluid Mechanics, Concrete, and Highway structures.",
+    "keywords": [
+      "Civil",
+      "civil",
+      "civil",
+      "about",
+      "department"
+    ],
+    "source_id": "master_040",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ041",
+    "category": "HOD",
+    "department": "Civil",
+    "question": "Who is the Head of Department (HOD) of Civil at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of Civil at APEC?",
+      "Civil department details sollunga.",
+      "Who is in charge of Civil department?",
+      "Civil details at APEC"
+    ],
+    "answer": "The Head of Department for Civil is Dr. A. Krishnamoorthi (M.E., Ph.D. - Joined June 1, 1999).",
+    "keywords": [
+      "Civil",
+      "civil",
+      "civil",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_041",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ042",
+    "category": "Faculty",
+    "department": "Civil",
+    "question": "Who are the faculty members in the Civil department at APEC?",
+    "variations": [
+      "Who are the faculty members in the Civil department at APEC?",
+      "Civil department details sollunga.",
+      "APEC Civil pathi sollunga.",
+      "Civil details at APEC"
+    ],
+    "answer": "Faculty in Civil: Dr. V. Ramasamy (Dean & Professor), Dr. A. Krishnamoorthi (Head of Department), Dr. K. Thiagarajan (Associate Professor), Dr. P. Somiyadevi (Assistant Professor), Mr. S. Rethinakumar (Assistant Professor), Mr. S. Selvakumar (Assistant Professor), Mr. G. Karthikkumar (Assistant Professor), Mr. S. Maluvu (Assistant Professor), Mr. S. Karthikeyan (Assistant Professor), Mr. S. Parthiban (Assistant Professor).",
+    "keywords": [
+      "Civil",
+      "civil",
+      "civil",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_042",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ043",
+    "category": "About",
+    "department": "MCA",
+    "question": "Tell me about the MCA department at APEC.",
+    "variations": [
+      "Tell me about the MCA department at APEC.",
+      "MCA department details sollunga.",
+      "APEC MCA pathi sollunga.",
+      "MCA details at APEC"
+    ],
+    "answer": "About MCA Department: Established in 1998 with an intake of 60 students in PG. Offers dedicated computing laboratories and active professional links for research evaluation systems.",
+    "keywords": [
+      "MCA",
+      "mca",
+      "computer applications",
+      "mca",
+      "about",
+      "department"
+    ],
+    "source_id": "master_043",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ044",
+    "category": "HOD",
+    "department": "MCA",
+    "question": "Who is the Head of Department (HOD) of MCA at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of MCA at APEC?",
+      "MCA department details sollunga.",
+      "Who is in charge of MCA department?",
+      "MCA details at APEC"
+    ],
+    "answer": "The Head of Department for MCA is Dr. S. Selvaraj (MCA, Ph.D. - Joined Jan 1, 2024).",
+    "keywords": [
+      "MCA",
+      "mca",
+      "computer applications",
+      "mca",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_044",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ045",
+    "category": "Faculty",
+    "department": "MCA",
+    "question": "Who are the faculty members in the MCA department at APEC?",
+    "variations": [
+      "Who are the faculty members in the MCA department at APEC?",
+      "MCA department details sollunga.",
+      "APEC MCA pathi sollunga.",
+      "MCA details at APEC"
+    ],
+    "answer": "Faculty in MCA: Dr. S. Selvaraj (Professor), Dr. S. Arunkumar (Assistant Professor & Placement Coordinator), Mr. E. Janakiraman (Assistant Professor), Ms. A. Yamuna (Assistant Professor), Ms. C. Amuthavalli (Assistant Professor), Mrs. Sakthi S (Assistant Professor), Mrs. M. Seetha (Assistant Professor).",
+    "keywords": [
+      "MCA",
+      "mca",
+      "computer applications",
+      "mca",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_045",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ046",
+    "category": "About",
+    "department": "CSE",
+    "question": "Tell me about the CSE department at APEC.",
+    "variations": [
+      "Tell me about the CSE department at APEC.",
+      "CSE department details sollunga.",
+      "APEC CSE pathi sollunga.",
+      "CSE details at APEC"
+    ],
+    "answer": "About CSE Department: Established in 1993 with an undergraduate course intake of 30, now expanded to 90. M.E. Computer Science and Engineering started in 2009 with an intake of 18.",
+    "keywords": [
+      "CSE",
+      "cse",
+      "computer science",
+      "computer engineering",
+      "about",
+      "department"
+    ],
+    "source_id": "master_046",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ047",
+    "category": "HOD",
+    "department": "CSE",
+    "question": "Who is the Head of Department (HOD) of CSE at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of CSE at APEC?",
+      "CSE department details sollunga.",
+      "Who is in charge of CSE department?",
+      "CSE details at APEC"
+    ],
+    "answer": "The Head of Department for CSE is Dr. C. Dhaya (M.E., Ph.D. - Joined June 12, 2001).",
+    "keywords": [
+      "CSE",
+      "cse",
+      "computer science",
+      "computer engineering",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_047",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ048",
+    "category": "Faculty",
+    "department": "CSE",
+    "question": "Who are the faculty members in the CSE department at APEC?",
+    "variations": [
+      "Who are the faculty members in the CSE department at APEC?",
+      "CSE department details sollunga.",
+      "APEC CSE pathi sollunga.",
+      "CSE details at APEC"
+    ],
+    "answer": "Faculty in CSE: Dr. C. Dhaya (Head of Department), Dr. S. Jayashri (Professor), Mr. G. Sekar (Assistant Professor), Mr. G. Srinivasan (Assistant Professor), Mr. K. Chairmadurai (Assistant Professor).",
+    "keywords": [
+      "CSE",
+      "cse",
+      "computer science",
+      "computer engineering",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_048",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ049",
+    "category": "About",
+    "department": "ECE",
+    "question": "Tell me about the ECE department at APEC.",
+    "variations": [
+      "Tell me about the ECE department at APEC.",
+      "ECE department details sollunga.",
+      "APEC ECE pathi sollunga.",
+      "ECE details at APEC"
+    ],
+    "answer": "About ECE Department: Established in 1984. Equipped with Microwave, VLSI Design, DSP, Networks, and Research labs utilizing high-end software tools like CADENCE, MATLAB, ORCAD, and XILINX.",
+    "keywords": [
+      "ECE",
+      "ece",
+      "electronics",
+      "communication",
+      "about",
+      "department"
+    ],
+    "source_id": "master_049",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ050",
+    "category": "HOD",
+    "department": "ECE",
+    "question": "Who is the Head of Department (HOD) of ECE at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of ECE at APEC?",
+      "ECE department details sollunga.",
+      "Who is in charge of ECE department?",
+      "ECE details at APEC"
+    ],
+    "answer": "The Head of Department for ECE is Dr. M. Malathi (M.E., Ph.D. - Joined Jan 1, 2002).",
+    "keywords": [
+      "ECE",
+      "ece",
+      "electronics",
+      "communication",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_050",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ051",
+    "category": "Faculty",
+    "department": "ECE",
+    "question": "Who are the faculty members in the ECE department at APEC?",
+    "variations": [
+      "Who are the faculty members in the ECE department at APEC?",
+      "ECE department details sollunga.",
+      "APEC ECE pathi sollunga.",
+      "ECE details at APEC"
+    ],
+    "answer": "Faculty in ECE: Dr. J. Raja (Principal & Professor), Dr. M. Malathi (Head of Department), Dr. P. Thirumaraiselvan (Professor), Dr. T.N. Suresh Babu (Assistant Professor), Mr. K. Mathivanan (Assistant Professor).",
+    "keywords": [
+      "ECE",
+      "ece",
+      "electronics",
+      "communication",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_051",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ052",
+    "category": "About",
+    "department": "EEE",
+    "question": "Tell me about the EEE department at APEC.",
+    "variations": [
+      "Tell me about the EEE department at APEC.",
+      "EEE department details sollunga.",
+      "APEC EEE pathi sollunga.",
+      "EEE details at APEC"
+    ],
+    "answer": "About EEE Department: Established in 1993. Accommodates comprehensive core infrastructure across Power Systems, Electrical Machines, and Control and Instrumentation. Features software installations like ETAP, CYME, and MIPOWER.",
+    "keywords": [
+      "EEE",
+      "eee",
+      "electrical",
+      "about",
+      "department"
+    ],
+    "source_id": "master_052",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ053",
+    "category": "HOD",
+    "department": "EEE",
+    "question": "Who is the Head of Department (HOD) of EEE at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of EEE at APEC?",
+      "EEE department details sollunga.",
+      "Who is in charge of EEE department?",
+      "EEE details at APEC"
+    ],
+    "answer": "The Head of Department for EEE is Dr. P. Rajivgandhi (M.E., Ph.D. - Joined June 11, 2014).",
+    "keywords": [
+      "EEE",
+      "eee",
+      "electrical",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_053",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ054",
+    "category": "Faculty",
+    "department": "EEE",
+    "question": "Who are the faculty members in the EEE department at APEC?",
+    "variations": [
+      "Who are the faculty members in the EEE department at APEC?",
+      "EEE department details sollunga.",
+      "APEC EEE pathi sollunga.",
+      "EEE details at APEC"
+    ],
+    "answer": "Faculty in EEE: Dr. P. Rajivgandhi (Head of Department), Dr. S.A. Elankurisil (Professor), Dr. R. Srivel (Associate Professor), Mrs. P. Tamizharasi (Assistant Professor), Dr. N. Manimaran (Assistant Professor).",
+    "keywords": [
+      "EEE",
+      "eee",
+      "electrical",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_054",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ055",
+    "category": "About",
+    "department": "IT",
+    "question": "Tell me about the IT department at APEC.",
+    "variations": [
+      "Tell me about the IT department at APEC.",
+      "IT department details sollunga.",
+      "APEC IT pathi sollunga.",
+      "IT details at APEC"
+    ],
+    "answer": "About IT Department: Established in 1998. Main research cells include Big Data Analytics, Cyber Security, Blockchain networks, Cloud Microservices, and semantic technologies.",
+    "keywords": [
+      "IT",
+      "it",
+      "information technology",
+      "about",
+      "department"
+    ],
+    "source_id": "master_055",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ056",
+    "category": "HOD",
+    "department": "IT",
+    "question": "Who is the Head of Department (HOD) of IT at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of IT at APEC?",
+      "IT department details sollunga.",
+      "Who is in charge of IT department?",
+      "IT details at APEC"
+    ],
+    "answer": "The Head of Department for IT is Dr. A. Bhuvaneswari (M.E., Ph.D. - Joined June 2, 2000).",
+    "keywords": [
+      "IT",
+      "it",
+      "information technology",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_056",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ057",
+    "category": "Faculty",
+    "department": "IT",
+    "question": "Who are the faculty members in the IT department at APEC?",
+    "variations": [
+      "Who are the faculty members in the IT department at APEC?",
+      "IT department details sollunga.",
+      "APEC IT pathi sollunga.",
+      "IT details at APEC"
+    ],
+    "answer": "Faculty in IT: Dr. A. Bhuvaneswari (Head of Department / Vice Principal), Mrs. M.D. Vasanthi (Assistant Professor), Mrs. S. Thulasilakshmi (Assistant Professor), Mrs. M. Lalitha (Assistant Professor), Mr. K. Hema Kumar (Assistant Professor).",
+    "keywords": [
+      "IT",
+      "it",
+      "information technology",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_057",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ058",
+    "category": "About",
+    "department": "MECH",
+    "question": "Tell me about the MECH department at APEC.",
+    "variations": [
+      "Tell me about the MECH department at APEC.",
+      "MECH department details sollunga.",
+      "APEC MECH pathi sollunga.",
+      "MECH details at APEC"
+    ],
+    "answer": "About MECH Department: Established in 1984 with an intake of 60. M.E. Thermal Engineering started in 2005 (intake 18), and Research Centre approved in 2011. Fully autonomous lab blocks handle CAD/CAM, Mechatronics, Metallurgy, Metrology, and Heat Engines research fields.",
+    "keywords": [
+      "MECH",
+      "mech",
+      "mechanical",
+      "about",
+      "department"
+    ],
+    "source_id": "master_058",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ059",
+    "category": "HOD",
+    "department": "MECH",
+    "question": "Who is the Head of Department (HOD) of MECH at APEC?",
+    "variations": [
+      "Who is the Head of Department (HOD) of MECH at APEC?",
+      "MECH department details sollunga.",
+      "Who is in charge of MECH department?",
+      "MECH details at APEC"
+    ],
+    "answer": "The Head of Department for MECH is Dr. C.K. Dhinakarraj (M.E., Ph.D. - Joined July 25, 2007).",
+    "keywords": [
+      "MECH",
+      "mech",
+      "mechanical",
+      "hod",
+      "head of department",
+      "head"
+    ],
+    "source_id": "master_059",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ060",
+    "category": "Faculty",
+    "department": "MECH",
+    "question": "Who are the faculty members in the MECH department at APEC?",
+    "variations": [
+      "Who are the faculty members in the MECH department at APEC?",
+      "MECH department details sollunga.",
+      "APEC MECH pathi sollunga.",
+      "MECH details at APEC"
+    ],
+    "answer": "Faculty in MECH: Dr. C.K. Dhinakarraj (Head of Department), Dr. R. Kamaljayaraj (Associate Professor), Dr. K. Gajalakshmi (Associate Professor), Dr. M. Vivekanandhan (Associate Professor), Mr. K. Dhandapani (Assistant Professor).",
+    "keywords": [
+      "MECH",
+      "mech",
+      "mechanical",
+      "faculty",
+      "staff",
+      "professors"
+    ],
+    "source_id": "master_060",
+    "source_file": "master_chunks.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ061",
+    "category": "Identity",
+    "department": null,
+    "question": "What is Adhiparasakthi Engineering College (APEC)?",
+    "variations": [
+      "What is Adhiparasakthi Engineering College (APEC)?",
+      "APEC pathi sollunga.",
+      "Tell me about APEC college.",
+      "What is the college name?"
+    ],
+    "answer": "Adhiparasakthi Engineering College (APEC) is located in Melmaruvathur, Tamil Nadu. It is affiliated with Anna University and focuses on academic excellence and student development.",
+    "keywords": [
+      "apec",
+      "college",
+      "about",
+      "engineering college"
+    ],
+    "source_id": "college_identity",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ062",
+    "category": "Location",
+    "department": null,
+    "question": "Where is APEC located and what is the nearest railway station?",
+    "variations": [
+      "Where is APEC located and what is the nearest railway station?",
+      "APEC enga irukku?",
+      "How to reach APEC?",
+      "Nearest railway station to APEC enna?"
+    ],
+    "answer": "APEC is located in Melmaruvathur on the Chennai–Trichy Highway (NH45). The nearest railway station is Melmaruvathur.",
+    "keywords": [
+      "location",
+      "where is apec",
+      "melmaruvathur",
+      "address"
+    ],
+    "source_id": "college_location",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ063",
+    "category": "Courses",
+    "department": null,
+    "question": "What courses and departments are listed in the APEC master dataset?",
+    "variations": [
+      "What courses and departments are listed in the APEC master dataset?",
+      "APEC la enna courses irukku?",
+      "Which branches are available?",
+      "Course list sollunga."
+    ],
+    "answer": "APEC offers courses such as CSE, ECE, EEE, Mechanical, Civil, AI & ML, MBA, and MCA.",
+    "keywords": [
+      "courses",
+      "departments",
+      "cse",
+      "ece",
+      "eee",
+      "mech",
+      "civil",
+      "aiml",
+      "mba",
+      "mca"
+    ],
+    "source_id": "college_courses",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ064",
+    "category": "Admissions",
+    "department": null,
+    "question": "How are admissions conducted at APEC?",
+    "variations": [
+      "How are admissions conducted at APEC?",
+      "Admission epdi nadakkum?",
+      "TNEA counselling moolama join pannalama?",
+      "APEC admission details"
+    ],
+    "answer": "Admissions are through Anna University counselling (TNEA) and management quota. Eligibility is based on 10+2 marks.",
+    "keywords": [
+      "admission",
+      "apply",
+      "eligibility",
+      "tnea",
+      "counselling"
+    ],
+    "source_id": "college_admissions",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ065",
+    "category": "Contact",
+    "department": null,
+    "question": "How can I contact APEC?",
+    "variations": [
+      "How can I contact APEC?",
+      "College phone number enna?",
+      "APEC email id sollunga.",
+      "How to contact the college office?"
+    ],
+    "answer": "Contact the college through official phone number or email available on the website for enquiries.",
+    "keywords": [
+      "contact",
+      "phone",
+      "number",
+      "email",
+      "call"
+    ],
+    "source_id": "college_contact",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ066",
+    "category": "Facility",
+    "department": null,
+    "question": "What facilities are available at APEC?",
+    "variations": [
+      "What facilities are available at APEC?",
+      "Campus facilities enna?",
+      "Hostel and transport available ah?",
+      "What amenities does APEC have?"
+    ],
+    "answer": "Facilities include hostels, transport, Wi-Fi campus, laboratories, sports, and medical support.",
+    "keywords": [
+      "facilities",
+      "hostel",
+      "wifi",
+      "sports",
+      "infrastructure"
+    ],
+    "source_id": "college_facilities",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ067",
+    "category": "Library",
+    "department": null,
+    "question": "What resources are available in the APEC library?",
+    "variations": [
+      "What resources are available in the APEC library?",
+      "Library details sollunga.",
+      "Books and journals available ah?",
+      "Digital resources enna irukku?"
+    ],
+    "answer": "The library provides books, journals, and digital resources like IEEE, Springer, and ScienceDirect.",
+    "keywords": [
+      "library",
+      "books",
+      "journals",
+      "ieee",
+      "springer"
+    ],
+    "source_id": "college_library",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ068",
+    "category": "Facility",
+    "department": null,
+    "question": "What facilities are available at APEC?",
+    "variations": [
+      "What facilities are available at APEC?",
+      "Campus facilities enna?",
+      "Hostel and transport available ah?",
+      "What amenities does APEC have?"
+    ],
+    "answer": "The placement cell trains students in aptitude and technical skills and provides job opportunities through campus placements.",
+    "keywords": [
+      "placement",
+      "jobs",
+      "companies",
+      "training"
+    ],
+    "source_id": "college_placement",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ069",
+    "category": "Transport",
+    "department": null,
+    "question": "Which areas are covered by APEC college bus transport?",
+    "variations": [
+      "Which areas are covered by APEC college bus transport?",
+      "College bus entha area ku pogum?",
+      "Bus route coverage enna?",
+      "APEC transport details"
+    ],
+    "answer": "The college provides bus transport covering areas like Chengalpattu, Maduranthakam, and nearby towns.",
+    "keywords": [
+      "bus",
+      "transport",
+      "route",
+      "chengalpattu",
+      "bus timing"
+    ],
+    "source_id": "college_transport",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  },
+  {
+    "id": "APECFAQ070",
+    "category": "Directory",
+    "department": null,
+    "question": "Which departments are listed in the APEC department directory?",
+    "variations": [
+      "Which departments are listed in the APEC department directory?",
+      "Departments list sollunga.",
+      "What branches are there at APEC?",
+      "APEC department names"
+    ],
+    "answer": "Departments include CSE, AI & ML, ECE, EEE, Mechanical, Civil, MBA, and MCA.",
+    "keywords": [
+      "departments",
+      "branches",
+      "cse",
+      "ece",
+      "eee",
+      "aiml"
+    ],
+    "source_id": "college_departments",
+    "source_file": "master_data.json",
+    "language": [
+      "English",
+      "Tamil-English"
+    ],
+    "answer_grounding": "source_text"
+  }
+]

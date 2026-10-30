@@ -10,7 +10,7 @@
         "tag": "ACHIEVEMENT",
         "title": "Student Academic Excellence & Recognition",
         "alt": "APEC Student Achievements & Excellence",
-        "imageUrl": "/Images/Hero/achivement_1.jpeg",
+        "imageUrl": "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793341704/apec/Uploads/1793341697565_Screenshot_2026-10-30_113941.png",
         "link": "/about"
       },
       {
@@ -18,15 +18,15 @@
         "tag": "GOLD MEDALIST",
         "title": "Anna University Rank Holders & Gold Medals",
         "alt": "APEC Gold Medal Award & Academic Excellence",
-        "imageUrl": "/Images/Hero/gold_medal.jpeg",
+        "imageUrl": "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340149/apec/Hero/hero_convocation.jpg",
         "link": "/about"
       },
       {
         "id": "ach-1792050355924",
-        "tag": "Campas Entrance",
+        "tag": "Gold Medalist",
         "title": "",
         "alt": "APEC Milestone",
-        "imageUrl": "/Images/Panorama/Main_Gate.webp",
+        "imageUrl": "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793341651/apec/Uploads/1793341649146_gold_medal.jpg",
         "link": ""
       }
     ]
@@ -42,8 +42,16 @@
         "tag": "EVENT",
         "title": "APEC Freshers Day & Welcome Celebrations",
         "alt": "APEC Freshers Day & Welcome Celebrations",
-        "imageUrl": "/Images/Hero/fresher_day.jpeg",
+        "imageUrl": "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340144/apec/Hero/fresher_day.jpg",
         "link": "/facilities"
+      },
+      {
+        "id": "up-1793338780230",
+        "tag": "EVENT",
+        "title": "Graduvation Day",
+        "alt": "Graduvation Day",
+        "imageUrl": "/Images/Uploads/1793338877847_Screenshot_2026-10-30_110815.png",
+        "link": "/events"
       }
     ]
   },

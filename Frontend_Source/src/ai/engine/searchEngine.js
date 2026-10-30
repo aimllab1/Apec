@@ -48,7 +48,7 @@ export class SearchEngine {
     this.documents = [];
     this.vocab.clear();
     this.idf = {};
-    const { college, admissions, placements, departments, faculty } = knowledgeBase;
+    const { college, admissions, placements, departments, faculty, faqs } = knowledgeBase;
 
     // --- INDEX ALL DOCUMENTS ---
 
@@ -145,6 +145,20 @@ export class SearchEngine {
         f
       );
     });
+
+    if (faqs && Array.isArray(faqs)) {
+      faqs.forEach(faq => {
+        const variationsText = Array.isArray(faq.variations) ? faq.variations.join(' ') : '';
+        const keywordsText = Array.isArray(faq.keywords) ? faq.keywords.join(' ') : '';
+        const langText = Array.isArray(faq.language) ? faq.language.join(' ') : '';
+        this.addDoc(
+          faq.id,
+          `${faq.question} ${variationsText} ${faq.answer}`,
+          `${faq.category || ''} ${faq.department || ''} ${keywordsText} ${langText}`,
+          faq
+        );
+      });
+    }
 
     this._buildIdf();
     this._buildVectors();

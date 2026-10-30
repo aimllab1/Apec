@@ -51,8 +51,8 @@ export default function Disclosures() {
   ];
 
   const serviceRules = [
-    { title: "Service Rules for Teaching Staff", filename: "teaching.pdf", folder: "Service Rules" },
-    { title: "Service Rules for Non-Teaching Staff", filename: "non-teaching_compressed.pdf", folder: "Service Rules" }
+    { title: "Service Rules for Teaching Staff", filename: "teaching.pdf", folder: "Service Rules", url: "https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348675/apec/Documents/PDFs/Service_Rules/teaching.pdf" },
+    { title: "Service Rules for Non-Teaching Staff", filename: "non-teaching_compressed.pdf", folder: "Service Rules", url: "https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348656/apec/Documents/PDFs/Service_Rules/non-teaching_compressed.pdf" }
   ];
 
   const aicteGeneral = [
@@ -75,7 +75,7 @@ export default function Disclosures() {
   ];
 
   const mandatoryDisclosure = [
-    { title: "Mandatory Disclosure Report", filename: "Mandatory_Disclosure.pdf", folder: "Mandatory Disclosure" }
+    { title: "Mandatory Disclosure Report", filename: "Mandatory_Disclosure.pdf", folder: "Mandatory Disclosure", url: "https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348626/apec/Documents/PDFs/Mandatory_Disclosure/Mandatory_Disclosure.pdf" }
   ];
 
   const securityAudit = [
@@ -332,7 +332,7 @@ export default function Disclosures() {
                               </div>
 
                               <a 
-                                href={`/Documents/PDFs/${encodeURIComponent(file.folder)}/${encodeURIComponent(file.filename)}`}
+                                href={doc.url || `/Documents/PDFs/encodeURIComponent(file.folder)/encodeURIComponent(file.filename)`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full text-center py-3 rounded-xl border border-gray-200 group-hover:border-[#FF8A00] text-sm font-black uppercase tracking-wider text-gray-700 group-hover:text-[#FF8A00] group-hover:bg-[#FFE7CC]/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -403,7 +403,7 @@ export default function Disclosures() {
                       </div>
 
                       <a 
-                        href={`/Documents/PDFs/${encodeURIComponent(doc.folder)}/${encodeURIComponent(doc.filename)}`}
+                        href={doc.url || `/Documents/PDFs/encodeURIComponent(doc.folder)/encodeURIComponent(doc.filename)`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full text-center py-3 rounded-xl border border-gray-200 group-hover:border-[#FF8A00] text-sm font-black uppercase tracking-wider text-gray-700 group-hover:text-[#FF8A00] group-hover:bg-[#FFE7CC]/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -453,7 +453,7 @@ export default function Disclosures() {
                                   <span className="text-[10px] font-bold text-gray-500 block mt-0.5">{doc.filename}</span>
                                 </div>
                                 <a 
-                                  href={`/Documents/PDFs/${encodeURIComponent(doc.folder)}/${encodeURIComponent(doc.filename)}`}
+                                  href={doc.url || `/Documents/PDFs/encodeURIComponent(doc.folder)/encodeURIComponent(doc.filename)`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#FF8A00] hover:border-[#FFE7CC] hover:bg-[#FFE7CC]/20 transition-all shrink-0 cursor-pointer"
@@ -500,7 +500,7 @@ export default function Disclosures() {
                                   <span className="text-[10px] font-bold text-gray-500 block mt-0.5">{doc.filename}</span>
                                 </div>
                                 <a 
-                                  href={`/Documents/PDFs/${encodeURIComponent(doc.folder)}/${encodeURIComponent(doc.filename)}`}
+                                  href={doc.url || `/Documents/PDFs/encodeURIComponent(doc.folder)/encodeURIComponent(doc.filename)`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:text-indigo-600 hover:border-indigo-100 hover:bg-indigo-50/50 transition-all shrink-0 cursor-pointer"
@@ -547,7 +547,7 @@ export default function Disclosures() {
                                   <span className="text-[10px] font-bold text-gray-500 block mt-0.5">{doc.filename}</span>
                                 </div>
                                 <a 
-                                  href={`/Documents/PDFs/${encodeURIComponent(doc.folder)}/${encodeURIComponent(doc.filename)}`}
+                                  href={doc.url || `/Documents/PDFs/encodeURIComponent(doc.folder)/encodeURIComponent(doc.filename)`}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:text-violet-650 hover:border-violet-100 hover:bg-violet-50/50 transition-all shrink-0 cursor-pointer"

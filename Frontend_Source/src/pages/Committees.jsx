@@ -16,7 +16,7 @@ const committeesList = [
     icon: ShieldAlert,
     color: "from-rose-500 to-red-600",
     bgColor: "bg-rose-50 border-rose-100 text-rose-700",
-    pdf: "/Documents/PDFs/Committees/1. Anti-Ragging.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342213/apec/Documents/PDFs/Committees/1__Anti-Ragging.pdf",
     coordinator: "Dr. K. P. Sathish Kumar (Nodal Officer)",
     contact: "+91 94434 26233",
     description: "Committed to maintaining a ragging-free campus and ensuring a safe, supportive, and welcoming environment for all students, especially newcomers. The committee strictly enforces the UGC regulations on curbing the menace of ragging in higher educational institutions.",
@@ -42,7 +42,7 @@ const committeesList = [
     icon: Building2,
     color: "from-blue-500 to-indigo-600",
     bgColor: "bg-blue-50 border-blue-100 text-blue-700",
-    pdf: "/Documents/PDFs/Committees/2. Industry Instituion interaction Cell.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342215/apec/Documents/PDFs/Committees/2__Industry_Instituion_interaction_Cell.pdf",
     coordinator: "Prof. S. R. Ravindran (Cell Coordinator)",
     contact: "+91 98402 12345",
     description: "Fostering collaboration between academia and industries to align engineering education with industrial requirements, promoting research, consultancy, and training programs that prepare students for real-world challenges.",
@@ -68,7 +68,7 @@ const committeesList = [
     icon: HeartHandshake,
     color: "from-pink-500 to-purple-600",
     bgColor: "bg-pink-50 border-pink-100 text-pink-700",
-    pdf: "/Documents/PDFs/Committees/3. Women Empowerment Cell.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342216/apec/Documents/PDFs/Committees/3__Women_Empowerment_Cell.pdf",
     coordinator: "Dr. M. Shanmugapriya (WEC Chairperson)",
     contact: "+91 97911 23456",
     description: "Dedicated to the academic, psychological, and social advancement of female students and staff members. The cell works to prevent gender-based discrimination, build self-confidence, and foster a safe and respectful campus community.",
@@ -94,7 +94,7 @@ const committeesList = [
     icon: GraduationCap,
     color: "from-amber-500 to-orange-600",
     bgColor: "bg-amber-50 border-amber-100 text-amber-700",
-    pdf: "/Documents/PDFs/Committees/4. Alumni Cell.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342218/apec/Documents/PDFs/Committees/4__Alumni_Cell.pdf",
     coordinator: "Mr. R. Vignesh (Alumni Officer)",
     contact: "+91 90807 65432",
     description: "Nurturing an active and mutually beneficial network connecting past graduates with current students and faculty, leveraging alumni achievements to support placements, mentoring, and academic advancements.",
@@ -120,7 +120,7 @@ const committeesList = [
     icon: Users,
     color: "from-teal-500 to-emerald-600",
     bgColor: "bg-teal-50 border-teal-100 text-teal-700",
-    pdf: "/Documents/PDFs/Committees/5. SC-ST Commitee.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342220/apec/Documents/PDFs/Committees/5__SC-ST_Commitee.pdf",
     coordinator: "Dr. P. Senthil Kumar (Committee Coordinator)",
     contact: "+91 94888 12345",
     description: "Focusing on the welfare, equity, and educational advancement of students belonging to Scheduled Castes and Scheduled Tribes. The committee coordinates scholarships, remedial measures, and ensures a welcoming, discrimination-free environment.",
@@ -146,7 +146,7 @@ const committeesList = [
     icon: Vote,
     color: "from-cyan-500 to-blue-600",
     bgColor: "bg-cyan-50 border-cyan-100 text-cyan-700",
-    pdf: "/Documents/PDFs/Committees/6. Electoral Literacy Club.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342222/apec/Documents/PDFs/Committees/6__Electoral_Literacy_Club.pdf",
     coordinator: "Prof. G. Baskaran (Club Advisor)",
     contact: "+91 99944 87654",
     description: "Promoting democratic literacy and creating civic awareness among students. The club conducts voter registration drives and educational campaigns to nurture responsible, informed, and active citizens.",
@@ -172,7 +172,7 @@ const committeesList = [
     icon: Compass,
     color: "from-indigo-500 to-purple-600",
     bgColor: "bg-indigo-50 border-indigo-100 text-indigo-750",
-    pdf: "/Documents/PDFs/Committees/7.Career Guidance Cell.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342223/apec/Documents/PDFs/Committees/7_Career_Guidance_Cell.pdf",
     coordinator: "Dr. S. Karthikeyan (CGC Director)",
     contact: "+91 94441 54321",
     description: "Equipping students with necessary resources, counselling, and specialized training to explore diverse professional options, prepare for prestigious national/international examinations, and succeed in higher education.",
@@ -198,7 +198,7 @@ const committeesList = [
     icon: Lightbulb,
     color: "from-orange-500 to-amber-600",
     bgColor: "bg-orange-50 border-orange-100 text-orange-700",
-    pdf: "/Documents/PDFs/Committees/8. Entrepreneurship Development Cell.pdf",
+    pdf: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342224/apec/Documents/PDFs/Committees/8__Entrepreneurship_Development_Cell.pdf",
     coordinator: "Dr. R. Rajesh (EDC Coordinator)",
     contact: "+91 98944 11223",
     description: "Developing a culture of innovation and startup creation among student minds. The cell acts as a launchpad, offering incubation services, industry mentorship, patent filing workshops, and seed funding support.",
@@ -591,7 +591,7 @@ export default function Committees() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-3 text-gray-900 leading-tight">
               Student Committees & Welfare Cells
             </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl">
+            <p className="text-sm md:text-base text-gray-500 font-bold w-full text-justify leading-relaxed">
               Dedicated organizational bodies at Adhiparasakthi Engineering College committed to facilitating campus welfare, gender equity, student representation, career guidance, and robust industrial training.
             </p>
           </div>

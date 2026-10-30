@@ -104,7 +104,7 @@ export default function Facilities() {
             Our Campus
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">Facilities & Infrastructure</h1>
-          <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">
+          <p className="text-sm sm:text-base text-gray-500 w-full text-justify leading-relaxed font-semibold">
             Adhiparasakthi Engineering College provides students with a well-maintained, high-standard campus environment. Explore our library resources, dynamic labs, separate hostels, and sports grounds.
           </p>
         </motion.div>

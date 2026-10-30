@@ -23,7 +23,7 @@ const cardVariants = {
 };
 
 export default function IDP() {
-  const pdfUrl = "/Documents/PDFs/UGC/2. IDP.pdf";
+  const pdfUrl = "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342936/apec/Documents/PDFs/UGC/2__IDP.pdf";
 
   const timelineData = [
     {

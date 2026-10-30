@@ -16,7 +16,7 @@ const staggerContainer = {
 };
 
 export default function Iqac() {
-  const pdfUrl = "/Documents/PDFs/UGC/statement_compliance.pdf";
+  const pdfUrl = "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342965/apec/Documents/PDFs/UGC/statement_compliance.pdf";
 
   return (
     <div className="min-h-screen bg-slate-50 text-gray-900 py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
@@ -36,7 +36,7 @@ export default function Iqac() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
               Internal Quality Assurance Cell (IQAC)
             </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl leading-relaxed">
+            <p className="text-sm md:text-base text-gray-500 font-bold w-full text-justify leading-relaxed">
               Establishing quality assurance systems at Adhiparasakthi Engineering College (APEC) to coordinate, internalize, and institutionalize best practices for academic and administrative excellence.
             </p>
           </div>

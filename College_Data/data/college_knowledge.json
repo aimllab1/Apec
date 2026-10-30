@@ -1178,18 +1178,22 @@
       ],
       "faculty": [
         {
+          "name": "Dr. S. Arunkumar",
+          "designation": "Head of Department",
+          "qualification": "MCA, M.Phil., Ph.D.",
+          "email": "arunkumar@apec.edu.in",
+          "faculty_id": "07TGMC0797",
+          "experience": "28 Years, 7 Months",
+          "joining_date": "May 1, 2007",
+          "teaching_since": "November 9, 1998",
+          "isHod": true
+        },
+        {
           "name": "Dr. S. Selvaraj",
           "designation": "Professor",
           "qualification": "MCA. Ph.D",
           "email": "mca@apec.edu.in",
           "experience": "Years,  Months"
-        },
-        {
-          "name": "Dr. S. Arunkumar",
-          "designation": "Assistant Professor",
-          "qualification": "MCA, M.Phil., Ph.D.",
-          "email": "arunkumar@apec.edu.in",
-          "experience": ""
         },
         {
           "name": "07TGMC0797",

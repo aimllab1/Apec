@@ -35,6 +35,27 @@ async function getHandler() {
   return cachedHandler;
 }
 
+// Handler cache for upload API
+let cachedUploadHandler = null;
+let cachedUploadMtime = 0;
+
+async function getUploadHandler() {
+  const fullPath = path.resolve(process.cwd(), 'Backend_API/api/upload.js');
+  try {
+    const { mtimeMs } = fs.statSync(fullPath);
+    if (!cachedUploadHandler || mtimeMs > cachedUploadMtime) {
+      console.log('[Vite API] Reloading Backend_API/api/upload.js (file changed)');
+      const url = pathToFileURL(fullPath).href + '?t=' + Date.now();
+      const mod = await import(/* @vite-ignore */ url);
+      cachedUploadHandler = mod.default;
+      cachedUploadMtime = mtimeMs;
+    }
+  } catch (e) {
+    console.error('[Vite API] Failed to load upload handler:', e.message);
+  }
+  return cachedUploadHandler;
+}
+
 // Handler cache for inquiries API
 let cachedInquiriesHandler = null;
 let cachedInquiriesMtime = 0;
@@ -219,52 +240,38 @@ export default defineConfig({
             }
           }
 
-          // Handle /api/upload and /api/upload-image (Save uploaded assets directly to Media_Assets)
+          // Handle /api/upload and /api/upload-image (Cloudinary via Backend_API/api/upload.js)
           if (req.url && (req.url.startsWith('/api/upload-image') || req.url.startsWith('/api/upload'))) {
-            if (req.method === 'POST') {
+            const uploadHandler = await getUploadHandler();
+            if (uploadHandler) {
               let body = '';
               req.on('data', chunk => { body += chunk; });
-              req.on('end', () => {
+              req.on('end', async () => {
                 try {
-                  const { filename, dataUrl, folder = 'Uploads' } = JSON.parse(body);
-                  if (!dataUrl || !filename) {
-                    res.statusCode = 400;
-                    res.end(JSON.stringify({ error: 'Missing filename or dataUrl' }));
-                    return;
-                  }
-
-                  const matches = dataUrl.match(/^data:([A-Za-z0-9-+\/.]+);base64,(.+)$/);
-                  if (!matches || matches.length !== 3) {
-                    res.statusCode = 400;
-                    res.end(JSON.stringify({ error: 'Invalid data URL format' }));
-                    return;
-                  }
-
-                  const mimeType = matches[1];
-                  const imageBuffer = Buffer.from(matches[2], 'base64');
-                  const sanitizedName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
-                  const sanitizedFolder = folder.replace(/[^a-zA-Z0-9_-]/g, '_');
-                  const isPdf = mimeType.includes('pdf') || filename.toLowerCase().endsWith('.pdf');
-                  const baseCat = isPdf ? 'Documents' : 'Images';
-                  
-                  const targetDir = path.resolve(__dirname, `../Media_Assets/${baseCat}/${sanitizedFolder}`);
-                  if (!fs.existsSync(targetDir)) {
-                    fs.mkdirSync(targetDir, { recursive: true });
-                  }
-
-                  const finalFilename = `${Date.now()}_${sanitizedName}`;
-                  const finalFilePath = path.join(targetDir, finalFilename);
-                  fs.writeFileSync(finalFilePath, imageBuffer);
-
-                  const publicUrl = `/${baseCat}/${sanitizedFolder}/${finalFilename}`;
-                  console.log(`[Vite API] Saved uploaded file to: ${finalFilePath} -> ${publicUrl}`);
-
-                  res.setHeader('Content-Type', 'application/json');
-                  res.statusCode = 200;
-                  res.end(JSON.stringify({ success: true, url: publicUrl, fileName: finalFilename, message: 'File uploaded successfully' }));
+                  const vercelReq = {
+                    method: req.method,
+                    url: req.url,
+                    headers: req.headers,
+                    body: body ? JSON.parse(body) : {}
+                  };
+                  const vercelRes = {
+                    setHeader: (k, v) => res.setHeader(k, v),
+                    status: (code) => {
+                      res.statusCode = code;
+                      return {
+                        json: (obj) => {
+                          res.setHeader('Content-Type', 'application/json');
+                          res.end(JSON.stringify(obj));
+                        },
+                        end: () => res.end()
+                      };
+                    }
+                  };
+                  await uploadHandler(vercelReq, vercelRes);
                 } catch (err) {
                   console.error('[Upload API Error]:', err.message);
                   res.statusCode = 500;
+                  res.setHeader('Content-Type', 'application/json');
                   res.end(JSON.stringify({ error: err.message }));
                 }
               });
@@ -371,7 +378,8 @@ export default defineConfig({
     allowedHosts: true,
     watch: {
       usePolling: true,
-      ignored: ['**/.env', '**/vite.config.js']
+      interval: 1000,
+      ignored: ['**/.env*', '**/vite.config.js', '**/.git/**']
     },
   },
   preview: {

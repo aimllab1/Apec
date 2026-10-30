@@ -272,7 +272,7 @@ export default function InstitutionalFooter({ setIsPanoOpen }) {
               <li><Link to="/coe" className="group hover:text-[#C5A059] transition-all flex items-center gap-1.5 font-bold hover:translate-x-1 duration-200"><span className="text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors">›</span> Controller of Examinations</Link></li>
               <li><Link to="/faculty" className="group hover:text-[#C5A059] transition-all flex items-center gap-1.5 font-bold hover:translate-x-1 duration-200"><span className="text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors">›</span> Faculty Directory</Link></li>
               <li><Link to="/r-d-cell" className="group hover:text-[#C5A059] transition-all flex items-center gap-1.5 font-bold hover:translate-x-1 duration-200"><span className="text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors">›</span> Research & Development</Link></li>
-              <li><Link to="/facilities/library" className="group hover:text-[#C5A059] transition-all flex items-center gap-1.5 font-bold hover:translate-x-1 duration-200"><span className="text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors">›</span> Central Library OPAC</Link></li>
+              <li><Link to="/facilities/library" className="group hover:text-[#C5A059] transition-all flex items-center gap-1.5 font-bold hover:translate-x-1 duration-200"><span className="text-[#C5A059]/60 group-hover:text-[#C5A059] transition-colors">›</span> Central Library</Link></li>
             </ul>
           </div>
 

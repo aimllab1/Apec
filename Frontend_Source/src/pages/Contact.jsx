@@ -105,7 +105,7 @@ export default function Contact() {
             Get In Touch With Us
           </span>
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">Contact Information</h1>
-          <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">
+          <p className="text-sm sm:text-base text-gray-500 w-full text-justify leading-relaxed font-semibold">
             Reach out to our campus desk or administration coordinators for support regarding admissions, research portals, or student services.
           </p>
         </motion.div>

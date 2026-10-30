@@ -5,6 +5,7 @@ import principalImg from '../principal.webp';
 import vpImg from '../Vice principal.jpg';
 import deanImg from '../Dean.webp';
 import aoImg from '../administrative officer.jpg';
+import malathiImg from '../malathi.jpg';
 
 const administrationData = [
   {
@@ -34,7 +35,7 @@ const administrationData = [
       'Promoted interdisciplinary research programs',
       'Recognized for exemplary academic leadership',
     ],
-    contact: 'principal@apec.ac.in',
+    contact: 'principal@apec.edu.in',
     office: 'Principal\'s Office, Main Block, APEC Campus',
     cvUrl: 'https://assets.super.so/47fa140c-5512-4ac6-a02b-6305f7e083a9/files/1900c68d-255a-455f-a68d-4b7e199bbf4e/Profile_(2).pdf',
   },
@@ -66,6 +67,37 @@ const administrationData = [
     ],
     contact: 'viceprincipal@apec.ac.in',
     office: 'Vice Principal\'s Office, Main Block, APEC Campus',
+  },
+  {
+    id: 'vice-principal-malathi',
+    route: '/administration/vice-principal-malathi',
+    name: 'Dr. M. Malathi, M.E., Ph.D.',
+    role: 'Vice Principal',
+    qualifications: 'M.E., Ph.D.',
+    department: 'Office of the Vice Principal & Dept of ECE',
+    img: malathiImg,
+    bio: 'Dr. M. Malathi serves as the Vice Principal and Professor & Head of Electronics & Communication Engineering at Adhiparasakthi Engineering College. With over 31 years of distinguished academic and administrative experience, she plays a vital role in institutional governance, academic accreditation, research advancement, and student mentoring.',
+    responsibilities: [
+      'Assisting the Principal in institutional administration and strategic planning',
+      'Overseeing academic quality standards, accreditation, and OBE compliance',
+      'Leading Department of Electronics and Communication Engineering initiatives',
+      'Promoting research activities, publications, and funded projects',
+      'Facilitating faculty mentorship and student career development',
+    ],
+    researchInterests: [
+      'Wireless Communication & Networks',
+      'VLSI Design & Embedded Systems',
+      'Signal & Image Processing',
+      'IoT & Sensor Applications',
+    ],
+    achievements: [
+      'Over 31 years of dedicated pedagogical leadership and research guidance',
+      'Published research papers in peer-reviewed international journals and conferences',
+      'Steered NBA and NAAC accreditation documentation and compliance frameworks',
+      'Guided numerous undergraduate and postgraduate technical projects',
+    ],
+    contact: 'ecemalathi@gmail.com',
+    office: 'Vice Principal\'s Office / ECE Department, APEC Campus',
   },
   {
     id: 'dean',

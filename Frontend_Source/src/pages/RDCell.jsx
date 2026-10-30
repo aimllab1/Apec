@@ -388,7 +388,7 @@ export default function RDCell() {
                     <h2 className="text-2xl md:text-3xl font-black mb-4 font-title text-indigo-650 flex items-center gap-2.5">
                       <Award className="w-6.5 h-6.5 text-[#FF8A00]" /> UGC Section 2(f) & 12 (B) Recognitions
                     </h2>
-                    <p className="text-sm md:text-base text-gray-700 leading-relaxed font-medium mb-6">
+                    <p className="text-sm md:text-base text-gray-700 leading-relaxed font-medium mb-6 w-full text-justify">
                       Adhiparasakthi Engineering College is proudly recognized under Section 2(f) and 12(B) of the UGC Act, certifying our institutional adherence to national standards of higher education, administrative excellence, and direct eligibility to receive central assistance and academic research grants.
                     </p>
                     <div className="flex flex-wrap gap-4">

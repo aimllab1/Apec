@@ -18,6 +18,21 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="APEC" />
     <link rel="apple-touch-icon" href="/apec-logo.png" />
+      <style>
+      /* Hide scrollbar on all pages across all modern browsers */
+      html, body, #root {
+        -ms-overflow-style: none !important; /* IE and Edge */
+        scrollbar-width: none !important; /* Firefox */
+      }
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar,
+      #root::-webkit-scrollbar {
+        display: none !important;
+        width: 0px !important;
+        height: 0px !important;
+        background: transparent !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

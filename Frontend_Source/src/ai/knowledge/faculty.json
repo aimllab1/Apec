@@ -1,15 +1,5 @@
 [
   {
-    "name": "New Faculty Member",
-    "designation": "Assistant Professor",
-    "qualification": "B.E., M.E.",
-    "email": "newfaculty@apec.edu.in",
-    "experience": "1 Year",
-    "department": "Artificial Intelligence and Machine Learning",
-    "department_key": "aiml",
-    "orcid": ""
-  },
-  {
     "name": "Dr. N. Elamathi",
     "designation": "Head of Department",
     "qualification": "ME, Ph.D",
@@ -270,20 +260,20 @@
     "orcid": ""
   },
   {
-    "name": "Dr. S. Selvaraj",
-    "designation": "Professor",
-    "qualification": "MCA. Ph.D",
-    "email": "mca@apec.edu.in",
+    "name": "Dr. S. Arunkumar",
+    "designation": "Head of Department",
+    "qualification": "MCA, M.Phil., Ph.D.",
+    "email": "arunkumar@apec.edu.in",
     "experience": "0 Years, 0 Months",
     "department": "Computer Applications",
     "department_key": "mca",
     "orcid": ""
   },
   {
-    "name": "Dr. S. Arunkumar",
-    "designation": "Assistant Professor",
-    "qualification": "MCA, M.Phil., Ph.D.",
-    "email": "arunkumar@apec.edu.in",
+    "name": "Dr. S. Selvaraj",
+    "designation": "Professor",
+    "qualification": "MCA. Ph.D",
+    "email": "mca@apec.edu.in",
     "experience": "0 Years, 0 Months",
     "department": "Computer Applications",
     "department_key": "mca",
@@ -851,7 +841,7 @@
   },
   {
     "name": "Dr. M. Malathi",
-    "designation": "Head of Department",
+    "designation": "Vice Principal, Head of Department & Professor",
     "qualification": "M.E., Ph.D.",
     "email": "ecemalathi@gmail.com",
     "experience": "31 Years, 8 Months",
@@ -1020,8 +1010,18 @@
     "orcid": ""
   },
   {
+    "name": "Vinithasri V",
+    "designation": "Assistant Professor",
+    "qualification": "M.E.",
+    "email": "vinivenkat62@gmail.com",
+    "experience": "1 Year",
+    "department": "Management Studies (MBA)",
+    "department_key": "mba",
+    "orcid": ""
+  },
+  {
     "name": "Dr. M. Saviour",
-    "designation": "Head of Department",
+    "designation": "Professor",
     "qualification": "Ph.D",
     "email": "saviour@apec.edu.in",
     "experience": "28 Years, 0 Months",
@@ -1031,7 +1031,7 @@
   },
   {
     "name": "Mr.V.Thamaraiselvan",
-    "designation": "Assistant Professor",
+    "designation": "Head of the Department",
     "qualification": "B.E,MBA,(Ph.D)",
     "email": "thamaraiselvan@apec.edu.in",
     "experience": "14 Years, 0 Months",

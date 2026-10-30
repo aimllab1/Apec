@@ -43,7 +43,7 @@ export default function FounderTrustees() {
           <h1 className="font-title text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2.5">
             Founders & Management
           </h1>
-          <p className="text-sm sm:text-base text-slate-650 leading-relaxed max-w-4xl font-semibold">
+          <p className="text-sm sm:text-base text-slate-650 leading-relaxed w-full text-justify font-semibold">
             Adhiparasakthi Engineering College is guided by the spiritual ideals, compassion, and leadership of our founder and trustees. Under their stewardship, the institution has provided world-class technical education to students from all walks of life.
           </p>
         </motion.div>
@@ -65,7 +65,7 @@ export default function FounderTrustees() {
               <h2 className="font-title text-2xl sm:text-3xl md:text-3xl font-bold text-slate-900 mb-3 leading-tight">
                 His Holiness Arulthiru Bangaru Siddhar (Amma)
               </h2>
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   His Holiness Arulthiru Bangaru Siddhar, affectionately revered as 'AMMA' by millions of followers, established the ACMEC Trust (Adhiparasakthi Charitable, Medical, Educational and Cultural Trust) in 1978. 
                 </p>
@@ -137,7 +137,7 @@ export default function FounderTrustees() {
               <h2 className="font-title text-2xl sm:text-3xl md:text-3xl font-bold text-slate-900 mb-3 leading-tight">
                 Sakthi Tmt. V. Lakshmi Bangaru Siddhar
               </h2>
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   As the President of the ACMEC Trust, Sakthi Tmt. V. Lakshmi Bangaru Siddhar has successfully transitioned the institution into a modern, research-first environment. 
                 </p>
@@ -209,7 +209,7 @@ export default function FounderTrustees() {
               <h2 className="font-title text-2xl sm:text-3xl md:text-3xl font-bold text-slate-900 mb-3 leading-tight">
                 Dr. G. B. Senthil Kumar, Ph.D.
               </h2>
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   As the Correspondent of Adhiparasakthi Engineering College, Dr. G. B. Senthil Kumar is the main architect of the institution's operational governance, academic planning, and corporate strategy.
                 </p>

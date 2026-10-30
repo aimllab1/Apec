@@ -1,5 +1,18 @@
-import fs from 'fs';
-import path from 'path';
+import { v2 as cloudinary } from 'cloudinary';
+import dotenv from 'dotenv';
+dotenv.config();
+
+// Configure Cloudinary from environment variables or hardcoded fallback
+const cloud_name = process.env.CLOUDINARY_CLOUD_NAME || 'o1hw2rfp';
+const api_key = process.env.CLOUDINARY_API_KEY || '485976653673534';
+const api_secret = process.env.CLOUDINARY_API_SECRET || 'BEIUxiKq7b92TZy2DbPYQrjHveo';
+
+cloudinary.config({
+  cloud_name,
+  api_key,
+  api_secret,
+  secure: true
+});
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,58 +39,31 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Missing filename or dataUrl' });
     }
 
-    const matches = dataUrl.match(/^data:([A-Za-z0-9-+\/.]+);base64,(.+)$/);
-    if (!matches || matches.length !== 3) {
-      return res.status(400).json({ error: 'Invalid base64 data URL format' });
-    }
-
-    const mimeType = matches[1];
-    const fileBuffer = Buffer.from(matches[2], 'base64');
-    const sanitizedName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+    // Determine target folder in Cloudinary (e.g. apec/Faculty)
     const sanitizedFolder = folder.replace(/[^a-zA-Z0-9_-]/g, '_');
-    const timestamp = Date.now();
-    const finalFilename = `${timestamp}_${sanitizedName}`;
+    const cloudinaryFolder = `apec/${sanitizedFolder}`;
 
-    // Target storage directories
-    const isPdf = mimeType.includes('pdf') || filename.toLowerCase().endsWith('.pdf');
-    const baseCategory = isPdf ? 'Documents' : 'Images';
-    const relativeWebPath = `/${baseCategory}/${sanitizedFolder}/${finalFilename}`;
+    // Clean public_id without extension
+    const baseName = filename.replace(/\.[^/.]+$/, '').replace(/[^a-zA-Z0-9._-]/g, '_');
+    const publicId = `${Date.now()}_${baseName}`;
 
-    const targetDirs = [
-      path.resolve(process.cwd(), `Media_Assets/${baseCategory}/${sanitizedFolder}`),
-      path.resolve(process.cwd(), `public/${baseCategory}/${sanitizedFolder}`)
-    ];
+    // Upload directly to Cloudinary
+    const uploadResult = await cloudinary.uploader.upload(dataUrl, {
+      folder: cloudinaryFolder,
+      public_id: publicId,
+      resource_type: 'auto',
+      overwrite: true
+    });
 
-    let saved = false;
-    for (const dir of targetDirs) {
-      try {
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir, { recursive: true });
-        }
-        const fullFilePath = path.join(dir, finalFilename);
-        fs.writeFileSync(fullFilePath, fileBuffer);
-        saved = true;
-      } catch (writeErr) {
-        console.warn('[Upload API] Target dir write failed:', dir, writeErr.message);
-      }
-    }
-
-    if (!saved) {
-      // Return inline data URL if filesystem write is restricted (e.g. read-only serverless edge)
-      return res.status(200).json({
-        success: true,
-        url: dataUrl,
-        fileName: finalFilename,
-        isInline: true
-      });
-    }
+    console.log(`[Upload API] Uploaded to Cloudinary: ${uploadResult.secure_url}`);
 
     return res.status(200).json({
       success: true,
-      url: relativeWebPath,
-      fileName: finalFilename,
-      fileSize: fileBuffer.length,
-      mimeType
+      url: uploadResult.secure_url,
+      fileName: filename,
+      fileSize: uploadResult.bytes,
+      mimeType: uploadResult.format,
+      public_id: uploadResult.public_id
     });
   } catch (err) {
     console.error('[Upload API Error]:', err.message);

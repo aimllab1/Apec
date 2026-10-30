@@ -1,6 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Clock, Users, ShieldAlert, Bus, Phone, Mail, Map as MapIcon, RotateCw } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  BookOpen, 
+  Clock, 
+  Users, 
+  ShieldAlert, 
+  Bus, 
+  Phone, 
+  Mail, 
+  Map as MapIcon, 
+  RotateCw,
+  Building2,
+  Bed,
+  Wifi,
+  Sparkles,
+  Dumbbell,
+  ShoppingBag,
+  Utensils,
+  Sunrise,
+  Sun,
+  Moon,
+  Trophy
+} from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -113,50 +135,35 @@ const facilityData = {
   },
   hostels: {
     name: "Hostel Accommodations",
-    intro: "Separate, secure, and clean in-campus residential complexes are provided for male and female students. Designed as a 'home away from home' to encourage focus and personal growth.",
+    intro: "Adhiparasakthi Engineering College provides dedicated, comfortable, and well-maintained in-campus residential complexes for students. With separate blocks for girls and boys, the hostels feature 600+ rooms each, dining halls, prayer halls, gyms, stationery shops, badminton sports facilities, and structured study hours during examinations.",
     stats: [
-      { label: "Student Capacity", value: "800+ Beds" },
-      { label: "Hostel Blocks", value: "Separate M/F" },
-      { label: "Floors per Block", value: "3 Stories" },
-      { label: "Security Guard Rota", value: "24/7 Patrols" }
+      { label: "Accommodation", value: "600+ Rooms" },
+      { label: "Girls Hostel", value: "5 Blocks" },
+      { label: "Boys Hostel", value: "3 Blocks" },
+      { label: "Room Capacity", value: "3–4 Students" }
     ],
     sections: [
       {
-        title: "Living Amenities",
-        desc: "Comfortable rooms and facilities ensuring clean living conditions for academic focus.",
+        title: "Girls Hostel Accommodation",
+        desc: "5 blocks with 600+ rooms, 3–4 students per room, Wi-Fi facility, and examination study hours (6:00 PM – 7:30 PM).",
         items: [
-          "Well-ventilated Rooms: Furnished with individual cots, study desks, closets, and study lamps.",
-          "Purified Water: In-house RO filtration plant distributing safe drinking water to all blocks.",
-          "Power Backup: Heavy-duty diesel generators providing uninterrupted electricity 24/7.",
-          "Laundry & Sanitation: Hygiene-focused bathroom systems and laundry wash facilities."
+          "Hostel Blocks: 5 blocks providing organized residential accommodation.",
+          "Accommodation & Capacity: 600+ rooms accommodating 3–4 students per room.",
+          "Connectivity & Devotion: Wi-Fi connection and internet access available alongside a dedicated prayer hall for worship.",
+          "Wellness & Amenities: Gym, stationery shop, dining hall (200–300 capacity), and badminton sports facility."
         ]
       },
       {
-        title: "Recreation & Dining",
-        desc: "Health, nutrition, and personal wellness programs inside the hostel boundaries.",
+        title: "Boys Hostel Accommodation",
+        desc: "3 blocks with 600+ rooms, 3–4 students per room, and examination study hours (6:00 PM – 7:30 PM).",
         items: [
-          "Dining Halls: Modern kitchen setup serving nutritious, balanced, vegetarian meals.",
-          "Physical Gym: Hydraulic strength training equipment managed by residential instructors.",
-          "TV & Multimedia Rooms: Common lounge areas with television networks, projectors, and seating.",
-          "Indoor Sports: Table tennis, carrom boards, and chess modules inside reading rooms."
+          "Hostel Blocks: 3 blocks providing organized residential accommodation.",
+          "Accommodation & Capacity: 600+ rooms accommodating 3–4 students per room.",
+          "Prayer & Fitness: Dedicated space for worship in prayer hall and fitness gym facilities available.",
+          "Campus Amenities: Stationery shop, dining hall (200–300 capacity), and badminton sports facility."
         ]
       }
-    ],
-    eResources: [
-      "High-speed WiFi network inside study blocks",
-      "Common room computers for academic inquiries",
-      "Digital reference desks linked to Adhiparasakthi Engineering College central servers"
-    ],
-    memberships: [
-      "Hostel Advisory Committee (HAC)",
-      "Anti-Ragging Squad Campus Patrol",
-      "Student Mess Audit Council"
-    ],
-    automation: {
-      software: "Biometric attendance scanning systems",
-      catalog: "Online hostel portal for room allocations and guest logs",
-      system: "CCTV camera networks monitoring corridors and entrances"
-    }
+    ]
   },
   transport: {
     name: "Transport & Bus Routes",
@@ -350,10 +357,179 @@ const busRoutesData = [
   }
 ];
 
+// Verified Hostel Accommodation Datasets
+const girlsHostelData = {
+  title: "Girls Hostel",
+  subtitle: "In-campus residential accommodation for female students",
+  badge: "Girls Residential Complex",
+  cards: [
+    {
+      title: "Hostel Blocks",
+      value: "5 Blocks",
+      detail: "5 independent, well-ventilated residential blocks providing safe, comfortable, and organized student accommodation.",
+      icon: Building2,
+      accent: "text-rose-700 bg-rose-50 border-rose-200"
+    },
+    {
+      title: "Accommodation",
+      value: "600+ Rooms",
+      detail: "600+ spacious, well-maintained rooms equipped with study tables, beds, and secure storage for female residents.",
+      icon: Bed,
+      accent: "text-amber-700 bg-amber-50 border-amber-200"
+    },
+    {
+      title: "Room Capacity",
+      value: "3–4 Students",
+      detail: "Optimally designed living spaces accommodating 3 to 4 students per room with individual study areas.",
+      icon: Users,
+      accent: "text-indigo-700 bg-indigo-50 border-indigo-200"
+    },
+    {
+      title: "Wi-Fi Facility",
+      value: "Wi-Fi & Internet",
+      detail: "High-speed campus Wi-Fi network and reliable internet access available across all residential blocks for academic research.",
+      icon: Wifi,
+      accent: "text-blue-700 bg-blue-50 border-blue-200"
+    },
+    {
+      title: "Prayer Hall",
+      value: "Dedicated Worship Space",
+      detail: "Serene dedicated prayer hall on premises providing students with a peaceful space for daily worship, reflection, and spiritual peace.",
+      icon: Sparkles,
+      accent: "text-purple-700 bg-purple-50 border-purple-200"
+    },
+    {
+      title: "Gymnasium",
+      value: "Fitness Gym",
+      detail: "Modern gymnasium and fitness exercise facilities available for daily student physical health and wellness.",
+      icon: Dumbbell,
+      accent: "text-emerald-700 bg-emerald-50 border-emerald-200"
+    },
+    {
+      title: "Stationery Shop",
+      value: "Campus Store",
+      detail: "On-campus stationery and utility store available for purchasing notebooks, project materials, printing, and daily essential products.",
+      icon: ShoppingBag,
+      accent: "text-orange-700 bg-orange-50 border-orange-200"
+    },
+    {
+      title: "Dining Hall",
+      value: "200–300 Students",
+      detail: "Spacious, hygienic dining hall with 200–300 seating capacity serving balanced, nutritious vegetarian and non-vegetarian meals.",
+      icon: Utensils,
+      accent: "text-teal-700 bg-teal-50 border-teal-200"
+    },
+    {
+      title: "Sports and Games",
+      value: "Badminton Facility",
+      detail: "Dedicated indoor and outdoor badminton courts and recreational facilities available for daily evening sports.",
+      icon: Trophy,
+      accent: "text-cyan-700 bg-cyan-50 border-cyan-200"
+    },
+    {
+      title: "Study Hours (Exams)",
+      value: "6:00 PM – 7:30 PM",
+      detail: "Structured evening study hours maintained daily during examination periods to foster disciplined academic focus.",
+      icon: Clock,
+      accent: "text-amber-800 bg-amber-50 border-amber-200"
+    }
+  ],
+  foodTimings: [
+    { meal: "Breakfast", timings: "7:00 AM – 9:00 AM", period: "Morning Session", icon: Sunrise, accent: "bg-amber-50 text-amber-900 border-amber-200" },
+    { meal: "Lunch", timings: "12:00 PM – 2:00 PM", period: "Afternoon Session", icon: Sun, accent: "bg-orange-50 text-orange-900 border-orange-200" },
+    { meal: "Dinner", timings: "7:00 PM – 8:30 PM", period: "Evening Session", icon: Moon, accent: "bg-indigo-50 text-indigo-900 border-indigo-200" }
+  ]
+};
+
+const boysHostelData = {
+  title: "Boys Hostel",
+  subtitle: "In-campus residential accommodation for male students",
+  badge: "Boys Residential Complex",
+  cards: [
+    {
+      title: "Hostel Blocks",
+      value: "3 Blocks",
+      detail: "3 independent residential blocks providing disciplined, comfortable, and organized accommodation for male students.",
+      icon: Building2,
+      accent: "text-blue-700 bg-blue-50 border-blue-200"
+    },
+    {
+      title: "Accommodation",
+      value: "600+ Rooms",
+      detail: "600+ well-maintained, ventilated rooms equipped with beds, study tables, and essential amenities.",
+      icon: Bed,
+      accent: "text-amber-700 bg-amber-50 border-amber-200"
+    },
+    {
+      title: "Room Capacity",
+      value: "3–4 Students",
+      detail: "Comfortable room capacity accommodating 3 to 4 students per room with personalized study spaces.",
+      icon: Users,
+      accent: "text-indigo-700 bg-indigo-50 border-indigo-200"
+    },
+    {
+      title: "Wi-Fi Facility",
+      value: "Wi-Fi & Internet",
+      detail: "High-speed campus Wi-Fi network and reliable internet connectivity available across all residential blocks for coursework and study.",
+      icon: Wifi,
+      accent: "text-blue-700 bg-blue-50 border-blue-200"
+    },
+    {
+      title: "Prayer Hall",
+      value: "Dedicated Worship Space",
+      detail: "Dedicated sacred prayer space on campus for daily worship, reflection, and spiritual well-being.",
+      icon: Sparkles,
+      accent: "text-purple-700 bg-purple-50 border-purple-200"
+    },
+    {
+      title: "Gymnasium",
+      value: "Fitness Gym",
+      detail: "Well-equipped fitness gymnasium with modern strength training and workout facilities supporting healthy student lifestyles.",
+      icon: Dumbbell,
+      accent: "text-emerald-700 bg-emerald-50 border-emerald-200"
+    },
+    {
+      title: "Stationery Shop",
+      value: "Campus Store",
+      detail: "Convenient on-campus stationery store providing academic supplies, photocopying, project printing, and personal essentials.",
+      icon: ShoppingBag,
+      accent: "text-orange-700 bg-orange-50 border-orange-200"
+    },
+    {
+      title: "Dining Hall",
+      value: "200–300 Students",
+      detail: "Spacious dining hall with 200–300 seating capacity providing hot, wholesome, and nutritious meals prepared under strict hygiene standards.",
+      icon: Utensils,
+      accent: "text-teal-700 bg-teal-50 border-teal-200"
+    },
+    {
+      title: "Sports and Games",
+      value: "Badminton Facility",
+      detail: "Badminton sports courts and indoor recreation areas available to encourage sportsmanship and physical fitness.",
+      icon: Trophy,
+      accent: "text-cyan-700 bg-cyan-50 border-cyan-200"
+    },
+    {
+      title: "Study Hours (Exams)",
+      value: "6:00 PM – 7:30 PM",
+      detail: "Mandatory quiet evening study hours observed during examination periods to support optimal academic preparation.",
+      icon: Clock,
+      accent: "text-amber-800 bg-amber-50 border-amber-200"
+    }
+  ],
+  foodTimings: [
+    { meal: "Breakfast", timings: "7:00 AM – 8:00 AM", period: "Morning Session", icon: Sunrise, accent: "bg-amber-50 text-amber-900 border-amber-200" },
+    { meal: "Lunch", timings: "12:00 PM – 1:00 PM", period: "Afternoon Session", icon: Sun, accent: "bg-orange-50 text-orange-900 border-orange-200" },
+    { meal: "Dinner", timings: "7:00 PM – 8:00 PM", period: "Evening Session", icon: Moon, accent: "bg-indigo-50 text-indigo-900 border-indigo-200" }
+  ]
+};
+
 export default function FacilityDetail() {
   const { id } = useParams();
   const facility = facilityData[id] || facilityData.library;
   const isTransport = id === 'transport';
+  const isHostel = id === 'hostels' || id === 'hostel';
+  const [activeHostelTab, setActiveHostelTab] = useState('all');
 
   // Selected Route index: null shows ALL routes on the map
   const [selectedRouteIdx, setSelectedRouteIdx] = useState(null);
@@ -379,7 +555,7 @@ export default function FacilityDetail() {
     const map = L.map('leaflet-transport-map').setView([12.4418, 79.8242], 10);
     leafletMapInstanceRef.current = map;
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_4yat_1_878193441a9add223f28da32', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 20
@@ -606,18 +782,26 @@ export default function FacilityDetail() {
 
   return (
     <div className="bg-white py-16 px-6">
-      <div className="max-w-4xl mx-auto text-left">
+      <div className={`${isHostel ? 'max-w-7xl' : 'max-w-4xl'} mx-auto text-left`}>
         
-        {/* Back Link */}
-        <Link to="/facilities" className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 mb-8 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Facility Overview
-        </Link>
+        {/* Back Link (Hidden on Hostel Accommodation Page) */}
+        {!isHostel && (
+          <Link to="/facilities" className="inline-flex items-center gap-2 text-xs font-bold text-gray-500 hover:text-gray-900 mb-8 transition-colors">
+            <ArrowLeft className="w-4 h-4" /> Back to Facility Overview
+          </Link>
+        )}
 
         {/* Header */}
         <div className="mb-12">
-          <span className="text-xs uppercase font-extrabold tracking-widest text-gray-400 mb-2 block">Campus Infrastructure</span>
-          <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">{facility.name}</h1>
-          <p className="text-sm text-gray-500 leading-relaxed max-w-2xl mb-6">{facility.intro}</p>
+          <span className={`uppercase font-extrabold tracking-widest block mb-2.5 ${isHostel ? 'text-xs sm:text-sm text-[#B38734]' : 'text-xs text-gray-400'}`}>
+            {isHostel ? 'Campus Residential Accommodation' : 'Campus Infrastructure'}
+          </span>
+          <h1 className={`tracking-tight mb-4 ${isHostel ? 'font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-[#03143D]' : 'text-3xl md:text-4xl font-black text-gray-900'}`}>
+            {facility.name}
+          </h1>
+          <p className={`leading-relaxed mb-6 w-full text-left ${isHostel ? 'text-base sm:text-lg text-slate-700 font-medium' : 'text-sm sm:text-base text-gray-600 font-medium'}`}>
+            {facility.intro}
+          </p>
           {id === 'labs' && (
             <button 
               onClick={() => setIsPanoOpen(true)}
@@ -832,8 +1016,364 @@ export default function FacilityDetail() {
             </div>
 
           </div>
+        ) : isHostel ? (
+          /* Dedicated High-Fidelity Hostel Accommodation View with Site Typography & Large Fonts */
+          <div className="space-y-16 animate-[fadeIn_0.3s_ease-out] text-left">
+            
+            {/* Quick Navigation and Overview Tabs */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-200">
+              <div className="flex flex-wrap items-center gap-2 p-1.5 bg-gray-100 rounded-2xl w-max">
+                <button
+                  type="button"
+                  onClick={() => setActiveHostelTab('all')}
+                  className={`px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-all cursor-pointer ${
+                    activeHostelTab === 'all'
+                      ? 'bg-white text-[#03143D] shadow-md'
+                      : 'text-slate-600 hover:text-[#03143D]'
+                  }`}
+                >
+                  All Hostels
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveHostelTab('girls')}
+                  className={`px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-all cursor-pointer ${
+                    activeHostelTab === 'girls'
+                      ? 'bg-rose-700 text-white shadow-md'
+                      : 'text-slate-600 hover:text-rose-700'
+                  }`}
+                >
+                  Girls Hostel (5 Blocks)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveHostelTab('boys')}
+                  className={`px-5 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-all cursor-pointer ${
+                    activeHostelTab === 'boys'
+                      ? 'bg-blue-800 text-white shadow-md'
+                      : 'text-slate-600 hover:text-blue-800'
+                  }`}
+                >
+                  Boys Hostel (3 Blocks)
+                </button>
+              </div>
+
+              <div className="text-sm font-bold text-slate-600 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+                In-Campus Residential Complexes
+              </div>
+            </div>
+
+            {/* Overview Key Highlights Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="p-6 bg-gradient-to-br from-rose-50/60 to-white border border-rose-200 rounded-2xl shadow-xs"
+              >
+                <span className="block text-xs sm:text-sm font-bold uppercase text-rose-700 tracking-wider mb-1.5">Girls Hostel</span>
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#03143D] leading-none block">5 Blocks</span>
+                <span className="block text-sm sm:text-base text-slate-600 font-semibold mt-2">600+ Rooms</span>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.08 }}
+                className="p-6 bg-gradient-to-br from-blue-50/60 to-white border border-blue-200 rounded-2xl shadow-xs"
+              >
+                <span className="block text-xs sm:text-sm font-bold uppercase text-blue-800 tracking-wider mb-1.5">Boys Hostel</span>
+                <span className="text-3xl sm:text-4xl font-extrabold text-[#03143D] leading-none block">3 Blocks</span>
+                <span className="block text-sm sm:text-base text-slate-600 font-semibold mt-2">600+ Rooms</span>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.16 }}
+                className="p-6 bg-gradient-to-br from-amber-50/60 to-white border border-amber-200 rounded-2xl shadow-xs"
+              >
+                <span className="block text-xs sm:text-sm font-bold uppercase text-amber-800 tracking-wider mb-1.5">Room Capacity</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-[#03143D] leading-none block">3–4 Students</span>
+                <span className="block text-sm sm:text-base text-slate-600 font-semibold mt-2">Per Room</span>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.24 }}
+                className="p-6 bg-gradient-to-br from-indigo-50/60 to-white border border-indigo-200 rounded-2xl shadow-xs"
+              >
+                <span className="block text-xs sm:text-sm font-bold uppercase text-indigo-700 tracking-wider mb-1.5">Exam Study Hours</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-[#03143D] leading-none block">6:00 – 7:30 PM</span>
+                <span className="block text-sm sm:text-base text-slate-600 font-semibold mt-2">Evening Study Hours</span>
+              </motion.div>
+            </div>
+
+            {/* 1. GIRLS HOSTEL SECTION */}
+            {(activeHostelTab === 'all' || activeHostelTab === 'girls') && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5 }}
+                className="space-y-8 pt-8 border-t border-gray-200"
+              >
+                {/* Heading with font-serif */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs sm:text-sm uppercase font-extrabold tracking-widest text-rose-700 bg-rose-50 border border-rose-200 px-3.5 py-1.5 rounded-full inline-block">
+                      {girlsHostelData.badge}
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider">APEC Melmaruvathur</span>
+                  </div>
+                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#03143D] tracking-tight">
+                    {girlsHostelData.title}
+                  </h2>
+                  <p className="text-base sm:text-lg text-slate-700 font-medium mt-2 w-full text-left leading-relaxed">
+                    Dedicated in-campus residential facility for female students with 5 blocks, Wi-Fi connectivity, prayer hall, gymnasium, stationery store, dining hall, badminton sports facility, and examination study hours.
+                  </p>
+                </div>
+
+                {/* Key Points Information Cards - Punchy, High Impact, Full Line Presentation */}
+                <div>
+                  <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-500 mb-5 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-rose-600"></span>
+                    Girls Hostel Facilities & Key Information
+                  </div>
+                  <div className="space-y-3.5">
+                    {girlsHostelData.cards.map((card, idx) => {
+                      const IconComp = card.icon;
+                      return (
+                        <div
+                          key={idx}
+                          className="w-full p-4 sm:p-5 bg-white border border-slate-200 rounded-2xl hover:border-rose-400 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 group"
+                        >
+                          <div className="flex items-center gap-4 min-w-[260px] sm:min-w-[300px]">
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border ${card.accent} group-hover:scale-105 transition-transform shadow-xs`}>
+                              <IconComp className="w-6 h-6" />
+                            </div>
+                            <div>
+                              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                                {card.title}
+                              </span>
+                              <span className="text-xl sm:text-2xl font-extrabold text-[#03143D] tracking-tight leading-tight block">
+                                {card.value}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="md:border-l md:border-slate-200 md:pl-6 grow">
+                            <p className="text-sm sm:text-base font-semibold text-slate-700 leading-relaxed text-left">
+                              {card.detail}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Girls Hostel Food Timings */}
+                <div className="p-6 sm:p-8 md:p-10 bg-gradient-to-br from-rose-50/50 via-white to-slate-50/50 border border-rose-200 rounded-3xl shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-1.5">
+                        <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0">
+                          <Utensils className="w-5 h-5" />
+                        </div>
+                        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#03143D] tracking-tight">
+                          Girls Hostel Food Timings
+                        </h3>
+                      </div>
+                      <p className="text-sm sm:text-base text-slate-600 font-medium w-full text-left">
+                        Daily meal schedule served in the Girls Hostel dining hall.
+                      </p>
+                    </div>
+                    <span className="text-xs sm:text-sm uppercase font-extrabold tracking-wider text-rose-700 bg-rose-100/70 border border-rose-200 px-4 py-1.5 rounded-full w-max">
+                      Meal Schedule
+                    </span>
+                  </div>
+
+                  <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
+                    <table className="w-full text-left border-collapse min-w-[500px]">
+                      <thead>
+                        <tr className="bg-[#03143D] text-white text-xs sm:text-sm uppercase tracking-wider font-extrabold">
+                          <th className="py-4 px-6">Meal</th>
+                          <th className="py-4 px-6">Timings</th>
+                          <th className="py-4 px-6 hidden sm:table-cell">Schedule Period</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-150 text-sm sm:text-base font-semibold text-slate-800">
+                        {girlsHostelData.foodTimings.map((meal, mIdx) => {
+                          const MealIcon = meal.icon;
+                          return (
+                            <tr key={mIdx} className="hover:bg-rose-50/40 transition-colors">
+                              <td className="py-5 px-6">
+                                <div className="flex items-center gap-3.5">
+                                  <div className="w-10 h-10 rounded-xl bg-slate-50 text-slate-700 border border-slate-200 flex items-center justify-center shrink-0">
+                                    <MealIcon className="w-5 h-5 text-rose-600" />
+                                  </div>
+                                  <div>
+                                    <span className="font-extrabold text-[#03143D] text-lg sm:text-xl block">{meal.meal}</span>
+                                    <span className="text-xs text-slate-500 font-medium sm:hidden">{meal.period}</span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-5 px-6">
+                                <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-base sm:text-lg lg:text-xl font-black font-mono border shadow-xs ${meal.accent}`}>
+                                  <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+                                  {meal.timings}
+                                </span>
+                              </td>
+                              <td className="py-5 px-6 hidden sm:table-cell text-sm sm:text-base text-slate-700 font-medium">
+                                {meal.period}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </motion.section>
+            )}
+
+            {/* 2. BOYS HOSTEL SECTION */}
+            {(activeHostelTab === 'all' || activeHostelTab === 'boys') && (
+              <motion.section
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5 }}
+                className="space-y-8 pt-8 border-t border-gray-200"
+              >
+                {/* Heading with font-serif */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs sm:text-sm uppercase font-extrabold tracking-widest text-blue-800 bg-blue-50 border border-blue-200 px-3.5 py-1.5 rounded-full inline-block">
+                      {boysHostelData.badge}
+                    </span>
+                    <span className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider">APEC Melmaruvathur</span>
+                  </div>
+                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#03143D] tracking-tight">
+                    {boysHostelData.title}
+                  </h2>
+                  <p className="text-base sm:text-lg text-slate-700 font-medium mt-2 w-full text-left leading-relaxed">
+                    Dedicated in-campus residential facility for male students with 3 blocks, prayer hall, gymnasium, stationery store, dining hall, badminton sports facility, and examination study hours.
+                  </p>
+                </div>
+
+                {/* Key Points Information Cards - Punchy, High Impact, Full Line Presentation */}
+                <div>
+                  <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-500 mb-5 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+                    Boys Hostel Facilities & Key Information
+                  </div>
+                  <div className="space-y-3.5">
+                    {boysHostelData.cards.map((card, idx) => {
+                      const IconComp = card.icon;
+                      return (
+                        <div
+                          key={idx}
+                          className="w-full p-4 sm:p-5 bg-white border border-slate-200 rounded-2xl hover:border-blue-400 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-4 group"
+                        >
+                          <div className="flex items-center gap-4 min-w-[260px] sm:min-w-[300px]">
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border ${card.accent} group-hover:scale-105 transition-transform shadow-xs`}>
+                              <IconComp className="w-6 h-6" />
+                            </div>
+                            <div>
+                              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
+                                {card.title}
+                              </span>
+                              <span className="text-xl sm:text-2xl font-extrabold text-[#03143D] tracking-tight leading-tight block">
+                                {card.value}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="md:border-l md:border-slate-200 md:pl-6 grow">
+                            <p className="text-sm sm:text-base font-semibold text-slate-700 leading-relaxed text-left">
+                              {card.detail}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Boys Hostel Food Timings */}
+                <div className="p-6 sm:p-8 md:p-10 bg-gradient-to-br from-blue-50/50 via-white to-slate-50/50 border border-blue-200 rounded-3xl shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-1.5">
+                        <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center shrink-0">
+                          <Utensils className="w-5 h-5" />
+                        </div>
+                        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#03143D] tracking-tight">
+                          Boys Hostel Food Timings
+                        </h3>
+                      </div>
+                      <p className="text-sm sm:text-base text-slate-600 font-medium w-full text-left">
+                        Daily meal schedule served in the Boys Hostel dining hall.
+                      </p>
+                    </div>
+                    <span className="text-xs sm:text-sm uppercase font-extrabold tracking-wider text-blue-800 bg-blue-100/70 border border-blue-200 px-4 py-1.5 rounded-full w-max">
+                      Meal Schedule
+                    </span>
+                  </div>
+
+                  <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-xs">
+                    <table className="w-full text-left border-collapse min-w-[500px]">
+                      <thead>
+                        <tr className="bg-[#03143D] text-white text-xs sm:text-sm uppercase tracking-wider font-extrabold">
+                          <th className="py-4 px-6">Meal</th>
+                          <th className="py-4 px-6">Timings</th>
+                          <th className="py-4 px-6 hidden sm:table-cell">Schedule Period</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-150 text-sm sm:text-base font-semibold text-slate-800">
+                        {boysHostelData.foodTimings.map((meal, mIdx) => {
+                          const MealIcon = meal.icon;
+                          return (
+                            <tr key={mIdx} className="hover:bg-blue-50/40 transition-colors">
+                              <td className="py-5 px-6">
+                                <div className="flex items-center gap-3.5">
+                                  <div className="w-10 h-10 rounded-xl bg-slate-50 text-slate-700 border border-slate-200 flex items-center justify-center shrink-0">
+                                    <MealIcon className="w-5 h-5 text-blue-600" />
+                                  </div>
+                                  <div>
+                                    <span className="font-extrabold text-[#03143D] text-lg sm:text-xl block">{meal.meal}</span>
+                                    <span className="text-xs text-slate-500 font-medium sm:hidden">{meal.period}</span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-5 px-6">
+                                <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-base sm:text-lg lg:text-xl font-black font-mono border shadow-xs ${meal.accent}`}>
+                                  <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+                                  {meal.timings}
+                                </span>
+                              </td>
+                              <td className="py-5 px-6 hidden sm:table-cell text-sm sm:text-base text-slate-700 font-medium">
+                                {meal.period}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </motion.section>
+            )}
+
+          </div>
         ) : (
-          /* High-Fidelity Custom Facility Dashboard for Library, Labs, and Hostels */
+          /* High-Fidelity Custom Facility Dashboard for Library and Labs */
           <div className="space-y-12 animate-[fadeIn_0.3s_ease-out] text-left">
             
             {/* Stats Dashboard Grid */}

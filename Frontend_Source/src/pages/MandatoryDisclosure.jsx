@@ -23,7 +23,7 @@ const cardVariants = {
 };
 
 export default function MandatoryDisclosure() {
-  const pdfUrl = "/Documents/PDFs/UGC/4. Mandatory_Disclosure.pdf";
+  const pdfUrl = "https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348692/apec/Documents/PDFs/UGC/4._Mandatory_Disclosure.pdf";
 
   const disclosureDetails = [
     {

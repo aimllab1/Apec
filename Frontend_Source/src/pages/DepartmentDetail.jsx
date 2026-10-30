@@ -16,6 +16,7 @@ import facultyData from '../ai/knowledge/faculty.json';
 import FacultyOrcidQr from '../components/FacultyOrcidQr';
 import { submitDepartmentFeedback } from '../utils/inquiryService';
 import { getRootCollegeUrl, isSubdomainMode } from '../utils/subdomain';
+import { getFacultyImageUrl, handleFacultyImageError } from '../utils/facultyImageResolver';
 
 // Helper to determine top-right badge (HOD, PRINCIPAL, VICE PRINCIPAL, DEAN)
 const getTopRightBadge = (member, currentDept) => {
@@ -25,8 +26,13 @@ const getTopRightBadge = (member, currentDept) => {
   }
   const name = (member.name || '').toLowerCase().trim();
   if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 'PRINCIPAL';
-  if (name.includes('bhuvaneswari') || name.includes('bhuvaneshwari') || (member.designation && member.designation.toLowerCase().includes('vice principal'))) return 'VICE PRINCIPAL';
+  if (name.includes('bhuvaneswari') || name.includes('bhuvaneshwari') || name.includes('malathi') || (member.designation && member.designation.toLowerCase().includes('vice principal'))) return 'VICE PRINCIPAL';
   if (name.includes('ramasamy') || (member.designation && member.designation.toLowerCase().includes('dean'))) return 'DEAN';
+  if (name.includes('arunkumar') || name.includes('arun kumar')) {
+    if (deptStr.includes('mca') || deptStr.includes('computer applications') || (member?.department_key === 'mca')) {
+      return 'HOD';
+    }
+  }
   if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 'HOD';
   return null;
 };
@@ -34,10 +40,11 @@ const getTopRightBadge = (member, currentDept) => {
 // Rank weighting for sorting faculty
 const getRankWeight = (member) => {
   const name = (member.name || '').toLowerCase().trim();
+  const deptStr = ((member?.department || '') + ' ' + (member?.department_key || '')).toLowerCase();
   if (name === 'dr. j. raja' || name === 'dr.j.raja' || name.includes('dr. j. raja')) return 1;
   if (name.includes('bhuvaneswari') || name.includes('bhuvaneshwari') || (member.designation && member.designation.toLowerCase().includes('vice principal'))) return 2;
   if (name.includes('ramasamy') || (member.designation && member.designation.toLowerCase().includes('dean'))) return 3;
-  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head'))) return 4;
+  if (member.isHod || (member.designation && member.designation.toLowerCase().includes('head')) || ((name.includes('arunkumar') || name.includes('arun kumar')) && (deptStr.includes('mca') || deptStr.includes('computer applications')))) return 4;
   const d = (member.designation || '').toLowerCase();
   if (d.includes('professor') && !d.includes('assistant') && !d.includes('associate')) return 5;
   if (d.includes('associate professor')) return 6;
@@ -58,30 +65,30 @@ const formatDesignation = (designation, name) => {
 };
 
 const departmentImages = {
-  aiml: '/Images/Dept/aiml dept.jpg',
-  cse: '/Images/Dept/cse dept.png',
-  it: '/Images/Dept/it dept.jpg',
-  ece: '/Images/Dept/ece dept.jpg',
-  eee: '/Images/Dept/eee dept.jpg',
-  mech: '/Images/Dept/mech dept.jpg',
-  civil: '/Images/Dept/civil dept.jpg',
-  chemical: '/Images/Dept/chem dept.jpg',
-  agri: '/Images/Dept/agri dept.jpg',
-  aids: '/Images/Dept/ai ds dept.jpg',
-  csd: '/Images/Dept/csd  dept.jpg',
-  mca: '/Images/Dept/MCA.jpg',
-  mba: '/Images/Dept/MBA.jpg',
-  'me-cse': '/Images/Dept/me.cse.jpg',
-  'me-thermal': '/Images/Dept/me.thermak.jpg',
-  'me-vlsi': '/Images/Dept/m.e.vlsi.jpg',
-  'me-ped': '/Images/Dept/power-electronics-electrical-drives.jpg',
-  'me-cem': '/Images/Dept/m.e.construction engg and mangement.jpg',
-  sh: '/Images/Dept/S&H dept.jpg',
-  'phd-civil': '/Images/Dept/phd.civil.jpg',
-  'phd-mech': '/Images/Dept/phd.mech.jpg',
-  'phd-eee': '/Images/Dept/phd.eee.jpg',
-  'phd-ece': '/Images/Dept/phd.ece.jpg',
-  default: '/Images/Dept/cse dept.png'
+  aiml: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340154/apec/Dept/aiml_dept.jpg',
+  cse: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png',
+  it: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340192/apec/Dept/it_dept.jpg',
+  ece: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340163/apec/Dept/ece_dept.jpg',
+  eee: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340191/apec/Dept/eee_dept.jpg',
+  mech: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340199/apec/Dept/mech_dept.jpg',
+  civil: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340156/apec/Dept/civil_dept.jpg',
+  chemical: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340155/apec/Dept/chem_dept.jpg',
+  agri: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340152/apec/Dept/agri_dept.jpg',
+  aids: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340153/apec/Dept/ai_ds_dept.jpg',
+  csd: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340157/apec/Dept/csd__dept.jpg',
+  mca: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340197/apec/Dept/MCA.jpg',
+  mba: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340196/apec/Dept/MBA.jpg',
+  'me-cse': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340198/apec/Dept/me_cse.jpg',
+  'me-thermal': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340199/apec/Dept/me_thermak.jpg',
+  'me-vlsi': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340195/apec/Dept/m_e_vlsi.jpg',
+  'me-ped': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340204/apec/Dept/power-electronics-electrical-drives.jpg',
+  'me-cem': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340194/apec/Dept/m_e_construction_engg_and_mangement.jpg',
+  sh: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340205/apec/Dept/S_H_dept.jpg',
+  'phd-civil': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340200/apec/Dept/phd_civil.jpg',
+  'phd-mech': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340203/apec/Dept/phd_mech.jpg',
+  'phd-eee': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340202/apec/Dept/phd_eee.jpg',
+  'phd-ece': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340201/apec/Dept/phd_ece.jpg',
+  default: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png'
 };
 
 const normalizeLabs = (department) => {
@@ -893,7 +900,21 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
     const saved = localStorage.getItem('apec_departments_data');
     let data = departmentsData;
     if (saved) {
-      try { data = JSON.parse(saved); } catch (e) {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') {
+          if (!parsed?.mca?.faculty?.[0]?.name?.toLowerCase().includes('arun')) {
+            parsed.mca = departmentsData.mca;
+          }
+          // Ensure newsletters from static data are populated into cached dept data
+          Object.keys(departmentsData).forEach(k => {
+            if (departmentsData[k]?.newsletters && (!parsed[k]?.newsletters || parsed[k].newsletters.length === 0)) {
+              if (parsed[k]) parsed[k].newsletters = departmentsData[k].newsletters;
+            }
+          });
+          data = parsed;
+        }
+      } catch (e) {}
     }
     const target = resolveDepartment(data, id);
     return normalizeLabs(target || departmentsData.aiml || departmentsData.cse);
@@ -904,7 +925,21 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
       const saved = localStorage.getItem('apec_departments_data');
       let data = departmentsData;
       if (saved) {
-        try { data = JSON.parse(saved); } catch (e) {}
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && typeof parsed === 'object') {
+            if (!parsed?.mca?.faculty?.[0]?.name?.toLowerCase().includes('arun')) {
+              parsed.mca = departmentsData.mca;
+            }
+            // Ensure newsletters from static data are populated into cached dept data
+            Object.keys(departmentsData).forEach(k => {
+              if (departmentsData[k]?.newsletters && (!parsed[k]?.newsletters || parsed[k].newsletters.length === 0)) {
+                if (parsed[k]) parsed[k].newsletters = departmentsData[k].newsletters;
+              }
+            });
+            data = parsed;
+          }
+        } catch (e) {}
       }
       const target = resolveDepartment(data, id);
       if (target) {
@@ -956,6 +991,21 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
   }, [searchParams]);
 
   const dept = deptData;
+
+  // Canonical syllabus resolver to guarantee visibility regardless of cached browser storage
+  const canonicalSyllabus = departmentsData[dept?.key]?.syllabus || departmentsData[id]?.syllabus;
+  const currentSyllabus = dept?.syllabus?.link ? dept.syllabus : (canonicalSyllabus || dept?.syllabus || {});
+  const syllabusLink = currentSyllabus?.link || `/Documents/PDFs/Curriculum/${dept?.key || id}-syllabus.pdf`;
+  const syllabusPreviewImg = currentSyllabus?.previewImage || `/Documents/PDFs/Curriculum/${dept?.key || id}-page-1.png`;
+  const syllabusFileName = currentSyllabus?.fileName || `${dept?.key || id}_syllabus.pdf`;
+  const syllabusFileSize = currentSyllabus?.fileSize || 'PDF';
+
+  // Canonical newsletters resolver to guarantee visibility regardless of cached browser storage
+  const canonicalNewsletters = departmentsData[dept?.key]?.newsletters || departmentsData[id]?.newsletters || [];
+  const currentNewsletters = (dept?.newsletters && Array.isArray(dept.newsletters) && dept.newsletters.length > 0)
+    ? dept.newsletters
+    : canonicalNewsletters;
+
   const deptImage = departmentImages[id] || departmentImages[dept.key] || departmentImages.default;
 
   // Department icon mapping
@@ -1085,9 +1135,9 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
   // Build Faculty Image Lookup Map from deptData
   const facultyImageMap = React.useMemo(() => {
     const map = {
-      'dr. m. vivekanandhan': '/Images/Faculty/vivekandhan.jpg',
-      'dr. vivekanandhan m': '/Images/Faculty/vivekandhan.jpg',
-      'ms.m.selvaprathipa': '/Images/Faculty/chemical/saraswathy.jpg'
+      'dr. m. vivekanandhan': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338344/apec/Faculty/1793338343070_mech_Dr__Vivekanandhan_M_b64.png',
+      'dr. vivekanandhan m': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338344/apec/Faculty/1793338343070_mech_Dr__Vivekanandhan_M_b64.png',
+      'ms.m.selvaprathipa': 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338303/apec/Faculty/1793338303691_chemical_saraswathy_jpg.jpg'
     };
     const savedCMS = localStorage.getItem('apec_departments_data');
     let depts = departmentsData;
@@ -1609,7 +1659,7 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                     <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-3 sm:mb-4 font-title text-indigo-650 flex items-center gap-2">
                       <BookOpen className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5" /> About the Department
                     </h2>
-                    <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed font-medium">
+                    <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed font-medium w-full text-justify">
                       {dept.about}
                     </p>
                   </div>
@@ -1622,7 +1672,7 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                         <h3 className="text-lg sm:text-xl md:text-2xl font-black text-indigo-650 mb-3 sm:mb-4 flex items-center gap-2 font-title">
                           <Milestone className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5 text-indigo-650" /> Vision
                         </h3>
-                        <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed font-semibold italic">
+                        <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed font-semibold italic text-justify">
                           "{dept.vision}"
                         </p>
                       </div>
@@ -1676,7 +1726,7 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                   ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 text-left">
                       {filteredFaculty.map((f, idx) => {
-                        const photoSrc = f.image || facultyImageMap[f.name?.toLowerCase().trim()] || null;
+                        const photoSrc = getFacultyImageUrl(f.image || facultyImageMap[f.name?.toLowerCase().trim()], f.name);
                         const topRightBadge = getTopRightBadge(f, dept.name);
 
                         return (
@@ -1709,7 +1759,7 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                                   alt={f.name} 
                                   className="absolute inset-0 w-full h-full object-cover object-top z-10 group-hover:scale-105 transition-transform duration-300"
                                   onError={(e) => {
-                                    e.target.style.display = 'none';
+                                    handleFacultyImageError(e, f.name, photoSrc);
                                   }}
                                 />
                               )}
@@ -2003,57 +2053,178 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
 
               {/* TAB 4.5: SYLLABUS & CURRICULUM */}
               {activeSubTab === 'syllabus' && (
-                <div className="space-y-6 sm:space-y-8 text-left">
+                <div className="space-y-6 text-left">
+                  {/* Top Breadcrumb & Department Header Info */}
                   <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-900 text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
-                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                      <div>
-                        <span className="px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[10px] font-black uppercase tracking-wider rounded-full inline-block mb-3">
-                          Academic Curriculum & Regulations
+                    <div className="max-w-3xl">
+                      <div className="flex flex-wrap items-center gap-2 mb-3">
+                        <span className="px-3 py-1 bg-amber-500/20 border border-amber-400/30 text-amber-300 text-[10px] font-black uppercase tracking-wider rounded-full inline-block">
+                          {dept.syllabus?.regulation || 'Regulation 2021 (R-2021)'}
                         </span>
-                        <h2 className="text-xl sm:text-2xl font-black font-title text-white">
-                          {dept.syllabus?.title || `${dept.name} Curriculum & Syllabus`}
-                        </h2>
-                        <p className="text-xs sm:text-sm text-indigo-200/80 mt-2 max-w-2xl font-medium leading-relaxed">
-                          {dept.syllabus?.description || 'Explore the comprehensive semester-wise course scheme, regulation guidelines, and core subject credit distribution.'}
-                        </p>
+                        <span className="px-3 py-1 bg-white/10 border border-white/20 text-indigo-200 text-[10px] font-bold rounded-full inline-block">
+                          Anna University Affiliated
+                        </span>
+                        {dept.syllabus?.fileSize && (
+                          <span className="px-3 py-1 bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-[10px] font-bold rounded-full inline-block">
+                            PDF • {dept.syllabus.fileSize}
+                          </span>
+                        )}
                       </div>
-                      {dept.syllabus?.link && (
-                        <a
-                          href={dept.syllabus.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-5 py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-lg flex items-center gap-2 shrink-0 cursor-pointer"
-                        >
-                          <Download className="w-4 h-4" /> Download Syllabus PDF
-                        </a>
-                      )}
+                      <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-white">
+                        {dept.syllabus?.title || `${dept.name} Curriculum & Syllabus`}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-indigo-200/80 mt-2 font-medium leading-relaxed">
+                        Official semester-wise curriculum, course schemes, evaluation metrics, and laboratory syllabus for {dept.name}.
+                      </p>
                     </div>
                   </div>
 
-                  {/* Semester Scheme Overview */}
-                  <div className="bg-gray-50 border border-gray-150 p-6 sm:p-8 rounded-3xl space-y-4">
-                    <h3 className="text-lg font-black text-indigo-950 font-title flex items-center gap-2">
-                      <BookOpenCheck className="w-5 h-5 text-indigo-650" /> Semester Scheme & Subject Structure
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 font-semibold leading-relaxed">
-                      The program follows AICTE & Anna University model curriculum covering Professional Core, Professional Electives, Open Electives, and Employability Enhancement Courses.
-                    </p>
-                    {dept.syllabus?.link ? (
-                      <div className="pt-2">
-                        <a 
-                          href={dept.syllabus.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-xs font-bold text-indigo-650 hover:underline"
-                        >
-                          <ExternalLink className="w-4 h-4" /> View Full Regulation PDF Document
-                        </a>
+                  {/* TWO COLUMN LAYOUT: Left Preview + Right Descriptions */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                    
+                    {/* LEFT COLUMN: PAGE 1 PREVIEW & SINGLE DOWNLOAD BUTTON */}
+                    <div className="lg:col-span-5 bg-white border border-gray-200 rounded-3xl p-5 sm:p-6 shadow-sm space-y-4">
+                      <div className="flex items-center justify-between border-b border-gray-150 pb-3 gap-2 flex-wrap">
+                        <div className="flex items-center gap-2">
+                          <BookOpenCheck className="w-4.5 h-4.5 text-indigo-650 shrink-0" />
+                          <h3 className="text-xs sm:text-sm font-black text-gray-900 uppercase tracking-wider">
+                            Document Preview
+                          </h3>
+                        </div>
+                        {syllabusLink && (
+                          <a
+                            href={syllabusLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[11px] font-bold text-indigo-650 hover:underline"
+                            title="Open full PDF document in new browser tab"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" /> Open Full PDF
+                          </a>
+                        )}
                       </div>
-                    ) : (
-                      <div className="p-4 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 font-semibold">
-                        The updated syllabus document for this department can be downloaded from the HOD desk or central college portal.
+
+                      {/* First Page Preview Frame */}
+                      <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-inner bg-slate-50 flex items-center justify-center p-2 group relative">
+                        <img
+                          src={syllabusPreviewImg}
+                          alt={`${dept.name} Syllabus Preview`}
+                          className="w-full h-auto object-contain rounded-xl shadow-xs transition-transform duration-300 group-hover:scale-[1.01]"
+                        />
                       </div>
-                    )}
+
+                      {/* ONLY DOWNLOAD BUTTON ON THIS PAGE */}
+                      {syllabusLink && (
+                        <div className="pt-2 space-y-2">
+                          <a
+                            href={syllabusLink}
+                            download={syllabusFileName}
+                            className="w-full py-3.5 px-6 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md hover:shadow-xl hover:scale-[1.01] flex items-center justify-center gap-2.5 cursor-pointer"
+                          >
+                            <Download className="w-4.5 h-4.5" /> Download Syllabus PDF
+                          </a>
+                          <p className="text-[11px] text-center text-gray-500 font-semibold">
+                            {syllabusFileName} • {syllabusFileSize} • Official Anna University Regulation
+                          </p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* RIGHT COLUMN: DESCRIPTIONS & CURRICULUM BREAKDOWN */}
+                    <div className="lg:col-span-7 space-y-6">
+                      
+                      {/* Overview & Description Card */}
+                      <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
+                        <div className="flex items-center gap-2.5 border-b border-gray-150 pb-3">
+                          <div className="w-9 h-9 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-650 shrink-0">
+                            <FileText className="w-4.5 h-4.5" />
+                          </div>
+                          <div>
+                            <h3 className="text-base sm:text-lg font-black text-slate-900 font-title">
+                              Curriculum Overview & Guidelines
+                            </h3>
+                            <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                              Autonomous & Affiliated Academic Framework
+                            </span>
+                          </div>
+                        </div>
+
+                        <p className="text-xs sm:text-sm text-gray-700 font-medium leading-relaxed">
+                          {dept.syllabus?.description || `Comprehensive semester-wise course scheme, regulation guidelines, and core subject credit distribution for ${dept.name}.`}
+                        </p>
+
+                        {dept.syllabus?.officialUrl && (
+                          <div className="pt-2 border-t border-gray-100 flex items-center justify-between flex-wrap gap-2">
+                            <span className="text-[11px] text-gray-500 font-semibold">
+                              Direct University Reference:
+                            </span>
+                            <a
+                              href={dept.syllabus.officialUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-650 hover:underline"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5 text-amber-500" />
+                              Official Anna University Portal Source
+                            </a>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Semester Scheme & Structure Card */}
+                      <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-7 shadow-sm space-y-4">
+                        <h4 className="text-base font-black text-indigo-950 font-title flex items-center gap-2">
+                          <BookOpenCheck className="w-5 h-5 text-indigo-650" /> Semester Scheme & Subject Structure
+                        </h4>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+                          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-150 space-y-1">
+                            <span className="text-[10px] font-black uppercase text-indigo-650 tracking-wider">Course Duration</span>
+                            <p className="text-xs font-bold text-gray-800">4 Years / 8 Semesters</p>
+                            <p className="text-[11px] text-gray-500">Choice Based Credit System (CBCS)</p>
+                          </div>
+
+                          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-150 space-y-1">
+                            <span className="text-[10px] font-black uppercase text-emerald-650 tracking-wider">Total Credits</span>
+                            <p className="text-xs font-bold text-gray-800">160 – 165 Credits</p>
+                            <p className="text-[11px] text-gray-500">AICTE & Anna University Model</p>
+                          </div>
+
+                          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-150 space-y-1">
+                            <span className="text-[10px] font-black uppercase text-amber-600 tracking-wider">Course Categories</span>
+                            <p className="text-xs font-bold text-gray-800">Core, PE, OE & EEC</p>
+                            <p className="text-[11px] text-gray-500">Theory, Seminars & Capstone</p>
+                          </div>
+
+                          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-150 space-y-1">
+                            <span className="text-[10px] font-black uppercase text-violet-650 tracking-wider">Evaluation Norms</span>
+                            <p className="text-xs font-bold text-gray-800">CIA + End Semester</p>
+                            <p className="text-[11px] text-gray-500">Continuous Assessment Reviews</p>
+                          </div>
+                        </div>
+
+                        <div className="p-4 rounded-2xl bg-indigo-50/60 border border-indigo-150 text-xs text-indigo-950 font-medium leading-relaxed">
+                          Students are advised to review prerequisite subjects, professional elective tracks, and open elective selections in accordance with the regulation guidelines.
+                        </div>
+
+                        <div className="pt-2 flex items-center justify-between border-t border-gray-100">
+                          <Link 
+                            to="/regulations?reg=reg21"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-650 hover:underline"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" /> View Full Regulation 2021 Rules & Norms
+                          </Link>
+                          <Link 
+                            to="/departments"
+                            className="text-xs font-bold text-gray-500 hover:text-gray-800"
+                          >
+                            All Departments &rarr;
+                          </Link>
+                        </div>
+                      </div>
+
+                    </div>
+
                   </div>
                 </div>
               )}
@@ -2641,7 +2812,7 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                   {/* 3. EVENTS LETTERS VIEW */}
                   {activeEventSubTab === 'letters' && (
                     <div className="space-y-6">
-                      {(!dept.newsletters || dept.newsletters.length === 0) ? (
+                      {(!currentNewsletters || currentNewsletters.length === 0) ? (
                         <div className="p-8 sm:p-12 bg-gray-50 border border-dashed border-gray-250 rounded-3xl text-center space-y-3 max-w-xl mx-auto">
                           <div className="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center mx-auto text-teal-600 shadow-2xs">
                             <FileText className="w-6 h-6" />
@@ -2652,28 +2823,42 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                           </p>
                         </div>
                       ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {dept.newsletters.map((nl, idx) => (
-                            <div key={idx} className="bg-gray-50 border border-gray-200 p-6 rounded-3xl space-y-4 hover:border-indigo-300 transition-all shadow-xs flex flex-col justify-between">
-                              <div className="space-y-2">
-                                <span className="px-3 py-1 bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-black uppercase rounded-full">
-                                  {nl.date || 'Events Letter Issue'}
-                                </span>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {currentNewsletters.map((nl, idx) => (
+                            <div key={idx} className="bg-white border border-gray-200 hover:border-teal-400 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all shadow-xs flex flex-col justify-between">
+                              <div className="space-y-3">
+                                <div className="flex items-center justify-between gap-2 flex-wrap">
+                                  <span className="px-3 py-1 bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-black uppercase rounded-full">
+                                    {nl.edition || nl.date || 'Events Letter Issue'}
+                                  </span>
+                                  {nl.fileSize && (
+                                    <span className="text-[11px] text-gray-500 font-bold bg-gray-100 px-2.5 py-0.5 rounded-full">
+                                      {nl.fileSize}
+                                    </span>
+                                  )}
+                                </div>
                                 <h3 className="text-lg font-black text-gray-900 leading-snug">{nl.title}</h3>
                                 <p className="text-xs text-gray-600 font-medium leading-relaxed">{nl.summary || 'Click below to read and download the full department events letter PDF document.'}</p>
                               </div>
-                              {nl.link ? (
-                                <a
-                                  href={nl.link}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
-                                >
-                                  <Download className="w-4 h-4" /> Click to Open Events Letter (PDF)
-                                </a>
-                              ) : (
-                                <div className="p-3 bg-gray-200 text-gray-600 text-xs font-semibold rounded-xl text-center">PDF document coming soon</div>
-                              )}
+                              <div className="pt-2">
+                                {nl.link ? (
+                                  <a
+                                    href={nl.downloadUrl || nl.link}
+                                    download={nl.fileName || `${nl.title}.pdf`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => {
+                                      window.open(nl.link, '_blank');
+                                    }}
+                                    className="w-full py-3 bg-[#00695c] hover:bg-[#004d40] text-white font-extrabold text-xs uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
+                                    title="Open and Download PDF"
+                                  >
+                                    <Download className="w-4 h-4" /> VIEW / DOWNLOAD PDF
+                                  </a>
+                                ) : (
+                                  <div className="p-3 bg-gray-200 text-gray-600 text-xs font-semibold rounded-xl text-center">PDF document coming soon</div>
+                                )}
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -2689,33 +2874,47 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                   <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-title text-indigo-650 flex items-center gap-2 mb-4">
                     <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" /> Department Newsletters & Magazines
                   </h2>
-                  {(!dept.newsletters || dept.newsletters.length === 0) ? (
+                  {(!currentNewsletters || currentNewsletters.length === 0) ? (
                     <div className="p-8 bg-gray-50 border border-dashed border-gray-250 rounded-3xl text-center text-gray-500 text-xs sm:text-sm font-semibold">
                       No newsletter PDF documents published for this department yet.
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {dept.newsletters.map((nl, idx) => (
-                        <div key={idx} className="bg-gray-50 border border-gray-200 p-6 rounded-3xl space-y-4 hover:border-indigo-300 transition-all shadow-xs flex flex-col justify-between">
-                          <div className="space-y-2">
-                            <span className="px-3 py-1 bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-black uppercase rounded-full">
-                              {nl.date || 'Newsletter Issue'}
-                            </span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {currentNewsletters.map((nl, idx) => (
+                        <div key={idx} className="bg-white border border-gray-200 hover:border-teal-400 p-6 rounded-3xl space-y-4 hover:shadow-md transition-all shadow-xs flex flex-col justify-between">
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between gap-2 flex-wrap">
+                              <span className="px-3 py-1 bg-teal-50 border border-teal-200 text-teal-800 text-[10px] font-black uppercase rounded-full">
+                                {nl.edition || nl.date || 'Newsletter Issue'}
+                              </span>
+                              {nl.fileSize && (
+                                <span className="text-[11px] text-gray-500 font-bold bg-gray-100 px-2.5 py-0.5 rounded-full">
+                                  {nl.fileSize}
+                                </span>
+                              )}
+                            </div>
                             <h3 className="text-lg font-black text-gray-900 leading-snug">{nl.title}</h3>
                             <p className="text-xs text-gray-600 font-medium leading-relaxed">{nl.summary || 'Click below to read and download the full department newsletter PDF document.'}</p>
                           </div>
-                          {nl.link ? (
-                            <a
-                              href={nl.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="w-full py-3 bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-2xl flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
-                            >
-                              <Download className="w-4 h-4" /> Click to Open Newsletter (PDF)
-                            </a>
-                          ) : (
-                            <div className="p-3 bg-gray-200 text-gray-600 text-xs font-semibold rounded-xl text-center">PDF document coming soon</div>
-                          )}
+                          <div className="pt-2">
+                            {nl.link ? (
+                              <a
+                                href={nl.downloadUrl || nl.link}
+                                download={nl.fileName || `${nl.title}.pdf`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => {
+                                  window.open(nl.link, '_blank');
+                                }}
+                                className="w-full py-3 bg-[#00695c] hover:bg-[#004d40] text-white font-extrabold text-xs uppercase tracking-wider rounded-full flex items-center justify-center gap-2 transition-all shadow-sm cursor-pointer"
+                                title="Open and Download PDF"
+                              >
+                                <Download className="w-4 h-4" /> VIEW / DOWNLOAD PDF
+                              </a>
+                            ) : (
+                              <div className="p-3 bg-gray-200 text-gray-600 text-xs font-semibold rounded-xl text-center">PDF document coming soon</div>
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -3255,13 +3454,13 @@ export default function DepartmentDetail({ departmentId: propDeptId } = {}) {
                         <div className="absolute inset-0 bg-slate-100 flex items-center justify-center text-slate-400 font-bold">
                           <User className="w-14 h-14 text-slate-400" />
                         </div>
-                        {(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]) && (
+                        {getFacultyImageUrl(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()], selectedFacultyMember.name) && (
                           <img 
-                            src={selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()]} 
+                            src={getFacultyImageUrl(selectedFacultyMember.image || facultyImageMap[selectedFacultyMember.name?.toLowerCase().trim()], selectedFacultyMember.name)} 
                             alt={selectedFacultyMember.name}
                             className="absolute inset-0 w-full h-full object-cover object-top z-10"
                             onError={(e) => {
-                              e.target.style.display = 'none';
+                              handleFacultyImageError(e, selectedFacultyMember.name, e.target.src);
                             }}
                           />
                         )}

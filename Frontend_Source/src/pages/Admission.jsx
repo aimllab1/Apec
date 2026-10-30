@@ -76,34 +76,34 @@ export default function Admission() {
 
   // Program details mapping (Intakes and names)
   const ugPrograms = [
-    { name: "B.E. - Civil Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/civil dept.jpg", key: "civil" },
-    { name: "B.E. - Mechanical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/mech dept.jpg", key: "mech" },
-    { name: "B.E. - Electrical and Electronics Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/eee dept.jpg", key: "eee" },
-    { name: "B.E. - Electronics and Communication Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/Images/Dept/ece dept.jpg", key: "ece" },
-    { name: "B.E. - Computer Science and Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "/Images/Dept/cse dept.png", key: "cse" },
-    { name: "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/Images/Dept/aiml dept.jpg", key: "aiml" },
-    { name: "B.Tech. - Information Technology", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/it dept.jpg", key: "it" },
-    { name: "B.Tech. - Chemical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/Images/Dept/chem dept.jpg", key: "chemical" },
-    { name: "B.Tech. - Agricultural Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "/Images/Dept/agri dept.jpg", key: "agri" },
-    { name: "B.Tech. - Artificial Intelligence and Data Science", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "/Images/Dept/ai ds dept.jpg", key: "aids" },
-    { name: "B.E. - CSD (Computer Science & Design)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "/Images/Dept/csd  dept.jpg", key: "csd" }
+    { name: "B.E. - Civil Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340156/apec/Dept/civil_dept.jpg", key: "civil" },
+    { name: "B.E. - Mechanical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340199/apec/Dept/mech_dept.jpg", key: "mech" },
+    { name: "B.E. - Electrical and Electronics Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340191/apec/Dept/eee_dept.jpg", key: "eee" },
+    { name: "B.E. - Electronics and Communication Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340163/apec/Dept/ece_dept.jpg", key: "ece" },
+    { name: "B.E. - Computer Science and Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 90, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340161/apec/Dept/cse_dept.png", key: "cse" },
+    { name: "B.E. - Computer Science & Engineering (Artificial Intelligence and Machine Learning)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340154/apec/Dept/aiml_dept.jpg", key: "aiml" },
+    { name: "B.Tech. - Information Technology", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340192/apec/Dept/it_dept.jpg", key: "it" },
+    { name: "B.Tech. - Chemical Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340155/apec/Dept/chem_dept.jpg", key: "chemical" },
+    { name: "B.Tech. - Agricultural Engineering", duration: "4 Years", type: "Under Graduate Programme", intake: 40, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340152/apec/Dept/agri_dept.jpg", key: "agri" },
+    { name: "B.Tech. - Artificial Intelligence and Data Science", duration: "4 Years", type: "Under Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340153/apec/Dept/ai_ds_dept.jpg", key: "aids" },
+    { name: "B.E. - CSD (Computer Science & Design)", duration: "4 Years", type: "Under Graduate Programme", intake: 30, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340157/apec/Dept/csd__dept.jpg", key: "csd" }
   ];
 
   const pgPrograms = [
-    { name: "M.E. - Computer Science and Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/Images/Dept/me.cse.jpg", key: "me-cse" },
-    { name: "M.E. - Thermal Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/Images/Dept/me.thermak.jpg", key: "me-thermal" },
-    { name: "M.E. - VLSI Design", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/Images/Dept/m.e.vlsi.jpg", key: "me-vlsi" },
-    { name: "M.E. - Power Electronics & Drives Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "/Images/Dept/power-electronics-electrical-drives.jpg", key: "me-ped" },
-    { name: "M.E. - Construction Engineering and Management", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "/Images/Dept/m.e.construction engg and mangement.jpg", key: "me-cem" },
-    { name: "M.B.A. (Master of Business Administration)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/Images/Dept/MBA.jpg", key: "mba" },
-    { name: "M.C.A. (Master of Computer Applications)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "/Images/Dept/MCA.jpg", key: "mca" }
+    { name: "M.E. - Computer Science and Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340198/apec/Dept/me_cse.jpg", key: "me-cse" },
+    { name: "M.E. - Thermal Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340199/apec/Dept/me_thermak.jpg", key: "me-thermal" },
+    { name: "M.E. - VLSI Design", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340195/apec/Dept/m_e_vlsi.jpg", key: "me-vlsi" },
+    { name: "M.E. - Power Electronics & Drives Engineering", duration: "2 Years", type: "Post Graduate Programme", intake: 9, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340204/apec/Dept/power-electronics-electrical-drives.jpg", key: "me-ped" },
+    { name: "M.E. - Construction Engineering and Management", duration: "2 Years", type: "Post Graduate Programme", intake: 18, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340194/apec/Dept/m_e_construction_engg_and_mangement.jpg", key: "me-cem" },
+    { name: "M.B.A. (Master of Business Administration)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340196/apec/Dept/MBA.jpg", key: "mba" },
+    { name: "M.C.A. (Master of Computer Applications)", duration: "2 Years", type: "Post Graduate Programme", intake: 60, img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340197/apec/Dept/MCA.jpg", key: "mca" }
   ];
 
   const phdPrograms = [
-    { name: "PhD - Civil Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.civil.jpg", key: "phd-civil" },
-    { name: "PhD - Mechanical Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.mech.jpg", key: "phd-mech" },
-    { name: "PhD - Electrical and Electronics Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.eee.jpg", key: "phd-eee" },
-    { name: "PhD - Electronics and Communication Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "/Images/Dept/phd.ece.jpg", key: "phd-ece" }
+    { name: "PhD - Civil Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340200/apec/Dept/phd_civil.jpg", key: "phd-civil" },
+    { name: "PhD - Mechanical Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340203/apec/Dept/phd_mech.jpg", key: "phd-mech" },
+    { name: "PhD - Electrical and Electronics Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340202/apec/Dept/phd_eee.jpg", key: "phd-eee" },
+    { name: "PhD - Electronics and Communication Engineering", duration: "Minimum 2 Years (Full Time)", type: "Doctoral Programmes (PhD)", img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340201/apec/Dept/phd_ece.jpg", key: "phd-ece" }
   ];
 
   // Scholarship Details
@@ -592,7 +592,7 @@ export default function Admission() {
                     <p className="text-xs md:text-sm text-gray-500 font-medium">Download the structured official PDF list of all courses offered at APEC.</p>
                   </div>
                   <a 
-                    href="/Documents/PDFs/Admission/1. Courses Offered.pdf" 
+                    href="https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342169/apec/Documents/PDFs/Admission/1__Courses_Offered.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs md:text-sm font-bold transition-all shadow-sm shrink-0"
@@ -1023,7 +1023,7 @@ export default function Admission() {
                     <p className="text-base text-gray-400 font-semibold">You can download the official college scholarships PDF document for your records.</p>
                   </div>
                   <a 
-                    href="/Documents/PDFs/Admission/2. Scholarships.pdf" 
+                    href="https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342170/apec/Documents/PDFs/Admission/2__Scholarships.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-base font-bold transition-all shadow-sm shrink-0"

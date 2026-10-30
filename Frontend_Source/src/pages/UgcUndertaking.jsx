@@ -8,7 +8,7 @@ const fadeInUp = {
 };
 
 export default function UgcUndertaking() {
-  const pdfUrl = "/Documents/PDFs/UGC/Undertaking.pdf";
+  const pdfUrl = "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342968/apec/Documents/PDFs/UGC/Undertaking.pdf";
 
   return (
     <div className="min-h-screen bg-slate-50 text-gray-900 pt-6 md:pt-10 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">

@@ -75,7 +75,7 @@ export default function UgcApprovalLetter() {
     '2f-12b': {
       title: "UGC 2(f) & 12(B) Approval Letter",
       badge: "UGC Statutory Recognition • Section 2(f) & 12(B)",
-      pdfUrl: "/Documents/PDFs/UGC/2f-and-12b.pdf",
+      pdfUrl: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342939/apec/Documents/PDFs/UGC/2f-and-12b.pdf",
       docTitle: "Official UGC 2(f) & 12(B) Recognition Document",
       pages: [
         {
@@ -99,7 +99,7 @@ export default function UgcApprovalLetter() {
     'autonomous': {
       title: "UGC Autonomous Approval Letter",
       badge: "UGC Autonomous Sanction (10 Years)",
-      pdfUrl: "/Documents/PDFs/UGC/8. ugc-approval-letter.pdf",
+      pdfUrl: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342957/apec/Documents/PDFs/UGC/8__ugc-approval-letter.pdf",
       docTitle: "Official UGC Autonomous Status Conferment Order",
       pages: [
         {

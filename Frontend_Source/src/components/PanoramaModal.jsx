@@ -6,27 +6,27 @@ import { getLoadedTourData, getLoadedTourDataAsync } from '../data/tourData';
 const westFacingImages = {
   mainGate: {
     title: "Main Entrance (West Gate)",
-    img: "/Images/Panorama/Main_Gate.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340093/apec/Panorama/Main_Gate.webp",
     desc: "Static photo facing West towards the Melmaruvathur highroad."
   },
   junctionOne: {
     title: "Junction 1 (West Facing)",
-    img: "/Images/Panorama/Junction_1.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340027/apec/Panorama/Junction_1.webp",
     desc: "Static view looking West towards the main Administrative Blocks."
   },
   junctionTwo: {
     title: "Junction 2 (West Facing)",
-    img: "/Images/Panorama/junction_2.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340052/apec/Panorama/junction_2.webp",
     desc: "Static view looking West towards the CSE & Mechanical Engineering wings."
   },
   pgBlock: {
     title: "PG Block (West Wing)",
-    img: "/Images/Panorama/pg_block.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340114/apec/Panorama/pg_block.webp",
     desc: "West-facing view of the Postgraduate Block corridor."
   },
   junctionThree: {
     title: "Junction 3 (West Facing)",
-    img: "/Images/Panorama/junction_3.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340063/apec/Panorama/junction_3.webp",
     desc: "Static view looking West towards the Central Hostel and library entrance."
   },
   library: {
@@ -36,17 +36,17 @@ const westFacingImages = {
   },
   reception: {
     title: "Reception Area (West Facing)",
-    img: "/Images/Panorama/reception.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340128/apec/Panorama/reception.webp",
     desc: "Static camera perspective facing the reception helpdesk."
   },
   amma: {
     title: "Amma Statue (West Facing)",
-    img: "/Images/Panorama/amma.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339991/apec/Panorama/amma.webp",
     desc: "Static shot looking West towards the central shrine."
   },
   aimlLab: {
     title: "AIML Lab (West Facing)",
-    img: "/Images/Panorama/aiml_lab.webp",
+    img: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339977/apec/Panorama/aiml_lab.webp",
     desc: "Static camera overview of the GPU computing clusters."
   }
 };
@@ -354,15 +354,15 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
     if (isOpen) {
       setIsInitialLoad(true); // Reset initial load overlay on open
       const panoramaImages = [
-        "/Images/Panorama/Main_Gate.webp",
-        "/Images/Panorama/Junction_1.webp",
-        "/Images/Panorama/junction_2.webp",
-        "/Images/Panorama/junction_3.webp",
-        "/Images/Panorama/amma.webp",
-        "/Images/Panorama/reception.webp",
-        "/Images/Panorama/aiml_lab.webp",
-        "/Images/Panorama/library_2.webp",
-        "/Images/Panorama/pg_block.webp"
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340093/apec/Panorama/Main_Gate.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340027/apec/Panorama/Junction_1.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340052/apec/Panorama/junction_2.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340063/apec/Panorama/junction_3.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339991/apec/Panorama/amma.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340128/apec/Panorama/reception.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339977/apec/Panorama/aiml_lab.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340075/apec/Panorama/library_2.webp",
+        "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340114/apec/Panorama/pg_block.webp"
       ];
       
       panoramaImages.forEach(url => {
@@ -390,15 +390,15 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
       
       // Get preview image of the target scene
       const scenesList = [
-        { id: 'mainGate', img: '/Images/Panorama/Main_Gate.webp' },
-        { id: 'junctionOne', img: '/Images/Panorama/Junction_1.webp' },
-        { id: 'junctionTwo', img: '/Images/Panorama/junction_2.webp' },
-        { id: 'reception', img: '/Images/Panorama/reception.webp' },
-        { id: 'amma', img: '/Images/Panorama/amma.webp' },
-        { id: 'aimlLab', img: '/Images/Panorama/aiml_lab.webp' },
-        { id: 'pgBlock', img: '/Images/Panorama/pg_block.webp' },
-        { id: 'junctionThree', img: '/Images/Panorama/junction_3.webp' },
-        { id: 'library', img: '/Images/Panorama/library_2.webp' }
+        { id: 'mainGate', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340093/apec/Panorama/Main_Gate.webp' },
+        { id: 'junctionOne', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340027/apec/Panorama/Junction_1.webp' },
+        { id: 'junctionTwo', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340052/apec/Panorama/junction_2.webp' },
+        { id: 'reception', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340128/apec/Panorama/reception.webp' },
+        { id: 'amma', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339991/apec/Panorama/amma.webp' },
+        { id: 'aimlLab', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339977/apec/Panorama/aiml_lab.webp' },
+        { id: 'pgBlock', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340114/apec/Panorama/pg_block.webp' },
+        { id: 'junctionThree', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340063/apec/Panorama/junction_3.webp' },
+        { id: 'library', img: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340075/apec/Panorama/library_2.webp' }
       ];
       const targetScene = scenesList.find(s => s.id === args.sceneId);
       const targetImg = targetScene ? targetScene.img : '';
@@ -1043,7 +1043,7 @@ export default function PanoramaModal({ isOpen, onClose, initialScene = 'mainGat
                       className="w-full h-full relative"
                     >
                       <img 
-                        src="/Images/Panorama/map.png" 
+                        src="https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340106/apec/Panorama/map.png" 
                         alt="Campus Navigation Map" 
                         className="w-full h-full object-cover pointer-events-none select-none opacity-85" 
                       />

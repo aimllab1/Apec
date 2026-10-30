@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { ReactLenis } from 'lenis/react';
+import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -27,6 +28,7 @@ import Administration from './pages/Administration';
 import Contact from './pages/Contact';
 import DepartmentDetail from './pages/DepartmentDetail';
 import FacilityDetail from './pages/FacilityDetail';
+import CentralLibrary from './pages/CentralLibrary';
 import AdminPortal from './pages/AdminPortal';
 import AdminProfile from './pages/AdminProfile';
 import PanoramaModal from './components/PanoramaModal';
@@ -68,41 +70,87 @@ function ScrollToTop() {
   return null;
 }
 
-// 3D Hologram Torus spinning cleanly in one direction (Y-axis)
-function HologramTorus() {
-  const meshRef = useRef();
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.8;
-      meshRef.current.rotation.x = 0;
-      meshRef.current.rotation.z = 0;
-    }
-  });
-  return (
-    <group scale={1.25}>
-      <mesh ref={meshRef}>
-        <torusGeometry args={[0.6, 0.18, 10, 28]} />
-        <meshBasicMaterial color="#0f172a" wireframe transparent opacity={0.45} />
-      </mesh>
-    </group>
-  );
-}
+// Palette definitions:
+// OVER WHITE/LIGHT PAGES: Unequivocally DARK-coloured bot icon (deep obsidian, slate graphite, rich charcoal)
+const DARK_TONE_A = '#090d16'; // Deep Obsidian / Black Slate
+const DARK_TONE_B = '#1e293b'; // Rich Slate Graphite
+const DARK_TONE_C = '#2d3748'; // Classy Deep Charcoal
 
-// White variant of HologramTorus for use inside the gradient chat bubble
-function HologramTorusWhite() {
+// OVER DARK BACKGROUNDS (e.g. footer): Refined light silvers & platinum
+const LIGHT_TONE_A = '#e2e8f0'; // Polished Platinum Silver
+const LIGHT_TONE_B = '#cbd5e1'; // Light Sterling Silver
+const LIGHT_TONE_C = '#94a3b8'; // Slate Titanium Grey
+
+// 3D Hologram Torus: Dark on white pages, light on dark pages, with continuous gradual color transitions
+function HologramTorus({ isDark = false }) {
   const meshRef = useRef();
+  const materialRef = useRef();
+
+  // Persistent THREE.Color instances for seamless, zero-allocation rendering
+  const colA = useRef(new THREE.Color());
+  const colB = useRef(new THREE.Color());
+  const colC = useRef(new THREE.Color());
+  const targetColor = useRef(new THREE.Color());
+  const activeColor = useRef(new THREE.Color(isDark ? LIGHT_TONE_A : DARK_TONE_A));
+
   useFrame((state, delta) => {
+    // Clean, stable 3D spin on Y-axis with subtle depth tilt
     if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.8;
-      meshRef.current.rotation.x = 0;
+      meshRef.current.rotation.y += delta * 0.75;
+      meshRef.current.rotation.x = 0.18;
       meshRef.current.rotation.z = 0;
     }
+
+    if (materialRef.current) {
+      const time = state.clock.getElapsedTime();
+
+      // Configure targets based on whether the underlying background is dark or light
+      if (isDark) {
+        colA.current.set(LIGHT_TONE_A);
+        colB.current.set(LIGHT_TONE_B);
+        colC.current.set(LIGHT_TONE_C);
+      } else {
+        // ON WHITE PAGES: Stays unequivocally DARK!
+        colA.current.set(DARK_TONE_A);
+        colB.current.set(DARK_TONE_B);
+        colC.current.set(DARK_TONE_C);
+      }
+
+      // Continuous, gradual 3-phase wave (smooth sinusoidal transitions across tones)
+      const wave = (time * 0.35) % 3.0;
+      if (wave < 1.0) {
+        const t = wave;
+        const smoothT = t * t * (3 - 2 * t);
+        targetColor.current.copy(colA.current).lerp(colB.current, smoothT);
+      } else if (wave < 2.0) {
+        const t = wave - 1.0;
+        const smoothT = t * t * (3 - 2 * t);
+        targetColor.current.copy(colB.current).lerp(colC.current, smoothT);
+      } else {
+        const t = wave - 2.0;
+        const smoothT = t * t * (3 - 2 * t);
+        targetColor.current.copy(colC.current).lerp(colA.current, smoothT);
+      }
+
+      // Smooth follow-through lerp ensures gradual transition when scrolling between light and dark sections
+      activeColor.current.lerp(targetColor.current, Math.min(delta * 2.8, 1));
+
+      materialRef.current.color.copy(activeColor.current);
+      // High contrast opacity: 0.90 for dark on white/light bg, 0.85 for light on dark bg
+      materialRef.current.opacity = isDark ? 0.85 : 0.90;
+    }
   });
+
   return (
     <group scale={1.25}>
       <mesh ref={meshRef}>
         <torusGeometry args={[0.6, 0.18, 10, 28]} />
-        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.75} />
+        <meshBasicMaterial 
+          ref={materialRef} 
+          wireframe 
+          transparent 
+          opacity={isDark ? 0.85 : 0.90} 
+        />
       </mesh>
     </group>
   );
@@ -225,6 +273,99 @@ function AppContent({ isLoading, setIsLoading }) {
   const [bubbleVisible, setBubbleVisible] = useState(false);
   const [bubbleText, setBubbleText] = useState('');
   const [isPanoOpen, setIsPanoOpen] = useState(false);
+  const [isDarkBg, setIsDarkBg] = useState(false);
+
+  // Background luminance detector for the fixed floating chatbot element
+  useEffect(() => {
+    let rafId = null;
+
+    const checkBackground = () => {
+      const x = window.innerWidth - 56;
+      const y = window.innerHeight - 56;
+
+      const elements = document.elementsFromPoint ? document.elementsFromPoint(x, y) : [document.elementFromPoint(x, y)];
+      let target = null;
+      for (const el of elements) {
+        if (!el) continue;
+        if (el.closest('.chatbot-avatar-container') || el.closest('.fixed.bottom-6.right-6')) continue;
+        target = el;
+        break;
+      }
+
+      if (!target) {
+        setIsDarkBg(false);
+        return;
+      }
+
+      // Check if target is inside footer or explicitly dark containers
+      if (
+        target.closest('footer') || 
+        target.closest('[class*="bg-[#07113A]"]') || 
+        target.closest('.bg-slate-900') || 
+        target.closest('.bg-slate-950') || 
+        target.closest('.bg-gray-900') ||
+        target.closest('.bg-black')
+      ) {
+        setIsDarkBg(true);
+        return;
+      }
+
+      // Walk up DOM tree to find effective background color
+      let curr = target;
+      let foundColor = null;
+      while (curr && curr !== document.documentElement) {
+        const style = window.getComputedStyle(curr);
+        const bg = style.backgroundColor;
+        if (bg && bg !== 'transparent' && !bg.includes('rgba(0, 0, 0, 0)')) {
+          foundColor = bg;
+          break;
+        }
+        curr = curr.parentElement;
+      }
+
+      // If no explicit background found on parents, inspect document.body
+      if (!foundColor) {
+        const bodyStyle = window.getComputedStyle(document.body);
+        if (bodyStyle.backgroundColor && bodyStyle.backgroundColor !== 'transparent' && !bodyStyle.backgroundColor.includes('rgba(0, 0, 0, 0)')) {
+          foundColor = bodyStyle.backgroundColor;
+        }
+      }
+
+      if (foundColor) {
+        const rgb = foundColor.match(/\d+/g);
+        if (rgb && rgb.length >= 3) {
+          const [r, g, b] = rgb.map(Number);
+          // Standard ITU-R BT.601 relative luminance formula
+          const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+          // If luminance < 130, background is dark; otherwise it is light (white pages)
+          setIsDarkBg(luminance < 130);
+          return;
+        }
+      }
+
+      // Default to false (light / white page)
+      setIsDarkBg(false);
+    };
+
+    const onScrollOrResize = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(checkBackground);
+    };
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+    
+    // Check immediately and shortly after mount
+    checkBackground();
+    const timer = setTimeout(checkBackground, 150);
+
+    return () => {
+      window.removeEventListener('scroll', onScrollOrResize);
+      window.removeEventListener('resize', onScrollOrResize);
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(timer);
+    };
+  }, [location.pathname]);
   const [branding, setBranding] = useState({
     collegeName: 'Adhiparasakthi Engineering College',
     tagline: 'An Autonomous Institution',
@@ -261,7 +402,8 @@ function AppContent({ isLoading, setIsLoading }) {
     { label: 'Research & Development', to: '/r-d-cell' },
     { label: 'Academic Facilities', to: '/facilities' },
     { label: 'Lab Infrastructure', to: '/facilities/labs' },
-    { label: 'Curriculum & Regulations', to: '/coe' }
+    { label: 'Curriculum & Regulations', to: '/regulations' },
+    { label: 'Office of COE', to: '/coe' }
   ];
 
   const admissionsCareerLinks = [
@@ -937,6 +1079,8 @@ function AppContent({ isLoading, setIsLoading }) {
                   
                   {/* Separate detail files */}
                   <Route path="/departments/:id" element={<PageTransition><DepartmentDetail /></PageTransition>} />
+                  <Route path="/facilities/central-library" element={<PageTransition><CentralLibrary /></PageTransition>} />
+                  <Route path="/facilities/library" element={<PageTransition><CentralLibrary /></PageTransition>} />
                   <Route path="/facilities/:id" element={<PageTransition><FacilityDetail /></PageTransition>} />
                   <Route path="/admin-portal" element={<PageTransition><AdminPortal /></PageTransition>} />
                   <Route path="/administration/:id" element={<PageTransition><AdminProfile /></PageTransition>} />
@@ -970,7 +1114,7 @@ function AppContent({ isLoading, setIsLoading }) {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -15, scale: 0.9 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="mb-1.5 mr-1 relative px-4 py-2 bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-xs font-semibold rounded-[20px] shadow-lg shadow-indigo-500/30 border border-white/20 flex items-center gap-2 select-none z-10 whitespace-nowrap"
+                    className="mb-1.5 mr-1 relative px-3.5 py-2 bg-gradient-to-r from-[#07113A] via-[#0D1C4D] to-[#07113A] text-slate-100 text-xs font-semibold rounded-[20px] shadow-[0_8px_25px_rgba(7,17,58,0.45)] border border-white/10 flex items-center gap-2.5 select-none z-10 whitespace-nowrap backdrop-blur-md"
                   >
                     {/* Vertically centered, mini 32px APEC 3D hologram logo */}
                     <div className="chat-bubble-logo shrink-0 relative">
@@ -980,10 +1124,10 @@ function AppContent({ isLoading, setIsLoading }) {
                       />
                     </div>
 
-                    <span>{bubbleText}</span>
+                    <span className="text-slate-100 font-medium tracking-wide">{bubbleText}</span>
                     
-                    {/* Tail — outer border color matching gradient end */}
-                    <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-purple-600" />
+                    {/* Tail — border color matching the institutional navy background */}
+                    <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#0D1C4D]" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -996,13 +1140,14 @@ function AppContent({ isLoading, setIsLoading }) {
                       setChatOpen(true);
                       setBubbleVisible(false); // Immediately hide the popup when clicked
                     }}
+                    aria-label="Open AI Chat Assistant"
                     className="relative w-16 h-16 bg-transparent border-0 outline-none flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95"
                   >
-                    {/* 3D hologram Canvas with subtle glow outline (no solid white circular container) */}
+                    {/* 3D hologram Canvas */}
                     <div className="absolute inset-0 z-10 pointer-events-none chatbot-canvas-glow">
                       <Canvas camera={{ position: [0, 0, 2], fov: 60 }}>
                         <ambientLight intensity={2} />
-                        <HologramTorus />
+                        <HologramTorus isDark={isDarkBg} />
                       </Canvas>
                     </div>
                   </button>

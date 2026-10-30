@@ -91,7 +91,7 @@ export default function Placements() {
             Career Cells
           </span>
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">Placements & MOUs</h1>
-          <p className="text-sm text-gray-500 max-w-2xl leading-relaxed font-semibold">
+          <p className="text-sm sm:text-base text-gray-500 w-full text-justify leading-relaxed font-semibold">
             Adhiparasakthi Engineering College Placement cell trains students in technical skills, aptitude benchmarks, and soft skills to secure careers in corporate organisations.
           </p>
         </motion.div>
@@ -201,7 +201,7 @@ export default function Placements() {
             <p className="text-xs text-gray-400 font-semibold">Download the official Placement Cell brochure with detailed recruiters, highlights, and MOU particulars.</p>
           </div>
           <a 
-            href="/Documents/PDFs/Placement/Placement Cell.pdf" 
+            href="https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348642/apec/Documents/PDFs/Placement/Placement_Cell.pdf" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm shrink-0"

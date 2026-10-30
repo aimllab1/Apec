@@ -76,5 +76,10 @@ export function generateResponse(docId, rawData, sessionContext = {}) {
     return `Faculty Profile:\n\nName: ${rawData.name}\nDesignation: ${rawData.designation}\nDepartment: ${rawData.department}\nQualification: ${rawData.qualification}\nExperience: ${rawData.experience}\nEmail: ${rawData.email}`;
   }
 
+  // --- FAQS (FREQUENTLY ASKED QUESTIONS) ---
+  if (docId.startsWith('APECFAQ') || (rawData && rawData.answer)) {
+    return rawData.answer;
+  }
+
   return "I don't have detailed information on that yet. Please call the APEC helpline at +91 7418064336 or email info@apec.edu.in for assistance.";
 }

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Mail, Download, Award, BookOpen, 
-  MessageSquare, Building
+  MessageSquare, Building, Copy, Check, ExternalLink
 } from 'lucide-react';
 import principalImg from '../principal.webp';
 
@@ -26,6 +26,28 @@ const staggerContainer = {
 };
 
 export default function PrincipalDesk() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText('principal@apec.edu.in');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    // Open Gmail web compose in a new tab for seamless browser access
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=principal@apec.edu.in', '_blank');
+    // Also trigger native mailto client
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = 'mailto:principal@apec.edu.in';
+    document.body.appendChild(iframe);
+    setTimeout(() => iframe.remove(), 1000);
+  };
+
   const handleDownloadCV = () => {
     window.open('https://assets.super.so/47fa140c-5512-4ac6-a02b-6305f7e083a9/files/1900c68d-255a-455f-a68d-4b7e199bbf4e/Profile_(2).pdf', '_blank');
   };
@@ -47,7 +69,7 @@ export default function PrincipalDesk() {
           <h1 className="font-title text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2.5">
             Principal's Desk
           </h1>
-          <p className="text-sm sm:text-base text-slate-650 leading-relaxed max-w-4xl font-semibold">
+          <p className="text-sm sm:text-base text-slate-650 leading-relaxed w-full text-justify font-semibold">
             Welcome to the Office of the Principal. Explore the academic vision, leadership credentials, and official message from the Principal.
           </p>
         </motion.div>
@@ -79,15 +101,47 @@ export default function PrincipalDesk() {
             {/* Quick Contacts Card */}
             <div className="w-full max-w-xs sm:max-w-sm mt-3.5 p-3.5 sm:p-4 bg-slate-50/90 border border-slate-200/80 rounded-2xl text-left space-y-3 shadow-2xs">
               <div className="flex gap-2.5 items-start">
-                <Mail className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
-                <div className="min-w-0">
-                  <span className="text-[10px] uppercase tracking-wider font-extrabold text-slate-500 block mb-0.5">Official Email</span>
-                  <a href="mailto:principal@apec.ac.in" className="text-xs font-bold text-slate-900 hover:text-indigo-600 break-all">principal@apec.ac.in</a>
+                <div className="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0 text-indigo-600 mt-0.5">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-1 mb-0.5">
+                    <span className="text-[10px] uppercase tracking-wider font-extrabold text-slate-500">Official Email</span>
+                    <button
+                      onClick={handleCopyEmail}
+                      type="button"
+                      className="text-[10.5px] font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-50 hover:bg-indigo-100 transition-all cursor-pointer"
+                      title="Copy email to clipboard"
+                    >
+                      {copied ? (
+                        <>
+                          <Check className="w-3 h-3 text-emerald-600" />
+                          <span className="text-emerald-700">Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3" />
+                          <span>Copy</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <a 
+                    href="mailto:principal@apec.edu.in"
+                    onClick={handleEmailClick}
+                    className="text-xs font-bold text-slate-900 hover:text-indigo-600 hover:underline transition-colors break-all flex items-center gap-1 group/mail cursor-pointer"
+                    title="Click to compose email (opens Gmail / Mail app)"
+                  >
+                    <span>principal@apec.edu.in</span>
+                    <ExternalLink className="w-3 h-3 opacity-50 group-hover/mail:opacity-100 text-indigo-600 shrink-0" />
+                  </a>
                 </div>
               </div>
               <div className="flex gap-2.5 items-start">
-                <Building className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
-                <div className="min-w-0">
+                <div className="w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center shrink-0 text-indigo-600 mt-0.5">
+                  <Building className="w-4 h-4" />
+                </div>
+                <div className="min-w-0 flex-1">
                   <span className="text-[10px] uppercase tracking-wider font-extrabold text-slate-500 block mb-0.5">Office Location</span>
                   <span className="text-xs font-bold text-slate-900 block leading-snug">Principal's Office, Main Block, APEC Campus</span>
                 </div>
@@ -114,7 +168,7 @@ export default function PrincipalDesk() {
               Principal & Academic Chair, APEC (Autonomous)
             </span>
             
-            <div className="space-y-3 text-sm sm:text-base text-slate-650 font-normal leading-relaxed mb-5">
+            <div className="space-y-3 text-sm sm:text-base text-slate-650 font-normal leading-relaxed mb-5 text-justify">
               <p>
                 Dr. J. Raja is a distinguished academic leader, research guide, and the Principal of Adhiparasakthi Engineering College, Melmaruvathur. Under his executive direction, APEC has implemented major innovations under its autonomous curriculum status, establishing research collaborations and digital training portals.
               </p>
@@ -185,7 +239,7 @@ export default function PrincipalDesk() {
             "Values-Driven Engineering for a Sustainable Future"
           </h3>
           
-          <div className="space-y-2.5 text-sm sm:text-base text-slate-700 font-medium leading-relaxed italic font-serif">
+          <div className="space-y-2.5 text-sm sm:text-base text-slate-700 font-medium leading-relaxed italic font-serif text-justify">
             <p>
               "Dear Students, Parents, and Stakeholders,
             </p>

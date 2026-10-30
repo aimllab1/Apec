@@ -56,7 +56,7 @@ export default function IqacMembers() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
               IQAC Members
             </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl leading-relaxed">
+            <p className="text-sm md:text-base text-gray-500 font-bold w-full text-justify leading-relaxed">
               Official constitution list of the Internal Quality Assurance Cell (IQAC) members at Adhiparasakthi Engineering College coordinating institutional quality development.
             </p>
           </div>

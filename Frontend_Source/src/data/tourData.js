@@ -13,7 +13,7 @@ export const defaultScenes = {
   mainGate: {
     title: "Entrance Gate",
     type: "equirectangular",
-    panorama: "/Images/Panorama/Main_Gate.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340093/apec/Panorama/Main_Gate.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -29,7 +29,7 @@ export const defaultScenes = {
   junctionOne: {
     title: "Junction 1",
     type: "equirectangular",
-    panorama: "/Images/Panorama/Junction_1.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340027/apec/Panorama/Junction_1.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -55,7 +55,7 @@ export const defaultScenes = {
   reception: {
     title: "Main Block Reception",
     type: "equirectangular",
-    panorama: "/Images/Panorama/reception.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340128/apec/Panorama/reception.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -76,7 +76,7 @@ export const defaultScenes = {
   amma: {
     title: "Amma Statue",
     type: "equirectangular",
-    panorama: "/Images/Panorama/amma.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339991/apec/Panorama/amma.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -97,7 +97,7 @@ export const defaultScenes = {
   aimlLab: {
     title: "AIML Research Lab",
     type: "equirectangular",
-    panorama: "/Images/Panorama/aiml_lab.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793339977/apec/Panorama/aiml_lab.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -113,7 +113,7 @@ export const defaultScenes = {
   junctionTwo: {
     title: "Junction 2",
     type: "equirectangular",
-    panorama: "/Images/Panorama/junction_2.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340052/apec/Panorama/junction_2.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -134,7 +134,7 @@ export const defaultScenes = {
   pgBlock: {
     title: "PG Block",
     type: "equirectangular",
-    panorama: "/Images/Panorama/pg_block.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340114/apec/Panorama/pg_block.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -155,7 +155,7 @@ export const defaultScenes = {
   junctionThree: {
     title: "Junction 3",
     type: "equirectangular",
-    panorama: "/Images/Panorama/junction_3.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340063/apec/Panorama/junction_3.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,
@@ -176,7 +176,7 @@ export const defaultScenes = {
   library: {
     title: "Central Library",
     type: "equirectangular",
-    panorama: "/Images/Panorama/library_2.webp",
+    panorama: "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340075/apec/Panorama/library_2.webp",
     yaw: -45,
     pitch: 0,
     hfov: 110,

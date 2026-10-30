@@ -6,13 +6,14 @@
     {
       "name": "Dr. S. Arunkumar",
       "qualification": "MCA, M.Phil., Ph.D.",
-      "designation": "Assistant Professor",
+      "designation": "Head of Department",
       "department": "Computer Applications",
       "email": "arunkumar@apec.edu.in",
       "joining_date": "May 1, 2007",
       "faculty_id": "07TGMC0797",
       "experience": "28 Years, 7 Months",
-      "teaching_since": "November 9, 1998"
+      "teaching_since": "November 9, 1998",
+      "isHod": true
     },
     {
       "name": "Ms. C. Amuthavalli",
@@ -74,7 +75,7 @@
     "Qualification",
     "MCA, M.Phil., Ph.D.",
     "Designation",
-    "Assistant Professor",
+    "Head of Department",
     "Department",
     "Computer Applications",
     "E-Mail",

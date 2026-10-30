@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
+  ArrowDown, ArrowUp, ArrowLeft, Bell, Building2,
   Save, AlertCircle, RefreshCw, RotateCcw, Users, FileText, Settings, Plus, Minus, Trash2, 
   Edit3, Check, CheckCircle2, ChevronRight, ChevronDown, UserCheck, ShieldAlert, KeyRound, Globe,
   Upload, Sparkles, Database, Search, Download, Trash, Compass, Megaphone, Lock, User, Eye, EyeOff, Shield, Mail, Key,
@@ -13,6 +14,7 @@ import departmentsData from '../data/departmentsData.json';
 import { getLoadedTourDataAsync, saveTourDataAsync } from '../data/tourData';
 import { encryptText, decryptText } from '../utils/crypto';
 import HomeManager from '../components/admin/HomeManager';
+import AdOverlayModal, { DEFAULT_ADS } from '../components/AdOverlayModal';
 import { uploadFile } from '../utils/storage';
 import { 
   fetchInquiries, 
@@ -26,6 +28,51 @@ import {
 
 // Google API Key from global memory rule
 const GEMINI_API_KEY = "AIzaSyDIEi9pe5s5Nkgnc6wc_Xn7apkevjwnMLg";
+
+const DEFAULT_TICKER_ITEMS = [
+  { text: "UGC Autonomous 10 Years Status Conferred", icon: "🏛", link: "/ugc-self-disclosure" },
+  { text: "95%+ Placement Track Record – 150+ Top Recruiters", icon: "👨‍💼", link: "/placements" },
+  { text: "Admissions Open for B.E. / B.Tech / M.E. / MBA / MCA 2026–2027", icon: "📢", link: "/admission" },
+  { text: "NAAC Accredited Institution with Grade 'A'", icon: "🎖", link: "/about/profile" },
+  { text: "Anna University Affiliated Autonomous Institution", icon: "🎓", link: "/about/profile" },
+];
+
+export const DESIRED_DEPT_ORDER = [
+  'civil',
+  'mech',
+  'eee',
+  'ece',
+  'cse',
+  'it',
+  'chemical', // chemi
+  'aiml',
+  'csd',
+  'agri',
+  'aids',
+  'mca',
+  'mba',
+  'me-cse',
+  'me-vlsi',
+  'me-ped',
+  'me-thermal',
+  'me-cem',
+  'sh',
+  'phd-civil',
+  'phd-mech',
+  'phd-ece',
+  'phd-eee'
+];
+
+export function sortDepartments(deptList) {
+  if (!Array.isArray(deptList)) return [];
+  const getRank = (dept) => {
+    const k = (dept?.key || dept?.code || '').toLowerCase().trim();
+    if (k === 'chemi') return DESIRED_DEPT_ORDER.indexOf('chemical');
+    const idx = DESIRED_DEPT_ORDER.indexOf(k);
+    return idx !== -1 ? idx : 999;
+  };
+  return [...deptList].sort((a, b) => getRank(a) - getRank(b));
+}
 
 export default function EditorPanel() {
   const navigate = useNavigate();
@@ -51,7 +98,7 @@ export default function EditorPanel() {
   }, [isLoggedIn, navigate]);
 
   // Tab State: 'dashboard' | 'branding' | 'ticker' | 'departments' | 'inquiries' | 'rag_training' | '360_tour' | 'hod_portals' | 'ads'
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('homepage');
   const [inquiryStatusFilter, setInquiryStatusFilter] = useState('ALL');
   const [editingNoteInquiry, setEditingNoteInquiry] = useState(null);
   const [noteInputText, setNoteInputText] = useState('');
@@ -69,13 +116,28 @@ export default function EditorPanel() {
   });
 
   // 2. Ticker News Form State
-  const [tickerNews, setTickerNews] = useState([]);
+  const [tickerNews, setTickerNews] = useState(() => {
+    try {
+      const savedTicker = localStorage.getItem('apec_ticker_news');
+      if (savedTicker) {
+        const parsed = JSON.parse(savedTicker);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return DEFAULT_TICKER_ITEMS;
+  });
+  const [adminDeptSelected, setAdminDeptSelected] = useState(false);
+  const [deptSearchQuery, setDeptSearchQuery] = useState('');
+  const [facultySearchQuery, setFacultySearchQuery] = useState('');
+  const [editingTickerIdx, setEditingTickerIdx] = useState(null);
   const [newTickerText, setNewTickerText] = useState('');
   const [newTickerLink, setNewTickerLink] = useState('');
 
   // 7. Advertisement manager states
   const [adEnabled, setAdEnabled] = useState(true);
   const [ads, setAds] = useState([]);
+  const [previewAdModalOpen, setPreviewAdModalOpen] = useState(false);
+  const [adPosterLoading, setAdPosterLoading] = useState(false);
   const [newAd, setNewAd] = useState({
     title: '',
     details: '',
@@ -326,13 +388,13 @@ export default function EditorPanel() {
 
   // Load Initial Configuration Data
   useEffect(() => {
-    // Determine default tab based on role
+        // Determine default tab based on role
     if (userRole.startsWith('dept_')) {
       setActiveTab('dashboard');
     } else if (userRole === 'admission') {
-      setActiveTab('dashboard');
+      setActiveTab('departments');
     } else {
-      setActiveTab('dashboard');
+      setActiveTab('homepage');
     }
 
     // Centralized settings loader
@@ -354,7 +416,19 @@ export default function EditorPanel() {
       if (savedEnabled !== null) setAdEnabled(savedEnabled === 'true');
       const savedAds = localStorage.getItem('apec_advertisements');
       if (savedAds) {
-        try { setAds(JSON.parse(savedAds)); } catch (e) {}
+        try { 
+          const parsed = JSON.parse(savedAds);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setAds(parsed);
+          } else {
+            setAds(DEFAULT_ADS);
+          }
+        } catch (e) {
+          setAds(DEFAULT_ADS);
+        }
+      } else {
+        setAds(DEFAULT_ADS);
+        try { localStorage.setItem('apec_advertisements', JSON.stringify(DEFAULT_ADS)); } catch (e) {}
       }
 
       // 4. Load & Auto-sync departments & faculty with central server
@@ -377,7 +451,7 @@ export default function EditorPanel() {
             if (serverDepts && typeof serverDepts === 'object') {
               const arr = Object.values(serverDepts);
               if (arr.length > 0) {
-                setDepts(arr);
+                setDepts(sortDepartments(arr));
                 localStorage.setItem('apec_departments_data', JSON.stringify(serverDepts));
               }
             }
@@ -445,6 +519,7 @@ export default function EditorPanel() {
       return d;
     });
 
+    loadedDepts = sortDepartments(loadedDepts);
     setDepts(loadedDepts);
 
     // Apply department role lock
@@ -568,13 +643,42 @@ export default function EditorPanel() {
   // Helper to save ads
   const saveAdsToDB = (updatedAds) => {
     localStorage.setItem('apec_advertisements', JSON.stringify(updatedAds));
+    sessionStorage.removeItem('apec_ad_closed');
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('apec_storage_update'));
   };
 
   // Advertisement manager actions
   const handleToggleAdEnabled = (val) => {
     setAdEnabled(val);
     localStorage.setItem('apec_ad_popup_enabled', String(val));
+    sessionStorage.removeItem('apec_ad_closed');
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('apec_storage_update'));
     triggerSuccess(`Advertisement popup globally turned ${val ? 'ON' : 'OFF'}`);
+  };
+
+  const handleAdPosterUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAdPosterLoading(true);
+    try {
+      const res = await uploadFile(file, 'Uploads');
+      if (res?.downloadURL || res?.url) {
+        setNewAd(prev => ({ ...prev, imgUrl: res.downloadURL || res.url }));
+        triggerSuccess("Ad poster uploaded!");
+      }
+    } catch (err) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setNewAd(prev => ({ ...prev, imgUrl: reader.result }));
+        triggerSuccess("Ad poster loaded!");
+      };
+      reader.readAsDataURL(file);
+    } finally {
+      setAdPosterLoading(false);
+      e.target.value = '';
+    }
   };
 
   const handleAddAd = () => {
@@ -797,16 +901,24 @@ export default function EditorPanel() {
       alert("Announcement headline is required.");
       return;
     }
-    const item = {
+        const item = {
       text: tickerModalForm.text.trim(),
       link: tickerModalForm.link.trim() || '/admission',
       icon: tickerModalForm.icon || '📢'
     };
-    const updated = [...tickerNews, item];
+    let updated;
+    if (editingTickerIdx !== null) {
+      updated = [...tickerNews];
+      updated[editingTickerIdx] = item;
+      triggerSuccess("News announcement updated!");
+    } else {
+      updated = [...tickerNews, item];
+      triggerSuccess("Announcement added to live ticker!");
+    }
     setTickerNews(updated);
     saveTickerToDB(updated);
     setIsAddTickerModalOpen(false);
-    triggerSuccess("Announcement added to live ticker!");
+    setEditingTickerIdx(null);
   };
 
   // Delete Faculty Member
@@ -1066,74 +1178,81 @@ export default function EditorPanel() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 text-gray-900 pt-6 pb-20 px-4 md:px-8 select-none text-left">
-      <div className="max-w-[1400px] mx-auto animate-fade-in">
+    <div className="min-h-screen bg-slate-50 text-gray-900 pt-6 pb-20 px-4 sm:px-6 lg:px-8 xl:px-10 text-left">
+      <div className="w-full max-w-[1720px] mx-auto animate-fade-in">
         
         {/* Banner / Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
           <div>
-            <h1 className="font-title text-3xl font-black text-slate-900 leading-tight">
-              APEC Web Portal Console
-            </h1>
-            <p className="text-sm font-semibold text-slate-500 mt-1">
-              Welcome, <span className="text-indigo-600 font-extrabold">{userEmail.split('@')[0]}</span> (Role: <span className="uppercase font-bold text-slate-700">{userRole}</span>)
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="font-title text-2xl lg:text-3xl font-black text-slate-900 leading-tight">
+                APEC Web Console
+              </h1>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 shadow-2xs">
+                <Shield className="w-3.5 h-3.5 text-indigo-600" />
+                <span className="font-mono text-[11px]">{userEmail}</span>
+                <span className="text-indigo-300">•</span>
+                <span className="uppercase font-extrabold">{userRole}</span>
+              </span>
+            </div>
+            <p className="text-xs font-semibold text-slate-500 mt-1">
+              Centralized Content Management System & Operational Hub
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {/* Public View Link */}
+            <Link 
+              to="/"
+              title="Open public website view"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-2xs active:scale-95 shrink-0"
+            >
+              <Globe className="w-3.5 h-3.5 text-indigo-600" /> Public Site
+            </Link>
+
             {/* ERP Portal Link */}
             <a 
               href="https://portal.vmedulife.com/public/auth/#/login/apec-melmaruvathur"
               target="_blank"
               rel="noopener noreferrer"
               title="Open VMedulife ERP Portal"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-blue-200 text-blue-800 bg-blue-50 hover:bg-blue-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-blue-200 text-blue-800 bg-blue-50/70 hover:bg-blue-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-2xs active:scale-95 shrink-0"
             >
-              <Globe className="w-3.5 h-3.5 text-blue-600" /> ERP Portal
+              <ExternalLink className="w-3.5 h-3.5 text-blue-600" /> ERP
             </a>
 
-            {/* Public View Link */}
-            <Link 
-              to="/"
-              title="View Public College Website"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
-            >
-              <Globe className="w-3.5 h-3.5 text-indigo-600" /> Public View
-            </Link>
-
-            {/* Export Config */}
-            <button 
-              onClick={handleExportCmsBackup}
-              title="Export all CMS settings & faculty photos as a JSON file"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
-            >
-              <Download className="w-3.5 h-3.5 text-indigo-600" /> Export Backup
-            </button>
-
-            {/* Import Config */}
-            <label 
-              title="Import JSON backup to sync changes across devices & Network IPs"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
-            >
-              <Upload className="w-3.5 h-3.5 text-emerald-600" /> Import Sync
-              <input type="file" accept="application/json" onChange={handleImportCmsBackup} className="hidden" />
-            </label>
-
-            {/* Download departmentsData.json */}
-            <button 
-              onClick={handleDownloadDepartmentsJson}
-              title="Download departmentsData.json to permanently commit to code repository"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-indigo-200 text-indigo-700 bg-indigo-50 hover:bg-indigo-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
-            >
-              <Database className="w-3.5 h-3.5 text-indigo-600" /> Code Sync JSON
-            </button>
+            {/* Backup & Sync Group */}
+            <div className="inline-flex items-center rounded-xl shadow-2xs border border-slate-200 bg-white p-0.5">
+              <button 
+                onClick={handleExportCmsBackup}
+                title="Export all CMS settings & faculty photos as a JSON file"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-700 hover:bg-slate-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5 text-indigo-600" /> Export
+              </button>
+              <label 
+                title="Import JSON backup to sync changes across devices"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-700 hover:bg-slate-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer border-l border-slate-200"
+              >
+                <Upload className="w-3.5 h-3.5 text-emerald-600" /> Import
+                <input type="file" accept="application/json" onChange={handleImportCmsBackup} className="hidden" />
+              </label>
+              <button 
+                onClick={handleDownloadDepartmentsJson}
+                title="Download departmentsData.json to permanently commit to code repository"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-indigo-700 hover:bg-indigo-50 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer border-l border-slate-200"
+              >
+                <Database className="w-3.5 h-3.5 text-indigo-600" /> Code Sync
+              </button>
+            </div>
 
             {userRole === 'admin' && (
               <button 
                 onClick={resetToFactoryDefault}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+                title="Reset to original repository defaults"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-red-200 text-red-600 bg-red-50 hover:bg-red-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-2xs active:scale-95 shrink-0"
               >
-                <RefreshCw className="w-3.5 h-3.5" /> Revert Defaults
+                <RefreshCw className="w-3.5 h-3.5" /> Revert
               </button>
             )}
 
@@ -1141,7 +1260,7 @@ export default function EditorPanel() {
             <button 
               onClick={handleLogout}
               title="Logout and lock portal session"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-rose-200 text-rose-700 bg-rose-50 hover:bg-rose-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm active:scale-95 shrink-0"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-rose-200 text-rose-700 bg-rose-50 hover:bg-rose-100 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-2xs active:scale-95 shrink-0"
             >
               <LogOut className="w-3.5 h-3.5 text-rose-600" /> Sign Out
             </button>
@@ -1163,11 +1282,11 @@ export default function EditorPanel() {
           )}
         </AnimatePresence>
 
-        {/* Layout grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Layout: Desktop Responsive Flex Layout */}
+        <div className="flex flex-col lg:flex-row gap-6 xl:gap-8 items-start">
           
-          {/* Left panel tabs (Restricted based on roles) */}
-          <div className="lg:col-span-1 flex flex-col gap-2">
+          {/* Left panel tabs: Fixed responsive width on desktop, sticky on scroll */}
+          <aside className="w-full lg:w-64 xl:w-72 shrink-0 lg:sticky lg:top-6 lg:self-start space-y-2">
             
             {/* HOD ROLE CUSTOM NAVIGATION */}
             {userRole.startsWith('dept_') ? (
@@ -1311,55 +1430,12 @@ export default function EditorPanel() {
                   </span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </button>
-
-                <button
-                  onClick={() => { setActiveTab('inquiries'); setSelectedFacultyIdx(null); }}
-                  className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                    activeTab === 'inquiries' 
-                      ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                      : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                  }`}
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Database className="w-4 h-4 text-rose-400" /> Department Leads
-                  </span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
               </>
             ) : (
               <>
-                {(userRole === 'admin' || userRole === 'admission') && (
-                  <button
-                    onClick={() => { setActiveTab('dashboard'); setSelectedFacultyIdx(null); }}
-                    className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                      activeTab === 'dashboard' 
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <BarChart3 className="w-4 h-4 text-indigo-200" /> Executive Analytics
-                    </span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
-
                 {userRole === 'admin' && (
                   <>
-                    <button
-                      onClick={() => { setActiveTab('branding'); setSelectedFacultyIdx(null); }}
-                      className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                        activeTab === 'branding' 
-                          ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                          : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                      }`}
-                    >
-                      <span className="flex items-center gap-2.5">
-                        <Globe className="w-4 h-4" /> Branding & Contact
-                      </span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </button>
-
+                    {/* HomePage (merged with Branding) */}
                     <button
                       onClick={() => { setActiveTab('homepage'); setSelectedFacultyIdx(null); }}
                       className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
@@ -1369,57 +1445,41 @@ export default function EditorPanel() {
                       }`}
                     >
                       <span className="flex items-center gap-2.5">
-                        <Layout className="w-4 h-4 text-amber-300" /> Home Page Customizer
+                        <Layout className="w-4 h-4 text-amber-300" /> HomePage
                       </span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
 
+                    {/* News (renamed from News Ticker) */}
                     <button
-                      onClick={() => { setActiveTab('ticker'); setSelectedFacultyIdx(null); }}
+                      onClick={() => { setActiveTab('news'); setSelectedFacultyIdx(null); }}
                       className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                        activeTab === 'ticker' 
+                        activeTab === 'news' || activeTab === 'ticker' 
                           ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
                           : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
                       }`}
                     >
                       <span className="flex items-center gap-2.5">
-                        <FileText className="w-4 h-4" /> News Ticker
+                        <Bell className="w-4 h-4 text-indigo-400" /> News
+                      </span>
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+
+                    {/* Faculty (renamed from Faculty Directories) */}
+                    <button
+                      onClick={() => { setActiveTab('departments'); setSelectedFacultyIdx(null); setAdminDeptSelected(false); }}
+                      className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
+                        activeTab === 'departments' 
+                          ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
+                          : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <Users className="w-4 h-4 text-indigo-400" /> Faculty
                       </span>
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </>
-                )}
-
-                {userRole === 'admin' && (
-                  <button
-                    onClick={() => { setActiveTab('departments'); setSelectedFacultyIdx(null); }}
-                    className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                      activeTab === 'departments' 
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <Users className="w-4 h-4" /> Faculty Directories
-                    </span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                )}
-
-                {(userRole === 'admin' || userRole === 'admission') && (
-                  <button
-                    onClick={() => { setActiveTab('inquiries'); setSelectedFacultyIdx(null); }}
-                    className={`w-full p-4 rounded-2xl border text-left font-black text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer ${
-                      activeTab === 'inquiries' 
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg' 
-                        : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100/50'
-                    }`}
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <Database className="w-4 h-4" /> Inquiries & leads
-                    </span>
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
                 )}
               </>
             )}
@@ -1450,7 +1510,7 @@ export default function EditorPanel() {
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  <Compass className="w-4 h-4" /> 360 VR Manager
+                  <Compass className="w-4 h-4" /> 360
                 </span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
@@ -1466,7 +1526,7 @@ export default function EditorPanel() {
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  <KeyRound className="w-4 h-4 text-amber-400" /> HOD Accounts & Portals
+                  <KeyRound className="w-4 h-4 text-amber-400" /> HOD Access
                 </span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
@@ -1526,10 +1586,10 @@ export default function EditorPanel() {
                 <ChevronRight className="w-3.5 h-3.5 text-rose-400" />
               </button>
             </div>
-          </div>
+          </aside>
 
-          {/* Right Panel Main Workspace */}
-          <div className="lg:col-span-3 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
+          {/* Right Panel Main Workspace: Fully responsive desktop canvas */}
+          <main className="flex-1 min-w-0 w-full bg-white border border-slate-200 rounded-3xl p-6 md:p-8 xl:p-10 shadow-sm">
             
             {/* DEPARTMENT HOD EXECUTIVE DASHBOARD */}
             {activeTab === 'dashboard' && userRole.startsWith('dept_') && depts[selectedDeptIdx] && (
@@ -1546,7 +1606,7 @@ export default function EditorPanel() {
                         {depts[selectedDeptIdx].name}
                       </h2>
                       <p className="text-xs text-indigo-200/80 mt-1 max-w-xl font-medium leading-relaxed">
-                        Welcome to your department administration workspace. Update HOD messages, faculty profiles, lab facilities, placement records, and candidate inquiries.
+                        Department portal operations console. Manage syllabus, faculty rosters, lab facilities, placement records, and candidate inquiries.
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
@@ -1710,385 +1770,169 @@ export default function EditorPanel() {
                       <h4 className="font-black text-slate-900 text-sm">Placement Statistics</h4>
                       <p className="text-xs text-slate-400 font-semibold mt-1">Edit placement percentage, packages, and recruiter list.</p>
                     </button>
-
-                    <button
-                      onClick={() => setActiveTab('inquiries')}
-                      className="p-5 bg-white border border-slate-200 hover:border-indigo-400 rounded-2xl text-left transition-all group cursor-pointer shadow-xs"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                        <Database className="w-5 h-5" />
-                      </div>
-                      <h4 className="font-black text-slate-900 text-sm">Department Inquiries</h4>
-                      <p className="text-xs text-slate-400 font-semibold mt-1">Review student admission leads interested in your department.</p>
-                    </button>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* EXECUTIVE ANALYTICS DASHBOARD */}
-            {activeTab === 'dashboard' && (userRole === 'admin' || userRole === 'admission') && (
-              <div className="space-y-8">
-                {/* Hero Header Banner */}
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-850 to-slate-950 text-white p-7 md:p-8 shadow-2xl border border-indigo-700/30">
-                  <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-                  <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                    <div>
-                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-200 text-[11px] font-extrabold uppercase tracking-wider mb-3">
-                        <Shield className="w-3.5 h-3.5 text-indigo-400" /> Executive Master Command Center
-                      </div>
-                      <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white">
-                        Welcome back, <span className="text-indigo-300 capitalize">{userEmail ? userEmail.split('@')[0] : userRole}</span>
-                      </h2>
-                      <p className="text-xs text-indigo-200/80 mt-1 max-w-xl font-medium leading-relaxed">
-                        Monitor real-time admission inquiries, departmental interest distribution, faculty directories, and system sync state.
-                      </p>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-3">
-                      <div className="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/15 text-xs text-right">
-                        <span className="block text-[9px] uppercase tracking-wider text-indigo-300 font-extrabold">System Date</span>
-                        <span className="font-mono font-bold text-white">{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      </div>
-                      <button
-                        onClick={() => setActiveTab('inquiries')}
-                        className="px-4 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-indigo-500/30 cursor-pointer flex items-center gap-2"
-                      >
-                        <Database className="w-4 h-4" /> Manage Leads ({totalInquiries})
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stat Cards Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {/* Card 1: Inquiries */}
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
-                    <div>
-                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Total Admission Inquiries</span>
-                      <span className="text-3xl font-black text-slate-900 block mt-1">{totalInquiries}</span>
-                      <div className="flex items-center gap-1.5 mt-2">
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-[10px] font-extrabold border border-emerald-200">
-                          <TrendingUp className="w-3 h-3" /> {newLeadsCount} New Leads
-                        </span>
-                      </div>
-                    </div>
-                    <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 group-hover:scale-110 transition-transform">
-                      <Users className="w-6 h-6" />
-                    </div>
-                  </div>
-
-                  {/* Card 2: Top Course */}
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
-                    <div>
-                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Top Demanded Course</span>
-                      <span className="text-base font-black text-slate-900 block mt-1 truncate max-w-[140px]" title={topCourse}>
-                        {topCourse}
-                      </span>
-                      <div className="flex items-center gap-1.5 mt-2">
-                        <span className="text-[10px] font-bold text-slate-500">
-                          {topCourseCount} request{topCourseCount !== 1 ? 's' : ''} ({totalInquiries ? Math.round((topCourseCount / totalInquiries) * 100) : 0}%)
-                        </span>
-                      </div>
-                    </div>
-                    <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform">
-                      <GraduationCap className="w-6 h-6" />
-                    </div>
-                  </div>
-
-                  {/* Card 3: Total Faculty */}
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
-                    <div>
-                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">Faculty Members</span>
-                      <span className="text-3xl font-black text-slate-900 block mt-1">{totalFacultyCount}</span>
-                      <div className="flex items-center gap-1.5 mt-2">
-                        <span className="text-[10px] font-bold text-indigo-600">
-                          Across {depts.length} Departments
-                        </span>
-                      </div>
-                    </div>
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
-                      <BookOpen className="w-6 h-6" />
-                    </div>
-                  </div>
-
-                  {/* Card 4: System Sync */}
-                  <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between hover:border-indigo-300 transition-all group">
-                    <div>
-                      <span className="text-[10px] uppercase font-black tracking-wider text-slate-400 block">System CMS State</span>
-                      <span className="text-sm font-black text-slate-900 block mt-1">Live CMS Operational</span>
-                      <div className="flex items-center gap-1.5 mt-2">
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 text-[10px] font-extrabold border border-indigo-200">
-                          <CheckCircle2 className="w-3 h-3 text-indigo-500" /> Sync Active
-                        </span>
-                      </div>
-                    </div>
-                    <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
-                      <Database className="w-6 h-6" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Department Demand Distribution & Pipeline Stages */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Department Demand Bar Chart */}
-                  <div className="lg:col-span-2 bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <h3 className="font-title text-base font-black text-slate-900 flex items-center gap-2">
-                          <BarChart3 className="w-4 h-4 text-indigo-600" /> Department Inquiry Demand Distribution
-                        </h3>
-                        <p className="text-xs text-slate-400 font-semibold mt-0.5">Live student preference metrics across engineering disciplines</p>
-                      </div>
-                      <span className="text-xs font-mono font-bold text-indigo-600 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-xs">
-                        {totalInquiries} Leads Total
-                      </span>
-                    </div>
-
-                    <div className="space-y-3 pt-1">
-                      {Object.entries(courseCounts).length === 0 ? (
-                        <div className="p-8 text-center text-xs font-semibold text-slate-400">
-                          No department inquiry data recorded yet.
-                        </div>
-                      ) : (
-                        Object.entries(courseCounts)
-                          .sort((a, b) => b[1] - a[1])
-                          .map(([deptName, count]) => {
-                            const percentage = totalInquiries ? Math.round((count / totalInquiries) * 100) : 0;
-                            return (
-                              <div key={deptName} className="space-y-1">
-                                <div className="flex justify-between items-center text-xs font-bold">
-                                  <span className="text-slate-800 uppercase tracking-wide flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-indigo-600" />
-                                    {deptName}
-                                  </span>
-                                  <span className="font-mono text-slate-500">
-                                    {count} lead{count !== 1 ? 's' : ''} ({percentage}%)
-                                  </span>
-                                </div>
-                                <div className="w-full bg-white border border-slate-200 rounded-full h-3 overflow-hidden p-0.5">
-                                  <motion.div
-                                    initial={{ width: 0 }}
-                                    animate={{ width: `${percentage}%` }}
-                                    transition={{ duration: 0.7, ease: "easeOut" }}
-                                    className="bg-gradient-to-r from-indigo-500 to-purple-600 h-full rounded-full"
-                                  />
-                                </div>
-                              </div>
-                            );
-                          })
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Admissions Pipeline & Quick Action Cards */}
-                  <div className="space-y-6">
-                    {/* Pipeline Stage Summary */}
-                    <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-                      <h3 className="font-title text-base font-black text-slate-900 flex items-center gap-2">
-                        <Activity className="w-4 h-4 text-emerald-600" /> Admissions Pipeline
-                      </h3>
-                      <div className="space-y-2.5">
-                        <div className="p-3 rounded-2xl bg-amber-50/80 border border-amber-200 flex items-center justify-between text-xs font-bold text-amber-900">
-                          <span className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" /> New Inquiry Leads
-                          </span>
-                          <span className="font-mono text-amber-800 bg-amber-200/60 px-2.5 py-0.5 rounded-lg">{newLeadsCount}</span>
-                        </div>
-
-                        <div className="p-3 rounded-2xl bg-blue-50/80 border border-blue-200 flex items-center justify-between text-xs font-bold text-blue-900">
-                          <span className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-blue-500" /> In Contact / Counseling
-                          </span>
-                          <span className="font-mono text-blue-800 bg-blue-200/60 px-2.5 py-0.5 rounded-lg">{inContactCount}</span>
-                        </div>
-
-                        <div className="p-3 rounded-2xl bg-emerald-50/80 border border-emerald-200 flex items-center justify-between text-xs font-bold text-emerald-900">
-                          <span className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" /> Confirmed Enrolled
-                          </span>
-                          <span className="font-mono text-emerald-800 bg-emerald-200/60 px-2.5 py-0.5 rounded-lg">{enrolledCount}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Quick Launch Hub */}
-                    <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-                      <h3 className="font-title text-xs font-black text-slate-400 uppercase tracking-wider">Quick Actions</h3>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <button
-                          onClick={() => setActiveTab('homepage')}
-                          className="p-3 rounded-xl border border-indigo-200 hover:border-indigo-400 bg-indigo-50/70 font-bold text-indigo-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
-                        >
-                          <Layout className="w-4 h-4 text-indigo-600" /> Customize Home
-                        </button>
-                        <button
-                          onClick={exportInquiriesToCSV}
-                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
-                        >
-                          <Download className="w-4 h-4 text-indigo-600" /> Export CSV
-                        </button>
-                        <button
-                          onClick={() => setActiveTab('hod_portals')}
-                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
-                        >
-                          <KeyRound className="w-4 h-4 text-amber-500" /> HOD Access
-                        </button>
-                        <button
-                          onClick={() => setActiveTab('ads')}
-                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
-                        >
-                          <Megaphone className="w-4 h-4 text-purple-600" /> Popup Ads
-                        </button>
-                        <button
-                          onClick={() => setActiveTab('rag_training')}
-                          className="p-3 rounded-xl border border-slate-200 hover:border-indigo-400 bg-white font-bold text-slate-700 flex flex-col items-center gap-1.5 transition-all text-center cursor-pointer shadow-xs"
-                        >
-                          <Sparkles className="w-4 h-4 text-indigo-600" /> AI Knowledge
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* BRANDING EDITOR */}
-            {activeTab === 'branding' && userRole === 'admin' && (
-              <div className="space-y-6">
-                <div>
-                  <h3 className="font-title text-xl font-black text-slate-900">Branding & Contact Info Settings</h3>
-                  <p className="text-xs text-slate-500 font-semibold mt-0.5">Edit main title blocks and contact hotlines.</p>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 tracking-wider">College Name</label>
-                    <input 
-                      type="text"
-                      value={branding.collegeName}
-                      onChange={(e) => setBranding({...branding, collegeName: e.target.value})}
-                      className="w-full text-sm px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 tracking-wider">Tagline/Status</label>
-                    <input 
-                      type="text"
-                      value={branding.tagline}
-                      onChange={(e) => setBranding({...branding, tagline: e.target.value})}
-                      className="w-full text-sm px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 tracking-wider">Admissions Helpline 1</label>
-                    <input 
-                      type="text"
-                      value={branding.helpline1}
-                      onChange={(e) => setBranding({...branding, helpline1: e.target.value})}
-                      className="w-full text-sm px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 tracking-wider">Admissions Helpline 2</label>
-                    <input 
-                      type="text"
-                      value={branding.helpline2}
-                      onChange={(e) => setBranding({...branding, helpline2: e.target.value})}
-                      className="w-full text-sm px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
-                    />
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-slate-100 flex justify-end">
-                  <button
-                    onClick={saveBranding}
-                    className="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow cursor-pointer transition-all active:scale-95"
-                  >
-                    <Save className="w-4 h-4" /> Save Branding Changes
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* HOME PAGE CUSTOMIZER */}
+            {/* HOME PAGE */}
             {activeTab === 'homepage' && userRole === 'admin' && (
-              <div className="-m-6 sm:-m-8">
-                <HomeManager />
-              </div>
+              <HomeManager />
             )}
 
-             {/* TICKER EDITOR */}
-            {activeTab === 'ticker' && userRole === 'admin' && (
+             {/* NEWS ANNOUNCEMENTS (Renamed from Ticker) */}
+            {(activeTab === 'news' || activeTab === 'ticker') && userRole === 'admin' && (
               <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-150 pb-4">
                   <div>
-                    <h3 className="font-title text-xl font-black text-slate-900">News Ticker Announcements</h3>
-                    <p className="text-xs text-slate-500 font-semibold mt-0.5">Control the scroll marquee news slides with optional hyperlinks.</p>
+                    <div className="flex items-center gap-2">
+                      <Bell className="w-5 h-5 text-indigo-600" />
+                      <h3 className="font-title text-xl font-black text-slate-900">News Announcements</h3>
+                      <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-extrabold uppercase">
+                        Live Header Ticker ({tickerNews.length})
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 font-semibold mt-1">
+                      Continuous headline announcements streamed on the public college website header and homepage.
+                    </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => setIsAddTickerModalOpen(true)}
-                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5 self-start sm:self-center"
-                  >
-                    <Plus className="w-4 h-4" /> Add Announcement
-                  </button>
-                </div>
 
-                {/* Add new slide */}
-                <div className="flex flex-col gap-3 bg-slate-50 p-5 border border-slate-200 rounded-2xl">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Announcement Text *</label>
-                    <input 
-                      type="text"
-                      placeholder="Enter new announcement text..."
-                      value={newTickerText}
-                      onChange={(e) => setNewTickerText(e.target.value)}
-                      className="w-full text-sm px-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-650 font-semibold text-slate-800"
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Optional Hyperlink Link</label>
-                    <input 
-                      type="text"
-                      placeholder="e.g. /cutoff-calculator or external URL"
-                      value={newTickerLink}
-                      onChange={(e) => setNewTickerLink(e.target.value)}
-                      className="w-full text-sm px-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-650 font-semibold text-slate-800"
-                    />
-                  </div>
-                  <div className="flex justify-end pt-1">
+                  <div className="flex items-center gap-2 self-start sm:self-auto">
                     <button
-                      onClick={addTickerItem}
-                      className="bg-indigo-650 hover:bg-indigo-700 text-white font-black text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl inline-flex items-center gap-1 cursor-pointer transition-all active:scale-95 shadow-sm"
+                      type="button"
+                      onClick={() => {
+                        setTickerModalForm({ text: '', link: '/admission', icon: '📢' });
+                        setEditingTickerIdx(null);
+                        setIsAddTickerModalOpen(true);
+                      }}
+                      className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
                     >
-                      <Plus className="w-4 h-4" /> Add Item
+                      <Plus className="w-4 h-4" /> Add News Item
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (window.confirm("Restore the 5 standard running news announcements?")) {
+                          setTickerNews(DEFAULT_TICKER_ITEMS);
+                          saveTickerToDB(DEFAULT_TICKER_ITEMS);
+                          triggerSuccess("Restored default running news announcements!");
+                        }
+                      }}
+                      title="Restore default running announcements"
+                      className="p-2 border border-slate-200 hover:bg-slate-100 rounded-xl text-slate-600 cursor-pointer"
+                    >
+                      <RotateCcw className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
 
-                {/* List of items */}
-                <div className="border border-slate-200 rounded-2xl divide-y divide-slate-150 overflow-hidden bg-slate-50">
-                  {tickerNews.map((item, idx) => (
-                    <div key={idx} className="flex justify-between items-center gap-4 p-4 hover:bg-slate-100/30 transition-colors">
-                      <div className="flex flex-col text-left">
-                        <span className="text-sm font-semibold text-slate-700 leading-normal">
-                          {typeof item === 'object' ? item.text : item}
-                        </span>
-                        {typeof item === 'object' && item.link && (
-                          <span className="text-[10px] text-indigo-500 font-bold font-mono mt-0.5">
-                            Link: {item.link}
-                          </span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => deleteTickerItem(idx)}
-                        className="text-red-500 hover:text-red-700 p-1.5 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                        title="Delete announcement"
+                {/* News Announcements List */}
+                <div className="space-y-3">
+                  {tickerNews.map((item, idx) => {
+                    const headline = typeof item === 'object' ? item.text : item;
+                    const link = typeof item === 'object' ? item.link : '';
+                    const icon = typeof item === 'object' ? (item.icon || '📢') : '📢';
+
+                    return (
+                      <div
+                        key={idx}
+                        className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs hover:border-indigo-300 transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                       >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  ))}
+                        <div className="flex items-center gap-3.5 min-w-0">
+                          {/* Icon badge */}
+                          <div className="w-11 h-11 rounded-2xl bg-indigo-50 border border-indigo-150 flex items-center justify-center text-xl shrink-0 shadow-2xs">
+                            {icon}
+                          </div>
+
+                          {/* Display name & hyperlink */}
+                          <div className="min-w-0">
+                            <span className="text-sm font-bold text-slate-900 block leading-snug">
+                              {headline}
+                            </span>
+                            <div className="flex flex-wrap items-center gap-2 mt-1">
+                              {link ? (
+                                <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-indigo-600 bg-indigo-50/70 px-2.5 py-0.5 rounded-lg border border-indigo-200/60">
+                                  <ExternalLink className="w-3 h-3" />
+                                  <span>{link}</span>
+                                </span>
+                              ) : (
+                                <span className="text-[11px] text-slate-400 font-semibold italic">No destination link</span>
+                              )}
+                              <span className="text-slate-300">•</span>
+                              <span className="text-[10px] font-extrabold uppercase text-slate-400">
+                                Position #{idx + 1}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Actions: Move Up, Move Down, Edit, Delete */}
+                        <div className="flex items-center gap-1.5 self-end sm:self-center shrink-0">
+                          <button
+                            type="button"
+                            disabled={idx === 0}
+                            onClick={() => {
+                              if (idx === 0) return;
+                              const copy = [...tickerNews];
+                              const temp = copy[idx];
+                              copy[idx] = copy[idx - 1];
+                              copy[idx - 1] = temp;
+                              setTickerNews(copy);
+                              saveTickerToDB(copy);
+                            }}
+                            className="p-2 border border-slate-200 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                            title="Move Up in marquee"
+                          >
+                            <ArrowUp className="w-3.5 h-3.5" />
+                          </button>
+
+                          <button
+                            type="button"
+                            disabled={idx === tickerNews.length - 1}
+                            onClick={() => {
+                              if (idx === tickerNews.length - 1) return;
+                              const copy = [...tickerNews];
+                              const temp = copy[idx];
+                              copy[idx] = copy[idx + 1];
+                              copy[idx + 1] = temp;
+                              setTickerNews(copy);
+                              saveTickerToDB(copy);
+                            }}
+                            className="p-2 border border-slate-200 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
+                            title="Move Down in marquee"
+                          >
+                            <ArrowDown className="w-3.5 h-3.5" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditingTickerIdx(idx);
+                              setTickerModalForm({
+                                text: headline,
+                                link: link || '',
+                                icon: icon || '📢'
+                              });
+                              setIsAddTickerModalOpen(true);
+                            }}
+                            className="p-2 border border-indigo-200 rounded-xl text-indigo-650 hover:bg-indigo-50 transition-all cursor-pointer"
+                            title="Edit Announcement"
+                          >
+                            <Edit3 className="w-3.5 h-3.5" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => deleteTickerItem(idx)}
+                            className="p-2 border border-rose-200 rounded-xl text-rose-600 hover:bg-rose-50 transition-all cursor-pointer"
+                            title="Delete Announcement"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -2096,9 +1940,28 @@ export default function EditorPanel() {
             {/* ADVERTISEMENT OVERLAY MANAGER */}
             {activeTab === 'ads' && userRole === 'admin' && (
               <div className="space-y-8">
-                <div>
-                  <h3 className="font-title text-xl font-black text-slate-900">Advertisement Overlay Manager</h3>
-                  <p className="text-xs text-slate-500 font-semibold mt-0.5">Control the global admissions overlay, schedule functional timers, and host multiple advertisements.</p>
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-150 pb-4">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <Megaphone className="w-5 h-5 text-indigo-600" />
+                      <h3 className="font-title text-xl font-black text-slate-900">Advertisement Overlay Manager</h3>
+                      <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-extrabold uppercase">
+                        Global Home Popup
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 font-semibold mt-0.5">Control the admissions alert popup, schedule functional timers, and manage campaign advertisements.</p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPreviewAdModalOpen(true)}
+                      className="px-4 py-2.5 rounded-xl border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100 text-indigo-700 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs active:scale-95"
+                    >
+                      <Eye className="w-4 h-4 text-indigo-600" />
+                      <span>Preview Live Overlay</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Global Status Switch */}
@@ -2130,7 +1993,7 @@ export default function EditorPanel() {
                       <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Ad Title *</label>
                       <input 
                         type="text"
-                        placeholder="e.g. APEC Admissions Open"
+                        placeholder="e.g. APEC Admissions Open 2026-27"
                         value={newAd.title}
                         onChange={(e) => setNewAd({...newAd, title: e.target.value})}
                         className="w-full text-xs px-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-semibold"
@@ -2140,27 +2003,39 @@ export default function EditorPanel() {
                       <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Details / Description</label>
                       <input 
                         type="text"
-                        placeholder="e.g. Register now for the counseling 2026 intake..."
+                        placeholder="e.g. Register now for counseling intake..."
                         value={newAd.details}
                         onChange={(e) => setNewAd({...newAd, details: e.target.value})}
                         className="w-full text-xs px-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-semibold"
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Image Path / URL</label>
+                      <div className="flex items-center justify-between">
+                        <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Poster Image URL *</label>
+                        <label className="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 cursor-pointer flex items-center gap-1">
+                          <Upload className="w-3 h-3" />
+                          <span>{adPosterLoading ? 'Processing...' : 'Upload from Device'}</span>
+                          <input type="file" accept="image/*" className="hidden" onChange={handleAdPosterUpload} />
+                        </label>
+                      </div>
                       <input 
                         type="text"
-                        placeholder="e.g. /Images/College/library.webp"
+                        placeholder="Paste image URL or click 'Upload from Device' above"
                         value={newAd.imgUrl}
                         onChange={(e) => setNewAd({...newAd, imgUrl: e.target.value})}
                         className="w-full text-xs px-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-semibold"
                       />
+                      {newAd.imgUrl && (
+                        <div className="w-full h-24 rounded-xl overflow-hidden border border-slate-200 mt-1 bg-slate-900">
+                          <img src={newAd.imgUrl} alt="Ad Preview" className="w-full h-full object-cover" />
+                        </div>
+                      )}
                     </div>
                     <div className="space-y-1">
                       <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Hyperlink Action (Optional)</label>
                       <input 
                         type="text"
-                        placeholder="e.g. /admission or registration link"
+                        placeholder="e.g. /admission or https://..."
                         value={newAd.link}
                         onChange={(e) => setNewAd({...newAd, link: e.target.value})}
                         className="w-full text-xs px-4 py-2.5 bg-white border border-slate-200 rounded-xl outline-none focus:border-indigo-600 font-semibold"
@@ -2275,96 +2150,294 @@ export default function EditorPanel() {
               </div>
             )}
 
-            {/* DEPARTMENT PORTAL CONTENT EDITOR */}
+            {/* DEPARTMENT & FACULTY PORTAL */}
             {activeTab === 'departments' && (userRole === 'admin' || userRole.startsWith('dept_')) && (
               <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                  <div>
-                    <h3 className="font-title text-xl font-black text-slate-900">
-                      {userRole.startsWith('dept_') ? `${depts[selectedDeptIdx]?.name || 'Department'} Portal CMS` : 'Department & Faculty Portals'}
-                    </h3>
 
-                  </div>
-                  
-                  {/* Select Department dropdown (Locked for department roles) */}
-                  <div className="relative w-full sm:max-w-xs">
-                    <select
-                      value={selectedDeptIdx}
-                      disabled={userRole.startsWith('dept_')}
-                      onChange={(e) => {
-                        setSelectedDeptIdx(Number(e.target.value));
-                        setSelectedFacultyIdx(null);
-                      }}
-                      className="w-full bg-slate-50 disabled:bg-slate-100/80 disabled:cursor-not-allowed text-slate-800 border border-slate-200 rounded-xl px-4 py-2.5 font-bold text-xs uppercase tracking-wider cursor-pointer focus:outline-none focus:border-indigo-600 transition-all appearance-none"
-                    >
-                      {depts.map((d, i) => (
-                        <option key={i} value={i}>{d.name}</option>
-                      ))}
-                    </select>
-                    {!userRole.startsWith('dept_') && (
-                      <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500">
-                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
-                          <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-
-
-                {/* SUB-TAB 1: FACULTY DIRECTORY & PHOTO UPLOADER */}
-                {deptSubTab === 'faculty' && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Left Column: Faculty List */}
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <h4 className="text-xs font-black uppercase text-slate-500 tracking-wider">
-                          Directory ({depts[selectedDeptIdx]?.faculty?.length || 0})
-                        </h4>
-                        <button
-                          onClick={openAddFacultyModal}
-                          className="text-xs font-black text-indigo-650 hover:underline flex items-center gap-1 cursor-pointer"
-                        >
-                          <Plus className="w-3 h-3" /> Add Faculty Member
-                        </button>
+                {/* ══════════════════════════════════════════════════════════════
+                    ADMIN VIEW: LEVEL 1 - DEPARTMENT SELECTION SCREEN
+                    ══════════════════════════════════════════════════════════════ */}
+                {userRole === 'admin' && !adminDeptSelected && (
+                  <div className="space-y-6 text-left">
+                    {/* Header */}
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-150 pb-4">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Users className="w-5 h-5 text-indigo-600" />
+                          <h3 className="font-title text-xl font-black text-slate-900">Faculty</h3>
+                        </div>
+                        <p className="text-xs text-slate-500 font-semibold mt-1">
+                          Select an academic department below to view its staff roster, update faculty profiles, and upload photographs.
+                        </p>
                       </div>
 
-                      <div className="border border-slate-200 rounded-2xl divide-y divide-slate-150 overflow-y-auto max-h-[480px] bg-slate-50 shadow-inner">
-                        {(depts[selectedDeptIdx]?.faculty || []).map((f, i) => (
-                          <div 
-                            key={i} 
-                            className={`p-3.5 flex justify-between items-center gap-3 cursor-pointer transition-colors ${
-                              selectedFacultyIdx === i ? 'bg-indigo-50/80 hover:bg-indigo-100/50' : 'hover:bg-slate-100/50'
-                            }`}
-                            onClick={() => selectFacultyForEdit(i)}
-                          >
-                            <div className="flex items-center gap-3 min-w-0">
-                              <div className="w-9 h-9 rounded-full overflow-hidden border border-slate-200 bg-white shrink-0 flex items-center justify-center">
-                                {f.image ? (
-                                  <img src={f.image} alt={f.name} className="w-full h-full object-cover object-top" onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
-                                ) : null}
-                                <span className="text-[10px] font-bold text-indigo-600" style={{ display: f.image ? 'none' : 'block' }}>
-                                  {f.name ? f.name.charAt(0) : 'F'}
-                                </span>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold">
+                          {depts.length} Academic Departments
+                        </span>
+                        <span className="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-600 text-xs font-bold">
+                          {depts.reduce((sum, d) => sum + (d.faculty?.length || 0), 0)} Registered Faculty
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Department Search Filter Bar */}
+                    <div className="relative max-w-md w-full">
+                      <input 
+                        type="text"
+                        placeholder="Search department by name or code (e.g. CSE, Mechanical, AI, Civil)..."
+                        value={deptSearchQuery}
+                        onChange={(e) => setDeptSearchQuery(e.target.value)}
+                        className="w-full text-xs font-semibold pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800 transition-all"
+                      />
+                      <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    </div>
+
+                    {/* 14 Department Cards Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                      {depts
+                        .map((dept, originalIdx) => ({ dept, originalIdx }))
+                        .filter(({ dept }) => {
+                          if (!deptSearchQuery.trim()) return true;
+                          const q = deptSearchQuery.toLowerCase();
+                          return (
+                            (dept.name || '').toLowerCase().includes(q) ||
+                            (dept.key || '').toLowerCase().includes(q) ||
+                            (dept.code || '').toLowerCase().includes(q)
+                          );
+                        })
+                        .map(({ dept, originalIdx }) => {
+                          const facultyCount = dept.faculty?.length || 0;
+                          const hod = dept.faculty?.find(f => /hod|head|professor & head/i.test(f.designation || '')) || dept.faculty?.[0];
+
+                          return (
+                            <div
+                              key={originalIdx}
+                              onClick={() => {
+                                setSelectedDeptIdx(originalIdx);
+                                setAdminDeptSelected(true);
+                                setSelectedFacultyIdx(null);
+                                setDeptSubTab('faculty');
+                              }}
+                              className="bg-white border border-slate-200 hover:border-indigo-500 rounded-3xl p-6 shadow-xs hover:shadow-lg transition-all cursor-pointer flex flex-col justify-between group text-left relative overflow-hidden"
+                            >
+                              <div className="space-y-3">
+                                {/* Top Badge Row */}
+                                <div className="flex items-center justify-between gap-2">
+                                  <div className="flex items-center gap-1.5 flex-wrap">
+                                    <span className="px-2.5 py-1 rounded-xl bg-indigo-50 text-indigo-700 font-extrabold text-xs tracking-wider border border-indigo-200/70 uppercase font-mono">
+                                      {dept.key?.toUpperCase() || 'DEPT'}
+                                    </span>
+                                    <span className={`px-2 py-0.5 rounded-lg text-[9px] font-extrabold uppercase border ${
+                                      (dept.key === 'mca' || dept.key === 'mba' || dept.key?.startsWith('me-'))
+                                        ? 'bg-purple-50 text-purple-700 border-purple-200'
+                                        : dept.key?.startsWith('phd')
+                                        ? 'bg-amber-50 text-amber-700 border-amber-200'
+                                        : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                    }`}>
+                                      {(dept.key === 'mca' || dept.key === 'mba' || dept.key?.startsWith('me-'))
+                                        ? 'Post Graduate'
+                                        : dept.key?.startsWith('phd')
+                                        ? 'Ph.D Research'
+                                        : 'Undergraduate'}
+                                    </span>
+                                  </div>
+                                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-xl shrink-0">
+                                    <Users className="w-3.5 h-3.5 text-indigo-500" />
+                                    <span>{facultyCount} Faculty</span>
+                                  </span>
+                                </div>
+
+                                {/* Department Name */}
+                                <h4 className="font-title text-base font-black text-slate-900 group-hover:text-indigo-650 transition-colors leading-snug">
+                                  {dept.name}
+                                </h4>
+
+                                {/* HOD Preview */}
+                                <div className="flex items-center gap-2.5 pt-3 border-t border-slate-100">
+                                  {hod?.image ? (
+                                    <img
+                                      src={hod.image}
+                                      alt={hod.name}
+                                      className="w-8 h-8 rounded-full object-cover object-top border border-slate-200 shrink-0"
+                                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                    />
+                                  ) : null}
+                                  <div
+                                    className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-650 font-bold text-[10px] flex items-center justify-center shrink-0 border border-indigo-100"
+                                    style={{ display: hod?.image ? 'none' : 'flex' }}
+                                  >
+                                    {hod?.name ? hod.name.charAt(0) : 'H'}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <span className="text-[10px] font-black uppercase text-slate-400 block tracking-wider">HOD / Lead</span>
+                                    <span className="text-xs text-slate-700 font-bold truncate block">
+                                      {hod?.name || 'Department Faculty'}
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
-                              <div className="min-w-0">
-                                <span className="text-sm font-bold text-slate-800 block truncate">{f.name}</span>
-                                <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block mt-0.5 truncate">{f.designation}</span>
+
+                              {/* Card Action Button */}
+                              <div className="w-full mt-5 py-2.5 px-4 rounded-xl bg-slate-50 group-hover:bg-indigo-600 text-slate-700 group-hover:text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-2xs">
+                                <span>View Staff Details</span>
+                                <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                               </div>
                             </div>
-                            
-                            <div className="flex items-center gap-1.5 shrink-0">
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+
+                {/* ══════════════════════════════════════════════════════════════
+                    LEVEL 2: SELECTED DEPARTMENT STAFF ROSTER & MANAGEMENT
+                    (Visible for Admin when department selected, OR for HOD role on faculty subTab)
+                    ══════════════════════════════════════════════════════════════ */}
+                {((userRole === 'admin' && adminDeptSelected) || (userRole.startsWith('dept_') && deptSubTab === 'faculty')) && (
+                  <div className="space-y-6 text-left">
+                    {/* Top Navigation Bar with Back Button */}
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-150 pb-4">
+                      <div className="flex flex-wrap items-center gap-3">
+                        {userRole === 'admin' && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setAdminDeptSelected(false);
+                              setSelectedFacultyIdx(null);
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-100 text-slate-700 font-extrabold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-2xs"
+                          >
+                            <ArrowLeft className="w-4 h-4 text-indigo-600" />
+                            <span>All Departments</span>
+                          </button>
+                        )}
+
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 font-mono font-extrabold text-[11px] border border-indigo-200 uppercase">
+                              {depts[selectedDeptIdx]?.key?.toUpperCase()}
+                            </span>
+                            <h3 className="font-title text-xl font-black text-slate-900">
+                              {depts[selectedDeptIdx]?.name}
+                            </h3>
+                          </div>
+                          <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                            {depts[selectedDeptIdx]?.faculty?.length || 0} Faculty Members registered in department directory
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 self-start sm:self-auto">
+                        <button
+                          type="button"
+                          onClick={openAddFacultyModal}
+                          className="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
+                        >
+                          <Plus className="w-4 h-4" /> Add Faculty Member
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Faculty Search Filter */}
+                    <div className="relative max-w-md w-full">
+                      <input 
+                        type="text"
+                        placeholder="Filter staff by name, designation, qualification..."
+                        value={facultySearchQuery}
+                        onChange={(e) => setFacultySearchQuery(e.target.value)}
+                        className="w-full text-xs font-semibold pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white text-slate-800"
+                      />
+                      <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    </div>
+
+                    {/* Staff Roster Grid (Modern Ideated Design) */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                      {(depts[selectedDeptIdx]?.faculty || [])
+                        .map((f, originalIdx) => ({ f, originalIdx }))
+                        .filter(({ f }) => {
+                          if (!facultySearchQuery.trim()) return true;
+                          const q = facultySearchQuery.toLowerCase();
+                          return (
+                            (f.name || '').toLowerCase().includes(q) ||
+                            (f.designation || '').toLowerCase().includes(q) ||
+                            (f.qualification || '').toLowerCase().includes(q) ||
+                            (f.email || '').toLowerCase().includes(q)
+                          );
+                        })
+                        .map(({ f, originalIdx }) => (
+                          <div
+                            key={originalIdx}
+                            className="bg-white border border-slate-200 hover:border-indigo-300 rounded-3xl p-5 shadow-xs transition-all flex flex-col justify-between text-left space-y-4 group"
+                          >
+                            <div className="flex items-start gap-4">
+                              {/* Photo Avatar */}
+                              <div className="w-16 h-16 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 shrink-0 flex items-center justify-center relative shadow-xs">
+                                {f.image ? (
+                                  <img
+                                    src={f.image}
+                                    alt={f.name}
+                                    className="w-full h-full object-cover object-top"
+                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                  />
+                                ) : null}
+                                <div
+                                  className="w-full h-full bg-indigo-50 text-indigo-600 font-black text-sm flex items-center justify-center"
+                                  style={{ display: f.image ? 'none' : 'flex' }}
+                                >
+                                  {f.name ? f.name.charAt(0) : 'F'}
+                                </div>
+                              </div>
+
+                              {/* Details */}
+                              <div className="min-w-0 flex-1">
+                                <h4 className="font-extrabold text-sm text-slate-900 truncate block">
+                                  {f.name}
+                                </h4>
+                                <span className="inline-block text-[10px] font-black uppercase text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-150 mt-1 truncate max-w-full">
+                                  {f.designation || 'Faculty'}
+                                </span>
+                                {f.qualification && (
+                                  <span className="text-xs text-slate-500 font-semibold block mt-1">
+                                    {f.qualification}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Contact Details & Experience */}
+                            <div className="space-y-1.5 text-xs text-slate-600 pt-3 border-t border-slate-100">
+                              {f.email && (
+                                <div className="flex items-center gap-2 truncate">
+                                  <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                  <a href={`mailto:${f.email}`} className="hover:text-indigo-600 font-semibold truncate">
+                                    {f.email}
+                                  </a>
+                                </div>
+                              )}
+                              {f.experience && (
+                                <div className="flex items-center gap-2 text-[11px] text-slate-500 font-medium">
+                                  <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                                  <span>Experience: <strong>{f.experience}</strong></span>
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Actions */}
+                            <div className="flex items-center gap-2 pt-2">
                               <button
-                                onClick={() => selectFacultyForEdit(i)}
-                                className="p-1.5 hover:bg-indigo-100 text-indigo-650 rounded-lg transition-colors cursor-pointer"
-                                title="Edit faculty member"
+                                type="button"
+                                onClick={() => selectFacultyForEdit(originalIdx)}
+                                className="flex-1 py-2 px-3 rounded-xl border border-indigo-200 bg-indigo-50/70 hover:bg-indigo-100 text-indigo-700 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer"
                               >
                                 <Edit3 className="w-3.5 h-3.5" />
+                                <span>Edit Profile</span>
                               </button>
+
                               <button
-                                onClick={(e) => { e.stopPropagation(); deleteFacultyMember(i); }}
-                                className="p-1.5 hover:bg-red-50 text-red-500 rounded-lg transition-colors cursor-pointer"
+                                type="button"
+                                onClick={() => deleteFacultyMember(originalIdx)}
+                                className="p-2 rounded-xl border border-rose-200 text-rose-600 hover:bg-rose-50 transition-all cursor-pointer"
                                 title="Remove faculty member"
                               >
                                 <Trash2 className="w-3.5 h-3.5" />
@@ -2372,174 +2445,170 @@ export default function EditorPanel() {
                             </div>
                           </div>
                         ))}
-                      </div>
                     </div>
 
-                    {/* Right Column: Edit Workspace Card */}
-                    <div>
-                      {selectedFacultyIdx === null ? (
-                        <div className="h-full border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center p-8 text-center text-slate-400">
-                          <Users className="w-8 h-8 text-slate-300 mb-2" />
-                          <span className="text-xs font-bold leading-normal">
-                            Select a faculty member from the directory list on the left to edit details and upload photo.
-                          </span>
-                        </div>
-                      ) : (
-                        <div className="border border-slate-200 rounded-2xl p-5 space-y-4 bg-white shadow-sm">
-                          <h4 className="text-xs font-black uppercase text-indigo-650 tracking-wider border-b border-slate-100 pb-2">
-                            Edit Faculty Member Details
-                          </h4>
-
-                          {/* Photo Upload & Preview Container */}
-                          <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
-                            <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider block">Faculty Photo & Upload</label>
-                            <div className="flex items-center gap-4">
-                              {/* Live Image Preview */}
-                              <div className="w-16 h-16 rounded-xl overflow-hidden border border-slate-250 bg-white shrink-0 flex items-center justify-center relative shadow-sm">
-                                {editFaculty.image ? (
-                                  <img 
-                                    src={editFaculty.image} 
-                                    alt={editFaculty.name} 
-                                    className="w-full h-full object-cover object-top" 
-                                    onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                  />
-                                ) : null}
-                                <div 
-                                  className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold"
-                                  style={{ display: editFaculty.image ? 'none' : 'flex' }}
-                                >
-                                  <GraduationCap className="w-6 h-6 text-indigo-650" />
-                                </div>
-                              </div>
-
-                              {/* File Upload Controls */}
-                              <div className="flex-1 space-y-1.5">
-                                <label className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-indigo-650 hover:bg-indigo-750 text-white text-xs font-bold rounded-xl cursor-pointer transition-all shadow-sm active:scale-95">
-                                  <Upload className="w-3.5 h-3.5" />
-                                  <span>Upload New Photo</span>
-                                  <input 
-                                    type="file" 
-                                    accept="image/*" 
-                                    onChange={handleFacultyImageUpload} 
-                                    className="hidden" 
-                                  />
-                                </label>
-                                {editFaculty.image && (
-                                  <button
-                                    type="button"
-                                    onClick={() => setEditFaculty({ ...editFaculty, image: '' })}
-                                    className="block text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
-                                  >
-                                    Remove Current Photo
-                                  </button>
-                                )}
-                              </div>
+                    {/* Edit Faculty Modal / Drawer */}
+                    {selectedFacultyIdx !== null && (
+                      <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+                        <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-xl w-full shadow-2xl border border-slate-200 text-left space-y-5 my-8">
+                          <div className="flex justify-between items-center border-b border-slate-150 pb-3">
+                            <div>
+                              <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
+                                <Edit3 className="w-5 h-5 text-indigo-600" /> Edit Faculty Member
+                              </h3>
+                              <p className="text-xs text-slate-400 font-medium">{editFaculty.name}</p>
                             </div>
-                          </div>
-
-                          <div className="space-y-3">
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Full Name</label>
-                              <input 
-                                type="text"
-                                value={editFaculty.name}
-                                onChange={(e) => setEditFaculty({...editFaculty, name: e.target.value})}
-                                className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                              />
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="space-y-1">
-                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Qualification</label>
-                                <input 
-                                  type="text"
-                                  value={editFaculty.qualification}
-                                  onChange={(e) => setEditFaculty({...editFaculty, qualification: e.target.value})}
-                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                                />
-                              </div>
-
-                              <div className="space-y-1">
-                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Designation</label>
-                                <input 
-                                  type="text"
-                                  value={editFaculty.designation}
-                                  onChange={(e) => setEditFaculty({...editFaculty, designation: e.target.value})}
-                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="space-y-1">
-                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">College Role/Dept</label>
-                              <input 
-                                type="text"
-                                value={editFaculty.department}
-                                onChange={(e) => setEditFaculty({...editFaculty, department: e.target.value})}
-                                className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                              />
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-3">
-                              <div className="space-y-1">
-                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Contact Email</label>
-                                <input 
-                                  type="text"
-                                  value={editFaculty.email}
-                                  onChange={(e) => setEditFaculty({...editFaculty, email: e.target.value})}
-                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                                />
-                              </div>
-
-                              <div className="space-y-1">
-                                <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Experience</label>
-                                <input 
-                                  type="text"
-                                  value={editFaculty.experience}
-                                  onChange={(e) => setEditFaculty({...editFaculty, experience: e.target.value})}
-                                  className="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
-                                />
-                              </div>
-
-                              <div className="space-y-1 col-span-2">
-                                <label className="text-[10px] font-black uppercase text-emerald-700 tracking-wider flex items-center gap-1">
-                                  <span className="w-3.5 h-3.5 bg-emerald-600 text-white rounded flex items-center justify-center text-[9px] font-mono">iD</span>
-                                  ORCID Identifier (e.g. 0009-0004-5988-5664)
-                                </label>
-                                <input 
-                                  type="text"
-                                  value={editFaculty.orcid || ''}
-                                  onChange={(e) => setEditFaculty({...editFaculty, orcid: e.target.value})}
-                                  placeholder="0009-0004-5988-5664"
-                                  className="w-full text-xs px-3 py-2 bg-emerald-50/50 border border-emerald-200 rounded-lg outline-none focus:border-emerald-600 focus:bg-white font-mono font-bold text-slate-800"
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="pt-3 border-t border-slate-100 flex justify-end gap-2">
                             <button
                               type="button"
                               onClick={() => setSelectedFacultyIdx(null)}
-                              className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 font-extrabold text-[10px] uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-95"
+                              className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer"
+                            >
+                              <X className="w-5 h-5" />
+                            </button>
+                          </div>
+
+                          {/* Photo Upload Container */}
+                          <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-4">
+                            <div className="w-16 h-16 rounded-2xl overflow-hidden border border-slate-250 bg-white shrink-0 flex items-center justify-center relative shadow-xs">
+                              {editFaculty.image ? (
+                                <img
+                                  src={editFaculty.image}
+                                  alt={editFaculty.name}
+                                  className="w-full h-full object-cover object-top"
+                                  onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                />
+                              ) : null}
+                              <div
+                                className="absolute inset-0 bg-indigo-50 flex items-center justify-center text-indigo-650 font-bold"
+                                style={{ display: editFaculty.image ? 'none' : 'flex' }}
+                              >
+                                <GraduationCap className="w-6 h-6 text-indigo-650" />
+                              </div>
+                            </div>
+
+                            <div className="flex-1 space-y-1.5">
+                              <label className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-indigo-650 hover:bg-indigo-750 text-white text-xs font-bold rounded-xl cursor-pointer transition-all shadow-sm active:scale-95">
+                                <Upload className="w-3.5 h-3.5" />
+                                <span>Upload New Photo</span>
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={handleFacultyImageUpload}
+                                  className="hidden"
+                                />
+                              </label>
+                              {editFaculty.image && (
+                                <button
+                                  type="button"
+                                  onClick={() => setEditFaculty({ ...editFaculty, image: '' })}
+                                  className="block text-[10px] font-bold text-rose-500 hover:underline cursor-pointer"
+                                >
+                                  Remove Photo
+                                </button>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Inputs Grid */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1 sm:col-span-2">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Full Name *</label>
+                              <input
+                                type="text"
+                                value={editFaculty.name}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, name: e.target.value })}
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-bold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Qualification</label>
+                              <input
+                                type="text"
+                                value={editFaculty.qualification}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, qualification: e.target.value })}
+                                placeholder="e.g. M.E., Ph.D."
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Designation</label>
+                              <input
+                                type="text"
+                                value={editFaculty.designation}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, designation: e.target.value })}
+                                placeholder="e.g. Associate Professor"
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Email Address</label>
+                              <input
+                                type="email"
+                                value={editFaculty.email}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, email: e.target.value })}
+                                placeholder="e.g. staff@apec.edu.in"
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Total Experience</label>
+                              <input
+                                type="text"
+                                value={editFaculty.experience}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, experience: e.target.value })}
+                                placeholder="e.g. 12+ Years"
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">Date of Joining</label>
+                              <input
+                                type="date"
+                                value={editFaculty.joiningDate}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, joiningDate: e.target.value })}
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[10px] font-black uppercase text-slate-500 tracking-wider">ORCID ID</label>
+                              <input
+                                type="text"
+                                value={editFaculty.orcid}
+                                onChange={(e) => setEditFaculty({ ...editFaculty, orcid: e.target.value })}
+                                placeholder="0000-0002-XXXX-XXXX"
+                                className="w-full text-xs px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-indigo-600 focus:bg-white font-semibold text-slate-800"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="pt-4 border-t border-slate-150 flex justify-end gap-2.5">
+                            <button
+                              type="button"
+                              onClick={() => setSelectedFacultyIdx(null)}
+                              className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 font-extrabold text-xs uppercase tracking-wider cursor-pointer"
                             >
                               Cancel
                             </button>
                             <button
                               type="button"
                               onClick={saveFacultyMember}
-                              className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-[10px] uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-95 flex items-center gap-1 shadow-sm"
+                              className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs uppercase tracking-wider cursor-pointer shadow-md flex items-center gap-2"
                             >
-                              <Check className="w-3.5 h-3.5" /> Save Member
+                              <Save className="w-4 h-4" /> Save Profile Details
                             </button>
                           </div>
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 )}
-
-                {/* SUB-TAB 2: OVERVIEW & VISION */}
+{/* SUB-TAB 2: OVERVIEW & VISION */}
                 {deptSubTab === 'overview' && depts[selectedDeptIdx] && (
                   <div className="space-y-6 text-left">
                     <div className="p-6 bg-slate-50 border border-slate-200 rounded-3xl space-y-4">
@@ -3938,8 +4007,8 @@ export default function EditorPanel() {
               </div>
             )}
 
-            {/* INQUIRIES & LEADS VIEWER (Admin / Admission role) */}
-            {activeTab === 'inquiries' && (userRole === 'admin' || userRole === 'admission') && (
+            {/* INQUIRIES & LEADS VIEWER (Temporarily removed per user request) */}
+            {false && activeTab === 'inquiries' && (userRole === 'admin' || userRole === 'admission') && (
               <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
@@ -4210,7 +4279,10 @@ export default function EditorPanel() {
                   <div>
                     <div className="flex items-center gap-2">
                       <KeyRound className="w-5 h-5 text-amber-500" />
-                      <h3 className="font-title text-xl font-black text-slate-900">HOD Department Portals Provisioning</h3>
+                      <h3 className="font-title text-xl font-black text-slate-900">HOD Access</h3>
+                      <span className="px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-extrabold uppercase">
+                        Department Portals
+                      </span>
                     </div>
                     <p className="text-xs text-slate-500 font-semibold mt-0.5">
                       Create & manage dedicated login credentials for Heads of Departments (HODs) to allow them to edit their own department details and faculty.
@@ -4528,9 +4600,13 @@ export default function EditorPanel() {
               <div className="flex flex-col gap-6 text-left">
                 <div className="flex justify-between items-center border-b border-slate-100 pb-4">
                   <div>
-                    <h3 className="text-sm font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                      <Compass className="w-5 h-5 text-indigo-600" /> 360 VR Manager & Map Coordinator
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <Compass className="w-5 h-5 text-indigo-600" />
+                      <h3 className="font-title text-xl font-black text-slate-900">360</h3>
+                      <span className="px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-[10px] font-extrabold uppercase">
+                        Virtual Campus Tour
+                      </span>
+                    </div>
                     <p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider mt-1">
                       Drag pins on the map to adjust coordinates, manage scenes, and create links.
                     </p>
@@ -4591,7 +4667,7 @@ export default function EditorPanel() {
                         className="w-full h-full relative"
                       >
                         <img 
-                          src="/Images/Panorama/map.png" 
+                          src="https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340106/apec/Panorama/map.png" 
                           alt="Campus Map Editor" 
                           className="w-full h-full object-cover pointer-events-none"
                         />
@@ -4940,7 +5016,7 @@ export default function EditorPanel() {
               </div>
             )}
 
-          </div>
+          </main>
 
         </div>
 
@@ -5356,6 +5432,11 @@ export default function EditorPanel() {
             </div>
           )}
         </AnimatePresence>
+
+        {/* Ad Overlay Live Preview Modal for Admin (Only opens on explicit preview click) */}
+        {previewAdModalOpen && (
+          <AdOverlayModal forceOpen={true} onClose={() => setPreviewAdModalOpen(false)} />
+        )}
 
       </div>
     </div>

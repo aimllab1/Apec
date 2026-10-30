@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ChevronLeft, ChevronRight, Award, Calendar 
+  ChevronLeft, ChevronRight, Award, Calendar, Sparkles 
 } from 'lucide-react';
 import PanoramaModal from '../components/PanoramaModal';
+import AdOverlayModal from '../components/AdOverlayModal';
 import defaultHomeData from '../data/homeData.json';
-import achievement1Img from '../assets/Hero/achivement_1.jpeg';
-import placementsImg from '../assets/Hero/placements.jpeg';
-import goldMedalImg from '../assets/Hero/gold_medal.jpeg';
-import fresherDayImg from '../assets/Hero/fresher_day.jpeg';
+const achievement1Img = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340136/apec/Hero/achivement_1.jpg';
+const placementsImg = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340151/apec/Hero/placements.jpg';
+const goldMedalImg = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340146/apec/Hero/gold_medal.jpg';
+const fresherDayImg = 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340144/apec/Hero/fresher_day.jpg';
 
 export default function Home() {
   const [isPanoOpen, setIsPanoOpen] = useState(false);
@@ -77,6 +78,7 @@ export default function Home() {
 
   const achievements = homeConfig.achievementsSection || defaultHomeData.achievementsSection;
   const upcoming = homeConfig.upcomingSection || defaultHomeData.upcomingSection;
+  const welcomeBanner = homeConfig.welcomeBanner || defaultHomeData.welcomeBanner;
 
   const achievementSlides = achievements.slides && achievements.slides.length > 0 
     ? achievements.slides 
@@ -156,6 +158,69 @@ export default function Home() {
     <div className="w-full bg-[#041744] text-white overflow-x-hidden">
       
       {/* ─────────────────────────────────────────────────────────────
+          ADMISSIONS CALL-TO-ACTION (CTA) BANNER
+          Configured via Admin Portal (HomePage > Admissions CTA Banner)
+          ───────────────────────────────────────────────────────────── */}
+      {welcomeBanner?.enabled && (
+        <div className="w-full bg-gradient-to-r from-[#031130] via-[#08205F] to-[#031130] border-b border-[#D4A347]/30 px-3.5 sm:px-6 lg:px-8 py-3 sm:py-4 relative overflow-hidden shadow-md">
+          <div className="max-w-[1550px] mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+            
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-4">
+              {welcomeBanner.badge && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D4A347]/20 border border-[#D4A347]/50 text-[#D4A347] text-[10px] sm:text-xs font-black uppercase tracking-wider shrink-0 self-start sm:self-auto shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-[#D4A347] animate-pulse" />
+                  {welcomeBanner.badge}
+                </span>
+              )}
+              
+              <div>
+                <h3 className="font-serif text-sm sm:text-base md:text-lg font-black text-white tracking-wide leading-tight">
+                  {welcomeBanner.title}
+                </h3>
+                {welcomeBanner.description && (
+                  <p className="text-xs sm:text-[13px] text-slate-300 font-medium line-clamp-1 sm:line-clamp-2 mt-0.5">
+                    {welcomeBanner.description}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0 self-start md:self-auto">
+              {welcomeBanner.primaryBtnText && (
+                <Link
+                  to={welcomeBanner.primaryBtnLink || '/admission'}
+                  className="px-4 py-2 rounded-xl bg-[#D4A347] hover:bg-[#b88c38] text-[#041744] font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all active:scale-95 flex items-center gap-1.5"
+                >
+                  <span>{welcomeBanner.primaryBtnText}</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+              )}
+
+              {welcomeBanner.secondaryBtnText && (
+                welcomeBanner.secondaryBtnAction === 'openPano' ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsPanoOpen(true)}
+                    className="px-3.5 py-2 rounded-xl border border-white/20 hover:border-[#D4A347] bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer backdrop-blur-md active:scale-95"
+                  >
+                    {welcomeBanner.secondaryBtnText}
+                  </button>
+                ) : (
+                  <Link
+                    to={welcomeBanner.secondaryBtnLink || '/admission'}
+                    className="px-3.5 py-2 rounded-xl border border-white/20 hover:border-[#D4A347] bg-white/5 hover:bg-white/10 text-white font-bold text-xs uppercase tracking-wider transition-all backdrop-blur-md active:scale-95"
+                  >
+                    {welcomeBanner.secondaryBtnText}
+                  </Link>
+                )
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
           DUAL-CONTAINER SHOWCASE (Only Necessary Components: Achievements + Upcoming)
           100% Mobile Responsive with Touch Swipe and Compact Spacing
           ───────────────────────────────────────────────────────────── */}
@@ -207,7 +272,7 @@ export default function Home() {
                           loading={idx === 0 ? "eager" : "lazy"}
                           onError={(e) => { 
                             e.target.onerror = null;
-                            e.target.src = "/Images/Hero/placements.jpeg"; 
+                            e.target.src = "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340151/apec/Hero/placements.jpg"; 
                           }}
                           className="w-full h-full object-cover object-center select-none"
                         />
@@ -320,7 +385,7 @@ export default function Home() {
                           loading="lazy"
                           onError={(e) => { 
                             e.target.onerror = null;
-                            e.target.src = "/Images/Hero/fresher_day.jpeg"; 
+                            e.target.src = "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793340144/apec/Hero/fresher_day.jpg"; 
                           }}
                           className="w-full h-full object-cover object-center select-none"
                         />
@@ -405,6 +470,12 @@ export default function Home() {
           />
         )}
       </AnimatePresence>
+
+      {/* ─────────────────────────────────────────────────────────────
+          SPECIAL ADVERTISEMENT OVERLAY POPUP
+          Managed in Admin Console (Ads Overlay Manager)
+          ───────────────────────────────────────────────────────────── */}
+      <AdOverlayModal />
 
     </div>
   );

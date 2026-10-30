@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { SearchEngine } from './searchEngine.js';
 import { generateResponse } from './responseGenerator.js';
+import { FastFAQMatcher } from './faqMatcher.js';
 import { tokenize } from './tokenizer.js';
 import { detectIntent, expandWithSynonyms } from './synonyms.js';
 import { addTurn, buildContextHint, isFollowUp } from './chatMemory.js';
@@ -17,15 +18,17 @@ function loadKnowledgeBase() {
     admissions:  JSON.parse(fs.readFileSync(path.join(dir, 'admissions.json'), 'utf8')),
     placements:  JSON.parse(fs.readFileSync(path.join(dir, 'placements.json'), 'utf8')),
     departments: JSON.parse(fs.readFileSync(path.join(dir, 'departments.json'), 'utf8')),
-    faculty:     JSON.parse(fs.readFileSync(path.join(dir, 'faculty.json'), 'utf8'))
+    faculty:     JSON.parse(fs.readFileSync(path.join(dir, 'faculty.json'), 'utf8')),
+    faqs:        JSON.parse(fs.readFileSync(path.join(dir, 'faqs.json'), 'utf8'))
   };
 }
 
-// === SINGLETON SEARCH ENGINE (built once, reused across all requests) ===
+// === SINGLETON SEARCH ENGINE & FAST FAQ MATCHER ===
 const kb = loadKnowledgeBase();
 const engine = new SearchEngine();
 engine.initialize(kb);
-console.log('[LocalAI] Search engine initialized and ready.');
+const faqMatcher = new FastFAQMatcher(kb.faqs);
+console.log('[LocalAI] Search engine & Fast FAQ Matcher initialized and ready.');
 
 // === CONVERSATIONAL INTENTS (handled locally without search) ===
 const GREET_WORDS = new Set(['hi', 'hello', 'hey', 'greetings', 'hola', 'yo', 'sup', 'howdy']);
@@ -96,6 +99,18 @@ export function getLocalResponse(queryText, session = null) {
   if (conversationalReply) {
     if (session) addTurn(session, queryText, conversationalReply, null, null, 'greeting');
     return { response: conversationalReply };
+  }
+
+  // --- STEP 1.5: Fast FAQ matching (instant response for frequently asked questions) ---
+  const fastFaqMatch = faqMatcher.findMatch(queryText);
+  if (fastFaqMatch) {
+    const faq = fastFaqMatch.faq;
+    const response = faq.answer;
+    console.log(`[LocalAI] Fast FAQ hit: "${faq.id}" (${fastFaqMatch.matchType}, score=${fastFaqMatch.score.toFixed(2)})`);
+    if (session) {
+      addTurn(session, queryText, response, faq.id, faq.department || null, faq.category || 'faq');
+    }
+    return { response, updatedSession: session };
   }
 
   // --- STEP 2: Detect department context from query ---

@@ -44,7 +44,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'somiya86@gmail.com',
     experience: '17+ Years',
-    image: '/Images/Faculty/Civil/sowmayadevi.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338307/apec/Faculty/1793338306456_civil_sowmayadevi_jpg.jpg'
   },
   {
     deptKey: 'mech',
@@ -55,7 +55,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'ckd@apec.edu.in',
     experience: '30+ Years',
-    image: '/Images/Faculty/mech/dhinakaraj.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338341/apec/Faculty/1793338340159_mech_dhinakaraj_jpg.jpg'
   },
   {
     deptKey: 'eee',
@@ -66,7 +66,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'rajivgandhi@apec.edu.in',
     experience: '12+ Years',
-    image: '/Images/Faculty/eee/rajivgandhi.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338360/apec/Faculty/1793338358738_eee_rajivgandhi_jpg.jpg'
   },
   {
     deptKey: 'ece',
@@ -77,7 +77,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'ecemalathi@gmail.com',
     experience: '31+ Years',
-    image: '/Images/Faculty/ece/malathi.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338370/apec/Faculty/1793338369229_ece_malathi_jpg.jpg'
   },
   {
     deptKey: 'cse',
@@ -88,7 +88,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'dhaya@apec.edu.in',
     experience: '25+ Years',
-    image: '/Images/Faculty/cse/dhaya.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338326/apec/Faculty/1793338325206_cse_dhaya_jpg.jpg'
   },
   {
     deptKey: 'it',
@@ -99,7 +99,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'bhuvaneswari@apec.edu.in',
     experience: '25+ Years',
-    image: '/Images/Faculty/it/bhuvaneshwari.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338353/apec/Faculty/1793338351959_it_bhuvaneshwari_jpg.jpg'
   },
   {
     deptKey: 'chemical',
@@ -110,7 +110,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'ganeshevst@gmail.com',
     experience: '10+ Years',
-    image: '/Images/Faculty/chemical/ganesh.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338300/apec/Faculty/1793338299267_chemical_ganesh_jpg.jpg'
   },
   {
     deptKey: 'aiml',
@@ -121,7 +121,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'elamathi@apec.edu.in',
     experience: '19+ Years',
-    image: '/Images/Faculty/aiml/elamathi.jpg',
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338296/apec/Faculty/1793338292400_aiml_elamathi_jpg.jpg',
     orcid: '0009-0004-5988-5664'
   },
   {
@@ -133,7 +133,7 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'sakthiraadhas@gmail.com',
     experience: '21+ Years',
-    image: '/Images/Faculty/s & h/sakthi radha.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338393/apec/Faculty/1793338392270_sh_sakthi_radha_jpg.jpg'
   },
   {
     deptKey: 'mba',
@@ -144,18 +144,18 @@ const departmentHods = [
     designation: 'Head of Department & Professor',
     email: 'saviour@apec.edu.in',
     experience: '28+ Years',
-    image: '/Images/Faculty/MBA/saviour.jpg'
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338386/apec/Faculty/1793338385351_mba_saviour_jpg.jpg'
   },
   {
     deptKey: 'mca',
     deptName: 'Master of Computer Applications (MCA)',
     code: 'MCA',
-    name: 'Dr. S. Selvaraj',
-    qualification: 'MCA., Ph.D.',
+    name: 'Dr. S. Arunkumar',
+    qualification: 'MCA, M.Phil., Ph.D.',
     designation: 'Head of Department & Professor',
-    email: 'mca@apec.edu.in',
-    experience: '20+ Years',
-    image: '/Images/Faculty/MCA/selva raj.jpg'
+    email: 'arunkumar@apec.edu.in',
+    experience: '28+ Years',
+    image: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338317/apec/Faculty/1793338316575_mca_arun_kumar_jpg.jpg'
   }
 ];
 
@@ -204,7 +204,7 @@ export default function Administration() {
           <h1 className="font-title text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2.5">
             Institutional Administration
           </h1>
-          <p className="text-sm sm:text-base text-slate-650 leading-relaxed max-w-4xl font-semibold">
+          <p className="text-sm sm:text-base text-slate-650 leading-relaxed w-full text-justify font-semibold">
             Apex academic and administrative leaders steering autonomous policies, curriculum excellence, student mentorship, accreditations, and modern campus infrastructure.
           </p>
         </motion.div>
@@ -235,7 +235,7 @@ export default function Administration() {
                 <span className="text-slate-500 text-[11px] sm:text-xs">31+ Years Experience</span>
               </div>
 
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   Dr. J. Raja is the Principal of Adhiparasakthi Engineering College. With over 31 years of academic, administrative, and research experience, he oversees institutional governance, Anna University autonomous regulations, and NAAC/NBA quality accreditations.
                 </p>
@@ -276,7 +276,11 @@ export default function Administration() {
             <div className="flex flex-wrap items-center gap-2.5">
               <a 
                 href="mailto:principal@apec.edu.in" 
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white hover:bg-indigo-50 hover:text-indigo-650 border border-slate-200 hover:border-indigo-200 px-3 py-1.5 rounded-lg transition-colors shadow-2xs"
+                onClick={() => {
+                  window.open('https://mail.google.com/mail/?view=cm&fs=1&to=principal@apec.edu.in', '_blank');
+                }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white hover:bg-indigo-50 hover:text-indigo-650 border border-slate-200 hover:border-indigo-200 px-3 py-1.5 rounded-lg transition-colors shadow-2xs cursor-pointer"
+                title="Compose email to principal@apec.edu.in"
               >
                 <Mail className="w-3.5 h-3.5 text-indigo-600" />
                 <span>principal@apec.edu.in</span>
@@ -341,7 +345,7 @@ export default function Administration() {
                 <span className="text-slate-500 text-[11px] sm:text-xs">32+ Years Experience (Since 1994)</span>
               </div>
 
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   Dr. V. Ramasamy serves as the Dean of Academic Affairs and Professor of Civil Engineering. Associated with APEC for over 32 years since 1994, he directs Autonomous curriculum regulations, Choice Based Credit System (CBCS) implementation, and smart campus academic infrastructure.
                 </p>
@@ -440,7 +444,7 @@ export default function Administration() {
                 <span className="text-slate-500 text-[11px] sm:text-xs">25+ Years Experience</span>
               </div>
 
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   Dr. A. Bhuvaneshwari is the Vice Principal and Professor of Information Technology & Computer Science. With 25+ years of experience, she coordinates academic operations, student welfare, internal quality assurance, and faculty development programs.
                 </p>
@@ -504,7 +508,7 @@ export default function Administration() {
           </div>
         </motion.div>
 
-        {/* 4. ADMINISTRATIVE OFFICER: Mr. M. Sadanandan */}
+        {/* 3.1. VICE PRINCIPAL: Dr. M. Malathi */}
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -514,7 +518,97 @@ export default function Administration() {
         >
           {/* Top: Description & Portrait Frame */}
           <div className="flex flex-col-reverse lg:flex-row-reverse gap-6 sm:gap-8 lg:gap-10 items-start">
-            {/* Right/Text: Short & Factual Biography */}
+            {/* Left/Text: Short & Factual Biography */}
+            <div className="w-full lg:w-7/12">
+              <span className="font-display text-[10px] uppercase font-extrabold tracking-widest text-indigo-700 bg-indigo-50 border border-indigo-100/80 px-2.5 py-1 rounded-md mb-2 inline-block">
+                Office of the Vice Principal & ECE
+              </span>
+              <h2 className="font-title text-2xl sm:text-3xl md:text-3xl font-bold text-slate-900 mb-1 leading-tight">
+                Dr. M. Malathi, M.E., Ph.D.
+              </h2>
+              <div className="flex flex-wrap items-center gap-2 mb-3 text-xs sm:text-sm font-bold text-indigo-700 font-display">
+                <span>Vice Principal & Professor</span>
+                <span>•</span>
+                <span className="text-slate-500 font-mono text-[11px] sm:text-xs">M.E., Ph.D.</span>
+                <span>•</span>
+                <span className="text-slate-500 text-[11px] sm:text-xs">31+ Years Experience</span>
+              </div>
+
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
+                <p>
+                  Dr. M. Malathi is the Vice Principal and Professor of Electronics & Communication Engineering. With over 31 years of distinguished academic service, she plays a vital role in institutional administration, curriculum execution, research culture, and faculty development.
+                </p>
+                <p>
+                  She has actively guided generations of engineers, published extensive research in wireless communication and embedded architectures, and contributed significantly to institutional accreditation and academic quality assurance.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: Portrait Frame */}
+            <div className="w-full lg:w-5/12 flex justify-center">
+              <div className="relative group max-w-xs sm:max-w-sm w-full p-2 bg-slate-50 border border-slate-200/90 rounded-2xl sm:rounded-3xl shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-indigo-500/40">
+                <div className="overflow-hidden rounded-xl sm:rounded-2xl relative">
+                  <img 
+                    src='https://res.cloudinary.com/o1hw2rfp/image/upload/v1793338370/apec/Faculty/1793338369229_ece_malathi_jpg.jpg' 
+                    alt="Dr. M. Malathi - Vice Principal" 
+                    className="w-full h-[360px] sm:h-[380px] lg:h-[400px] object-cover object-[center_12%] rounded-xl sm:rounded-2xl grayscale-[5%] group-hover:grayscale-0 group-hover:scale-103 transition-all duration-700" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent rounded-xl sm:rounded-2xl" />
+                  <div className="absolute bottom-4 left-4 right-4 text-left z-10">
+                    <span className="font-display text-[9px] uppercase font-black text-amber-400 tracking-widest block drop-shadow mb-0.5">
+                      OFFICE OF THE VICE PRINCIPAL
+                    </span>
+                    <h4 className="font-serif text-base sm:text-lg font-bold text-white uppercase leading-tight tracking-wide drop-shadow-md mb-0.5">
+                      Dr. M. Malathi
+                    </h4>
+                    <span className="font-display text-[11px] sm:text-xs font-black text-slate-300 uppercase tracking-widest block drop-shadow">
+                      VICE PRINCIPAL & PROFESSOR (ECE)
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom: Full-Width Contact & Actions Bar */}
+          <div className="w-full mt-4 pt-3 border-t border-slate-200/70 flex flex-wrap items-center justify-between gap-3 bg-slate-50/90 p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 shadow-2xs">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <a 
+                href="mailto:ecemalathi@gmail.com" 
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-white hover:bg-indigo-50 hover:text-indigo-650 border border-slate-200 hover:border-indigo-200 px-3 py-1.5 rounded-lg transition-colors shadow-2xs"
+              >
+                <Mail className="w-3.5 h-3.5 text-indigo-600" />
+                <span>ecemalathi@gmail.com</span>
+              </a>
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg">
+                <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                <span>Vice Principal's Office / ECE Dept, APEC Campus</span>
+              </span>
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-2">
+              <Link 
+                to="/administration/vice-principal-malathi" 
+                className="inline-flex items-center gap-1 text-xs font-extrabold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg transition-all"
+              >
+                <span>Full Profile</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 4. ADMINISTRATIVE OFFICER: Mr. M. Sadanandan */}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={staggerContainer}
+          className="border-t border-slate-100 pt-6 sm:pt-8 mb-8 sm:mb-10"
+        >
+          {/* Top: Description & Portrait Frame */}
+          <div className="flex flex-col-reverse lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-start">
+            {/* Left: Short & Factual Biography */}
             <div className="w-full lg:w-7/12">
               <span className="font-display text-[10px] uppercase font-extrabold tracking-widest text-indigo-700 bg-indigo-50 border border-indigo-100/80 px-2.5 py-1 rounded-md mb-2 inline-block">
                 General Administration
@@ -530,7 +624,7 @@ export default function Administration() {
                 <span className="text-slate-500 text-[11px] sm:text-xs">General Administration</span>
               </div>
 
-              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed">
+              <div className="space-y-2.5 text-sm sm:text-base text-slate-650 font-normal leading-relaxed text-justify">
                 <p>
                   Mr. M. Sadanandan serves as the Administrative Officer, managing the college's operational administration, campus infrastructure, logistical coordination, and procurement frameworks.
                 </p>
@@ -609,7 +703,7 @@ export default function Administration() {
             <h2 className="font-title text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mb-2">
               Heads of Departments (HODs)
             </h2>
-            <p className="text-sm sm:text-base text-slate-650 font-semibold max-w-4xl leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-650 font-semibold w-full text-justify leading-relaxed">
               Distinguished academic leaders steering specialized engineering disciplines, research laboratories, curriculum delivery, and student career outcomes.
             </p>
           </div>

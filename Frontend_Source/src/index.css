@@ -23,6 +23,15 @@
     max-width: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   html {
@@ -85,27 +94,32 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom scrollbar */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+/* Hide scrollbar on all pages while preserving scroll functionality */
+html,
+body,
+#root {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  -webkit-appearance: none !important;
+  background: transparent !important;
 }
-::-webkit-scrollbar-track {
-  background: #f3f4f6;
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
-::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 /* Dynamic Dark Mode overrides when is-home-page class is applied to root */
@@ -164,16 +178,16 @@ body {
 }
 
 .chatbot-avatar-container {
-  animation: chatbotFloat 3.5s ease-in-out infinite;
+  /* No bouncing animation - stays stationary while 3D torus spins */
 }
 
 .chatbot-canvas-glow {
-  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.6)) drop-shadow(0 0 2px rgba(139, 92, 246, 0.4));
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.22));
   transition: filter 0.3s ease;
 }
 
-.group:hover .chatbot-canvas-glow {
-  filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.8)) drop-shadow(0 0 4px rgba(139, 92, 246, 0.6));
+.chatbot-avatar-container:hover .chatbot-canvas-glow {
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.35));
 }
 
 .chat-bubble-logo {
@@ -195,7 +209,7 @@ body {
   width: 120% !important;
   height: 120% !important;
   border-radius: 50% !important;
-  border: 2px solid rgba(100, 80, 255, .6) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.2) !important;
   animation: wireSpin 4s linear infinite !important;
   box-sizing: border-box !important;
 }
@@ -208,7 +222,7 @@ body {
   overflow: hidden !important;
   transform-style: preserve-3d !important;
   animation: apec3DSpin 6s linear infinite !important;
-  filter: drop-shadow(0 0 10px rgba(80, 70, 255, .8)) !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3)) !important;
   background-color: #ffffff !important;
   padding: 2px !important;
   box-sizing: border-box !important;
@@ -1399,4 +1413,14 @@ header nav {
 .no-scrollbar {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+}
+
+
+/* Global page scrollbar removal */
+html.lenis,
+body,
+#root,
+.lenis.lenis-smooth {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }

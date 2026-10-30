@@ -45,7 +45,7 @@ export default function InstrumentationCell() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
               Sophisticated Instrumentation Cell
             </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl leading-relaxed">
+            <p className="text-sm md:text-base text-gray-500 font-bold w-full text-justify leading-relaxed">
               APEC's Sophisticated Instrumentation Cell (SIC) houses advanced analytical instruments to support academic research, research projects, and testing facilities for engineering and science disciplines.
             </p>
           </div>

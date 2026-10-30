@@ -45,7 +45,7 @@ export default function InstitutionalProfile() {
           <h1 className="font-title text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-2.5">
             Institutional Profile
           </h1>
-          <p className="text-sm sm:text-base text-slate-650 leading-relaxed max-w-4xl font-semibold">
+          <p className="text-sm sm:text-base text-slate-650 leading-relaxed w-full text-justify font-semibold">
             Adhiparasakthi Engineering College (APEC), Melmaruvathur, established in 1984, is a premier autonomous institution. Founded on the values of academic quality, research excellence, and spiritual grounding, APEC is committed to nurturing socially responsible engineers. Affiliated with Anna University and approved by AICTE, the institution has consistently maintained a reputation for progressive educational curriculum.
           </p>
         </motion.div>
@@ -220,7 +220,7 @@ export default function InstitutionalProfile() {
           <h2 className="font-title text-2xl sm:text-3xl font-bold text-gray-900 mb-2 leading-tight">
             Institutional Governance Hub
           </h2>
-          <p className="text-sm sm:text-base text-slate-650 font-semibold leading-relaxed max-w-4xl mb-6">
+          <p className="text-sm sm:text-base text-slate-650 font-semibold leading-relaxed w-full text-justify mb-6">
             Explore our governance nodes, quality control cells, welfare committees, statutory disclosures, and transparency portals.
           </p>
 

@@ -144,7 +144,7 @@ export default function AlumniCell() {
             <span>APEC Global Alumni Network</span>
           </div>
           <a 
-            href="/Documents/PDFs/Committees/4. Alumni Cell.pdf" 
+            href="https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342218/apec/Documents/PDFs/Committees/4__Alumni_Cell.pdf" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-700 hover:text-purple-700 bg-white border border-gray-200 px-3.5 py-1.5 rounded-xl shadow-xs hover:border-purple-300 transition-all"
@@ -158,11 +158,11 @@ export default function AlumniCell() {
         {/* HERO TITLE & HERO CONTENT */}
         <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white rounded-3xl p-6 sm:p-10 md:p-12 shadow-xl mb-12 relative overflow-hidden">
           <div className="absolute right-0 top-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10 w-full">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 leading-tight">
               Global <span className="text-purple-300">Alumni Network & Cell</span>
             </h1>
-            <p className="text-sm sm:text-base md:text-lg text-slate-200 font-medium leading-relaxed mb-8">
+            <p className="text-sm sm:text-base md:text-lg text-slate-200 font-medium leading-relaxed mb-8 w-full text-justify">
               Connecting thousands of proud APEC graduates across the globe. Our Alumni Association fosters lifelong bonds, student mentorship, career guidance, and collaborative growth between past and present scholars.
             </p>
 
@@ -237,10 +237,10 @@ export default function AlumniCell() {
                   <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-4 font-title">
                     Cell Mission & Vision
                   </h2>
-                  <p className="text-sm text-gray-600 leading-relaxed font-medium mb-4">
+                  <p className="text-sm text-gray-600 leading-relaxed font-medium mb-4 text-justify">
                     The APEC Alumni Cell strives to create a vibrant global ecosystem connecting past graduates, current students, faculty, and industry leaders. We enable seamless communication, continuous learning, and collective pride.
                   </p>
-                  <p className="text-sm text-gray-600 leading-relaxed font-medium">
+                  <p className="text-sm text-gray-600 leading-relaxed font-medium text-justify">
                     Through structured mentorship, placement assistance, guest lectures, and campus development funds, the Alumni Association empowers the next generation of engineers to excel in their careers.
                   </p>
                 </motion.div>

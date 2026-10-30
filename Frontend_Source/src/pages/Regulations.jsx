@@ -91,6 +91,15 @@ export default function Regulations() {
         'Continuous Internal Assessments computed from 3 periodic reviews'
       ],
       documents: [
+        { name: 'APEC Regulation 2021 All Departments Syllabus Complete Package (ZIP)', size: '58 MB', type: 'ZIP', link: '/Documents/PDFs/Curriculum/REG_21_SYLLABUS.zip' },
+        { name: 'B.E. Computer Science and Engineering (AIML) - Reg 21 Syllabus', size: '7.3 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342233/apec/Documents/PDFs/Curriculum/aiml-syllabus.pdf' },
+        { name: 'B.E. Computer Science and Engineering (CSE) - Reg 21 Syllabus', size: '7.2 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342376/apec/Documents/PDFs/Curriculum/cse-syllabus.pdf' },
+        { name: 'B.Tech Information Technology (IT) - Reg 21 Syllabus', size: '7.4 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342398/apec/Documents/PDFs/Curriculum/it-syllabus.pdf' },
+        { name: 'B.E. Electronics and Communication Engineering (ECE) - Reg 21 Syllabus', size: '6.8 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342385/apec/Documents/PDFs/Curriculum/ece-syllabus.pdf' },
+        { name: 'B.E. Electrical and Electronics Engineering (EEE) - Reg 21 Syllabus', size: '5.8 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342391/apec/Documents/PDFs/Curriculum/eee-syllabus.pdf' },
+        { name: 'B.E. Mechanical Engineering (Mech) - Reg 21 Syllabus', size: '6.5 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342405/apec/Documents/PDFs/Curriculum/mech-syllabus.pdf' },
+        { name: 'B.Tech Chemical Engineering - Reg 21 Syllabus', size: '7.1 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342350/apec/Documents/PDFs/Curriculum/chemical-syllabus.pdf' },
+        { name: 'B.E. Civil Engineering - Reg 21 Syllabus', size: '12.4 MB', type: 'PDF', link: 'https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348619/apec/Documents/PDFs/Curriculum/civil-syllabus.pdf' },
         { name: 'Anna University Reg 21 UG Academic Regulations & Evaluation Norms', size: '3.1 MB', type: 'PDF' },
         { name: 'Anna University Reg 21 PG Academic Regulations', size: '2.2 MB', type: 'PDF' },
         { name: 'Reg 21 Letter Grading Scale & CGPA Computation Norms', size: '840 KB', type: 'PDF' }
@@ -135,7 +144,7 @@ export default function Regulations() {
               >
                 Academic Regulations & Curriculum
               </h1>
-              <p className="text-xs sm:text-sm text-gray-600 font-medium max-w-2xl mt-2 leading-relaxed">
+              <p className="text-xs sm:text-sm text-gray-600 font-medium w-full text-justify mt-2 leading-relaxed">
                 Official rules, Choice Based Credit System (CBCS) framework, examination guidelines, evaluation metrics, and curriculum handbooks governing undergraduate and postgraduate studies.
               </p>
             </div>
@@ -273,18 +282,30 @@ export default function Regulations() {
                     </div>
                   </div>
 
-                  <a 
-                    href="#download" 
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert(`Downloading: ${doc.name}`);
-                    }}
-                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-gray-100 group-hover:bg-indigo-650 group-hover:text-white text-gray-700 text-xs font-bold transition-all shrink-0 flex items-center gap-1.5"
-                    title="Download Document"
-                  >
-                    <Download className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Download</span>
-                  </a>
+                  {doc.link ? (
+                    <a 
+                      href={doc.link} 
+                      download
+                      className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-black transition-all shrink-0 flex items-center gap-1.5 shadow-xs cursor-pointer"
+                      title={`Download ${doc.name}`}
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Download</span>
+                    </a>
+                  ) : (
+                    <a 
+                      href="#download" 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        alert(`Downloading: ${doc.name}`);
+                      }}
+                      className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-gray-100 group-hover:bg-indigo-650 group-hover:text-white text-gray-700 text-xs font-bold transition-all shrink-0 flex items-center gap-1.5"
+                      title="Download Document"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Download</span>
+                    </a>
+                  )}
                 </div>
               ))}
             </div>

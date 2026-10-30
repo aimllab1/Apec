@@ -124,7 +124,7 @@ export default function About() {
           <h1 className="font-title text-3xl md:text-5xl font-bold text-gray-900 tracking-tight mb-6">
             About the Institution
           </h1>
-          <p className="text-sm md:text-base text-gray-500 leading-relaxed max-w-3xl font-semibold">
+          <p className="text-sm sm:text-base text-gray-500 leading-relaxed w-full text-justify font-semibold">
             Adhiparasakthi Engineering College, Melmaruvathur, is an autonomous institution dedicated to training professionals with technical competencies, spiritual grounding, and a deep sense of service to society. Since 1984, Adhiparasakthi Engineering College has empowered generations of engineers through value-centric, research-oriented pathways.
           </p>
         </motion.div>
@@ -151,7 +151,7 @@ export default function About() {
                 </div>
               </div>
               <h3 className="text-lg font-extrabold text-gray-900 mb-3">Vision</h3>
-              <p className="text-xs text-gray-500 leading-relaxed font-semibold">
+              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed font-semibold text-justify">
                 Adhiparasakthi Engineering College is committed to creating high-quality engineers, who have a sense of service and spirituality in order to advance the growth of the society at large through the adoption of appropriate technologies and ensure their sustainability.
               </p>
             </div>
@@ -432,7 +432,7 @@ export default function About() {
             whileInView="visible"
             viewport={{ once: true, margin: "-120px" }}
             variants={staggerContainer}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5"
           >
             {administrationData.map((leader, idx) => (
               <motion.div key={leader.id} variants={fadeInUp}>

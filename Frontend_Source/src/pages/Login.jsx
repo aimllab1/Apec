@@ -10,9 +10,9 @@ const GOOGLE_APPS_SCRIPT_URL = "";
 export default function Login() {
   const navigate = useNavigate();
   
-  // Inputs (prefilled for development convenience as requested)
-  const [usernameInput, setUsernameInput] = useState('admin@apec.edu.in');
-  const [passwordInput, setPasswordInput] = useState('web-development-01');
+  // Inputs
+  const [usernameInput, setUsernameInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   
   // UI States
   const [showPassword, setShowPassword] = useState(false);
@@ -254,7 +254,6 @@ export default function Login() {
                     type="text" 
                     value={usernameInput}
                     onChange={(e) => setUsernameInput(e.target.value)}
-                    placeholder="admin@apec.edu.in"
                     disabled={isLoading}
                     className="w-full text-sm md:text-base pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-250 rounded-2xl outline-none focus:border-indigo-650 focus:bg-white transition-all font-semibold text-gray-800"
                   />
@@ -272,7 +271,6 @@ export default function Login() {
                     type={showPassword ? "text" : "password"} 
                     value={passwordInput}
                     onChange={(e) => setPasswordInput(e.target.value)}
-                    placeholder="••••••••••••"
                     disabled={isLoading}
                     className="w-full text-sm md:text-base pl-12 pr-12 py-3.5 bg-gray-50 border border-gray-250 rounded-2xl outline-none focus:border-indigo-650 focus:bg-white transition-all font-semibold text-gray-800"
                   />

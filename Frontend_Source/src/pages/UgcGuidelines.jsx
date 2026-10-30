@@ -23,7 +23,7 @@ const cardVariants = {
 };
 
 export default function UgcGuidelines() {
-  const pdfUrl = "/Documents/PDFs/UGC/3. UGC Self Disclouser.pdf";
+  const pdfUrl = "https://res.cloudinary.com/o1hw2rfp/image/upload/v1793342942/apec/Documents/PDFs/UGC/3__UGC_Self_Disclouser.pdf";
 
   const disclosureSections = [
     {

@@ -15,6 +15,8 @@ export function createSession() {
 
 // Add a turn to session memory
 export function addTurn(session, userText, aiResponse, docId = null, department = null, topic = null) {
+  if (!session) return;
+  if (!Array.isArray(session.turns)) session.turns = [];
   session.turns.push({ user: userText, ai: aiResponse, timestamp: Date.now() });
   if (department) session.lastDepartment = department;
   if (topic) session.lastTopic = topic;

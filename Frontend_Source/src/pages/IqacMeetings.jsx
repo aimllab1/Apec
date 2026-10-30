@@ -14,12 +14,12 @@ const staggerContainer = {
 
 export default function IqacMeetings() {
   const meetings = [
-    { title: "IQAC Meeting - 1", filename: "IQAC_ Meeting-1.pdf" },
+    { title: "IQAC Meeting - 1", filename: "IQAC_ Meeting-1.pdf", url: "https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348620/apec/Documents/PDFs/IQAC/IQAC__Meeting-1.pdf" },
     { title: "IQAC Meeting - 2", filename: "IQAC_ Meeting-2.pdf" },
     { title: "IQAC Meeting - 3", filename: "IQAC_ Meeting-3.pdf" },
     { title: "IQAC Meeting - 4", filename: "IQAC_ Meeting-4.pdf" },
     { title: "IQAC Meeting - 5", filename: "IQAC_ Meeting-5.pdf" },
-    { title: "IQAC Meeting - 6", filename: "IQAC_ Meeting-6.pdf" },
+    { title: "IQAC Meeting - 6", filename: "IQAC_ Meeting-6.pdf", url: "https://res.cloudinary.com/o1hw2rfp/raw/upload/v1793348622/apec/Documents/PDFs/IQAC/IQAC__Meeting-6.pdf" },
     { title: "IQAC Meeting - 7", filename: "IQAC_Meeting-7.pdf" },
     { title: "IQAC Meeting - 8", filename: "IQAC Meeting-8.pdf" },
     { title: "IQAC Meeting - 9", filename: "IQAC Meeting-9.pdf" }
@@ -43,7 +43,7 @@ export default function IqacMeetings() {
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-black font-title tracking-tight mb-4 text-gray-900 leading-tight">
               IQAC MoM & AT
             </h1>
-            <p className="text-sm md:text-base text-gray-500 font-bold max-w-3xl leading-relaxed">
+            <p className="text-sm md:text-base text-gray-500 font-bold w-full text-justify leading-relaxed">
               Official Minutes of Meetings and Action Taken (MoM & AT) reports of the Internal Quality Assurance Cell board.
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function IqacMeetings() {
                 </div>
 
                 <a 
-                  href={`/Documents/PDFs/IQAC/${encodeURIComponent(meeting.filename)}`}
+                  href={meeting.url || `/Documents/PDFs/IQAC/${encodeURIComponent(meeting.filename)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full text-center py-3 rounded-xl border border-gray-200 group-hover:border-indigo-200 text-sm font-black uppercase tracking-wider text-gray-700 group-hover:text-indigo-650 group-hover:bg-indigo-50/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
